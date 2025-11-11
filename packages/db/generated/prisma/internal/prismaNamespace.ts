@@ -1060,7 +1060,6 @@ export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof User
 
 export const ZapScalarFieldEnum = {
   id: 'id',
-  triggerId: 'triggerId',
   userId: 'userId'
 } as const
 

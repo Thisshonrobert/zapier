@@ -8,7 +8,16 @@ export const SignupSchema = z.object({
 });
 
 export const SigninSchema = z.object({
-  email: z.string().email("Invalid email Address"),
+  email: z.email("Invalid email Address"),
   password: z.string(),
 });
+
+export const ZapScehema = z.object({
+  availableTriggerId: z.string(),
+  triggerMetadata:z.any(),
+  actions:z.array(z.object({
+    availableActionId: z.string(),
+    actionMetadata: z.any(),
+  })),
+})
 

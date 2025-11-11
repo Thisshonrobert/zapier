@@ -259,7 +259,7 @@ export type ActionCreateInput = {
   id?: string
   sortingOrder?: number
   type: Prisma.AvailableActionCreateNestedOneWithoutActionInput
-  zap: Prisma.ZapCreateNestedOneWithoutActionInput
+  zap: Prisma.ZapCreateNestedOneWithoutActionsInput
 }
 
 export type ActionUncheckedCreateInput = {
@@ -273,7 +273,7 @@ export type ActionUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   sortingOrder?: Prisma.IntFieldUpdateOperationsInput | number
   type?: Prisma.AvailableActionUpdateOneRequiredWithoutActionNestedInput
-  zap?: Prisma.ZapUpdateOneRequiredWithoutActionNestedInput
+  zap?: Prisma.ZapUpdateOneRequiredWithoutActionsNestedInput
 }
 
 export type ActionUncheckedUpdateInput = {
@@ -476,7 +476,7 @@ export type ActionScalarWhereInput = {
 export type ActionCreateWithoutTypeInput = {
   id?: string
   sortingOrder?: number
-  zap: Prisma.ZapCreateNestedOneWithoutActionInput
+  zap: Prisma.ZapCreateNestedOneWithoutActionsInput
 }
 
 export type ActionUncheckedCreateWithoutTypeInput = {
@@ -544,7 +544,7 @@ export type ActionCreateManyTypeInput = {
 export type ActionUpdateWithoutTypeInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   sortingOrder?: Prisma.IntFieldUpdateOperationsInput | number
-  zap?: Prisma.ZapUpdateOneRequiredWithoutActionNestedInput
+  zap?: Prisma.ZapUpdateOneRequiredWithoutActionsNestedInput
 }
 
 export type ActionUncheckedUpdateWithoutTypeInput = {
