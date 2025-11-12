@@ -7,3 +7,8 @@ services:
       POSTGRES_USER: thisshonrobert
       POSTGRES_PASSWORD: mysecretpassword
       POSTGRES_DB: mydatabase
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+volumes:
+      db-data:

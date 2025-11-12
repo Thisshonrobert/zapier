@@ -36,16 +36,22 @@ export type ZapSumAggregateOutputType = {
 
 export type ZapMinAggregateOutputType = {
   id: string | null
+  name: string | null
+  time: Date | null
   userId: number | null
 }
 
 export type ZapMaxAggregateOutputType = {
   id: string | null
+  name: string | null
+  time: Date | null
   userId: number | null
 }
 
 export type ZapCountAggregateOutputType = {
   id: number
+  name: number
+  time: number
   userId: number
   _all: number
 }
@@ -61,16 +67,22 @@ export type ZapSumAggregateInputType = {
 
 export type ZapMinAggregateInputType = {
   id?: true
+  name?: true
+  time?: true
   userId?: true
 }
 
 export type ZapMaxAggregateInputType = {
   id?: true
+  name?: true
+  time?: true
   userId?: true
 }
 
 export type ZapCountAggregateInputType = {
   id?: true
+  name?: true
+  time?: true
   userId?: true
   _all?: true
 }
@@ -163,6 +175,8 @@ export type ZapGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
 
 export type ZapGroupByOutputType = {
   id: string
+  name: string | null
+  time: Date
   userId: number
   _count: ZapCountAggregateOutputType | null
   _avg: ZapAvgAggregateOutputType | null
@@ -191,6 +205,8 @@ export type ZapWhereInput = {
   OR?: Prisma.ZapWhereInput[]
   NOT?: Prisma.ZapWhereInput | Prisma.ZapWhereInput[]
   id?: Prisma.StringFilter<"Zap"> | string
+  name?: Prisma.StringNullableFilter<"Zap"> | string | null
+  time?: Prisma.DateTimeFilter<"Zap"> | Date | string
   userId?: Prisma.IntFilter<"Zap"> | number
   trigger?: Prisma.XOR<Prisma.TriggerNullableScalarRelationFilter, Prisma.TriggerWhereInput> | null
   actions?: Prisma.ActionListRelationFilter
@@ -200,6 +216,8 @@ export type ZapWhereInput = {
 
 export type ZapOrderByWithRelationInput = {
   id?: Prisma.SortOrder
+  name?: Prisma.SortOrderInput | Prisma.SortOrder
+  time?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   trigger?: Prisma.TriggerOrderByWithRelationInput
   actions?: Prisma.ActionOrderByRelationAggregateInput
@@ -212,6 +230,8 @@ export type ZapWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.ZapWhereInput | Prisma.ZapWhereInput[]
   OR?: Prisma.ZapWhereInput[]
   NOT?: Prisma.ZapWhereInput | Prisma.ZapWhereInput[]
+  name?: Prisma.StringNullableFilter<"Zap"> | string | null
+  time?: Prisma.DateTimeFilter<"Zap"> | Date | string
   userId?: Prisma.IntFilter<"Zap"> | number
   trigger?: Prisma.XOR<Prisma.TriggerNullableScalarRelationFilter, Prisma.TriggerWhereInput> | null
   actions?: Prisma.ActionListRelationFilter
@@ -221,6 +241,8 @@ export type ZapWhereUniqueInput = Prisma.AtLeast<{
 
 export type ZapOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
+  name?: Prisma.SortOrderInput | Prisma.SortOrder
+  time?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   _count?: Prisma.ZapCountOrderByAggregateInput
   _avg?: Prisma.ZapAvgOrderByAggregateInput
@@ -234,11 +256,15 @@ export type ZapScalarWhereWithAggregatesInput = {
   OR?: Prisma.ZapScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ZapScalarWhereWithAggregatesInput | Prisma.ZapScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Zap"> | string
+  name?: Prisma.StringNullableWithAggregatesFilter<"Zap"> | string | null
+  time?: Prisma.DateTimeWithAggregatesFilter<"Zap"> | Date | string
   userId?: Prisma.IntWithAggregatesFilter<"Zap"> | number
 }
 
 export type ZapCreateInput = {
   id?: string
+  name?: string | null
+  time?: Date | string
   trigger?: Prisma.TriggerCreateNestedOneWithoutZapInput
   actions?: Prisma.ActionCreateNestedManyWithoutZapInput
   user: Prisma.UserCreateNestedOneWithoutZapInput
@@ -247,6 +273,8 @@ export type ZapCreateInput = {
 
 export type ZapUncheckedCreateInput = {
   id?: string
+  name?: string | null
+  time?: Date | string
   userId: number
   trigger?: Prisma.TriggerUncheckedCreateNestedOneWithoutZapInput
   actions?: Prisma.ActionUncheckedCreateNestedManyWithoutZapInput
@@ -255,6 +283,8 @@ export type ZapUncheckedCreateInput = {
 
 export type ZapUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   trigger?: Prisma.TriggerUpdateOneWithoutZapNestedInput
   actions?: Prisma.ActionUpdateManyWithoutZapNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutZapNestedInput
@@ -263,6 +293,8 @@ export type ZapUpdateInput = {
 
 export type ZapUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   trigger?: Prisma.TriggerUncheckedUpdateOneWithoutZapNestedInput
   actions?: Prisma.ActionUncheckedUpdateManyWithoutZapNestedInput
@@ -271,15 +303,21 @@ export type ZapUncheckedUpdateInput = {
 
 export type ZapCreateManyInput = {
   id?: string
+  name?: string | null
+  time?: Date | string
   userId: number
 }
 
 export type ZapUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ZapUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
@@ -295,6 +333,8 @@ export type ZapOrderByRelationAggregateInput = {
 
 export type ZapCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  name?: Prisma.SortOrder
+  time?: Prisma.SortOrder
   userId?: Prisma.SortOrder
 }
 
@@ -304,11 +344,15 @@ export type ZapAvgOrderByAggregateInput = {
 
 export type ZapMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  name?: Prisma.SortOrder
+  time?: Prisma.SortOrder
   userId?: Prisma.SortOrder
 }
 
 export type ZapMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  name?: Prisma.SortOrder
+  time?: Prisma.SortOrder
   userId?: Prisma.SortOrder
 }
 
@@ -363,6 +407,14 @@ export type ZapUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.ZapScalarWhereInput | Prisma.ZapScalarWhereInput[]
 }
 
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
+}
+
+export type DateTimeFieldUpdateOperationsInput = {
+  set?: Date | string
+}
+
 export type ZapCreateNestedOneWithoutTriggerInput = {
   create?: Prisma.XOR<Prisma.ZapCreateWithoutTriggerInput, Prisma.ZapUncheckedCreateWithoutTriggerInput>
   connectOrCreate?: Prisma.ZapCreateOrConnectWithoutTriggerInput
@@ -407,6 +459,8 @@ export type ZapUpdateOneRequiredWithoutZapRunNestedInput = {
 
 export type ZapCreateWithoutUserInput = {
   id?: string
+  name?: string | null
+  time?: Date | string
   trigger?: Prisma.TriggerCreateNestedOneWithoutZapInput
   actions?: Prisma.ActionCreateNestedManyWithoutZapInput
   zapRun?: Prisma.ZapRunCreateNestedManyWithoutZapInput
@@ -414,6 +468,8 @@ export type ZapCreateWithoutUserInput = {
 
 export type ZapUncheckedCreateWithoutUserInput = {
   id?: string
+  name?: string | null
+  time?: Date | string
   trigger?: Prisma.TriggerUncheckedCreateNestedOneWithoutZapInput
   actions?: Prisma.ActionUncheckedCreateNestedManyWithoutZapInput
   zapRun?: Prisma.ZapRunUncheckedCreateNestedManyWithoutZapInput
@@ -450,11 +506,15 @@ export type ZapScalarWhereInput = {
   OR?: Prisma.ZapScalarWhereInput[]
   NOT?: Prisma.ZapScalarWhereInput | Prisma.ZapScalarWhereInput[]
   id?: Prisma.StringFilter<"Zap"> | string
+  name?: Prisma.StringNullableFilter<"Zap"> | string | null
+  time?: Prisma.DateTimeFilter<"Zap"> | Date | string
   userId?: Prisma.IntFilter<"Zap"> | number
 }
 
 export type ZapCreateWithoutTriggerInput = {
   id?: string
+  name?: string | null
+  time?: Date | string
   actions?: Prisma.ActionCreateNestedManyWithoutZapInput
   user: Prisma.UserCreateNestedOneWithoutZapInput
   zapRun?: Prisma.ZapRunCreateNestedManyWithoutZapInput
@@ -462,6 +522,8 @@ export type ZapCreateWithoutTriggerInput = {
 
 export type ZapUncheckedCreateWithoutTriggerInput = {
   id?: string
+  name?: string | null
+  time?: Date | string
   userId: number
   actions?: Prisma.ActionUncheckedCreateNestedManyWithoutZapInput
   zapRun?: Prisma.ZapRunUncheckedCreateNestedManyWithoutZapInput
@@ -485,6 +547,8 @@ export type ZapUpdateToOneWithWhereWithoutTriggerInput = {
 
 export type ZapUpdateWithoutTriggerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   actions?: Prisma.ActionUpdateManyWithoutZapNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutZapNestedInput
   zapRun?: Prisma.ZapRunUpdateManyWithoutZapNestedInput
@@ -492,6 +556,8 @@ export type ZapUpdateWithoutTriggerInput = {
 
 export type ZapUncheckedUpdateWithoutTriggerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   actions?: Prisma.ActionUncheckedUpdateManyWithoutZapNestedInput
   zapRun?: Prisma.ZapRunUncheckedUpdateManyWithoutZapNestedInput
@@ -499,6 +565,8 @@ export type ZapUncheckedUpdateWithoutTriggerInput = {
 
 export type ZapCreateWithoutActionsInput = {
   id?: string
+  name?: string | null
+  time?: Date | string
   trigger?: Prisma.TriggerCreateNestedOneWithoutZapInput
   user: Prisma.UserCreateNestedOneWithoutZapInput
   zapRun?: Prisma.ZapRunCreateNestedManyWithoutZapInput
@@ -506,6 +574,8 @@ export type ZapCreateWithoutActionsInput = {
 
 export type ZapUncheckedCreateWithoutActionsInput = {
   id?: string
+  name?: string | null
+  time?: Date | string
   userId: number
   trigger?: Prisma.TriggerUncheckedCreateNestedOneWithoutZapInput
   zapRun?: Prisma.ZapRunUncheckedCreateNestedManyWithoutZapInput
@@ -529,6 +599,8 @@ export type ZapUpdateToOneWithWhereWithoutActionsInput = {
 
 export type ZapUpdateWithoutActionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   trigger?: Prisma.TriggerUpdateOneWithoutZapNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutZapNestedInput
   zapRun?: Prisma.ZapRunUpdateManyWithoutZapNestedInput
@@ -536,6 +608,8 @@ export type ZapUpdateWithoutActionsInput = {
 
 export type ZapUncheckedUpdateWithoutActionsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   trigger?: Prisma.TriggerUncheckedUpdateOneWithoutZapNestedInput
   zapRun?: Prisma.ZapRunUncheckedUpdateManyWithoutZapNestedInput
@@ -543,6 +617,8 @@ export type ZapUncheckedUpdateWithoutActionsInput = {
 
 export type ZapCreateWithoutZapRunInput = {
   id?: string
+  name?: string | null
+  time?: Date | string
   trigger?: Prisma.TriggerCreateNestedOneWithoutZapInput
   actions?: Prisma.ActionCreateNestedManyWithoutZapInput
   user: Prisma.UserCreateNestedOneWithoutZapInput
@@ -550,6 +626,8 @@ export type ZapCreateWithoutZapRunInput = {
 
 export type ZapUncheckedCreateWithoutZapRunInput = {
   id?: string
+  name?: string | null
+  time?: Date | string
   userId: number
   trigger?: Prisma.TriggerUncheckedCreateNestedOneWithoutZapInput
   actions?: Prisma.ActionUncheckedCreateNestedManyWithoutZapInput
@@ -573,6 +651,8 @@ export type ZapUpdateToOneWithWhereWithoutZapRunInput = {
 
 export type ZapUpdateWithoutZapRunInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   trigger?: Prisma.TriggerUpdateOneWithoutZapNestedInput
   actions?: Prisma.ActionUpdateManyWithoutZapNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutZapNestedInput
@@ -580,6 +660,8 @@ export type ZapUpdateWithoutZapRunInput = {
 
 export type ZapUncheckedUpdateWithoutZapRunInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.IntFieldUpdateOperationsInput | number
   trigger?: Prisma.TriggerUncheckedUpdateOneWithoutZapNestedInput
   actions?: Prisma.ActionUncheckedUpdateManyWithoutZapNestedInput
@@ -587,10 +669,14 @@ export type ZapUncheckedUpdateWithoutZapRunInput = {
 
 export type ZapCreateManyUserInput = {
   id?: string
+  name?: string | null
+  time?: Date | string
 }
 
 export type ZapUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   trigger?: Prisma.TriggerUpdateOneWithoutZapNestedInput
   actions?: Prisma.ActionUpdateManyWithoutZapNestedInput
   zapRun?: Prisma.ZapRunUpdateManyWithoutZapNestedInput
@@ -598,6 +684,8 @@ export type ZapUpdateWithoutUserInput = {
 
 export type ZapUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   trigger?: Prisma.TriggerUncheckedUpdateOneWithoutZapNestedInput
   actions?: Prisma.ActionUncheckedUpdateManyWithoutZapNestedInput
   zapRun?: Prisma.ZapRunUncheckedUpdateManyWithoutZapNestedInput
@@ -605,6 +693,8 @@ export type ZapUncheckedUpdateWithoutUserInput = {
 
 export type ZapUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  time?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -649,6 +739,8 @@ export type ZapCountOutputTypeCountZapRunArgs<ExtArgs extends runtime.Types.Exte
 
 export type ZapSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  name?: boolean
+  time?: boolean
   userId?: boolean
   trigger?: boolean | Prisma.Zap$triggerArgs<ExtArgs>
   actions?: boolean | Prisma.Zap$actionsArgs<ExtArgs>
@@ -659,22 +751,28 @@ export type ZapSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = ru
 
 export type ZapSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  name?: boolean
+  time?: boolean
   userId?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["zap"]>
 
 export type ZapSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  name?: boolean
+  time?: boolean
   userId?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["zap"]>
 
 export type ZapSelectScalar = {
   id?: boolean
+  name?: boolean
+  time?: boolean
   userId?: boolean
 }
 
-export type ZapOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId", ExtArgs["result"]["zap"]>
+export type ZapOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "time" | "userId", ExtArgs["result"]["zap"]>
 export type ZapInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   trigger?: boolean | Prisma.Zap$triggerArgs<ExtArgs>
   actions?: boolean | Prisma.Zap$actionsArgs<ExtArgs>
@@ -699,6 +797,8 @@ export type $ZapPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
+    name: string | null
+    time: Date
     userId: number
   }, ExtArgs["result"]["zap"]>
   composites: {}
@@ -1128,6 +1228,8 @@ export interface Prisma__ZapClient<T, Null = never, ExtArgs extends runtime.Type
  */
 export interface ZapFieldRefs {
   readonly id: Prisma.FieldRef<"Zap", 'String'>
+  readonly name: Prisma.FieldRef<"Zap", 'String'>
+  readonly time: Prisma.FieldRef<"Zap", 'DateTime'>
   readonly userId: Prisma.FieldRef<"Zap", 'Int'>
 }
     

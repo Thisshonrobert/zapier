@@ -24,6 +24,8 @@ model User {
 
 model Zap {
   id        String   @id @default(uuid())
+  name      String?  @default("Untitled Zap")
+  time       DateTime   @default(now())
   trigger   Trigger? // for 1-1 no need for @relation
   actions    Action[]
   userId    Int
@@ -51,12 +53,14 @@ model Action {
 model AvailableAction {
   id     String   @id @default(uuid())
   name   String
+  imageUrl String
   action Action[]
 }
 
 model AvailableTriggerType {
   id      String    @id @default(uuid())
   name    String
+  imageUrl String
   trigger Trigger[]
 }
 

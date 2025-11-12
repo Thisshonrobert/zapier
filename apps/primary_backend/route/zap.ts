@@ -16,6 +16,8 @@ router.post("/", authMiddleware, async (req, res) => {
     const zap = await prisma.zap.create({
         data: {
           userId: parseInt(id),
+          name: parsed.data.name,
+          time: new Date(),
           actions: {                                
             create: parsed.data.actions.map((action, index) => ({
               actionId: action.availableActionId,
@@ -31,7 +33,7 @@ router.post("/", authMiddleware, async (req, res) => {
         },
         include: {                                 
           trigger: { include: { type: true } },
-          action:  { include: { type: true } },
+          actions:  { include: { type: true } },
         },
       });
       
@@ -46,7 +48,7 @@ router.get("/",authMiddleware, async (req, res) => {
         },
         include: {
             trigger: { include: { type: true } },
-            action: { include: { type: true } },
+            actions: { include: { type: true } },
         },
     });
     return res.json({ zaps });
@@ -62,7 +64,7 @@ router.get("/:id",authMiddleware, async (req, res) => {
         },
         include: {
             trigger: { include: { type: true } },
-            action: { include: { type: true } },
+            actions: { include: { type: true } },
         },
     });
     return res.json({ zap });

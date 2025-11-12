@@ -87,6 +87,8 @@ export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof User
 
 export const ZapScalarFieldEnum = {
   id: 'id',
+  name: 'name',
+  time: 'time',
   userId: 'userId'
 } as const
 
@@ -114,7 +116,8 @@ export type ActionScalarFieldEnum = (typeof ActionScalarFieldEnum)[keyof typeof 
 
 export const AvailableActionScalarFieldEnum = {
   id: 'id',
-  name: 'name'
+  name: 'name',
+  imageUrl: 'imageUrl'
 } as const
 
 export type AvailableActionScalarFieldEnum = (typeof AvailableActionScalarFieldEnum)[keyof typeof AvailableActionScalarFieldEnum]
@@ -122,7 +125,8 @@ export type AvailableActionScalarFieldEnum = (typeof AvailableActionScalarFieldE
 
 export const AvailableTriggerTypeScalarFieldEnum = {
   id: 'id',
-  name: 'name'
+  name: 'name',
+  imageUrl: 'imageUrl'
 } as const
 
 export type AvailableTriggerTypeScalarFieldEnum = (typeof AvailableTriggerTypeScalarFieldEnum)[keyof typeof AvailableTriggerTypeScalarFieldEnum]
@@ -166,6 +170,14 @@ export const QueryMode = {
 } as const
 
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+export const NullsOrder = {
+  first: 'first',
+  last: 'last'
+} as const
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
 export const JsonNullValueFilter = {

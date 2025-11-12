@@ -1060,6 +1060,8 @@ export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof User
 
 export const ZapScalarFieldEnum = {
   id: 'id',
+  name: 'name',
+  time: 'time',
   userId: 'userId'
 } as const
 
@@ -1087,7 +1089,8 @@ export type ActionScalarFieldEnum = (typeof ActionScalarFieldEnum)[keyof typeof 
 
 export const AvailableActionScalarFieldEnum = {
   id: 'id',
-  name: 'name'
+  name: 'name',
+  imageUrl: 'imageUrl'
 } as const
 
 export type AvailableActionScalarFieldEnum = (typeof AvailableActionScalarFieldEnum)[keyof typeof AvailableActionScalarFieldEnum]
@@ -1095,7 +1098,8 @@ export type AvailableActionScalarFieldEnum = (typeof AvailableActionScalarFieldE
 
 export const AvailableTriggerTypeScalarFieldEnum = {
   id: 'id',
-  name: 'name'
+  name: 'name',
+  imageUrl: 'imageUrl'
 } as const
 
 export type AvailableTriggerTypeScalarFieldEnum = (typeof AvailableTriggerTypeScalarFieldEnum)[keyof typeof AvailableTriggerTypeScalarFieldEnum]
@@ -1141,6 +1145,14 @@ export const QueryMode = {
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
 
+export const NullsOrder = {
+  first: 'first',
+  last: 'last'
+} as const
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
 export const JsonNullValueFilter = {
   DbNull: DbNull,
   JsonNull: JsonNull,
@@ -1181,6 +1193,20 @@ export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 
  * Reference to a field of type 'String[]'
  */
 export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String[]'>
+    
+
+
+/**
+ * Reference to a field of type 'DateTime'
+ */
+export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+/**
+ * Reference to a field of type 'DateTime[]'
+ */
+export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
     
 
 

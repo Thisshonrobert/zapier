@@ -10,7 +10,27 @@ app.post("/hooks/catch/:userId/:zapId", async (req, res) => {
   const zapId = req.params.zapId;
   const body = req.body;
 
-  await prisma.$transaction(async (tx) => {
+  console.log("Webhook received:", { userId, zapId });
+
+
+  const user =  await prisma.user.findUnique({
+    where: {
+      id: parseInt(userId),
+    }
+  });
+  if (!user) {
+    return res.status(404).json({ message: "User not found" });
+  }
+  const zap = await prisma.zap.findUnique({
+    where: {
+      id: zapId,
+    }
+  });
+  if (!zap) {
+    return res.status(404).json({ message: "Zap not found" });
+  }
+
+  await prisma.$transaction(async tx => {
     console.log("Reached here 2");
 
     const run = await tx.zapRun.create({
