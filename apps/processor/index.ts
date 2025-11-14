@@ -18,7 +18,9 @@ async function main() {
         })
         producer.send({
             topic:TOPIC_NAME,
-            messages:pendingRows.map(row => ({value: row.zapRunId}))
+            messages:pendingRows.map(row => ({
+                value: JSON.stringify({value: row.zapRunId, stage: 0})
+            }))
         })
 
         await prisma.zapRunOutbox.deleteMany({

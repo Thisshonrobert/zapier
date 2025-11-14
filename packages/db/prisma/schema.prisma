@@ -23,14 +23,14 @@ model User {
 }
 
 model Zap {
-  id        String   @id @default(uuid())
-  name      String?  @default("Untitled Zap")
-  time       DateTime   @default(now())
-  trigger   Trigger? // for 1-1 no need for @relation
-  actions    Action[]
-  userId    Int
-  user      User     @relation(fields: [userId], references: [id])
-  zapRun    ZapRun[]
+  id      String   @id @default(uuid())
+  name    String?  @default("Untitled Zap")
+  time    DateTime @default(now())
+  trigger Trigger? // for 1-1 no need for @relation
+  actions Action[]
+  userId  Int
+  user    User     @relation(fields: [userId], references: [id])
+  zapRun  ZapRun[]
 }
 
 model Trigger {
@@ -42,26 +42,27 @@ model Trigger {
 }
 
 model Action {
-  id       String          @id @default(uuid())
-  actionId String
-  type     AvailableAction @relation(fields: [actionId], references: [id])
-  zapId    String          @unique
-  zap      Zap             @relation(fields: [zapId], references: [id])
-  sortingOrder Int         @default(0)
+  id           String          @id @default(uuid())
+  actionId     String
+  type         AvailableAction @relation(fields: [actionId], references: [id])
+  metadata     Json            @default("{}")
+  zapId        String          @unique
+  zap          Zap             @relation(fields: [zapId], references: [id])
+  sortingOrder Int             @default(0)
 }
 
 model AvailableAction {
-  id     String   @id @default(uuid())
-  name   String
+  id       String   @id @default(uuid())
+  name     String
   imageUrl String
-  action Action[]
+  action   Action[]
 }
 
 model AvailableTriggerType {
-  id      String    @id @default(uuid())
-  name    String
+  id       String    @id @default(uuid())
+  name     String
   imageUrl String
-  trigger Trigger[]
+  trigger  Trigger[]
 }
 
 //when was the Zap triggered

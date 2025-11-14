@@ -1080,6 +1080,7 @@ export type TriggerScalarFieldEnum = (typeof TriggerScalarFieldEnum)[keyof typeo
 export const ActionScalarFieldEnum = {
   id: 'id',
   actionId: 'actionId',
+  metadata: 'metadata',
   zapId: 'zapId',
   sortingOrder: 'sortingOrder'
 } as const

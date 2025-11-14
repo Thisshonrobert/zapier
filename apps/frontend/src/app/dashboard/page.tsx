@@ -89,7 +89,7 @@ return <div>
           </div>
         </div>
       </div>
-      {loading ? <LoaderOne/>:
+      {loading ?<div className="flex justify-center"><LoaderOne/></div> :
       <div className='flex justify-center'> <ZapTable zaps={zaps}/></div>} 
 </div>
 }
