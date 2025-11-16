@@ -6,7 +6,7 @@ export const SecondaryButton = ({
   size = "small",
 }: {
   children: ReactNode;
-  onClick: () => void;
+  onClick?: () => void;
   size?: "big" | "small";
 }) => {
   return (

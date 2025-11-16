@@ -1,20 +1,16 @@
 "use client";
-import React from "react";
+
 import { PrimaryButton } from "./buttons/PrimaryButton";
 import { SecondaryButton } from "./buttons/SecondaryButton";
 import { FeatureComponent } from "./FeatureComponent";
 import { useRouter } from "next/navigation";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+
+import {  useClerk } from "@clerk/nextjs";
 
 const Hero = () => {
   const router = useRouter();
+  const { openSignIn } = useClerk();
+
   return (
     <div>
       <div className="flex justify-center ">
@@ -40,21 +36,16 @@ const Hero = () => {
             Get Started Free
           </PrimaryButton>
           <div className="pl-4 ">
-          <Dialog>
-          <DialogTrigger asChild>
-            <SecondaryButton onClick={() => {}} size="big">
-              Start With GMail
+            <SecondaryButton
+              onClick={() =>
+                openSignIn({
+                  redirectUrl: "/dashboard", // where to go after login
+                })
+              }
+              size="big"
+            >
+              Start With Gmail
             </SecondaryButton>
-            </DialogTrigger>
-            <DialogContent>
-        <DialogHeader>
-          <DialogTitle>NOTE</DialogTitle>
-          <DialogDescription>
-            this is a MVP, this feature will be added soon...
-          </DialogDescription>
-        </DialogHeader>
-      </DialogContent>
-            </Dialog>
           </div>
         </div>
       </div>
@@ -75,7 +66,5 @@ const Hero = () => {
     </div>
   );
 };
-
-
 
 export default Hero;

@@ -4,16 +4,29 @@ import { LinkButton } from "./buttons/LinkButton";
 import { usePathname, useRouter } from "next/navigation";
 import { PrimaryButton } from "./buttons/PrimaryButton";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { UserButton, useUser } from '@clerk/nextjs'
+import { Button } from "@/components/ui/button";
+
+
 
 const Appbar = () => {
   const router = useRouter();
   const currentPath = usePathname();
+  const { user } = useUser()
+let imageUrl:string = "";
+if (user?.hasImage) {
+   imageUrl = user.imageUrl
+}
   
   // Routes where login/signup buttons should be hidden and Avatar shown
   const isAuthenticatedRoute = currentPath !== '/' && currentPath !== '/login' && currentPath !== '/signup';
   
   // Generate a random avatar image URL
   const randomAvatarUrl = `https://api.dicebear.com/7.x/avataaars/svg?seed=${Math.random()}`;
+
+ function userButtonFunc(){
+  return <UserButton/>
+ } 
   
   return (
     <div className="flex border-b justify-between p-4">
@@ -23,10 +36,8 @@ const Appbar = () => {
       <div className="flex gap-4  items-center text-gray-700">
         <LinkButton onClick={() => {}}>Contact Sales</LinkButton>
         {isAuthenticatedRoute ? (
-          <Avatar>
-            <AvatarImage src={randomAvatarUrl} alt="User Avatar" />
-            <AvatarFallback>U</AvatarFallback>
-          </Avatar>
+       <UserButton afterSignOutUrl="/" />
+
         ) : currentPath === '/' ? (
           <div className="flex space-x-2">
             <LinkButton
