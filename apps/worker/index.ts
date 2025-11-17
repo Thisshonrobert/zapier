@@ -1,6 +1,9 @@
-
 import { Kafka } from "kafkajs";
-import { prisma } from "../../packages/db/prisma/db"
+import { prisma } from "../../packages/db/prisma/db";
+import { parse } from "./parse";
+import type { JsonObject } from "@prisma/client/runtime/binary";
+import { resolveChatId, sendTelegram } from "./telegram";
+import { email } from "./email";
 const TOPIC_NAME = "zap-events";
 const kafka = new Kafka({
   clientId: "worker",
@@ -22,16 +25,16 @@ async function main() {
           offset: message.offset,
           value: message.value?.toString(),
         });
-        if(!message.value?.toString()) return;
+        if (!message.value?.toString()) return;
 
-        const parsedValue = JSON.parse(message.value?.toString())
+        const parsedValue = JSON.parse(message.value?.toString());
         const zapRunId = parsedValue.zapRunId;
         const stage = parsedValue.stage;
         const zapDetails = await prisma.zapRun.findFirst({
-          where:{
-            zapId:zapRunId
+          where: {
+            zapId: zapRunId,
           },
-          include:{
+          include: {
             zap: {
               include: {
                 actions: {
@@ -41,27 +44,72 @@ async function main() {
                 },
               },
             },
-          }
-        })
+          },
+        });
         console.log(zapDetails);
 
-        const currentAction = zapDetails?.zap.actions.find(x=> x.sortingOrder === stage);
+        const currentAction = zapDetails?.zap.actions.find(
+          (x) => x.sortingOrder === stage
+        );
 
         if (!currentAction) {
           console.log("Current action not found");
           return;
         }
 
-        const zapRunMetaData = zapDetails?.metadata
+        const zapRunMetaData = zapDetails?.metadata ?? {};
 
-        if(currentAction.type.id === "email") console.log("email action")
-        if(currentAction.type.id === "send-sol") console.log("sol action")
-          
-        const lastStage = (zapDetails?.zap.actions.length || 1) - 1;
-        
-        if(lastStage!==stage){
+        if (currentAction.type.id === "email") {
+          try {
+            console.log("email action");
+            const to = parse(
+              (currentAction.metadata as JsonObject)?.email as string,
+              zapRunMetaData
+            );
+            const body = parse(
+              (currentAction.metadata as JsonObject)?.body as string,
+              zapRunMetaData
+            );
+
+            const from = parse(
+              (currentAction.metadata as JsonObject)?.from as string,
+              zapRunMetaData
+            );
+            const subject = parse(
+              (currentAction.metadata as JsonObject)?.subject as string,
+              zapRunMetaData
+            );
+
+            await email(to, body, from, subject);
+          } catch (error) {
+            console.log(error);
+          }
+        }
+        if (currentAction.type.id === "telegram") {
+          try {
+            console.log("telegram post action ");
+            if (currentAction.type.id === "telegram") {
+              const channelUsername = parse(
+                (currentAction.metadata as JsonObject)?.chatId as string,
+                zapRunMetaData
+              );
+              const chatId = await resolveChatId(channelUsername);
+              const message = parse(
+                (currentAction.metadata as JsonObject)?.message as string,
+                zapRunMetaData
+              );
+              await sendTelegram(chatId, message);
+            }
+          } catch (error) {
+            console.log(error);
+          }
+        }
+
+        const lastStage = zapDetails!.zap.actions.length - 1;
+
+        if (lastStage !== stage) {
           await producer.send({
-            topic:TOPIC_NAME,
+            topic: TOPIC_NAME,
             messages: [
               {
                 value: JSON.stringify({
@@ -70,9 +118,8 @@ async function main() {
                 }),
               },
             ],
-          })
+          });
         }
-
 
         await new Promise((r) => setTimeout(r, 2000));
 
