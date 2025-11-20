@@ -126,7 +126,9 @@ export const ZapTable = ({ zaps }: { zaps: Zap[] }) => {
                 <td className="p-3 text-center">
                 <Dialog>
                 <DialogTrigger asChild>
-                  <LinkButton onClick={() => router.push(`/zap/${zap.id}`)}>
+                  <LinkButton 
+                   onClick={() =>{}}>
+                  {/* onClick={() => router.push(`/zap/${zap.id}`)}> */}
                     Go
                   </LinkButton>
                   </DialogTrigger>
