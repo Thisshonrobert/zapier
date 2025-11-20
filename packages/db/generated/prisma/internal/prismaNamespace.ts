@@ -397,7 +397,8 @@ export const ModelName = {
   AvailableAction: 'AvailableAction',
   AvailableTriggerType: 'AvailableTriggerType',
   ZapRun: 'ZapRun',
-  ZapRunOutbox: 'ZapRunOutbox'
+  ZapRunOutbox: 'ZapRunOutbox',
+  TestTriggerBuffer: 'TestTriggerBuffer'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -413,7 +414,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "zap" | "trigger" | "action" | "availableAction" | "availableTriggerType" | "zapRun" | "zapRunOutbox"
+    modelProps: "user" | "zap" | "trigger" | "action" | "availableAction" | "availableTriggerType" | "zapRun" | "zapRunOutbox" | "testTriggerBuffer"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1009,6 +1010,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    TestTriggerBuffer: {
+      payload: Prisma.$TestTriggerBufferPayload<ExtArgs>
+      fields: Prisma.TestTriggerBufferFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TestTriggerBufferFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TestTriggerBufferPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TestTriggerBufferFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TestTriggerBufferPayload>
+        }
+        findFirst: {
+          args: Prisma.TestTriggerBufferFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TestTriggerBufferPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TestTriggerBufferFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TestTriggerBufferPayload>
+        }
+        findMany: {
+          args: Prisma.TestTriggerBufferFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TestTriggerBufferPayload>[]
+        }
+        create: {
+          args: Prisma.TestTriggerBufferCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TestTriggerBufferPayload>
+        }
+        createMany: {
+          args: Prisma.TestTriggerBufferCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.TestTriggerBufferCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TestTriggerBufferPayload>[]
+        }
+        delete: {
+          args: Prisma.TestTriggerBufferDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TestTriggerBufferPayload>
+        }
+        update: {
+          args: Prisma.TestTriggerBufferUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TestTriggerBufferPayload>
+        }
+        deleteMany: {
+          args: Prisma.TestTriggerBufferDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TestTriggerBufferUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.TestTriggerBufferUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TestTriggerBufferPayload>[]
+        }
+        upsert: {
+          args: Prisma.TestTriggerBufferUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TestTriggerBufferPayload>
+        }
+        aggregate: {
+          args: Prisma.TestTriggerBufferAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTestTriggerBuffer>
+        }
+        groupBy: {
+          args: Prisma.TestTriggerBufferGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TestTriggerBufferGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TestTriggerBufferCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TestTriggerBufferCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1121,6 +1196,17 @@ export const ZapRunOutboxScalarFieldEnum = {
 } as const
 
 export type ZapRunOutboxScalarFieldEnum = (typeof ZapRunOutboxScalarFieldEnum)[keyof typeof ZapRunOutboxScalarFieldEnum]
+
+
+export const TestTriggerBufferScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  tempZapId: 'tempZapId',
+  payload: 'payload',
+  createdAt: 'createdAt'
+} as const
+
+export type TestTriggerBufferScalarFieldEnum = (typeof TestTriggerBufferScalarFieldEnum)[keyof typeof TestTriggerBufferScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1333,6 +1419,7 @@ export type GlobalOmitConfig = {
   availableTriggerType?: Prisma.AvailableTriggerTypeOmit
   zapRun?: Prisma.ZapRunOmit
   zapRunOutbox?: Prisma.ZapRunOutboxOmit
+  testTriggerBuffer?: Prisma.TestTriggerBufferOmit
 }
 
 /* Types for Logging */

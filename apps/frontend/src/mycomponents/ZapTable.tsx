@@ -15,7 +15,10 @@ import {
 } from "@/components/ui/empty";
 import { Zap } from "@/app/dashboard/page";
 import { LinkButton } from "./buttons/LinkButton";
-import {jwtDecode} from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
+import { useState } from "react";
+import { Check, Copy } from "lucide-react";
+import { Dialog, DialogTrigger, DialogTitle, DialogDescription, DialogContent, DialogHeader } from "@/components/ui/dialog";
 
 type JwtPayload = {
   id: string;
@@ -24,7 +27,7 @@ type JwtPayload = {
 
 export const ZapTable = ({ zaps }: { zaps: Zap[] }) => {
   const router = useRouter();
- const userId  = getUserIdFromToken()
+  const userId = getUserIdFromToken();
   // Helper to format date
   const formatDate = (date: Date | string) => {
     const d = typeof date === "string" ? new Date(date) : date;
@@ -34,6 +37,7 @@ export const ZapTable = ({ zaps }: { zaps: Zap[] }) => {
       year: "numeric",
     });
   };
+
 
   // 🟢 If no zaps found
   if (zaps.length === 0) {
@@ -46,7 +50,8 @@ export const ZapTable = ({ zaps }: { zaps: Zap[] }) => {
             </EmptyMedia>
             <EmptyTitle>No Zaps Yet</EmptyTitle>
             <EmptyDescription>
-              You haven&apos;t created any zaps yet. Start by making your first one.
+              You haven&apos;t created any zaps yet. Start by making your first
+              one.
             </EmptyDescription>
           </EmptyHeader>
           <EmptyContent>
@@ -76,25 +81,21 @@ export const ZapTable = ({ zaps }: { zaps: Zap[] }) => {
           <tbody>
             {zaps.map((zap) => (
               <tr key={zap.id} className="border-t hover:bg-gray-50">
-              
-                <td className="p-3 font-medium">
-                  {zap.name} 
-                </td>
+                <td className="p-3 font-medium">{zap.name}</td>
 
-               
                 <td className="p-3">
                   <div className="flex items-center gap-2">
-                    <Image
-                      src={zap.trigger.type.image}
+                    <img
+                      src={zap.trigger.type.imageUrl}
                       alt={zap.trigger.type.name}
                       width={30}
                       height={30}
                       className="rounded"
                     />
                     {zap.actions.map((action) => (
-                      <Image
+                      <img
                         key={action.id}
-                        src={action.type.image}
+                        src={action.type.imageUrl}
                         alt={action.type.name}
                         width={30}
                         height={30}
@@ -104,19 +105,40 @@ export const ZapTable = ({ zaps }: { zaps: Zap[] }) => {
                   </div>
                 </td>
 
-              
                 <td className="p-3">{formatDate(zap.time)}</td>
 
-              
                 <td className="p-3 text-sm text-gray-600 truncate max-w-xs">
-                  {`${HOOKS_URL}/hooks/catch/${userId}/${zap.id}`}
+                  <Button
+                    onClick={() =>
+                      navigator.clipboard.writeText(
+                        `${HOOKS_URL}/hooks/catch/${userId}/${zap.id}`
+                      )
+                    }
+                    variant="outline"
+                    size="sm"
+                    className="flex items-center gap-2"
+                  >
+                    <Copy className="w-4 h-4" />
+                    Copy
+                  </Button>
                 </td>
 
-                
                 <td className="p-3 text-center">
+                <Dialog>
+                <DialogTrigger asChild>
                   <LinkButton onClick={() => router.push(`/zap/${zap.id}`)}>
                     Go
                   </LinkButton>
+                  </DialogTrigger>
+            <DialogContent>
+        <DialogHeader>
+          <DialogTitle>NOTE</DialogTitle>
+          <DialogDescription>
+            this is a MVP, this feature will be added soon...
+          </DialogDescription>
+        </DialogHeader>
+      </DialogContent>
+            </Dialog>
                 </td>
               </tr>
             ))}
@@ -128,14 +150,14 @@ export const ZapTable = ({ zaps }: { zaps: Zap[] }) => {
 };
 
 const getUserIdFromToken = () => {
-    const token = localStorage.getItem("token");
-    if (!token) return null;
-  
-    try {
-      const decoded = jwtDecode<JwtPayload>(token);
-      return decoded.id;
-    } catch (err) {
-      console.error("Invalid token", err);
-      return null;
-    }
-  };
+  const token = localStorage.getItem("token");
+  if (!token) return null;
+
+  try {
+    const decoded = jwtDecode<JwtPayload>(token);
+    return decoded.id;
+  } catch (err) {
+    console.error("Invalid token", err);
+    return null;
+  }
+};

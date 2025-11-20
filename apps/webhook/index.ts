@@ -51,6 +51,38 @@ app.post("/hooks/catch/:userId/:zapId", async (req, res) => {
     message: "webhook recieved",
   });
 });
+
+//test trigger buffer
+app.post("/hooks/catch/test/:userId/:tempZapId", async (req, res) => {
+  const userId = parseInt(req.params.userId);
+  const tempZapId = req.params.tempZapId;
+  const body = req.body;
+
+  const existing = await prisma.testTriggerBuffer.findFirst({
+    where: { tempZapId: tempZapId },
+  });
+
+  if (existing) {
+    await prisma.testTriggerBuffer.update({
+      where: { id: existing.id },
+      data: { payload: body },
+    });
+  } else {
+    await prisma.testTriggerBuffer.create({
+      data: { tempZapId, userId, payload: body },
+    });
+  }
+
+  console.log("test Webhook received:", { userId, tempZapId, payload:req.body });
+
+  res.json({
+    message: "test webhook recieved",
+  });
+});
 app.listen(3002, () => {
   console.log("Hooks server is running on localhost:3002");
 })
+
+
+
+ 

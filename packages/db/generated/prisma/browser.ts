@@ -57,3 +57,8 @@ export type ZapRun = Prisma.ZapRunModel
  * 
  */
 export type ZapRunOutbox = Prisma.ZapRunOutboxModel
+/**
+ * Model TestTriggerBuffer
+ * 
+ */
+export type TestTriggerBuffer = Prisma.TestTriggerBufferModel

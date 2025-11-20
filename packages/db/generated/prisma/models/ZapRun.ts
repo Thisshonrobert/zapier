@@ -176,14 +176,14 @@ export type ZapRunOrderByWithRelationInput = {
 
 export type ZapRunWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  zapId?: string
   AND?: Prisma.ZapRunWhereInput | Prisma.ZapRunWhereInput[]
   OR?: Prisma.ZapRunWhereInput[]
   NOT?: Prisma.ZapRunWhereInput | Prisma.ZapRunWhereInput[]
   metadata?: Prisma.JsonFilter<"ZapRun">
+  zapId?: Prisma.StringFilter<"ZapRun"> | string
   zap?: Prisma.XOR<Prisma.ZapScalarRelationFilter, Prisma.ZapWhereInput>
   zapRunOutbox?: Prisma.XOR<Prisma.ZapRunOutboxNullableScalarRelationFilter, Prisma.ZapRunOutboxWhereInput> | null
-}, "id" | "zapId">
+}, "id">
 
 export type ZapRunOrderByWithAggregationInput = {
   id?: Prisma.SortOrder

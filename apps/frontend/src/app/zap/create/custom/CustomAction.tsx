@@ -18,27 +18,37 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Zap, Plus, X } from "lucide-react";
+import { Email } from "../actions/Email";
+import { Telegram } from "../actions/Telegram";
+import { useZapStore } from "@/app/store/zapStore";
+
 
 type ActionNode = Node<{ availableActions: Action[] }, "action">;
 
 export default function CustomAction({ data, id }: NodeProps<ActionNode>) {
-  // State to control dialog open/close
+  
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  // State to track selected action
+  
+  const [isEditorDialogOpen,setIsEditorDialogOpen] = useState(false)
   const [selectedAction, setSelectedAction] = useState<Action | null>(null);
   const { setNodes, setEdges } = useReactFlow();
-
-  // Function to handle action selection
+  const addAction = useZapStore(s => s.addAction);
+  const removeAction = useZapStore(s => s.removeAction)
+  
   const handleSelectAction = (action: Action) => {
     setSelectedAction(action);
+    addAction(id,action.id) // when a action is seleted , metadata is updated in action child components
     setIsDialogOpen(false);
+    setIsEditorDialogOpen(true);
   };
 
   const handleRemove = () => {
+    removeAction(id)
     setNodes((prevNodes) => prevNodes.filter((node) => node.id !== id));
     setEdges((prevEdges) =>
       prevEdges.filter((edge) => edge.source !== id && edge.target !== id)
     );
+   
   };
 
 
@@ -73,6 +83,8 @@ export default function CustomAction({ data, id }: NodeProps<ActionNode>) {
       },
     ]);
   };
+
+
 
   return (
     <>
@@ -181,6 +193,18 @@ export default function CustomAction({ data, id }: NodeProps<ActionNode>) {
           </div>
         </DialogContent>
       </Dialog>
+      <Dialog open={isEditorDialogOpen} onOpenChange={setIsEditorDialogOpen}>
+        <DialogTitle> </DialogTitle>
+  <DialogContent className="max-w-xl">
+    {selectedAction?.id === "email" && (
+      <Email nodeId={id} />
+    )}
+    {selectedAction?.id === "telegram" && (
+      <Telegram nodeId={id}  />
+    )}
+  </DialogContent>
+</Dialog>
+
     </>
   );
 }

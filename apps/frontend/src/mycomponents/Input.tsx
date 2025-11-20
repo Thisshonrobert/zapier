@@ -12,7 +12,7 @@ export const Input = ({
 }) => {
   return (
     <div className="text-sm  pt-2 pb-1">
-      * <label>{label}</label>
+       <label>{label}</label>
       <input
         className="border rounded px-4 py-2 w-full border-black"
         type={type}

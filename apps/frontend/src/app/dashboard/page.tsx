@@ -24,7 +24,7 @@ export interface Zap {
     type: {
       id: string;
       name: string;
-      image: string;
+      imageUrl: string;
     };
   }[];
   trigger: {
@@ -33,7 +33,7 @@ export interface Zap {
     type: {
       id: string;
       name: string;
-      image: string;
+      imageUrl: string;
     };
   };
 }

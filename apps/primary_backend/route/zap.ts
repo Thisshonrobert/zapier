@@ -4,9 +4,8 @@ import { ZapScehema } from "../types/zodtypes";
 const router = Router();
 import { authMiddleware } from "../middleware";
 
-router.post("/", authMiddleware, async (req, res) => {
-    // @ts-ignore
-    const id: string = req.id;
+router.post("/create", authMiddleware, async (req, res) => {
+    const id = req.id;
     const parsed = ZapScehema.safeParse(req.body);
     if (!parsed.success) {
         return res.status(411).json({
@@ -15,7 +14,7 @@ router.post("/", authMiddleware, async (req, res) => {
     } 
     const zap = await prisma.zap.create({
         data: {
-          userId: parseInt(id),
+          userId: id,
           name: parsed.data.name,
           time: new Date(),
           actions: {                                

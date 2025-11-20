@@ -16,7 +16,7 @@ async function main() {
   await consumer.subscribe({ topic: TOPIC_NAME, fromBeginning: true });
   const producer = kafka.producer();
   await producer.connect();
-  while (1) {
+  
     await consumer.run({
       autoCommit: false,
       eachMessage: async ({ topic, partition, message }) => {
@@ -32,7 +32,7 @@ async function main() {
         const stage = parsedValue.stage;
         const zapDetails = await prisma.zapRun.findFirst({
           where: {
-            zapId: zapRunId,
+            id: zapRunId,
           },
           include: {
             zap: {
@@ -62,24 +62,26 @@ async function main() {
         if (currentAction.type.id === "email") {
           try {
             console.log("email action");
+            console.log("raw currentaction metadata",currentAction.metadata);
+            console.log((currentAction.metadata as JsonObject)?.to as string)
             const to = parse(
-              (currentAction.metadata as JsonObject)?.email as string,
+              (currentAction.metadata as JsonObject)?.to as string,
               zapRunMetaData
-            );
+            ).trim();
             const body = parse(
               (currentAction.metadata as JsonObject)?.body as string,
               zapRunMetaData
-            );
+            ).trim();
 
             const from = parse(
               (currentAction.metadata as JsonObject)?.from as string,
               zapRunMetaData
-            );
+            ).trim();
             const subject = parse(
               (currentAction.metadata as JsonObject)?.subject as string,
               zapRunMetaData
-            );
-
+            ).trim();
+            console.log("results from parser = ", to,from,body,subject)
             await email(to, body, from, subject);
           } catch (error) {
             console.log(error);
@@ -89,16 +91,20 @@ async function main() {
           try {
             console.log("telegram post action ");
             if (currentAction.type.id === "telegram") {
-              const channelUsername = parse(
-                (currentAction.metadata as JsonObject)?.chatId as string,
+              const botToken =( parse(
+                (currentAction.metadata as JsonObject)?.botToken as string,
+                zapRunMetaData).trim() || process.env.TELEGRAM_BOT_TOKEN
+              ) || "";
+              const channelUserName = parse(
+                (currentAction.metadata as JsonObject)?.channelUserName as string,
                 zapRunMetaData
-              );
-              const chatId = await resolveChatId(channelUsername);
+              ).trim();
+              const chatId = await resolveChatId(channelUserName,botToken);
               const message = parse(
                 (currentAction.metadata as JsonObject)?.message as string,
                 zapRunMetaData
-              );
-              await sendTelegram(chatId, message);
+              ).trim();
+              await sendTelegram(chatId, message,botToken);
             }
           } catch (error) {
             console.log(error);
@@ -134,6 +140,6 @@ async function main() {
         ]);
       },
     });
-  }
+  
 }
 main().catch(console.error);

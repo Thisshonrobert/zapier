@@ -228,16 +228,16 @@ export type ActionOrderByWithRelationInput = {
 
 export type ActionWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  zapId?: string
   AND?: Prisma.ActionWhereInput | Prisma.ActionWhereInput[]
   OR?: Prisma.ActionWhereInput[]
   NOT?: Prisma.ActionWhereInput | Prisma.ActionWhereInput[]
   actionId?: Prisma.StringFilter<"Action"> | string
   metadata?: Prisma.JsonFilter<"Action">
+  zapId?: Prisma.StringFilter<"Action"> | string
   sortingOrder?: Prisma.IntFilter<"Action"> | number
   type?: Prisma.XOR<Prisma.AvailableActionScalarRelationFilter, Prisma.AvailableActionWhereInput>
   zap?: Prisma.XOR<Prisma.ZapScalarRelationFilter, Prisma.ZapWhereInput>
-}, "id" | "zapId">
+}, "id">
 
 export type ActionOrderByWithAggregationInput = {
   id?: Prisma.SortOrder

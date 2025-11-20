@@ -4,17 +4,11 @@ import { useState, useCallback, useEffect } from "react";
 import {
   ReactFlow,
   addEdge,
-  applyNodeChanges,
-  applyEdgeChanges,
+
   type Node,
   type Edge,
-  type FitViewOptions,
   Background,
   type OnConnect,
-  type OnNodesChange,
-  type OnEdgesChange,
-  type OnNodeDrag,
-  type DefaultEdgeOptions,
   BackgroundVariant,
   Controls,
   useNodesState,
@@ -29,12 +23,27 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button";
 import { initialEdges, getInitialNodes } from "./Workflow.constants";
 import { BACKEND_URL } from "@/config";
 import axios from "axios";
 import CustomTrigger from "./custom/CustonTrigger";
 import CustomAction from "./custom/CustomAction";
+import { Input } from "@/mycomponents/Input";
+import { Label } from "@/components/ui/label";
+import { useZapStore } from "@/app/store/zapStore";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 type ActionItem = {
   id: string;
@@ -86,6 +95,10 @@ export default function App() {
     getInitialNodes(availableTriggers, availableActions)
   );
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+  const [zapname,setZapname] = useState("");
+  const setZapName = useZapStore(s=>s.setZapName)
+
+  const router = useRouter();
 
   // Update nodes when triggers/actions are loaded
   useEffect(() => {
@@ -110,12 +123,68 @@ export default function App() {
     [setEdges]
   );
 
+  
+const handleNameSubmit = async()=>{
+  setZapName(zapname)
+  const { zapName, triggerId, actions } = useZapStore.getState();
+
+  const finalJson = {
+    name: zapName,
+    availableTriggerId: triggerId,
+    actions: actions.map((a, index) => ({
+      availableActionId: a.actionId,
+      actionMetadata: a.metadata,
+      sortingOrder: index
+    }))
+  };
+
+  const res = await axios.post(
+    `${BACKEND_URL}/api/v1/zap/create`,
+    finalJson,
+    { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
+  );
+toast.success(res.data.zapId)
+  
+  useZapStore.getState().resetZap();
+  setTimeout(() => {
+    router.push('/dashboard')
+  }, 3000);
+};
+
+
+
   return (
     <Card className="w-full h-screen flex flex-col">
     <CardHeader>
       <CardTitle>Create your Zap</CardTitle>
       <CardAction>
-        <Button variant="link">Publish</Button>
+      <Dialog>
+  <DialogTrigger asChild>
+    <Button variant="link">Publish</Button>
+  </DialogTrigger>
+
+  <DialogContent className="sm:max-w-[425px]">
+    <DialogHeader>
+      <DialogTitle>Save ZapName</DialogTitle>
+    </DialogHeader>
+
+    <div className="grid ">
+      <Label>Name</Label>
+      <Input 
+      label=""
+        placeholder="Zap1"
+        onChange={(e) => setZapname(e.target.value)}
+      />
+    </div>
+
+    <DialogFooter>
+      <Button onClick={handleNameSubmit}>
+        Save changes and Publish
+      </Button>
+    </DialogFooter>
+  </DialogContent>
+</Dialog>
+
       </CardAction>
     </CardHeader>
   
@@ -139,3 +208,4 @@ export default function App() {
   
   );
 }
+

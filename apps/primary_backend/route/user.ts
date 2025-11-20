@@ -87,6 +87,7 @@ router.get("/", authMiddleware, async (req, res) => {
       id,
     },
     select: {
+      id:true,
       name: true,
       email: true,
     },
@@ -97,6 +98,25 @@ router.get("/", authMiddleware, async (req, res) => {
 });
 
 
+// router.get("/auth/me", authMiddleware, async (req, res) => {
+//   try {
+//     const user = await prisma.user.findUnique({
+//       where: { id: Number(req.id) },
+//       select: {
+//         id: true,
+//         name: true,
+//         email: true,
+//       },
+//     });
+
+//     return res.json({
+//       authType: req.authType, // "jwt" or "clerk"
+//       user,
+//     });
+//   } catch (e) {
+//     return res.status(500).json({ message: "Error fetching user" });
+//   }
+// });
  
 
 export const userRouter = router;

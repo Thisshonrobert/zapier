@@ -11,4 +11,18 @@ router.get("/available",async (req, res) => {
     })
 });
 
+router.get("/test/result/:tempZapId",async(req,res)=>{
+   const tempZapId = req.params.tempZapId;
+    const testResult = await prisma.testTriggerBuffer.findFirst({
+        where:{
+            tempZapId:tempZapId
+        }
+    })
+
+    return res.json({
+        testResult
+    })
+
+})
+
 export const triggerRouter = router;

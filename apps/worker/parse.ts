@@ -1,5 +1,6 @@
 export function parse(template: string, values: any) {
-    return template.replace(/\{([^}]+)\}/g, (_, expression) => {
+  if (!template || typeof template !== "string") return "";
+    return template.replace(/\{\{([^}]+)\}\}/g, (_, expression) => {
       try {
         const keys = expression.split(".");
         let val = values;

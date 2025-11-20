@@ -56,7 +56,8 @@ export const ModelName = {
   AvailableAction: 'AvailableAction',
   AvailableTriggerType: 'AvailableTriggerType',
   ZapRun: 'ZapRun',
-  ZapRunOutbox: 'ZapRunOutbox'
+  ZapRunOutbox: 'ZapRunOutbox',
+  TestTriggerBuffer: 'TestTriggerBuffer'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -148,6 +149,17 @@ export const ZapRunOutboxScalarFieldEnum = {
 } as const
 
 export type ZapRunOutboxScalarFieldEnum = (typeof ZapRunOutboxScalarFieldEnum)[keyof typeof ZapRunOutboxScalarFieldEnum]
+
+
+export const TestTriggerBufferScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  tempZapId: 'tempZapId',
+  payload: 'payload',
+  createdAt: 'createdAt'
+} as const
+
+export type TestTriggerBufferScalarFieldEnum = (typeof TestTriggerBufferScalarFieldEnum)[keyof typeof TestTriggerBufferScalarFieldEnum]
 
 
 export const SortOrder = {

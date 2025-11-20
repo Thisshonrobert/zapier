@@ -1,15 +1,16 @@
 "use client";
 
+import { Dialog, DialogTrigger, DialogTitle, DialogDescription, DialogContent, DialogHeader } from "@/components/ui/dialog";
 import { PrimaryButton } from "./buttons/PrimaryButton";
 import { SecondaryButton } from "./buttons/SecondaryButton";
 import { FeatureComponent } from "./FeatureComponent";
 import { useRouter } from "next/navigation";
 
-import {  useClerk } from "@clerk/nextjs";
+// import {  useClerk } from "@clerk/nextjs";
 
 const Hero = () => {
   const router = useRouter();
-  const { openSignIn } = useClerk();
+  // const { openSignIn } = useClerk();
 
   return (
     <div>
@@ -35,17 +36,35 @@ const Hero = () => {
           >
             Get Started Free
           </PrimaryButton>
-          <div className="pl-4 ">
+          {/* <div className="pl-4 ">
             <SecondaryButton
-              onClick={() =>
+              onClick={() =>{
                 openSignIn({
                   redirectUrl: "/dashboard", // where to go after login
                 })
               }
+            }
               size="big"
             >
               Start With Gmail
             </SecondaryButton>
+          </div> */}
+          <div className="pl-4 ">
+          <Dialog>
+          <DialogTrigger asChild>
+            <SecondaryButton onClick={() => {}} size="big">
+              Start With GMail
+            </SecondaryButton>
+            </DialogTrigger>
+            <DialogContent>
+        <DialogHeader>
+          <DialogTitle>NOTE</DialogTitle>
+          <DialogDescription>
+            this is a MVP, this feature will be added soon...
+          </DialogDescription>
+        </DialogHeader>
+      </DialogContent>
+            </Dialog>
           </div>
         </div>
       </div>
