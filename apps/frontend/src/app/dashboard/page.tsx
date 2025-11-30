@@ -8,6 +8,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { ZapTable } from "@/mycomponents/ZapTable";
 import { LoaderOne } from "@/components/ui/loader";
+import { Button } from "@/components/ui/button";
 
 
 export interface Zap {
@@ -75,17 +76,19 @@ return <div>
     <Appbar/>
     <div className="flex justify-center pt-8">
         <div className="w-full max-w-screen-lg">
-          <div className="flex justify-between  pr-8">
+          <div className="flex justify-between  ">
             <div className="text-2xl font-bold">
               <div>My Zaps</div>
             </div>
-            <DarkButton
+            <Button
+              variant="outline"
+              className="bg-orange-500 text-white"
               onClick={() => {
                 router.push("/zap/create");
               }}
             >
               Create
-            </DarkButton>
+            </Button>
           </div>
         </div>
       </div>

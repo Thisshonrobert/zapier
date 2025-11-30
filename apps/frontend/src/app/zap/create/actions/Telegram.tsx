@@ -4,6 +4,7 @@ import { useState } from "react";
 import { FieldPicker } from "@/mycomponents/fieldPicker";
 import { useZapStore } from "@/app/store/zapStore";
 import { toast } from "sonner";
+import { TokenInput } from "@/mycomponents/TokenInput"; 
 
 export function Telegram({ nodeId }: { nodeId: string }) {
   const updateAction = useZapStore(s => s.updateAction);
@@ -12,11 +13,14 @@ export function Telegram({ nodeId }: { nodeId: string }) {
   const [botToken, setBotToken] = useState("");
   const [message, setMessage] = useState("");
 
-  const insertVariable = (field: "channelUserName" | "botToken" |  "message", value: string) => {
-    if (field === "channelUserName") setChannelUserName(prev => prev + " " + value);
-    if (field === "botToken") setBotToken(prev => prev + " " + value);
-    if (field === "message") setMessage(prev => prev + " " + value);
-    
+  const insertVariable = (
+    field: "channelUserName" | "botToken" | "message",
+    value: string
+  ) => {
+    if (field === "channelUserName")
+      setChannelUserName(prev => prev + value);
+    if (field === "botToken") setBotToken(prev => prev + value);
+    if (field === "message") setMessage(prev => prev + value);
   };
 
   const saveAction = () => {
@@ -30,43 +34,42 @@ export function Telegram({ nodeId }: { nodeId: string }) {
     <div className="space-y-4">
       <h2 className="font-semibold text-lg">Telegram Action</h2>
 
-      {/* Chat ID */}
+      {/* Channel Username */}
       <div>
-      <div className="flex justify-between items-center">
-        <label>Channel Username</label>
-        <FieldPicker onSelect={v => insertVariable("channelUserName", v)} />
-      </div>
-        <input
+        <div className="flex justify-between items-center mb-1">
+          <label>Channel Username</label>
+          <FieldPicker onSelect={v => insertVariable("channelUserName", v)} />
+        </div>
+
+        <TokenInput
           value={channelUserName}
-          onChange={e => setChannelUserName(e.target.value)}
-          className="w-full border p-2 rounded"
+          onChange={setChannelUserName}
         />
       </div>
 
       {/* Bot Token */}
       <div>
-      <div className="flex justify-between items-center">
-        <label>Bot Token</label>
-        
-        <FieldPicker onSelect={v => insertVariable("botToken", v)} />
-      </div>
-        <input
+        <div className="flex justify-between items-center mb-1">
+          <label>Bot Token</label>
+          <FieldPicker onSelect={v => insertVariable("botToken", v)} />
+        </div>
+
+        <TokenInput
           value={botToken}
-          onChange={e => setBotToken(e.target.value)}
-          className="w-full border p-2 rounded"
+          onChange={setBotToken}
         />
       </div>
 
       {/* Message */}
       <div>
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center mb-1">
           <label>Message</label>
           <FieldPicker onSelect={v => insertVariable("message", v)} />
         </div>
-        <textarea
+
+        <TokenInput
           value={message}
-          onChange={e => setMessage(e.target.value)}
-          className="w-full border p-2 rounded h-28"
+          onChange={setMessage}
         />
       </div>
 

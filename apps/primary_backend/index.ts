@@ -6,7 +6,7 @@ import { userRouter } from './route/user';
 import { zapRouter } from './route/zap';
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3002;
 
 app.use(cors());
 app.use(express.json());
@@ -18,5 +18,5 @@ app.use("/api/v1/trigger",triggerRouter)
 app.use("/api/v1/action",actionRouter)
 
 app.listen(PORT,()=>{
-    console.log("primary-backend running 3001")
+    console.log("primary-backend running 3002")
 })

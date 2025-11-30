@@ -1,10 +1,14 @@
 import { useZapStore } from "@/app/store/zapStore";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { CirclePlus } from "lucide-react";
 
 
 export function FieldPicker({ onSelect }: { onSelect: (value: string) => void }) {
   const triggerData = useZapStore(s => s.tempZapData);
 
-  if (!triggerData) return <p>No trigger data found</p>;
+  if (!triggerData) return null;
 
   const data = triggerData.payload;
 
@@ -12,16 +16,29 @@ export function FieldPicker({ onSelect }: { onSelect: (value: string) => void })
   // ["to", "from", "subject", "body"]
 
   return (
-    <div className="flex gap-2">
-      {fields.map(f => (
-        <button
-          key={f}
-          className="px-2 py-1 text-xs bg-gray-200 rounded hover:bg-gray-300"
-          onClick={() =>onSelect(`{{${f}}}`)}
-        >
-          {f}
-        </button>
+    
+      
+    <DropdownMenu>
+    <DropdownMenuTrigger asChild>
+      <Button variant="outline" size="icon">
+        <CirclePlus />
+      </Button>
+    </DropdownMenuTrigger>
+
+    <DropdownMenuContent>
+      {fields.map((f) => (
+        <DropdownMenuItem key={f}>
+          <Badge
+            className="bg-orange-500 text-white cursor-pointer"
+            onClick={() => onSelect(`{{${f}}}`)}
+          >
+            {f}
+          </Badge>
+        </DropdownMenuItem>
       ))}
-    </div>
+    </DropdownMenuContent>
+  </DropdownMenu>
+      
+    
   );
 }

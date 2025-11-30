@@ -12,6 +12,13 @@ app.post("/hooks/catch/:userId/:zapId", async (req, res) => {
 
   console.log("Webhook received:", { userId, zapId });
 
+  const secretHeader = req.headers["x-zap-secret"];
+  const expectedSecret = process.env.ZAP_SECRET;
+
+  if (!secretHeader || secretHeader !== expectedSecret) {
+    return Response.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
 
   const user =  await prisma.user.findUnique({
     where: {
@@ -79,8 +86,8 @@ app.post("/hooks/catch/test/:userId/:tempZapId", async (req, res) => {
     message: "test webhook recieved",
   });
 });
-app.listen(3002, () => {
-  console.log("Hooks server is running on localhost:3002");
+app.listen(3003, () => {
+  console.log("Hooks server is running on localhost:3003");
 })
 
 
