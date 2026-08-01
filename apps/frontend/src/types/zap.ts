@@ -1,0 +1,33 @@
+export interface AppType {
+  id: string;
+  name: string;
+  imageUrl: string;
+}
+
+export interface Zap {
+  id: string;
+  name: string;
+  time: Date;
+  triggerId: string;
+  userId: number;
+  actions: {
+    id: string;
+    zapId: string;
+    actionId: string;
+    sortingOrder: number;
+    type: AppType;
+  }[];
+  trigger: {
+    id: string;
+    zapId: string;
+    type: AppType;
+  };
+}
+
+export interface ZapRun {
+  id: string;
+  zapId: string;
+  metadata: Record<string, unknown>;
+  status: "success" | "running";
+  zap: Pick<Zap, "id" | "name" | "time" | "trigger" | "actions">;
+}

@@ -17,30 +17,24 @@ import {
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 import {
-  Card,
-  CardAction,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
   Dialog,
   DialogClose,
   DialogContent,
-
   DialogFooter,
-  DialogHeader,
-  DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import { Button } from "@/components/ui/button";
+import { Rocket } from "lucide-react";
+import {
+  DialogHeading,
+  Field,
+  btnPrimary,
+  btnSecondary,
+} from "@/mycomponents/app/FormKit";
 import { initialEdges, getInitialNodes } from "./Workflow.constants";
 import { BACKEND_URL } from "@/config";
 import axios from "axios";
 import CustomTrigger from "./custom/CustonTrigger";
 import CustomAction from "./custom/CustomAction";
-import { Input } from "@/mycomponents/Input";
-import { Label } from "@/components/ui/label";
 import { useZapStore } from "@/app/store/zapStore";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -154,42 +148,55 @@ toast.success(res.data.zapId)
 
 
   return (
-    <Card className="w-full h-screen flex flex-col">
-    <CardHeader>
-      <CardTitle>Create your Zap</CardTitle>
-      <CardAction>
-      <Dialog>
-  <DialogTrigger asChild>
-    <Button variant="link">Publish</Button>
-  </DialogTrigger>
+    <div className="flex h-screen w-full flex-col bg-[#fffdf9]">
+      <header className="flex shrink-0 items-center justify-between gap-4 border-b border-zinc-200 bg-white px-6 py-4">
+        <div className="min-w-0">
+          <h1 className="text-xl font-bold tracking-tight text-zinc-900">
+            Create your Zap
+          </h1>
+          <p className="mt-0.5 text-sm text-zinc-500">
+            Pick a trigger, add the steps that follow, then publish.
+          </p>
+        </div>
 
-  <DialogContent className="sm:max-w-[425px]">
-    <DialogHeader>
-      <DialogTitle>Save ZapName</DialogTitle>
-    </DialogHeader>
+        <Dialog>
+          <DialogTrigger asChild>
+            <button className={btnPrimary}>
+              <Rocket className="h-4 w-4" />
+              Publish
+            </button>
+          </DialogTrigger>
 
-    <div className="grid ">
-      <Label>Name</Label>
-      <Input 
-      label=""
-        placeholder="Zap1"
-        onChange={(e) => setZapname(e.target.value)}
-      />
-    </div>
+          <DialogContent className="rounded-2xl sm:max-w-[440px]">
+            <DialogHeading
+              icon={Rocket}
+              title="Publish your Zap"
+              description="Give it a name so you can find it on your dashboard."
+            />
 
-    <DialogFooter>
-      <Button onClick={handleNameSubmit}>
-        Save changes and Publish
-      </Button>
-    </DialogFooter>
-  </DialogContent>
-</Dialog>
+            <div className="mt-5">
+              <Field label="Zap name">
+                <input
+                  className="h-10 w-full rounded-lg border border-zinc-300 bg-white px-3 text-sm text-zinc-900 transition placeholder:text-zinc-400 hover:border-zinc-400 focus:border-[#FF4F00] focus:outline-none focus:ring-2 focus:ring-[#FF4F00]/20"
+                  placeholder="e.g. Notify me about new signups"
+                  onChange={(e) => setZapname(e.target.value)}
+                />
+              </Field>
+            </div>
 
-      </CardAction>
-    </CardHeader>
-  
-    <CardContent className="flex-1 p-0">
-      <div className="w-full h-full">
+            <DialogFooter className="mt-5 gap-2 border-t border-zinc-200 pt-4 sm:justify-end">
+              <DialogClose asChild>
+                <button className={btnSecondary}>Cancel</button>
+              </DialogClose>
+              <button onClick={handleNameSubmit} className={btnPrimary}>
+                Save and publish
+              </button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+      </header>
+
+      <div className="min-h-0 flex-1">
         <ReactFlow
           nodes={nodes}
           edges={edges}
@@ -199,13 +206,12 @@ toast.success(res.data.zapId)
           fitView
           nodeTypes={nodeTypes}
         >
-          <Background color="#ccc" variant={BackgroundVariant.Dots} />
-          <Controls />
+          <Background color="#e4e4e7" gap={18} size={2} variant={BackgroundVariant.Dots} />
+          <Controls className="!rounded-lg !border !border-zinc-200 !shadow-sm" />
         </ReactFlow>
       </div>
-    </CardContent>
-  </Card>
-  
+    </div>
+
   );
 }
 

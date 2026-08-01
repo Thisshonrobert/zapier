@@ -1,98 +1,104 @@
 "use client";
-import Appbar from "@/mycomponents/Appbar";
-import DarkButton from "@/mycomponents/buttons/DarkButton";
 
-import { BACKEND_URL } from "@/config";
-import React from "react";
-import axios from "axios";
 import { useRouter } from "next/navigation";
-import { ZapTable } from "@/mycomponents/ZapTable";
+import { Bot, FileInput, MessageSquare, Plug, Zap as ZapIcon } from "lucide-react";
 import { LoaderOne } from "@/components/ui/loader";
-import { Button } from "@/components/ui/button";
+import { ZapTable } from "@/mycomponents/ZapTable";
+import { AppShell } from "@/mycomponents/app/AppShell";
+import { MvpAction } from "@/mycomponents/app/MvpDialog";
+import { useZaps } from "@/hooks/useZaps";
 
+export type { Zap } from "@/types/zap";
 
-export interface Zap {
-  id: string;
-  name:string,
-  time:Date,
-  triggerId: string;
-  userId: number;
-  actions: {
-    id: string;
-    zapId: string;
-    actionId: string;
-    sortingOrder: number;
-    type: {
-      id: string;
-      name: string;
-      imageUrl: string;
-    };
-  }[];
-  trigger: {
-    id: string;
-    zapId: string;
-    type: {
-      id: string;
-      name: string;
-      imageUrl: string;
-    };
-  };
-}
+const SCRATCH_CARDS = [
+  {
+    label: "Zap",
+    description: "Automated workflows",
+    icon: ZapIcon,
+    tint: "bg-orange-100 text-[#FF4F00]",
+    href: "/zap/create",
+  },
+  { label: "Agent", description: "AI teammates", icon: Bot, tint: "bg-red-100 text-red-600" },
+  {
+    label: "Chatbot",
+    description: "AI-powered chatbot",
+    icon: MessageSquare,
+    tint: "bg-purple-100 text-purple-600",
+  },
+  { label: "MCP", description: "AI tool integrations", icon: Plug, tint: "bg-pink-100 text-pink-600" },
+  { label: "Form", description: "Automation-ready forms", icon: FileInput, tint: "bg-amber-100 text-amber-600" },
+] as const;
 
-interface ZapsResponse {
-  zaps: Zap[];
-}
+export default function DashboardPage() {
+  const { loading, zaps } = useZaps();
+  const router = useRouter();
 
-function useZaps(){
-    const [loading,setLoading] = React.useState(true)
-    const [zaps,setZaps] = React.useState<Zap[]>([]);
-    const token = typeof window !== 'undefined' ? localStorage.getItem("token") : null;
+  return (
+    <AppShell>
+      <div className="mx-auto w-full max-w-6xl px-6 py-10">
+        <h1 className="mb-1 text-3xl font-bold tracking-tight text-zinc-900">
+          Welcome back
+        </h1>
+        <p className="mb-8 text-sm text-zinc-600">
+          Build a workflow, then watch every run land in your Zap history.
+        </p>
 
-    React.useEffect(()=>{
-        if(!token){
-            setLoading(false);
-            return;
-          }
-         axios.get<ZapsResponse>(`${BACKEND_URL}/api/v1/zap`,{
-            headers:{
-                Authorization: `Bearer ${token}`,
-            }
-        }).then((response)=>{
-            setZaps(response.data.zaps)
-            setLoading(false);
-        })
-    },[zaps])
+        <h2 className="mb-3 text-lg font-semibold text-zinc-900">
+          Start from scratch
+        </h2>
+        <div className="mb-12 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+          {SCRATCH_CARDS.map((card) => {
+            const Icon = card.icon;
+            const body = (
+              <div className="flex h-full items-center gap-3 rounded-xl border border-zinc-200 bg-white p-4 transition hover:border-zinc-400 hover:shadow-sm">
+                <span className={`grid h-9 w-9 shrink-0 place-items-center rounded-lg ${card.tint}`}>
+                  <Icon className="h-[18px] w-[18px]" />
+                </span>
+                <span className="min-w-0">
+                  <span className="block text-sm font-semibold text-zinc-900">
+                    {card.label}
+                  </span>
+                  <span className="block truncate text-xs text-zinc-500">
+                    {card.description}
+                  </span>
+                </span>
+              </div>
+            );
 
-    return {
-        loading,
-        zaps
-    }
-}
-
-export default function(){
-    const {loading,zaps} = useZaps();
-    const router = useRouter();
-return <div>
-    <Appbar/>
-    <div className="flex justify-center pt-8">
-        <div className="w-full max-w-screen-lg">
-          <div className="flex justify-between  ">
-            <div className="text-2xl font-bold">
-              <div>My Zaps</div>
-            </div>
-            <Button
-              variant="outline"
-              className="bg-orange-500 text-white"
-              onClick={() => {
-                router.push("/zap/create");
-              }}
-            >
-              Create
-            </Button>
-          </div>
+            return "href" in card && card.href ? (
+              <button
+                key={card.label}
+                className="text-left"
+                onClick={() => router.push(card.href)}
+              >
+                {body}
+              </button>
+            ) : (
+              <MvpAction key={card.label} className="cursor-pointer" title={card.label}>
+                {body}
+              </MvpAction>
+            );
+          })}
         </div>
+
+        <div className="mb-4 flex items-center justify-between">
+          <h2 className="text-lg font-semibold text-zinc-900">My Zaps</h2>
+          <button
+            onClick={() => router.push("/zap/create")}
+            className="rounded-lg bg-[#FF4F00] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#e64700]"
+          >
+            Create
+          </button>
+        </div>
+
+        {loading ? (
+          <div className="flex justify-center py-16">
+            <LoaderOne />
+          </div>
+        ) : (
+          <ZapTable zaps={zaps} />
+        )}
       </div>
-      {loading ?<div className="flex justify-center"><LoaderOne/></div> :
-      <div className='flex justify-center'> <ZapTable zaps={zaps}/></div>} 
-</div>
+    </AppShell>
+  );
 }

@@ -9,15 +9,9 @@ import {
 } from "@xyflow/react";
 import { type Action } from "../Workflow.constants";
 import { useState } from "react";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { Zap, Plus, X } from "lucide-react";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Zap, Plus, X, ChevronRight } from "lucide-react";
+import { DialogHeading, btnSecondary } from "@/mycomponents/app/FormKit";
 import { Email } from "../actions/Email";
 import { Telegram } from "../actions/Telegram";
 import { useZapStore } from "@/app/store/zapStore";
@@ -88,105 +82,117 @@ export default function CustomAction({ data, id }: NodeProps<ActionNode>) {
 
   return (
     <>
-      <div className="relative w-64">
-        <Handle type="target" position={Position.Top} className="w-2 h-2" />
+      <div className="relative w-72">
+        <Handle
+          type="target"
+          position={Position.Top}
+          className="!h-2.5 !w-2.5 !border-2 !border-white !bg-zinc-400"
+        />
 
-        <div className="bg-white border border-gray-200 rounded-xl shadow-sm">
-          <div className="flex items-center justify-between gap-2 px-3 py-2 border-b border-gray-100">
+        <div className="overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-[0_1px_2px_rgba(24,24,27,0.06),0_8px_24px_-12px_rgba(24,24,27,0.18)] transition hover:border-zinc-300">
+          <div className="flex items-center justify-between gap-2 border-b border-zinc-100 bg-violet-50/60 px-4 py-2.5">
             <div className="flex items-center gap-2">
-              <Zap className="w-4 h-4 text-blue-500" />
-              <span className="font-semibold text-gray-800 text-sm">Action</span>
+              <Zap className="h-4 w-4 text-violet-600" />
+              <span className="text-[13px] font-semibold tracking-tight text-zinc-900">
+                Action
+              </span>
             </div>
-            {id !== '2' &&   <Button
-              type="button"
-              variant="ghost"
-              size="icon"
-              className="h-6 w-6 text-gray-500 hover:text-gray-700"
-              aria-label="Remove action"
-              onClick={handleRemove}
-            >
-              <X className="w-4 h-4" />
-            </Button>}
-          
+            {id !== '2' && (
+              <button
+                type="button"
+                className="grid h-6 w-6 place-items-center rounded-md text-zinc-400 transition hover:bg-white hover:text-zinc-700"
+                aria-label="Remove action"
+                onClick={handleRemove}
+              >
+                <X className="h-3.5 w-3.5" />
+              </button>
+            )}
           </div>
 
-          <div className="px-3 py-3 text-sm">
+          <div className="px-4 py-3.5 text-sm">
             {selectedAction ? (
-              <div className="flex items-center gap-3 mb-3">
+              <div className="mb-3 flex items-center gap-3 rounded-lg bg-zinc-50 px-3 py-2 ring-1 ring-zinc-100">
                 {selectedAction.imageUrl && (
                   <img
                     src={selectedAction.imageUrl}
                     alt={selectedAction.name}
-                    className="w-7 h-7 rounded"
+                    className="h-7 w-7 rounded object-contain"
                   />
                 )}
-                <span className="font-medium text-gray-700">
+                <span className="font-medium text-zinc-900">
                   {selectedAction.name}
                 </span>
               </div>
             ) : (
-              <p className="text-gray-600 mb-3">
-                2. Select the event for your Zap to run
+              <p className="mb-3 text-sm leading-relaxed text-zinc-500">
+                Select what your Zap should do next.
               </p>
             )}
 
-            <Button
+            <button
               onClick={() => setIsDialogOpen(true)}
-              variant="outline"
-              className="w-full text-sm"
+              className={`${btnSecondary} w-full`}
             >
-              {selectedAction ? "Change Action" : "+ Add Action"}
-            </Button>
+              {selectedAction ? "Change action" : "Add action"}
+            </button>
           </div>
         </div>
 
         {/* Handle for outgoing connections (bottom) */}
-        <Handle type="source" position={Position.Bottom} className="w-2 h-2" />
+        <Handle
+          type="source"
+          position={Position.Bottom}
+          className="!h-2.5 !w-2.5 !border-2 !border-white !bg-zinc-400"
+        />
 
         {/* Plus button to add more actions (positioned after the node) */}
-        <div className="absolute -bottom-9 left-1/2 transform -translate-x-1/2 z-10">
+        <div className="absolute -bottom-9 left-1/2 z-10 -translate-x-1/2 transform">
           <button
             onClick={handleAddAction}
-            className="w-8 h-8 rounded-full bg-blue-500 hover:bg-blue-600 text-white flex items-center justify-center shadow-md transition-colors cursor-pointer"
+            className="grid h-8 w-8 cursor-pointer place-items-center rounded-full border border-zinc-200 bg-white text-zinc-500 shadow-sm transition hover:border-violet-300 hover:bg-violet-50 hover:text-violet-600"
             title="Add another action"
           >
-            <Plus className="w-5 h-5" />
+            <Plus className="h-4 w-4" />
           </button>
         </div>
       </div>
 
     
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
-          <DialogHeader>
-            <DialogTitle>Select an Action</DialogTitle>
-            <DialogDescription>
-              Choose the action that will run when your trigger fires
-            </DialogDescription>
-          </DialogHeader>
+        <DialogContent className="max-h-[80vh] max-w-2xl overflow-y-auto rounded-2xl">
+          <DialogHeading
+            icon={Zap}
+            title="Select an action"
+            description="Choose what should happen when your trigger fires."
+            tint="violet"
+          />
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
+          <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
             {data.availableActions.length > 0 ? (
               data.availableActions.map((action) => (
                 <button
                   key={action.id}
                   onClick={() => handleSelectAction(action)}
-                  className="flex items-center gap-3 p-4 border border-gray-200 rounded-lg hover:bg-gray-50 hover:border-gray-300 transition-colors text-left"
+                  className="group flex items-center gap-3 rounded-xl border border-zinc-200 bg-white p-4 text-left transition hover:border-violet-300 hover:bg-violet-50/40 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-200"
                 >
                   {action.imageUrl && (
                     <img
                       src={action.imageUrl}
                       alt={action.name}
-                      className="w-12 h-12 rounded object-cover"
+                      className="h-10 w-10 rounded-lg object-contain"
                     />
                   )}
-                  <div className="flex-1">
-                    <p className="font-medium text-gray-900">{action.name}</p>
+                  <div className="min-w-0 flex-1">
+                    <p className="truncate font-medium text-zinc-900">
+                      {action.name}
+                    </p>
+                    <p className="text-xs text-zinc-500">Runs after the trigger</p>
                   </div>
+                  <ChevronRight className="h-4 w-4 shrink-0 text-zinc-300 transition group-hover:translate-x-0.5 group-hover:text-violet-500" />
                 </button>
               ))
             ) : (
-              <p className="col-span-2 text-center text-gray-500 py-8">
+              <p className="col-span-2 py-10 text-center text-sm text-zinc-500">
                 No actions available
               </p>
             )}
@@ -194,16 +200,20 @@ export default function CustomAction({ data, id }: NodeProps<ActionNode>) {
         </DialogContent>
       </Dialog>
       <Dialog open={isEditorDialogOpen} onOpenChange={setIsEditorDialogOpen}>
-        <DialogTitle> </DialogTitle>
-  <DialogContent className="max-w-xl">
-    {selectedAction?.id === "email" && (
-      <Email nodeId={id} />
-    )}
-    {selectedAction?.id === "telegram" && (
-      <Telegram nodeId={id}  />
-    )}
-  </DialogContent>
-</Dialog>
+        <DialogContent className="max-w-xl rounded-2xl">
+          {selectedAction?.id === "email" && <Email nodeId={id} />}
+          {selectedAction?.id === "telegram" && <Telegram nodeId={id} />}
+          {selectedAction?.id !== "email" &&
+            selectedAction?.id !== "telegram" && (
+              <DialogHeading
+                icon={Zap}
+                title={selectedAction?.name ?? "Configure action"}
+                description="This action has no settings to configure yet."
+                tint="violet"
+              />
+            )}
+        </DialogContent>
+      </Dialog>
 
     </>
   );

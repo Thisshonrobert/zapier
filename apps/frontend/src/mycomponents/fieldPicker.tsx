@@ -20,18 +20,27 @@ export function FieldPicker({ onSelect }: { onSelect: (value: string) => void })
       
     <DropdownMenu>
     <DropdownMenuTrigger asChild>
-      <Button variant="outline" size="icon">
-        <CirclePlus />
+      <Button
+        variant="ghost"
+        size="sm"
+        className="h-7 gap-1.5 rounded-md px-2 text-xs font-medium text-[#FF4F00] hover:bg-orange-50 hover:text-[#c93f00]"
+      >
+        <CirclePlus className="h-3.5 w-3.5" />
+        Insert data
       </Button>
     </DropdownMenuTrigger>
 
-    <DropdownMenuContent>
+    <DropdownMenuContent align="end" className="min-w-44">
+      <p className="px-2 py-1.5 text-xs font-medium text-zinc-500">
+        From your trigger
+      </p>
       {fields.map((f) => (
-        <DropdownMenuItem key={f}>
-          <Badge
-            className="bg-orange-500 text-white cursor-pointer"
-            onClick={() => onSelect(`{{${f}}}`)}
-          >
+        <DropdownMenuItem
+          key={f}
+          className="cursor-pointer"
+          onClick={() => onSelect(`{{${f}}}`)}
+        >
+          <Badge className="rounded-md bg-orange-100 px-1.5 text-xs font-medium text-[#c93f00] ring-1 ring-orange-200">
             {f}
           </Badge>
         </DropdownMenuItem>

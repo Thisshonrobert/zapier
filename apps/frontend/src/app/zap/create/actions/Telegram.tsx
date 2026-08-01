@@ -1,10 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import { Send } from "lucide-react";
 import { FieldPicker } from "@/mycomponents/fieldPicker";
 import { useZapStore } from "@/app/store/zapStore";
 import { toast } from "sonner";
-import { TokenInput } from "@/mycomponents/TokenInput"; 
+import { TokenInput } from "@/mycomponents/TokenInput";
+import { DialogHeading, Field, btnPrimary } from "@/mycomponents/app/FormKit";
 
 export function Telegram({ nodeId }: { nodeId: string }) {
   const updateAction = useZapStore(s => s.updateAction);
@@ -31,54 +33,43 @@ export function Telegram({ nodeId }: { nodeId: string }) {
   };
 
   return (
-    <div className="space-y-4">
-      <h2 className="font-semibold text-lg">Telegram Action</h2>
+    <div className="space-y-5">
+      <DialogHeading
+        icon={Send}
+        title="Telegram action"
+        description="Post a message to a channel when this step runs."
+        tint="sky"
+      />
 
-      {/* Channel Username */}
-      <div>
-        <div className="flex justify-between items-center mb-1">
-          <label>Channel Username</label>
-          <FieldPicker onSelect={v => insertVariable("channelUserName", v)} />
-        </div>
+      <div className="space-y-4">
+        <Field
+          label="Channel username"
+          hint="For example @my_updates_channel"
+          action={<FieldPicker onSelect={v => insertVariable("channelUserName", v)} />}
+        >
+          <TokenInput value={channelUserName} onChange={setChannelUserName} />
+        </Field>
 
-        <TokenInput
-          value={channelUserName}
-          onChange={setChannelUserName}
-        />
+        <Field
+          label="Bot token"
+          action={<FieldPicker onSelect={v => insertVariable("botToken", v)} />}
+        >
+          <TokenInput value={botToken} onChange={setBotToken} />
+        </Field>
+
+        <Field
+          label="Message"
+          action={<FieldPicker onSelect={v => insertVariable("message", v)} />}
+        >
+          <TokenInput value={message} onChange={setMessage} />
+        </Field>
       </div>
 
-      {/* Bot Token */}
-      <div>
-        <div className="flex justify-between items-center mb-1">
-          <label>Bot Token</label>
-          <FieldPicker onSelect={v => insertVariable("botToken", v)} />
-        </div>
-
-        <TokenInput
-          value={botToken}
-          onChange={setBotToken}
-        />
+      <div className="border-t border-zinc-200 pt-4">
+        <button onClick={saveAction} className={`${btnPrimary} w-full`}>
+          Save Telegram action
+        </button>
       </div>
-
-      {/* Message */}
-      <div>
-        <div className="flex justify-between items-center mb-1">
-          <label>Message</label>
-          <FieldPicker onSelect={v => insertVariable("message", v)} />
-        </div>
-
-        <TokenInput
-          value={message}
-          onChange={setMessage}
-        />
-      </div>
-
-      <button
-        onClick={saveAction}
-        className="px-4 py-2 w-full bg-purple-600 hover:bg-purple-700 text-white rounded"
-      >
-        Save Telegram Action
-      </button>
     </div>
   );
 }

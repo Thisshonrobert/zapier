@@ -1,10 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import { Mail } from "lucide-react";
 import { FieldPicker } from "@/mycomponents/fieldPicker";
 import { TokenInput } from "@/mycomponents/TokenInput";
 import { useZapStore } from "@/app/store/zapStore";
 import { toast } from "sonner";
+import { DialogHeading, Field, btnPrimary } from "@/mycomponents/app/FormKit";
 
 export function Email({ nodeId }: { nodeId: string }) {
   const updateAction = useZapStore(s => s.updateAction);
@@ -20,51 +22,37 @@ export function Email({ nodeId }: { nodeId: string }) {
   };
 
   return (
-    <div className="space-y-4">
-      <h2 className="text-lg font-semibold">Email Action</h2>
+    <div className="space-y-5">
+      <DialogHeading
+        icon={Mail}
+        title="Email action"
+        description="Compose the message this step will send when the Zap runs."
+        tint="sky"
+      />
 
-      {/* TO */}
-      <div>
-        <label className="block mb-1">To</label>
-        <div className="flex gap-2 items-center">
+      <div className="space-y-4">
+        <Field label="To" action={<FieldPicker onSelect={(v) => setTo(p => p + "" + v)} />}>
           <TokenInput value={to} onChange={setTo} />
-          <FieldPicker onSelect={(v) => setTo(p => p + "" + v)} />
-        </div>
-      </div>
+        </Field>
 
-      {/* FROM */}
-      <div>
-        <label className="block mb-1">From</label>
-        <div className="flex gap-2 items-center">
+        <Field label="From" action={<FieldPicker onSelect={(v) => setFrom(p => p + "" + v)} />}>
           <TokenInput value={from} onChange={setFrom} />
-          <FieldPicker onSelect={(v) => setFrom(p => p + "" + v)} />
-        </div>
-      </div>
+        </Field>
 
-      {/* SUBJECT */}
-      <div>
-        <label className="block mb-1">Subject</label>
-        <div className="flex gap-2 items-center">
+        <Field label="Subject" action={<FieldPicker onSelect={(v) => setSubject(p => p + "" + v)} />}>
           <TokenInput value={subject} onChange={setSubject} />
-          <FieldPicker onSelect={(v) => setSubject(p => p + "" + v)} />
-        </div>
-      </div>
+        </Field>
 
-      {/* BODY */}
-      <div>
-        <label className="block mb-1">Body</label>
-        <div className="flex gap-2 items-center">
+        <Field label="Body" action={<FieldPicker onSelect={(v) => setBody(p => p + "" + v)} />}>
           <TokenInput value={body} onChange={setBody} />
-          <FieldPicker onSelect={(v) => setBody(p => p + "" + v)} />
-        </div>
+        </Field>
       </div>
 
-      <button
-        onClick={saveAction}
-        className="w-full py-2 bg-purple-600 text-white rounded hover:bg-purple-700"
-      >
-        Save Email Action
-      </button>
+      <div className="border-t border-zinc-200 pt-4">
+        <button onClick={saveAction} className={`${btnPrimary} w-full`}>
+          Save email action
+        </button>
+      </div>
     </div>
   );
 }
