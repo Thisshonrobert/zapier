@@ -14,9 +14,18 @@ async function main() {
     while(1){
         const pendingRows = await prisma.zapRunOutbox.findMany({
             where:{},
+            orderBy:{ id: 'asc' },
             take:10
         })
-        producer.send({
+
+        if (pendingRows.length === 0) {
+            await new Promise(r => setTimeout(r, 500))
+            continue
+        }
+
+        // await before deleting: if the broker never acks, the rows stay in the
+        // outbox and get picked up on the next loop instead of being lost.
+        await producer.send({
             topic:TOPIC_NAME,
             messages:pendingRows.map(row => ({
                 value: JSON.stringify({zapRunId: row.zapRunId, stage: 0})
@@ -30,7 +39,7 @@ async function main() {
                 }
             }
         })
-        console.log("reached processor")
+        console.log(`processor: published ${pendingRows.length} event(s)`)
     }
 }
 main();

@@ -11,6 +11,22 @@ const kafka = new Kafka({
 });
 const consumer = kafka.consumer({ groupId: "zap-group" });
 
+// ponytail: in-process retry only — covers transient failures (network blip, rate limit).
+// Permanent failures are logged and skipped so one bad message can't block the partition.
+// Upgrade path: persist an attempt counter + DLQ topic if delivery must survive a restart.
+async function withRetry(fn: () => Promise<void>, attempts = 3) {
+  for (let i = 1; i <= attempts; i++) {
+    try {
+      return await fn();
+    } catch (err) {
+      if (i === attempts) throw err;
+      const wait = 1000 * 2 ** (i - 1); // 1s, 2s
+      console.log(`attempt ${i}/${attempts} failed, retrying in ${wait}ms`);
+      await new Promise((r) => setTimeout(r, wait));
+    }
+  }
+}
+
 async function main() {
   await consumer.connect();
   await consumer.subscribe({ topic: TOPIC_NAME, fromBeginning: true });
@@ -59,11 +75,11 @@ async function main() {
 
         const zapRunMetaData = zapDetails?.metadata ?? {};
 
-        if (currentAction.type.id === "email") {
-          try {
+        let succeeded = true;
+
+        try {
+          if (currentAction.type.id === "email") {
             console.log("email action");
-            console.log("raw currentaction metadata",currentAction.metadata);
-            console.log((currentAction.metadata as JsonObject)?.to as string)
             const to = parse(
               (currentAction.metadata as JsonObject)?.to as string,
               zapRunMetaData
@@ -82,38 +98,35 @@ async function main() {
               zapRunMetaData
             ).trim();
             console.log("results from parser = ", to,from,body,subject)
-            await email(to, body, from, subject);
-          } catch (error) {
-            console.log(error);
+            await withRetry(() => email(to, body, from, subject));
           }
-        }
-        if (currentAction.type.id === "telegram") {
-          try {
+
+          if (currentAction.type.id === "telegram") {
             console.log("telegram post action ");
-            if (currentAction.type.id === "telegram") {
-              const botToken =( parse(
-                (currentAction.metadata as JsonObject)?.botToken as string,
-                zapRunMetaData).trim() || process.env.TELEGRAM_BOT_TOKEN
-              ) || "";
-              const channelUserName = parse(
-                (currentAction.metadata as JsonObject)?.channelUserName as string,
-                zapRunMetaData
-              ).trim();
-              const chatId = await resolveChatId(channelUserName,botToken);
-              const message = parse(
-                (currentAction.metadata as JsonObject)?.message as string,
-                zapRunMetaData
-              ).trim();
-              await sendTelegram(chatId, message,botToken);
-            }
-          } catch (error) {
-            console.log(error);
+            const botToken =( parse(
+              (currentAction.metadata as JsonObject)?.botToken as string,
+              zapRunMetaData).trim() || process.env.TELEGRAM_BOT_TOKEN
+            ) || "";
+            const channelUserName = parse(
+              (currentAction.metadata as JsonObject)?.channelUserName as string,
+              zapRunMetaData
+            ).trim();
+            const chatId = await resolveChatId(channelUserName,botToken);
+            const message = parse(
+              (currentAction.metadata as JsonObject)?.message as string,
+              zapRunMetaData
+            ).trim();
+            await withRetry(() => sendTelegram(chatId, message, botToken));
           }
+        } catch (error) {
+          succeeded = false;
+          console.error("action failed after retries", { zapRunId, stage, error });
         }
 
         const lastStage = zapDetails!.zap.actions.length - 1;
 
-        if (lastStage !== stage) {
+        // only advance and mark done when the action actually succeeded
+        if (succeeded && lastStage !== stage) {
           await producer.send({
             topic: TOPIC_NAME,
             messages: [
@@ -127,9 +140,7 @@ async function main() {
           });
         }
 
-        await new Promise((r) => setTimeout(r, 2000));
-
-        console.log("processing done");
+        console.log(succeeded ? "processing done" : "processing failed, stage not advanced");
 
         await consumer.commitOffsets([
           {
