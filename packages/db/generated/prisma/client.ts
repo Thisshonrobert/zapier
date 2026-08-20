@@ -42,7 +42,7 @@ export { Prisma }
 
 // file annotations for bundling tools to include these files
 path.join(__dirname, "query_engine-windows.dll.node")
-path.join(process.cwd(), "../generated/prisma/query_engine-windows.dll.node")
+path.join(process.cwd(), "packages/db/generated/prisma/query_engine-windows.dll.node")
 
 /**
  * Model User
@@ -89,3 +89,8 @@ export type ZapRunOutbox = Prisma.ZapRunOutboxModel
  * 
  */
 export type TestTriggerBuffer = Prisma.TestTriggerBufferModel
+/**
+ * Model ZapRunRetry
+ * 
+ */
+export type ZapRunRetry = Prisma.ZapRunRetryModel
