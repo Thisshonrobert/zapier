@@ -166,11 +166,12 @@ export const ZapTable = ({ zaps }: { zaps: Zap[] }) => {
                   </TableCell>
                   <TableCell>
                     <div className="flex items-center justify-end gap-2">
-                      <MvpAction className="inline-block" title="Open Zap">
-                        <span className="cursor-pointer rounded-lg bg-[#FF4F00] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#e64700]">
-                          Go
-                        </span>
-                      </MvpAction>
+                      <button
+                        onClick={() => router.push(`/zap/${zap.id}`)}
+                        className="cursor-pointer rounded-lg bg-[#FF4F00] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#e64700]"
+                      >
+                        Go
+                      </button>
                       <MvpAction className="inline-block" title="Zap options">
                         <MoreHorizontal className="h-4 w-4 cursor-pointer text-zinc-500 hover:text-zinc-800" />
                       </MvpAction>

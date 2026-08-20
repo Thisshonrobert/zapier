@@ -3,7 +3,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { BACKEND_URL } from "@/config";
-import type { Zap, ZapRun } from "@/types/zap";
+import type { Zap, ZapDetail, ZapRun } from "@/types/zap";
 
 const authHeaders = () => {
   const token =
@@ -51,4 +51,24 @@ export function useZapRuns() {
   }, []);
 
   return { loading, runs };
+}
+
+export function useZap(id: string) {
+  const [loading, setLoading] = useState(true);
+  const [zap, setZap] = useState<ZapDetail | null>(null);
+
+  useEffect(() => {
+    const headers = authHeaders();
+    if (!headers || !id) {
+      setLoading(false);
+      return;
+    }
+    axios
+      .get<{ zap: ZapDetail }>(`${BACKEND_URL}/api/v1/zap/${id}`, { headers })
+      .then((res) => setZap(res.data?.zap ?? null))
+      .catch(() => setZap(null))
+      .finally(() => setLoading(false));
+  }, [id]);
+
+  return { loading, zap };
 }

@@ -31,3 +31,14 @@ export interface ZapRun {
   status: "success" | "running";
   zap: Pick<Zap, "id" | "name" | "time" | "trigger" | "actions">;
 }
+
+/** A single Zap plus its run history, as returned by GET /api/v1/zap/:id. */
+export interface ZapDetail
+  extends Pick<Zap, "id" | "name" | "time" | "trigger" | "actions"> {
+  runs: {
+    id: string;
+    metadata: Record<string, unknown>;
+    status: "success" | "running";
+    failures: number;
+  }[];
+}
