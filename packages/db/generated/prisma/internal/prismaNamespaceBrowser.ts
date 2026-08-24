@@ -57,7 +57,8 @@ export const ModelName = {
   AvailableTriggerType: 'AvailableTriggerType',
   ZapRun: 'ZapRun',
   ZapRunOutbox: 'ZapRunOutbox',
-  TestTriggerBuffer: 'TestTriggerBuffer'
+  TestTriggerBuffer: 'TestTriggerBuffer',
+  ZapRunRetry: 'ZapRunRetry'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -160,6 +161,19 @@ export const TestTriggerBufferScalarFieldEnum = {
 } as const
 
 export type TestTriggerBufferScalarFieldEnum = (typeof TestTriggerBufferScalarFieldEnum)[keyof typeof TestTriggerBufferScalarFieldEnum]
+
+
+export const ZapRunRetryScalarFieldEnum = {
+  id: 'id',
+  zapRunId: 'zapRunId',
+  stage: 'stage',
+  attempt: 'attempt',
+  lastError: 'lastError',
+  nextRunAt: 'nextRunAt',
+  createdAt: 'createdAt'
+} as const
+
+export type ZapRunRetryScalarFieldEnum = (typeof ZapRunRetryScalarFieldEnum)[keyof typeof ZapRunRetryScalarFieldEnum]
 
 
 export const SortOrder = {

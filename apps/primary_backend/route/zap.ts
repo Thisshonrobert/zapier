@@ -89,6 +89,8 @@ router.get("/runs", authMiddleware, async (req, res) => {
     });
 })
 
+// Single Zap, read-only: definition plus every run of it.
+// The userId filter is what stops one user inspecting another's Zap.
 router.get("/:id",authMiddleware, async (req, res) => {
     const id = req.id;
     const zapId = req.params.id;
@@ -100,8 +102,39 @@ router.get("/:id",authMiddleware, async (req, res) => {
         include: {
             trigger: { include: { type: true } },
             actions: { include: { type: true } },
+            zapRun: { include: { zapRunOutbox: true } },
         },
     });
-    return res.json({ zap });
+
+    if (!zap) {
+        return res.status(404).json({ message: "Zap not found" });
+    }
+
+    // Retries are keyed by zapRunId alone, so one query covers every run
+    // instead of one per run. Tallied in JS — a Zap's retry rows are few.
+    const failures = await prisma.zapRunRetry.findMany({
+        where: { zapRunId: { in: zap.zapRun.map((run) => run.id) } },
+        select: { zapRunId: true },
+    });
+    const failureCount = new Map<string, number>();
+    for (const failure of failures) {
+        failureCount.set(failure.zapRunId, (failureCount.get(failure.zapRunId) ?? 0) + 1);
+    }
+
+    return res.json({
+        zap: {
+            id: zap.id,
+            name: zap.name,
+            time: zap.time,
+            trigger: zap.trigger,
+            actions: zap.actions,
+            runs: zap.zapRun.map((run) => ({
+                id: run.id,
+                metadata: run.metadata,
+                status: run.zapRunOutbox ? "running" : "success",
+                failures: failureCount.get(run.id) ?? 0,
+            })),
+        },
+    });
 })
 export const zapRouter = router;

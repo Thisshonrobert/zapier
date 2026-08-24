@@ -407,10 +407,6 @@ export type ZapUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.ZapScalarWhereInput | Prisma.ZapScalarWhereInput[]
 }
 
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
-}
-
 export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
 }

@@ -10,10 +10,11 @@ datasource db {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
+  id       Int     @id @default(autoincrement())
   name     String
-  email    String @unique
-  password String
+  email    String  @unique
+  // Null for accounts that sign in through Clerk (Google) — they never set one.
+  password String?
   zap      Zap[]
 }
 
@@ -83,4 +84,19 @@ model TestTriggerBuffer {
   tempZapId String
   payload   Json
   createdAt DateTime @default(now())
+}
+
+// Durable record of an action that ran out of retries. Written alongside the
+// zap-events-dlq message, so a failure is queryable from SQL and replayable
+// from Kafka rather than only visible in worker logs.
+model ZapRunRetry {
+  id        String   @id @default(uuid())
+  zapRunId  String
+  stage     Int
+  attempt   Int      @default(0)
+  lastError String?
+  nextRunAt DateTime @default(now())
+  createdAt DateTime @default(now())
+
+  @@index([zapRunId])
 }

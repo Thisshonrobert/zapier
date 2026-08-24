@@ -4,28 +4,15 @@ import { parse } from "./parse";
 import type { JsonObject } from "@prisma/client/runtime/binary";
 import { resolveChatId, sendTelegram } from "./telegram";
 import { email } from "./email";
+import { withRetry } from "./retry";
+import { deadLetter, DLQ_TOPIC } from "./deadletter";
 const TOPIC_NAME = "zap-events";
+const RETRY_ATTEMPTS = 3;
 const kafka = new Kafka({
   clientId: "worker",
   brokers: ["localhost:9092"],
 });
 const consumer = kafka.consumer({ groupId: "zap-group" });
-
-// ponytail: in-process retry only — covers transient failures (network blip, rate limit).
-// Permanent failures are logged and skipped so one bad message can't block the partition.
-// Upgrade path: persist an attempt counter + DLQ topic if delivery must survive a restart.
-async function withRetry(fn: () => Promise<void>, attempts = 3) {
-  for (let i = 1; i <= attempts; i++) {
-    try {
-      return await fn();
-    } catch (err) {
-      if (i === attempts) throw err;
-      const wait = 1000 * 2 ** (i - 1); // 1s, 2s
-      console.log(`attempt ${i}/${attempts} failed, retrying in ${wait}ms`);
-      await new Promise((r) => setTimeout(r, wait));
-    }
-  }
-}
 
 async function main() {
   await consumer.connect();
@@ -98,7 +85,7 @@ async function main() {
               zapRunMetaData
             ).trim();
             console.log("results from parser = ", to,from,body,subject)
-            await withRetry(() => email(to, body, from, subject));
+            await withRetry(() => email(to, body, from, subject), RETRY_ATTEMPTS);
           }
 
           if (currentAction.type.id === "telegram") {
@@ -116,11 +103,29 @@ async function main() {
               (currentAction.metadata as JsonObject)?.message as string,
               zapRunMetaData
             ).trim();
-            await withRetry(() => sendTelegram(chatId, message, botToken));
+            await withRetry(() => sendTelegram(chatId, message, botToken), RETRY_ATTEMPTS);
           }
         } catch (error) {
           succeeded = false;
-          console.error("action failed after retries", { zapRunId, stage, error });
+          // Retries are spent. Park the event in both sinks before the offset
+          // is committed, so a permanent failure is recorded instead of lost.
+          await deadLetter(
+            {
+              send: async (payload) => {
+                await producer.send({
+                  topic: DLQ_TOPIC,
+                  messages: [{ value: JSON.stringify(payload) }],
+                });
+              },
+              record: async (row) => {
+                await prisma.zapRunRetry.create({ data: row });
+              },
+            },
+            zapRunId,
+            stage,
+            RETRY_ATTEMPTS,
+            error
+          );
         }
 
         const lastStage = zapDetails!.zap.actions.length - 1;

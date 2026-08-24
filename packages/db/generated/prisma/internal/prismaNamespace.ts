@@ -398,7 +398,8 @@ export const ModelName = {
   AvailableTriggerType: 'AvailableTriggerType',
   ZapRun: 'ZapRun',
   ZapRunOutbox: 'ZapRunOutbox',
-  TestTriggerBuffer: 'TestTriggerBuffer'
+  TestTriggerBuffer: 'TestTriggerBuffer',
+  ZapRunRetry: 'ZapRunRetry'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -414,7 +415,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "zap" | "trigger" | "action" | "availableAction" | "availableTriggerType" | "zapRun" | "zapRunOutbox" | "testTriggerBuffer"
+    modelProps: "user" | "zap" | "trigger" | "action" | "availableAction" | "availableTriggerType" | "zapRun" | "zapRunOutbox" | "testTriggerBuffer" | "zapRunRetry"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1084,6 +1085,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    ZapRunRetry: {
+      payload: Prisma.$ZapRunRetryPayload<ExtArgs>
+      fields: Prisma.ZapRunRetryFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ZapRunRetryFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ZapRunRetryPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ZapRunRetryFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ZapRunRetryPayload>
+        }
+        findFirst: {
+          args: Prisma.ZapRunRetryFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ZapRunRetryPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ZapRunRetryFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ZapRunRetryPayload>
+        }
+        findMany: {
+          args: Prisma.ZapRunRetryFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ZapRunRetryPayload>[]
+        }
+        create: {
+          args: Prisma.ZapRunRetryCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ZapRunRetryPayload>
+        }
+        createMany: {
+          args: Prisma.ZapRunRetryCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ZapRunRetryCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ZapRunRetryPayload>[]
+        }
+        delete: {
+          args: Prisma.ZapRunRetryDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ZapRunRetryPayload>
+        }
+        update: {
+          args: Prisma.ZapRunRetryUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ZapRunRetryPayload>
+        }
+        deleteMany: {
+          args: Prisma.ZapRunRetryDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ZapRunRetryUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ZapRunRetryUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ZapRunRetryPayload>[]
+        }
+        upsert: {
+          args: Prisma.ZapRunRetryUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ZapRunRetryPayload>
+        }
+        aggregate: {
+          args: Prisma.ZapRunRetryAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateZapRunRetry>
+        }
+        groupBy: {
+          args: Prisma.ZapRunRetryGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ZapRunRetryGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ZapRunRetryCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ZapRunRetryCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1207,6 +1282,19 @@ export const TestTriggerBufferScalarFieldEnum = {
 } as const
 
 export type TestTriggerBufferScalarFieldEnum = (typeof TestTriggerBufferScalarFieldEnum)[keyof typeof TestTriggerBufferScalarFieldEnum]
+
+
+export const ZapRunRetryScalarFieldEnum = {
+  id: 'id',
+  zapRunId: 'zapRunId',
+  stage: 'stage',
+  attempt: 'attempt',
+  lastError: 'lastError',
+  nextRunAt: 'nextRunAt',
+  createdAt: 'createdAt'
+} as const
+
+export type ZapRunRetryScalarFieldEnum = (typeof ZapRunRetryScalarFieldEnum)[keyof typeof ZapRunRetryScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1420,6 +1508,7 @@ export type GlobalOmitConfig = {
   zapRun?: Prisma.ZapRunOmit
   zapRunOutbox?: Prisma.ZapRunOutboxOmit
   testTriggerBuffer?: Prisma.TestTriggerBufferOmit
+  zapRunRetry?: Prisma.ZapRunRetryOmit
 }
 
 /* Types for Logging */
