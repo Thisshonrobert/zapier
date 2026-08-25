@@ -100,3 +100,19 @@ model ZapRunRetry {
 
   @@index([zapRunId])
 }
+
+// Durable record of an action stage execution. Prevents duplicate side-effects
+// and race conditions via two-phase atomic lease claim (PENDING + leaseUntil -> SUCCESS/FAILED).
+model ZapRunExecution {
+  id          String    @id @default(uuid())
+  zapRunId    String
+  stage       Int
+  status      String    @default("PENDING")
+  leaseUntil  DateTime?
+  createdAt   DateTime  @default(now())
+  completedAt DateTime?
+
+  @@unique([zapRunId, stage])
+  @@index([zapRunId])
+}
+
