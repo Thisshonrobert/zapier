@@ -22,10 +22,12 @@
 ### Task 1: Extract and test `withRetry`
 
 **Files:**
+
 - Create: `apps/worker/retry.ts`, `apps/worker/retry.test.ts`
 - Modify: `apps/worker/index.ts` — delete the inline `withRetry`, import it instead
 
 **Interfaces:**
+
 - Produces: `withRetry(fn: () => Promise<void>, attempts = 3, sleep = (ms: number) => Promise<void>): Promise<void>` — resolves on first success, rethrows the last error after `attempts` failures. `sleep` is injectable so tests don't wait on real timers.
 
 - [ ] **Step 1:** Write `retry.test.ts` asserting three cases: success calls the fn once; a fn failing twice then succeeding is called three times; an always-failing fn is called exactly `attempts` times and rejects with the final error.
@@ -39,9 +41,11 @@
 ### Task 2: Retry table migration
 
 **Files:**
+
 - Modify: `packages/db/prisma/schema.prisma` — an uncommitted `ZapRunRetry` model is already there; finish it.
 
 **Interfaces:**
+
 - Produces: `prisma.zapRunRetry` with fields `{ id, zapRunId, stage, attempt, lastError, nextRunAt, createdAt }` and `@@index([zapRunId])`.
 
 - [ ] **Step 1:** Give `nextRunAt` a `@default(now())` so writers needn't supply it, add the `zapRunId` index, and add a comment explaining the row is the SQL-queryable twin of the DLQ message.
@@ -54,10 +58,12 @@
 ### Task 3: Dead-letter failed events
 
 **Files:**
+
 - Create: `apps/worker/deadletter.ts`, `apps/worker/deadletter.test.ts`
 - Modify: `apps/worker/index.ts` — the `catch` block that currently only `console.error`s
 
 **Interfaces:**
+
 - Consumes: `withRetry` (Task 1), `prisma.zapRunRetry` (Task 2).
 - Produces: `DLQ_TOPIC = "zap-events-dlq"` and
   `deadLetter(sinks: { send(payload: object): Promise<void>; record(row: { zapRunId: string; stage: number; attempt: number; lastError: string }): Promise<void> }, zapRunId: string, stage: number, attempt: number, error: unknown): Promise<void>`
@@ -76,9 +82,11 @@
 ### Task 4: Zap detail endpoint returns run history
 
 **Files:**
+
 - Modify: `apps/primary_backend/route/zap.ts` — the `GET /:id` handler
 
 **Interfaces:**
+
 - Produces: `GET /api/v1/zap/:id` → `{ zap: { id, name, time, trigger, actions, runs: { id, metadata, status: "running" | "success", failures: number }[] } }`, or `404 { message }`. `status` derives from the outbox row (present ⇒ still queued); `failures` is that run's `ZapRunRetry` count.
 
 - [ ] **Step 1:** Extend the existing `findFirst` with `zapRun: { include: { zapRunOutbox: true } }`. Keep the `userId: id` filter — it's what stops users reading each other's Zaps. Return `404` when null instead of today's `{ zap: null }`.
@@ -91,10 +99,12 @@
 ### Task 5: Read-only Zap detail page
 
 **Files:**
+
 - Create: `apps/frontend/src/app/zap/[id]/page.tsx`
 - Modify: `apps/frontend/src/types/zap.ts`, `apps/frontend/src/hooks/useZaps.ts`, `apps/frontend/src/mycomponents/ZapTable.tsx`
 
 **Interfaces:**
+
 - Consumes: `GET /api/v1/zap/:id` (Task 4).
 - Produces: `useZap(id: string): { loading: boolean; zap: ZapDetail | null }`, and `ZapDetail extends Pick<Zap, "id"|"name"|"time"|"trigger"|"actions">` with `runs: { id: string; metadata: Record<string, unknown>; status: "success" | "running"; failures: number }[]`.
 
@@ -110,9 +120,11 @@
 ### Task 6: Clerk token exchange endpoint
 
 **Files:**
+
 - Modify: `packages/db/prisma/schema.prisma` (`User.password` → `String?`), `apps/primary_backend/route/user.ts`
 
 **Interfaces:**
+
 - Produces: `POST /api/v1/user/clerk`, header `Authorization: Bearer <clerk session token>` → `{ token: string }` (app JWT, payload `{ id: number }`). Creates the local `User` on first sign-in.
 
 - [ ] **Step 1:** Make `User.password` optional — Google users never have one.
@@ -126,10 +138,12 @@
 ### Task 7: Google sign-in button + callback
 
 **Files:**
+
 - Create: `apps/frontend/src/app/sso-callback/page.tsx`, `apps/frontend/src/app/auth/callback/page.tsx`
 - Modify: `apps/frontend/src/app/login/page.tsx`, `apps/frontend/.env`
 
 **Interfaces:**
+
 - Consumes: `POST /api/v1/user/clerk` (Task 6).
 - Produces: `/auth/callback` — exchanges the Clerk session for the app JWT, writes `localStorage.token`, redirects to `/dashboard`.
 
@@ -146,9 +160,11 @@
 ### Task 8: Kafka in docker-compose (prerequisite for Task 3's verification)
 
 **Files:**
+
 - Modify: `docker-compose.yml`
 
 **Interfaces:**
+
 - Produces: a broker on `localhost:9092`, matching the hardcoded `brokers` arrays in `apps/processor/index.ts:7` and `apps/worker/index.ts:10`.
 
 - [ ] **Step 1:** Add a `bitnami/kafka` service in KRaft mode (no Zookeeper container). Advertise `PLAINTEXT://localhost:9092` so the host-run Bun apps can reach it, and set `KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=true` — that's what lets `zap-events-dlq` spring into existence on first produce, so nothing has to pre-create it.
