@@ -68,3 +68,12 @@ This document records the foundational architectural decisions established in th
 - **Files**: [`apps/worker/index.ts`](../apps/worker/index.ts)
 - **Decision**: Kafka consumer `autoCommit` is disabled (`autoCommit: false`). Offsets are explicitly committed via `consumer.commitOffsets(...)` only after a stage is either successfully resolved, skipped, or permanently dead-lettered.
 - **Rationale**: Automatic commits risk acknowledging messages before side-effect execution is finalized. Manual commits ensure that crashes during execution result in message redelivery and lease reclamation.
+
+---
+
+## ADR 008: In-Process Exponential Backoff with Full Jitter
+
+- **Status**: Implemented
+- **Files**: [`apps/worker/retry.ts`](../apps/worker/retry.ts), [`apps/worker/retry.test.ts`](../apps/worker/retry.test.ts)
+- **Decision**: Transient action failures are retried up to 3 times in-process using an exponential delay calculation combined with Full Jitter ($\text{wait} = \text{random}(0, \text{baseMs} \times 2^{\text{attempt}-1})$).
+- **Rationale**: Pure exponential backoff leads to synchronized retry waves when multiple concurrent workers fail simultaneously. Full Jitter spreads retry wakeups uniformly over the backoff interval, preventing the Thundering Herd effect on downstream external APIs.

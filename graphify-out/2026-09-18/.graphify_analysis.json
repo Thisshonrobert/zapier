@@ -2509,6 +2509,17 @@
   ],
   "surprises": [
     {
+      "source": "Zapier Brand Logo",
+      "target": "Zapier Clone Project Overview",
+      "source_files": [
+        "apps/frontend/public/Zapier-logo.png",
+        "README.md"
+      ],
+      "confidence": "INFERRED",
+      "relation": "conceptually_related_to",
+      "why": "inferred connection - not explicitly stated in source; crosses file types (doc \u2194 image); connects across different repos/directories"
+    },
+    {
       "source": "Delivery and State Invariants",
       "target": "Defense-in-Depth Idempotency",
       "source_files": [
@@ -2518,17 +2529,6 @@
       "confidence": "INFERRED",
       "relation": "semantically_similar_to",
       "why": "inferred connection - not explicitly stated in source; connects across different repos/directories; semantically similar concepts with no structural link"
-    },
-    {
-      "source": "Zapier Brand Logo",
-      "target": "Zapier Clone Project Overview",
-      "source_files": [
-        "apps/frontend/public/Zapier-logo.png",
-        "README.md"
-      ],
-      "confidence": "INFERRED",
-      "relation": "conceptually_related_to",
-      "why": "inferred connection - not explicitly stated in source; crosses file types (doc ↔ image); connects across different repos/directories"
     },
     {
       "source": "Kafka Zap Events Topic",
@@ -2564,41 +2564,8 @@
       "why": "inferred connection - not explicitly stated in source; connects across different repos/directories"
     }
   ],
-  "questions": [
-    {
-      "type": "bridge_node",
-      "question": "Why does `TriggerDelegate` connect `TriggerDelegate` to `Trigger.ts`?",
-      "why": "High betweenness centrality (0.019) - this node is a cross-community bridge."
-    },
-    {
-      "type": "bridge_node",
-      "question": "Why does `ZapDelegate` connect `ZapDelegate` to `Zap.ts`?",
-      "why": "High betweenness centrality (0.012) - this node is a cross-community bridge."
-    },
-    {
-      "type": "bridge_node",
-      "question": "Why does `ZapRunOutboxDelegate` connect `ZapRunOutboxDelegate` to `ZapRunOutbox.ts`?",
-      "why": "High betweenness centrality (0.012) - this node is a cross-community bridge."
-    },
-    {
-      "type": "isolated_nodes",
-      "question": "What connects `ActionScalarFieldEnum`, `Args`, `At` to the rest of the system?",
-      "why": "1455 weakly-connected nodes found - possible documentation gaps or missing edges."
-    },
-    {
-      "type": "low_cohesion",
-      "question": "Should `prismaNamespace.ts` be split into smaller, more focused modules?",
-      "why": "Cohesion score 0.015503875968992248 - nodes in this community are weakly interconnected."
-    },
-    {
-      "type": "low_cohesion",
-      "question": "Should `Zap.ts` be split into smaller, more focused modules?",
-      "why": "Cohesion score 0.017094017094017096 - nodes in this community are weakly interconnected."
-    },
-    {
-      "type": "low_cohesion",
-      "question": "Should `Action.ts` be split into smaller, more focused modules?",
-      "why": "Cohesion score 0.021052631578947368 - nodes in this community are weakly interconnected."
-    }
-  ]
+  "tokens": {
+    "input": 0,
+    "output": 0
+  }
 }

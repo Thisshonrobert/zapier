@@ -1,17 +1,12 @@
-# Graph Report - zapier  (2026-09-18)
+# Graph Report - zapier  (2026-09-16)
 
 ## Corpus Check
 - cluster-only mode — file stats not available
 
 ## Summary
-- 2143 nodes · 2612 edges · 103 communities (62 shown, 36 thin omitted)
+- 2144 nodes · 2616 edges · 103 communities (60 shown, 38 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 21 edges (avg confidence: 0.92)
 - Token cost: 0 input · 0 output
-
-## Graph Freshness
-- Built from commit: `63539296`
-- Run `git rev-parse HEAD` and compare to check if the graph is stale.
-- Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
 - prismaNamespace.ts
@@ -30,25 +25,26 @@
 - eslint-config/package.json
 - cn
 - commonInputTypes.ts
+- frontend/package.json
+- Appbar.tsx
 - ui/package.json
 - package.json
-- history/page.tsx
-- Appbar.tsx
-- frontend/package.json
+- CustonTrigger.tsx
 - dependencies
-- PrismaClient
+- history/page.tsx
 - prismaNamespaceBrowser.ts
-- webhook/package.json
 - dashboard/page.tsx
+- webhook/package.json
 - components.json
 - compilerOptions
 - compilerOptions
 - compilerOptions
 - compilerOptions
+- PrismaClient
+- lucide-react
 - compilerOptions
+- primary_backend/index.ts
 - user.ts
-- login/page.tsx
-- dialog.tsx
 - ActionDelegate
 - AvailableActionDelegate
 - AvailableTriggerTypeDelegate
@@ -60,35 +56,33 @@
 - ZapRunExecutionDelegate
 - ZapRunOutboxDelegate
 - ZapRunRetryDelegate
-- CustomAction.tsx
 - compilerOptions
-- zapStore.ts
-- worker/package.json
-- CustonTrigger.tsx
-- processor/package.json
-- tasks
 - create/page.tsx
+- dialog.tsx
+- worker/package.json
+- primary backend/package.json
+- processor/package.json
+- turbo.json
 - empty.tsx
-- primary_backend/package.json
 - browser.ts
 - dependencies
 - client.ts
+- layout.tsx
 - Kafka Zap Events Topic
 - compilerOptions
 - Transactional Outbox Communication Boundary
 - devDependencies
-- primary_backend/index.ts
-- db.ts
 - Prisma__ZapClient
 - typescript-config/package.json
 - ui/tsconfig.json
 - Next.js Frontend Application
+- app/page.tsx
 - Prisma__ActionClient
 - Prisma__TriggerClient
 - Prisma__ZapRunClient
 - react-library.json
 - scripts
-- MvpDialog.tsx
+- class.ts
 - Prisma__AvailableActionClient
 - Prisma__AvailableTriggerTypeClient
 - Prisma__UserClient
@@ -98,6 +92,7 @@
 - Prisma__TestTriggerBufferClient
 - Prisma__ZapRunExecutionClient
 - Prisma__ZapRunRetryClient
+- next
 - src/button.tsx
 - frontend/eslint.config.mjs
 - postcss.config.mjs
@@ -126,10 +121,10 @@
 10. `AvailableTriggerTypeDelegate` - 18 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `Delivery and State Invariants` --semantically_similar_to--> `Defense-in-Depth Idempotency`  [INFERRED] [semantically similar]
-  AGENTS.MD → docs/idempotency.md
 - `Zapier Brand Logo` --conceptually_related_to--> `Zapier Clone Project Overview`  [INFERRED]
   apps/frontend/public/Zapier-logo.png → README.md
+- `Delivery and State Invariants` --semantically_similar_to--> `Defense-in-Depth Idempotency`  [INFERRED] [semantically similar]
+  AGENTS.MD → docs/idempotency.md
 - `Kafka Zap Events Topic` --conceptually_related_to--> `Kafka KRaft Service`  [INFERRED]
   README.md → docker-compose.yml
 - `Prisma PostgreSQL Persistence` --conceptually_related_to--> `PostgreSQL Service`  [INFERRED]
@@ -144,7 +139,7 @@
 - **Zap Execution Event Flow** — readme_transactional_outbox, readme_kafka_zap_events, readme_worker_action_execution [EXTRACTED 1.00]
 - **Idempotency Defense Layers** — docs_architecture_transactional_outbox, docs_worker_execution_lease, docs_kafka_manual_offset_commits [INFERRED 0.95]
 
-## Communities (103 total, 36 thin omitted)
+## Communities (103 total, 38 thin omitted)
 
 ### Community 0 - "prismaNamespace.ts"
 Cohesion: 0.02
@@ -203,52 +198,52 @@ Cohesion: 0.08
 Nodes (34): config, nextJsConfig, devDependencies, eslint, eslint-config-prettier, @eslint/js, eslint-plugin-only-warn, eslint-plugin-react (+26 more)
 
 ### Community 14 - "cn"
-Cohesion: 0.11
-Nodes (27): Badge(), badgeVariants, Button(), buttonVariants, Card(), CardAction(), CardContent(), CardDescription() (+19 more)
+Cohesion: 0.12
+Nodes (25): Badge(), badgeVariants, Button(), buttonVariants, Card(), CardAction(), CardContent(), CardDescription() (+17 more)
 
 ### Community 15 - "commonInputTypes.ts"
 Cohesion: 0.07
 Nodes (29): DateTimeFilter, DateTimeNullableFilter, DateTimeNullableWithAggregatesFilter, DateTimeWithAggregatesFilter, IntFilter, IntWithAggregatesFilter, JsonFilter, JsonFilterBase (+21 more)
 
-### Community 16 - "ui/package.json"
+### Community 16 - "frontend/package.json"
+Cohesion: 0.07
+Nodes (28): @clerk/nextjs, eslint, react, react-dom, @types/node, @types/react, @types/react-dom, typescript (+20 more)
+
+### Community 17 - "Appbar.tsx"
+Cohesion: 0.13
+Nodes (21): Avatar(), AvatarFallback(), AvatarImage(), DropdownMenu(), DropdownMenuCheckboxItem(), DropdownMenuContent(), DropdownMenuGroup(), DropdownMenuItem() (+13 more)
+
+### Community 18 - "ui/package.json"
 Cohesion: 0.07
 Nodes (28): dependencies, react, react-dom, devDependencies, eslint, @repo/eslint-config, @repo/typescript-config, @types/node (+20 more)
 
-### Community 17 - "package.json"
+### Community 19 - "package.json"
 Cohesion: 0.07
 Nodes (27): dependencies, @prisma/client, @prisma/extension-accelerate, devDependencies, prettier, prisma, turbo, typescript (+19 more)
 
-### Community 18 - "history/page.tsx"
+### Community 20 - "CustonTrigger.tsx"
 Cohesion: 0.14
-Nodes (17): Connection, ConnectionsPage(), formatDate(), toConnections(), FILTER_CHIPS, HistoryPage(), preview(), STATUS_STYLES (+9 more)
-
-### Community 19 - "Appbar.tsx"
-Cohesion: 0.16
-Nodes (19): Avatar(), AvatarFallback(), AvatarImage(), DropdownMenu(), DropdownMenuCheckboxItem(), DropdownMenuContent(), DropdownMenuGroup(), DropdownMenuItem() (+11 more)
-
-### Community 20 - "frontend/package.json"
-Cohesion: 0.08
-Nodes (24): @clerk/nextjs, eslint, react, react-dom, @types/node, @types/react, @types/react-dom, typescript (+16 more)
+Nodes (12): LoginResponse, CustomTrigger(), TriggerNode, BACKEND_URL, HOOKS_URL, tokenDecode(), Section(), PrimaryButton() (+4 more)
 
 ### Community 21 - "dependencies"
 Cohesion: 0.08
 Nodes (25): dependencies, axios, class-variance-authority, @clerk/nextjs, clsx, jwt-decode, lucide-react, motion (+17 more)
 
-### Community 22 - "PrismaClient"
-Cohesion: 0.08
-Nodes (4): config, LogOptions, PrismaClient, PrismaClientConstructor
+### Community 22 - "history/page.tsx"
+Cohesion: 0.15
+Nodes (15): Connection, ConnectionsPage(), formatDate(), toConnections(), FILTER_CHIPS, STATUS_STYLES, Input(), LoaderOne() (+7 more)
 
 ### Community 23 - "prismaNamespaceBrowser.ts"
 Cohesion: 0.08
 Nodes (23): ActionScalarFieldEnum, AnyNull, AvailableActionScalarFieldEnum, AvailableTriggerTypeScalarFieldEnum, DbNull, Decimal, JsonNull, JsonNullValueFilter (+15 more)
 
-### Community 24 - "webhook/package.json"
+### Community 24 - "dashboard/page.tsx"
+Cohesion: 0.16
+Nodes (18): DashboardPage(), SCRATCH_CARDS, HistoryPage(), preview(), ZapDetailPage(), authHeaders(), useZap(), useZapRuns() (+10 more)
+
+### Community 25 - "webhook/package.json"
 Cohesion: 0.08
 Nodes (23): dependencies, express, @prisma/client, @prisma/extension-accelerate, @types/express, devDependencies, prisma, @types/bun (+15 more)
-
-### Community 25 - "dashboard/page.tsx"
-Cohesion: 0.18
-Nodes (16): DashboardPage(), SCRATCH_CARDS, ZapDetailPage(), authHeaders(), useZap(), useZapRuns(), useZaps(), appTint() (+8 more)
 
 ### Community 26 - "components.json"
 Cohesion: 0.10
@@ -270,73 +265,69 @@ Nodes (19): compilerOptions, allowImportingTsExtensions, allowJs, jsx, lib, modu
 Cohesion: 0.10
 Nodes (19): compilerOptions, allowImportingTsExtensions, allowJs, jsx, lib, module, moduleDetection, moduleResolution (+11 more)
 
-### Community 31 - "compilerOptions"
+### Community 32 - "lucide-react"
+Cohesion: 0.27
+Nodes (13): useZapStore, Email(), Telegram(), ActionNode, CustomAction(), btnPrimary, btnSecondary, DialogHeading() (+5 more)
+
+### Community 33 - "compilerOptions"
 Cohesion: 0.11
 Nodes (18): compilerOptions, allowJs, esModuleInterop, incremental, isolatedModules, jsx, lib, module (+10 more)
 
-### Community 32 - "user.ts"
+### Community 34 - "primary_backend/index.ts"
 Cohesion: 0.15
-Nodes (15): authMiddleware(), DecodedToken, Express, Request, clerk, router, router, zapRouter (+7 more)
+Nodes (12): app, actionRouter, router, router, triggerRouter, userRouter, kafka, app (+4 more)
 
-### Community 33 - "login/page.tsx"
-Cohesion: 0.18
-Nodes (7): LoginResponse, Appbar(), PrimaryButton(), CheckFeature(), Hero(), HeroVideo(), Input()
-
-### Community 34 - "dialog.tsx"
+### Community 35 - "user.ts"
 Cohesion: 0.16
-Nodes (12): Dialog(), DialogClose(), DialogContent(), DialogDescription(), DialogFooter(), DialogHeader(), DialogOverlay(), DialogTitle() (+4 more)
-
-### Community 46 - "CustomAction.tsx"
-Cohesion: 0.28
-Nodes (12): useZapStore, Email(), Telegram(), ActionNode, CustomAction(), btnPrimary, DialogHeading(), Field() (+4 more)
+Nodes (14): authMiddleware(), DecodedToken, Express, Request, clerk, router, router, zapRouter (+6 more)
 
 ### Community 47 - "compilerOptions"
 Cohesion: 0.12
 Nodes (16): compilerOptions, declaration, declarationMap, esModuleInterop, incremental, isolatedModules, lib, module (+8 more)
 
-### Community 48 - "zapStore.ts"
-Cohesion: 0.14
-Nodes (11): nextConfig, geistMono, geistSans, inter, metadata, action, TriggerTestResult, zapData (+3 more)
+### Community 48 - "create/page.tsx"
+Cohesion: 0.17
+Nodes (14): ActionItem, ActionResponse, App(), nodeTypes, TriggerItem, TriggerResponse, useAvailableActionsAndTriggers(), Action (+6 more)
 
-### Community 49 - "worker/package.json"
+### Community 49 - "dialog.tsx"
+Cohesion: 0.23
+Nodes (9): Dialog(), DialogContent(), DialogDescription(), DialogHeader(), DialogOverlay(), DialogTitle(), DialogTrigger(), SecondaryButton() (+1 more)
+
+### Community 50 - "worker/package.json"
 Cohesion: 0.12
 Nodes (15): dependencies, resend, devDependencies, @types/bun, @types/bun, typescript, module, name (+7 more)
 
-### Community 50 - "CustonTrigger.tsx"
-Cohesion: 0.21
-Nodes (8): CustomTrigger(), TriggerNode, BACKEND_URL, HOOKS_URL, tokenDecode(), btnSecondary, Section(), axios
+### Community 51 - "primary backend/package.json"
+Cohesion: 0.13
+Nodes (14): @clerk/nextjs, express, @types/express, module, name, private, scripts, dev (+6 more)
 
-### Community 51 - "processor/package.json"
+### Community 52 - "processor/package.json"
 Cohesion: 0.13
 Nodes (14): dependencies, kafkajs, devDependencies, @types/bun, @types/bun, typescript, module, name (+6 more)
 
-### Community 52 - "tasks"
+### Community 53 - "turbo.json"
 Cohesion: 0.13
 Nodes (14): dependsOn, inputs, outputs, dependsOn, cache, persistent, dependsOn, $schema (+6 more)
-
-### Community 53 - "create/page.tsx"
-Cohesion: 0.20
-Nodes (12): ActionItem, ActionResponse, App(), nodeTypes, TriggerItem, TriggerResponse, useAvailableActionsAndTriggers(), Action (+4 more)
 
 ### Community 54 - "empty.tsx"
 Cohesion: 0.24
 Nodes (11): Empty(), EmptyContent(), EmptyDescription(), EmptyHeader(), EmptyMedia(), emptyMediaVariants, EmptyTitle(), formatDate() (+3 more)
 
-### Community 55 - "primary_backend/package.json"
-Cohesion: 0.14
-Nodes (13): @clerk/nextjs, express, @types/express, module, name, private, scripts, dev (+5 more)
-
-### Community 56 - "browser.ts"
+### Community 55 - "browser.ts"
 Cohesion: 0.14
 Nodes (12): Action, AvailableAction, AvailableTriggerType, $Enums, TestTriggerBuffer, Trigger, User, Zap (+4 more)
 
-### Community 57 - "dependencies"
+### Community 56 - "dependencies"
 Cohesion: 0.15
 Nodes (13): dependencies, bcrypt, @clerk/backend, @clerk/nextjs, cors, dotenv, express, jsonwebtoken (+5 more)
 
-### Community 58 - "client.ts"
+### Community 57 - "client.ts"
 Cohesion: 0.15
 Nodes (12): Action, AvailableAction, AvailableTriggerType, $Enums, TestTriggerBuffer, Trigger, User, Zap (+4 more)
+
+### Community 58 - "layout.tsx"
+Cohesion: 0.20
+Nodes (8): geistMono, geistSans, inter, metadata, action, TriggerTestResult, zapData, Toaster()
 
 ### Community 59 - "Kafka Zap Events Topic"
 Cohesion: 0.20
@@ -354,60 +345,56 @@ Nodes (10): Delivery and State Invariants, Action Handler Contract, Action Regis
 Cohesion: 0.20
 Nodes (10): devDependencies, eslint, eslint-config-next, tailwindcss, @tailwindcss/postcss, tw-animate-css, @types/node, @types/react (+2 more)
 
-### Community 63 - "primary_backend/index.ts"
-Cohesion: 0.24
-Nodes (7): app, actionRouter, router, router, triggerRouter, userRouter, cors
-
-### Community 64 - "db.ts"
-Cohesion: 0.28
-Nodes (5): kafka, app, PrismaClient, prisma, kafkajs
-
-### Community 66 - "typescript-config/package.json"
+### Community 64 - "typescript-config/package.json"
 Cohesion: 0.29
 Nodes (6): license, name, private, publishConfig, access, version
 
-### Community 67 - "ui/tsconfig.json"
+### Community 65 - "ui/tsconfig.json"
 Cohesion: 0.29
 Nodes (6): compilerOptions, outDir, exclude, extends, include, @repo/typescript-config/react-library.json
 
-### Community 68 - "Next.js Frontend Application"
+### Community 66 - "Next.js Frontend Application"
 Cohesion: 0.33
 Nodes (6): Next.js Logo, Vercel Logo, Zapier Brand Logo, Next.js Frontend Application, Primary Backend Bun Service, Zapier Clone Project Overview
 
-### Community 72 - "react-library.json"
+### Community 67 - "app/page.tsx"
+Cohesion: 0.40
+Nodes (3): Appbar(), Hero(), HeroVideo()
+
+### Community 71 - "react-library.json"
 Cohesion: 0.33
 Nodes (5): compilerOptions, jsx, extends, ./base.json, $schema
 
-### Community 73 - "scripts"
+### Community 72 - "scripts"
 Cohesion: 0.40
 Nodes (5): scripts, build, dev, lint, start
 
-### Community 74 - "MvpDialog.tsx"
-Cohesion: 0.50
-Nodes (3): MvpAction(), NAV, Sidebar()
+### Community 73 - "class.ts"
+Cohesion: 0.40
+Nodes (3): config, LogOptions, PrismaClientConstructor
 
-### Community 79 - "kafkajs-bun-fix.js"
+### Community 78 - "kafkajs-bun-fix.js"
 Cohesion: 0.40
 Nodes (4): content, fs, path, possiblePaths
 
-### Community 80 - "Manual Offset Commit Protocol"
+### Community 79 - "Manual Offset Commit Protocol"
 Cohesion: 0.50
 Nodes (4): ADR Two-Phase Execution Lease, At-Least-Once Delivery Semantics, Manual Offset Commit Protocol, PostgreSQL Execution Lease
 
 ## Knowledge Gaps
 - **1455 isolated node(s):** `ActionScalarFieldEnum`, `Args`, `At`, `AtLeast`, `AtLoose` (+1450 more)
   These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 1752 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **36 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **38 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
+- **Why does `PrismaClient` connect `PrismaClient` to `prismaNamespace.ts`, `class.ts`?**
+  _High betweenness centrality (0.020) - this node is a cross-community bridge._
 - **Why does `TriggerDelegate` connect `TriggerDelegate` to `Trigger.ts`?**
-  _High betweenness centrality (0.019) - this node is a cross-community bridge._
+  _High betweenness centrality (0.020) - this node is a cross-community bridge._
 - **Why does `ZapDelegate` connect `ZapDelegate` to `Zap.ts`?**
-  _High betweenness centrality (0.012) - this node is a cross-community bridge._
-- **Why does `ZapRunOutboxDelegate` connect `ZapRunOutboxDelegate` to `ZapRunOutbox.ts`?**
-  _High betweenness centrality (0.012) - this node is a cross-community bridge._
+  _High betweenness centrality (0.013) - this node is a cross-community bridge._
 - **What connects `ActionScalarFieldEnum`, `Args`, `At` to the rest of the system?**
   _1455 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `prismaNamespace.ts` be split into smaller, more focused modules?**
