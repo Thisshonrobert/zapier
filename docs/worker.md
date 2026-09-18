@@ -113,11 +113,12 @@ Once a lease is secured, `executeClaimedAction` runs:
      zapRunMetadata: execution.zapDetails.metadata,
    };
    ```
-3. **In-Process Exponential Backoff**:
+3. **In-Process Exponential Backoff with Full Jitter**:
    - Wrapped by `withRetry(..., 3)` in [`apps/worker/retry.ts`](../apps/worker/retry.ts).
-   - Attempt 1: Immediate.
-   - Attempt 2: After 1,000ms.
-   - Attempt 3: After 2,000ms.
+   - Attempt 1: Immediate execution.
+   - Attempt 2: Sleeps a randomized duration in $[0, 1000\text{ms}]$.
+   - Attempt 3: Sleeps a randomized duration in $[0, 2000\text{ms}]$.
+   - **Full Jitter** decorrelates retry spikes across concurrent workers to mitigate the "Thundering Herd" problem against rate-limited downstream APIs.
 4. **State Finalization**:
    - On success: `status = "SUCCESS"`, `leaseUntil = null`, `completedAt = now()`.
    - On terminal failure: `status = "FAILED"`, `leaseUntil = null`, `completedAt = now()`.
