@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI service boundary reference</title>
+  <link rel="stylesheet" href="../assets/course.css">
+</head>
+<body>
+<main>
+  <p class="kicker">Quick reference · Phase 1</p>
+  <h1>AI service boundaries</h1>
+  <table>
+    <thead><tr><th>Layer</th><th>Owns</th><th>Failure result</th></tr></thead>
+    <tbody>
+      <tr><td>Express</td><td>HTTP transport, status mapping, server lifecycle</td><td>4xx/5xx without side effects</td></tr>
+      <tr><td>Zod</td><td>Strict request, evidence, and result contracts</td><td>Reject unknown or mistyped values</td></tr>
+      <tr><td>LangGraph</td><td>Explicit node order, state, step budget</td><td>Bounded domain error</td></tr>
+      <tr><td>Evidence tool</td><td>Allowlisted, read-only fixture access</td><td>Explicit unavailable/not found</td></tr>
+      <tr><td>Model adapter</td><td>Diagnosis proposal only</td><td>Timeout or invalid output</td></tr>
+      <tr><td>Safety guard</td><td>Observed citations and replay preconditions</td><td>Reject unsupported proposal</td></tr>
+    </tbody>
+  </table>
+  <div class="card danger"><strong>Invariant:</strong> model output never authorizes a provider send, database mutation, or Kafka replay.</div>
+  <p><a href="../lessons/0001-bounded-langgraph-triage.html">Return to Lesson 1</a></p>
+</main>
+</body>
+</html>

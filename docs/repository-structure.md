@@ -10,6 +10,7 @@ This repository is a TypeScript monorepo configured with [Turborepo](https://tur
 .
 ├── apps/
 │   ├── frontend/            # Next.js 16 App Router UI dashboard
+│   ├── ai_agent/            # Read-only LangGraph.js DLQ triage service
 │   ├── primary_backend/     # Express REST API for auth, zap management, and catalog
 │   ├── processor/           # Outbox poller daemon publishing events to Kafka
 │   ├── webhook/             # Ingestion service for webhooks and trigger test buffering
@@ -86,6 +87,17 @@ This repository is a TypeScript monorepo configured with [Turborepo](https://tur
   - `src/app/history/`: Full run execution logs across all Zaps.
   - `src/app/store/zapStore.ts`: Zustand store managing trigger selection, action sequence array, and temporary test payloads.
 
+### 6. `ai_agent` ([`apps/ai_agent`](../apps/ai_agent))
+
+- **Role**: Read-only Autonomous DLQ Triage Agent. Phase 1 accepts two allowlisted synthetic fixtures and has no database, Kafka, provider-send, approval or replay capability.
+- **Entry Point**: [`apps/ai_agent/src/index.ts`](../apps/ai_agent/src/index.ts) (Port `3004`).
+- **Key Modules**:
+  - `src/graph.ts`: Bounded two-node LangGraph.js investigation workflow and deterministic grounding rules.
+  - `src/contracts.ts`: Strict Zod contracts for requests, evidence and proposals.
+  - `src/tools/failure-context.ts`: Allowlisted local fixture evidence tool.
+  - `src/http.ts`: Express preview route and model-client shutdown ownership.
+  - `src/demo.ts`: Fixture CLI using the same graph.
+
 ---
 
 ## 📦 Packages (`packages/`)
@@ -110,11 +122,12 @@ This repository is a TypeScript monorepo configured with [Turborepo](https://tur
 
 ## 🧪 Where Tests Live
 
-The repository currently utilizes lightweight, `node:assert`-based self-checking unit test scripts run via Bun:
+The worker uses lightweight `node:assert` self-checking scripts, while the AI workspace uses Bun's test runner:
 
 - [`apps/worker/idempotency.test.ts`](../apps/worker/idempotency.test.ts): Tests atomic lease acquisition, concurrent worker race prevention, expired lease recovery, and duplicate redelivery skipping.
 - [`apps/worker/deadletter.test.ts`](../apps/worker/deadletter.test.ts): Tests dual-sink DLQ publishing (Kafka + PostgreSQL) and non-throwing error handling.
 - [`apps/worker/retry.test.ts`](../apps/worker/retry.test.ts): Tests exponential backoff retries and error rethrowing on attempt exhaustion.
+- [`apps/ai_agent/tests`](../apps/ai_agent/tests): Bun tests for strict contracts, grounded F01/F07 behavior, execution budgets, HTTP mapping and lifecycle cleanup.
 
 ---
 
