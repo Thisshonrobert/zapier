@@ -27,6 +27,7 @@ TypeScript monorepo for an event-driven Zapier-style workflow automation platfor
   - `processor/` — Pulls pending events and dispatches to Kafka
   - `worker/` — Consumes Kafka messages and executes zap action steps
   - `frontend/` — Web dashboard UI
+  - `ai_agent/` — Read-only LangGraph.js investigation service; no replay authority
 - `packages/`
   - `db/` — Prisma schema, migrations, and database client
   - `ui/` — Shared UI component library

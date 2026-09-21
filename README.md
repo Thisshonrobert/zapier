@@ -18,6 +18,7 @@ This monorepo is a ground-up clone of Zapier with a Bun + Turbo build. It curren
 - `apps/webhook`: Express service receiving external webhooks and enqueueing Zap executions.
 - `apps/processor`: Outbox processor that drains `ZapRunOutbox` rows into Kafka `zap-events`.
 - `apps/worker`: Kafka consumer that replays each Zap action step-by-step.
+- `apps/ai_agent`: Fixture-driven LangGraph.js triage preview service; read-only and local-only in Phase 1.
 - `packages/db`: Prisma schema, generated client, and migrations targeting PostgreSQL.
 
 ## High-level flow
@@ -49,6 +50,7 @@ Services (run each in its own terminal):
 - Webhook ingress: `cd apps/webhook && bun install && bun run index.ts`
 - Outbox processor: `cd apps/processor && bun install && bun run index.ts`
 - Worker: `cd apps/worker && bun install && bun run index.ts`
+- AI triage preview: `bun run --cwd apps/ai_agent dev` (local synthetic fixtures only, port `3004`)
 
 All services share the Prisma client via `packages/db`. Use `turbo run dev --filter=<app>` if you prefer orchestrating via Turbo.
 
@@ -377,7 +379,8 @@ zapier/
 │   ├── primary_backend/   # Express API (auth, CRUD)
 │   ├── webhook/           # Webhook ingress service
 │   ├── processor/         # Outbox processor → Kafka
-│   └── worker/            # Kafka consumer → action executor
+│   ├── worker/            # Kafka consumer → action executor
+│   └── ai_agent/          # LangGraph.js DLQ triage preview
 ├── packages/
 │   ├── db/                # Prisma schema and client
 │   ├── ui/                # Shared UI components

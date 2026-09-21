@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bounded LangGraph triage</title>
+    <link rel="stylesheet" href="../assets/course.css" />
+  </head>
+  <body>
+    <main>
+      <p class="kicker">Autonomous DLQ Triage · Lesson 1 · 8 minutes</p>
+      <h1>Make uncertainty a first-class result</h1>
+      <p class="lead">
+        The first agent is useful because it can stop safely. Its job is to turn
+        observed facts into a cited proposal, while deterministic code rejects
+        unsupported replay advice.
+      </p>
+
+      <div class="flow" aria-label="Phase 1 execution flow">
+        <span>Fixture ID</span><span>Evidence tool</span
+        ><span>Model boundary</span><span>Safety guard</span>
+      </div>
+
+      <h2>The production shape</h2>
+      <p>
+        <strong>Express</strong> owns transport and server lifetime.
+        <strong>Zod</strong> rejects malformed HTTP input, fixture data, and
+        model output. <strong>LangGraph.js</strong> makes the two state
+        transitions explicit. The injected model interface keeps provider choice
+        outside the graph.
+      </p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Boundary</th>
+            <th>What it proves</th>
+            <th>What it cannot prove</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Fixture tool</td>
+            <td>Facts match the allowlisted JSON contract</td>
+            <td>The provider accepted or rejected a request</td>
+          </tr>
+          <tr>
+            <td>Model output</td>
+            <td>The response matches the diagnosis schema</td>
+            <td>The diagnosis is grounded or safe</td>
+          </tr>
+          <tr>
+            <td>Safety guard</td>
+            <td>Citations were observed and replay conditions hold</td>
+            <td>A future replay will succeed</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="card safe">
+        <strong>F01: explicit 429 rejection.</strong> Every attempt was rejected
+        and a retry window was returned. A proposal may say “wait, obtain
+        approval, then request replay.” The agent still performs no replay.
+      </div>
+      <div class="card danger">
+        <strong>F07: timeout with unknown delivery.</strong> The client did not
+        receive a response. The provider may still have accepted the request.
+        The safe result is <code>insufficient_evidence</code> and reconciliation
+        before replay.
+      </div>
+
+      <h2>Retrieval check</h2>
+      <p>
+        Without looking at the answer, explain this in one or two sentences:
+        <em
+          >A Telegram send times out before a response arrives. What may the
+          agent conclude, and why?</em
+        >
+      </p>
+      <details>
+        <summary>Reveal the target reasoning</summary>
+        <p>
+          It may conclude only that delivery is unknown. A timeout describes
+          what the caller observed, not what Telegram did, so replay must wait
+          for a receipt or another deterministic reconciliation signal.
+        </p>
+      </details>
+
+      <h2>Read the implementation as a system</h2>
+      <ol>
+        <li>
+          Start at
+          <a href="../apps/ai_agent/src/http.ts"><code>http.ts</code></a> and
+          find the server lifecycle boundary.
+        </li>
+        <li>
+          Follow the request into
+          <a href="../apps/ai_agent/src/graph.ts"><code>graph.ts</code></a
+          >. Identify the two nodes and the tool, step, and time budgets.
+        </li>
+        <li>
+          In
+          <a href="../apps/ai_agent/src/contracts.ts"
+            ><code>contracts.ts</code></a
+          >, find the three separate untrusted inputs.
+        </li>
+        <li>
+          Run the F01 and F07 tests and explain why the expected proposals
+          differ.
+        </li>
+      </ol>
+
+      <p class="caption">
+        Primary sources:
+        <a href="https://docs.langchain.com/oss/javascript/langgraph/graph-api"
+          >LangGraph.js Graph API</a
+        >, <a href="https://expressjs.com/en/5x/api.html">Express 5 API</a>, and
+        <a href="https://zod.dev/">Zod</a>.
+      </p>
+      <p>
+        Use the
+        <a href="../reference/ai-service-boundaries.html">boundary reference</a>
+        while reading the code. Ask your agent about any step whose authority or
+        failure behavior is unclear.
+      </p>
+    </main>
+  </body>
+</html>
