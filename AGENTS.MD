@@ -46,10 +46,11 @@ TypeScript monorepo for an event-driven Zapier-style workflow automation platfor
 
 ---
 
-## Tooling & Verification Commands
+## Tooling & Verification
 
-Read when lint,build,type check `docs/tooling_Verification.md`
+For lint, build, and type-check commands, read:
 
+`docs/tooling_Verification.md`
 ---
 
 ## Documentation
@@ -73,12 +74,39 @@ Update Graphify only after a major architectural change or major implementation 
 The following project workflow skills are preferred:
 
 - `/superpowers` — planning, execution, testing, and review.
-- `/teach` — learning-oriented explanations during implementation.
+- `/teach` — use only when explicitly requested for learning-oriented explanations.
 - `/ponytail` — clean and maintainable implementation practices.
 
 Use these skills when relevant.
 
 Do not duplicate their instructions in this file.
+
+---
+## Model Routing
+
+Use the model based on task complexity and risk.
+
+### GPT-5.6 Sol — High Reasoning
+
+Use for:
+- Production implementation with architectural judgment
+- Database transactions/migrations
+- Concurrency, idempotency, retries, and distributed systems
+- Security-sensitive code
+- Difficult debugging
+- Final integration and architecture reviews
+
+### GPT-5.6 Luna — Low/Medium Reasoning
+
+Use for:
+- Small/mechanical tests and fixtures
+- Documentation and learning notes
+- Formatting/repetitive edits
+- Focused verification commands
+- Graphify maintenance after approved milestones
+
+**Rule:** Explicitly specify the model when dispatching a subagent.  
+Do not assign Luna production work involving ambiguous behavior, concurrency, persistence, security, or cross-service contracts.
 
 ---
 
@@ -87,5 +115,5 @@ Do not duplicate their instructions in this file.
 When introducing a new subsystem, pattern, or dependency:
 
 1. Work incrementally in discrete phases.
-2. Before implementing each phase, explain the relevant architecture, tradeoffs, and code changes using `/teach`.
+2. Before implementing each phase, explain the relevant architecture, tradeoffs, and code changes using `/teach`.But make it minimal and concise to save tokens.
 3. Test and verify the current phase before proceeding to the next.
