@@ -10,7 +10,8 @@ const fixtureFiles: Readonly<Record<string, string>> = {
   "telegram-rate-limit": "telegram-rate-limit.json",
   "telegram-unknown-delivery": "telegram-unknown-delivery.json",
 };
-
+//Abstraction layer so that graph doesnt matter where the evidence comes from. 
+// This allows us to swap out the source of evidence without changing the rest of the codebase.
 export class FixtureFailureContextTool {
   constructor(private readonly fixtureDirectory: string) {}
 
@@ -18,7 +19,7 @@ export class FixtureFailureContextTool {
     const filename = fixtureFiles[fixtureId];
     if (!filename) throw new FixtureNotFound(fixtureId);
 
-    let payload: string;
+    let payload: string;  
     try {
       payload = await readFile(join(this.fixtureDirectory, filename), {
         encoding: "utf8",

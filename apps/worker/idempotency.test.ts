@@ -147,6 +147,7 @@ async function main() {
     execute: async (meta, ctx) => {
       handlerCalls++;
       receivedIdempotencyKey = ctx.idempotencyKey;
+      return { provider: "email", phase: "send", outcome: "accepted" };
     },
   };
 

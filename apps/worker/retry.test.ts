@@ -15,6 +15,19 @@ async function main() {
   );
   assert.equal(calls, 1, "success should not retry");
 
+  const accepted = await withRetry(async () => ({
+    provider: "email" as const,
+    phase: "send" as const,
+    outcome: "accepted" as const,
+    safeReceiptId: "email_123",
+  }));
+  assert.deepEqual(accepted, {
+    provider: "email",
+    phase: "send",
+    outcome: "accepted",
+    safeReceiptId: "email_123",
+  });
+
   // flaky twice, then succeeds -> no throw
   calls = 0;
   await withRetry(
