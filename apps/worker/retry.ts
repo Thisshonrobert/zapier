@@ -13,12 +13,12 @@
  * @param sleep Injectable sleep function for testing
  * @param random Injectable RNG returning [0, 1) for testing
  */
-export async function withRetry(
-  fn: () => Promise<void>,
+export async function withRetry<T>(
+  fn: () => Promise<T>,
   attempts = 3,
   sleep = (ms: number) => new Promise((r) => setTimeout(r, ms)),
   random = () => Math.random(),
-) {
+): Promise<T> {
   const baseMs = 1000;
   for (let i = 1; i <= attempts; i++) {
     try {
@@ -34,4 +34,5 @@ export async function withRetry(
       await sleep(wait);
     }
   }
+  throw new Error("Retry loop exhausted without a result");
 }
