@@ -211,7 +211,7 @@ async function executeClaimedAction(
   };
 
   try {
-    await withRetry(
+    const actionResult = await withRetry(
       () =>
         handler.execute(
           execution.currentAction.metadata as Record<string, unknown>,
@@ -219,6 +219,12 @@ async function executeClaimedAction(
         ),
       RETRY_ATTEMPTS,
     );
+    console.log("action provider accepted request", {
+      zapRunId,
+      stage,
+      provider: actionResult.provider,
+      hasReceipt: actionResult.safeReceiptId !== undefined,
+    });
     await updateExecutionStatus(zapRunId, stage, "SUCCESS");
     return true;
   } catch (error) {
