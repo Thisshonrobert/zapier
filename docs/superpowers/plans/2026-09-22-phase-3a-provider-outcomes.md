@@ -4,7 +4,7 @@
 
 **Goal:** Make Email and Telegram action handlers return truthful provider-acceptance receipts or throw bounded, redacted failure evidence without changing persistence, Kafka, or replay behavior.
 
-**Architecture:** Define the outcome contract once in the worker action boundary, let provider adapters normalize their own SDK/API responses, and keep orchestration unaware of provider-specific response shapes. `withRetry<T>` transports the accepted result back to the worker; Phase 3B will persist that result and enforce the no-resend boundary when a later database write fails.
+**Architecture:** Define the outcome contract once in the worker action boundary, let provider adapters normalize their own SDK/API responses, and keep orchestration unaware of provider-specific response shapes. `withRetry<T>` transports the accepted result back to the worker; Phase 3B will add durable acceptance persistence and protect against later Kafka redelivery after a database write failure.
 
 **Tech Stack:** TypeScript, Bun, Resend SDK 6.4.2, Telegram Bot HTTP API, Node `assert` test scripts
 
@@ -17,7 +17,7 @@
 - Only `accepted` is a successful `ActionResult`; every other outcome is carried by `ActionExecutionError`.
 - Never include credentials, recipient values, message bodies, provider response bodies, or raw SDK error messages in structured evidence or logs.
 - Accept status only when it is an integer from 100 through 599, receipt IDs only as non-empty values of at most 128 characters, safe codes only as lowercase `[a-z0-9_]` values of at most 64 characters, and retry delays only as integers from 1 through 86,400 seconds.
-- A provider `accepted` result followed by a failed PostgreSQL `SUCCESS` write must not cause an automatic provider retry; Phase 3A exposes the fact, and Phase 3B changes orchestration to preserve it.
+- A provider `accepted` result followed by a failed PostgreSQL `SUCCESS` write does not re-enter the current in-process `withRetry` call. Phase 3B owns durable acceptance persistence and protection from later Kafka redelivery reclaiming an expired `PENDING` lease and resending.
 - Keep the existing unrelated changes in `apps/ai_agent/src/tools/failure-context.ts`, `.claude/settings.local.json`, and `graphify-out/` out of Phase 3A commits.
 
 ---
@@ -272,6 +272,26 @@ export type EmailTransport = (
 const resendTransport: EmailTransport = (payload, options) =>
   resend.emails.send(payload, options);
 
+const resendErrorNames = new Set([
+  "missing_required_field",
+  "invalid_idempotency_key",
+  "invalid_idempotent_request",
+  "concurrent_idempotent_requests",
+  "invalid_access",
+  "invalid_parameter",
+  "invalid_region",
+  "rate_limit_exceeded",
+  "missing_api_key",
+  "invalid_api_key",
+  "suspended_api_key",
+  "invalid_from_address",
+  "validation_error",
+  "not_found",
+  "method_not_allowed",
+  "application_error",
+  "internal_server_error",
+]);
+
 function validStatus(value: unknown): number | undefined {
   return Number.isInteger(value) && Number(value) >= 100 && Number(value) <= 599
     ? Number(value)
@@ -281,7 +301,7 @@ function validStatus(value: unknown): number | undefined {
 function safeEmailCode(value: unknown): string {
   if (typeof value !== "string") return "email_provider_error";
   const normalized = value.toLowerCase().replace(/[^a-z0-9_]+/g, "_").slice(0, 64);
-  return normalized || "email_provider_error";
+  return resendErrorNames.has(normalized) ? normalized : "email_provider_error";
 }
 
 function safeReceipt(value: unknown): string | undefined {
@@ -641,7 +661,7 @@ Before the `SUCCESS` write, add only a redacted diagnostic:
     });
 ```
 
-Do not log the receipt itself. Do not place the `SUCCESS` write inside `withRetry`; a failed database write must not resend the accepted action.
+Do not log the receipt itself. Do not place the `SUCCESS` write inside `withRetry`; a failed database write must not re-enter the current in-process retry call. Phase 3B owns durable acceptance persistence and redelivery protection.
 
 - [ ] **Step 2: Run focused worker regression scripts**
 
@@ -688,4 +708,3 @@ git commit -m "feat(worker): surface accepted action results"
 - [ ] **Step 6: Record the Phase 3A checkpoint**
 
 Report the focused-test, type-check, lint, and build results with command evidence. Stop before Phase 3B so the provider-outcome boundary can be reviewed independently.
-

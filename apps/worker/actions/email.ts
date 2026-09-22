@@ -21,6 +21,26 @@ export type EmailTransport = (
 const resendTransport: EmailTransport = (payload, options) =>
   resend.emails.send(payload, options);
 
+const resendErrorNames = new Set([
+  "missing_required_field",
+  "invalid_idempotency_key",
+  "invalid_idempotent_request",
+  "concurrent_idempotent_requests",
+  "invalid_access",
+  "invalid_parameter",
+  "invalid_region",
+  "rate_limit_exceeded",
+  "missing_api_key",
+  "invalid_api_key",
+  "suspended_api_key",
+  "invalid_from_address",
+  "validation_error",
+  "not_found",
+  "method_not_allowed",
+  "application_error",
+  "internal_server_error",
+]);
+
 function validStatus(value: unknown): number | undefined {
   return Number.isInteger(value) && Number(value) >= 100 && Number(value) <= 599
     ? Number(value)
@@ -30,7 +50,7 @@ function validStatus(value: unknown): number | undefined {
 function safeEmailCode(value: unknown): string {
   if (typeof value !== "string") return "email_provider_error";
   const normalized = value.toLowerCase().replace(/[^a-z0-9_]+/g, "_").slice(0, 64);
-  return normalized || "email_provider_error";
+  return resendErrorNames.has(normalized) ? normalized : "email_provider_error";
 }
 
 function safeReceipt(value: unknown): string | undefined {
