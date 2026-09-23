@@ -14,7 +14,7 @@ This repository is a TypeScript monorepo configured with [Turborepo](https://tur
 │   ├── primary_backend/     # Express REST API for auth, zap management, and catalog
 │   ├── processor/           # Outbox poller daemon publishing events to Kafka
 │   ├── webhook/             # Ingestion service for webhooks and trigger test buffering
-│   └── worker/              # Kafka consumer executing action steps and handling DLQ
+│   └── worker/              # Kafka consumer executing fenced, single-shot action steps
 ├── packages/
 │   ├── db/                  # Prisma 6 schema, migrations, and shared DB client
 │   ├── ui/                  # Shared React UI component library
@@ -67,12 +67,12 @@ This repository is a TypeScript monorepo configured with [Turborepo](https://tur
 - **Role**: Asynchronous Kafka consumer and step execution engine.
 - **Entry Point**: [`apps/worker/index.ts`](../apps/worker/index.ts).
 - **Key Modules**:
-  - `index.ts`: Kafka consumer loop (`groupId: 'zap-group'`), distributed lease claiming (`claimExecution`), action invocation, next-stage production, and manual offset commits.
+  - `index.ts`: Kafka consumer loop, stage loading, next-stage production, and manual offset commits.
+  - `execution-store.ts`: Claim-token fencing, attempt evidence, fingerprints, and atomic terminal failure persistence.
+  - `orchestration.ts`: Single-shot action execution and `ack`/`advance` resolution.
   - `actions/index.ts`: Action registry (`actionRegistry`, `getActionHandler`).
   - `actions/email.ts`: Resend email integration with `Idempotency-Key` headers.
   - `actions/telegram.ts`: Telegram Bot API integration with `@username` resolver.
-  - `retry.ts`: In-process exponential backoff retry runner (`withRetry`).
-  - `deadletter.ts`: Dead-letter handler producing to Kafka `zap-events-dlq` and writing `ZapRunRetry` table.
   - `parse.ts`: Mustache-style template string variable interpolator (`{{variable.path}}`).
   - `types.ts`: Core type contracts (`ActionContext`, `ActionHandler`).
 
@@ -124,9 +124,8 @@ This repository is a TypeScript monorepo configured with [Turborepo](https://tur
 
 The worker uses lightweight `node:assert` self-checking scripts, while the AI workspace uses Bun's test runner:
 
-- [`apps/worker/idempotency.test.ts`](../apps/worker/idempotency.test.ts): Tests atomic lease acquisition, concurrent worker race prevention, expired lease recovery, and duplicate redelivery skipping.
-- [`apps/worker/deadletter.test.ts`](../apps/worker/deadletter.test.ts): Tests dual-sink DLQ publishing (Kafka + PostgreSQL) and non-throwing error handling.
-- [`apps/worker/retry.test.ts`](../apps/worker/retry.test.ts): Tests exponential backoff retries and error rethrowing on attempt exhaustion.
+- [`apps/worker/idempotency.test.ts`](../apps/worker/idempotency.test.ts): Tests single-shot orchestration, ACK gating, malformed input, and duplicate redelivery.
+- [`apps/worker/execution-store.test.ts`](../apps/worker/execution-store.test.ts): Tests claim fencing, durable attempts, rollback, sanitization, and linked failures.
 - [`apps/ai_agent/tests`](../apps/ai_agent/tests): Bun tests for strict contracts, grounded F01/F07 behavior, execution budgets, HTTP mapping and lifecycle cleanup.
 
 ---

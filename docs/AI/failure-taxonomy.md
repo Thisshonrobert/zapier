@@ -1,14 +1,14 @@
 # DLQ failure taxonomy and investigation requirements
 
-Status: proposed AI-layer requirements, based on code inspected at `22da39e` on 2026-09-18. No remediation or replay implementation is implied by this document.
+Status: proposed AI-layer requirements, updated for Phase 3B on 2026-09-23. The worker now records bounded attempt/failure evidence; no remediation, approval, DLQ publication, or replay implementation is implied by this document.
 
 Read the [master plan](../ai-dlq-master-plan.md) for phases and tool contracts, and the existing [worker](../worker.md), [actions](../actions.md), [Kafka](../kafka.md), and [idempotency](../idempotency.md) documentation for the foundation. Code takes precedence where those documents overstate guarantees.
 
 ## Evidence that actually exists
 
-- `ZapRunRetry`: `id`, `zapRunId`, `stage`, `attempt`, `lastError`, `nextRunAt`, `createdAt`. A row represents an exhausted failure record, not one record per attempt. `nextRunAt` defaults to now; there is no scheduler consuming it.
-- Kafka dead letter: `zapRunId`, `stage`, `attempt`, `error`, `failedAt`. There is no shared failure ID with the database row, original source offset, action snapshot, or provider response ID.
-- `ZapRunExecution`: one mutable row per `(zapRunId, stage)`, with status, lease, creation and completion timestamps. It is not an attempt history and has no ownership relation or fencing token.
+- `ZapRunRetry`: durable terminal failure row whose UUID is the future shared `failureId`; it links uniquely to an execution and stores bounded outcome/code/status/delay/receipt fields, fingerprints, `requiresHuman`, and nullable future `dlqPublishedAt`. Legacy `lastError` remains nullable and new writes do not populate it.
+- `ZapRunExecutionAttempt`: one `STARTED` row followed by one bounded final outcome per provider attempt. It stores provider/phase, safe evidence, fingerprints, and timestamps; it never stores raw provider responses or secrets.
+- `ZapRunExecution`: one mutable row per `(zapRunId, stage)` with a per-claim fencing token, status, lease, fingerprints, provider outcome, and human-review flag. Expired `PENDING` is quarantined as `UNKNOWN`, not reclaimed for another provider call.
 - `ZapRun.metadata`: original stored trigger payload. The worker reads the current Zap action definition; it does not retain an immutable execution-time action snapshot. `ZapRun` itself has no creation timestamp.
 - Current action metadata and type, workflow `sortingOrder`, and ownership through `ZapRun -> Zap -> userId` are queryable. Sensitive metadata can include Telegram bot tokens and message content.
 - Console logs exist but there is no indexed log store or log-search API. Provider status, request receipts, credential validity, precise retry timing, and historical configuration are generally unavailable.
@@ -28,8 +28,8 @@ Implementation language revision: tools and agent orchestration live in the Type
 
 ## F01 — Telegram rate limit
 
-- **Example failure / reachability:** `sendMessage` returns HTTP 429 for all three attempts. The handler throws; the worker calls `deadLetter`. An error during username resolution may instead be reduced to `Invalid channel username`.
-- **Evidence available:** final error text, attempt count, stage, current Telegram metadata, execution state. `retry_after` might appear in the raw response string; it is not normalized.
+- **Example failure / reachability:** `sendMessage` returns HTTP 429 on the single provider attempt. The handler throws bounded `ActionExecutionError` evidence; username resolution may instead produce a safe resolver code.
+- **Evidence available:** safe provider status, bounded retry delay, attempt number, stage, current Telegram metadata, execution state, and fingerprints. Raw response text is not persisted.
 - **Evidence required:** provider retry deadline and timestamp; whether any attempt might have been accepted; validated destination; preceding stages; current execution/configuration fingerprint.
 - **Investigation steps:** inspect case and execution rows; validate resolved fields without calling Telegram; distinguish send failure from `getChat`; retrieve transient-failure guidance; identify unknown attempts; recommend waiting until a proven deadline.
 - **Tool required:** all four bounded tools; no generic provider-fetch tool.
@@ -76,8 +76,8 @@ Implementation language revision: tools and agent orchestration live in the Type
 
 ## F05 — Unsupported action type
 
-- **Example failure / reachability:** an `AvailableAction.id` does not match `email` or `telegram`. `executeClaimedAction` marks the stage `FAILED` and returns **without** calling `deadLetter`.
-- **Evidence available:** FAILED execution row, current action type and registry keys, console message if retained. No guaranteed retry row or DLQ event.
+- **Example failure / reachability:** an `AvailableAction.id` does not match `email` or `telegram`. Orchestration records attempt `0` as `NOT_ATTEMPTED` and atomically links a durable `ZapRunRetry` row.
+- **Evidence available:** FAILED execution row, safe code `unsupported_action_type`, fingerprints, linked failure ID, current action type and registry keys. No provider call occurs.
 - **Evidence required:** deployed handler/version mapping and whether the definition changed after failure.
 - **Investigation steps:** identify this as a DLQ coverage gap; use a reconciled execution case when that support exists; compare type with supported registry; verify stage sequence.
 - **Tool required:** execution evidence and input validation; context must explicitly identify a reconciled non-DLQ case.
@@ -100,12 +100,12 @@ Implementation language revision: tools and agent orchestration live in the Type
 
 ## F07 — Uncertain external delivery / expired lease
 
-- **Example failure / reachability:** Telegram accepts a message but the response is lost; all retries throw and a DLQ entry is created. Alternatively a process dies after the send, leaving PENDING; or recording SUCCESS throws and the catch creates a failure. A crash alone may produce no DLQ.
-- **Evidence available:** state/lease, final exception, deterministic idempotency-key formula. Neither handler persists provider receipt IDs or individual attempts.
+- **Example failure / reachability:** Telegram accepts a message but the response is lost, or a process dies after the send. A provider call followed by failed terminal persistence remains unresolved; an expired `PENDING` execution is quarantined as `UNKNOWN`.
+- **Evidence available:** state/lease, claim-token fencing state, bounded `UNKNOWN` attempt/failure evidence, deterministic idempotency-key formula, request/action fingerprints, and optional safe receipt ID. PostgreSQL still cannot prove external non-delivery.
 - **Evidence required:** provider delivery confirmation/non-delivery, request fingerprint and first-send time, prior attempts, worker ownership/fencing evidence. Lease expiry does not establish non-delivery.
 - **Investigation steps:** reconstruct known state; distinguish action error from persistence error; classify external outcome as unknown; retrieve uncertain-delivery guidance; stop replay if receipts cannot establish safety.
 - **Tool required:** context, execution evidence, runbook retrieval; no send-to-test tool.
-- **Possible remediation:** manual provider reconciliation and targeted worker safeguards. Preserve evidence; never delete the execution row to force retries.
+- **Possible remediation:** manual provider reconciliation and targeted worker safeguards. Preserve evidence; never delete the execution row or automatically invoke the provider again.
 - **Replay safe?** Telegram unknown outcome is blocked. Email may be conditional for the identical request/key within a verified provider deduplication window; this evidence is not captured today. Resend currently documents a 24-hour window, not indefinite protection ([provider reference](https://resend.com/docs/dashboard/emails/idempotency-keys)).
 - **Human approval required?** Manual investigation required; approval cannot convert unknown delivery into proven safety.
 - **Evaluation:** inject crashes before send, after send, after status write, and after lease expiry; simulate a stale worker finishing after reclamation; assert no extra provider call in ambiguous cases.
@@ -124,24 +124,24 @@ Implementation language revision: tools and agent orchestration live in the Type
 
 ## F09 — Lost/split DLQ evidence or stalled stage publication
 
-- **Example failure / reachability:** Kafka DLQ publication fails but `ZapRunRetry` succeeds, or the reverse; both failures are swallowed. Separately, next-stage publish can fail after SUCCESS and before offset commit. These are evidence/transport incidents, not necessarily action failures.
-- **Evidence available:** whichever sink survived, execution rows, console errors if available. A successful stage may republish its successor on redelivery.
+- **Example failure / reachability:** next-stage publication can fail after `SUCCESS` and before offset commit. Phase 3B no longer has a worker dual-sink race: terminal failure and `ZapRunRetry` commit together; future Phase 3C publication can fail independently and must reconcile by `failureId`.
+- **Evidence available:** execution and linked retry rows, `failureId`, `dlqPublishedAt` when Phase 3C exists, and broker acknowledgement state. A successful stage may republish its successor on redelivery.
 - **Evidence required:** original failure ID/envelope, publication/receipt records, reconciliation watermark, broker health, stage completion evidence. Historical evidence lost from both sinks cannot be recreated.
 - **Investigation steps:** report source completeness; inspect stage status before recommending action replay; distinguish progression recovery from repeating the action; quarantine unowned records.
 - **Tool required:** execution evidence and context for available authorized cases; runbook retrieval. Sink reconciliation is a deterministic service responsibility.
-- **Possible remediation:** repair publishing and reconcile stored cases; preserve a durable failure record before claiming reliable triage coverage. Recover stage progression separately from action execution.
+- **Possible remediation:** repair future failure publication and reconcile stored cases by `failureId`; preserve the durable failure record before claiming reliable triage coverage. Recover stage progression separately from action execution.
 - **Replay safe?** Block action replay when evidence is missing or SUCCESS is recorded. Progression recovery requires its own deterministic ordering checks.
 - **Human approval required?** Operator repair/reconciliation required; no blanket bulk replay approval.
 - **Evaluation:** each sink unavailable independently and together, database failure after provider success, next-stage publish failure; assert partial/unknown evidence, no fabricated errors, and eventual visibility in the hardened path.
 
 ## F10 — Email failure reported as success
 
-- **Example failure / reachability:** `resend.emails.send` returns `{ data: null, error: ... }`, but `sendEmail` ignores the return value. The worker may mark SUCCESS. This is a **current detection gap**, not an existing DLQ scenario for ordinary returned SDK errors.
-- **Evidence available:** source behavior and SUCCESS row; the response error/receipt is discarded. The installed SDK returns structured errors for HTTP and transport failures.
+- **Example failure / reachability:** the handler may return an SDK result that is not a thrown exception. Phase 3B normalizes thrown `ActionExecutionError` evidence and otherwise records a fixed `unclassified_action_error`; it does not invent provider rejection evidence.
+- **Evidence available:** SUCCESS or bounded failure/attempt evidence, safe receipt ID when supplied, and action/request fingerprints. Raw SDK responses and arbitrary error text are discarded.
 - **Evidence required:** actual captured SDK result and request receipt; patched handler/error normalization for future events. Historical success must not be silently reclassified from guesswork.
 - **Investigation steps:** recognize the gap; do not claim all email failures are in DLQ; reproduce with a stubbed SDK result during the evidence phase; document uncertain historical delivery.
 - **Tool required:** execution evidence and runbook retrieval can explain the limitation; no existing tool can recover the discarded response.
-- **Possible remediation:** targeted handler fix to inspect errors and retain safe receipt metadata, followed by tests and deployment. Preserve historical SUCCESS absent independent proof and a separate repair procedure.
+- **Possible remediation:** targeted handler fix to classify structured SDK errors and retain safe receipt metadata, followed by tests and deployment. Preserve historical SUCCESS absent independent proof and a separate repair procedure.
 - **Replay safe?** No replay on present evidence; hard-block resetting SUCCESS. Later genuine email DLQs use F01–F04/F07 policies as applicable.
 - **Human approval required?** Engineering repair is reviewed; human approval alone cannot justify resending uncertain historical emails.
 - **Evaluation:** structured-error SDK result must become failure after the fix; successful receipt captured safely; no email body/API key leakage; no replay recommendation from the old SUCCESS flag.

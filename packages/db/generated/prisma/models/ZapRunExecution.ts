@@ -42,6 +42,11 @@ export type ZapRunExecutionMinAggregateOutputType = {
   leaseUntil: Date | null
   createdAt: Date | null
   completedAt: Date | null
+  claimToken: string | null
+  providerOutcome: string | null
+  actionFingerprint: string | null
+  requestFingerprint: string | null
+  requiresHuman: boolean | null
 }
 
 export type ZapRunExecutionMaxAggregateOutputType = {
@@ -52,6 +57,11 @@ export type ZapRunExecutionMaxAggregateOutputType = {
   leaseUntil: Date | null
   createdAt: Date | null
   completedAt: Date | null
+  claimToken: string | null
+  providerOutcome: string | null
+  actionFingerprint: string | null
+  requestFingerprint: string | null
+  requiresHuman: boolean | null
 }
 
 export type ZapRunExecutionCountAggregateOutputType = {
@@ -62,6 +72,11 @@ export type ZapRunExecutionCountAggregateOutputType = {
   leaseUntil: number
   createdAt: number
   completedAt: number
+  claimToken: number
+  providerOutcome: number
+  actionFingerprint: number
+  requestFingerprint: number
+  requiresHuman: number
   _all: number
 }
 
@@ -82,6 +97,11 @@ export type ZapRunExecutionMinAggregateInputType = {
   leaseUntil?: true
   createdAt?: true
   completedAt?: true
+  claimToken?: true
+  providerOutcome?: true
+  actionFingerprint?: true
+  requestFingerprint?: true
+  requiresHuman?: true
 }
 
 export type ZapRunExecutionMaxAggregateInputType = {
@@ -92,6 +112,11 @@ export type ZapRunExecutionMaxAggregateInputType = {
   leaseUntil?: true
   createdAt?: true
   completedAt?: true
+  claimToken?: true
+  providerOutcome?: true
+  actionFingerprint?: true
+  requestFingerprint?: true
+  requiresHuman?: true
 }
 
 export type ZapRunExecutionCountAggregateInputType = {
@@ -102,6 +127,11 @@ export type ZapRunExecutionCountAggregateInputType = {
   leaseUntil?: true
   createdAt?: true
   completedAt?: true
+  claimToken?: true
+  providerOutcome?: true
+  actionFingerprint?: true
+  requestFingerprint?: true
+  requiresHuman?: true
   _all?: true
 }
 
@@ -199,6 +229,11 @@ export type ZapRunExecutionGroupByOutputType = {
   leaseUntil: Date | null
   createdAt: Date
   completedAt: Date | null
+  claimToken: string | null
+  providerOutcome: string | null
+  actionFingerprint: string | null
+  requestFingerprint: string | null
+  requiresHuman: boolean
   _count: ZapRunExecutionCountAggregateOutputType | null
   _avg: ZapRunExecutionAvgAggregateOutputType | null
   _sum: ZapRunExecutionSumAggregateOutputType | null
@@ -232,6 +267,13 @@ export type ZapRunExecutionWhereInput = {
   leaseUntil?: Prisma.DateTimeNullableFilter<"ZapRunExecution"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"ZapRunExecution"> | Date | string
   completedAt?: Prisma.DateTimeNullableFilter<"ZapRunExecution"> | Date | string | null
+  claimToken?: Prisma.StringNullableFilter<"ZapRunExecution"> | string | null
+  providerOutcome?: Prisma.StringNullableFilter<"ZapRunExecution"> | string | null
+  actionFingerprint?: Prisma.StringNullableFilter<"ZapRunExecution"> | string | null
+  requestFingerprint?: Prisma.StringNullableFilter<"ZapRunExecution"> | string | null
+  requiresHuman?: Prisma.BoolFilter<"ZapRunExecution"> | boolean
+  attempts?: Prisma.ZapRunExecutionAttemptListRelationFilter
+  failure?: Prisma.XOR<Prisma.ZapRunRetryNullableScalarRelationFilter, Prisma.ZapRunRetryWhereInput> | null
 }
 
 export type ZapRunExecutionOrderByWithRelationInput = {
@@ -242,6 +284,13 @@ export type ZapRunExecutionOrderByWithRelationInput = {
   leaseUntil?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   completedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  claimToken?: Prisma.SortOrderInput | Prisma.SortOrder
+  providerOutcome?: Prisma.SortOrderInput | Prisma.SortOrder
+  actionFingerprint?: Prisma.SortOrderInput | Prisma.SortOrder
+  requestFingerprint?: Prisma.SortOrderInput | Prisma.SortOrder
+  requiresHuman?: Prisma.SortOrder
+  attempts?: Prisma.ZapRunExecutionAttemptOrderByRelationAggregateInput
+  failure?: Prisma.ZapRunRetryOrderByWithRelationInput
 }
 
 export type ZapRunExecutionWhereUniqueInput = Prisma.AtLeast<{
@@ -256,6 +305,13 @@ export type ZapRunExecutionWhereUniqueInput = Prisma.AtLeast<{
   leaseUntil?: Prisma.DateTimeNullableFilter<"ZapRunExecution"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"ZapRunExecution"> | Date | string
   completedAt?: Prisma.DateTimeNullableFilter<"ZapRunExecution"> | Date | string | null
+  claimToken?: Prisma.StringNullableFilter<"ZapRunExecution"> | string | null
+  providerOutcome?: Prisma.StringNullableFilter<"ZapRunExecution"> | string | null
+  actionFingerprint?: Prisma.StringNullableFilter<"ZapRunExecution"> | string | null
+  requestFingerprint?: Prisma.StringNullableFilter<"ZapRunExecution"> | string | null
+  requiresHuman?: Prisma.BoolFilter<"ZapRunExecution"> | boolean
+  attempts?: Prisma.ZapRunExecutionAttemptListRelationFilter
+  failure?: Prisma.XOR<Prisma.ZapRunRetryNullableScalarRelationFilter, Prisma.ZapRunRetryWhereInput> | null
 }, "id" | "zapRunId_stage">
 
 export type ZapRunExecutionOrderByWithAggregationInput = {
@@ -266,6 +322,11 @@ export type ZapRunExecutionOrderByWithAggregationInput = {
   leaseUntil?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   completedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  claimToken?: Prisma.SortOrderInput | Prisma.SortOrder
+  providerOutcome?: Prisma.SortOrderInput | Prisma.SortOrder
+  actionFingerprint?: Prisma.SortOrderInput | Prisma.SortOrder
+  requestFingerprint?: Prisma.SortOrderInput | Prisma.SortOrder
+  requiresHuman?: Prisma.SortOrder
   _count?: Prisma.ZapRunExecutionCountOrderByAggregateInput
   _avg?: Prisma.ZapRunExecutionAvgOrderByAggregateInput
   _max?: Prisma.ZapRunExecutionMaxOrderByAggregateInput
@@ -284,6 +345,11 @@ export type ZapRunExecutionScalarWhereWithAggregatesInput = {
   leaseUntil?: Prisma.DateTimeNullableWithAggregatesFilter<"ZapRunExecution"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"ZapRunExecution"> | Date | string
   completedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"ZapRunExecution"> | Date | string | null
+  claimToken?: Prisma.StringNullableWithAggregatesFilter<"ZapRunExecution"> | string | null
+  providerOutcome?: Prisma.StringNullableWithAggregatesFilter<"ZapRunExecution"> | string | null
+  actionFingerprint?: Prisma.StringNullableWithAggregatesFilter<"ZapRunExecution"> | string | null
+  requestFingerprint?: Prisma.StringNullableWithAggregatesFilter<"ZapRunExecution"> | string | null
+  requiresHuman?: Prisma.BoolWithAggregatesFilter<"ZapRunExecution"> | boolean
 }
 
 export type ZapRunExecutionCreateInput = {
@@ -294,6 +360,13 @@ export type ZapRunExecutionCreateInput = {
   leaseUntil?: Date | string | null
   createdAt?: Date | string
   completedAt?: Date | string | null
+  claimToken?: string | null
+  providerOutcome?: string | null
+  actionFingerprint?: string | null
+  requestFingerprint?: string | null
+  requiresHuman?: boolean
+  attempts?: Prisma.ZapRunExecutionAttemptCreateNestedManyWithoutExecutionInput
+  failure?: Prisma.ZapRunRetryCreateNestedOneWithoutExecutionInput
 }
 
 export type ZapRunExecutionUncheckedCreateInput = {
@@ -304,6 +377,13 @@ export type ZapRunExecutionUncheckedCreateInput = {
   leaseUntil?: Date | string | null
   createdAt?: Date | string
   completedAt?: Date | string | null
+  claimToken?: string | null
+  providerOutcome?: string | null
+  actionFingerprint?: string | null
+  requestFingerprint?: string | null
+  requiresHuman?: boolean
+  attempts?: Prisma.ZapRunExecutionAttemptUncheckedCreateNestedManyWithoutExecutionInput
+  failure?: Prisma.ZapRunRetryUncheckedCreateNestedOneWithoutExecutionInput
 }
 
 export type ZapRunExecutionUpdateInput = {
@@ -314,6 +394,13 @@ export type ZapRunExecutionUpdateInput = {
   leaseUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  claimToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actionFingerprint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requestFingerprint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requiresHuman?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  attempts?: Prisma.ZapRunExecutionAttemptUpdateManyWithoutExecutionNestedInput
+  failure?: Prisma.ZapRunRetryUpdateOneWithoutExecutionNestedInput
 }
 
 export type ZapRunExecutionUncheckedUpdateInput = {
@@ -324,6 +411,13 @@ export type ZapRunExecutionUncheckedUpdateInput = {
   leaseUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  claimToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actionFingerprint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requestFingerprint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requiresHuman?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  attempts?: Prisma.ZapRunExecutionAttemptUncheckedUpdateManyWithoutExecutionNestedInput
+  failure?: Prisma.ZapRunRetryUncheckedUpdateOneWithoutExecutionNestedInput
 }
 
 export type ZapRunExecutionCreateManyInput = {
@@ -334,6 +428,11 @@ export type ZapRunExecutionCreateManyInput = {
   leaseUntil?: Date | string | null
   createdAt?: Date | string
   completedAt?: Date | string | null
+  claimToken?: string | null
+  providerOutcome?: string | null
+  actionFingerprint?: string | null
+  requestFingerprint?: string | null
+  requiresHuman?: boolean
 }
 
 export type ZapRunExecutionUpdateManyMutationInput = {
@@ -344,6 +443,11 @@ export type ZapRunExecutionUpdateManyMutationInput = {
   leaseUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  claimToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actionFingerprint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requestFingerprint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requiresHuman?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type ZapRunExecutionUncheckedUpdateManyInput = {
@@ -354,6 +458,16 @@ export type ZapRunExecutionUncheckedUpdateManyInput = {
   leaseUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  claimToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actionFingerprint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requestFingerprint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requiresHuman?: Prisma.BoolFieldUpdateOperationsInput | boolean
+}
+
+export type ZapRunExecutionNullableScalarRelationFilter = {
+  is?: Prisma.ZapRunExecutionWhereInput | null
+  isNot?: Prisma.ZapRunExecutionWhereInput | null
 }
 
 export type ZapRunExecutionZapRunIdStageCompoundUniqueInput = {
@@ -369,6 +483,11 @@ export type ZapRunExecutionCountOrderByAggregateInput = {
   leaseUntil?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   completedAt?: Prisma.SortOrder
+  claimToken?: Prisma.SortOrder
+  providerOutcome?: Prisma.SortOrder
+  actionFingerprint?: Prisma.SortOrder
+  requestFingerprint?: Prisma.SortOrder
+  requiresHuman?: Prisma.SortOrder
 }
 
 export type ZapRunExecutionAvgOrderByAggregateInput = {
@@ -383,6 +502,11 @@ export type ZapRunExecutionMaxOrderByAggregateInput = {
   leaseUntil?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   completedAt?: Prisma.SortOrder
+  claimToken?: Prisma.SortOrder
+  providerOutcome?: Prisma.SortOrder
+  actionFingerprint?: Prisma.SortOrder
+  requestFingerprint?: Prisma.SortOrder
+  requiresHuman?: Prisma.SortOrder
 }
 
 export type ZapRunExecutionMinOrderByAggregateInput = {
@@ -393,16 +517,241 @@ export type ZapRunExecutionMinOrderByAggregateInput = {
   leaseUntil?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   completedAt?: Prisma.SortOrder
+  claimToken?: Prisma.SortOrder
+  providerOutcome?: Prisma.SortOrder
+  actionFingerprint?: Prisma.SortOrder
+  requestFingerprint?: Prisma.SortOrder
+  requiresHuman?: Prisma.SortOrder
 }
 
 export type ZapRunExecutionSumOrderByAggregateInput = {
   stage?: Prisma.SortOrder
 }
 
-export type NullableDateTimeFieldUpdateOperationsInput = {
-  set?: Date | string | null
+export type ZapRunExecutionScalarRelationFilter = {
+  is?: Prisma.ZapRunExecutionWhereInput
+  isNot?: Prisma.ZapRunExecutionWhereInput
 }
 
+export type ZapRunExecutionCreateNestedOneWithoutFailureInput = {
+  create?: Prisma.XOR<Prisma.ZapRunExecutionCreateWithoutFailureInput, Prisma.ZapRunExecutionUncheckedCreateWithoutFailureInput>
+  connectOrCreate?: Prisma.ZapRunExecutionCreateOrConnectWithoutFailureInput
+  connect?: Prisma.ZapRunExecutionWhereUniqueInput
+}
+
+export type ZapRunExecutionUpdateOneWithoutFailureNestedInput = {
+  create?: Prisma.XOR<Prisma.ZapRunExecutionCreateWithoutFailureInput, Prisma.ZapRunExecutionUncheckedCreateWithoutFailureInput>
+  connectOrCreate?: Prisma.ZapRunExecutionCreateOrConnectWithoutFailureInput
+  upsert?: Prisma.ZapRunExecutionUpsertWithoutFailureInput
+  disconnect?: Prisma.ZapRunExecutionWhereInput | boolean
+  delete?: Prisma.ZapRunExecutionWhereInput | boolean
+  connect?: Prisma.ZapRunExecutionWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ZapRunExecutionUpdateToOneWithWhereWithoutFailureInput, Prisma.ZapRunExecutionUpdateWithoutFailureInput>, Prisma.ZapRunExecutionUncheckedUpdateWithoutFailureInput>
+}
+
+export type ZapRunExecutionCreateNestedOneWithoutAttemptsInput = {
+  create?: Prisma.XOR<Prisma.ZapRunExecutionCreateWithoutAttemptsInput, Prisma.ZapRunExecutionUncheckedCreateWithoutAttemptsInput>
+  connectOrCreate?: Prisma.ZapRunExecutionCreateOrConnectWithoutAttemptsInput
+  connect?: Prisma.ZapRunExecutionWhereUniqueInput
+}
+
+export type ZapRunExecutionUpdateOneRequiredWithoutAttemptsNestedInput = {
+  create?: Prisma.XOR<Prisma.ZapRunExecutionCreateWithoutAttemptsInput, Prisma.ZapRunExecutionUncheckedCreateWithoutAttemptsInput>
+  connectOrCreate?: Prisma.ZapRunExecutionCreateOrConnectWithoutAttemptsInput
+  upsert?: Prisma.ZapRunExecutionUpsertWithoutAttemptsInput
+  connect?: Prisma.ZapRunExecutionWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ZapRunExecutionUpdateToOneWithWhereWithoutAttemptsInput, Prisma.ZapRunExecutionUpdateWithoutAttemptsInput>, Prisma.ZapRunExecutionUncheckedUpdateWithoutAttemptsInput>
+}
+
+export type ZapRunExecutionCreateWithoutFailureInput = {
+  id?: string
+  zapRunId: string
+  stage: number
+  status?: string
+  leaseUntil?: Date | string | null
+  createdAt?: Date | string
+  completedAt?: Date | string | null
+  claimToken?: string | null
+  providerOutcome?: string | null
+  actionFingerprint?: string | null
+  requestFingerprint?: string | null
+  requiresHuman?: boolean
+  attempts?: Prisma.ZapRunExecutionAttemptCreateNestedManyWithoutExecutionInput
+}
+
+export type ZapRunExecutionUncheckedCreateWithoutFailureInput = {
+  id?: string
+  zapRunId: string
+  stage: number
+  status?: string
+  leaseUntil?: Date | string | null
+  createdAt?: Date | string
+  completedAt?: Date | string | null
+  claimToken?: string | null
+  providerOutcome?: string | null
+  actionFingerprint?: string | null
+  requestFingerprint?: string | null
+  requiresHuman?: boolean
+  attempts?: Prisma.ZapRunExecutionAttemptUncheckedCreateNestedManyWithoutExecutionInput
+}
+
+export type ZapRunExecutionCreateOrConnectWithoutFailureInput = {
+  where: Prisma.ZapRunExecutionWhereUniqueInput
+  create: Prisma.XOR<Prisma.ZapRunExecutionCreateWithoutFailureInput, Prisma.ZapRunExecutionUncheckedCreateWithoutFailureInput>
+}
+
+export type ZapRunExecutionUpsertWithoutFailureInput = {
+  update: Prisma.XOR<Prisma.ZapRunExecutionUpdateWithoutFailureInput, Prisma.ZapRunExecutionUncheckedUpdateWithoutFailureInput>
+  create: Prisma.XOR<Prisma.ZapRunExecutionCreateWithoutFailureInput, Prisma.ZapRunExecutionUncheckedCreateWithoutFailureInput>
+  where?: Prisma.ZapRunExecutionWhereInput
+}
+
+export type ZapRunExecutionUpdateToOneWithWhereWithoutFailureInput = {
+  where?: Prisma.ZapRunExecutionWhereInput
+  data: Prisma.XOR<Prisma.ZapRunExecutionUpdateWithoutFailureInput, Prisma.ZapRunExecutionUncheckedUpdateWithoutFailureInput>
+}
+
+export type ZapRunExecutionUpdateWithoutFailureInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  zapRunId?: Prisma.StringFieldUpdateOperationsInput | string
+  stage?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  leaseUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  claimToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actionFingerprint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requestFingerprint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requiresHuman?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  attempts?: Prisma.ZapRunExecutionAttemptUpdateManyWithoutExecutionNestedInput
+}
+
+export type ZapRunExecutionUncheckedUpdateWithoutFailureInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  zapRunId?: Prisma.StringFieldUpdateOperationsInput | string
+  stage?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  leaseUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  claimToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actionFingerprint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requestFingerprint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requiresHuman?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  attempts?: Prisma.ZapRunExecutionAttemptUncheckedUpdateManyWithoutExecutionNestedInput
+}
+
+export type ZapRunExecutionCreateWithoutAttemptsInput = {
+  id?: string
+  zapRunId: string
+  stage: number
+  status?: string
+  leaseUntil?: Date | string | null
+  createdAt?: Date | string
+  completedAt?: Date | string | null
+  claimToken?: string | null
+  providerOutcome?: string | null
+  actionFingerprint?: string | null
+  requestFingerprint?: string | null
+  requiresHuman?: boolean
+  failure?: Prisma.ZapRunRetryCreateNestedOneWithoutExecutionInput
+}
+
+export type ZapRunExecutionUncheckedCreateWithoutAttemptsInput = {
+  id?: string
+  zapRunId: string
+  stage: number
+  status?: string
+  leaseUntil?: Date | string | null
+  createdAt?: Date | string
+  completedAt?: Date | string | null
+  claimToken?: string | null
+  providerOutcome?: string | null
+  actionFingerprint?: string | null
+  requestFingerprint?: string | null
+  requiresHuman?: boolean
+  failure?: Prisma.ZapRunRetryUncheckedCreateNestedOneWithoutExecutionInput
+}
+
+export type ZapRunExecutionCreateOrConnectWithoutAttemptsInput = {
+  where: Prisma.ZapRunExecutionWhereUniqueInput
+  create: Prisma.XOR<Prisma.ZapRunExecutionCreateWithoutAttemptsInput, Prisma.ZapRunExecutionUncheckedCreateWithoutAttemptsInput>
+}
+
+export type ZapRunExecutionUpsertWithoutAttemptsInput = {
+  update: Prisma.XOR<Prisma.ZapRunExecutionUpdateWithoutAttemptsInput, Prisma.ZapRunExecutionUncheckedUpdateWithoutAttemptsInput>
+  create: Prisma.XOR<Prisma.ZapRunExecutionCreateWithoutAttemptsInput, Prisma.ZapRunExecutionUncheckedCreateWithoutAttemptsInput>
+  where?: Prisma.ZapRunExecutionWhereInput
+}
+
+export type ZapRunExecutionUpdateToOneWithWhereWithoutAttemptsInput = {
+  where?: Prisma.ZapRunExecutionWhereInput
+  data: Prisma.XOR<Prisma.ZapRunExecutionUpdateWithoutAttemptsInput, Prisma.ZapRunExecutionUncheckedUpdateWithoutAttemptsInput>
+}
+
+export type ZapRunExecutionUpdateWithoutAttemptsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  zapRunId?: Prisma.StringFieldUpdateOperationsInput | string
+  stage?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  leaseUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  claimToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actionFingerprint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requestFingerprint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requiresHuman?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  failure?: Prisma.ZapRunRetryUpdateOneWithoutExecutionNestedInput
+}
+
+export type ZapRunExecutionUncheckedUpdateWithoutAttemptsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  zapRunId?: Prisma.StringFieldUpdateOperationsInput | string
+  stage?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  leaseUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  claimToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actionFingerprint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requestFingerprint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requiresHuman?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  failure?: Prisma.ZapRunRetryUncheckedUpdateOneWithoutExecutionNestedInput
+}
+
+
+/**
+ * Count Type ZapRunExecutionCountOutputType
+ */
+
+export type ZapRunExecutionCountOutputType = {
+  attempts: number
+}
+
+export type ZapRunExecutionCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  attempts?: boolean | ZapRunExecutionCountOutputTypeCountAttemptsArgs
+}
+
+/**
+ * ZapRunExecutionCountOutputType without action
+ */
+export type ZapRunExecutionCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ZapRunExecutionCountOutputType
+   */
+  select?: Prisma.ZapRunExecutionCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * ZapRunExecutionCountOutputType without action
+ */
+export type ZapRunExecutionCountOutputTypeCountAttemptsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ZapRunExecutionAttemptWhereInput
+}
 
 
 export type ZapRunExecutionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -413,6 +762,14 @@ export type ZapRunExecutionSelect<ExtArgs extends runtime.Types.Extensions.Inter
   leaseUntil?: boolean
   createdAt?: boolean
   completedAt?: boolean
+  claimToken?: boolean
+  providerOutcome?: boolean
+  actionFingerprint?: boolean
+  requestFingerprint?: boolean
+  requiresHuman?: boolean
+  attempts?: boolean | Prisma.ZapRunExecution$attemptsArgs<ExtArgs>
+  failure?: boolean | Prisma.ZapRunExecution$failureArgs<ExtArgs>
+  _count?: boolean | Prisma.ZapRunExecutionCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["zapRunExecution"]>
 
 export type ZapRunExecutionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -423,6 +780,11 @@ export type ZapRunExecutionSelectCreateManyAndReturn<ExtArgs extends runtime.Typ
   leaseUntil?: boolean
   createdAt?: boolean
   completedAt?: boolean
+  claimToken?: boolean
+  providerOutcome?: boolean
+  actionFingerprint?: boolean
+  requestFingerprint?: boolean
+  requiresHuman?: boolean
 }, ExtArgs["result"]["zapRunExecution"]>
 
 export type ZapRunExecutionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -433,6 +795,11 @@ export type ZapRunExecutionSelectUpdateManyAndReturn<ExtArgs extends runtime.Typ
   leaseUntil?: boolean
   createdAt?: boolean
   completedAt?: boolean
+  claimToken?: boolean
+  providerOutcome?: boolean
+  actionFingerprint?: boolean
+  requestFingerprint?: boolean
+  requiresHuman?: boolean
 }, ExtArgs["result"]["zapRunExecution"]>
 
 export type ZapRunExecutionSelectScalar = {
@@ -443,13 +810,28 @@ export type ZapRunExecutionSelectScalar = {
   leaseUntil?: boolean
   createdAt?: boolean
   completedAt?: boolean
+  claimToken?: boolean
+  providerOutcome?: boolean
+  actionFingerprint?: boolean
+  requestFingerprint?: boolean
+  requiresHuman?: boolean
 }
 
-export type ZapRunExecutionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "zapRunId" | "stage" | "status" | "leaseUntil" | "createdAt" | "completedAt", ExtArgs["result"]["zapRunExecution"]>
+export type ZapRunExecutionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "zapRunId" | "stage" | "status" | "leaseUntil" | "createdAt" | "completedAt" | "claimToken" | "providerOutcome" | "actionFingerprint" | "requestFingerprint" | "requiresHuman", ExtArgs["result"]["zapRunExecution"]>
+export type ZapRunExecutionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  attempts?: boolean | Prisma.ZapRunExecution$attemptsArgs<ExtArgs>
+  failure?: boolean | Prisma.ZapRunExecution$failureArgs<ExtArgs>
+  _count?: boolean | Prisma.ZapRunExecutionCountOutputTypeDefaultArgs<ExtArgs>
+}
+export type ZapRunExecutionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type ZapRunExecutionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
 
 export type $ZapRunExecutionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "ZapRunExecution"
-  objects: {}
+  objects: {
+    attempts: Prisma.$ZapRunExecutionAttemptPayload<ExtArgs>[]
+    failure: Prisma.$ZapRunRetryPayload<ExtArgs> | null
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     zapRunId: string
@@ -458,6 +840,11 @@ export type $ZapRunExecutionPayload<ExtArgs extends runtime.Types.Extensions.Int
     leaseUntil: Date | null
     createdAt: Date
     completedAt: Date | null
+    claimToken: string | null
+    providerOutcome: string | null
+    actionFingerprint: string | null
+    requestFingerprint: string | null
+    requiresHuman: boolean
   }, ExtArgs["result"]["zapRunExecution"]>
   composites: {}
 }
@@ -852,6 +1239,8 @@ readonly fields: ZapRunExecutionFieldRefs;
  */
 export interface Prisma__ZapRunExecutionClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  attempts<T extends Prisma.ZapRunExecution$attemptsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ZapRunExecution$attemptsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ZapRunExecutionAttemptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  failure<T extends Prisma.ZapRunExecution$failureArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ZapRunExecution$failureArgs<ExtArgs>>): Prisma.Prisma__ZapRunRetryClient<runtime.Types.Result.GetResult<Prisma.$ZapRunRetryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -888,6 +1277,11 @@ export interface ZapRunExecutionFieldRefs {
   readonly leaseUntil: Prisma.FieldRef<"ZapRunExecution", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"ZapRunExecution", 'DateTime'>
   readonly completedAt: Prisma.FieldRef<"ZapRunExecution", 'DateTime'>
+  readonly claimToken: Prisma.FieldRef<"ZapRunExecution", 'String'>
+  readonly providerOutcome: Prisma.FieldRef<"ZapRunExecution", 'String'>
+  readonly actionFingerprint: Prisma.FieldRef<"ZapRunExecution", 'String'>
+  readonly requestFingerprint: Prisma.FieldRef<"ZapRunExecution", 'String'>
+  readonly requiresHuman: Prisma.FieldRef<"ZapRunExecution", 'Boolean'>
 }
     
 
@@ -904,6 +1298,10 @@ export type ZapRunExecutionFindUniqueArgs<ExtArgs extends runtime.Types.Extensio
    * Omit specific fields from the ZapRunExecution
    */
   omit?: Prisma.ZapRunExecutionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ZapRunExecutionInclude<ExtArgs> | null
   /**
    * Filter, which ZapRunExecution to fetch.
    */
@@ -923,6 +1321,10 @@ export type ZapRunExecutionFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.E
    */
   omit?: Prisma.ZapRunExecutionOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ZapRunExecutionInclude<ExtArgs> | null
+  /**
    * Filter, which ZapRunExecution to fetch.
    */
   where: Prisma.ZapRunExecutionWhereUniqueInput
@@ -940,6 +1342,10 @@ export type ZapRunExecutionFindFirstArgs<ExtArgs extends runtime.Types.Extension
    * Omit specific fields from the ZapRunExecution
    */
   omit?: Prisma.ZapRunExecutionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ZapRunExecutionInclude<ExtArgs> | null
   /**
    * Filter, which ZapRunExecution to fetch.
    */
@@ -989,6 +1395,10 @@ export type ZapRunExecutionFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Ex
    */
   omit?: Prisma.ZapRunExecutionOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ZapRunExecutionInclude<ExtArgs> | null
+  /**
    * Filter, which ZapRunExecution to fetch.
    */
   where?: Prisma.ZapRunExecutionWhereInput
@@ -1037,6 +1447,10 @@ export type ZapRunExecutionFindManyArgs<ExtArgs extends runtime.Types.Extensions
    */
   omit?: Prisma.ZapRunExecutionOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ZapRunExecutionInclude<ExtArgs> | null
+  /**
    * Filter, which ZapRunExecutions to fetch.
    */
   where?: Prisma.ZapRunExecutionWhereInput
@@ -1079,6 +1493,10 @@ export type ZapRunExecutionCreateArgs<ExtArgs extends runtime.Types.Extensions.I
    * Omit specific fields from the ZapRunExecution
    */
   omit?: Prisma.ZapRunExecutionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ZapRunExecutionInclude<ExtArgs> | null
   /**
    * The data needed to create a ZapRunExecution.
    */
@@ -1127,6 +1545,10 @@ export type ZapRunExecutionUpdateArgs<ExtArgs extends runtime.Types.Extensions.I
    * Omit specific fields from the ZapRunExecution
    */
   omit?: Prisma.ZapRunExecutionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ZapRunExecutionInclude<ExtArgs> | null
   /**
    * The data needed to update a ZapRunExecution.
    */
@@ -1194,6 +1616,10 @@ export type ZapRunExecutionUpsertArgs<ExtArgs extends runtime.Types.Extensions.I
    */
   omit?: Prisma.ZapRunExecutionOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ZapRunExecutionInclude<ExtArgs> | null
+  /**
    * The filter to search for the ZapRunExecution to update in case it exists.
    */
   where: Prisma.ZapRunExecutionWhereUniqueInput
@@ -1220,6 +1646,10 @@ export type ZapRunExecutionDeleteArgs<ExtArgs extends runtime.Types.Extensions.I
    */
   omit?: Prisma.ZapRunExecutionOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ZapRunExecutionInclude<ExtArgs> | null
+  /**
    * Filter which ZapRunExecution to delete.
    */
   where: Prisma.ZapRunExecutionWhereUniqueInput
@@ -1240,6 +1670,49 @@ export type ZapRunExecutionDeleteManyArgs<ExtArgs extends runtime.Types.Extensio
 }
 
 /**
+ * ZapRunExecution.attempts
+ */
+export type ZapRunExecution$attemptsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ZapRunExecutionAttempt
+   */
+  select?: Prisma.ZapRunExecutionAttemptSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ZapRunExecutionAttempt
+   */
+  omit?: Prisma.ZapRunExecutionAttemptOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ZapRunExecutionAttemptInclude<ExtArgs> | null
+  where?: Prisma.ZapRunExecutionAttemptWhereInput
+  orderBy?: Prisma.ZapRunExecutionAttemptOrderByWithRelationInput | Prisma.ZapRunExecutionAttemptOrderByWithRelationInput[]
+  cursor?: Prisma.ZapRunExecutionAttemptWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ZapRunExecutionAttemptScalarFieldEnum | Prisma.ZapRunExecutionAttemptScalarFieldEnum[]
+}
+
+/**
+ * ZapRunExecution.failure
+ */
+export type ZapRunExecution$failureArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ZapRunRetry
+   */
+  select?: Prisma.ZapRunRetrySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ZapRunRetry
+   */
+  omit?: Prisma.ZapRunRetryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ZapRunRetryInclude<ExtArgs> | null
+  where?: Prisma.ZapRunRetryWhereInput
+}
+
+/**
  * ZapRunExecution without action
  */
 export type ZapRunExecutionDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1251,4 +1724,8 @@ export type ZapRunExecutionDefaultArgs<ExtArgs extends runtime.Types.Extensions.
    * Omit specific fields from the ZapRunExecution
    */
   omit?: Prisma.ZapRunExecutionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ZapRunExecutionInclude<ExtArgs> | null
 }

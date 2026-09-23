@@ -15,9 +15,9 @@ This document provides a factual assessment of what is currently implemented in 
 
 ### 2. Execution Engine & Worker Subsystem
 
-- **Distributed Lease Locking**: 2-phase atomic locking via `ZapRunExecution` with `PENDING`, `SUCCESS`, `FAILED` statuses and 2-minute lease duration for crash recovery.
-- **In-Process Exponential Retries**: 3 retry attempts with exponential backoff (`1s`, `2s`).
-- **Dead-Letter Pipeline (DLQ)**: Dual-sink dead lettering producing to Kafka topic `zap-events-dlq` and logging to table `ZapRunRetry`.
+- **Fenced Single-Shot Execution**: `ZapRunExecution` uses a per-claim token, durable attempt rows, bounded fingerprints, and 2-minute lease quarantine. A stale worker cannot finalize a newer claim.
+- **Durable Failure Evidence**: Terminal `FAILED` state and one linked `ZapRunRetry` row commit atomically with sanitized provider outcome and `requiresHuman` evidence.
+- **Kafka ACK Gating**: Only durable `SUCCESS` or linked durable `FAILED` messages are acknowledged. Phase 3C will publish failures from durable rows; the worker is not a DLQ producer.
 - **Action Extensibility Registry**: Pluggable `ActionHandler` interface with active handlers for Resend Email and Telegram Bot API.
 - **Template Expression Parsing**: Dot-notated mustache syntax (`{{data.user.email}}`) resolved against execution metadata.
 
@@ -38,10 +38,10 @@ This document provides a factual assessment of what is currently implemented in 
 1. **Linear Workflow DAG Only**:
    - Workflows currently execute strictly as a single linear sequence sorted by `sortingOrder: 0, 1, 2...`.
    - Branching conditions, conditional filtering (`if/else`), parallel execution branches, and loops are not yet modeled in the database schema or worker.
-2. **DLQ Replay Mechanism**:
-   - Failed events are recorded in `ZapRunRetry` and published to `zap-events-dlq`, but no background replay consumer or manual re-drive UI exists yet to re-ingest dead-lettered events.
-3. **Third-Party Idempotency Disparity**:
-   - While Resend Email API requests include idempotency tokens, the Telegram Bot API lacks provider-level idempotency headers; safety relies exclusively on the worker's internal database lease.
+2. **Failure publication and replay**:
+   - `ZapRunRetry.id` is the future `failureId`. Phase 3C publication/reconciliation and any human-controlled replay or approval API are not implemented.
+3. **Third-Party delivery uncertainty**:
+   - Resend requests include an idempotency key and Telegram lacks provider-level idempotency. Provider acceptance followed by persistence failure remains `UNKNOWN` and requires human review; the worker never resends automatically.
 4. **Single-Threaded Outbox Poller**:
    - `apps/processor` runs an unpartitioned single-instance loop polling the outbox table. At extreme scale, this requires database partitioning or CDC (Change Data Capture) tools like Debezium.
 
