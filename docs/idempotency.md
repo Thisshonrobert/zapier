@@ -26,7 +26,8 @@ flowchart TD
         ClaimLease --> CheckStatus{Status & Lease}
         CheckStatus -- "SUCCESS" --> SkipExec["Skip Handler (Already Done)"]
         CheckStatus -- "Active PENDING" --> SkipRace["Skip (Other worker active)"]
-        CheckStatus -- "Expired PENDING / New" --> ExecAction["Execute Action Handler"]
+        CheckStatus -- "Expired PENDING" --> Quarantine["FAILED / UNKNOWN quarantine"]
+        CheckStatus -- "New claim" --> ExecAction["One provider call"]
     end
 
     subgraph Tier4["Tier 4: External API Idempotency"]
@@ -62,11 +63,13 @@ $$\text{idempotencyKey} = \texttt{"zaprun\_" + zapRunId + "\_stage\_" + stage}$$
 - The outbox processor awaits Kafka confirmation (`await producer.send(...)`) before issuing `prisma.zapRunOutbox.deleteMany(...)`.
 - If the processor crashes or Kafka is unreachable, outbox rows remain intact and will be re-polled and re-sent.
 
-### 3. Worker Execution: Two-Phase Lease Claim ([`apps/worker/index.ts`](../apps/worker/index.ts))
+### 3. Worker Execution: Fenced Single-Shot Claim ([`apps/worker/orchestration.ts`](../apps/worker/orchestration.ts))
 
 - Enforced by PostgreSQL table `ZapRunExecution` with unique constraint `@@unique([zapRunId, stage])`.
 - **Duplicate Kafka Deliveries**: If Kafka redelivers `{ zapRunId, stage: 0 }` after a stage has already finished, `claimExecution()` detects `status === "SUCCESS"` and skips action dispatch completely.
-- **Worker Crash Recovery**: If a worker dies while `status === "PENDING"`, other workers wait until `leaseUntil` expires before atomically reclaiming the lease via `updateMany`.
+- **Claim fencing**: Each new claim receives a local `claimToken`. Attempt and terminal writes require the execution ID, `PENDING` status, and current token.
+- **Worker crash/lease expiry**: An expired or null lease is quarantined as `FAILED` with `providerOutcome = "unknown"` and `requiresHuman = true`; it is never reclaimed for another provider call.
+- **Attempt evidence**: One `STARTED` row is finalized with bounded provider evidence and fingerprints. A linked `ZapRunRetry.id` is the durable `failureId`.
 
 ### 4. External Provider Side Effects
 
@@ -78,9 +81,9 @@ $$\text{idempotencyKey} = \texttt{"zaprun\_" + zapRunId + "\_stage\_" + stage}$$
     "X-Entity-Ref-ID": ctx.idempotencyKey,
   }
   ```
-  If Resend experiences network timeouts during retry attempts, Resend's API deduplicates against the token and prevents duplicate emails.
+  The key remains available to the provider, but the worker makes one call only. A timeout or persistence failure is recorded as `UNKNOWN` when possible and requires human review; internal retries do not resend the provider request.
 - **Telegram Bot API** ([`apps/worker/actions/telegram.ts`](../apps/worker/actions/telegram.ts)):
-  _Current Limitation_: The Telegram Bot API does not natively support client-supplied idempotency tokens on `sendMessage`. Deduplication relies entirely on Tier 3 (the worker's `ZapRunExecution` lease gate).
+  _Current Limitation_: Telegram does not natively support client-supplied idempotency tokens. Unknown delivery therefore remains a human-review case; the worker never retries the call automatically.
 
 ---
 
@@ -90,6 +93,6 @@ The idempotency model is covered by automated unit tests in [`apps/worker/idempo
 
 - **Scenario A**: Normal single-run lease acquisition, execution, and transition to `SUCCESS`.
 - **Scenario B**: Immediate Kafka redelivery after `SUCCESS` (skips side-effect execution).
-- **Scenario C**: Worker crash during `PENDING` (expired lease is safely reclaimed after timeout).
-- **Scenario D**: Concurrent worker race condition (second worker is blocked by active lease).
-- **Scenario E**: Terminal failure (transition to `FAILED` with DLQ emission).
+- **Scenario C**: Active `PENDING` is not executed or acknowledged; expired `PENDING` is quarantined without a provider call.
+- **Scenario D**: Claim-token fencing blocks stale workers from changing attempts or terminal state.
+- **Scenario E**: Terminal failure atomically links one `ZapRunRetry` record; the worker does not publish directly to a DLQ.

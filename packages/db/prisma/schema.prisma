@@ -86,33 +86,72 @@ model TestTriggerBuffer {
   createdAt DateTime @default(now())
 }
 
-// Durable record of an action that ran out of retries. Written alongside the
-// zap-events-dlq message, so a failure is queryable from SQL and replayable
-// from Kafka rather than only visible in worker logs.
+// Durable terminal failure record. Its UUID is the canonical failureId used by
+// the later DLQ publisher; worker execution never publishes directly.
 model ZapRunRetry {
-  id        String   @id @default(uuid())
-  zapRunId  String
-  stage     Int
-  attempt   Int      @default(0)
-  lastError String?
-  nextRunAt DateTime @default(now())
-  createdAt DateTime @default(now())
+  id                 String           @id @default(uuid())
+  zapRunId           String
+  stage              Int
+  attempt            Int              @default(0)
+  lastError          String?
+  nextRunAt          DateTime         @default(now())
+  createdAt          DateTime         @default(now())
+  executionId        String?          @unique
+  execution          ZapRunExecution? @relation(fields: [executionId], references: [id])
+  provider           String?
+  phase              String?
+  providerOutcome    String?
+  safeCode           String?
+  providerStatus     Int?
+  retryAfterSeconds  Int?
+  safeReceiptId      String?
+  actionFingerprint  String?
+  requestFingerprint String?
+  requiresHuman      Boolean          @default(true)
+  dlqPublishedAt     DateTime?
 
   @@index([zapRunId])
 }
 
-// Durable record of an action stage execution. Prevents duplicate side-effects
-// and race conditions via two-phase atomic lease claim (PENDING + leaseUntil -> SUCCESS/FAILED).
+// Durable action-stage execution fenced by a per-claim token.
 model ZapRunExecution {
-  id          String    @id @default(uuid())
-  zapRunId    String
-  stage       Int
-  status      String    @default("PENDING")
-  leaseUntil  DateTime?
-  createdAt   DateTime  @default(now())
-  completedAt DateTime?
+  id                 String                   @id @default(uuid())
+  zapRunId           String
+  stage              Int
+  status             String                   @default("PENDING")
+  leaseUntil         DateTime?
+  createdAt          DateTime                 @default(now())
+  completedAt        DateTime?
+  claimToken         String?
+  providerOutcome    String?
+  actionFingerprint  String?
+  requestFingerprint String?
+  requiresHuman      Boolean                  @default(false)
+  attempts           ZapRunExecutionAttempt[]
+  failure            ZapRunRetry?
 
   @@unique([zapRunId, stage])
   @@index([zapRunId])
+}
+
+model ZapRunExecutionAttempt {
+  id                 String          @id @default(uuid())
+  executionId        String
+  execution          ZapRunExecution @relation(fields: [executionId], references: [id])
+  attemptNumber      Int
+  status             String
+  provider           String?
+  phase              String?
+  safeCode           String?
+  providerStatus     Int?
+  retryAfterSeconds  Int?
+  safeReceiptId      String?
+  actionFingerprint  String
+  requestFingerprint String
+  startedAt          DateTime        @default(now())
+  completedAt        DateTime?
+
+  @@unique([executionId, attemptNumber])
+  @@index([executionId])
 }
 

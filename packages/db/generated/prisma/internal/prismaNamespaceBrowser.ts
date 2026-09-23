@@ -59,7 +59,8 @@ export const ModelName = {
   ZapRunOutbox: 'ZapRunOutbox',
   TestTriggerBuffer: 'TestTriggerBuffer',
   ZapRunRetry: 'ZapRunRetry',
-  ZapRunExecution: 'ZapRunExecution'
+  ZapRunExecution: 'ZapRunExecution',
+  ZapRunExecutionAttempt: 'ZapRunExecutionAttempt'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -171,7 +172,19 @@ export const ZapRunRetryScalarFieldEnum = {
   attempt: 'attempt',
   lastError: 'lastError',
   nextRunAt: 'nextRunAt',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  executionId: 'executionId',
+  provider: 'provider',
+  phase: 'phase',
+  providerOutcome: 'providerOutcome',
+  safeCode: 'safeCode',
+  providerStatus: 'providerStatus',
+  retryAfterSeconds: 'retryAfterSeconds',
+  safeReceiptId: 'safeReceiptId',
+  actionFingerprint: 'actionFingerprint',
+  requestFingerprint: 'requestFingerprint',
+  requiresHuman: 'requiresHuman',
+  dlqPublishedAt: 'dlqPublishedAt'
 } as const
 
 export type ZapRunRetryScalarFieldEnum = (typeof ZapRunRetryScalarFieldEnum)[keyof typeof ZapRunRetryScalarFieldEnum]
@@ -184,10 +197,35 @@ export const ZapRunExecutionScalarFieldEnum = {
   status: 'status',
   leaseUntil: 'leaseUntil',
   createdAt: 'createdAt',
-  completedAt: 'completedAt'
+  completedAt: 'completedAt',
+  claimToken: 'claimToken',
+  providerOutcome: 'providerOutcome',
+  actionFingerprint: 'actionFingerprint',
+  requestFingerprint: 'requestFingerprint',
+  requiresHuman: 'requiresHuman'
 } as const
 
 export type ZapRunExecutionScalarFieldEnum = (typeof ZapRunExecutionScalarFieldEnum)[keyof typeof ZapRunExecutionScalarFieldEnum]
+
+
+export const ZapRunExecutionAttemptScalarFieldEnum = {
+  id: 'id',
+  executionId: 'executionId',
+  attemptNumber: 'attemptNumber',
+  status: 'status',
+  provider: 'provider',
+  phase: 'phase',
+  safeCode: 'safeCode',
+  providerStatus: 'providerStatus',
+  retryAfterSeconds: 'retryAfterSeconds',
+  safeReceiptId: 'safeReceiptId',
+  actionFingerprint: 'actionFingerprint',
+  requestFingerprint: 'requestFingerprint',
+  startedAt: 'startedAt',
+  completedAt: 'completedAt'
+} as const
+
+export type ZapRunExecutionAttemptScalarFieldEnum = (typeof ZapRunExecutionAttemptScalarFieldEnum)[keyof typeof ZapRunExecutionAttemptScalarFieldEnum]
 
 
 export const SortOrder = {

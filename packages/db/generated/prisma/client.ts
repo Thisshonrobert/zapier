@@ -99,3 +99,8 @@ export type ZapRunRetry = Prisma.ZapRunRetryModel
  * 
  */
 export type ZapRunExecution = Prisma.ZapRunExecutionModel
+/**
+ * Model ZapRunExecutionAttempt
+ * 
+ */
+export type ZapRunExecutionAttempt = Prisma.ZapRunExecutionAttemptModel

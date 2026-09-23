@@ -1,12 +1,12 @@
 # Background Worker
 
-This document specifies the internal lifecycle, distributed lease management, action execution mechanics, and error recovery policies of the background worker service (`apps/worker`).
+This document specifies the internal lifecycle, fenced action execution, durable failure evidence, and Kafka acknowledgement policy of the background worker service (`apps/worker`).
 
 ---
 
 ## 🔄 Worker Lifecycle & Architecture
 
-The worker service ([`apps/worker/index.ts`](../apps/worker/index.ts)) consumes workflow stage execution events from Kafka, guarantees idempotent execution using PostgreSQL leases, coordinates in-process retries, advances workflow stages, and handles terminal failures.
+The worker service ([`apps/worker/index.ts`](../apps/worker/index.ts)) consumes workflow stage execution events from Kafka, uses PostgreSQL claim fencing for at-least-once delivery, invokes each provider at most once per claimed stage, advances only successful stages, and durably parks failures for human review.
 
 ```mermaid
 flowchart TD
@@ -18,16 +18,18 @@ flowchart TD
     ReadMsg --> LoadStage[Query ZapRun & Action with sortingOrder == stage]
 
     LoadStage --> CheckExist{Action found?}
-    CheckExist -- No --> LogNotFound[Log error & commit offset] --> MessageLoop
-    CheckExist -- Yes --> ClaimLease[Execute claimExecution: Attempt DB lease]
+    CheckExist -- No --> ThrowNotFound[Throw before offset commit]
+    CheckExist -- Yes --> ClaimLease[Claim with execution-store]
 
     ClaimLease --> LeaseDecision{Lease State}
 
-    LeaseDecision -- Already SUCCESS --> SkipAndAdvance[Skip execution, advance next stage if pending]
-    LeaseDecision -- Already FAILED --> SkipTerminal[Skip execution]
-    LeaseDecision -- Active Lock (PENDING) --> SkipLocked[Skip: held by other worker]
-    LeaseDecision -- Claimed / Reclaimed --> ExecuteAction[executeClaimedAction: withRetry attempts: 3]
+    LeaseDecision -- Already SUCCESS --> SkipAndAdvance[ACK and advance]
+    LeaseDecision -- Already FAILED --> SkipTerminal[ACK without advancing]
+    LeaseDecision -- Active Lock (PENDING) --> Unresolved[No ACK; redelivery]
+    LeaseDecision -- Expired PENDING --> Quarantine[FAILED/UNKNOWN + human review]
+    LeaseDecision -- Claimed --> StartAttempt[Persist STARTED]
 
+    StartAttempt --> ExecuteAction[Invoke provider once]
     ExecuteAction --> ExecResult{Execution Result}
 
     ExecResult -- Success --> UpdateSuccess[Update ZapRunExecution status = SUCCESS]
@@ -35,15 +37,14 @@ flowchart TD
     CheckLast -- No --> ProduceNext[Produce stage + 1 to zap-events]
     CheckLast -- Yes --> Complete[Workflow complete]
 
-    ExecResult -- Fail Exhausted --> UpdateFail[Update ZapRunExecution status = FAILED]
-    UpdateFail --> SendDLQ[deadLetter: Publish zap-events-dlq + ZapRunRetry row]
+    ExecResult -- Provider failure --> UpdateFail[Atomically persist FAILED + ZapRunRetry]
 
     SkipAndAdvance --> CommitOffset[Commit Kafka Offset]
     SkipTerminal --> CommitOffset
-    SkipLocked --> CommitOffset
+    Quarantine --> CommitOffset
     Complete --> CommitOffset
     ProduceNext --> CommitOffset
-    SendDLQ --> CommitOffset
+    Unresolved --> MessageLoop
 
     CommitOffset --> MessageLoop
 ```
@@ -52,7 +53,7 @@ flowchart TD
 
 ## 🔒 Distributed Lease Management (`ZapRunExecution`)
 
-To ensure **strict once-and-only-once execution** of external side effects under Kafka at-least-once redelivery and concurrent worker environments, the worker implements a two-phase database lease claim in [`apps/worker/index.ts`](../apps/worker/index.ts) using the `ZapRunExecution` model:
+To prevent stale workers from overwriting newer decisions under Kafka at-least-once redelivery, the worker uses a per-claim `claimToken` in [`apps/worker/execution-store.ts`](../apps/worker/execution-store.ts). This fences database writes; it cannot prove exactly-once delivery to an external provider.
 
 ### Database Model
 
@@ -63,6 +64,11 @@ model ZapRunExecution {
   stage       Int
   status      String    @default("PENDING") // PENDING | SUCCESS | FAILED
   leaseUntil  DateTime?
+  claimToken  String?
+  providerOutcome String?
+  actionFingerprint String?
+  requestFingerprint String?
+  requiresHuman Boolean @default(false)
   createdAt   DateTime  @default(now())
   completedAt DateTime?
 
@@ -81,27 +87,15 @@ model ZapRunExecution {
      - `status === "SUCCESS"`: Action was previously completed. Skip side-effects (`alreadySucceeded = true`).
      - `status === "FAILED"`: Action previously exhausted all retries. Skip permanently.
      - `status === "PENDING"` and `leaseUntil > now`: Another active worker is processing this stage. Skip execution to prevent duplicate concurrent work.
-3. **Crashed Worker Recovery (Expired Lease Reclamation)**:
-   - If `status === "PENDING"` and `leaseUntil <= now`, the holding worker crashed or timed out.
-   - The current worker attempts an atomic `updateMany`:
-     ```typescript
-     const reclaim = await prisma.zapRunExecution.updateMany({
-       where: {
-         zapRunId,
-         stage,
-         status: "PENDING",
-         OR: [{ leaseUntil: { lte: now } }, { leaseUntil: null }],
-       },
-       data: { leaseUntil: new Date(now.getTime() + LEASE_DURATION_MS) },
-     });
-     if (reclaim.count > 0) executionClaimed = true;
-     ```
+3. **Expired lease quarantine**:
+   - An expired or null lease is atomically fenced, marked `FAILED` with `providerOutcome = "unknown"`, and linked to exactly one `ZapRunRetry` row with `requiresHuman = true`.
+   - The provider is never invoked to resolve lease uncertainty. A stale worker cannot update the terminal row because every attempt and terminal write checks the current token.
 
 ---
 
 ## 🛠️ Action Dispatch & Execution
 
-Once a lease is secured, `executeClaimedAction` runs:
+Once a claim is secured, [`apps/worker/orchestration.ts`](../apps/worker/orchestration.ts) runs:
 
 1. **Handler Resolution**: Looks up `getActionHandler(actionTypeId)` from [`apps/worker/actions/index.ts`](../apps/worker/actions/index.ts).
 2. **Context Creation**:
@@ -113,37 +107,27 @@ Once a lease is secured, `executeClaimedAction` runs:
      zapRunMetadata: execution.zapDetails.metadata,
    };
    ```
-3. **In-Process Exponential Backoff with Full Jitter**:
-   - Wrapped by `withRetry(..., 3)` in [`apps/worker/retry.ts`](../apps/worker/retry.ts).
-   - Attempt 1: Immediate execution.
-   - Attempt 2: Sleeps a randomized duration in $[0, 1000\text{ms}]$.
-   - Attempt 3: Sleeps a randomized duration in $[0, 2000\text{ms}]$.
-   - **Full Jitter** decorrelates retry spikes across concurrent workers to mitigate the "Thundering Herd" problem against rate-limited downstream APIs.
+3. **Single provider attempt**:
+  - The worker persists one `STARTED` attempt, invokes the selected handler exactly once, and finalizes that attempt as `ACCEPTED`, `REJECTED`, or `UNKNOWN`.
+  - A provider response followed by database failure is not retried automatically. The outcome remains unresolved until persistence succeeds or reconciliation records `UNKNOWN`.
 4. **State Finalization**:
    - On success: `status = "SUCCESS"`, `leaseUntil = null`, `completedAt = now()`.
    - On terminal failure: `status = "FAILED"`, `leaseUntil = null`, `completedAt = now()`.
 
 ---
 
-## 🪦 Dead-Letter Queue (DLQ) & Failure Recording
+## 🪦 Durable Failure Recording
 
-When an action exhausts all retry attempts:
+When a provider rejects an action, persistence fails after a provider call, or a lease expires:
 
-1. The worker calls `deadLetter()` in [`apps/worker/deadletter.ts`](../apps/worker/deadletter.ts).
-2. **Dual-Sink Strategy**:
-   - **Kafka Sink**: Produces a structured failure event to topic `zap-events-dlq`.
-   - **PostgreSQL Sink**: Inserts a diagnostic record into `ZapRunRetry`:
-     ```typescript
-     await prisma.zapRunRetry.create({
-       data: { zapRunId, stage, attempt, lastError },
-     });
-     ```
-3. **Non-Throwing Guarantee**: Sinks are executed independently in separate `try/catch` blocks so that sink failures do not crash the consumer loop or prevent offset commits.
+1. `execution-store.ts` sanitizes allowlisted evidence and computes SHA-256 action/request fingerprints.
+2. One PostgreSQL transaction fences the execution, finalizes the attempt, and creates exactly one linked `ZapRunRetry`. Its UUID is the future shared `failureId`.
+3. The worker does not publish Kafka DLQ messages. Phase 3C will publish durable failure rows by `failureId` and stamp `dlqPublishedAt` only after broker acknowledgement.
 
 ---
 
 ## 📐 Invariants Summary
 
-- **Offset Commit Isolation**: Kafka offsets are never committed before status resolution (`SUCCESS`, `FAILED`, skipped, or dead-lettered).
-- **Lease Boundary**: The default lease duration is `2 minutes` (`LEASE_DURATION_MS = 120_000`).
+- **Offset Commit Isolation**: Offsets are committed only after durable `SUCCESS` or linked durable `FAILED`. Active leases, unlinked failures, stale ownership, invalid input, and persistence errors remain uncommitted.
+- **Lease Boundary**: The default lease duration is `2 minutes`; expiration quarantines the action as unknown rather than reclaiming it for another provider call.
 - **Linear Progression**: Stage $N+1$ is only queued if stage $N$ completes with status `SUCCESS`.

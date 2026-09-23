@@ -23,24 +23,21 @@ This document records the foundational architectural decisions established in th
 
 ---
 
-## ADR 003: Two-Phase Distributed Execution Lease via PostgreSQL
+## ADR 003: Fenced Single-Shot Execution via PostgreSQL
 
 - **Status**: Implemented
 - **Files**: [`packages/db/prisma/schema.prisma`](../packages/db/prisma/schema.prisma), [`apps/worker/index.ts`](../apps/worker/index.ts), [`apps/worker/idempotency.test.ts`](../apps/worker/idempotency.test.ts)
-- **Decision**: Worker step execution is guarded by the `ZapRunExecution` table using a compound unique key `(zapRunId, stage)`. Before executing side effects, a worker creates a `PENDING` record with an expiration timestamp (`leaseUntil = now + 2m`). If a worker crashes, other workers reclaim the expired lease via `updateMany`.
-- **Rationale**: In an at-least-once message system, multiple workers may receive the same message or a rebalance might redeliver unacknowledged messages. The atomic database lease coordinates execution and skips recorded successes. It does not guarantee exactly-once external side effects: a provider may accept a request before a process crashes or a status write fails. The current lease has no fencing/renewal, and Telegram has no implemented provider deduplication. See proposed ADR 013 before adding replay.
+- **Decision**: Worker step execution is guarded by the `ZapRunExecution` table using `(zapRunId, stage)` and a per-claim `claimToken`. A worker persists `STARTED` attempt evidence, invokes the provider once, and fences every terminal write by execution ID, `PENDING` status, and token. Expired leases become `FAILED`/`UNKNOWN` with human review and are never reclaimed for another provider call.
+- **Rationale**: At-least-once Kafka delivery requires duplicate suppression and stale-worker fencing, but PostgreSQL cannot atomically commit with an external provider. Durable attempt evidence and bounded fingerprints make uncertainty explicit without claiming exactly-once external delivery. See proposed ADR 013 before adding replay.
 
 ---
 
-## ADR 004: Dual-Sink Dead-Letter Architecture
+## ADR 004: Durable Failure Record Before Future DLQ Publication
 
 - **Status**: Implemented
-- **Files**: [`apps/worker/deadletter.ts`](../apps/worker/deadletter.ts), [`packages/db/prisma/schema.prisma`](../packages/db/prisma/schema.prisma)
-- **Decision**: When an action stage exhausts its in-process retry limit (3 attempts), the worker dispatches failure diagnostics to two sinks:
-  1. **Kafka Topic**: `zap-events-dlq` (for offline event replay and stream consumers).
-  2. **PostgreSQL Table**: `ZapRunRetry` (for fast SQL queries and user-facing UI inspection).
-- **Rationale**: Storing failures in Kafka enables event replay pipelines, while storing them in PostgreSQL allows the API and frontend to quickly query failure counts per run without scanning Kafka topics.
-- **Implementation Note**: Both sinks are wrapped in independent `try/catch` blocks so a failure in one sink does not crash the worker or block offset commits.
+- **Files**: [`apps/worker/execution-store.ts`](../apps/worker/execution-store.ts), [`packages/db/prisma/schema.prisma`](../packages/db/prisma/schema.prisma)
+- **Decision**: The worker atomically persists terminal `FAILED` execution state, one linked `ZapRunExecutionAttempt` outcome, and one `ZapRunRetry` row. The retry row UUID is the canonical `failureId`; raw provider responses, credentials, payloads, and arbitrary errors are excluded. Phase 3C will publish sanitized failure envelopes to `zap-events-dlq` after broker acknowledgement.
+- **Rationale**: PostgreSQL is the execution source of truth. Separating durable failure recording from later Kafka publication prevents a broker failure from erasing failure evidence or authorizing provider replay.
 
 ---
 
@@ -62,21 +59,21 @@ This document records the foundational architectural decisions established in th
 
 ---
 
-## ADR 007: Manual Kafka Offset Commit Protocol
+## ADR 007: Manual Kafka Offset Commit After Durable Resolution
 
 - **Status**: Implemented
 - **Files**: [`apps/worker/index.ts`](../apps/worker/index.ts)
-- **Decision**: Kafka consumer `autoCommit` is disabled (`autoCommit: false`). Offsets are explicitly committed via `consumer.commitOffsets(...)` only after a stage is either successfully resolved, skipped, or permanently dead-lettered.
-- **Rationale**: Automatic commits risk acknowledging messages before side-effect execution is finalized. Manual commits ensure that crashes during execution result in message redelivery and lease reclamation.
+- **Decision**: Kafka consumer `autoCommit` is disabled (`autoCommit: false`). Offsets are explicitly committed only after durable `SUCCESS` or linked durable `FAILED`; active `PENDING`, stale ownership, unlinked failures, invalid input, and persistence errors remain uncommitted.
+- **Rationale**: Automatic or premature commits can lose unresolved work. Redelivery must retry persistence or observe the terminal row, never invoke the provider again automatically.
 
 ---
 
-## ADR 008: In-Process Exponential Backoff with Full Jitter
+## ADR 008: No Automatic Provider Retry in Execution
 
 - **Status**: Implemented
-- **Files**: [`apps/worker/retry.ts`](../apps/worker/retry.ts), [`apps/worker/retry.test.ts`](../apps/worker/retry.test.ts)
-- **Decision**: Transient action failures are retried up to 3 times in-process using an exponential delay calculation combined with Full Jitter ($\text{wait} = \text{random}(0, \text{baseMs} \times 2^{\text{attempt}-1})$).
-- **Rationale**: Pure exponential backoff leads to synchronized retry waves when multiple concurrent workers fail simultaneously. Full Jitter spreads retry wakeups uniformly over the backoff interval, preventing the Thundering Herd effect on downstream external APIs.
+- **Files**: [`apps/worker/orchestration.ts`](../apps/worker/orchestration.ts), [`apps/worker/execution-store.ts`](../apps/worker/execution-store.ts)
+- **Decision**: The worker invokes a provider once per valid claim. Rejected and uncertain outcomes become durable sanitized failure evidence; no automatic provider retry or replay is performed.
+- **Rationale**: A provider may accept a request before PostgreSQL records the result. Retrying to resolve that ambiguity can duplicate an external side effect. Human-controlled future replay is outside Phase 3B.
 
 ---
 

@@ -1,258 +1,121 @@
-import assert from "node:assert";
-import { getActionHandler } from "./actions";
-import type { ActionContext, ActionHandler } from "./types";
-import { withRetry } from "./retry";
-import { deadLetter } from "./deadletter";
+import assert from "node:assert/strict";
+import type { getActionHandler } from "./actions/index.ts";
+import { ActionExecutionError, type ActionHandler } from "./types.ts";
+import { executeStage, parseZapEvent, requireLoadedAction } from "./orchestration.ts";
 
-type ExecutionRecord = {
-  status: "PENDING" | "SUCCESS" | "FAILED";
-  leaseUntil?: Date | null;
-  completedAt?: Date | null;
-};
+assert.throws(() => parseZapEvent(null), /empty Kafka message/);
+assert.throws(() => parseZapEvent(Buffer.from("{")), /malformed Kafka message/);
+assert.throws(() => parseZapEvent(Buffer.from('{"zapRunId":"run-1"}')), /invalid Kafka event/);
+assert.deepEqual(parseZapEvent(Buffer.from('{"zapRunId":"run-1","stage":0}')), { zapRunId: "run-1", stage: 0 });
+assert.throws(() => requireLoadedAction(null), /action not found/);
 
-const LEASE_DURATION_MS = 60_000;
+type Call = { name: string; value?: unknown };
 
-/**
- * Pure test harness simulating the worker's atomic lease claim, crash recovery,
- * and idempotency logic without needing a live Postgres instance.
- */
-async function processActionWithLeaseClaim(params: {
-  zapRunId: string;
-  stage: number;
-  handler: ActionHandler;
-  metadata: Record<string, unknown>;
-  zapRunMetadata: Record<string, unknown>;
-  executionsStore: Map<string, ExecutionRecord>;
-  retrySink: any[];
-  dlqSink: any[];
-  currentTime?: Date;
+function harness(options: {
+  claim?: any; start?: "STARTED" | "STALE"; success?: any; failure?: any;
+  notAttempted?: any; handler?: ActionHandler; throwOnSuccess?: boolean; throwOnStart?: boolean;
 }) {
-  const {
-    zapRunId,
-    stage,
-    handler,
-    metadata,
-    zapRunMetadata,
-    executionsStore,
-    retrySink,
-    dlqSink,
-    currentTime = new Date(),
-  } = params;
+  const calls: Call[] = [];
+  const claimed = options.claim ?? {
+    kind: "CLAIMED", executionId: "execution-1", claimToken: "token-1",
+    actionFingerprint: "a".repeat(64), requestFingerprint: "b".repeat(64),
+  };
+  const store: any = {
+    claim: async () => { calls.push({ name: "claim" }); return claimed; },
+    startAttempt: async () => {
+      calls.push({ name: "start" });
+      if (options.throwOnStart) throw new Error("start persistence failed");
+      return options.start ?? "STARTED";
+    },
+    finalizeSuccess: async () => {
+      calls.push({ name: "success" });
+      if (options.throwOnSuccess) throw new Error("finalization failed");
+      return options.success ?? { kind: "FINALIZED" };
+    },
+    finalizeFailure: async (_owner: unknown, evidence: unknown) => {
+      calls.push({ name: "failure", value: evidence });
+      return options.failure ?? { kind: "FAILED", failureId: "failure-1" };
+    },
+    finalizeNotAttempted: async () => {
+      calls.push({ name: "notAttempted" });
+      return options.notAttempted ?? { kind: "FAILED", failureId: "failure-unsupported" };
+    },
+  };
+  const handler = options.handler;
+  const run = () => executeStage({
+    event: { zapRunId: "run-1", stage: 0 },
+    action: { id: "action-1", typeId: handler?.type ?? "unsupported-secret-type", metadata: { body: "secret body" } },
+    zapRunMetadata: { recipient: "secret recipient" },
+    store,
+    getHandler: (() => handler) as typeof getActionHandler,
+  });
+  return { calls, run };
+}
 
-  const key = `${zapRunId}_${stage}`;
-  const leaseUntil = new Date(currentTime.getTime() + LEASE_DURATION_MS);
+let providerCalls = 0;
+const accepted: ActionHandler = {
+  type: "email",
+  execute: async () => {
+    providerCalls++;
+    return { provider: "email", phase: "send", outcome: "accepted", safeReceiptId: "receipt-1" };
+  },
+};
+const acceptedRun = harness({ handler: accepted });
+assert.deepEqual(await acceptedRun.run(), { ack: true, advance: true });
+assert.equal(providerCalls, 1);
+assert.deepEqual(acceptedRun.calls.map((call) => call.name), ["claim", "start", "success"]);
 
-  let executionClaimed = false;
-  let alreadySucceeded = false;
-
-  // 1. Atomic Create or Lease Reclaim
-  if (!executionsStore.has(key)) {
-    executionsStore.set(key, {
-      status: "PENDING",
-      leaseUntil,
+providerCalls = 0;
+const rejected: ActionHandler = {
+  type: "telegram",
+  execute: async () => {
+    providerCalls++;
+    throw new ActionExecutionError("raw provider response", {
+      provider: "telegram", phase: "send", outcome: "rejected", safeCode: "provider_rejected", status: 429,
     });
-    executionClaimed = true;
-  } else {
-    const existing = executionsStore.get(key)!;
+  },
+};
+const rejectedRun = harness({ handler: rejected });
+assert.deepEqual(await rejectedRun.run(), { ack: true, advance: false });
+assert.equal(providerCalls, 1);
+assert.deepEqual(rejectedRun.calls.map((call) => call.name), ["claim", "start", "failure"]);
+assert.equal(JSON.stringify(rejectedRun.calls).includes("raw provider response"), false);
 
-    if (existing.status === "SUCCESS") {
-      alreadySucceeded = true;
-    } else if (existing.status === "FAILED") {
-      // Terminal failure
-    } else if (existing.status === "PENDING") {
-      if (existing.leaseUntil && existing.leaseUntil > currentTime) {
-        // Active lease held by another worker
-      } else {
-        // Expired lease from crashed worker: reclaim
-        executionsStore.set(key, {
-          ...existing,
-          leaseUntil,
-        });
-        executionClaimed = true;
-      }
-    }
-  }
+providerCalls = 0;
+const dbFailure = harness({ handler: accepted, throwOnSuccess: true });
+await assert.rejects(dbFailure.run(), /finalization failed/);
+assert.equal(providerCalls, 1, "provider is never retried after finalization failure");
 
-  let succeeded = alreadySucceeded;
-
-  if (executionClaimed) {
-    const idempotencyKey = `zaprun_${zapRunId}_stage_${stage}`;
-    const ctx: ActionContext = {
-      zapRunId,
-      stage,
-      idempotencyKey,
-      zapRunMetadata,
-    };
-
-    try {
-      await withRetry(() => handler.execute(metadata, ctx), 3, async () => {});
-
-      executionsStore.set(key, {
-        status: "SUCCESS",
-        leaseUntil: null,
-        completedAt: new Date(),
-      });
-      succeeded = true;
-    } catch (error) {
-      succeeded = false;
-      executionsStore.set(key, {
-        status: "FAILED",
-        leaseUntil: null,
-        completedAt: new Date(),
-      });
-
-      await deadLetter(
-        {
-          send: async (p) => {
-            dlqSink.push(p);
-          },
-          record: async (r) => {
-            retrySink.push(r);
-          },
-        },
-        zapRunId,
-        stage,
-        3,
-        error
-      );
-    }
-  }
-
-  return { skipped: !executionClaimed, succeeded };
+for (const [claim, expected] of [
+  [{ kind: "ACTIVE_PENDING" }, { ack: false, advance: false }],
+  [{ kind: "UNRESOLVED" }, { ack: false, advance: false }],
+  [{ kind: "SUCCESS" }, { ack: true, advance: true }],
+  [{ kind: "FAILED", failureId: "failure-2" }, { ack: true, advance: false }],
+] as const) {
+  providerCalls = 0;
+  const run = harness({ claim, handler: accepted });
+  assert.deepEqual(await run.run(), expected);
+  assert.equal(providerCalls, 0);
+  assert.deepEqual(run.calls.map((call) => call.name), ["claim"]);
 }
 
-/**
- * Test suite for Action Registry, Lease-Based Atomic Claims, Crash Recovery, and DLQ.
- */
-async function main() {
-  // Test 1: Action Registry verification
-  assert(getActionHandler("email"), "email handler should be registered");
-  assert(getActionHandler("telegram"), "telegram handler should be registered");
-  assert.equal(
-    getActionHandler("unknown_action"),
-    undefined,
-    "unregistered handler returns undefined"
-  );
+const unsupported = harness({});
+assert.deepEqual(await unsupported.run(), { ack: true, advance: false });
+assert.deepEqual(unsupported.calls.map((call) => call.name), ["claim", "notAttempted"]);
 
-  // Test 2 (Scenario A): Normal first execution acquires lease, executes, and marks SUCCESS
-  const executions = new Map<string, ExecutionRecord>();
-  const dlqMessages: any[] = [];
-  const retryRows: any[] = [];
+providerCalls = 0;
+const staleStart = harness({ handler: accepted, start: "STALE" });
+assert.deepEqual(await staleStart.run(), { ack: false, advance: false });
+assert.equal(providerCalls, 0);
 
-  let handlerCalls = 0;
-  let receivedIdempotencyKey = "";
+providerCalls = 0;
+const staleFinal = harness({ handler: accepted, success: { kind: "STALE" } });
+assert.deepEqual(await staleFinal.run(), { ack: false, advance: false });
+assert.equal(providerCalls, 1);
 
-  const mockHandler: ActionHandler = {
-    type: "test",
-    execute: async (meta, ctx) => {
-      handlerCalls++;
-      receivedIdempotencyKey = ctx.idempotencyKey;
-      return { provider: "email", phase: "send", outcome: "accepted" };
-    },
-  };
+providerCalls = 0;
+const startFailure = harness({ handler: accepted, throwOnStart: true });
+await assert.rejects(startFailure.run(), /start persistence failed/);
+assert.equal(providerCalls, 0);
 
-  const run1 = await processActionWithLeaseClaim({
-    zapRunId: "run-1",
-    stage: 0,
-    handler: mockHandler,
-    metadata: {},
-    zapRunMetadata: {},
-    executionsStore: executions,
-    retrySink: retryRows,
-    dlqSink: dlqMessages,
-  });
-
-  assert.equal(run1.skipped, false, "first run should execute");
-  assert.equal(run1.succeeded, true, "first run should succeed");
-  assert.equal(handlerCalls, 1, "handler called once");
-  assert.equal(receivedIdempotencyKey, "zaprun_run-1_stage_0", "idempotency key matches pattern");
-  assert.equal(executions.get("run-1_0")?.status, "SUCCESS", "status should be SUCCESS");
-  assert.equal(executions.get("run-1_0")?.leaseUntil, null, "lease should be cleared on success");
-
-  // Test 3 (Scenario B & D): Kafka redelivery after SUCCESS -> skips side effect completely
-  const redeliveredRun = await processActionWithLeaseClaim({
-    zapRunId: "run-1",
-    stage: 0,
-    handler: mockHandler,
-    metadata: {},
-    zapRunMetadata: {},
-    executionsStore: executions,
-    retrySink: retryRows,
-    dlqSink: dlqMessages,
-  });
-
-  assert.equal(redeliveredRun.skipped, true, "redelivery after SUCCESS must be skipped");
-  assert.equal(redeliveredRun.succeeded, true, "succeeded run remains succeeded");
-  assert.equal(handlerCalls, 1, "handler must NOT be called again on redelivery");
-
-  // Test 4 (Scenario A): Concurrent Worker Race with active lease -> skipped
-  const now = new Date();
-  executions.set("run-active_0", {
-    status: "PENDING",
-    leaseUntil: new Date(now.getTime() + 30_000), // active for 30 more seconds
-  });
-
-  const concurrentRun = await processActionWithLeaseClaim({
-    zapRunId: "run-active",
-    stage: 0,
-    handler: mockHandler,
-    metadata: {},
-    zapRunMetadata: {},
-    executionsStore: executions,
-    retrySink: retryRows,
-    dlqSink: dlqMessages,
-    currentTime: now,
-  });
-
-  assert.equal(concurrentRun.skipped, true, "active lease cannot be claimed by concurrent worker");
-
-  // Test 5 (Scenario C): Worker Crashed after PENDING (Expired Lease Recovery)
-  executions.set("run-crashed_0", {
-    status: "PENDING",
-    leaseUntil: new Date(now.getTime() - 10_000), // expired 10 seconds ago
-  });
-
-  const recoveryRun = await processActionWithLeaseClaim({
-    zapRunId: "run-crashed",
-    stage: 0,
-    handler: mockHandler,
-    metadata: {},
-    zapRunMetadata: {},
-    executionsStore: executions,
-    retrySink: retryRows,
-    dlqSink: dlqMessages,
-    currentTime: now,
-  });
-
-  assert.equal(recoveryRun.skipped, false, "expired lease must be reclaimed by recovery worker");
-  assert.equal(recoveryRun.succeeded, true, "recovered execution succeeds");
-  assert.equal(executions.get("run-crashed_0")?.status, "SUCCESS", "status transitioned to SUCCESS after recovery");
-
-  // Test 6 (Scenario E): Action fails all retries -> FAILED + DLQ + ZapRunRetry
-  const failingHandler: ActionHandler = {
-    type: "fail",
-    execute: async () => {
-      throw new Error("SMTP connection refused");
-    },
-  };
-
-  const failedRun = await processActionWithLeaseClaim({
-    zapRunId: "run-fail",
-    stage: 0,
-    handler: failingHandler,
-    metadata: {},
-    zapRunMetadata: {},
-    executionsStore: executions,
-    retrySink: retryRows,
-    dlqSink: dlqMessages,
-  });
-
-  assert.equal(failedRun.succeeded, false, "failing run should report failed");
-  assert.equal(executions.get("run-fail_0")?.status, "FAILED", "status marked FAILED");
-  assert.equal(dlqMessages.length, 1, "sent to DLQ");
-  assert.equal(retryRows.length, 1, "written to retry table");
-
-  console.log("idempotency.test.ts OK");
-}
-
-main();
+console.log("idempotency.test.ts OK");

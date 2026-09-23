@@ -29,11 +29,15 @@ export type AggregateZapRunRetry = {
 export type ZapRunRetryAvgAggregateOutputType = {
   stage: number | null
   attempt: number | null
+  providerStatus: number | null
+  retryAfterSeconds: number | null
 }
 
 export type ZapRunRetrySumAggregateOutputType = {
   stage: number | null
   attempt: number | null
+  providerStatus: number | null
+  retryAfterSeconds: number | null
 }
 
 export type ZapRunRetryMinAggregateOutputType = {
@@ -44,6 +48,18 @@ export type ZapRunRetryMinAggregateOutputType = {
   lastError: string | null
   nextRunAt: Date | null
   createdAt: Date | null
+  executionId: string | null
+  provider: string | null
+  phase: string | null
+  providerOutcome: string | null
+  safeCode: string | null
+  providerStatus: number | null
+  retryAfterSeconds: number | null
+  safeReceiptId: string | null
+  actionFingerprint: string | null
+  requestFingerprint: string | null
+  requiresHuman: boolean | null
+  dlqPublishedAt: Date | null
 }
 
 export type ZapRunRetryMaxAggregateOutputType = {
@@ -54,6 +70,18 @@ export type ZapRunRetryMaxAggregateOutputType = {
   lastError: string | null
   nextRunAt: Date | null
   createdAt: Date | null
+  executionId: string | null
+  provider: string | null
+  phase: string | null
+  providerOutcome: string | null
+  safeCode: string | null
+  providerStatus: number | null
+  retryAfterSeconds: number | null
+  safeReceiptId: string | null
+  actionFingerprint: string | null
+  requestFingerprint: string | null
+  requiresHuman: boolean | null
+  dlqPublishedAt: Date | null
 }
 
 export type ZapRunRetryCountAggregateOutputType = {
@@ -64,6 +92,18 @@ export type ZapRunRetryCountAggregateOutputType = {
   lastError: number
   nextRunAt: number
   createdAt: number
+  executionId: number
+  provider: number
+  phase: number
+  providerOutcome: number
+  safeCode: number
+  providerStatus: number
+  retryAfterSeconds: number
+  safeReceiptId: number
+  actionFingerprint: number
+  requestFingerprint: number
+  requiresHuman: number
+  dlqPublishedAt: number
   _all: number
 }
 
@@ -71,11 +111,15 @@ export type ZapRunRetryCountAggregateOutputType = {
 export type ZapRunRetryAvgAggregateInputType = {
   stage?: true
   attempt?: true
+  providerStatus?: true
+  retryAfterSeconds?: true
 }
 
 export type ZapRunRetrySumAggregateInputType = {
   stage?: true
   attempt?: true
+  providerStatus?: true
+  retryAfterSeconds?: true
 }
 
 export type ZapRunRetryMinAggregateInputType = {
@@ -86,6 +130,18 @@ export type ZapRunRetryMinAggregateInputType = {
   lastError?: true
   nextRunAt?: true
   createdAt?: true
+  executionId?: true
+  provider?: true
+  phase?: true
+  providerOutcome?: true
+  safeCode?: true
+  providerStatus?: true
+  retryAfterSeconds?: true
+  safeReceiptId?: true
+  actionFingerprint?: true
+  requestFingerprint?: true
+  requiresHuman?: true
+  dlqPublishedAt?: true
 }
 
 export type ZapRunRetryMaxAggregateInputType = {
@@ -96,6 +152,18 @@ export type ZapRunRetryMaxAggregateInputType = {
   lastError?: true
   nextRunAt?: true
   createdAt?: true
+  executionId?: true
+  provider?: true
+  phase?: true
+  providerOutcome?: true
+  safeCode?: true
+  providerStatus?: true
+  retryAfterSeconds?: true
+  safeReceiptId?: true
+  actionFingerprint?: true
+  requestFingerprint?: true
+  requiresHuman?: true
+  dlqPublishedAt?: true
 }
 
 export type ZapRunRetryCountAggregateInputType = {
@@ -106,6 +174,18 @@ export type ZapRunRetryCountAggregateInputType = {
   lastError?: true
   nextRunAt?: true
   createdAt?: true
+  executionId?: true
+  provider?: true
+  phase?: true
+  providerOutcome?: true
+  safeCode?: true
+  providerStatus?: true
+  retryAfterSeconds?: true
+  safeReceiptId?: true
+  actionFingerprint?: true
+  requestFingerprint?: true
+  requiresHuman?: true
+  dlqPublishedAt?: true
   _all?: true
 }
 
@@ -203,6 +283,18 @@ export type ZapRunRetryGroupByOutputType = {
   lastError: string | null
   nextRunAt: Date
   createdAt: Date
+  executionId: string | null
+  provider: string | null
+  phase: string | null
+  providerOutcome: string | null
+  safeCode: string | null
+  providerStatus: number | null
+  retryAfterSeconds: number | null
+  safeReceiptId: string | null
+  actionFingerprint: string | null
+  requestFingerprint: string | null
+  requiresHuman: boolean
+  dlqPublishedAt: Date | null
   _count: ZapRunRetryCountAggregateOutputType | null
   _avg: ZapRunRetryAvgAggregateOutputType | null
   _sum: ZapRunRetrySumAggregateOutputType | null
@@ -236,6 +328,19 @@ export type ZapRunRetryWhereInput = {
   lastError?: Prisma.StringNullableFilter<"ZapRunRetry"> | string | null
   nextRunAt?: Prisma.DateTimeFilter<"ZapRunRetry"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"ZapRunRetry"> | Date | string
+  executionId?: Prisma.StringNullableFilter<"ZapRunRetry"> | string | null
+  provider?: Prisma.StringNullableFilter<"ZapRunRetry"> | string | null
+  phase?: Prisma.StringNullableFilter<"ZapRunRetry"> | string | null
+  providerOutcome?: Prisma.StringNullableFilter<"ZapRunRetry"> | string | null
+  safeCode?: Prisma.StringNullableFilter<"ZapRunRetry"> | string | null
+  providerStatus?: Prisma.IntNullableFilter<"ZapRunRetry"> | number | null
+  retryAfterSeconds?: Prisma.IntNullableFilter<"ZapRunRetry"> | number | null
+  safeReceiptId?: Prisma.StringNullableFilter<"ZapRunRetry"> | string | null
+  actionFingerprint?: Prisma.StringNullableFilter<"ZapRunRetry"> | string | null
+  requestFingerprint?: Prisma.StringNullableFilter<"ZapRunRetry"> | string | null
+  requiresHuman?: Prisma.BoolFilter<"ZapRunRetry"> | boolean
+  dlqPublishedAt?: Prisma.DateTimeNullableFilter<"ZapRunRetry"> | Date | string | null
+  execution?: Prisma.XOR<Prisma.ZapRunExecutionNullableScalarRelationFilter, Prisma.ZapRunExecutionWhereInput> | null
 }
 
 export type ZapRunRetryOrderByWithRelationInput = {
@@ -246,10 +351,24 @@ export type ZapRunRetryOrderByWithRelationInput = {
   lastError?: Prisma.SortOrderInput | Prisma.SortOrder
   nextRunAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  executionId?: Prisma.SortOrderInput | Prisma.SortOrder
+  provider?: Prisma.SortOrderInput | Prisma.SortOrder
+  phase?: Prisma.SortOrderInput | Prisma.SortOrder
+  providerOutcome?: Prisma.SortOrderInput | Prisma.SortOrder
+  safeCode?: Prisma.SortOrderInput | Prisma.SortOrder
+  providerStatus?: Prisma.SortOrderInput | Prisma.SortOrder
+  retryAfterSeconds?: Prisma.SortOrderInput | Prisma.SortOrder
+  safeReceiptId?: Prisma.SortOrderInput | Prisma.SortOrder
+  actionFingerprint?: Prisma.SortOrderInput | Prisma.SortOrder
+  requestFingerprint?: Prisma.SortOrderInput | Prisma.SortOrder
+  requiresHuman?: Prisma.SortOrder
+  dlqPublishedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  execution?: Prisma.ZapRunExecutionOrderByWithRelationInput
 }
 
 export type ZapRunRetryWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  executionId?: string
   AND?: Prisma.ZapRunRetryWhereInput | Prisma.ZapRunRetryWhereInput[]
   OR?: Prisma.ZapRunRetryWhereInput[]
   NOT?: Prisma.ZapRunRetryWhereInput | Prisma.ZapRunRetryWhereInput[]
@@ -259,7 +378,19 @@ export type ZapRunRetryWhereUniqueInput = Prisma.AtLeast<{
   lastError?: Prisma.StringNullableFilter<"ZapRunRetry"> | string | null
   nextRunAt?: Prisma.DateTimeFilter<"ZapRunRetry"> | Date | string
   createdAt?: Prisma.DateTimeFilter<"ZapRunRetry"> | Date | string
-}, "id">
+  provider?: Prisma.StringNullableFilter<"ZapRunRetry"> | string | null
+  phase?: Prisma.StringNullableFilter<"ZapRunRetry"> | string | null
+  providerOutcome?: Prisma.StringNullableFilter<"ZapRunRetry"> | string | null
+  safeCode?: Prisma.StringNullableFilter<"ZapRunRetry"> | string | null
+  providerStatus?: Prisma.IntNullableFilter<"ZapRunRetry"> | number | null
+  retryAfterSeconds?: Prisma.IntNullableFilter<"ZapRunRetry"> | number | null
+  safeReceiptId?: Prisma.StringNullableFilter<"ZapRunRetry"> | string | null
+  actionFingerprint?: Prisma.StringNullableFilter<"ZapRunRetry"> | string | null
+  requestFingerprint?: Prisma.StringNullableFilter<"ZapRunRetry"> | string | null
+  requiresHuman?: Prisma.BoolFilter<"ZapRunRetry"> | boolean
+  dlqPublishedAt?: Prisma.DateTimeNullableFilter<"ZapRunRetry"> | Date | string | null
+  execution?: Prisma.XOR<Prisma.ZapRunExecutionNullableScalarRelationFilter, Prisma.ZapRunExecutionWhereInput> | null
+}, "id" | "executionId">
 
 export type ZapRunRetryOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -269,6 +400,18 @@ export type ZapRunRetryOrderByWithAggregationInput = {
   lastError?: Prisma.SortOrderInput | Prisma.SortOrder
   nextRunAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  executionId?: Prisma.SortOrderInput | Prisma.SortOrder
+  provider?: Prisma.SortOrderInput | Prisma.SortOrder
+  phase?: Prisma.SortOrderInput | Prisma.SortOrder
+  providerOutcome?: Prisma.SortOrderInput | Prisma.SortOrder
+  safeCode?: Prisma.SortOrderInput | Prisma.SortOrder
+  providerStatus?: Prisma.SortOrderInput | Prisma.SortOrder
+  retryAfterSeconds?: Prisma.SortOrderInput | Prisma.SortOrder
+  safeReceiptId?: Prisma.SortOrderInput | Prisma.SortOrder
+  actionFingerprint?: Prisma.SortOrderInput | Prisma.SortOrder
+  requestFingerprint?: Prisma.SortOrderInput | Prisma.SortOrder
+  requiresHuman?: Prisma.SortOrder
+  dlqPublishedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.ZapRunRetryCountOrderByAggregateInput
   _avg?: Prisma.ZapRunRetryAvgOrderByAggregateInput
   _max?: Prisma.ZapRunRetryMaxOrderByAggregateInput
@@ -287,6 +430,18 @@ export type ZapRunRetryScalarWhereWithAggregatesInput = {
   lastError?: Prisma.StringNullableWithAggregatesFilter<"ZapRunRetry"> | string | null
   nextRunAt?: Prisma.DateTimeWithAggregatesFilter<"ZapRunRetry"> | Date | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"ZapRunRetry"> | Date | string
+  executionId?: Prisma.StringNullableWithAggregatesFilter<"ZapRunRetry"> | string | null
+  provider?: Prisma.StringNullableWithAggregatesFilter<"ZapRunRetry"> | string | null
+  phase?: Prisma.StringNullableWithAggregatesFilter<"ZapRunRetry"> | string | null
+  providerOutcome?: Prisma.StringNullableWithAggregatesFilter<"ZapRunRetry"> | string | null
+  safeCode?: Prisma.StringNullableWithAggregatesFilter<"ZapRunRetry"> | string | null
+  providerStatus?: Prisma.IntNullableWithAggregatesFilter<"ZapRunRetry"> | number | null
+  retryAfterSeconds?: Prisma.IntNullableWithAggregatesFilter<"ZapRunRetry"> | number | null
+  safeReceiptId?: Prisma.StringNullableWithAggregatesFilter<"ZapRunRetry"> | string | null
+  actionFingerprint?: Prisma.StringNullableWithAggregatesFilter<"ZapRunRetry"> | string | null
+  requestFingerprint?: Prisma.StringNullableWithAggregatesFilter<"ZapRunRetry"> | string | null
+  requiresHuman?: Prisma.BoolWithAggregatesFilter<"ZapRunRetry"> | boolean
+  dlqPublishedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"ZapRunRetry"> | Date | string | null
 }
 
 export type ZapRunRetryCreateInput = {
@@ -297,6 +452,18 @@ export type ZapRunRetryCreateInput = {
   lastError?: string | null
   nextRunAt?: Date | string
   createdAt?: Date | string
+  provider?: string | null
+  phase?: string | null
+  providerOutcome?: string | null
+  safeCode?: string | null
+  providerStatus?: number | null
+  retryAfterSeconds?: number | null
+  safeReceiptId?: string | null
+  actionFingerprint?: string | null
+  requestFingerprint?: string | null
+  requiresHuman?: boolean
+  dlqPublishedAt?: Date | string | null
+  execution?: Prisma.ZapRunExecutionCreateNestedOneWithoutFailureInput
 }
 
 export type ZapRunRetryUncheckedCreateInput = {
@@ -307,6 +474,18 @@ export type ZapRunRetryUncheckedCreateInput = {
   lastError?: string | null
   nextRunAt?: Date | string
   createdAt?: Date | string
+  executionId?: string | null
+  provider?: string | null
+  phase?: string | null
+  providerOutcome?: string | null
+  safeCode?: string | null
+  providerStatus?: number | null
+  retryAfterSeconds?: number | null
+  safeReceiptId?: string | null
+  actionFingerprint?: string | null
+  requestFingerprint?: string | null
+  requiresHuman?: boolean
+  dlqPublishedAt?: Date | string | null
 }
 
 export type ZapRunRetryUpdateInput = {
@@ -317,6 +496,18 @@ export type ZapRunRetryUpdateInput = {
   lastError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nextRunAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  provider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phase?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  safeCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerStatus?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  retryAfterSeconds?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  safeReceiptId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actionFingerprint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requestFingerprint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requiresHuman?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  dlqPublishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  execution?: Prisma.ZapRunExecutionUpdateOneWithoutFailureNestedInput
 }
 
 export type ZapRunRetryUncheckedUpdateInput = {
@@ -327,6 +518,18 @@ export type ZapRunRetryUncheckedUpdateInput = {
   lastError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nextRunAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  executionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phase?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  safeCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerStatus?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  retryAfterSeconds?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  safeReceiptId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actionFingerprint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requestFingerprint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requiresHuman?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  dlqPublishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type ZapRunRetryCreateManyInput = {
@@ -337,6 +540,18 @@ export type ZapRunRetryCreateManyInput = {
   lastError?: string | null
   nextRunAt?: Date | string
   createdAt?: Date | string
+  executionId?: string | null
+  provider?: string | null
+  phase?: string | null
+  providerOutcome?: string | null
+  safeCode?: string | null
+  providerStatus?: number | null
+  retryAfterSeconds?: number | null
+  safeReceiptId?: string | null
+  actionFingerprint?: string | null
+  requestFingerprint?: string | null
+  requiresHuman?: boolean
+  dlqPublishedAt?: Date | string | null
 }
 
 export type ZapRunRetryUpdateManyMutationInput = {
@@ -347,6 +562,17 @@ export type ZapRunRetryUpdateManyMutationInput = {
   lastError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nextRunAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  provider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phase?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  safeCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerStatus?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  retryAfterSeconds?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  safeReceiptId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actionFingerprint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requestFingerprint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requiresHuman?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  dlqPublishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type ZapRunRetryUncheckedUpdateManyInput = {
@@ -357,6 +583,18 @@ export type ZapRunRetryUncheckedUpdateManyInput = {
   lastError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   nextRunAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  executionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  provider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phase?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  safeCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerStatus?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  retryAfterSeconds?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  safeReceiptId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actionFingerprint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requestFingerprint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requiresHuman?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  dlqPublishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type ZapRunRetryCountOrderByAggregateInput = {
@@ -367,11 +605,25 @@ export type ZapRunRetryCountOrderByAggregateInput = {
   lastError?: Prisma.SortOrder
   nextRunAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  executionId?: Prisma.SortOrder
+  provider?: Prisma.SortOrder
+  phase?: Prisma.SortOrder
+  providerOutcome?: Prisma.SortOrder
+  safeCode?: Prisma.SortOrder
+  providerStatus?: Prisma.SortOrder
+  retryAfterSeconds?: Prisma.SortOrder
+  safeReceiptId?: Prisma.SortOrder
+  actionFingerprint?: Prisma.SortOrder
+  requestFingerprint?: Prisma.SortOrder
+  requiresHuman?: Prisma.SortOrder
+  dlqPublishedAt?: Prisma.SortOrder
 }
 
 export type ZapRunRetryAvgOrderByAggregateInput = {
   stage?: Prisma.SortOrder
   attempt?: Prisma.SortOrder
+  providerStatus?: Prisma.SortOrder
+  retryAfterSeconds?: Prisma.SortOrder
 }
 
 export type ZapRunRetryMaxOrderByAggregateInput = {
@@ -382,6 +634,18 @@ export type ZapRunRetryMaxOrderByAggregateInput = {
   lastError?: Prisma.SortOrder
   nextRunAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  executionId?: Prisma.SortOrder
+  provider?: Prisma.SortOrder
+  phase?: Prisma.SortOrder
+  providerOutcome?: Prisma.SortOrder
+  safeCode?: Prisma.SortOrder
+  providerStatus?: Prisma.SortOrder
+  retryAfterSeconds?: Prisma.SortOrder
+  safeReceiptId?: Prisma.SortOrder
+  actionFingerprint?: Prisma.SortOrder
+  requestFingerprint?: Prisma.SortOrder
+  requiresHuman?: Prisma.SortOrder
+  dlqPublishedAt?: Prisma.SortOrder
 }
 
 export type ZapRunRetryMinOrderByAggregateInput = {
@@ -392,11 +656,178 @@ export type ZapRunRetryMinOrderByAggregateInput = {
   lastError?: Prisma.SortOrder
   nextRunAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  executionId?: Prisma.SortOrder
+  provider?: Prisma.SortOrder
+  phase?: Prisma.SortOrder
+  providerOutcome?: Prisma.SortOrder
+  safeCode?: Prisma.SortOrder
+  providerStatus?: Prisma.SortOrder
+  retryAfterSeconds?: Prisma.SortOrder
+  safeReceiptId?: Prisma.SortOrder
+  actionFingerprint?: Prisma.SortOrder
+  requestFingerprint?: Prisma.SortOrder
+  requiresHuman?: Prisma.SortOrder
+  dlqPublishedAt?: Prisma.SortOrder
 }
 
 export type ZapRunRetrySumOrderByAggregateInput = {
   stage?: Prisma.SortOrder
   attempt?: Prisma.SortOrder
+  providerStatus?: Prisma.SortOrder
+  retryAfterSeconds?: Prisma.SortOrder
+}
+
+export type ZapRunRetryNullableScalarRelationFilter = {
+  is?: Prisma.ZapRunRetryWhereInput | null
+  isNot?: Prisma.ZapRunRetryWhereInput | null
+}
+
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean
+}
+
+export type NullableDateTimeFieldUpdateOperationsInput = {
+  set?: Date | string | null
+}
+
+export type ZapRunRetryCreateNestedOneWithoutExecutionInput = {
+  create?: Prisma.XOR<Prisma.ZapRunRetryCreateWithoutExecutionInput, Prisma.ZapRunRetryUncheckedCreateWithoutExecutionInput>
+  connectOrCreate?: Prisma.ZapRunRetryCreateOrConnectWithoutExecutionInput
+  connect?: Prisma.ZapRunRetryWhereUniqueInput
+}
+
+export type ZapRunRetryUncheckedCreateNestedOneWithoutExecutionInput = {
+  create?: Prisma.XOR<Prisma.ZapRunRetryCreateWithoutExecutionInput, Prisma.ZapRunRetryUncheckedCreateWithoutExecutionInput>
+  connectOrCreate?: Prisma.ZapRunRetryCreateOrConnectWithoutExecutionInput
+  connect?: Prisma.ZapRunRetryWhereUniqueInput
+}
+
+export type ZapRunRetryUpdateOneWithoutExecutionNestedInput = {
+  create?: Prisma.XOR<Prisma.ZapRunRetryCreateWithoutExecutionInput, Prisma.ZapRunRetryUncheckedCreateWithoutExecutionInput>
+  connectOrCreate?: Prisma.ZapRunRetryCreateOrConnectWithoutExecutionInput
+  upsert?: Prisma.ZapRunRetryUpsertWithoutExecutionInput
+  disconnect?: Prisma.ZapRunRetryWhereInput | boolean
+  delete?: Prisma.ZapRunRetryWhereInput | boolean
+  connect?: Prisma.ZapRunRetryWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ZapRunRetryUpdateToOneWithWhereWithoutExecutionInput, Prisma.ZapRunRetryUpdateWithoutExecutionInput>, Prisma.ZapRunRetryUncheckedUpdateWithoutExecutionInput>
+}
+
+export type ZapRunRetryUncheckedUpdateOneWithoutExecutionNestedInput = {
+  create?: Prisma.XOR<Prisma.ZapRunRetryCreateWithoutExecutionInput, Prisma.ZapRunRetryUncheckedCreateWithoutExecutionInput>
+  connectOrCreate?: Prisma.ZapRunRetryCreateOrConnectWithoutExecutionInput
+  upsert?: Prisma.ZapRunRetryUpsertWithoutExecutionInput
+  disconnect?: Prisma.ZapRunRetryWhereInput | boolean
+  delete?: Prisma.ZapRunRetryWhereInput | boolean
+  connect?: Prisma.ZapRunRetryWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ZapRunRetryUpdateToOneWithWhereWithoutExecutionInput, Prisma.ZapRunRetryUpdateWithoutExecutionInput>, Prisma.ZapRunRetryUncheckedUpdateWithoutExecutionInput>
+}
+
+export type ZapRunRetryCreateWithoutExecutionInput = {
+  id?: string
+  zapRunId: string
+  stage: number
+  attempt?: number
+  lastError?: string | null
+  nextRunAt?: Date | string
+  createdAt?: Date | string
+  provider?: string | null
+  phase?: string | null
+  providerOutcome?: string | null
+  safeCode?: string | null
+  providerStatus?: number | null
+  retryAfterSeconds?: number | null
+  safeReceiptId?: string | null
+  actionFingerprint?: string | null
+  requestFingerprint?: string | null
+  requiresHuman?: boolean
+  dlqPublishedAt?: Date | string | null
+}
+
+export type ZapRunRetryUncheckedCreateWithoutExecutionInput = {
+  id?: string
+  zapRunId: string
+  stage: number
+  attempt?: number
+  lastError?: string | null
+  nextRunAt?: Date | string
+  createdAt?: Date | string
+  provider?: string | null
+  phase?: string | null
+  providerOutcome?: string | null
+  safeCode?: string | null
+  providerStatus?: number | null
+  retryAfterSeconds?: number | null
+  safeReceiptId?: string | null
+  actionFingerprint?: string | null
+  requestFingerprint?: string | null
+  requiresHuman?: boolean
+  dlqPublishedAt?: Date | string | null
+}
+
+export type ZapRunRetryCreateOrConnectWithoutExecutionInput = {
+  where: Prisma.ZapRunRetryWhereUniqueInput
+  create: Prisma.XOR<Prisma.ZapRunRetryCreateWithoutExecutionInput, Prisma.ZapRunRetryUncheckedCreateWithoutExecutionInput>
+}
+
+export type ZapRunRetryUpsertWithoutExecutionInput = {
+  update: Prisma.XOR<Prisma.ZapRunRetryUpdateWithoutExecutionInput, Prisma.ZapRunRetryUncheckedUpdateWithoutExecutionInput>
+  create: Prisma.XOR<Prisma.ZapRunRetryCreateWithoutExecutionInput, Prisma.ZapRunRetryUncheckedCreateWithoutExecutionInput>
+  where?: Prisma.ZapRunRetryWhereInput
+}
+
+export type ZapRunRetryUpdateToOneWithWhereWithoutExecutionInput = {
+  where?: Prisma.ZapRunRetryWhereInput
+  data: Prisma.XOR<Prisma.ZapRunRetryUpdateWithoutExecutionInput, Prisma.ZapRunRetryUncheckedUpdateWithoutExecutionInput>
+}
+
+export type ZapRunRetryUpdateWithoutExecutionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  zapRunId?: Prisma.StringFieldUpdateOperationsInput | string
+  stage?: Prisma.IntFieldUpdateOperationsInput | number
+  attempt?: Prisma.IntFieldUpdateOperationsInput | number
+  lastError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nextRunAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  provider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phase?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  safeCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerStatus?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  retryAfterSeconds?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  safeReceiptId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actionFingerprint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requestFingerprint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requiresHuman?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  dlqPublishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+}
+
+export type ZapRunRetryUncheckedUpdateWithoutExecutionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  zapRunId?: Prisma.StringFieldUpdateOperationsInput | string
+  stage?: Prisma.IntFieldUpdateOperationsInput | number
+  attempt?: Prisma.IntFieldUpdateOperationsInput | number
+  lastError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  nextRunAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  provider?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phase?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerOutcome?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  safeCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  providerStatus?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  retryAfterSeconds?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  safeReceiptId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  actionFingerprint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requestFingerprint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  requiresHuman?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  dlqPublishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -409,6 +840,19 @@ export type ZapRunRetrySelect<ExtArgs extends runtime.Types.Extensions.InternalA
   lastError?: boolean
   nextRunAt?: boolean
   createdAt?: boolean
+  executionId?: boolean
+  provider?: boolean
+  phase?: boolean
+  providerOutcome?: boolean
+  safeCode?: boolean
+  providerStatus?: boolean
+  retryAfterSeconds?: boolean
+  safeReceiptId?: boolean
+  actionFingerprint?: boolean
+  requestFingerprint?: boolean
+  requiresHuman?: boolean
+  dlqPublishedAt?: boolean
+  execution?: boolean | Prisma.ZapRunRetry$executionArgs<ExtArgs>
 }, ExtArgs["result"]["zapRunRetry"]>
 
 export type ZapRunRetrySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -419,6 +863,19 @@ export type ZapRunRetrySelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   lastError?: boolean
   nextRunAt?: boolean
   createdAt?: boolean
+  executionId?: boolean
+  provider?: boolean
+  phase?: boolean
+  providerOutcome?: boolean
+  safeCode?: boolean
+  providerStatus?: boolean
+  retryAfterSeconds?: boolean
+  safeReceiptId?: boolean
+  actionFingerprint?: boolean
+  requestFingerprint?: boolean
+  requiresHuman?: boolean
+  dlqPublishedAt?: boolean
+  execution?: boolean | Prisma.ZapRunRetry$executionArgs<ExtArgs>
 }, ExtArgs["result"]["zapRunRetry"]>
 
 export type ZapRunRetrySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -429,6 +886,19 @@ export type ZapRunRetrySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   lastError?: boolean
   nextRunAt?: boolean
   createdAt?: boolean
+  executionId?: boolean
+  provider?: boolean
+  phase?: boolean
+  providerOutcome?: boolean
+  safeCode?: boolean
+  providerStatus?: boolean
+  retryAfterSeconds?: boolean
+  safeReceiptId?: boolean
+  actionFingerprint?: boolean
+  requestFingerprint?: boolean
+  requiresHuman?: boolean
+  dlqPublishedAt?: boolean
+  execution?: boolean | Prisma.ZapRunRetry$executionArgs<ExtArgs>
 }, ExtArgs["result"]["zapRunRetry"]>
 
 export type ZapRunRetrySelectScalar = {
@@ -439,13 +909,36 @@ export type ZapRunRetrySelectScalar = {
   lastError?: boolean
   nextRunAt?: boolean
   createdAt?: boolean
+  executionId?: boolean
+  provider?: boolean
+  phase?: boolean
+  providerOutcome?: boolean
+  safeCode?: boolean
+  providerStatus?: boolean
+  retryAfterSeconds?: boolean
+  safeReceiptId?: boolean
+  actionFingerprint?: boolean
+  requestFingerprint?: boolean
+  requiresHuman?: boolean
+  dlqPublishedAt?: boolean
 }
 
-export type ZapRunRetryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "zapRunId" | "stage" | "attempt" | "lastError" | "nextRunAt" | "createdAt", ExtArgs["result"]["zapRunRetry"]>
+export type ZapRunRetryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "zapRunId" | "stage" | "attempt" | "lastError" | "nextRunAt" | "createdAt" | "executionId" | "provider" | "phase" | "providerOutcome" | "safeCode" | "providerStatus" | "retryAfterSeconds" | "safeReceiptId" | "actionFingerprint" | "requestFingerprint" | "requiresHuman" | "dlqPublishedAt", ExtArgs["result"]["zapRunRetry"]>
+export type ZapRunRetryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  execution?: boolean | Prisma.ZapRunRetry$executionArgs<ExtArgs>
+}
+export type ZapRunRetryIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  execution?: boolean | Prisma.ZapRunRetry$executionArgs<ExtArgs>
+}
+export type ZapRunRetryIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  execution?: boolean | Prisma.ZapRunRetry$executionArgs<ExtArgs>
+}
 
 export type $ZapRunRetryPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "ZapRunRetry"
-  objects: {}
+  objects: {
+    execution: Prisma.$ZapRunExecutionPayload<ExtArgs> | null
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     zapRunId: string
@@ -454,6 +947,18 @@ export type $ZapRunRetryPayload<ExtArgs extends runtime.Types.Extensions.Interna
     lastError: string | null
     nextRunAt: Date
     createdAt: Date
+    executionId: string | null
+    provider: string | null
+    phase: string | null
+    providerOutcome: string | null
+    safeCode: string | null
+    providerStatus: number | null
+    retryAfterSeconds: number | null
+    safeReceiptId: string | null
+    actionFingerprint: string | null
+    requestFingerprint: string | null
+    requiresHuman: boolean
+    dlqPublishedAt: Date | null
   }, ExtArgs["result"]["zapRunRetry"]>
   composites: {}
 }
@@ -848,6 +1353,7 @@ readonly fields: ZapRunRetryFieldRefs;
  */
 export interface Prisma__ZapRunRetryClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  execution<T extends Prisma.ZapRunRetry$executionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ZapRunRetry$executionArgs<ExtArgs>>): Prisma.Prisma__ZapRunExecutionClient<runtime.Types.Result.GetResult<Prisma.$ZapRunExecutionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -884,6 +1390,18 @@ export interface ZapRunRetryFieldRefs {
   readonly lastError: Prisma.FieldRef<"ZapRunRetry", 'String'>
   readonly nextRunAt: Prisma.FieldRef<"ZapRunRetry", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"ZapRunRetry", 'DateTime'>
+  readonly executionId: Prisma.FieldRef<"ZapRunRetry", 'String'>
+  readonly provider: Prisma.FieldRef<"ZapRunRetry", 'String'>
+  readonly phase: Prisma.FieldRef<"ZapRunRetry", 'String'>
+  readonly providerOutcome: Prisma.FieldRef<"ZapRunRetry", 'String'>
+  readonly safeCode: Prisma.FieldRef<"ZapRunRetry", 'String'>
+  readonly providerStatus: Prisma.FieldRef<"ZapRunRetry", 'Int'>
+  readonly retryAfterSeconds: Prisma.FieldRef<"ZapRunRetry", 'Int'>
+  readonly safeReceiptId: Prisma.FieldRef<"ZapRunRetry", 'String'>
+  readonly actionFingerprint: Prisma.FieldRef<"ZapRunRetry", 'String'>
+  readonly requestFingerprint: Prisma.FieldRef<"ZapRunRetry", 'String'>
+  readonly requiresHuman: Prisma.FieldRef<"ZapRunRetry", 'Boolean'>
+  readonly dlqPublishedAt: Prisma.FieldRef<"ZapRunRetry", 'DateTime'>
 }
     
 
@@ -900,6 +1418,10 @@ export type ZapRunRetryFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.I
    * Omit specific fields from the ZapRunRetry
    */
   omit?: Prisma.ZapRunRetryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ZapRunRetryInclude<ExtArgs> | null
   /**
    * Filter, which ZapRunRetry to fetch.
    */
@@ -919,6 +1441,10 @@ export type ZapRunRetryFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Exten
    */
   omit?: Prisma.ZapRunRetryOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ZapRunRetryInclude<ExtArgs> | null
+  /**
    * Filter, which ZapRunRetry to fetch.
    */
   where: Prisma.ZapRunRetryWhereUniqueInput
@@ -936,6 +1462,10 @@ export type ZapRunRetryFindFirstArgs<ExtArgs extends runtime.Types.Extensions.In
    * Omit specific fields from the ZapRunRetry
    */
   omit?: Prisma.ZapRunRetryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ZapRunRetryInclude<ExtArgs> | null
   /**
    * Filter, which ZapRunRetry to fetch.
    */
@@ -985,6 +1515,10 @@ export type ZapRunRetryFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extens
    */
   omit?: Prisma.ZapRunRetryOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ZapRunRetryInclude<ExtArgs> | null
+  /**
    * Filter, which ZapRunRetry to fetch.
    */
   where?: Prisma.ZapRunRetryWhereInput
@@ -1033,6 +1567,10 @@ export type ZapRunRetryFindManyArgs<ExtArgs extends runtime.Types.Extensions.Int
    */
   omit?: Prisma.ZapRunRetryOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ZapRunRetryInclude<ExtArgs> | null
+  /**
    * Filter, which ZapRunRetries to fetch.
    */
   where?: Prisma.ZapRunRetryWhereInput
@@ -1076,6 +1614,10 @@ export type ZapRunRetryCreateArgs<ExtArgs extends runtime.Types.Extensions.Inter
    */
   omit?: Prisma.ZapRunRetryOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ZapRunRetryInclude<ExtArgs> | null
+  /**
    * The data needed to create a ZapRunRetry.
    */
   data: Prisma.XOR<Prisma.ZapRunRetryCreateInput, Prisma.ZapRunRetryUncheckedCreateInput>
@@ -1109,6 +1651,10 @@ export type ZapRunRetryCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Ext
    */
   data: Prisma.ZapRunRetryCreateManyInput | Prisma.ZapRunRetryCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ZapRunRetryIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1123,6 +1669,10 @@ export type ZapRunRetryUpdateArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Omit specific fields from the ZapRunRetry
    */
   omit?: Prisma.ZapRunRetryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ZapRunRetryInclude<ExtArgs> | null
   /**
    * The data needed to update a ZapRunRetry.
    */
@@ -1175,6 +1725,10 @@ export type ZapRunRetryUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Ext
    * Limit how many ZapRunRetries to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ZapRunRetryIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1189,6 +1743,10 @@ export type ZapRunRetryUpsertArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Omit specific fields from the ZapRunRetry
    */
   omit?: Prisma.ZapRunRetryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ZapRunRetryInclude<ExtArgs> | null
   /**
    * The filter to search for the ZapRunRetry to update in case it exists.
    */
@@ -1216,6 +1774,10 @@ export type ZapRunRetryDeleteArgs<ExtArgs extends runtime.Types.Extensions.Inter
    */
   omit?: Prisma.ZapRunRetryOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ZapRunRetryInclude<ExtArgs> | null
+  /**
    * Filter which ZapRunRetry to delete.
    */
   where: Prisma.ZapRunRetryWhereUniqueInput
@@ -1236,6 +1798,25 @@ export type ZapRunRetryDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.I
 }
 
 /**
+ * ZapRunRetry.execution
+ */
+export type ZapRunRetry$executionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ZapRunExecution
+   */
+  select?: Prisma.ZapRunExecutionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ZapRunExecution
+   */
+  omit?: Prisma.ZapRunExecutionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ZapRunExecutionInclude<ExtArgs> | null
+  where?: Prisma.ZapRunExecutionWhereInput
+}
+
+/**
  * ZapRunRetry without action
  */
 export type ZapRunRetryDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1247,4 +1828,8 @@ export type ZapRunRetryDefaultArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * Omit specific fields from the ZapRunRetry
    */
   omit?: Prisma.ZapRunRetryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ZapRunRetryInclude<ExtArgs> | null
 }

@@ -400,7 +400,8 @@ export const ModelName = {
   ZapRunOutbox: 'ZapRunOutbox',
   TestTriggerBuffer: 'TestTriggerBuffer',
   ZapRunRetry: 'ZapRunRetry',
-  ZapRunExecution: 'ZapRunExecution'
+  ZapRunExecution: 'ZapRunExecution',
+  ZapRunExecutionAttempt: 'ZapRunExecutionAttempt'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -416,7 +417,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "zap" | "trigger" | "action" | "availableAction" | "availableTriggerType" | "zapRun" | "zapRunOutbox" | "testTriggerBuffer" | "zapRunRetry" | "zapRunExecution"
+    modelProps: "user" | "zap" | "trigger" | "action" | "availableAction" | "availableTriggerType" | "zapRun" | "zapRunOutbox" | "testTriggerBuffer" | "zapRunRetry" | "zapRunExecution" | "zapRunExecutionAttempt"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1234,6 +1235,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    ZapRunExecutionAttempt: {
+      payload: Prisma.$ZapRunExecutionAttemptPayload<ExtArgs>
+      fields: Prisma.ZapRunExecutionAttemptFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ZapRunExecutionAttemptFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ZapRunExecutionAttemptPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ZapRunExecutionAttemptFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ZapRunExecutionAttemptPayload>
+        }
+        findFirst: {
+          args: Prisma.ZapRunExecutionAttemptFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ZapRunExecutionAttemptPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ZapRunExecutionAttemptFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ZapRunExecutionAttemptPayload>
+        }
+        findMany: {
+          args: Prisma.ZapRunExecutionAttemptFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ZapRunExecutionAttemptPayload>[]
+        }
+        create: {
+          args: Prisma.ZapRunExecutionAttemptCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ZapRunExecutionAttemptPayload>
+        }
+        createMany: {
+          args: Prisma.ZapRunExecutionAttemptCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ZapRunExecutionAttemptCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ZapRunExecutionAttemptPayload>[]
+        }
+        delete: {
+          args: Prisma.ZapRunExecutionAttemptDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ZapRunExecutionAttemptPayload>
+        }
+        update: {
+          args: Prisma.ZapRunExecutionAttemptUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ZapRunExecutionAttemptPayload>
+        }
+        deleteMany: {
+          args: Prisma.ZapRunExecutionAttemptDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ZapRunExecutionAttemptUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ZapRunExecutionAttemptUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ZapRunExecutionAttemptPayload>[]
+        }
+        upsert: {
+          args: Prisma.ZapRunExecutionAttemptUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ZapRunExecutionAttemptPayload>
+        }
+        aggregate: {
+          args: Prisma.ZapRunExecutionAttemptAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateZapRunExecutionAttempt>
+        }
+        groupBy: {
+          args: Prisma.ZapRunExecutionAttemptGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ZapRunExecutionAttemptGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ZapRunExecutionAttemptCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ZapRunExecutionAttemptCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1366,7 +1441,19 @@ export const ZapRunRetryScalarFieldEnum = {
   attempt: 'attempt',
   lastError: 'lastError',
   nextRunAt: 'nextRunAt',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  executionId: 'executionId',
+  provider: 'provider',
+  phase: 'phase',
+  providerOutcome: 'providerOutcome',
+  safeCode: 'safeCode',
+  providerStatus: 'providerStatus',
+  retryAfterSeconds: 'retryAfterSeconds',
+  safeReceiptId: 'safeReceiptId',
+  actionFingerprint: 'actionFingerprint',
+  requestFingerprint: 'requestFingerprint',
+  requiresHuman: 'requiresHuman',
+  dlqPublishedAt: 'dlqPublishedAt'
 } as const
 
 export type ZapRunRetryScalarFieldEnum = (typeof ZapRunRetryScalarFieldEnum)[keyof typeof ZapRunRetryScalarFieldEnum]
@@ -1379,10 +1466,35 @@ export const ZapRunExecutionScalarFieldEnum = {
   status: 'status',
   leaseUntil: 'leaseUntil',
   createdAt: 'createdAt',
-  completedAt: 'completedAt'
+  completedAt: 'completedAt',
+  claimToken: 'claimToken',
+  providerOutcome: 'providerOutcome',
+  actionFingerprint: 'actionFingerprint',
+  requestFingerprint: 'requestFingerprint',
+  requiresHuman: 'requiresHuman'
 } as const
 
 export type ZapRunExecutionScalarFieldEnum = (typeof ZapRunExecutionScalarFieldEnum)[keyof typeof ZapRunExecutionScalarFieldEnum]
+
+
+export const ZapRunExecutionAttemptScalarFieldEnum = {
+  id: 'id',
+  executionId: 'executionId',
+  attemptNumber: 'attemptNumber',
+  status: 'status',
+  provider: 'provider',
+  phase: 'phase',
+  safeCode: 'safeCode',
+  providerStatus: 'providerStatus',
+  retryAfterSeconds: 'retryAfterSeconds',
+  safeReceiptId: 'safeReceiptId',
+  actionFingerprint: 'actionFingerprint',
+  requestFingerprint: 'requestFingerprint',
+  startedAt: 'startedAt',
+  completedAt: 'completedAt'
+} as const
+
+export type ZapRunExecutionAttemptScalarFieldEnum = (typeof ZapRunExecutionAttemptScalarFieldEnum)[keyof typeof ZapRunExecutionAttemptScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1484,6 +1596,13 @@ export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'J
  * Reference to a field of type 'QueryMode'
  */
 export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
+    
+
+
+/**
+ * Reference to a field of type 'Boolean'
+ */
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -1598,6 +1717,7 @@ export type GlobalOmitConfig = {
   testTriggerBuffer?: Prisma.TestTriggerBufferOmit
   zapRunRetry?: Prisma.ZapRunRetryOmit
   zapRunExecution?: Prisma.ZapRunExecutionOmit
+  zapRunExecutionAttempt?: Prisma.ZapRunExecutionAttemptOmit
 }
 
 /* Types for Logging */

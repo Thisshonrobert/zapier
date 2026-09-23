@@ -9,7 +9,7 @@ This document specifies the Kafka message topics, schemas, producer/consumer top
 | Topic Name           | Purpose                                                                  | Producers                       | Consumers                                                          | Retention / Configuration                                  |
 | :------------------- | :----------------------------------------------------------------------- | :------------------------------ | :----------------------------------------------------------------- | :--------------------------------------------------------- |
 | **`zap-events`**     | Primary workflow execution queue carrying stage transition events.       | `apps/processor`, `apps/worker` | `apps/worker` (`zap-group`)                                        | Auto-created in local KRaft container; standard retention. |
-| **`zap-events-dlq`** | Dead-letter queue capturing events that failed after exhaustive retries. | `apps/worker`                   | _None currently implemented (ready for external replay consumers)_ | Captures diagnostic failure payloads for replay.           |
+| **`zap-events-dlq`** | Future sanitized publication of durable failures. | Phase 3C publisher (not implemented) | _None currently implemented_ | Publication is keyed by durable `failureId`; it is not an execution retry queue. |
 
 ---
 
@@ -37,16 +37,19 @@ type ZapEvent = {
 
 ---
 
-### 2. `zap-events-dlq` Message Schema
+### 2. Future `zap-events-dlq` Message Schema
 
 Messages published to `zap-events-dlq` contain failure context for offline inspection and replay.
 
 ```typescript
-type DeadLetterEvent = {
+type DurableFailureEvent = {
+  failureId: string; // ZapRunRetry.id
   zapRunId: string; // UUID of the failed ZapRun
   stage: number; // The action stage that failed
   attempt: number; // Maximum attempt count reached (e.g., 3)
-  error: string; // Stringified error message or stack summary
+  providerOutcome: "rejected" | "not_attempted" | "unknown";
+  safeCode: string;
+  requiresHuman: true;
   failedAt: string; // ISO 8601 timestamp of failure
 };
 ```
@@ -57,8 +60,11 @@ type DeadLetterEvent = {
 {
   "zapRunId": "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d",
   "stage": 1,
-  "attempt": 3,
-  "error": "Telegram sendMessage failed (400): Chat not found",
+  "failureId": "2d8a3a0c-9f4a-4ee6-8b5a-3a4f0f4f4c2a",
+  "attempt": 1,
+  "providerOutcome": "rejected",
+  "safeCode": "provider_rejected",
+  "requiresHuman": true,
   "failedAt": "2026-09-16T08:00:00.000Z"
 }
 ```
@@ -85,7 +91,7 @@ flowchart LR
 
     Processor -->|"Produces {zapRunId, stage: 0}"| ZapEventsTopic
     WorkerProducer -->|"Produces {zapRunId, stage: stage + 1}"| ZapEventsTopic
-    WorkerProducer -->|"Produces {zapRunId, stage, error, ...}"| DLQTopic
+    FuturePublisher["Phase 3C publisher"] -->|"Produces sanitized {failureId, ...}"| DLQTopic
     ZapEventsTopic -->|"Consumes (autoCommit: false)"| WorkerConsumer
 ```
 
@@ -97,7 +103,7 @@ flowchart LR
 2. **Worker Producer** ([`apps/worker/index.ts`](../apps/worker/index.ts)):
    - `clientId`: `"worker"`
    - Produces subsequent stage events (`stage: stage + 1`) to `zap-events`.
-   - Produces exhausted failures to `zap-events-dlq` via [`apps/worker/deadletter.ts`](../apps/worker/deadletter.ts).
+  - Does not produce to `zap-events-dlq`. Phase 3C will read durable `ZapRunRetry` rows and stamp `dlqPublishedAt` only after broker acknowledgement.
 
 ### Consumers
 
@@ -116,9 +122,10 @@ flowchart LR
 2. **Manual Offset Commits**:
    - `autoCommit` is set to `false`.
    - The worker explicitly commits offsets only after an event has been:
-     - Successfully executed and status recorded as `SUCCESS`.
-     - Skipped due to existing `SUCCESS` or `FAILED` status.
-     - Dead-lettered to `zap-events-dlq` and recorded in `ZapRunRetry`.
+       - Successfully executed and status recorded as `SUCCESS`.
+       - Skipped due to existing `SUCCESS` or linked `FAILED` status.
+       - Expired/failed and recorded as `FAILED` with one linked `ZapRunRetry`.
+     - Active `PENDING`, unlinked `FAILED`, stale ownership, invalid input, or persistence failure are not committed.
 3. **Commit Syntax**:
    ```typescript
    await consumer.commitOffsets([
