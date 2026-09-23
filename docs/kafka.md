@@ -9,7 +9,7 @@ This document specifies the Kafka message topics, schemas, producer/consumer top
 | Topic Name           | Purpose                                                                  | Producers                       | Consumers                                                          | Retention / Configuration                                  |
 | :------------------- | :----------------------------------------------------------------------- | :------------------------------ | :----------------------------------------------------------------- | :--------------------------------------------------------- |
 | **`zap-events`**     | Primary workflow execution queue carrying stage transition events.       | `apps/processor`, `apps/worker` | `apps/worker` (`zap-group`)                                        | Auto-created in local KRaft container; standard retention. |
-| **`zap-events-dlq`** | Future sanitized publication of durable failures. | Phase 3C publisher (not implemented) | _None currently implemented_ | Publication is keyed by durable `failureId`; it is not an execution retry queue. |
+| **`zap-events-dlq`** | Sanitized publication of durable failures. | Separate Phase 3C publisher | Future triage/reconciliation consumers | Publication is keyed by durable `failureId`; it is evidence delivery, not provider replay. |
 
 ---
 
@@ -37,7 +37,7 @@ type ZapEvent = {
 
 ---
 
-### 2. Future `zap-events-dlq` Message Schema
+### 2. `zap-events-dlq` Message Schema
 
 Messages published to `zap-events-dlq` contain failure context for offline inspection and replay.
 
@@ -46,7 +46,7 @@ type DurableFailureEvent = {
   failureId: string; // ZapRunRetry.id
   zapRunId: string; // UUID of the failed ZapRun
   stage: number; // The action stage that failed
-  attempt: number; // Maximum attempt count reached (e.g., 3)
+  attempt: number; // Provider attempt number, or 0 for not-attempted cases
   providerOutcome: "rejected" | "not_attempted" | "unknown";
   safeCode: string;
   requiresHuman: true;
@@ -91,7 +91,7 @@ flowchart LR
 
     Processor -->|"Produces {zapRunId, stage: 0}"| ZapEventsTopic
     WorkerProducer -->|"Produces {zapRunId, stage: stage + 1}"| ZapEventsTopic
-    FuturePublisher["Phase 3C publisher"] -->|"Produces sanitized {failureId, ...}"| DLQTopic
+  DlqPublisher["Phase 3C publisher"] -->|"Produces sanitized {failureId, ...}"| DLQTopic
     ZapEventsTopic -->|"Consumes (autoCommit: false)"| WorkerConsumer
 ```
 
@@ -103,7 +103,13 @@ flowchart LR
 2. **Worker Producer** ([`apps/worker/index.ts`](../apps/worker/index.ts)):
    - `clientId`: `"worker"`
    - Produces subsequent stage events (`stage: stage + 1`) to `zap-events`.
-  - Does not produce to `zap-events-dlq`. Phase 3C will read durable `ZapRunRetry` rows and stamp `dlqPublishedAt` only after broker acknowledgement.
+  - Does not produce to `zap-events-dlq`. The separate Phase 3C publisher claims due `ZapRunRetry` rows and stamps `dlqPublishedAt` only after broker acknowledgement.
+
+3. **DLQ publisher/reconciler** ([`apps/worker/dlq-publisher-index.ts`](../apps/worker/dlq-publisher-index.ts)):
+   - Runs separately from action execution.
+   - Publishes bounded, sanitized envelopes keyed by `failureId`.
+   - Retries Kafka evidence delivery with bounded backoff, never provider execution.
+   - Reconciles expired `PENDING` and unlinked `FAILED` executions without invoking providers.
 
 ### Consumers
 

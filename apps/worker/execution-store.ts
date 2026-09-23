@@ -179,6 +179,7 @@ export function createExecutionStore(
             actionFingerprint: existing.actionFingerprint ?? fingerprints.actionFingerprint,
             requestFingerprint: existing.requestFingerprint ?? fingerprints.requestFingerprint,
             requiresHuman: true,
+            evidenceSource: "captured",
           },
         });
         return failure.id as string;
@@ -326,6 +327,7 @@ export function createExecutionStore(
             actionFingerprint: execution.actionFingerprint,
             requestFingerprint: execution.requestFingerprint,
             requiresHuman: true,
+            evidenceSource: "captured",
           },
         });
         return failure.id as string;

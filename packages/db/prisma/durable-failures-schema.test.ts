@@ -2,10 +2,14 @@ import assert from "node:assert/strict";
 import { Prisma, PrismaClient } from "../generated/prisma/client.ts";
 
 const generatedClient = new PrismaClient();
-const runtimeModels = (generatedClient as any)._runtimeDataModel.models as Record<string, object>;
+const runtimeModels = (generatedClient as any)._runtimeDataModel
+  .models as Record<string, object>;
 const dmmf = (Prisma as any).dmmf ?? {
   datamodel: {
-    models: Object.entries(runtimeModels).map(([name, value]) => ({ name, ...value })),
+    models: Object.entries(runtimeModels).map(([name, value]) => ({
+      name,
+      ...value,
+    })),
   },
 };
 
@@ -13,9 +17,15 @@ const migrationPath = new URL(
   "./migrations/20260922000000_phase_3b_durable_failures/migration.sql",
   import.meta.url,
 );
+const dlqMigrationPath = new URL(
+  "./migrations/20260923000000_phase_3c_dlq_publication/migration.sql",
+  import.meta.url,
+);
 
 const model = (name: string) => {
-  const value = dmmf.datamodel.models.find((item: { name: string }) => item.name === name);
+  const value = dmmf.datamodel.models.find(
+    (item: { name: string }) => item.name === name,
+  );
   assert.ok(value, `${name} model is missing`);
   return value;
 };
@@ -43,7 +53,11 @@ const assertField = (
     expected.required,
     `${modelName}.${fieldName} nullability`,
   );
-  assert.equal(value.isList, expected.list ?? false, `${modelName}.${fieldName} list`);
+  assert.equal(
+    value.isList,
+    expected.list ?? false,
+    `${modelName}.${fieldName} list`,
+  );
   if ("default" in expected) {
     assert.deepEqual(
       value.default,
@@ -141,6 +155,19 @@ assertField("ZapRunRetry", "requiresHuman", {
   required: true,
   default: true,
 });
+for (const [name, type] of Object.entries({
+  evidenceSource: "String",
+  dlqPublishClaimToken: "String",
+  dlqPublishLeaseUntil: "DateTime",
+  dlqNextAttemptAt: "DateTime",
+})) {
+  assertField("ZapRunRetry", name, { type, required: false });
+}
+assertField("ZapRunRetry", "dlqPublishAttempts", {
+  type: "Int",
+  required: true,
+  default: 0,
+});
 
 for (const legacyField of [
   "id",
@@ -153,8 +180,15 @@ for (const legacyField of [
 ]) {
   field("ZapRunRetry", legacyField);
 }
-assert.equal(field("ZapRunRetry", "id").isId, true, "ZapRunRetry.id remains the failureId");
-assert.equal((field("ZapRunRetry", "id").default as { name?: string }).name, "uuid");
+assert.equal(
+  field("ZapRunRetry", "id").isId,
+  true,
+  "ZapRunRetry.id remains the failureId",
+);
+assert.equal(
+  (field("ZapRunRetry", "id").default as { name?: string }).name,
+  "uuid",
+);
 assert.equal(field("ZapRunRetry", "executionId").isUnique, true);
 
 const migration = await Bun.file(migrationPath).text();
@@ -169,6 +203,22 @@ assert.match(
 );
 assert.doesNotMatch(migration, /DROP\s+TABLE/i);
 assert.doesNotMatch(migration, /DROP\s+COLUMN/i);
+
+const dlqMigration = await Bun.file(dlqMigrationPath).text();
+for (const column of [
+  "evidenceSource",
+  "dlqPublishClaimToken",
+  "dlqPublishLeaseUntil",
+  "dlqNextAttemptAt",
+  "dlqPublishAttempts",
+]) {
+  assert.match(dlqMigration, new RegExp(`ADD COLUMN "${column}"`));
+}
+assert.match(
+  dlqMigration,
+  /CREATE INDEX "ZapRunRetry_dlqPublishedAt_dlqNextAttemptAt_idx" ON "ZapRunRetry"\("dlqPublishedAt", "dlqNextAttemptAt"\)/,
+);
+assert.doesNotMatch(dlqMigration, /DROP\s+(?:TABLE|COLUMN)/i);
 
 console.log("durable-failures-schema.test.ts OK");
 await generatedClient.$disconnect();

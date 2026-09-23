@@ -70,6 +70,9 @@ This repository is a TypeScript monorepo configured with [Turborepo](https://tur
   - `index.ts`: Kafka consumer loop, stage loading, next-stage production, and manual offset commits.
   - `execution-store.ts`: Claim-token fencing, attempt evidence, fingerprints, and atomic terminal failure persistence.
   - `orchestration.ts`: Single-shot action execution and `ack`/`advance` resolution.
+  - `dlq-publisher.ts`: Fenced, sanitized publication of durable failures keyed by `failureId`.
+  - `dlq-reconciler.ts`: Database-only repair of expired or unlinked execution failures.
+  - `dlq-publisher-index.ts`: Separate Phase 3C publisher/reconciler process entry point.
   - `actions/index.ts`: Action registry (`actionRegistry`, `getActionHandler`).
   - `actions/email.ts`: Resend email integration with `Idempotency-Key` headers.
   - `actions/telegram.ts`: Telegram Bot API integration with `@username` resolver.

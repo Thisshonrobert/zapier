@@ -31,6 +31,7 @@ export type ZapRunRetryAvgAggregateOutputType = {
   attempt: number | null
   providerStatus: number | null
   retryAfterSeconds: number | null
+  dlqPublishAttempts: number | null
 }
 
 export type ZapRunRetrySumAggregateOutputType = {
@@ -38,6 +39,7 @@ export type ZapRunRetrySumAggregateOutputType = {
   attempt: number | null
   providerStatus: number | null
   retryAfterSeconds: number | null
+  dlqPublishAttempts: number | null
 }
 
 export type ZapRunRetryMinAggregateOutputType = {
@@ -60,6 +62,11 @@ export type ZapRunRetryMinAggregateOutputType = {
   requestFingerprint: string | null
   requiresHuman: boolean | null
   dlqPublishedAt: Date | null
+  evidenceSource: string | null
+  dlqPublishClaimToken: string | null
+  dlqPublishLeaseUntil: Date | null
+  dlqNextAttemptAt: Date | null
+  dlqPublishAttempts: number | null
 }
 
 export type ZapRunRetryMaxAggregateOutputType = {
@@ -82,6 +89,11 @@ export type ZapRunRetryMaxAggregateOutputType = {
   requestFingerprint: string | null
   requiresHuman: boolean | null
   dlqPublishedAt: Date | null
+  evidenceSource: string | null
+  dlqPublishClaimToken: string | null
+  dlqPublishLeaseUntil: Date | null
+  dlqNextAttemptAt: Date | null
+  dlqPublishAttempts: number | null
 }
 
 export type ZapRunRetryCountAggregateOutputType = {
@@ -104,6 +116,11 @@ export type ZapRunRetryCountAggregateOutputType = {
   requestFingerprint: number
   requiresHuman: number
   dlqPublishedAt: number
+  evidenceSource: number
+  dlqPublishClaimToken: number
+  dlqPublishLeaseUntil: number
+  dlqNextAttemptAt: number
+  dlqPublishAttempts: number
   _all: number
 }
 
@@ -113,6 +130,7 @@ export type ZapRunRetryAvgAggregateInputType = {
   attempt?: true
   providerStatus?: true
   retryAfterSeconds?: true
+  dlqPublishAttempts?: true
 }
 
 export type ZapRunRetrySumAggregateInputType = {
@@ -120,6 +138,7 @@ export type ZapRunRetrySumAggregateInputType = {
   attempt?: true
   providerStatus?: true
   retryAfterSeconds?: true
+  dlqPublishAttempts?: true
 }
 
 export type ZapRunRetryMinAggregateInputType = {
@@ -142,6 +161,11 @@ export type ZapRunRetryMinAggregateInputType = {
   requestFingerprint?: true
   requiresHuman?: true
   dlqPublishedAt?: true
+  evidenceSource?: true
+  dlqPublishClaimToken?: true
+  dlqPublishLeaseUntil?: true
+  dlqNextAttemptAt?: true
+  dlqPublishAttempts?: true
 }
 
 export type ZapRunRetryMaxAggregateInputType = {
@@ -164,6 +188,11 @@ export type ZapRunRetryMaxAggregateInputType = {
   requestFingerprint?: true
   requiresHuman?: true
   dlqPublishedAt?: true
+  evidenceSource?: true
+  dlqPublishClaimToken?: true
+  dlqPublishLeaseUntil?: true
+  dlqNextAttemptAt?: true
+  dlqPublishAttempts?: true
 }
 
 export type ZapRunRetryCountAggregateInputType = {
@@ -186,6 +215,11 @@ export type ZapRunRetryCountAggregateInputType = {
   requestFingerprint?: true
   requiresHuman?: true
   dlqPublishedAt?: true
+  evidenceSource?: true
+  dlqPublishClaimToken?: true
+  dlqPublishLeaseUntil?: true
+  dlqNextAttemptAt?: true
+  dlqPublishAttempts?: true
   _all?: true
 }
 
@@ -295,6 +329,11 @@ export type ZapRunRetryGroupByOutputType = {
   requestFingerprint: string | null
   requiresHuman: boolean
   dlqPublishedAt: Date | null
+  evidenceSource: string | null
+  dlqPublishClaimToken: string | null
+  dlqPublishLeaseUntil: Date | null
+  dlqNextAttemptAt: Date | null
+  dlqPublishAttempts: number
   _count: ZapRunRetryCountAggregateOutputType | null
   _avg: ZapRunRetryAvgAggregateOutputType | null
   _sum: ZapRunRetrySumAggregateOutputType | null
@@ -340,6 +379,11 @@ export type ZapRunRetryWhereInput = {
   requestFingerprint?: Prisma.StringNullableFilter<"ZapRunRetry"> | string | null
   requiresHuman?: Prisma.BoolFilter<"ZapRunRetry"> | boolean
   dlqPublishedAt?: Prisma.DateTimeNullableFilter<"ZapRunRetry"> | Date | string | null
+  evidenceSource?: Prisma.StringNullableFilter<"ZapRunRetry"> | string | null
+  dlqPublishClaimToken?: Prisma.StringNullableFilter<"ZapRunRetry"> | string | null
+  dlqPublishLeaseUntil?: Prisma.DateTimeNullableFilter<"ZapRunRetry"> | Date | string | null
+  dlqNextAttemptAt?: Prisma.DateTimeNullableFilter<"ZapRunRetry"> | Date | string | null
+  dlqPublishAttempts?: Prisma.IntFilter<"ZapRunRetry"> | number
   execution?: Prisma.XOR<Prisma.ZapRunExecutionNullableScalarRelationFilter, Prisma.ZapRunExecutionWhereInput> | null
 }
 
@@ -363,6 +407,11 @@ export type ZapRunRetryOrderByWithRelationInput = {
   requestFingerprint?: Prisma.SortOrderInput | Prisma.SortOrder
   requiresHuman?: Prisma.SortOrder
   dlqPublishedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  evidenceSource?: Prisma.SortOrderInput | Prisma.SortOrder
+  dlqPublishClaimToken?: Prisma.SortOrderInput | Prisma.SortOrder
+  dlqPublishLeaseUntil?: Prisma.SortOrderInput | Prisma.SortOrder
+  dlqNextAttemptAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  dlqPublishAttempts?: Prisma.SortOrder
   execution?: Prisma.ZapRunExecutionOrderByWithRelationInput
 }
 
@@ -389,6 +438,11 @@ export type ZapRunRetryWhereUniqueInput = Prisma.AtLeast<{
   requestFingerprint?: Prisma.StringNullableFilter<"ZapRunRetry"> | string | null
   requiresHuman?: Prisma.BoolFilter<"ZapRunRetry"> | boolean
   dlqPublishedAt?: Prisma.DateTimeNullableFilter<"ZapRunRetry"> | Date | string | null
+  evidenceSource?: Prisma.StringNullableFilter<"ZapRunRetry"> | string | null
+  dlqPublishClaimToken?: Prisma.StringNullableFilter<"ZapRunRetry"> | string | null
+  dlqPublishLeaseUntil?: Prisma.DateTimeNullableFilter<"ZapRunRetry"> | Date | string | null
+  dlqNextAttemptAt?: Prisma.DateTimeNullableFilter<"ZapRunRetry"> | Date | string | null
+  dlqPublishAttempts?: Prisma.IntFilter<"ZapRunRetry"> | number
   execution?: Prisma.XOR<Prisma.ZapRunExecutionNullableScalarRelationFilter, Prisma.ZapRunExecutionWhereInput> | null
 }, "id" | "executionId">
 
@@ -412,6 +466,11 @@ export type ZapRunRetryOrderByWithAggregationInput = {
   requestFingerprint?: Prisma.SortOrderInput | Prisma.SortOrder
   requiresHuman?: Prisma.SortOrder
   dlqPublishedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  evidenceSource?: Prisma.SortOrderInput | Prisma.SortOrder
+  dlqPublishClaimToken?: Prisma.SortOrderInput | Prisma.SortOrder
+  dlqPublishLeaseUntil?: Prisma.SortOrderInput | Prisma.SortOrder
+  dlqNextAttemptAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  dlqPublishAttempts?: Prisma.SortOrder
   _count?: Prisma.ZapRunRetryCountOrderByAggregateInput
   _avg?: Prisma.ZapRunRetryAvgOrderByAggregateInput
   _max?: Prisma.ZapRunRetryMaxOrderByAggregateInput
@@ -442,6 +501,11 @@ export type ZapRunRetryScalarWhereWithAggregatesInput = {
   requestFingerprint?: Prisma.StringNullableWithAggregatesFilter<"ZapRunRetry"> | string | null
   requiresHuman?: Prisma.BoolWithAggregatesFilter<"ZapRunRetry"> | boolean
   dlqPublishedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"ZapRunRetry"> | Date | string | null
+  evidenceSource?: Prisma.StringNullableWithAggregatesFilter<"ZapRunRetry"> | string | null
+  dlqPublishClaimToken?: Prisma.StringNullableWithAggregatesFilter<"ZapRunRetry"> | string | null
+  dlqPublishLeaseUntil?: Prisma.DateTimeNullableWithAggregatesFilter<"ZapRunRetry"> | Date | string | null
+  dlqNextAttemptAt?: Prisma.DateTimeNullableWithAggregatesFilter<"ZapRunRetry"> | Date | string | null
+  dlqPublishAttempts?: Prisma.IntWithAggregatesFilter<"ZapRunRetry"> | number
 }
 
 export type ZapRunRetryCreateInput = {
@@ -463,6 +527,11 @@ export type ZapRunRetryCreateInput = {
   requestFingerprint?: string | null
   requiresHuman?: boolean
   dlqPublishedAt?: Date | string | null
+  evidenceSource?: string | null
+  dlqPublishClaimToken?: string | null
+  dlqPublishLeaseUntil?: Date | string | null
+  dlqNextAttemptAt?: Date | string | null
+  dlqPublishAttempts?: number
   execution?: Prisma.ZapRunExecutionCreateNestedOneWithoutFailureInput
 }
 
@@ -486,6 +555,11 @@ export type ZapRunRetryUncheckedCreateInput = {
   requestFingerprint?: string | null
   requiresHuman?: boolean
   dlqPublishedAt?: Date | string | null
+  evidenceSource?: string | null
+  dlqPublishClaimToken?: string | null
+  dlqPublishLeaseUntil?: Date | string | null
+  dlqNextAttemptAt?: Date | string | null
+  dlqPublishAttempts?: number
 }
 
 export type ZapRunRetryUpdateInput = {
@@ -507,6 +581,11 @@ export type ZapRunRetryUpdateInput = {
   requestFingerprint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   requiresHuman?: Prisma.BoolFieldUpdateOperationsInput | boolean
   dlqPublishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  evidenceSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dlqPublishClaimToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dlqPublishLeaseUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dlqNextAttemptAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dlqPublishAttempts?: Prisma.IntFieldUpdateOperationsInput | number
   execution?: Prisma.ZapRunExecutionUpdateOneWithoutFailureNestedInput
 }
 
@@ -530,6 +609,11 @@ export type ZapRunRetryUncheckedUpdateInput = {
   requestFingerprint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   requiresHuman?: Prisma.BoolFieldUpdateOperationsInput | boolean
   dlqPublishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  evidenceSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dlqPublishClaimToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dlqPublishLeaseUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dlqNextAttemptAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dlqPublishAttempts?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type ZapRunRetryCreateManyInput = {
@@ -552,6 +636,11 @@ export type ZapRunRetryCreateManyInput = {
   requestFingerprint?: string | null
   requiresHuman?: boolean
   dlqPublishedAt?: Date | string | null
+  evidenceSource?: string | null
+  dlqPublishClaimToken?: string | null
+  dlqPublishLeaseUntil?: Date | string | null
+  dlqNextAttemptAt?: Date | string | null
+  dlqPublishAttempts?: number
 }
 
 export type ZapRunRetryUpdateManyMutationInput = {
@@ -573,6 +662,11 @@ export type ZapRunRetryUpdateManyMutationInput = {
   requestFingerprint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   requiresHuman?: Prisma.BoolFieldUpdateOperationsInput | boolean
   dlqPublishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  evidenceSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dlqPublishClaimToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dlqPublishLeaseUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dlqNextAttemptAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dlqPublishAttempts?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type ZapRunRetryUncheckedUpdateManyInput = {
@@ -595,6 +689,11 @@ export type ZapRunRetryUncheckedUpdateManyInput = {
   requestFingerprint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   requiresHuman?: Prisma.BoolFieldUpdateOperationsInput | boolean
   dlqPublishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  evidenceSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dlqPublishClaimToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dlqPublishLeaseUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dlqNextAttemptAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dlqPublishAttempts?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type ZapRunRetryCountOrderByAggregateInput = {
@@ -617,6 +716,11 @@ export type ZapRunRetryCountOrderByAggregateInput = {
   requestFingerprint?: Prisma.SortOrder
   requiresHuman?: Prisma.SortOrder
   dlqPublishedAt?: Prisma.SortOrder
+  evidenceSource?: Prisma.SortOrder
+  dlqPublishClaimToken?: Prisma.SortOrder
+  dlqPublishLeaseUntil?: Prisma.SortOrder
+  dlqNextAttemptAt?: Prisma.SortOrder
+  dlqPublishAttempts?: Prisma.SortOrder
 }
 
 export type ZapRunRetryAvgOrderByAggregateInput = {
@@ -624,6 +728,7 @@ export type ZapRunRetryAvgOrderByAggregateInput = {
   attempt?: Prisma.SortOrder
   providerStatus?: Prisma.SortOrder
   retryAfterSeconds?: Prisma.SortOrder
+  dlqPublishAttempts?: Prisma.SortOrder
 }
 
 export type ZapRunRetryMaxOrderByAggregateInput = {
@@ -646,6 +751,11 @@ export type ZapRunRetryMaxOrderByAggregateInput = {
   requestFingerprint?: Prisma.SortOrder
   requiresHuman?: Prisma.SortOrder
   dlqPublishedAt?: Prisma.SortOrder
+  evidenceSource?: Prisma.SortOrder
+  dlqPublishClaimToken?: Prisma.SortOrder
+  dlqPublishLeaseUntil?: Prisma.SortOrder
+  dlqNextAttemptAt?: Prisma.SortOrder
+  dlqPublishAttempts?: Prisma.SortOrder
 }
 
 export type ZapRunRetryMinOrderByAggregateInput = {
@@ -668,6 +778,11 @@ export type ZapRunRetryMinOrderByAggregateInput = {
   requestFingerprint?: Prisma.SortOrder
   requiresHuman?: Prisma.SortOrder
   dlqPublishedAt?: Prisma.SortOrder
+  evidenceSource?: Prisma.SortOrder
+  dlqPublishClaimToken?: Prisma.SortOrder
+  dlqPublishLeaseUntil?: Prisma.SortOrder
+  dlqNextAttemptAt?: Prisma.SortOrder
+  dlqPublishAttempts?: Prisma.SortOrder
 }
 
 export type ZapRunRetrySumOrderByAggregateInput = {
@@ -675,6 +790,7 @@ export type ZapRunRetrySumOrderByAggregateInput = {
   attempt?: Prisma.SortOrder
   providerStatus?: Prisma.SortOrder
   retryAfterSeconds?: Prisma.SortOrder
+  dlqPublishAttempts?: Prisma.SortOrder
 }
 
 export type ZapRunRetryNullableScalarRelationFilter = {
@@ -749,6 +865,11 @@ export type ZapRunRetryCreateWithoutExecutionInput = {
   requestFingerprint?: string | null
   requiresHuman?: boolean
   dlqPublishedAt?: Date | string | null
+  evidenceSource?: string | null
+  dlqPublishClaimToken?: string | null
+  dlqPublishLeaseUntil?: Date | string | null
+  dlqNextAttemptAt?: Date | string | null
+  dlqPublishAttempts?: number
 }
 
 export type ZapRunRetryUncheckedCreateWithoutExecutionInput = {
@@ -770,6 +891,11 @@ export type ZapRunRetryUncheckedCreateWithoutExecutionInput = {
   requestFingerprint?: string | null
   requiresHuman?: boolean
   dlqPublishedAt?: Date | string | null
+  evidenceSource?: string | null
+  dlqPublishClaimToken?: string | null
+  dlqPublishLeaseUntil?: Date | string | null
+  dlqNextAttemptAt?: Date | string | null
+  dlqPublishAttempts?: number
 }
 
 export type ZapRunRetryCreateOrConnectWithoutExecutionInput = {
@@ -807,6 +933,11 @@ export type ZapRunRetryUpdateWithoutExecutionInput = {
   requestFingerprint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   requiresHuman?: Prisma.BoolFieldUpdateOperationsInput | boolean
   dlqPublishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  evidenceSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dlqPublishClaimToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dlqPublishLeaseUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dlqNextAttemptAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dlqPublishAttempts?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type ZapRunRetryUncheckedUpdateWithoutExecutionInput = {
@@ -828,6 +959,11 @@ export type ZapRunRetryUncheckedUpdateWithoutExecutionInput = {
   requestFingerprint?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   requiresHuman?: Prisma.BoolFieldUpdateOperationsInput | boolean
   dlqPublishedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  evidenceSource?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dlqPublishClaimToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dlqPublishLeaseUntil?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dlqNextAttemptAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dlqPublishAttempts?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 
@@ -852,6 +988,11 @@ export type ZapRunRetrySelect<ExtArgs extends runtime.Types.Extensions.InternalA
   requestFingerprint?: boolean
   requiresHuman?: boolean
   dlqPublishedAt?: boolean
+  evidenceSource?: boolean
+  dlqPublishClaimToken?: boolean
+  dlqPublishLeaseUntil?: boolean
+  dlqNextAttemptAt?: boolean
+  dlqPublishAttempts?: boolean
   execution?: boolean | Prisma.ZapRunRetry$executionArgs<ExtArgs>
 }, ExtArgs["result"]["zapRunRetry"]>
 
@@ -875,6 +1016,11 @@ export type ZapRunRetrySelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   requestFingerprint?: boolean
   requiresHuman?: boolean
   dlqPublishedAt?: boolean
+  evidenceSource?: boolean
+  dlqPublishClaimToken?: boolean
+  dlqPublishLeaseUntil?: boolean
+  dlqNextAttemptAt?: boolean
+  dlqPublishAttempts?: boolean
   execution?: boolean | Prisma.ZapRunRetry$executionArgs<ExtArgs>
 }, ExtArgs["result"]["zapRunRetry"]>
 
@@ -898,6 +1044,11 @@ export type ZapRunRetrySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   requestFingerprint?: boolean
   requiresHuman?: boolean
   dlqPublishedAt?: boolean
+  evidenceSource?: boolean
+  dlqPublishClaimToken?: boolean
+  dlqPublishLeaseUntil?: boolean
+  dlqNextAttemptAt?: boolean
+  dlqPublishAttempts?: boolean
   execution?: boolean | Prisma.ZapRunRetry$executionArgs<ExtArgs>
 }, ExtArgs["result"]["zapRunRetry"]>
 
@@ -921,9 +1072,14 @@ export type ZapRunRetrySelectScalar = {
   requestFingerprint?: boolean
   requiresHuman?: boolean
   dlqPublishedAt?: boolean
+  evidenceSource?: boolean
+  dlqPublishClaimToken?: boolean
+  dlqPublishLeaseUntil?: boolean
+  dlqNextAttemptAt?: boolean
+  dlqPublishAttempts?: boolean
 }
 
-export type ZapRunRetryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "zapRunId" | "stage" | "attempt" | "lastError" | "nextRunAt" | "createdAt" | "executionId" | "provider" | "phase" | "providerOutcome" | "safeCode" | "providerStatus" | "retryAfterSeconds" | "safeReceiptId" | "actionFingerprint" | "requestFingerprint" | "requiresHuman" | "dlqPublishedAt", ExtArgs["result"]["zapRunRetry"]>
+export type ZapRunRetryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "zapRunId" | "stage" | "attempt" | "lastError" | "nextRunAt" | "createdAt" | "executionId" | "provider" | "phase" | "providerOutcome" | "safeCode" | "providerStatus" | "retryAfterSeconds" | "safeReceiptId" | "actionFingerprint" | "requestFingerprint" | "requiresHuman" | "dlqPublishedAt" | "evidenceSource" | "dlqPublishClaimToken" | "dlqPublishLeaseUntil" | "dlqNextAttemptAt" | "dlqPublishAttempts", ExtArgs["result"]["zapRunRetry"]>
 export type ZapRunRetryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   execution?: boolean | Prisma.ZapRunRetry$executionArgs<ExtArgs>
 }
@@ -959,6 +1115,11 @@ export type $ZapRunRetryPayload<ExtArgs extends runtime.Types.Extensions.Interna
     requestFingerprint: string | null
     requiresHuman: boolean
     dlqPublishedAt: Date | null
+    evidenceSource: string | null
+    dlqPublishClaimToken: string | null
+    dlqPublishLeaseUntil: Date | null
+    dlqNextAttemptAt: Date | null
+    dlqPublishAttempts: number
   }, ExtArgs["result"]["zapRunRetry"]>
   composites: {}
 }
@@ -1402,6 +1563,11 @@ export interface ZapRunRetryFieldRefs {
   readonly requestFingerprint: Prisma.FieldRef<"ZapRunRetry", 'String'>
   readonly requiresHuman: Prisma.FieldRef<"ZapRunRetry", 'Boolean'>
   readonly dlqPublishedAt: Prisma.FieldRef<"ZapRunRetry", 'DateTime'>
+  readonly evidenceSource: Prisma.FieldRef<"ZapRunRetry", 'String'>
+  readonly dlqPublishClaimToken: Prisma.FieldRef<"ZapRunRetry", 'String'>
+  readonly dlqPublishLeaseUntil: Prisma.FieldRef<"ZapRunRetry", 'DateTime'>
+  readonly dlqNextAttemptAt: Prisma.FieldRef<"ZapRunRetry", 'DateTime'>
+  readonly dlqPublishAttempts: Prisma.FieldRef<"ZapRunRetry", 'Int'>
 }
     
 

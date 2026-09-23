@@ -121,8 +121,8 @@ Once a claim is secured, [`apps/worker/orchestration.ts`](../apps/worker/orchest
 When a provider rejects an action, persistence fails after a provider call, or a lease expires:
 
 1. `execution-store.ts` sanitizes allowlisted evidence and computes SHA-256 action/request fingerprints.
-2. One PostgreSQL transaction fences the execution, finalizes the attempt, and creates exactly one linked `ZapRunRetry`. Its UUID is the future shared `failureId`.
-3. The worker does not publish Kafka DLQ messages. Phase 3C will publish durable failure rows by `failureId` and stamp `dlqPublishedAt` only after broker acknowledgement.
+2. One PostgreSQL transaction fences the execution, finalizes the attempt, and creates exactly one linked `ZapRunRetry`. Its UUID is the shared `failureId`.
+3. The action worker does not publish Kafka DLQ messages. The separate Phase 3C publisher publishes durable failure rows by `failureId` and stamps `dlqPublishedAt` only after broker acknowledgement. Its reconciler repairs expired or unlinked execution failures using database transactions only.
 
 ---
 

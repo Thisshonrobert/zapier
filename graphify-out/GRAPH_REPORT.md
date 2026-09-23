@@ -1,17 +1,17 @@
 # Graph Report - zapier  (2026-09-23)
 
 ## Corpus Check
-- 197 files · ~133,940 words
+- 207 files · ~138,437 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 18 file(s) not represented in the graph (top: (none) 6, .toml 2, .css 2)
 
 ## Summary
-- 2631 nodes · 3239 edges · 125 communities (79 shown, 41 thin omitted)
+- 2686 nodes · 3306 edges · 136 communities (90 shown, 41 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 23 edges (avg confidence: 0.91)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `d91f2e5b`
+- Built from commit: `283803ac`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -64,7 +64,7 @@
 - ZapRunRetryDelegate
 - create/page.tsx
 - compilerOptions
-- layout.tsx
+- zapStore.ts
 - worker/package.json
 - graph.ts
 - processor/package.json
@@ -136,6 +136,17 @@
 - 0001-existing-python-fastapi-pydantic-foundation.md
 - 0002-typescript-first-ai-learning.md
 - NOTES.md
+- dashboard/page.tsx
+- lucide-react
+- dlq-publisher-index.ts
+- dlq-reconciler.ts
+- devDependencies
+- Phase 3C Durable DLQ Publication Design
+- app/page.tsx
+- dlq-publisher.test.ts
+- scripts
+- Global Constraints
+- Q: Start Phase 3C durable DLQ publication and reconciliation
 
 ## God Nodes (most connected - your core abstractions)
 1. `cn()` - 61 edges
@@ -168,7 +179,7 @@
 - **Zap Execution Event Flow** — readme_transactional_outbox, readme_kafka_zap_events, readme_worker_action_execution [EXTRACTED 1.00]
 - **Idempotency Defense Layers** — docs_architecture_transactional_outbox, docs_worker_execution_lease, docs_kafka_manual_offset_commits [INFERRED 0.95]
 
-## Communities (125 total, 41 thin omitted)
+## Communities (136 total, 41 thin omitted)
 
 ### Community 0 - "prismaNamespace.ts"
 Cohesion: 0.02
@@ -219,16 +230,16 @@ Cohesion: 0.03
 Nodes (77): AggregateZapRunRetry, BoolFieldUpdateOperationsInput, GetZapRunRetryAggregateType, GetZapRunRetryGroupByPayload, NullableDateTimeFieldUpdateOperationsInput, NullableIntFieldUpdateOperationsInput, ZapRunRetry$executionArgs, ZapRunRetryAggregateArgs (+69 more)
 
 ### Community 12 - "idempotency.test.ts"
-Cohesion: 0.11
-Nodes (27): actionRegistry, getActionHandler(), createFingerprints(), accepted, acceptedRun, Call, dbFailure, harness() (+19 more)
+Cohesion: 0.12
+Nodes (25): getActionHandler(), createFingerprints(), accepted, acceptedRun, Call, dbFailure, harness(), rejected (+17 more)
 
 ### Community 13 - "eslint-config/package.json"
 Cohesion: 0.08
 Nodes (34): config, nextJsConfig, devDependencies, eslint, eslint-config-prettier, @eslint/js, eslint-plugin-only-warn, eslint-plugin-react (+26 more)
 
 ### Community 14 - "cn"
-Cohesion: 0.10
-Nodes (29): Badge(), badgeVariants, Button(), buttonVariants, Card(), CardAction(), CardContent(), CardDescription() (+21 more)
+Cohesion: 0.13
+Nodes (23): Button(), buttonVariants, Card(), CardAction(), CardContent(), CardDescription(), CardFooter(), CardHeader() (+15 more)
 
 ### Community 15 - "commonInputTypes.ts"
 Cohesion: 0.05
@@ -243,20 +254,20 @@ Cohesion: 0.07
 Nodes (27): dependencies, @prisma/client, @prisma/extension-accelerate, devDependencies, prettier, prisma, turbo, typescript (+19 more)
 
 ### Community 18 - "history/page.tsx"
-Cohesion: 0.09
-Nodes (33): Connection, ConnectionsPage(), formatDate(), toConnections(), DashboardPage(), SCRATCH_CARDS, FILTER_CHIPS, HistoryPage() (+25 more)
+Cohesion: 0.15
+Nodes (15): Connection, ConnectionsPage(), formatDate(), toConnections(), FILTER_CHIPS, STATUS_STYLES, Input(), LoaderOne() (+7 more)
 
 ### Community 19 - "Appbar.tsx"
-Cohesion: 0.14
-Nodes (20): Avatar(), AvatarFallback(), AvatarImage(), DropdownMenu(), DropdownMenuContent(), DropdownMenuGroup(), DropdownMenuItem(), DropdownMenuLabel() (+12 more)
+Cohesion: 0.13
+Nodes (21): Avatar(), AvatarFallback(), AvatarImage(), DropdownMenu(), DropdownMenuCheckboxItem(), DropdownMenuContent(), DropdownMenuGroup(), DropdownMenuItem() (+13 more)
 
 ### Community 20 - "frontend/package.json"
 Cohesion: 0.07
-Nodes (27): @clerk/nextjs, eslint, react, react-dom, @types/node, @types/react, @types/react-dom, typescript (+19 more)
+Nodes (26): @clerk/nextjs, eslint, react, react-dom, @types/node, @types/react, @types/react-dom, typescript (+18 more)
 
 ### Community 21 - "dependencies"
-Cohesion: 0.06
-Nodes (35): dependencies, axios, class-variance-authority, @clerk/nextjs, clsx, jwt-decode, lucide-react, motion (+27 more)
+Cohesion: 0.08
+Nodes (25): dependencies, axios, class-variance-authority, @clerk/nextjs, clsx, jwt-decode, lucide-react, motion (+17 more)
 
 ### Community 23 - "prismaNamespaceBrowser.ts"
 Cohesion: 0.08
@@ -299,28 +310,28 @@ Cohesion: 0.16
 Nodes (14): authMiddleware(), DecodedToken, Express, Request, clerk, router, router, zapRouter (+6 more)
 
 ### Community 33 - "login/page.tsx"
-Cohesion: 0.13
-Nodes (10): LoginResponse, BACKEND_URL, HOOKS_URL, Appbar(), PrimaryButton(), CheckFeature(), Hero(), HeroVideo() (+2 more)
+Cohesion: 0.18
+Nodes (8): LoginResponse, BACKEND_URL, HOOKS_URL, PrimaryButton(), CheckFeature(), Input(), axios, sonner
 
 ### Community 34 - "dialog.tsx"
-Cohesion: 0.18
-Nodes (12): Dialog(), DialogClose(), DialogContent(), DialogDescription(), DialogFooter(), DialogHeader(), DialogOverlay(), DialogTitle() (+4 more)
+Cohesion: 0.26
+Nodes (8): Dialog(), DialogContent(), DialogDescription(), DialogHeader(), DialogTitle(), DialogTrigger(), SecondaryButton(), FeatureComponent()
 
 ### Community 46 - "create/page.tsx"
-Cohesion: 0.10
-Nodes (36): metadata, action, TriggerTestResult, useZapStore, zapData, Email(), Telegram(), ActionNode (+28 more)
+Cohesion: 0.13
+Nodes (20): CustomTrigger(), TriggerNode, ActionItem, ActionResponse, App(), nodeTypes, TriggerItem, TriggerResponse (+12 more)
 
 ### Community 47 - "compilerOptions"
 Cohesion: 0.12
 Nodes (16): compilerOptions, declaration, declarationMap, esModuleInterop, incremental, isolatedModules, lib, module (+8 more)
 
-### Community 48 - "layout.tsx"
-Cohesion: 0.22
-Nodes (6): nextConfig, geistMono, geistSans, inter, Toaster(), next
+### Community 48 - "zapStore.ts"
+Cohesion: 0.14
+Nodes (11): nextConfig, geistMono, geistSans, inter, metadata, action, TriggerTestResult, zapData (+3 more)
 
 ### Community 49 - "worker/package.json"
 Cohesion: 0.12
-Nodes (15): dependencies, resend, devDependencies, @types/bun, @types/bun, typescript, module, name (+7 more)
+Nodes (16): dependencies, resend, devDependencies, @types/bun, @types/bun, typescript, module, name (+8 more)
 
 ### Community 50 - "graph.ts"
 Cohesion: 0.08
@@ -371,16 +382,16 @@ Cohesion: 0.22
 Nodes (10): Delivery and State Invariants, Action Handler Contract, Action Registry, Event-Driven System Topology, Transactional Outbox Communication Boundary, ADR Transactional Outbox, Distributed Lease Claim, Workflow Execution Lifecycle (+2 more)
 
 ### Community 62 - "execution-store.ts"
-Cohesion: 0.12
-Nodes (21): canonicalJson(), ClaimDecision, createExecutionStore(), Delegate, DurableFailureEvidence, ExecutionDb, ExecutionKey, FinalizeDecision (+13 more)
+Cohesion: 0.15
+Nodes (16): canonicalJson(), ClaimDecision, createExecutionStore(), Delegate, DurableFailureEvidence, ExecutionDb, ExecutionKey, FinalizeDecision (+8 more)
 
 ### Community 63 - "primary_backend/index.ts"
 Cohesion: 0.16
 Nodes (11): app, actionRouter, router, router, triggerRouter, userRouter, kafka, app (+3 more)
 
 ### Community 64 - "durable-failures-schema.test.ts"
-Cohesion: 0.24
-Nodes (9): PrismaClient, assertField(), attempt, attemptFields, field(), generatedClient, migrationPath, model() (+1 more)
+Cohesion: 0.22
+Nodes (10): PrismaClient, assertField(), attempt, attemptFields, dlqMigrationPath, field(), generatedClient, migrationPath (+2 more)
 
 ### Community 66 - "typescript-config/package.json"
 Cohesion: 0.29
@@ -399,7 +410,7 @@ Cohesion: 0.33
 Nodes (5): compilerOptions, jsx, extends, ./base.json, $schema
 
 ### Community 73 - "actions/telegram.ts"
-Cohesion: 0.22
+Cohesion: 0.21
 Nodes (15): boundedPositiveInteger(), FetchTransport, readJson(), resolutionError(), resolveChatId(), retryAfter(), safeIdentifier(), sendError() (+7 more)
 
 ### Community 79 - "kafkajs-bun-fix.js"
@@ -419,8 +430,8 @@ Cohesion: 0.12
 Nodes (16): compilerOptions, allowImportingTsExtensions, lib, module, moduleDetection, moduleResolution, noEmit, noFallthroughCasesInSwitch (+8 more)
 
 ### Community 104 - "actions/email.ts"
-Cohesion: 0.20
-Nodes (12): emailAction, EmailTransport, resend, resendErrorNames, safeEmailCode(), safeReceipt(), sendEmail(), captureFailure() (+4 more)
+Cohesion: 0.14
+Nodes (19): emailAction, EmailTransport, resend, resendErrorNames, safeEmailCode(), safeReceipt(), sendEmail(), captureFailure() (+11 more)
 
 ### Community 105 - "6. Phases, dependencies and teaching workflow"
 Cohesion: 0.12
@@ -486,9 +497,53 @@ Nodes (3): config, LogOptions, PrismaClientConstructor
 Cohesion: 0.40
 Nodes (4): Gaps, Knowledge, Production AI Service Resources, Wisdom (Communities)
 
+### Community 125 - "dashboard/page.tsx"
+Cohesion: 0.16
+Nodes (18): DashboardPage(), SCRATCH_CARDS, HistoryPage(), preview(), ZapDetailPage(), authHeaders(), useZap(), useZapRuns() (+10 more)
+
+### Community 126 - "lucide-react"
+Cohesion: 0.23
+Nodes (15): useZapStore, Email(), Telegram(), ActionNode, CustomAction(), Badge(), badgeVariants, btnPrimary (+7 more)
+
+### Community 127 - "dlq-publisher-index.ts"
+Cohesion: 0.16
+Nodes (13): createDlqPublisher(), DlqPublisherDb, dueWhere(), DurableFailureEvent, evidenceSources, FailureRow, main(), ProcessDependencies (+5 more)
+
+### Community 128 - "dlq-reconciler.ts"
+Cohesion: 0.18
+Nodes (7): ExecutionRow, ReconcilerDb, ReconcilerTx, STALE, execution, now, Row
+
+### Community 129 - "devDependencies"
+Cohesion: 0.20
+Nodes (10): devDependencies, eslint, eslint-config-next, tailwindcss, @tailwindcss/postcss, tw-animate-css, @types/node, @types/react (+2 more)
+
+### Community 130 - "Phase 3C Durable DLQ Publication Design"
+Cohesion: 0.25
+Nodes (7): Data model, Goal, Phase 3C Durable DLQ Publication Design, Publication boundary, Reconciliation, Runtime, Verification
+
+### Community 131 - "app/page.tsx"
+Cohesion: 0.40
+Nodes (3): Appbar(), Hero(), HeroVideo()
+
+### Community 132 - "dlq-publisher.test.ts"
+Cohesion: 0.47
+Nodes (5): base, createdAt, fakeDb(), matches(), Row
+
+### Community 133 - "scripts"
+Cohesion: 0.40
+Nodes (5): scripts, build, dev, lint, start
+
+### Community 134 - "Global Constraints"
+Cohesion: 0.40
+Nodes (4): Global Constraints, Phase 3C Durable DLQ Publication Implementation Plan, Task 1: Phase 3C-A — Fenced Durable Failure Publisher, Task 2: Phase 3C-B — Reconciliation and Separate Runtime
+
+### Community 135 - "Q: Start Phase 3C durable DLQ publication and reconciliation"
+Cohesion: 0.40
+Nodes (4): Answer, Outcome, Q: Start Phase 3C durable DLQ publication and reconciliation, Source Nodes
+
 ## Knowledge Gaps
-- **1784 isolated node(s):** `name`, `version`, `private`, `type`, `dev` (+1779 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 2127 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **1813 isolated node(s):** `name`, `version`, `private`, `type`, `dev` (+1808 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 2163 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 - **41 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
@@ -496,12 +551,12 @@ _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `PrismaClient` connect `PrismaClient` to `prismaNamespace.ts`, `class.ts`?**
   _High betweenness centrality (0.024) - this node is a cross-community bridge._
-- **Why does `TestTriggerBufferDelegate` connect `TestTriggerBufferDelegate` to `TestTriggerBuffer.ts`?**
-  _High betweenness centrality (0.017) - this node is a cross-community bridge._
-- **Why does `ActionDelegate` connect `ActionDelegate` to `Action.ts`?**
-  _High betweenness centrality (0.011) - this node is a cross-community bridge._
+- **Why does `Prisma__TriggerClient` connect `Prisma__TriggerClient` to `Trigger.ts`?**
+  _High betweenness centrality (0.014) - this node is a cross-community bridge._
+- **Why does `TriggerDelegate` connect `TriggerDelegate` to `Trigger.ts`?**
+  _High betweenness centrality (0.010) - this node is a cross-community bridge._
 - **What connects `name`, `version`, `private` to the rest of the system?**
-  _1784 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _1813 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `prismaNamespace.ts` be split into smaller, more focused modules?**
   _Cohesion score 0.015267175572519083 - nodes in this community are weakly interconnected._
 - **Should `Zap.ts` be split into smaller, more focused modules?**

@@ -51,8 +51,9 @@ flowchart TD
     Worker -->|"Dispatches Action"| ResendAPI
     Worker -->|"Dispatches Action"| TelegramAPI
     Worker -->|"Produces next stage {stage+1}"| KafkaBus
-    Worker -->|"On failure: DLQ event + ZapRunRetry row"| KafkaBus
-    Worker -->|"On failure: Writes ZapRunRetry"| Postgres
+    Worker -->|"On terminal failure: Writes ZapRunRetry"| Postgres
+    DlqPublisher["Phase 3C DLQ publisher/reconciler"] -->|"Publishes sanitized failureId envelope"| KafkaBus
+    DlqPublisher -->|"Claims/stamps publication and reconciles"| Postgres
 ```
 
 ---

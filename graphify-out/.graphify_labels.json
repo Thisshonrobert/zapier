@@ -47,7 +47,7 @@
   "45": "ZapRunRetryDelegate",
   "46": "create/page.tsx",
   "47": "compilerOptions",
-  "48": "layout.tsx",
+  "48": "zapStore.ts",
   "49": "worker/package.json",
   "50": "graph.ts",
   "51": "processor/package.json",
@@ -123,5 +123,16 @@
   "121": "Production AI Service Resources",
   "122": "0001-existing-python-fastapi-pydantic-foundation.md",
   "123": "0002-typescript-first-ai-learning.md",
-  "124": "NOTES.md"
+  "124": "NOTES.md",
+  "125": "dashboard/page.tsx",
+  "126": "lucide-react",
+  "127": "dlq-publisher-index.ts",
+  "128": "dlq-reconciler.ts",
+  "129": "devDependencies",
+  "130": "Phase 3C Durable DLQ Publication Design",
+  "131": "app/page.tsx",
+  "132": "dlq-publisher.test.ts",
+  "133": "scripts",
+  "134": "Global Constraints",
+  "135": "Q: Start Phase 3C durable DLQ publication and reconciliation"
 }

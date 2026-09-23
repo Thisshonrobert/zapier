@@ -184,7 +184,12 @@ export const ZapRunRetryScalarFieldEnum = {
   actionFingerprint: 'actionFingerprint',
   requestFingerprint: 'requestFingerprint',
   requiresHuman: 'requiresHuman',
-  dlqPublishedAt: 'dlqPublishedAt'
+  dlqPublishedAt: 'dlqPublishedAt',
+  evidenceSource: 'evidenceSource',
+  dlqPublishClaimToken: 'dlqPublishClaimToken',
+  dlqPublishLeaseUntil: 'dlqPublishLeaseUntil',
+  dlqNextAttemptAt: 'dlqNextAttemptAt',
+  dlqPublishAttempts: 'dlqPublishAttempts'
 } as const
 
 export type ZapRunRetryScalarFieldEnum = (typeof ZapRunRetryScalarFieldEnum)[keyof typeof ZapRunRetryScalarFieldEnum]
