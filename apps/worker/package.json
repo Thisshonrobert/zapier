@@ -4,8 +4,8 @@
   "type": "module",
   "private": true,
   "scripts": {
-    
-    "dev": "bun  run index.ts"
+    "dev": "bun run index.ts",
+    "dev:dlq": "bun run dlq-publisher-index.ts"
   },
   "devDependencies": {
     "@types/bun": "latest"

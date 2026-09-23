@@ -109,8 +109,14 @@ model ZapRunRetry {
   requestFingerprint String?
   requiresHuman      Boolean          @default(true)
   dlqPublishedAt     DateTime?
+  evidenceSource     String?
+  dlqPublishClaimToken String?
+  dlqPublishLeaseUntil DateTime?
+  dlqNextAttemptAt   DateTime?
+  dlqPublishAttempts Int              @default(0)
 
   @@index([zapRunId])
+  @@index([dlqPublishedAt, dlqNextAttemptAt])
 }
 
 // Durable action-stage execution fenced by a per-claim token.

@@ -1,12 +1,12 @@
 # DLQ failure taxonomy and investigation requirements
 
-Status: proposed AI-layer requirements, updated for Phase 3B on 2026-09-23. The worker now records bounded attempt/failure evidence; no remediation, approval, DLQ publication, or replay implementation is implied by this document.
+Status: proposed AI-layer requirements, updated for Phase 3C on 2026-09-23. The system records bounded attempt/failure evidence and publishes sanitized DLQ envelopes through a separate runtime; no remediation, approval, or replay implementation is implied by this document.
 
 Read the [master plan](../ai-dlq-master-plan.md) for phases and tool contracts, and the existing [worker](../worker.md), [actions](../actions.md), [Kafka](../kafka.md), and [idempotency](../idempotency.md) documentation for the foundation. Code takes precedence where those documents overstate guarantees.
 
 ## Evidence that actually exists
 
-- `ZapRunRetry`: durable terminal failure row whose UUID is the future shared `failureId`; it links uniquely to an execution and stores bounded outcome/code/status/delay/receipt fields, fingerprints, `requiresHuman`, and nullable future `dlqPublishedAt`. Legacy `lastError` remains nullable and new writes do not populate it.
+- `ZapRunRetry`: durable terminal failure row whose UUID is the shared `failureId` and Kafka message key; it links uniquely to an execution and stores bounded outcome/code/status/delay/receipt fields, fingerprints, `requiresHuman`, evidence provenance, publication claim state, backoff state, and nullable `dlqPublishedAt`. Legacy `lastError` remains nullable and new writes do not populate it.
 - `ZapRunExecutionAttempt`: one `STARTED` row followed by one bounded final outcome per provider attempt. It stores provider/phase, safe evidence, fingerprints, and timestamps; it never stores raw provider responses or secrets.
 - `ZapRunExecution`: one mutable row per `(zapRunId, stage)` with a per-claim fencing token, status, lease, fingerprints, provider outcome, and human-review flag. Expired `PENDING` is quarantined as `UNKNOWN`, not reclaimed for another provider call.
 - `ZapRun.metadata`: original stored trigger payload. The worker reads the current Zap action definition; it does not retain an immutable execution-time action snapshot. `ZapRun` itself has no creation timestamp.
@@ -76,8 +76,8 @@ Implementation language revision: tools and agent orchestration live in the Type
 
 ## F05 — Unsupported action type
 
-- **Example failure / reachability:** an `AvailableAction.id` does not match `email` or `telegram`. Orchestration records attempt `0` as `NOT_ATTEMPTED` and atomically links a durable `ZapRunRetry` row.
-- **Evidence available:** FAILED execution row, safe code `unsupported_action_type`, fingerprints, linked failure ID, current action type and registry keys. No provider call occurs.
+- **Example failure / reachability:** an `AvailableAction.id` does not match `email` or `telegram`. Orchestration records attempt `0` as `NOT_ATTEMPTED` and atomically links a durable `ZapRunRetry` row; the separate publisher later emits its sanitized envelope.
+- **Evidence available:** FAILED execution row, safe code `unsupported_action_type`, fingerprints, linked failure ID, publication state, current action type and registry keys. No provider call occurs.
 - **Evidence required:** deployed handler/version mapping and whether the definition changed after failure.
 - **Investigation steps:** identify this as a DLQ coverage gap; use a reconciled execution case when that support exists; compare type with supported registry; verify stage sequence.
 - **Tool required:** execution evidence and input validation; context must explicitly identify a reconciled non-DLQ case.
@@ -124,12 +124,12 @@ Implementation language revision: tools and agent orchestration live in the Type
 
 ## F09 — Lost/split DLQ evidence or stalled stage publication
 
-- **Example failure / reachability:** next-stage publication can fail after `SUCCESS` and before offset commit. Phase 3B no longer has a worker dual-sink race: terminal failure and `ZapRunRetry` commit together; future Phase 3C publication can fail independently and must reconcile by `failureId`.
-- **Evidence available:** execution and linked retry rows, `failureId`, `dlqPublishedAt` when Phase 3C exists, and broker acknowledgement state. A successful stage may republish its successor on redelivery.
+- **Example failure / reachability:** next-stage publication can fail after `SUCCESS` and before offset commit. Phase 3B has no worker dual-sink race: terminal failure and `ZapRunRetry` commit together; Phase 3C publication can fail independently and reconciles by `failureId`.
+- **Evidence available:** execution and linked retry rows, `failureId`, publication claim/attempt state, `dlqPublishedAt`, and broker acknowledgement state. A successful stage may republish its successor on redelivery.
 - **Evidence required:** original failure ID/envelope, publication/receipt records, reconciliation watermark, broker health, stage completion evidence. Historical evidence lost from both sinks cannot be recreated.
 - **Investigation steps:** report source completeness; inspect stage status before recommending action replay; distinguish progression recovery from repeating the action; quarantine unowned records.
 - **Tool required:** execution evidence and context for available authorized cases; runbook retrieval. Sink reconciliation is a deterministic service responsibility.
-- **Possible remediation:** repair future failure publication and reconcile stored cases by `failureId`; preserve the durable failure record before claiming reliable triage coverage. Recover stage progression separately from action execution.
+- **Possible remediation:** repair failure publication and reconcile stored cases by `failureId`; preserve the durable failure record before claiming reliable triage coverage. Recover stage progression separately from action execution.
 - **Replay safe?** Block action replay when evidence is missing or SUCCESS is recorded. Progression recovery requires its own deterministic ordering checks.
 - **Human approval required?** Operator repair/reconciliation required; no blanket bulk replay approval.
 - **Evaluation:** each sink unavailable independently and together, database failure after provider success, next-stage publish failure; assert partial/unknown evidence, no fabricated errors, and eventual visibility in the hardened path.

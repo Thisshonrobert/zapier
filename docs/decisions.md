@@ -32,12 +32,12 @@ This document records the foundational architectural decisions established in th
 
 ---
 
-## ADR 004: Durable Failure Record Before Future DLQ Publication
+## ADR 004: Durable Failure Record and Separate DLQ Publication
 
 - **Status**: Implemented
 - **Files**: [`apps/worker/execution-store.ts`](../apps/worker/execution-store.ts), [`packages/db/prisma/schema.prisma`](../packages/db/prisma/schema.prisma)
-- **Decision**: The worker atomically persists terminal `FAILED` execution state, one linked `ZapRunExecutionAttempt` outcome, and one `ZapRunRetry` row. The retry row UUID is the canonical `failureId`; raw provider responses, credentials, payloads, and arbitrary errors are excluded. Phase 3C will publish sanitized failure envelopes to `zap-events-dlq` after broker acknowledgement.
-- **Rationale**: PostgreSQL is the execution source of truth. Separating durable failure recording from later Kafka publication prevents a broker failure from erasing failure evidence or authorizing provider replay.
+- **Decision**: The action worker atomically persists terminal `FAILED` execution state, one linked `ZapRunExecutionAttempt` outcome, and one `ZapRunRetry` row. A separate Phase 3C runtime claims due retry rows, publishes sanitized failure envelopes to `zap-events-dlq` keyed by the retry UUID `failureId`, and stamps `dlqPublishedAt` only after broker acknowledgement. Reconciliation repairs expired or unlinked execution failures transactionally and never invokes providers.
+- **Rationale**: PostgreSQL is the execution source of truth. Separating durable failure recording from Kafka publication prevents broker failure from erasing evidence, while fenced claims and bounded backoff make publication retryable without retrying provider side effects.
 
 ---
 

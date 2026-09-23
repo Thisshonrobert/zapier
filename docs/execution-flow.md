@@ -48,7 +48,11 @@ sequenceDiagram
             Worker->>Kafka: publishNextStage(): producer.send(topic: 'zap-events', value: { zapRunId, stage: 1 })
         else Action Failed Exhaustively (3 attempts)
             Worker->>DB: Update ZapRunExecution status = FAILED
-            Worker->>DLQ: deadLetter(): Send to zap-events-dlq & INSERT into ZapRunRetry
+            Worker->>Postgres: Atomically persist FAILED + linked ZapRunRetry
+            Note over Worker,Postgres: No provider retry and no direct DLQ publication
+            DlqPublisher->>Postgres: Claim due failureId or reconcile missing failure
+            DlqPublisher->>DLQ: Publish sanitized envelope keyed by failureId
+            DlqPublisher->>Postgres: Stamp dlqPublishedAt after broker ACK
         end
     else Already SUCCESS
         Worker->>Kafka: Skip execution, advance next stage if applicable
@@ -136,7 +140,8 @@ sequenceDiagram
    - If more actions exist in the Zap (`stage < totalActions - 1`), the worker produces `{ zapRunId, stage: stage + 1 }` to `zap-events`.
 2. **On Failure (Exhausted Retries)**:
    - `updateExecutionStatus(zapRunId, stage, "FAILED")` sets `status: "FAILED"`.
-   - `deadLetter()` in [`apps/worker/deadletter.ts`](../apps/worker/deadletter.ts) simultaneously produces an error payload to topic `zap-events-dlq` and inserts a diagnostic row into PostgreSQL table `ZapRunRetry`.
+  - The action worker persists a sanitized, linked `ZapRunRetry` failure record in one transaction.
+  - The separate Phase 3C runtime publishes that row to `zap-events-dlq` by `failureId`, stamps `dlqPublishedAt` only after broker acknowledgement, and reconciles expired or unlinked execution rows without invoking providers.
 3. **Offset Commit**:
    - After processing, skipping, or dead-lettering, the worker commits the Kafka offset:
      ```typescript

@@ -17,7 +17,7 @@ This document provides a factual assessment of what is currently implemented in 
 
 - **Fenced Single-Shot Execution**: `ZapRunExecution` uses a per-claim token, durable attempt rows, bounded fingerprints, and 2-minute lease quarantine. A stale worker cannot finalize a newer claim.
 - **Durable Failure Evidence**: Terminal `FAILED` state and one linked `ZapRunRetry` row commit atomically with sanitized provider outcome and `requiresHuman` evidence.
-- **Kafka ACK Gating**: Only durable `SUCCESS` or linked durable `FAILED` messages are acknowledged. Phase 3C will publish failures from durable rows; the worker is not a DLQ producer.
+- **Kafka ACK Gating**: Only durable `SUCCESS` or linked durable `FAILED` messages are acknowledged. A separate Phase 3C publisher delivers sanitized failure envelopes by `failureId` and stamps `dlqPublishedAt` after broker ACK; its reconciler repairs missing failure coverage without provider calls.
 - **Action Extensibility Registry**: Pluggable `ActionHandler` interface with active handlers for Resend Email and Telegram Bot API.
 - **Template Expression Parsing**: Dot-notated mustache syntax (`{{data.user.email}}`) resolved against execution metadata.
 
@@ -39,7 +39,7 @@ This document provides a factual assessment of what is currently implemented in 
    - Workflows currently execute strictly as a single linear sequence sorted by `sortingOrder: 0, 1, 2...`.
    - Branching conditions, conditional filtering (`if/else`), parallel execution branches, and loops are not yet modeled in the database schema or worker.
 2. **Failure publication and replay**:
-   - `ZapRunRetry.id` is the future `failureId`. Phase 3C publication/reconciliation and any human-controlled replay or approval API are not implemented.
+   - Phase 3C publication and reconciliation are implemented as a separate worker runtime. Human-controlled replay and approval APIs remain unimplemented; DLQ publication never authorizes replay.
 3. **Third-Party delivery uncertainty**:
    - Resend requests include an idempotency key and Telegram lacks provider-level idempotency. Provider acceptance followed by persistence failure remains `UNKNOWN` and requires human review; the worker never resends automatically.
 4. **Single-Threaded Outbox Poller**:

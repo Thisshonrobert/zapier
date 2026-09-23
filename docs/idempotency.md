@@ -95,4 +95,4 @@ The idempotency model is covered by automated unit tests in [`apps/worker/idempo
 - **Scenario B**: Immediate Kafka redelivery after `SUCCESS` (skips side-effect execution).
 - **Scenario C**: Active `PENDING` is not executed or acknowledged; expired `PENDING` is quarantined without a provider call.
 - **Scenario D**: Claim-token fencing blocks stale workers from changing attempts or terminal state.
-- **Scenario E**: Terminal failure atomically links one `ZapRunRetry` record; the worker does not publish directly to a DLQ.
+- **Scenario E**: Terminal failure atomically links one `ZapRunRetry` record; the separate publisher may publish that record more than once only with the same `failureId`, and consumers deduplicate it.
