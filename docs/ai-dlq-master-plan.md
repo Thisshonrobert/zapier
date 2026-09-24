@@ -1,6 +1,6 @@
 # Autonomous DLQ Triage Agent — master implementation plan
 
-> **Status: Phase 1 implemented in TypeScript; Phases 2–15 remain proposed.** Prepared 2026-09-18 against source at `22da39e`; Phase 1 was migrated to the existing Bun/TypeScript stack on 2026-09-21. Implement only the phase explicitly requested next, using the repository teaching workflow and `executing-plans`; finish its tests and review before advancing.
+> **Status: Phases 1–4 implemented; Phase 5 is next.** Phase 4A-4C verification: 65 focused tests passed, 3 PostgreSQL integration tests passed, and type check/lint/build passed with the existing Next/Yarn-Corepack warnings. Scope revised 2026-09-24. Phase 5 simulated runbooks and later diagnosis, approval, replay, and frontend work remain deferred.
 
 **Goal:** investigate failed workflow stages, gather bounded evidence, propose grounded remediation, enforce deterministic safety and human approval, and hand eligible replay to application code.
 
@@ -8,56 +8,43 @@
 
 **Stack:** Bun, TypeScript, Express, Zod and LangGraph.js for the AI service; PostgreSQL for durable agent state when required. Existing Prisma, KafkaJS and Next.js remain in place. Add one model adapter initially; RAG and Langfuse remain in their planned phases. The agent is an ordinary `apps/*` workspace with dependencies in the shared Bun lockfile.
 
-**Requirements and navigation:** this document owns sequencing, boundaries and teaching goals. [Failure taxonomy](AI/failure-taxonomy.md) owns scenarios/evidence. [ADRs 009–018](decisions.md#adr-009-read-only-single-agent-triage-boundary) own new proposed decisions. Reuse [architecture](architecture.md), [execution flow](execution-flow.md), [worker](worker.md), [Kafka](kafka.md), [actions](actions.md), [idempotency](idempotency.md), [repository structure](repository-structure.md), [current state](current-state.md), and [verification commands](tooling_Verification.md); do not duplicate their service setup instructions.
+**Requirements and navigation:** this document owns sequencing, release scope and implementation boundaries. [Failure taxonomy](AI/failure-taxonomy.md) owns scenarios/evidence. [ADRs 009–018](decisions.md#adr-009-read-only-single-agent-triage-boundary) own new proposed decisions. Reuse [architecture](architecture.md), [execution flow](execution-flow.md), [worker](worker.md), [Kafka](kafka.md), [actions](actions.md), [idempotency](idempotency.md), [repository structure](repository-structure.md), [current state](current-state.md), and [verification commands](tooling_Verification.md); do not duplicate their service setup instructions.
 
 ## 1. Current AI-relevant architecture
 
-The existing path is webhook transaction -> `ZapRun` + `ZapRunOutbox` -> processor -> `zap-events` -> ordered worker action -> next stage or dead-letter sinks. This is a linear sequence, not a general branching DAG. The AI triage graph is a separate control workflow; it does not change the user's Zap graph.
+The existing path is webhook transaction -> run/outbox -> processor -> Kafka -> ordered worker actions -> durable execution/failure evidence -> separate DLQ publisher. Workflows are linear sequences, not a general branching DAG. The AI investigation graph is a separate control workflow.
 
-| Actual code                                                                                                                                                              | Reusable behavior                                                                                   | AI implication                                                                                                                      |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| [Webhook](../apps/webhook/index.ts), [processor](../apps/processor/index.ts)                                                                                             | Transactional ingestion and ACK-before-delete publishing of stage zero                              | Preserve; initial outbox cannot replay arbitrary stages because it stores no stage and processor hardcodes zero                     |
-| [Worker](../apps/worker/index.ts), `claimExecution`, `executeClaimedAction`, `publishNextStage`                                                                          | Atomic create/reclaim of execution lease; three attempts; ordered stage publication; manual offsets | Keep as executor; FAILED is terminal, so republishing alone does not replay                                                         |
-| [Retry](../apps/worker/retry.ts), [deadletter](../apps/worker/deadletter.ts)                                                                                             | Full-jitter retry; sequential independent attempts to write Kafka DLQ and SQL retry row             | Useful evidence sources, but neither guaranteed complete nor a replay scheduler                                                     |
-| [Schema](../packages/db/prisma/schema.prisma)                                                                                                                            | Retry rows, execution state, trigger payload, current action definitions and owner relation         | Read explicit joins; retry/execution models have no FK relation to run and can be orphaned                                          |
-| [Registry](../apps/worker/actions/index.ts), [email](../apps/worker/actions/email.ts), [Telegram](../apps/worker/actions/telegram.ts), [parser](../apps/worker/parse.ts) | Real integrations, stable per-run/stage idempotency key, template parsing                           | Investigate concrete email/Telegram cases; dry-run inputs without calling handlers                                                  |
-| [API](../apps/primary_backend/route/zap.ts), [middleware](../apps/primary_backend/middleware.ts)                                                                         | JWT user identity, owner-filtered Zap/run queries and retry counts                                  | Reuse identity/ownership patterns; add case-level authorization on every read, approval and stream                                  |
-| [History UI](../apps/frontend/src/app/history/page.tsx), [Zap detail](../apps/frontend/src/app/zap/[id]/page.tsx), [hooks](../apps/frontend/src/hooks/useZaps.ts)        | Existing shell, authenticated fetch, run list and inspect pages                                     | Extend these; `Autoreplay` is currently an `MvpAction` placeholder                                                                  |
-| [Worker tests](../apps/worker/idempotency.test.ts)                                                                                                                       | Lightweight assert-based checks; retry/deadletter scripts import real helpers                       | Lease test copies orchestration into a Map simulation; it does not establish real DB concurrency or external exactly-once execution |
+| Completed phase                          | Evidence and implementation boundary                                                                                                                                                                                                                                                                                                 |
+| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 1 — Fixture investigator                 | `apps/ai_agent/src/graph.ts`, contracts, injected fixture model, local preview API/CLI and tests. The fixture path remains available alongside the Phase 4 live read-only path.                                                                                                                                                      |
+| 2 — Evaluation foundation                | [Implementation plan](superpowers/plans/2026-09-21-phase-2-evaluation-fixtures.md), `apps/ai_agent/evaluation/cases.jsonl`, evaluation checks and tests. Preserve the existing 26-case development/held-out dataset.                                                                                                                 |
+| 3A — Provider outcomes                   | [Design](superpowers/specs/2026-09-22-phase-3a-provider-outcomes-design.md), email/Telegram handlers and tests. Structured acceptance/rejection/not-attempted/unknown evidence; Resend returned errors are handled.                                                                                                                  |
+| 3B — Durable failures                    | [Design](superpowers/specs/2026-09-22-phase-3b-durable-failures-design.md), `apps/worker/execution-store.ts`, worker orchestration and additive schema. Single-shot execution, claim fencing, attempt evidence, fingerprints, atomic FAILED/failure-row persistence and ACK gating.                                                  |
+| 3C — Publication/reconciliation          | [Completed checklist](superpowers/plans/2026-09-23-phase-3c-dlq-publication.md), publisher, reconciler and separate worker entrypoint. Sanitized publication by failureId, broker-ACK stamping, backoff, expired-execution quarantine and missing-failure repair without provider calls.                                             |
+| 4A-4C — Bounded live investigation tools | Authenticated owner-scoped case listing and private service-scope boundary; redacted failure context; bounded execution evidence with provenance and explicit unknowns; deterministic worker-parity input validation with no provider calls. Real PostgreSQL ownership-isolation coverage and shared contract fixtures are included. |
 
-Phase 1 now provides a local fixture-only LangGraph.js preview API and CLI under `apps/ai_agent/`. No live model adapter, backend/DLQ connection, Langfuse, checkpoint store, RAG corpus, evaluation harness, approval ledger or deterministic replay service is implemented.
+Phase 3B supersedes Phase 3A's interim automatic provider retry behavior: the active execution path makes one provider attempt. Publication retries deliver evidence; they do not resend provider actions. Existing fencing, fingerprints, durable capture, publication and reconciliation are retained.
 
-### Code/documentation discrepancies that affect this design
+The Phase 3C checklist records verification as completed. Older phase plans contain historical unchecked steps; source artifacts corroborate implementation, but neither artifact presence nor this revision claims fresh deployment or migration status. Phase 4A-4C verification is recorded in this milestone; check the target environment before deployment rather than replaying old plans.
 
-1. README claims action integrations/retries are missing; source implements them. Its listed edit/delete Zap routes are not in `route/zap.ts`, which has create/list/runs/detail only. Do not plan an agent tool against a nonexistent edit endpoint.
-2. Existing docs/ADR 003 overstate exactly-once external side effects. Database leases cannot atomically include provider delivery; Telegram has no implemented provider deduplication. There is no lease renewal/fencing, provider timeout, or persistent provider receipt. A late worker can outlive its lease.
-3. `sendEmail` ignores Resend's structured `{ data, error }` result; the installed SDK returns errors rather than necessarily throwing. Thus a failure can become SUCCESS and bypass DLQ. [Resend's Node example](https://resend.com/docs/send-with-nodejs) also checks the error explicitly. The current HTTP idempotency header is supported by the installed SDK; do not incorrectly call the header wiring broken.
-4. `deadLetter` swallows failure of either or both sinks; reaching the later commit does not imply durable dead-letter capture. `attempt: 3` is a configured limit, not persisted per-attempt proof. The catch also handles failures writing SUCCESS, so a DLQ does not prove the provider failed.
-5. Unsupported handlers become FAILED without DLQ. Invalid JSON throws before classification; empty value/missing action returns before the explicit commit, contrary to the worker diagram. Later committed offsets can advance past earlier records. These need separate coverage/quarantine handling, not fabricated DLQ rows.
-6. The history API treats a drained outbox as success. That only means initial publication, not action completion. AI safety and its future UI must read execution rows instead.
-7. Worker loads current action configuration, with no historical snapshot/version; `sortingOrder` is not unique. The worker does not validate all predecessor SUCCESS rows before executing a received stage. Proposed replay must enforce this explicitly.
-8. `nextRunAt` is unused for scheduling. `ZapRun` has no creation time; use actual available timestamps and label uncertainty. There is no usable arbitrary log-search source.
-9. `current-state.md` describes future AI actions/general DAGs, a different objective from this triage layer. Its missing shared tsconfig claim is stale in this checkout: `packages/typescript-config/react-library.json` exists. Do not assume old tooling failures are current.
+Remaining constraints: external provider acceptance is not final delivery; an accepted request followed by failed persistence can remain UNKNOWN. Historical evidence/configuration snapshots may be absent. Current action definitions are mutable. FAILED does not become replayable by raw Kafka republish. Phase 4 live tools remain read-only and bounded; RAG, integrated model diagnosis, durable HITL, frontend integration, and replay remain future work.
 
-These findings define gates for connecting AI to live replay. They do not justify rebuilding ingestion, Kafka, auth or workflow execution. Older docs remain historical descriptions; corrections important to safety are recorded in the existing decision document and this source audit.
+Some taxonomy/current-state/ADR prose still describes pre-Phase-3 behavior (including repeated provider retries or missing durable failure records). For present behavior use source and Phase 3 records; preserve legacy/unknown distinctions. Antigravity owns routine reconciliation of those documents. Do not rebuild completed safeguards from stale prose.
 
-## 2. Architectural review
+## 2. Release scope and workflow
 
-| Proposed idea                              | Verdict and repository-specific adjustment                                                                                                                                                                                                                                                                                                                                                                              |
-| ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1. Simple single-agent LangGraph           | Recommended. Use a small `StateGraph` with typed state and a bounded evidence loop. Multiple deterministic nodes are not multiple agents. Plain async functions would be enough for diagnosis alone, but persistence/interrupts make LangGraph useful here. No autonomous supervisor.                                                                                                                                   |
-| 2. Scenario-derived tools                  | Strongly agree. Four read-only tools cover this taxonomy. Application routing/policy/approval/replay are not tools. Never expose SQL, shell, arbitrary HTTP, DB updates, Kafka publish or action execution.                                                                                                                                                                                                             |
-| 3. Simulated runbooks as RAG               | Appropriate with explicit simulation labels. Six short local Markdown documents and deterministic lexical retrieval first; benchmark against simply supplying relevant runbooks. Retrieval does not establish incident facts.                                                                                                                                                                                           |
-| 4. LangGraph streaming                     | Useful after stable state/proposal contracts. Project sanitized LangGraph.js updates through the agent service and an authenticated primary-backend SSE stream; graph streaming itself supplies neither browser auth nor reconnect history. Skip raw token/chain-of-thought streaming. [LangGraph.js streaming](https://docs.langchain.com/oss/javascript/langgraph/streaming) supports state updates for this purpose. |
-| 5. Interrupt/resume for approval           | Appropriate only with durable checkpoints, owner-bound thread IDs, versioned immutable proposals, and idempotent approval consumption. Restarted interrupt nodes rerun preceding code; keep that code free of effects. [LangGraph.js interrupt reference](https://docs.langchain.com/oss/javascript/langgraph/interrupts).                                                                                              |
-| 6. Replay outside LLM                      | Mandatory, but missing today. Add a guarded application command and durable replay intent integrated with the existing worker. Republish-to-Kafka is insufficient because FAILED stages are skipped.                                                                                                                                                                                                                    |
-| 7. Langfuse                                | Useful at the first live-model milestone. Keep it optional for service availability and separate from approval/audit truth. Validate one TypeScript integration in the AI service, not multiple overlapping tracing stacks. [Official integration](https://langfuse.com/integrations/frameworks/langchain).                                                                                                             |
-| 8. Traces connected to evaluations         | Agree. Link investigation, evidence version, prompt/model version, runbook revision, dataset item and replay outcome. Curate/redact traces before adding them to a dataset; a trace is not ground truth.                                                                                                                                                                                                                |
-| 9. Code evaluators plus semantic judge     | Agree; start deterministic fixtures in Phase 1, not Phase 11. Judges score grounding/usefulness only; code enforces permissions, schema, ordering and replay policy. Langfuse supports both offline datasets and online evaluations ([overview](https://langfuse.com/docs/evaluation/overview)).                                                                                                                        |
-| 10. Supervisor only if complexity warrants | Agree, but number of nodes alone is not justification. First use functions/subgraphs; require an evaluation-backed benefit from independent expertise before adding agents.                                                                                                                                                                                                                                             |
-| 11. Optional MCP                           | Agree. Local typed functions fit a single monorepo. MCP is an interoperability adapter later, not a prerequisite for tools, RAG or safe execution.                                                                                                                                                                                                                                                                      |
+**Finish line — Required:** an authenticated DLQ investigation application using bounded read-only tools and cited runbooks, explicit uncertainty, saved investigations, a usable existing-frontend UI, basic tracing, deterministic evaluations, durable LangGraph interrupt/resume, and owner-approved replay of the narrow eligible scenario in Section 5. Complete the required increments and safety gates, not every numbered extension.
 
-**Architecture revision:** the user selected TypeScript/Bun for the AI subsystem after the separate Python stack proved distracting. The agent remains a separate service and trust boundary, but it now participates in the existing monorepo/toolchain. This reduces learning and operational overhead without changing the safety architecture. It does not justify a supervisor, MCP server or hosted platform.
+Retain TypeScript/Bun, one separate Express/LangGraph.js agent service, one initial model provider, existing PostgreSQL/Kafka/Prisma, and the existing frontend. Prefer a smaller supported capability with explicit limitations. Add complexity only for its correctness, security, or approved scope; never retain a capability while deferring a safeguard on which it depends.
+
+- **Required from the first relevant boundary:** owner isolation, service authentication, redaction, runtime contract validation, bounded requests/model/tools/cost, honest evidence and abstention. Approval/replay durability, audit, fencing, revalidation and relevant crash/concurrency tests precede live replay.
+- **Optional:** resumable SSE (10C), semantic judging (12), expanded command-center presentation (13).
+- **Deferred beyond completion:** broader recovery automation and scale testing (14B), supervisors (15), MCP, vector infrastructure, bulk/changed-input replay, high availability, general DAG execution, new brokers and additional services.
+- **Preserved:** existing Phase 3 reliability mechanisms. A smaller release is not permission to delete them or to claim exactly-once external delivery.
+
+**Responsibilities:** Astra revises scope/master plan; Codex implements the requested increment, verifies it and gives a concise handoff. Learning happens separately through ChatGPT/GitHub/Notion; there are no mandatory teaching sessions, learner checkpoints, lessons or interview explanations. Antigravity updates routine milestone documentation and Graphify after completion, following the repository's pushed-milestone policy. Codex reports concrete master-plan conflicts instead of silently redesigning.
+
+This revision changes sequencing and release scope, not the read-only agent or deterministic authorization boundaries in ADRs 009–018. In particular, ADR 017's proposed streaming transport becomes optional; authenticated polling is the initial UI transport. Antigravity should align that proposed ADR during its documentation handoff. No detailed implementation plans for later phases are required now.
 
 ## 3. Boundaries, state and initial contracts
 
@@ -82,7 +69,7 @@ flowchart TD
 
 The agent lives in `apps/ai_agent/` as a normal Bun workspace with its own `package.json`, `tsconfig.json`, `src/` and `tests/`. Keep graph logic importable independently of Express; expose a local fixture API and CLI using the same graph. Later, primary-backend `route/triage.ts` is the authenticated gateway. Do not add AI action types to the worker registry.
 
-Initial read-only case discovery in the TypeScript backend uses owner-filtered `ZapRunRetry` rows, not a second Kafka consumer. This covers only the surviving SQL sink. A later deterministic reconciler discovers FAILED executions without rows and optionally imports Kafka-only failures under a separate consumer group; it never performs LLM calls inside the workflow consumer. Unknown ownership is quarantined outside tenant APIs.
+Initial read-only case discovery in the TypeScript backend uses owner-filtered `ZapRunRetry` rows, not a second Kafka consumer. This covers only the surviving SQL sink. The Phase 3C reconciler already repairs FAILED executions without rows and quarantines expired executions. Importing Kafka-only failures is deferred; no LLM runs inside the workflow consumer. Unknown ownership is quarantined outside tenant APIs.
 
 Server code binds `userId`, `caseId`, `zapRunId`, `stage` and internal thread ID after a join through the owner. A model-supplied ID is never authorization. Do not hand the model a Prisma client, provider credential, executable code, free-form URL or Kafka producer. The agent process has separate credentials and no workflow-table write role or workflow-topic producer capability.
 
@@ -116,7 +103,7 @@ Keep authoritative action-input validation next to the worker parser and expose 
 
 `apps/ai_agent/src/contracts.ts` uses strict Zod schemas for requests, evidence and output, rejecting unknown fields, oversized values and invalid types. Use an explicit serializable LangGraph.js state schema with intentional reducers; validate external/model values before merging them. Version JSON/OpenAPI contracts and test both services rather than assuming shared language types validate remote data.
 
-- **CaseRef:** server-bound case ID, source (`retry_row`, later `reconciled_execution` or `kafka_quarantine`), run/stage, owner and source reference. Model-visible projection excludes auth data.
+- **CaseRef:** server-bound case ID, source (`retry_row` or `reconciled_execution`; `kafka_quarantine` deferred), run/stage, owner and source reference. Model-visible projection excludes auth data.
 - **Evidence:** ID, type, source reference, observed timestamp, content hash, redacted facts, unavailable fields, and simulation flag. Evidence snapshots are immutable per investigation revision.
 - **InvestigationState:** case reference, evidence map, safe progress, bounded tool/step counters, diagnosis, proposal and deterministic policy result. Start with at most 8 tool calls, 12 graph steps, one output-repair attempt and a 60-second active-run deadline; human waiting does not consume that deadline. Enforce the framework recursion bound as an additional cap.
 - **Diagnosis:** taxonomy ID or `unknown`, summary, evidence references, alternate explanations, missing evidence, confidence label (`low`, `medium`, `high`). Confidence is descriptive, never replay authorization.
@@ -128,19 +115,19 @@ Lifecycle: `queued -> investigating -> proposed -> blocked | awaiting_approval -
 
 ### Persistence, API and run ownership (introduced in Phase 8)
 
-The agent service owns investigation jobs, safe progress events and LangGraph PostgreSQL checkpoints in an `ai_agent` schema with a restricted role and service-owned migrations. Primary-backend Prisma owns case-owner bindings, immutable submitted proposals, `TriageApproval` and later `ReplayRequest` in the application schema. The same PostgreSQL instance can host both. No table has two migration owners; neither service directly updates the other’s tables. Avoid duplicating unrestricted payloads across stores.
+The agent service owns investigation jobs, current safe progress and LangGraph PostgreSQL checkpoints in an `ai_agent` schema with a restricted role and service-owned migrations. Primary-backend Prisma owns case-owner bindings, immutable submitted proposals, `TriageApproval` and later `ReplayRequest` in the application schema. The same PostgreSQL instance can host both. No table has two migration owners; neither service directly updates the other’s tables. Avoid duplicating unrestricted payloads across stores.
 
 - Investigation stores source identity, owner/run/stage, status, graph/prompt version, redacted evidence snapshot and hash, proposal/version, checkpoint thread ID, active-run lease and expiry. Permit only one active investigation per canonical source identity; repeated start with the same idempotency token returns it.
 - Approval stores actor, proposal/evidence/configuration hashes, decision, timestamp, expiry, and a unique consumable authorization reference. Initial policy: run owner can approve their own eligible case; an operator role/cross-tenant approval is not implied by JWT auth.
-- Events are bounded, append-only user-safe progress/audit records. Approval/replay transitions require durable business audit even if Langfuse is down. Failed trace export is non-blocking; failed approval audit is fail-closed.
+- Business audit records are durable and bounded. Polling reads a current sanitized snapshot; an append-only transport event history is optional in Phase 10C. Approval/replay transitions require durable business audit even if Langfuse is down. Failed trace export is non-blocking; failed approval audit is fail-closed.
 - A short-lived DB lease serializes graph execution per investigation across requests/processes. A deterministic runner claims queued rows and resumes after restart; one-process polling is sufficient initially. Waiting for human approval releases the runner lease and all Kafka/provider resources. Browser disconnect does not cancel a persisted investigation.
-- Proposed routes under `/api/v1/triage`: `GET /cases`, `POST /cases/:caseId/investigations`, `GET /investigations/:id`, `POST /investigations/:id/decision`, and `GET /investigations/:id/events`. Validate ownership on every request and derive internal graph thread IDs server-side. POST start/decision accept idempotency keys. Decision accepts only proposal version and approve/reject, not arbitrary `Command` state or model instructions.
+- Proposed routes under `/api/v1/triage`: `GET /cases`, `POST /cases/:caseId/investigations`, `GET /investigations/:id`, `POST /investigations/:id/decision`, and optional `GET /investigations/:id/events` only in Phase 10C. Validate ownership on every request and derive internal graph thread IDs server-side. POST start/decision accept idempotency keys. Decision accepts only proposal version and approve/reject, not arbitrary `Command` state or model instructions.
 
 Only introduce persistence after fixture contracts work. The Phase 1 request-bound preview has no checkpointer; any later in-memory checkpointer is limited to local teaching exercises, while durable approvals must survive restart. LangGraph supplies checkpoint mechanisms, not the application's auth and approval policy ([LangGraph.js persistence reference](https://docs.langchain.com/oss/javascript/langgraph/persistence)).
 
 ## 4. Failure taxonomy and the minimum RAG corpus
 
-The [taxonomy](AI/failure-taxonomy.md) covers F01 rate limits, F02 outages/transport, F03 credentials/permissions, F04 destination/template input, F05 unsupported action, F06 malformed/missing stage/run, F07 uncertain delivery/lease, F08 stale/duplicate cases, F09 incomplete DLQ/progression and F10 hidden email errors. F05/F06/F10 and some F07/F09 incidents are coverage gaps, not normal DLQ inputs today.
+The [taxonomy](AI/failure-taxonomy.md) covers F01 rate limits, F02 outages/transport, F03 credentials/permissions, F04 destination/template input, F05 unsupported action, F06 malformed/missing stage/run, F07 uncertain delivery/lease, F08 stale/duplicate cases, F09 incomplete DLQ/progression and F10 hidden email errors. Phase 3 repaired important F05/F07/F09/F10 evidence paths; legacy rows and invalid/unowned envelopes can still lack usable evidence. Inspect source before treating historical taxonomy prose as current behavior.
 
 Create these **six simulated documents in Phase 5**, not during this planning task:
 
@@ -161,9 +148,13 @@ Evaluate retrieval against labelled relevant sections and a no-retrieval baselin
 
 ## 5. Deterministic replay design and release gate
 
-**Initial scope is same-input, single-stage replay only.** No LLM mutations, bulk replay, changed recipient/body, historical payload edits, credential repair, reset of SUCCESS, or creation of a new run to evade deduplication. Manual repair recommendations can be useful even when replay remains blocked.
+**Required initial scenario: F01, captured Telegram send-stage HTTP 429 rejection, same-input and single-stage, with at most one owner-approved replay per original failure.** Require a complete persisted attempt record proving explicit rejection, a valid bounded retry delay and completion timestamp, unchanged request/action/handler identity, and every gate below. Derive not-before conservatively from the recorded completion time plus retry delay. Missing/contradictory/legacy/reconciled-only evidence blocks eligibility. Only this scenario is allowlisted; all others remain diagnosis/manual escalation. Before live enablement, confirm that the provider's current semantics support treating this exact response as rejection; if not, report a plan conflict and keep replay disabled.
 
-Before replay, code must verify all of: owner authorization; approved unexpired proposal; unchanged evidence/action/payload fingerprint and deployed handler version; valid existing run and contiguous unique stage sequence; every predecessor SUCCESS; no incompatible successor state; target FAILED and no live execution; no existing active replay request; provider delivery safety; not-before deadline; bounded replay count. Revalidate after human wait, when creating the request, and immediately before worker execution. Deny unknowns. Resend currently retains keys for 24 hours; do not assume the existing stable key guarantees safety indefinitely or with changed content ([Resend idempotency](https://resend.com/docs/dashboard/emails/idempotency-keys)).
+A replay gets its own durable generation/attempt identity; Phase 3's single-attempt and one-failure-row constraints cannot silently be reused to overwrite history. Phase 9A must specify and test an additive history-preserving representation. A second 429 or any replay failure ends this release's replay allowance; unknown outcome is never retried.
+
+**All replay remains same-input, single-stage only.** No LLM mutations, bulk replay, changed recipient/body, historical payload edits, credential repair, reset of SUCCESS, or creation of a new run to evade deduplication. Manual repair recommendations can be useful even when replay remains blocked.
+
+Before replay, code must verify all of: owner authorization; approved unexpired proposal; unchanged evidence/action/payload fingerprint and deployed handler version; valid existing run and contiguous unique stage sequence; every predecessor SUCCESS; no incompatible successor state; target FAILED and no live execution; no existing active replay request; provider delivery safety; not-before deadline; bounded replay count. Revalidate after human wait, when creating the request, and immediately before worker execution. Deny unknowns. Email replay is deferred; any future provider-deduplication path must verify the provider's then-current guarantees and expiry rather than assuming permanent safety.
 
 ### Smallest reliable extension to the foundation
 
@@ -175,210 +166,119 @@ Before replay, code must verify all of: owner authorization; approved unexpired 
 6. Record outcome and request generation together. If uncertain after a crash, preserve `outcome_unknown` and require reconciliation; do not automatically retry ambiguous Telegram delivery. Repeated delivery of a completed replay request is a no-op. Successful stage progression continues through the existing worker, with validated ordering and crash-window tests.
 7. On replay failure, retain original failure/approval evidence and record the new failure with request/generation linkage. Start a new case revision; never consume old approval again. No infinite autonomous retry loop.
 
-Do not implement this whole mechanism in Phase 1. Phase 3 establishes evidence prerequisites; Phase 8 establishes durable safety/approval; Phase 9 integrates replay in small reviewed substeps: ledger/dry-run, publisher, worker guarded claim, then crash/concurrency verification. Test real transaction conflicts and duplicate delivery before live side effects. Extending the existing worker at these boundaries preserves the foundation instead of replacing it.
+Phase 3 has established evidence prerequisites; Phase 8 establishes durable safety/approval; Phase 9 integrates replay in small reviewed substeps: ledger/dry-run, publisher, worker guarded claim, then crash/concurrency verification. Test real transaction conflicts and duplicate delivery before live side effects. Extending the existing worker at these boundaries preserves the foundation instead of replacing it.
 
-## 6. Phases, dependencies and teaching workflow
+## 6. Phases, dependencies and implementation increments
 
-**Learning baseline:** use the repository’s existing TypeScript/Bun conventions so the learner can focus on AI-system behavior rather than a second stack. Skip basic TypeScript and Express lessons. Teach the current increment's graph boundaries, dependency injection, asynchronous resource lifecycle, failure handling, contract validation, persistence and recovery through concrete code and tests. Agent paths below are relative to `apps/ai_agent/` unless explicitly rooted.
+Phases 1–3 are completed (Section 1); do not rerun their implementation plans. Phase numbering is retained for references. Required execution order:
 
-These are independently reviewable increments, **not dependency-free tasks**. Each leaves a usable artifact and may stop without implementing later phases. At every phase: teach the concepts below using the local `/teach` guidance, ask the learner to predict one failure path, implement incrementally, run the listed checks, and have them explain the observed result. Keep learning objectives here; create separate lessons only when requested. Do not generate a second generic curriculum or duplicate architecture docs.
+`4A -> 4B -> 4C -> 5 -> 6 -> 10A -> 7 -> 8A -> 8B -> 8C -> 9A -> 9B -> 9C -> 10B -> 11 -> 14A`
 
-Order changes: taxonomy analysis is already completed before finalizing tools; Phase 1 uses its fixtures. Evidence gaps precede live tools/replay. Structured output begins with the agent, not after streaming. Observability moves before HITL/replay. Evaluation fixtures start immediately and grow throughout; Phase 11 formalizes the experiment workflow. Durable approval precedes side effects, basic UI precedes the full command center, and supervisors follow production evidence.
+Deterministic checks grow with each phase; Phase 11 formalizes evaluation rather than postponing it. Phase 7 can precede 10A if desired, and Phase 11 diagnosis evaluation can begin after Phase 6. Controls from 14A apply when their capability first becomes live. Optional/deferred work is not a dependency of this sequence.
 
-### Phase 1 — Small fixture-driven LangGraph.js agent (implemented)
+Each increment below states outcome, files, verification and completion; these are scope contracts, not exhaustive implementation scripts. Paths without a prefix are within `apps/ai_agent/`. No phase completion authorizes the next.
 
-- **Dependencies:** this reviewed plan and taxonomy; no live backend/DLQ access required.
-- **Learn / before coding:** implement LangGraph.js state transitions, strict Zod boundaries and injected model/tool clients; manage server/model lifecycle, deadlines and API error mapping. Explain why model output cannot authorize a send; skip introductory TypeScript tutorials.
-- **Goal / interface:** local-only Express `POST /investigations/preview` and CLI accept an allowlisted synthetic fixture ID, not arbitrary paths or live case IDs. One fixture `getFailureContext` tool supplies redacted facts; the graph returns a validated diagnosis/proposal or `insufficient_evidence`. Use a fake model in tests and one optional live-model smoke run. No database, Kafka, RAG, approval, frontend or replay. This request-bound preview is explicitly non-durable; Phase 8 adds durable jobs.
-- **Files:** `package.json`, `tsconfig.json`, `src/contracts.ts`, `graph.ts`, `http.ts`, `fixture-model.ts`, `demo.ts`, `index.ts`, `src/tools/failure-context.ts`, `tests/graph.test.ts`, `tests/http.test.ts`, and two synthetic fixtures. The root `bun.lock` owns dependencies.
-- **Tests:** known 429 fixture, ambiguous timeout abstention, strict invalid output, tool rejection, repeated calls/step limit, model timeout, HTTP validation/unknown fixture and client shutdown; no write/send capability. Run `bun test apps/ai_agent/tests` and `bun run --cwd apps/ai_agent check-types`; live-model smoke is optional and outside deterministic CI.
-- **Done:** explainable tool call -> evidence -> grounded structured proposal, bounded failure path, reproducible tests; application behavior unchanged.
-- **Interview concepts:** agent vs workflow, capability boundaries, nondeterminism, structured output vs safety, why a graph is warranted.
+### Phase 4 — Bounded live investigation tools — Completed
 
-### Phase 2 — Executable taxonomy and initial evaluation fixtures
+**Dependencies:** completed phases 1–3 and Section 3 contracts. No RAG, new model integration, live replay, approval, frontend, schema expansion or Kafka intake. Preserve existing worker semantics and do not call providers.
 
-- **Dependencies:** Phase 1 contract; scenario definitions already in [taxonomy](AI/failure-taxonomy.md).
-- **Learn / before coding:** symptoms vs causes, ground truth vs hypotheses, evidence sufficiency, failure coverage vs DLQ coverage.
-- **Goal / interface:** machine-readable cases carry scenario ID, source kind, evidence, expected diagnosis set, missing evidence and expected policy outcome. Build 20 scenario variants and six safety cases; begin a deterministic rubric and label gaps honestly.
-- **Likely files:** `tests/fixtures/`, `evaluation/cases.jsonl`, `src/evaluation/checks.ts`, `tests/checks.test.ts`; update taxonomy only for discovered facts.
-- **Tests:** every F01–F10 case has required fields and expected evidence/policy; no real secrets/PII; fixture parser validates; unsupported/non-DLQ cases cannot masquerade as normal retry rows.
-- **Done:** versioned fixtures drive implementation and an initial held-out set is excluded from prompts/runbooks.
-- **Interview concepts:** dataset design, coverage, class imbalance, leakage, safe abstention.
+- **4A — Authenticated failure context.** Completed. Owner-filtered case listing and `getFailureContext` use server-bound identity, HMAC service scopes, redaction, size/time limits, correlation IDs, strict contracts, and PostgreSQL ownership joins. Forged IDs/scopes, expired tokens, orphan rows, nested secrets, response bounds, and read timeouts are covered.
+- **4B — Execution evidence.** Completed. `getExecutionEvidence` reports bounded attempts, predecessor states, provenance, ordering, fingerprints, and explicit unknowns for captured, reconciled, and legacy cases.
+- **4C — Deterministic input validation.** Completed. `validateActionInputs` uses authoritative worker registry/parser semantics, returns secret-safe status and fingerprints, and performs no handler or provider call.
 
-### Phase 3 — Evidence readiness and targeted foundation safeguards
+Phase 4 verification completed with 65 focused tests, 3 PostgreSQL integration tests, and passing type check, lint, and build. The existing Next/Yarn-Corepack warnings remain noted; they do not change the Phase 4 contract.
 
-- **Dependencies:** Phase 2. This is targeted prerequisite work, not rebuilding the backend.
-- **Learn / before coding:** SDK error contracts, atomicity boundaries, retry attempts vs failure records, provider acceptance vs worker status.
-- **Goal / interface:** normalize safe provider errors/results; detect Resend error values; capture action/request fingerprints, first-attempt time, per-attempt outcome certainty and safe receipt IDs; add failure identity linking sinks for new failures. For exhausted failures, transactionally persist FAILED state plus the failure record before treating the event as durably parked; Kafka DLQ publication remains independently retryable from that stored identity. On DB failure, do not claim capture or deliberately acknowledge completion; recovery must reconcile unresolved executions, including records skipped while a lease was active. Preserve legacy unknowns rather than inventing backfill facts. This narrowly changes the loss-tolerant behavior documented in ADR 004 and requires updating its status/description when implemented.
-- **Likely files:** worker `actions/email.ts`, `actions/telegram.ts`, `types.ts`, `index.ts`, `deadletter.ts` and focused tests; additive Prisma schema/migration; existing worker/Kafka/current-state docs. New fields are optional for old envelopes; no destructive migration.
-- **Tests:** SDK returned error, resolver-vs-send failure, SUCCESS-write failure after provider acceptance, unsupported handler, malformed envelope, either/both sink failure; structured redaction; old messages still accepted. Run actual helpers/orchestration, not just copied lease logic.
-- **Done:** observed facts and unknowns are explicit; synthetic/legacy evidence remains labelled; no claim of reliable live triage if both sinks can disappear. Read-only demonstration may continue with documented partial coverage while this gate is unfinished, but live replay cannot.
-- **Interview concepts:** dual writes, idempotency vs exactly-once, observability gaps, backward compatibility, durable quarantine.
+Cross-increment rule: add only files needed for the current contract; no parser duplication, generic SQL/HTTP/shell tool, arbitrary model-selected identity or new dependency without a concrete requirement.
 
-### Phase 4 — Four bounded investigation tools
+### Phase 5 — Simulated runbooks and minimal RAG — Required
 
-- **Dependencies:** Phase 2 contracts; Phase 3 for complete live evidence. Partial read-only mode must label missing fields.
-- **Learn / before coding:** least privilege, owner-bound context, redaction, dry runs and schema validation at trust boundaries.
-- **Goal / interface:** implement the first three agent tools through an injected authenticated primary-backend evidence client; keep `searchRunbooks` for Phase 5. Add owner-filtered case listing and a private Express investigation boundary. Test the service contract above before using live evidence.
-- **Likely files:** agent `src/tools/failure-context.ts`, `execution-evidence.ts`, `validate-action-inputs.ts`, `src/clients/backend.ts`, `tests/tools.test.ts`, `tests/contracts.test.ts`; primary backend `route/triage.ts`, pure validation adapter and `index.ts`; reuse `middleware.ts` and worker `parse.ts`.
-- **Tests:** two owners with overlapping-looking case IDs, orphan retry rows, result truncation, unavailable history, timeout, secrets in nested data/error text, parser parity, authenticated evidence HTTP and no provider execution/network calls. Local DB integration validates the owner joins.
-- **Done:** tools satisfy F01–F10 evidence needs or explicitly return unavailable; no arbitrary SQL/log/network tool exists.
-- **Interview concepts:** confused deputy, object authorization, capabilities, deterministic validation vs LLM inference.
+- **Dependencies/outcome:** Phase 4; six labelled documents and bounded `searchRunbooks` per Section 4.
+- **Files:** `docs/AI/runbooks/`, `src/tools/search-runbooks.ts`, retrieval tests. These runbooks are feature inputs; Codex may implement them despite Antigravity owning routine milestone documentation.
+- **Verify/done:** relevant top-three retrieval on labelled cases, no-match behavior, stable tie order, valid versioned citations and malicious/conflicting-text handling; compare with no retrieval. Useful cited guidance without claiming incident facts.
+- **Excluded:** embeddings, vector database, rerankers, repository ingestion and new ingestion services.
 
-### Phase 5 — Simulated runbooks and minimal RAG
+### Phase 6 — Integrated diagnosis and structured remediation — Required
 
-- **Dependencies:** Phase 2 taxonomy and Phase 4 tool boundary; can author runbook text while evidence work proceeds.
-- **Learn / before coding:** retrieval vs generation, provenance, precision/recall, procedural guidance vs incident facts.
-- **Goal / interface:** six documents and bounded `searchRunbooks` as specified in Section 4; cited immutable excerpt IDs/version hashes.
-- **Likely files:** six `docs/AI/runbooks/` files, agent `src/tools/search-runbooks.ts`, `tests/search-runbooks.test.ts`.
-- **Tests:** relevant section in top three, empty/no-match response, stale version, conflicting text, deterministic tie order, malicious text and metadata filtering; compare with no-retrieval baseline.
-- **Done:** useful cited guidance on held-out phrasing; no embedding/vector infrastructure without measured need.
-- **Interview concepts:** RAG grounding, chunking tradeoffs, retrieval evaluation, prompt injection through documents.
+- **Dependencies/outcome:** Phases 4–5; one model adapter and a bounded graph that gathers evidence, retrieves guidance and returns validated diagnosis/proposal or abstention.
+- **Files:** `src/graph.ts`, contracts, prompts/model adapter, evaluation checks and graph/API tests.
+- **Verify/done:** taxonomy cases, valid evidence IDs, contradictory/insufficient evidence, prompt injection, invalid model output, time/tool/token budgets and limited repair. Unknown delivery cannot become replay eligibility.
+- **Excluded:** writes/replay tools, agent-generated fixes, multiple providers and autonomous supervisor. The request-bound diagnosis API remains bounded and explicitly non-durable until 8A.
 
-### Phase 6 — Integrated diagnosis and structured remediation
+### Phase 7 — Basic Langfuse observability — Required
 
-- **Dependencies:** Phases 4–5 and early deterministic checks.
-- **Learn / before coding:** evidence synthesis, uncertainty, loop termination, recommendations vs commands.
-- **Goal / interface:** bounded graph `load -> gather/validate/retrieve -> diagnose -> validate proposal -> finish`, with a limited evidence loop when necessary. Accept only schema-valid output with existing evidence references; unsupported remediation becomes escalation.
-- **Likely files:** `src/graph.ts`, `contracts.ts`, `prompts.ts`, `src/evaluation/checks.ts`, `tests/graph.test.ts`; update API response contracts.
-- **Tests:** full taxonomy fixtures, nonexistent citations, contradicting evidence, hallucinated tools, prompt injection, exhausted budget and malformed output. Unknown delivery cannot become a replay recommendation merely from high confidence.
-- **Done:** read-only investigation demo with testable recommendations, no fabricated facts and bounded cost/latency.
-- **Interview concepts:** tool-use trajectories, grounding vs correctness, finite-state control, fail-closed output handling.
+- **Dependencies/outcome:** Phase 6; one useful trace linking investigation, model/tools/retrieval, errors, latency, token usage and version identifiers.
+- **Files:** `src/observability.ts`, adapter/graph wiring and exporter tests.
+- **Verify/done:** inspect one configured trace; fake exporter tests prove redaction and non-blocking outage behavior. Report inability to validate real export rather than claiming it.
+- **Excluded:** self-hosted telemetry infrastructure, duplicate tracing stacks, elaborate dashboards and trace-driven automatic dataset creation. Business audit remains independent.
 
-### Phase 7 — Langfuse observability
+### Phase 8 — Durable investigations, policy and HITL — Required
 
-- **Dependencies:** Phase 6 (basic correlation/logging begins in Phase 1).
-- **Learn / before coding:** trace/span hierarchy, correlation vs audit, redaction before export, sampling and cost accounting.
-- **Goal / interface:** link graph/model/tool/retrieval spans to investigation/evidence/prompt/model/runbook versions; capture tool failures, token usage, latency and final policy category. Preserve a stable local investigation ID if export fails.
-- **Likely files:** `src/observability.ts`, `tests/observability.test.ts`, graph/model wiring and `package.json`; document environment variable names without values.
-- **Tests:** fake exporter verifies nesting/redaction and version tags; one real test trace in a configured project; exporter outage does not break diagnosis; no prompt/secret dump on error.
-- **Done:** one inspected trace explains what evidence was used and links to a fixture/evaluation run; no mandatory Langfuse self-hosting stack or duplicate LangSmith requirement.
-- **Interview concepts:** observability vs monitoring vs audit, trace propagation, privacy, measuring latency/cost.
+**Dependencies:** Phase 6 and Section 3 ownership contracts; Phase 7 export is never an availability dependency. One deployment/runner is sufficient, but duplicate requests and restarts still require idempotency. No Kafka dispatch or provider execution.
 
-### Phase 8 — Durable investigations, deterministic safety and HITL
+- **8A — Saved investigations.** Persist jobs, immutable redacted snapshots/results and PostgreSQL graph checkpoints with restricted ownership. Files: `src/checkpoint.ts`, `runner.ts`, service-owned migrations, backend binding/API changes and recovery tests. Verify duplicate start, bounded concurrency, restart recovery, owner reads and browser disconnect. Done: saved results survive restart; abandoned read-only work can resume or end explicitly without losing authority boundaries.
+- **8B — Deterministic policy and proposals.** Store immutable versioned proposals and backend-computed policy for the Section 5 allowlist. Files: backend `services/replay-policy.ts`, proposal schema/migration, routes and tests. Verify missing evidence, cooldown, changed fingerprints, order, active lease, unknown outcomes and stale state. Done: eligible proposals require approval; hard blocks cannot be overridden.
+- **8C — Durable approval and interrupt/resume.** Persist owner decision, actor, expiry and audit before notifying LangGraph; use idempotent decision IDs and recover missed resume notifications. Files: approval schema/migration, backend decision route, graph/runner and HITL tests. Verify restart at interrupt, concurrent/duplicate decisions, wrong owner, expiry, rejection, failed audit writes and commit-before-notification crash. Done: graph reflects the authoritative decision exactly once logically, without dispatching actions.
 
-- **Dependencies:** Phase 6; Phase 7 trace linkage preferred, availability not required. Phase 3 evidence required for replay eligibility.
-- **Learn / before coding:** durable checkpoints, interrupt node restart, idempotent resume, CAS/version checks, time-of-check/time-of-use races.
-- **Goal / interface:** implement persistence/API design from Section 3, deterministic `services/replay-policy.ts` producing `PolicyResult`, and durable interrupt/resume. All replay is approval-required initially; approval cannot override a block. Rejection/expiry/cancellation ends the pending proposal without side effects.
-- **Likely files:** agent `src/checkpoint.ts`, `runner.ts`, `graph.ts`, `tests/hitl.test.ts`, `tests/recovery.test.ts`, service-owned checkpoint migrations/dependencies; primary-backend `services/replay-policy.ts`, `route/triage.ts`, focused policy tests and Prisma-owned proposal/approval migrations.
-- **Tests:** restart at interrupt, wrong owner/thread, expired proposal, changed fingerprint, missing predecessor, active lease, unknown Telegram delivery, concurrent decisions, duplicate resume, failed checkpoint/audit write and crash between approval commit and agent resume notification. Reconciliation must preserve the authoritative decision without repeated effects.
-- **Done:** durable approve/reject demo via API, immutable proposal and auditable actor; approved state is still only authority for the later application replay path.
-- **Interview concepts:** durable execution vs database transactions, authorization vs confirmation, fencing/versioning, exactly-once approval consumption.
+### Phase 9 — Narrow deterministic replay — Required
 
-### Phase 9 — Deterministic replay integration
+**Dependencies:** Phase 8 and completed Phase 3 safeguards; Section 5 gates are mandatory. Feature disabled until 9C passes. Only the allowlisted F01 case is supported; no changed inputs, automatic/bulk replay, credential repair or second replay.
 
-- **Dependencies:** Phases 3 and 8, passing safety fixtures; feature disabled by default until integration verification.
-- **Learn / before coding:** durable intent, outbox ACK windows, replay generations, external side-effect uncertainty, prerequisite ordering.
-- **Goal / interface:** Section 5 protocol, one eligible stage/request. `services/replay.ts` consumes an approved version and returns a ReplayRequest ID; dispatcher and worker enforce the rest. Graph/tool registry has no replay function.
-- **Likely files:** backend `services/replay.ts`, `services/replay-dispatcher.ts`, `services/replay.test.ts`; worker `index.ts`, extracted `execution.ts` only as needed to test real logic, `replay.test.ts`, action timeout/receipt handling; Prisma schema/migration. Keep initial `ZapRunOutbox`/processor semantics unchanged.
-- **Tests:** actual PostgreSQL transaction races; duplicate approvals/dispatch/events; publish fail before/after ACK; process crash before/after provider call; stale worker completion; unchanged predecessors; no reset of SUCCESS; invalid/mismatched request ID; expired key window; old event compatibility; new failure generation. External providers are stubbed with acceptance/timeout semantics in automated tests.
-- **Done:** eligible fixture replay succeeds through existing worker once logically; unsafe/unknown cases remain blocked; queued vs executed vs unknown outcomes remain distinct; one manually authorized sandbox smoke only after deterministic tests pass.
-- **Interview concepts:** at-least-once delivery, effectively-once application outcomes, transactional outbox, fencing, compensation limits.
+- **9A — Durable request and dry run.** Specify additive replay generation/attempt/failure history compatible with existing uniqueness constraints; transactionally consume one approval and record immutable ReplayRequest plus audit. Files: backend `services/replay.ts`, Prisma migration/schema and policy/transaction tests. Verify real DB competing requests, duplicate approval, stale versions, preserved original history and all block reasons. Done: one durable intent, no publishing or provider effects.
+- **9B — Dispatch and guarded worker claim.** Implement Section 5 outbox/worker protocol with request identity, fencing, bounded provider timeout, immutable selected inputs and outcome recording. Files: backend dispatcher, worker execution/envelope boundaries, schema as needed and focused tests. Verify duplicates, forged request IDs, legacy event compatibility, stale completion, no SUCCESS reset and failed replay history. Done: stubbed eligible request executes through the existing worker; unknown outcomes remain terminal.
+- **9C — Recovery and enablement gate.** Exercise real PostgreSQL/Kafka with stubbed external providers across publish-before/after-ACK and provider-before/after-persistence crash windows. Files: integration tests and narrow configuration fixes. Done: one logical consumption of authority, correct queued/completed/unknown states, preserved ordering/history, kill switch and no automatic resend. A real sandbox send requires separate explicit authorization; failure to prove provider rejection semantics keeps live replay disabled.
 
-### Phase 10 — Streaming and minimal operator UI
+### Phase 10 — Operator interface and optional streaming
 
-- **Dependencies:** Phase 8 persistent events and stable state contract; replay controls require Phase 9.
-- **Learn / before coding:** graph updates vs network transport, SSE framing, authenticated fetch streaming, reconnect cursors, durable state vs transient notifications.
-- **Goal / interface:** project LangGraph.js updates into sanitized persisted events, expose an internal agent stream and proxy it through authenticated primary-backend Express; add minimal investigation/approval view within the existing Next.js app. Use fetch-based SSE parsing to preserve current Bearer JWT auth; do not put tokens in query strings. Reconnect with last event sequence; if history expired, fetch a snapshot. Server-side jobs outlive browser streams.
-- **Likely files:** primary-backend `route/triage.ts`; agent `src/events.ts`, `http.ts`, `tests/events.test.ts`; frontend `src/hooks/useTriage.ts`, `src/app/triage/[id]/page.tsx`, existing AppShell navigation.
-- **Tests:** disconnect/reconnect, monotonic IDs, no duplicate decisions, unauthorized stream, expired token, slow client/backpressure, interrupt/rejection display and redacted errors; verify cancellation of stream does not restart graph.
-- **Done:** visible investigation/tool milestones, evidence, proposal, wait/approve/reject and actual replay status. No raw hidden reasoning, provider keys or unvalidated model output streamed.
-- **Interview concepts:** SSE vs WebSocket, delivery vs state, resumable UI, browser auth tradeoffs.
+- **10A — Required; moved immediately after Phase 6.** Basic authenticated case list, explicit investigation action, diagnosis/evidence/citations and blocked/unknown states in the existing frontend. Files: existing AppShell, `apps/frontend/src/app/triage/`, `src/hooks/useTriage.ts`, types and backend response projections. Verify owner isolation, loading/error/empty states and request cancellation. Done: useful read-only UI using ordinary requests; pre-8A results are explicitly transient. Do not poll by repeatedly starting investigations.
+- **10B — Required; after 8–9.** Add saved investigation reads/polling, approve/reject, expiry/conflict reasons and actual replay outcomes. Same UI/API boundaries plus end-to-end tests. Verify wrong owner, stale decisions, repeated clicks, restart/reload and blocked controls. Done: case -> diagnosis -> decision -> observed outcome works without conflating publication with execution.
+- **10C — Optional; after 8A and 10B.** Resumable sanitized SSE with event sequence/history and authenticated fetch; files `src/events.ts`, backend proxy and frontend stream hook. Verify reconnect, expired cursor snapshot fallback, authorization and backpressure. Done only if explicitly selected; no raw graph state/hidden reasoning or URL tokens. Polling remains sufficient for completion.
 
-### Phase 11 — Evaluation dataset, experiments and code evaluators
+### Phase 11 — Deterministic evaluation and reporting — Required
 
-- **Dependencies:** Phase 6; include Phase 9 trajectories when available. Early safety checks are already release gates.
-- **Learn / before coding:** offline vs online eval, held-out ground truth, retrieval vs reasoning failures, safety metrics separate from accuracy.
-- **Goal / interface:** version dataset/evaluator/model/prompt/runbook/code; local experiment runner exports scores linked to Langfuse traces. Promote only reviewed/redacted traces into fixtures, with human labels independent of model outputs.
-- **Likely files:** `evaluation/cases.jsonl`, `src/evaluation/checks.ts`, `run.ts`, `tests/checks.test.ts`; Bun evaluation command; concise evaluation instructions in this plan.
-- **Tests:** evaluator mutation checks (wrong owner, fabricated citation, bypass approval, stale proposal must fail); reproducible fixture replay and experiment linkage; no real side effects in evaluations.
-- **Done:** first 26 cases split 18 development / 8 held-out by scenario variants, maintaining unsafe cases in both. All deterministic safety assertions pass, zero unauthorized writes/replays/leaks, all outputs valid or explicit errors/abstentions, and all cited evidence IDs exist. Track diagnosis acceptance (initial target >=80% on labelled cases), retrieval top-3 recall (>=90% on retrieval cases), abstention correctness, tool budget, cost and p95 active latency; report denominators and small-sample limitations. Never trade a safety failure for average score.
-- **Interview concepts:** regression testing vs eval, leakage, dataset shift, calibration, trace-to-dataset feedback loops.
+- **Dependencies/outcome:** Phase 6 for diagnosis, Phase 9 for final replay assertions. Reuse Phase 2's versioned 26 cases (18 development / 8 held-out); add variants only for supported changes.
+- **Files:** `evaluation/cases.jsonl`, `src/evaluation/checks.ts`, experiment runner and tests.
+- **Verify/done:** reproducible report with schema/citation validity, grounding, abstention, owner isolation, replay policy, cost and latency. Wrong-owner, fabricated-citation, stale-proposal and unsafe-replay mutations must fail; zero safety violations is required. Track diagnosis acceptance (initial target 80%) and retrieval top-three recall (90%) with denominators and small-sample caveats; report shortfalls honestly. No held-out leakage or real provider effects.
+- **Excluded:** automatic trace ingestion and semantic judge as a safety authority.
 
-### Phase 12 — LLM-as-a-judge, only for semantic quality
+### Phase 12 — Semantic judge — Optional
 
-- **Dependencies:** Phase 11 human-labelled examples and functioning deterministic gates.
-- **Learn / before coding:** judge bias, calibration, evidence-grounded rubrics, evaluator prompt injection.
-- **Goal / interface:** offline judge scores root-cause explanation, evidence support, uncertainty and remediation usefulness on a 0–2 rubric with cited rationale. Calibrate on a double-reviewed subset; blind the judge to candidate identity and compare disagreements. Judge never approves replay or changes execution state.
-- **Likely files:** `src/evaluation/judge.ts`, `evaluation/judge-rubric.md`, `tests/judge.test.ts`, experiment runner wiring.
-- **Tests:** unsupported confident answer vs grounded abstention; verbosity bias pair; malicious evidence; malformed judge output, outage and version changes. Retain deterministic results when judge is unavailable.
-- **Done:** agreement/disagreement report and sampled human review show added semantic signal; do not make judge score a safety gate or use it as ground truth for its own dataset.
-- **Interview concepts:** measurement validity, self-preference bias, inter-rater agreement, rubric design.
+After Phase 11, add a calibrated offline rubric only if needed. Files: judge/rubric/runner and tests. Verify grounded abstention, verbosity bias, malformed output and outage; done when human comparison shows useful signal. Never gates authorization; not required for release.
 
-### Phase 13 — Next.js command center
+### Phase 13 — Expanded command center — Optional
 
-- **Dependencies:** Phase 10 minimal UI and Phase 11 quality reporting; Phase 12 optional.
-- **Learn / before coding:** operator decision support, clear provenance, stale state, partial failure and accessible controls.
-- **Goal / interface:** extend list/detail/history into a DLQ queue, evidence timeline, retrieved references, proposal safety reasons, approval history and replay outcomes; link authorized traces. Derive real run status from execution evidence and distinguish dispatched/completed/unknown.
-- **Likely files:** frontend `src/app/triage/page.tsx`, `src/app/triage/[id]/page.tsx`, `src/hooks/useTriage.ts`, `src/types/triage.ts`; history, Zap detail and `src/types/zap.ts`; backend `route/zap.ts`/`route/triage.ts` for honest aggregate status.
-- **Tests:** owner isolation, empty/loading/partial/error states, keyboard approval flow, stale proposal conflict, reconnect and disabled blocked replay; end-to-end synthetic case -> investigation -> rejection or allowed replay outcome.
-- **Done:** useful command center in existing frontend, no separate dashboard app or decorative graph replacing evidence.
-- **Interview concepts:** human factors, auditability, eventual consistency in UI, preventing automation bias.
+After 10B, extend timeline/filtering/trace links and evaluation presentation within the existing UI. Files: triage pages/hooks and owner-scoped projections; verify accessibility, stale state and partial failures. Done when the selected operator feature works; no separate app or mandatory advanced dashboard.
 
-### Phase 14 — Production hardening and staged rollout
+### Phase 14 — Operational readiness
 
-- **Dependencies:** complete core phases and replay crash tests; security/safety controls above are not postponed to here.
-- **Learn / before coding:** threat models, recovery SLOs, bounded concurrency, secret handling, operational rollout and rollback.
-- **Goal / interface:** feature flags for investigation/replay separately; per-owner rate limits and spend/concurrency budgets; durable scheduling and reconciliation; retention/access policy for evidence/checkpoints/traces; restricted DB privileges, configured origins, provider timeouts, alerts and restart recovery. Reconcile Kafka-only failures if required with stable failure IDs and a distinct consumer group. No model in the workflow consumer loop.
-- **Likely files:** AI runner/config and backend routes, worker safety seams, Prisma indexes/migrations, deployment/compose config only if needed; existing operations/docs with concise AI additions.
-- **Tests:** load and provider/model/DB/Kafka outages, missing sink, prompt injection, oversized payload, lease races, interrupted deploy/schema compatibility, backup/restore and kill-switch exercise; verify owner mapping and webhook ownership assumptions before external rollout.
-- **Done:** report-only -> shadow diagnoses -> owner-approved canary replay -> broader approved replay, each gated on safety fixtures and measured outcomes. Rollback disables new starts/dispatch, preserves audit/checkpoints and reconciles already accepted sends; it cannot unsend external actions. Alerts cover stuck approvals/requests, missing evidence, duplicate attempts, trace export loss and cost limits.
-- **Interview concepts:** fault containment, backpressure, threat modelling, operational readiness, backward-compatible rollout.
+- **14A — Required final gate, controls introduced with their features.** Investigation/replay feature switches, configured origins and service/DB privileges, bounded input/model/tool/provider deadlines, per-owner request/concurrency/spend budgets, redaction, retention/access rules, basic failure/stuck-work visibility and recoverable shutdown/restart. Files: service/backend config, runner, necessary deployment settings and operational tests. Verify model/DB/Kafka outages at supported boundaries, restart, kill switch, secret isolation and backup/restore of approval/replay authority before external rollout. Done: documented supported limits, read-only operation first, narrow approved replay only after 9C; rollback stops new work without claiming to unsend accepted actions.
+- **14B — Deferred.** Kafka-only intake, generalized recovery automation, high-volume load/SLO programs, high availability and broader replay coverage. No new files/work until separately scoped; existing Phase 3 reconciliation remains active.
 
-### Phase 15 — Supervisor/subagents only after measured justification
+### Phase 15 — Supervisors — Deferred
 
-- **Dependencies:** Phase 11 baseline and real operational evidence from Phase 14. Optional; absence does not prevent project completion.
-- **Learn / before coding:** decomposition vs orchestration overhead, shared context, bounded delegation, multi-agent failure amplification.
-- **Goal / interface:** first refactor ordinary functions/subgraphs. Add specialist agents only when held-out failure analysis shows distinct domains cannot be handled adequately within the bounded single-agent design, and a prototype improves quality at acceptable cost/latency without new safety failures.
-- **Likely files:** `src/graph.ts`, narrowly scoped `src/subgraphs/` only if justified; evaluation runner and ADR 015.
-- **Tests:** compare identical dataset/budgets, tool-scope isolation, conflicting diagnoses, recursion/delegation bound, interrupted specialist and retained approval boundary.
-- **Done:** written benchmark justifies adoption or records deferral. Replay and approval authority stay centralized in deterministic application code.
-- **Interview concepts:** coordination cost, independent specialization, shared state vs messages, evaluation-driven architecture.
+Outside completion criteria. Reconsider only with measured failure of the bounded single-agent approach and a separately approved scope. No implementation files or verification work now.
 
-### Optional — MCP adapter
+### Optional — MCP adapter — Deferred beyond this release
 
-- **Dependencies:** stable Phase 4/5 tools and an actual second client/integration requirement.
-- **Learn / before coding:** tool protocol vs business logic, transport authentication, capability scope and schema compatibility.
-- **Goal / interface:** expose the same read-only contracts without expanding authority; no replay/write tool.
-- **Likely files:** a small `src/mcp/` adapter only if required, tool contract tests and ADR 016.
-- **Tests:** transport auth, cross-owner denial, schema parity, bounded responses, adapter timeout and no additional privileged capabilities.
-- **Done:** demonstrated consumer benefits from interoperability; otherwise remain deferred.
-- **Interview concepts:** protocols vs architecture, portability vs coupling, least privilege across transports.
+Existing numbering/title retained for references. No implementation now; reconsider only for an actual second consumer without expanding tool authority.
 
-## 7. Verification and first-phase checklist
+## 7. Verification and handoff
 
-Follow [tooling_Verification.md](tooling_Verification.md). For implementation phases, run relevant focused checks and record results of `bun run check-types`, `bun run lint`, `bun run build`. Root Turbo tasks only run scripts packages actually declare; backend/worker currently declare only `dev`. Add appropriate focused verification scripts when introducing AI code; a green root command alone cannot prove backend coverage. Do not run live side-effect tests as a consequence of a build.
+For implementation, read [tooling_Verification.md](tooling_Verification.md), run focused checks for affected behavior and the required root type/lint/build checks. Root Turbo success only covers declared package scripts; use direct backend/worker checks where needed. Do not claim tests passed without current output, or infer migrations are deployed from their presence.
 
-The agent participates in root Turbo verification and also has focused commands. Use `bun test apps/ai_agent/tests` and `bun run --cwd apps/ai_agent check-types` while iterating, then run root `bun run check-types`, `bun run lint` and `bun run build` when the workspace is available on PATH. Add service-contract and PostgreSQL recovery tests in their phases. A green agent suite does not verify worker behavior, and a green root build does not replace scenario tests.
+Use existing agent tests/type checks and worker provider/execution/publisher/reconciler suites when affected. Phase 4 requires real DB ownership-join coverage; Phase 9 requires production-path DB/Kafka crash/concurrency tests. Automated provider calls are stubbed; real external sends are never an incidental verification step.
 
-Worker regression commands when those files change: `bun run apps/worker/retry.test.ts`, `bun run apps/worker/deadletter.test.ts`, `bun run apps/worker/idempotency.test.ts`. Add production-path PostgreSQL/Kafka integration coverage for replay; existing Map-based tests do not establish concurrency guarantees. No implementation tests are claimed passed by this plan.
+Codex handoff: changed files, behavior delivered, checks/results, limitations or blockers, and a short Antigravity documentation handoff where relevant. No teaching session, generated lesson, routine Graphify update, unsolicited next-phase implementation or automatic commit/push. Antigravity handles routine documentation and milestone Graphify work. Feature artifacts explicitly in scope, such as runbooks and evaluation rubrics, remain implementation work.
 
-Phase 1 migration verification is recorded in the implementation session. The host does not expose `bun` directly on PATH, so the repository-pinned Bun 1.2.20 runtime is invoked through `npx` for focused and root checks.
-
-Phase 1 implementation record:
-
-- [x] Teach a small graph using F01 and F07 in [`lessons/0001-bounded-langgraph-triage.html`](../lessons/0001-bounded-langgraph-triage.html).
-- [ ] Learner checkpoint: explain why a timeout is not proof of non-delivery.
-- [x] Pin LangGraph.js, Express and Zod in the existing Bun workspace; the injected model interface keeps tests provider-independent.
-- [x] Define minimal serializable evidence/diagnosis/proposal schemas and two synthetic fixtures, including typed cooldown and approval conditions.
-- [x] Write 22 focused tests for grounded 429 diagnosis, unknown-delivery abstention, invalid/oversized input and output, lifecycle, full-request timeout and tool/step limits.
-- [x] Implement the bounded TypeScript graph with one fixture read tool, one model call path and Zod output checks; expose it through the local Express preview route and CLI.
-- [x] Run Bun tests and strict TypeScript checks. The optional live-model smoke was intentionally skipped because no provider was selected or required.
-
-Phase 2 is the next planned increment and is not authorized by completion of Phase 1.
-
-- [ ] Review the result with the learner and stop. No DB integration, RAG or replay work until its phase is requested.
+This scope revision records the completed Phase 4A-4C implementation from the current working tree. Phase 5 starts only on an explicit implementation request; do not create simulated runbooks or rebuild Graphify as part of this milestone.
 
 ## 8. Risks and deliberately deferred complexity
 
-- **Largest risk:** confusing database execution status with provider outcome. Unknown Telegram delivery and uncertain historical email success must remain blocked.
-- **Evidence quality:** final error strings, missing per-attempt records, mutable configs and lossy DLQ capture constrain diagnosis. RAG cannot reconstruct lost incident evidence.
-- **Privacy/injection:** payloads, error strings and retrieved prose are untrusted; redact centrally and bound tools in code. Repo README contains credential-like material, so whole-repo ingestion is inappropriate.
-- **Approval races:** checkpoints are not authorization; revalidate hashes/owner/version after human delays and again at execution. Do not keep leases or Kafka messages open awaiting humans.
-- **Run lifecycle:** avoid tying long-running work to an HTTP request or streaming connection. Keep runner state durable before exposing durable HITL.
-- **Historical coverage:** use read-only SQL-backed triage first and clearly report coverage gaps; no claim that every production failure reaches the agent.
-- **Dependency drift:** verify current LangGraph.js and model-provider APIs in each relevant phase; no speculative version-specific snippets in a long-term master plan.
-- **Unnecessary now:** general DAG engine, extra services beyond the agent service, autonomous infra remediation, 20+ tools, vector DB, GraphRAG, deep research browsing, Redis/new job broker, LangGraph hosted platform, multi-agent supervisor, MCP server, bulk autonomous replay and a separate frontend.
-- **Scope:** auth/ingestion/processor rebuilds and generic cleanup are excluded. Targeted correctness changes are justified only by evidence/approval/replay safety requirements above.
+- **External uncertainty:** database state and model confidence cannot prove provider non-delivery; unsupported/ambiguous cases remain blocked even after human approval.
+- **Historical gaps:** no invented snapshots, receipts or missing attempts. Current definitions are not historical evidence.
+- **Untrusted content:** retrieved prose, payloads and errors cannot change tool scope/policy; redact before any model, checkpoint, trace or UI exposure.
+- **Approval races:** immutable versions, ownership, fingerprints and revalidation survive human delays; checkpoints never grant authority.
+- **Recovery:** preserve Phase 3 fencing and reconciliation. Persist approval/replay before effects; never hold a provider/Kafka lease while awaiting a human.
+- **Scope:** no auth/ingestion rebuild, general DAG, extra platform, automatic provider retry, broad replay, vector infrastructure, supervisor or MCP requirement.
+- **Dependency drift:** verify the selected library/provider interfaces during their implementation phase. No speculative upgrade or architecture review is required.
 
-The first useful outcome is a tested read-only triage agent. The first useful production outcome may remain diagnosis plus manual escalation for many cases; safe autonomy is constrained by evidence, not by how confidently the model speaks.
+The release is complete when its required capabilities and safety gates work within the stated limits. Unsupported cases may finish with diagnosis and manual escalation; optional extensions do not block completion.

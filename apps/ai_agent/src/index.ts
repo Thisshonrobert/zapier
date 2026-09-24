@@ -6,6 +6,14 @@ const port = Number(process.env.PORT ?? 3004);
 const running = await createHttpServer({
   fixtureDirectory: defaultFixtureDirectory(),
   model: new FixtureDiagnosisModel(),
+  ...(process.env.TRIAGE_SERVICE_SECRET
+    ? {
+        privateTools: {
+          backendBaseUrl: process.env.PRIMARY_BACKEND_URL ?? "http://127.0.0.1:3002",
+          serviceSecret: process.env.TRIAGE_SERVICE_SECRET,
+        },
+      }
+    : {}),
 }).start(port);
 
 console.log(`ai-agent running at ${running.baseUrl}`);

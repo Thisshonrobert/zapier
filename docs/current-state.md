@@ -25,8 +25,20 @@ This document provides a factual assessment of what is currently implemented in 
 
 - **Authentication**: Native username/password signup with bcrypt hashing and JWT generation, alongside Clerk OAuth token exchange endpoint (`POST /api/v1/user/clerk`).
 - **Zap CRUD & Inspect**: Creation of ordered multi-action Zaps, listing user workflows, querying execution history, and calculating failure counts.
+- **Phase 4A-4C read-only triage boundary**: Authenticated `GET /api/v1/triage/cases` lists only the owner's joined retry cases. Owner checks are repeated before each evidence read, including failure context, bounded execution evidence, and deterministic action-input validation. The primary backend signs a case-, operation-, investigation-, and correlation-bound service scope for the private agent boundary; the agent and backend both verify its HMAC, audience, expiry, operation, route binding, and correlation ID.
 
-### 4. Frontend Dashboard & Builder
+### 4. AI Triage Evidence
+
+- **Failure context**: Returns bounded provider/error facts, redacted final errors, and payload/action structure summaries. Raw payload values and credential-like data are not exposed to the agent.
+- **Execution evidence**: Returns bounded attempt history, current execution state, predecessor states, fingerprints, ordering status, and provenance. Captured, reconciled, and legacy evidence are distinct; missing relations, truncated history, and ambiguous ordering are reported as unavailable or incomplete.
+- **Deterministic input validation**: Uses the worker's authoritative action registry and parser semantics to classify valid, invalid, or blocked inputs, including missing required fields, invalid types, missing template paths, and credential presence indicators. It does not execute handlers or call providers.
+- **Bounds and contracts**: Strict shared Zod contracts reject unknown or oversized values. Backend reads time out after 2 seconds, agent-to-backend reads after 2 seconds, primary-to-agent reads after 3 seconds, and agent responses over 32 KiB are rejected. Evidence is versioned, hashed, redacted, and marked with explicit unknowns and completeness flags.
+
+Required service configuration is `TRIAGE_SERVICE_SECRET` (the same 32-or-more-character secret in both services). `AI_AGENT_URL` configures the primary backend's agent address and `PRIMARY_BACKEND_URL` configures the agent's backend address; both default to loopback URLs for local development and should be set explicitly outside it.
+
+Phase 4 verification completed with 65 focused tests, 3 PostgreSQL integration tests, and passing type check, lint, and build. The repository checks reported the existing Next/Yarn-Corepack warnings; no new implementation or schema change is implied by those warnings.
+
+### 5. Frontend Dashboard & Builder
 
 - **Workflow Builder**: Next.js UI for configuring triggers, adding sequential action nodes, mapping dynamic fields, and testing triggers against live webhook buffers.
 - **Inspect & History**: Dedicated pages for viewing Zap details, historical runs, and execution status.
@@ -44,6 +56,8 @@ This document provides a factual assessment of what is currently implemented in 
    - Resend requests include an idempotency key and Telegram lacks provider-level idempotency. Provider acceptance followed by persistence failure remains `UNKNOWN` and requires human review; the worker never resends automatically.
 4. **Single-Threaded Outbox Poller**:
    - `apps/processor` runs an unpartitioned single-instance loop polling the outbox table. At extreme scale, this requires database partitioning or CDC (Change Data Capture) tools like Debezium.
+5. **Triage integration remains read-only**:
+   - Phase 4 does not add simulated runbooks, model diagnosis, durable investigations, human approval, replay, frontend triage screens, Kafka intake, or provider calls. Those remain later master-plan phases.
 
 ---
 
@@ -65,3 +79,5 @@ The upcoming AI workflow automation phase is anticipated to interact with the fo
 - **Dynamic Workflow DAG Graph**: Moving beyond linear `sortingOrder` to support AI-generated branch graphs and conditional step execution.
 - **AI Action Handlers**: Registering new `ActionHandler` implementations (e.g., LLM text transformation, summarization, decision evaluation, intelligent routing).
 - **Prompt & Tool Context Flow**: Enriching `ActionContext` to support passing prompt templates, dynamic function calling schemas, and previous step outputs into AI nodes.
+
+The Phase 4 live evidence boundary is the implemented exception to the former fixture-only description: it is a read-only investigation surface and does not change worker execution authority or external side effects.

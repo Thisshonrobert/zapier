@@ -79,7 +79,7 @@ This document records the foundational architectural decisions established in th
 
 ## ADR 009: Read-only single-agent triage boundary
 
-- **Status**: Accepted; fixture-only Phase 1 migrated to TypeScript/LangGraph.js 2026-09-21. Production integration remains proposed.
+- **Status**: Accepted; fixture-only Phase 1 migrated to TypeScript/LangGraph.js 2026-09-21, with the read-only Phase 4A-4C backend integration implemented. Durable investigation and replay integration remain proposed.
 - **Context**: The backend, Kafka worker and DLQ foundation exist. The AI runtime currently handles synthetic fixtures only. Triage is a separate control workflow, not an AI action in a user's Zap.
 - **Decision**: Start with one bounded LangGraph.js workflow in a separate Express workspace at `apps/ai_agent/`, first against synthetic fixtures. Zod validates service/tool/output contracts. The primary backend later authenticates and binds ownership; deterministic application code retains approval/policy/replay authority and the worker remains executor. Use durable PostgreSQL checkpoints before real HITL.
 - **Alternatives / consequences**: This supersedes the short-lived Python/FastAPI Phase 1 implementation. Reusing TypeScript/Bun lowers learning and operational overhead while preserving a separate process and trust boundary. No existing application is rewritten. The model receives no Prisma client, shell or producer. See ADR 018 for ownership and integration.
@@ -87,7 +87,7 @@ This document records the foundational architectural decisions established in th
 
 ## ADR 010: Scenario-derived read-only tools and evidence provenance
 
-- **Status**: Proposed.
+- **Status**: Partially implemented in Phase 4A-4C; runbook search remains proposed.
 - **Context**: Current failures concern email/Telegram, execution state and evidence gaps; an arbitrary log-search platform does not exist.
 - **Decision**: Start with four scoped tools: failure context, execution evidence, pure input validation and runbook search. Bind owner/run/stage in server code. Return redacted, bounded, versioned evidence with explicit unavailable/simulated fields. Discover SQL retry cases deterministically before adding a Kafka triage consumer.
 - **Alternatives / consequences**: No speculative tool catalog, generic SQL/HTTP/shell or provider send-to-test. Missing facts lead to abstention. Tool additions require a taxonomy case that cannot be investigated with current capabilities. SQL-only discovery does not claim Kafka-only or lost-sink coverage.
@@ -151,7 +151,7 @@ This document records the foundational architectural decisions established in th
 
 ## ADR 018: TypeScript agent-service ownership and internal contracts
 
-- **Status**: TypeScript/Bun/Express/Zod/LangGraph.js selected by user; independent Phase 1 service implemented, production integration proposed.
+- **Status**: TypeScript/Bun/Express/Zod/LangGraph.js selected by user; Phase 4A-4C private read-only integration implemented. Durable agent state, approval, replay, and frontend integration remain proposed.
 - **Context**: A separate Python stack distracted from the intended AI-system learning. Existing backend, worker, Kafka infrastructure and frontend are already TypeScript/Bun and remain in place.
 - **Decision**: Add `apps/ai_agent/` as a separate monorepo workspace. It owns LangGraph.js, read-only tool adapters, later RAG/evaluations/Langfuse and PostgreSQL agent jobs/checkpoints/progress in its own schema. The primary backend owns workflow reads/validation, owner bindings, proposal/approval records, safety policy and deterministic replay. Prisma migrations own application tables; agent checkpoint setup owns only its tables. No shared writable ORM model or dual migration ownership.
 - **Integration**: Keep browser authentication in the primary backend. Use private authenticated HTTP calls with short-lived owner/case/investigation scopes; recheck ownership in evidence APIs. Zod validates versioned JSON contracts on both sides with shared fixtures. Authoritative input validation reuses worker semantics rather than duplicating the parser. Backend-computed fingerprints cross the boundary unchanged.

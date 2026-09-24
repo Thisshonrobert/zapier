@@ -2,6 +2,7 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 
 import { EvidenceSchema, type Evidence } from "../contracts.ts";
+import type { BackendClient } from "../clients/backend.ts";
 
 export class FixtureNotFound extends Error {}
 export class FixtureIdentityMismatch extends Error {}
@@ -43,5 +44,13 @@ export class FixtureFailureContextTool {
       );
     }
     return evidence;
+  }
+}
+
+export class BackendFailureContextTool {
+  constructor(private readonly backend: BackendClient) {}
+
+  get() {
+    return this.backend.getFailureContext();
   }
 }

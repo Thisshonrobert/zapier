@@ -16,7 +16,7 @@ This document serves as the primary index and navigation reference for all techn
 | [**`idempotency.md`**](./idempotency.md)                   | Multi-layered deduplication strategy (Transactional Outbox $\rightarrow$ Broker ACK $\rightarrow$ DB Execution Lease $\rightarrow$ External API headers).    |
 | [**`actions.md`**](./actions.md)                           | Action registry pattern, `ActionHandler` contracts, `{{expression}}` template parsing, and Email / Telegram integrations.                                    |
 | [**`current-state.md`**](./current-state.md)               | Detailed audit of implemented features, known limitations, technical debt, and future AI touchpoints.                                                        |
-| [**`decisions.md`**](./decisions.md)                       | Architectural Decision Records (ADRs 001–007) documenting core design choices and trade-offs.                                                                |
+| [**`decisions.md`**](./decisions.md)                       | Architectural Decision Records (ADRs 001–018) documenting core design choices and trade-offs.                                                                |
 | [**`graphify.md`**](./graphify.md)                         | Guidance on consulting and updating the repository knowledge graph.                                                                                          |
 
 ---
@@ -27,3 +27,4 @@ This document serves as the primary index and navigation reference for all techn
 - **Adding / Modifying Action Steps**: Consult [`actions.md`](./actions.md), [`idempotency.md`](./idempotency.md), and [`worker.md`](./worker.md).
 - **Extending Messaging / Queuing**: Review [`kafka.md`](./kafka.md) and [`worker.md`](./worker.md).
 - **AI Implementation**: Start with the [Autonomous DLQ Triage master plan](./ai-dlq-master-plan.md) and [failure taxonomy](./AI/failure-taxonomy.md). The AI service uses TypeScript, Bun, Express, Zod and LangGraph.js inside the existing monorepo; the backend, worker, Kafka infrastructure and frontend keep their current responsibilities. AI reference material uses `docs/AI/` (do not create a parallel `docs/ai/` directory). ADRs 009–018 in [decisions.md](./decisions.md) distinguish implemented foundations from proposed integration details.
+- **Phase 4 triage boundary**: Phase 4A–4C is implemented as a read-only, owner-scoped path. Use [architecture.md](./architecture.md) for the authenticated service boundary and [current-state.md](./current-state.md) for evidence, redaction, validation, environment, and verification details. Phase 5 simulated runbooks and later diagnosis, approval, replay, and frontend work remain deferred.
