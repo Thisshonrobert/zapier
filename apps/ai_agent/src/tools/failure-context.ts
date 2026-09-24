@@ -7,6 +7,7 @@ import type { BackendClient } from "../clients/backend.ts";
 export class FixtureNotFound extends Error {}
 export class FixtureIdentityMismatch extends Error {}
 
+//The fixture is the simulated evidence source.
 const fixtureFiles: Readonly<Record<string, string>> = {
   "telegram-rate-limit": "telegram-rate-limit.json",
   "telegram-unknown-delivery": "telegram-unknown-delivery.json",

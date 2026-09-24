@@ -1,3 +1,4 @@
+//publishing business logic LIKE FIND FAILURE, CLAIM LEASE, PUBLISH TO SINK, AND UPDATE DB
 const CLAIM_LEASE_MS = 2 * 60 * 1000;
 const MAX_BACKOFF_MS = 60 * 1000;
 const SAFE_CODE = /^[a-z0-9_]{1,64}$/;

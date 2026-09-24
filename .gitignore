@@ -38,3 +38,6 @@ yarn-error.log*
 *.pem
 .agents
 skills-lock.json
+
+graphify-out/cache/
+.tmp-turbo-user/
