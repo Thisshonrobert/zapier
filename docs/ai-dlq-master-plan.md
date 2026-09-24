@@ -1,6 +1,6 @@
 # Autonomous DLQ Triage Agent — master implementation plan
 
-> **Status: Phases 1–4 implemented; Phase 5 is next.** Phase 4A-4C verification: 65 focused tests passed, 3 PostgreSQL integration tests passed, and type check/lint/build passed with the existing Next/Yarn-Corepack warnings. Scope revised 2026-09-24. Phase 5 simulated runbooks and later diagnosis, approval, replay, and frontend work remain deferred.
+> **Status: Phases 1–5 implemented; Phase 6 is next.** Phase 4A-4C verification: 65 focused tests passed, 3 PostgreSQL integration tests passed, and type check/lint/build passed with the existing Next/Yarn-Corepack warnings. Phase 5 verification: 8 focused retrieval tests passed, root type-check and build passed with existing Yarn/Corepack warnings, independent review found no Critical or Important findings, root lint remains blocked by 9 unrelated errors and 22 warnings, and the full AI-agent suite is blocked by a pre-existing non-JSON comment on line 28 of the modified evaluation/cases.jsonl. Scope revised 2026-09-24. Phase 6 integrated diagnosis and all later approval, replay, and frontend work remain deferred.
 
 **Goal:** investigate failed workflow stages, gather bounded evidence, propose grounded remediation, enforce deterministic safety and human approval, and hand eligible replay to application code.
 
@@ -22,12 +22,13 @@ The existing path is webhook transaction -> run/outbox -> processor -> Kafka -> 
 | 3B — Durable failures                    | [Design](superpowers/specs/2026-09-22-phase-3b-durable-failures-design.md), `apps/worker/execution-store.ts`, worker orchestration and additive schema. Single-shot execution, claim fencing, attempt evidence, fingerprints, atomic FAILED/failure-row persistence and ACK gating.                                                  |
 | 3C — Publication/reconciliation          | [Completed checklist](superpowers/plans/2026-09-23-phase-3c-dlq-publication.md), publisher, reconciler and separate worker entrypoint. Sanitized publication by failureId, broker-ACK stamping, backoff, expired-execution quarantine and missing-failure repair without provider calls.                                             |
 | 4A-4C — Bounded live investigation tools | Authenticated owner-scoped case listing and private service-scope boundary; redacted failure context; bounded execution evidence with provenance and explicit unknowns; deterministic worker-parity input validation with no provider calls. Real PostgreSQL ownership-isolation coverage and shared contract fixtures are included. |
+| 5 — Simulated runbooks and minimal retrieval | Six labelled simulated runbooks covering F01–F10; allowlisted bounded Markdown indexing; deterministic keyword and metadata-filter retrieval with stable top-three ordering; versioned citations, SHA-256 content hashes, stale exclusion, and untrusted-guidance markers. |
 
 Phase 3B supersedes Phase 3A's interim automatic provider retry behavior: the active execution path makes one provider attempt. Publication retries deliver evidence; they do not resend provider actions. Existing fencing, fingerprints, durable capture, publication and reconciliation are retained.
 
 The Phase 3C checklist records verification as completed. Older phase plans contain historical unchecked steps; source artifacts corroborate implementation, but neither artifact presence nor this revision claims fresh deployment or migration status. Phase 4A-4C verification is recorded in this milestone; check the target environment before deployment rather than replaying old plans.
 
-Remaining constraints: external provider acceptance is not final delivery; an accepted request followed by failed persistence can remain UNKNOWN. Historical evidence/configuration snapshots may be absent. Current action definitions are mutable. FAILED does not become replayable by raw Kafka republish. Phase 4 live tools remain read-only and bounded; RAG, integrated model diagnosis, durable HITL, frontend integration, and replay remain future work.
+Remaining constraints: external provider acceptance is not final delivery; an accepted request followed by failed persistence can remain UNKNOWN. Historical evidence/configuration snapshots may be absent. Current action definitions are mutable. FAILED does not become replayable by raw Kafka republish. Phase 4 live tools and Phase 5 retrieval remain read-only and bounded; integrated model diagnosis, durable HITL, frontend integration, and replay remain future work.
 
 Some taxonomy/current-state/ADR prose still describes pre-Phase-3 behavior (including repeated provider retries or missing durable failure records). For present behavior use source and Phase 3 records; preserve legacy/unknown distinctions. Antigravity owns routine reconciliation of those documents. Do not rebuild completed safeguards from stale prose.
 
@@ -129,7 +130,7 @@ Only introduce persistence after fixture contracts work. The Phase 1 request-bou
 
 The [taxonomy](AI/failure-taxonomy.md) covers F01 rate limits, F02 outages/transport, F03 credentials/permissions, F04 destination/template input, F05 unsupported action, F06 malformed/missing stage/run, F07 uncertain delivery/lease, F08 stale/duplicate cases, F09 incomplete DLQ/progression and F10 hidden email errors. Phase 3 repaired important F05/F07/F09/F10 evidence paths; legacy rows and invalid/unowned envelopes can still lack usable evidence. Inspect source before treating historical taxonomy prose as current behavior.
 
-Create these **six simulated documents in Phase 5**, not during this planning task:
+Phase 5 implements these **six simulated documents**:
 
 | Planned document under `docs/AI/runbooks/` | Scope and required distinctions                                                                                             |
 | ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------- |
@@ -142,9 +143,9 @@ Create these **six simulated documents in Phase 5**, not during this planning ta
 
 Every document contains ID/version, `simulated: true`, owner/review date, applicable taxonomy/provider/code version, symptoms, evidence needed, read-only investigation procedure, allowed remediation, forbidden actions, replay/approval conditions, verification/rollback or escalation, and links to existing source/docs. Separate fabricated examples from real implementation facts. Do not copy the architecture docs, ingest the entire repo, `.env`, README credentials, user payloads or Graphify graph.
 
-Index allowed Markdown files at startup/build by headings, keeping each short section intact with ID, heading, provider/category metadata and content hash. Use deterministic token/keyword overlap plus metadata filters with stable tie-breaking and a small top-k. No vector DB, embeddings, reranker, GraphRAG or ingestion service initially. Return no match rather than inventing a citation. The agent cites retrieved sections as procedural guidance alongside separate incident evidence; neither retrieved prose nor payload/error text can change tool permissions or policy. Code safety wins if a runbook conflicts.
+`searchRunbooks` indexes only the six allowlisted Markdown files, bounded by document size, section length/count, query length, filter size, and a maximum result limit of three. It keeps short sections intact with ID, heading, provider/category metadata and SHA-256 content hash. Deterministic keyword overlap plus taxonomy/provider filters use citation order for stable ties. No vector DB, embeddings, reranker, GraphRAG or repository-ingestion service exists. Return no match rather than inventing a citation. Each result includes a versioned citation and is marked as untrusted procedural guidance that cannot change policy; code safety wins if runbook text conflicts. Explicitly stale runbooks are excluded.
 
-Evaluate retrieval against labelled relevant sections and a no-retrieval baseline. Introduce embeddings only if held-out paraphrases fail retrieval materially and improvement justifies dependency/cost; reuse PostgreSQL if it suffices. Versioned stale runbooks must be excluded or explicitly flagged, not silently trusted.
+Phase 5 retrieval tests cover labelled top-three retrieval against a no-retrieval baseline, no-match behavior, bounds, stable ties, citation and hash integrity, malicious/conflicting text, duplicate citations, and stale documents. Embeddings remain deferred unless a later evaluation justifies their dependency/cost; reuse PostgreSQL if it suffices.
 
 ## 5. Deterministic replay design and release gate
 
@@ -190,12 +191,13 @@ Phase 4 verification completed with 65 focused tests, 3 PostgreSQL integration t
 
 Cross-increment rule: add only files needed for the current contract; no parser duplication, generic SQL/HTTP/shell tool, arbitrary model-selected identity or new dependency without a concrete requirement.
 
-### Phase 5 — Simulated runbooks and minimal RAG — Required
+### Phase 5 — Simulated runbooks and minimal retrieval — Completed
 
-- **Dependencies/outcome:** Phase 4; six labelled documents and bounded `searchRunbooks` per Section 4.
-- **Files:** `docs/AI/runbooks/`, `src/tools/search-runbooks.ts`, retrieval tests. These runbooks are feature inputs; Codex may implement them despite Antigravity owning routine milestone documentation.
-- **Verify/done:** relevant top-three retrieval on labelled cases, no-match behavior, stable tie order, valid versioned citations and malicious/conflicting-text handling; compare with no retrieval. Useful cited guidance without claiming incident facts.
-- **Excluded:** embeddings, vector database, rerankers, repository ingestion and new ingestion services.
+- **Dependencies/outcome:** Completed after Phase 4. Six labelled simulated runbooks cover F01–F10. `searchRunbooks` uses allowlisted, bounded Markdown indexing, deterministic keyword overlap and taxonomy/provider metadata filters, returns at most three results with stable citation tie ordering, emits versioned citations and SHA-256 content hashes, excludes stale documents, and labels text as untrusted procedural guidance that cannot change policy.
+- **Files:** `docs/AI/runbooks/`, `apps/ai_agent/src/tools/search-runbooks.ts`, and `apps/ai_agent/tests/search-runbooks.test.ts`.
+- **Verification:** 8 focused retrieval tests passed, covering labelled retrieval, no-match behavior, bounds, stable ties, citation integrity, malicious/conflicting text, duplicate citations, and stale documents. Root type-check passed. Root build passed with existing Yarn/Corepack warnings. Independent review found no remaining Critical or Important findings. Root lint remains blocked by unrelated existing frontend issues: 9 errors and 22 warnings. The full AI-agent suite has unrelated failures because the pre-existing modified `apps/ai_agent/evaluation/cases.jsonl` contains a non-JSON comment on line 28.
+- **Preserved:** Phase 4 read-only, owner-scoped, redacted, bounded, versioned evidence contracts and worker authority are unchanged. Phase 6 integration has not been implemented.
+- **Excluded:** embeddings, vector database, rerankers, repository ingestion, new ingestion services, model diagnosis, graph integration, approval, replay, and frontend integration.
 
 ### Phase 6 — Integrated diagnosis and structured remediation — Required
 
@@ -269,7 +271,7 @@ Use existing agent tests/type checks and worker provider/execution/publisher/rec
 
 Codex handoff: changed files, behavior delivered, checks/results, limitations or blockers, and a short Antigravity documentation handoff where relevant. No teaching session, generated lesson, routine Graphify update, unsolicited next-phase implementation or automatic commit/push. Antigravity handles routine documentation and milestone Graphify work. Feature artifacts explicitly in scope, such as runbooks and evaluation rubrics, remain implementation work.
 
-This scope revision records the completed Phase 4A-4C implementation from the current working tree. Phase 5 starts only on an explicit implementation request; do not create simulated runbooks or rebuild Graphify as part of this milestone.
+This scope revision records the completed Phase 4A-4C implementation from the current working tree. Phase 5 is now implemented in the current working tree. Phase 6 has not been implemented; do not infer integrated diagnosis or graph integration from the Phase 5 retrieval tool. Graphify remains governed by the pushed-milestone policy in `docs/graphify.md`.
 
 ## 8. Risks and deliberately deferred complexity
 
