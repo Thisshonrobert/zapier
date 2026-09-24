@@ -38,6 +38,15 @@ Required service configuration is `TRIAGE_SERVICE_SECRET` (the same 32-or-more-c
 
 Phase 4 verification completed with 65 focused tests, 3 PostgreSQL integration tests, and passing type check, lint, and build. The repository checks reported the existing Next/Yarn-Corepack warnings; no new implementation or schema change is implied by those warnings.
 
+### 4.1 Phase 5 simulated runbooks and retrieval
+
+- Six labelled simulated runbooks cover taxonomy cases F01 through F10: transient provider failures, credentials and destinations, template/registry/stage validation, uncertain delivery, replay/stale cases, and evidence gaps.
+- `searchRunbooks` indexes only an allowlist of bounded Markdown files and sections. Retrieval is deterministic keyword overlap with taxonomy/provider metadata filters, at most three results, and citation-order tie breaking.
+- Matches include versioned citations and SHA-256 content hashes. Documents marked `status: stale` are explicitly excluded, duplicate citations are rejected, and retrieved text is marked as untrusted procedural guidance that cannot change policy.
+- Phase 5 retrieval coverage includes labelled retrieval, no-match behavior, bounds, stable ties, citation integrity, malicious/conflicting text, duplicate citations, and stale documents.
+- Verification recorded: 8 focused retrieval tests passed; root type-check passed; root build passed with existing Yarn/Corepack warnings; independent review found no remaining Critical or Important findings. Root lint remains blocked by unrelated existing frontend issues (9 errors and 22 warnings). The full AI-agent suite has unrelated failures because the pre-existing modified `apps/ai_agent/evaluation/cases.jsonl` contains a non-JSON comment on line 28.
+- Phase 4 contracts remain unchanged. Phase 5 is read-only retrieval only; embeddings, vector databases, reranking, repository ingestion, Phase 6 graph integration, approval, replay, and frontend triage integration are not implemented.
+
 ### 5. Frontend Dashboard & Builder
 
 - **Workflow Builder**: Next.js UI for configuring triggers, adding sequential action nodes, mapping dynamic fields, and testing triggers against live webhook buffers.
@@ -57,7 +66,7 @@ Phase 4 verification completed with 65 focused tests, 3 PostgreSQL integration t
 4. **Single-Threaded Outbox Poller**:
    - `apps/processor` runs an unpartitioned single-instance loop polling the outbox table. At extreme scale, this requires database partitioning or CDC (Change Data Capture) tools like Debezium.
 5. **Triage integration remains read-only**:
-   - Phase 4 does not add simulated runbooks, model diagnosis, durable investigations, human approval, replay, frontend triage screens, Kafka intake, or provider calls. Those remain later master-plan phases.
+   - Phases 4 and 5 provide bounded evidence tools and simulated runbook retrieval only. Model diagnosis, durable investigations, human approval, replay, frontend triage screens, Kafka intake, and provider calls remain unimplemented later phases.
 
 ---
 
