@@ -21,6 +21,122 @@ const boundedName = z.string().min(1).max(128);
 const boundedSummary = z.string().min(1).max(1_000);
 const boundedError = z.string().min(1).max(2_000);
 
+const uuid = z.uuid();
+const structureSummary = z.object({
+  paths: z.array(z.object({ path: z.string().min(1).max(256), type: z.string().min(1).max(32) }).strict()).max(64),
+  truncated: z.boolean(),
+}).strict();
+
+export const FailureContextEvidenceSchema = z.object({
+  contract_version: z.literal(1),
+  evidence_id: evidenceRef,
+  type: z.literal("failure_context"),
+  source_ref: z.object({ case_id: uuid, zap_run_id: uuid, stage: z.number().int().nonnegative().max(1_000) }).strict(),
+  observed_at: z.iso.datetime({ offset: true }),
+  content_hash: z.string().regex(/^[a-f0-9]{64}$/),
+  facts: z.object({
+    source_kind: z.enum(["retry_row", "reconciled_execution"]),
+    current_action_type: z.string().min(1).max(128).nullable(),
+    retry: z.object({
+      provider: z.string().max(32).nullable().optional(),
+      phase: z.string().max(32).nullable().optional(),
+      provider_outcome: z.string().max(32).nullable().optional(),
+      safe_code: z.string().max(64).nullable().optional(),
+      provider_status: z.number().int().min(100).max(599).nullable().optional(),
+      retry_after_seconds: z.number().int().positive().max(86_400).nullable().optional(),
+      requires_human: z.boolean(),
+      final_error: z.string().max(2_000).nullable().optional(),
+    }).strict(),
+    action_metadata: structureSummary,
+    payload: structureSummary,
+  }).strict(),
+  unavailable: z.array(z.string().min(1).max(128)).max(32),
+  complete: z.boolean(),
+  simulated: z.literal(false),
+}).strict();
+
+export type FailureContextEvidence = z.infer<typeof FailureContextEvidenceSchema>;
+
+export const ExecutionEvidenceSchema = z.object({
+  contract_version: z.literal(1),
+  evidence_id: evidenceRef,
+  type: z.literal("execution_evidence"),
+  source_ref: z.object({ case_id: uuid, zap_run_id: uuid, stage: z.number().int().nonnegative().max(1_000) }).strict(),
+  observed_at: z.iso.datetime({ offset: true }),
+  content_hash: z.string().regex(/^[a-f0-9]{64}$/),
+  facts: z.object({
+    provenance: z.enum(["captured", "reconciled_execution", "legacy"]),
+    current_execution: z.object({
+      execution_id: uuid,
+      status: z.string().min(1).max(32),
+      lease_until: z.iso.datetime({ offset: true }).nullable(),
+      completed_at: z.iso.datetime({ offset: true }).nullable(),
+      provider_outcome: z.string().max(32).nullable(),
+      requires_human: z.boolean(),
+      action_fingerprint: z.string().regex(/^[a-f0-9]{64}$/).nullable(),
+      request_fingerprint: z.string().regex(/^[a-f0-9]{64}$/).nullable(),
+    }).strict().nullable(),
+    attempts: z.array(z.object({
+      attempt_number: z.number().int().nonnegative(),
+      status: z.string().min(1).max(32),
+      provider: z.string().max(32).nullable(),
+      phase: z.string().max(32).nullable(),
+      provider_outcome: z.enum(["accepted", "rejected", "not_attempted", "unknown"]),
+      safe_code: z.string().max(64).nullable(),
+      provider_status: z.number().int().min(100).max(599).nullable(),
+      retry_after_seconds: z.number().int().positive().max(86_400).nullable(),
+      started_at: z.iso.datetime({ offset: true }).nullable(),
+      completed_at: z.iso.datetime({ offset: true }).nullable(),
+      provenance: z.enum(["captured", "reconciled_execution", "legacy"]),
+    }).strict()).max(50),
+    history_limit: z.number().int().min(1).max(50),
+    history_truncated: z.boolean(),
+    predecessors: z.array(z.object({
+      stage: z.number().int().nonnegative(), status: z.string().min(1).max(32),
+      provider_outcome: z.string().max(32).nullable(), completed_at: z.iso.datetime({ offset: true }).nullable(),
+    }).strict()).max(100),
+    ordering: z.object({
+      status: z.enum(["valid", "invalid", "unknown"]),
+      missing_predecessor_stages: z.array(z.number().int().nonnegative()).max(100),
+    }).strict(),
+  }).strict(),
+  unavailable: z.array(z.string().min(1).max(128)).max(32),
+  complete: z.boolean(),
+  simulated: z.literal(false),
+}).strict();
+
+export type ExecutionEvidence = z.infer<typeof ExecutionEvidenceSchema>;
+
+export const ActionInputValidationEvidenceSchema = z.object({
+  contract_version: z.literal(1),
+  evidence_id: evidenceRef,
+  type: z.literal("action_input_validation"),
+  source_ref: z.object({ case_id: uuid, zap_run_id: uuid, stage: z.number().int().nonnegative().max(1_000) }).strict(),
+  observed_at: z.iso.datetime({ offset: true }),
+  content_hash: z.string().regex(/^[a-f0-9]{64}$/),
+  facts: z.object({
+    action_type: z.string().min(1).max(128).nullable(),
+    validation_status: z.enum(["valid", "invalid", "blocked"]),
+    supported: z.boolean(),
+    missing_required_fields: z.array(z.string().min(1).max(128)).max(32),
+    invalid_field_types: z.array(z.object({
+      field: z.string().min(1).max(128), expected: z.literal("string"), actual: z.string().min(1).max(32),
+    }).strict()).max(32),
+    missing_template_paths: z.array(z.string().min(1).max(256)).max(64),
+    credential_presence: z.array(z.object({
+      field: z.string().min(1).max(128), present: z.boolean(),
+      source: z.enum(["action_metadata", "unknown_worker_environment"]),
+    }).strict()).max(16),
+    blocked_reasons: z.array(z.string().min(1).max(128)).max(16),
+    input_fingerprint: z.string().regex(/^[a-f0-9]{64}$/),
+  }).strict(),
+  unavailable: z.array(z.string().min(1).max(128)).max(32),
+  complete: z.boolean(),
+  simulated: z.literal(false),
+}).strict();
+
+export type ActionInputValidationEvidence = z.infer<typeof ActionInputValidationEvidenceSchema>;
+
 // ============================================================================
 // HTTP API Request Schema
 // Schema for POST /investigations/preview payload validation.

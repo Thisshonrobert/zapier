@@ -2,6 +2,7 @@ import { createServer, type Server } from "node:http";
 import type { AddressInfo } from "node:net";
 
 import express, { type ErrorRequestHandler } from "express";
+import { createPrivateToolsRouter } from "./private-http.ts";
 
 import { PreviewRequestSchema, type DiagnosisModel } from "./contracts.ts";
 import {
@@ -22,6 +23,11 @@ type HttpServerOptions = {
   fixtureDirectory: string;
   model: DiagnosisModel;
   previewOptions?: PreviewOptions;
+  privateTools?: {
+    backendBaseUrl: string;
+    serviceSecret: string;
+    timeoutMs?: number;
+  };
 };
 
 export type RunningHttpServer = {
@@ -39,6 +45,7 @@ export function createHttpServer({
   fixtureDirectory,
   model,
   previewOptions,
+  privateTools,
 }: HttpServerOptions) {
   const app = express();
   const previewService = buildPreviewService(
@@ -47,6 +54,9 @@ export function createHttpServer({
     previewOptions,
   );
   app.use(express.json({ limit: "16kb" }));
+  if (privateTools) {
+    app.use("/private/v1/tools", createPrivateToolsRouter(privateTools));
+  }
 
   app.post("/investigations/preview", async (request, response) => {
     const parsed = PreviewRequestSchema.safeParse(request.body);

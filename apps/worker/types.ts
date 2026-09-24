@@ -10,7 +10,7 @@ export interface ActionContext {
 }
 
 export type ActionProvider = "email" | "telegram";
-export type ActionPhase = "resolve_destination" | "send";
+export type ActionPhase = "resolve_destination" | "send"; // at channel level, we can have multiple phases of execution. For example, resolving the destination and sending the message are two distinct phases.  
 export type ProviderOutcome =
   | "accepted"
   | "rejected"
@@ -32,7 +32,12 @@ export type ActionFailureEvidence = {
   status?: number;
   retryAfterSeconds?: number;
 };
-
+/**
+ * Error thrown when an action fails to execute.
+ * Error
+├── human-readable message
+└── structured evidence
+ */
 export class ActionExecutionError extends Error {
   constructor(
     message: string,

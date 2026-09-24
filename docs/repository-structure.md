@@ -92,12 +92,14 @@ This repository is a TypeScript monorepo configured with [Turborepo](https://tur
 
 ### 6. `ai_agent` ([`apps/ai_agent`](../apps/ai_agent))
 
-- **Role**: Read-only Autonomous DLQ Triage Agent. Phase 1 accepts two allowlisted synthetic fixtures and has no database, Kafka, provider-send, approval or replay capability.
+- **Role**: Read-only Autonomous DLQ Triage Agent. Phase 4A-4C supports authenticated backend evidence reads in addition to the two allowlisted synthetic fixtures. It still has no database ownership, Kafka, provider-send, approval, replay, or frontend authority.
 - **Entry Point**: [`apps/ai_agent/src/index.ts`](../apps/ai_agent/src/index.ts) (Port `3004`).
 - **Key Modules**:
   - `src/graph.ts`: Bounded two-node LangGraph.js investigation workflow and deterministic grounding rules.
-  - `src/contracts.ts`: Strict Zod contracts for requests, evidence and proposals.
-  - `src/tools/failure-context.ts`: Allowlisted local fixture evidence tool.
+  - `src/contracts.ts`: Strict Zod contracts for requests and live evidence.
+  - `src/clients/backend.ts`: Scoped, bounded HTTP client for primary-backend evidence.
+  - `src/private-http.ts`: Private service-scope verification and tool routes.
+  - `src/tools/`: Fixture and backend-backed failure context, execution evidence, and action-input validation tools.
   - `src/http.ts`: Express preview route and model-client shutdown ownership.
   - `src/demo.ts`: Fixture CLI using the same graph.
 
@@ -141,3 +143,5 @@ The worker uses lightweight `node:assert` self-checking scripts, while the AI wo
 | `package.json`               | Root workspace script runner, package manager specification (`bun@1.2.20`).              |
 | `docker-compose.yml`         | Container definitions for local PostgreSQL 16 (`5432`) and Kafka (`9092`).               |
 | `patches/kafkajs-bun-fix.js` | Postinstall patch resolving KafkaJS socket compatibility when running under Bun runtime. |
+
+Phase 4 service configuration: `TRIAGE_SERVICE_SECRET` is required by the private boundary and must match in `primary_backend` and `ai_agent`; it must be at least 32 characters. `AI_AGENT_URL` selects the agent address used by the backend and `PRIMARY_BACKEND_URL` selects the backend address used by the agent. The URL variables have loopback defaults for local development and should be explicit in deployed environments.

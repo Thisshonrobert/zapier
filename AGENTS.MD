@@ -82,31 +82,45 @@ Use these skills when relevant.
 Do not duplicate their instructions in this file.
 
 ---
-## Model Routing
+## Tool Roles & Model Routing
 
-Use the model based on task complexity and risk.
+This project uses a multi-tool pipeline to balance reasoning, context limits, and execution speed.
 
-### GPT-5.6 Sol — High Reasoning
+### 1. Architecture & Master Plan: Astra (ChatGPT)
+- Responsible for drafting and expanding `docs/ai-dlq-master-plan.md`.
+- Outputs are mutable; implementation realities update the plan.
 
-Use for:
-- Production implementation with architectural judgment
-- Database transactions/migrations
-- Concurrency, idempotency, retries, and distributed systems
-- Security-sensitive code
-- Difficult debugging
-- Final integration and architecture reviews
+### 2. Implementation: Codex (GPT-5.6 Sol / Terra)
+- Implements the requested master-plan scope, verifies it, and reports changed files, results, and limitations. Learning is handled separately in ChatGPT using GitHub/Notion; do not require teaching sessions, learner checkpoints, lessons, or interview explanations unless explicitly requested.
+- **Sol (Flagship):** Production implementation, complex architecture, DB transactions, security, and difficult debugging.
+- **Terra (Balanced):** Straightforward implementation, tests, and medium-complexity tasks.
+- **Rule:** Implementation agents MUST STOP and report if they find a conflict with the master plan. Do not silently redesign.
 
-### GPT-5.6 Luna — Low/Medium Reasoning
+### 3. Documentation & Ops: Antigravity (Gemini)
+- Responsible for `docs/` updates, `Graphify` milestone updates.
+- Handles routine documentation after completed phases and Graphify under the milestone policy above. Codex provides a concise handoff; explicitly scoped feature artifacts such as runbooks and evaluation fixtures remain implementation work.
+- Prevents wasting expensive implementation tokens on repository maintenance.
 
-Use for:
-- Small/mechanical tests and fixtures
-- Documentation and learning notes
-- Formatting/repetitive edits
-- Focused verification commands
-- Graphify maintenance after approved milestones
 
-**Rule:** Explicitly specify the model when dispatching a subagent.  
-Do not assign Luna production work involving ambiguous behavior, concurrency, persistence, security, or cross-service contracts.
+## Token Efficiency & Memory (claude-mem)
+- **Scope Boundaries:** Always specify files to read, modify, and ignore in every prompt.
+- **File-first memory:** Treat Git, the approved spec/plan, and a concise ignored progress ledger as the source of truth. Do not reconstruct completed work from chat history.
+- **claude-mem:** Use it only when the MCP server is configured and available. Retrieve a small task-specific summary, never the full project history. Its absence must not block implementation.
+- Use `.agents/skills/token-optimizer` selectively. During implementation, do not run its full audit/state dump unless the user explicitly requests an audit; prefer a compact usage check.
+
+### Token Budget Guardrails
+
+- Default to one agent for ordered work that edits shared files. Use parallel agents only for genuinely independent tasks.
+- An approved design or implementation plan is executable authority. Do not create another plan or architecture review unless implementation exposes a concrete conflict or ambiguity.
+- Per phase, default to at most two subagent dispatches : one implementer and one final reviewer. Skip per-task reviewers unless the user explicitly requests them or the risk justifies the added cost.
+- Use Sol at medium reasoning for architecture, transactions, security, and difficult implementation. Use Terra for bounded mechanical work. Use high reasoning only when explicitly requested or medium reasoning reports a blocker.
+- Spawn agents with no inherited conversation history and point them to narrow file-based briefs. Agents must return a short status and write detailed reports to an ignored workspace file.
+- Never redispatch interrupted work blindly. First inspect the previous agent status, report, Git diff, and uncommitted files; continue partial work instead of restarting it.
+- Keep only one implementation agent active at a time. Do not start duplicate reviewers, planners, or documentation agents for the same phase.
+- Do not paste large diagnostics, diffs, generated files, or audit JSON into chat. Save them to files and summarize only decisions, failures, and verification results.
+- Prefer one focused verification pass after implementation. Re-run only checks affected by a fix, then run the required repository verification once before completion.
+- If planning or coordination consumes substantial usage before production work starts, stop delegation, report the burn, and switch to direct single-agent execution.
+- After completing the requested task, run focused verification, summarize changed files and results, then stop; do not begin unrequested follow-up work.
 
 ---
 
@@ -115,5 +129,4 @@ Do not assign Luna production work involving ambiguous behavior, concurrency, pe
 When introducing a new subsystem, pattern, or dependency:
 
 1. Work incrementally in discrete phases.
-2. Before implementing each phase, explain the relevant architecture, tradeoffs, and code changes using `/teach`.But make it minimal and concise to save tokens.
-3. Test and verify the current phase before proceeding to the next.
+2. Test and verify the current phase before proceeding to the next.
