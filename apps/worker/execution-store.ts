@@ -354,3 +354,8 @@ export function createExecutionStore(
     ),
   };
 }
+/**Z100 / stage 1
+    ↓
+actionFingerprint  → "Telegram action A123"
+requestFingerprint → "Telegram john + Hello"
+store.claim()      → "Worker #1 owns this execution" */

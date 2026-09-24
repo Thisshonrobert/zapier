@@ -8,7 +8,7 @@ TypeScript monorepo for an event-driven Zapier-style workflow automation platfor
 
 ## Engineering Guide
 
-- Keep code maintainable, readable, simple, and testable.
+- Keep code maintainable, Human readable, simple, and testable.
 - Follow existing patterns and conventions in the repository.
 - Prefer simple solutions over unnecessary abstraction.
 - Keep changes focused on the requested task.
@@ -130,3 +130,4 @@ When introducing a new subsystem, pattern, or dependency:
 
 1. Work incrementally in discrete phases.
 2. Test and verify the current phase before proceeding to the next.
+3. Finally give handoff prompt for antigravity , which should include doc, graphify and git command file names which should be staged and commited(I will do it manually).

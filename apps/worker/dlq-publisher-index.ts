@@ -1,3 +1,4 @@
+//executable process + Kafka wiring + loop
 import { createDlqPublisher, type DlqPublisherDb } from "./dlq-publisher.ts";
 import { createDlqReconciler, type ReconcilerDb } from "./dlq-reconciler.ts";
 
@@ -70,3 +71,11 @@ if (import.meta.main)
     console.error("DLQ publisher stopped", error);
     process.exitCode = 1;
   });
+
+  /**dlq-publisher.ts
+        ↓
+"how do I safely publish?"
+
+dlq-publisher-index.ts
+        ↓
+"run this publisher continuously using Kafka" */

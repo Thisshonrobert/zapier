@@ -255,3 +255,44 @@ export function buildPreviewService(
   };
 }
 
+/**Worker
+   ↓
+ZapRunExecution
+   ↓
+ZapRunExecutionAttempt
+   ↓
+ZapRunRetry
+   ↓
+DLQ Publisher
+   ↓
+Kafka DLQ
+   ↓
+AI Investigation
+   ↓
+Load evidence
+   ↓
+LLM diagnosis
+   ↓
+Structured output validation
+   ↓
+Grounding / deterministic safety checks
+   ↓
+Safe investigation result */
+
+/**PreviewRequestSchema
+        ↓
+   fixture_id
+        ↓
+FailureContextTool
+        ↓
+EvidenceSchema
+        ↓
+      LLM
+        ↓
+Diagnosis + RemediationProposal
+        ↓
+PreviewResultSchema
+        ↓
+validateGrounding()
+        ↓
+final safe result */

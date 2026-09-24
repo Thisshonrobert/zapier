@@ -1,3 +1,4 @@
+//It handles cases where the database and execution state are inconsistent.
 const STALE = Symbol("stale reconciliation");
 
 type ExecutionRow = {
@@ -148,3 +149,10 @@ export function createDlqReconciler(
     },
   };
 }
+/**ZapRunExecution = PENDING
+leaseUntil      = expired
+
+It converts it into:
+FAILED
+providerOutcome = unknown
+safeCode = lease_expired */

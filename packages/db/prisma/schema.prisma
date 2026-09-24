@@ -161,3 +161,22 @@ model ZapRunExecutionAttempt {
   @@index([executionId])
 }
 
+/**ZapRun
+  │
+  └── stage 1
+       │
+       ▼
+  ZapRunExecution(What is the state of this particular stage?)
+       │
+       ├── Attempt #1
+       ├── Attempt #2
+       └── Attempt #3
+              │
+              ▼
+        ZapRunExecutionAttempt(What happened during each individual attempt? ,IF I PUT EVERYTHING IN ZapRunExecution, then the history will be lost)
+
+If all attempts ultimately fail:
+              │
+              ▼
+        ZapRunRetry(What is the durable terminal failure that needs recovery/DLQ handling?)
+        **/
