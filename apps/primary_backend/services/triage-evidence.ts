@@ -352,3 +352,59 @@ export class TriageEvidenceService {
     return result;
   }
 }
+//**It reads the failure record:But it DOES NOT send the raw data to AIcustomer.email → string
+
+/**So Phase 4 summarizes the structure.
+
+Example:
+
+payload:
+  customer.name → string
+  customer.email → string
+
+instead of:
+
+customer.name = "Thisshon"
+customer.email = "..." */
+
+/**{
+  "contract_version": 1,
+  "evidence_id": "failure:R100",
+  "type": "failure_context",
+
+  "source_ref": {
+    "case_id": "R100",
+    "zap_run_id": "Z100",
+    "stage": 2
+  },
+
+  "facts": {
+    "source_kind": "retry_row",
+
+    "current_action_type": "telegram",
+
+    "retry": {
+      "provider": "telegram",
+      "phase": "send",
+      "provider_outcome": "rejected",
+      "safe_code": "telegram_http_429",
+      "provider_status": 429,
+      "retry_after_seconds": 30,
+      "requires_human": true
+    },
+
+    "action_metadata": {
+      "paths": [
+        {"path": "message", "type": "string"}
+      ],
+      "truncated": false
+    },
+
+    "payload": {
+      "paths": [
+        {"path": "customer.name", "type": "string"}
+      ],
+      "truncated": false
+    }
+  }
+} */

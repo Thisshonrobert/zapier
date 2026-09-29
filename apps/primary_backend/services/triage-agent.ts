@@ -1,3 +1,4 @@
+//HTTP client used by the primary backend to talk to the AI service.
 export class AgentReadTimeout extends Error {}
 
 export class TriageAgentClient {
@@ -29,3 +30,17 @@ export class TriageAgentClient {
     }
   }
 }
+
+/**correlationId = C123 is a tracking id
+
+It follows the request:
+
+Frontend
+ ↓
+Primary Backend
+ ↓
+AI Agent
+ ↓
+Primary Backend internal endpoint
+
+So logs from all components can be connected to the same investigation. */

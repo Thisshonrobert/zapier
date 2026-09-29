@@ -8,11 +8,27 @@ import {
 import { z } from "zod";
 
 import {
+  ActionInputValidationEvidenceSchema,
   EvidenceSchema,
+  ExecutionEvidenceSchema,
+  FailureContextEvidenceSchema,
+  IntegratedDiagnosisResultSchema,
+  IntegratedModelOutputSchema,
+  ModelUsageSchema,
   PreviewResultSchema,
   type DiagnosisModel,
+  type DiagnosisPrompt,
+  type IntegratedDiagnosisModel,
+  type IntegratedDiagnosisResult,
+  type IntegratedModelOutput,
+  type ModelGeneration,
   type PreviewResult,
 } from "./contracts.ts";
+import { DIAGNOSIS_PROMPT_VERSION, buildDiagnosisPrompt } from "./prompts.ts";
+import type {
+  RunbookMatch,
+  RunbookSearchInput,
+} from "./tools/search-runbooks.ts";
 
 // ============================================================================
 // Custom Domain Errors
@@ -23,6 +39,7 @@ export class ModelTimeout extends Error {}
 export class InvestigationTimeout extends Error {}
 export class ToolBudgetExceeded extends Error {}
 export class GraphStepLimitExceeded extends Error {}
+export class TokenBudgetExceeded extends Error {}
 
 // ============================================================================
 // Failure Context Reader Interface
@@ -242,6 +259,452 @@ export function buildPreviewService(
         const result = PreviewResultSchema.safeParse(state.result);
         if (!result.success)
           throw new InvalidModelOutput("Graph returned an invalid result");
+        return result.data;
+      } catch (error) {
+        if (error instanceof GraphRecursionError) {
+          throw new GraphStepLimitExceeded("Graph step limit exhausted", {
+            cause: error,
+          });
+        }
+        throw error;
+      }
+    },
+  };
+}
+
+const RunbookMatchSchema = z
+  .object({
+    runbookId: z.string().min(1).max(64),
+    version: z.string().regex(/^\d+\.\d+\.\d+$/),
+    citation: z
+      .string()
+      .min(1)
+      .max(256)
+      .regex(/^RB-[A-Z0-9-]+@\d+\.\d+\.\d+#[a-z0-9-]+$/),
+    heading: z.string().min(1).max(256),
+    content: z.string().min(1).max(4_000),
+    contentHash: z.string().regex(/^[a-f0-9]{64}$/),
+    taxonomy: z.array(z.string().regex(/^F(?:0[1-9]|10)$/)).max(10),
+    providers: z.array(z.string().min(1).max(64)).max(10),
+    simulated: z.literal(true),
+    authority: z.literal("untrusted_procedural_guidance"),
+    canChangePolicy: z.literal(false),
+    score: z.number().finite().nonnegative(),
+  })
+  .strict();
+
+const EvidenceBundleSchema = z
+  .object({
+    failureContext: FailureContextEvidenceSchema,
+    executionEvidence: ExecutionEvidenceSchema,
+    inputValidation: ActionInputValidationEvidenceSchema,
+  })
+  .strict();
+
+const DiagnosisState = new StateSchema({
+  evidence: EvidenceBundleSchema.optional(),
+  runbooks: z.array(RunbookMatchSchema).max(3).default([]),
+  result: IntegratedDiagnosisResultSchema.optional(),
+  toolCalls: z.number().int().nonnegative().default(0),
+});
+
+export interface IntegratedInvestigationTools {
+  getFailureContext(signal: AbortSignal): Promise<unknown>;
+  getExecutionEvidence(
+    historyLimit: number,
+    signal: AbortSignal,
+  ): Promise<unknown>;
+  validateActionInputs(signal: AbortSignal): Promise<unknown>;
+  searchRunbooks(input: RunbookSearchInput): RunbookMatch[];
+}
+
+export type DiagnosisOptions = {
+  modelTimeoutMs?: number;
+  investigationTimeoutMs?: number;
+  maxToolCalls?: number;
+  maxGraphSteps?: number;
+  maxModelTokens?: number;
+  maxPromptCharacters?: number;
+  maxRepairAttempts?: 0 | 1;
+};
+
+function assertSameCanonicalSource(
+  evidence: z.infer<typeof EvidenceBundleSchema>,
+) {
+  const expected = evidence.failureContext.source_ref;
+  for (const actual of [
+    evidence.executionEvidence.source_ref,
+    evidence.inputValidation.source_ref,
+  ]) {
+    if (
+      actual.case_id !== expected.case_id ||
+      actual.zap_run_id !== expected.zap_run_id ||
+      actual.stage !== expected.stage
+    ) {
+      throw new InvalidModelOutput(
+        "Evidence sources do not identify the same canonical case",
+      );
+    }
+  }
+}
+
+function retrievalInput(
+  evidence: z.infer<typeof EvidenceBundleSchema>,
+): RunbookSearchInput {
+  const failure = evidence.failureContext.facts;
+  const execution = evidence.executionEvidence.facts;
+  const validation = evidence.inputValidation.facts;
+  const attempts = execution.attempts.flatMap((attempt) => [
+    attempt.provider,
+    attempt.phase,
+    attempt.provider_outcome,
+    attempt.safe_code,
+    attempt.provider_status?.toString(),
+  ]);
+  const values = [
+    failure.current_action_type,
+    failure.retry.provider,
+    failure.retry.phase,
+    failure.retry.provider_outcome,
+    failure.retry.safe_code,
+    failure.retry.provider_status?.toString(),
+    execution.provenance,
+    execution.current_execution?.status,
+    execution.current_execution?.provider_outcome,
+    execution.ordering.status,
+    validation.action_type,
+    validation.validation_status,
+    validation.supported ? "supported" : "unsupported",
+    ...validation.blocked_reasons,
+    ...validation.missing_required_fields,
+    ...validation.missing_template_paths,
+    ...attempts,
+  ].filter((value): value is string => Boolean(value));
+  const providers = new Set(
+    [failure.retry.provider, ...execution.attempts.map((item) => item.provider)]
+      .filter((value): value is string => Boolean(value))
+      .map((value) => value.toLowerCase()),
+  );
+  return {
+    query: [...new Set(values)].join(" ").slice(0, 500) || "failure evidence",
+    ...(providers.size > 0 ? { providers: [...providers] } : {}),
+    limit: 3,
+  };
+}
+
+function issueForOutput(
+  evidence: z.infer<typeof EvidenceBundleSchema>,
+  runbooks: readonly RunbookMatch[],
+  output: IntegratedModelOutput,
+): string | undefined {
+  const observedEvidence = new Set([
+    evidence.failureContext.evidence_id,
+    evidence.executionEvidence.evidence_id,
+    evidence.inputValidation.evidence_id,
+  ]);
+  if (
+    ![
+      ...output.diagnosis.evidence_refs,
+      ...output.proposal.evidence_refs,
+    ].every((reference) => observedEvidence.has(reference))
+  ) {
+    return "ungrounded_evidence_reference";
+  }
+
+  const unavailable = new Set([
+    ...evidence.failureContext.unavailable,
+    ...evidence.executionEvidence.unavailable,
+    ...evidence.inputValidation.unavailable,
+  ]);
+  if (
+    ![...unavailable].every((item) =>
+      output.diagnosis.missing_evidence.includes(item),
+    )
+  ) {
+    return "unacknowledged_missing_evidence";
+  }
+
+  const observedCitations = new Set(
+    runbooks.map((runbook) => runbook.citation),
+  );
+  if (
+    new Set(output.proposal.runbook_citations).size !==
+      output.proposal.runbook_citations.length ||
+    !output.proposal.runbook_citations.every((reference) =>
+      observedCitations.has(reference),
+    )
+  ) {
+    return "ungrounded_runbook_citation";
+  }
+
+  const allowedKindByDisposition = {
+    replay_candidate: "wait_then_replay",
+    owner_action_required: "request_manual_fix",
+    engineering_escalation_required: "escalate",
+    insufficient_evidence: "escalate",
+    outcome_unknown: "escalate",
+    duplicate_or_stale: "no_action",
+    resolved_without_replay: "no_action",
+  } as const;
+  if (
+    output.proposal.kind !==
+    allowedKindByDisposition[output.proposal.disposition]
+  ) {
+    return "invalid_disposition_mapping";
+  }
+  const abstained =
+    output.proposal.disposition === "insufficient_evidence" ||
+    output.proposal.disposition === "outcome_unknown";
+  if ((output.status === "abstained") !== abstained) {
+    return "invalid_abstention_status";
+  }
+
+  const observedOutcomes = new Set([
+    evidence.failureContext.facts.retry.provider_outcome,
+    evidence.executionEvidence.facts.current_execution?.provider_outcome,
+    ...evidence.executionEvidence.facts.attempts.map(
+      (attempt) => attempt.provider_outcome,
+    ),
+  ]);
+  const contradictoryOutcomes =
+    observedOutcomes.has("unknown") ||
+    (observedOutcomes.has("rejected") && observedOutcomes.has("accepted"));
+  if (
+    contradictoryOutcomes &&
+    !["insufficient_evidence", "outcome_unknown"].includes(
+      output.proposal.disposition,
+    )
+  ) {
+    return "unsafe_delivery_disposition";
+  }
+
+  if (
+    output.proposal.disposition === "replay_candidate" &&
+    !supportsReplayCandidate(evidence)
+  ) {
+    return "unsafe_replay_candidate";
+  }
+  return undefined;
+}
+
+function supportsReplayCandidate(
+  evidence: z.infer<typeof EvidenceBundleSchema>,
+) {
+  const failure = evidence.failureContext;
+  const execution = evidence.executionEvidence;
+  const validation = evidence.inputValidation;
+  const current = execution.facts.current_execution;
+  return (
+    failure.complete &&
+    execution.complete &&
+    validation.complete &&
+    failure.facts.source_kind === "retry_row" &&
+    failure.facts.current_action_type === "telegram" &&
+    failure.facts.retry.provider === "telegram" &&
+    failure.facts.retry.phase === "send" &&
+    failure.facts.retry.provider_outcome === "rejected" &&
+    failure.facts.retry.provider_status === 429 &&
+    failure.facts.retry.retry_after_seconds !== null &&
+    failure.facts.retry.retry_after_seconds !== undefined &&
+    execution.facts.provenance === "captured" &&
+    current?.status === "FAILED" &&
+    current.lease_until === null &&
+    current.provider_outcome === "rejected" &&
+    current.action_fingerprint !== null &&
+    current.request_fingerprint !== null &&
+    execution.facts.attempts.length > 0 &&
+    execution.facts.attempts.every(
+      (attempt) =>
+        attempt.provenance === "captured" &&
+        attempt.provider === "telegram" &&
+        attempt.phase === "send" &&
+        attempt.provider_outcome === "rejected" &&
+        attempt.provider_status === 429 &&
+        attempt.retry_after_seconds !== null &&
+        attempt.completed_at !== null,
+    ) &&
+    !execution.facts.history_truncated &&
+    execution.facts.ordering.status === "valid" &&
+    execution.facts.predecessors.every(
+      (predecessor) => predecessor.status === "SUCCESS",
+    ) &&
+    validation.facts.action_type === "telegram" &&
+    validation.facts.validation_status === "valid" &&
+    validation.facts.supported
+  );
+}
+
+function replayNotBefore(
+  evidence: z.infer<typeof EvidenceBundleSchema>,
+  output: IntegratedModelOutput,
+) {
+  if (output.proposal.disposition !== "replay_candidate") return null;
+  const completedAttempts = evidence.executionEvidence.facts.attempts.map(
+    (attempt) => ({
+      completedAt: Date.parse(attempt.completed_at!),
+      retryAfterSeconds: attempt.retry_after_seconds!,
+    }),
+  );
+  const notBefore = Math.max(
+    ...completedAttempts.map(
+      (attempt) => attempt.completedAt + attempt.retryAfterSeconds * 1_000,
+    ),
+  );
+  return new Date(notBefore).toISOString();
+}
+
+async function generateWithTimeout(
+  model: IntegratedDiagnosisModel,
+  prompt: DiagnosisPrompt,
+  timeoutMs: number,
+  investigationSignal: AbortSignal,
+): Promise<ModelGeneration> {
+  const controller = new AbortController();
+  const signal = AbortSignal.any([investigationSignal, controller.signal]);
+  let timeout: ReturnType<typeof setTimeout> | undefined;
+  const deadline = new Promise<never>((_, reject) => {
+    timeout = setTimeout(() => {
+      controller.abort();
+      reject(new ModelTimeout("Diagnosis model timed out"));
+    }, timeoutMs);
+  });
+  try {
+    return await Promise.race([model.generate(prompt, signal), deadline]);
+  } finally {
+    if (timeout) clearTimeout(timeout);
+  }
+}
+
+export function buildDiagnosisService(
+  tools: IntegratedInvestigationTools,
+  model: IntegratedDiagnosisModel,
+  options: DiagnosisOptions = {},
+) {
+  const modelTimeoutMs = options.modelTimeoutMs ?? 15_000;
+  const investigationTimeoutMs = options.investigationTimeoutMs ?? 60_000;
+  const maxToolCalls = options.maxToolCalls ?? 8;
+  const maxGraphSteps = options.maxGraphSteps ?? 12;
+  const maxModelTokens = options.maxModelTokens ?? 8_000;
+  const maxPromptCharacters = options.maxPromptCharacters ?? 48_000;
+  const maxRepairAttempts = options.maxRepairAttempts ?? 1;
+
+  const workflow = new StateGraph(DiagnosisState)
+    .addNode("gatherEvidence", async (state, config) => {
+      if (state.toolCalls + 3 > maxToolCalls) {
+        throw new ToolBudgetExceeded("Evidence tool budget exhausted");
+      }
+      const signal = config.signal;
+      if (!signal)
+        throw new InvestigationTimeout("Missing investigation signal");
+      const [failureContext, executionEvidence, inputValidation] =
+        await Promise.all([
+          tools.getFailureContext(signal),
+          tools.getExecutionEvidence(10, signal),
+          tools.validateActionInputs(signal),
+        ]);
+      const evidence = EvidenceBundleSchema.parse({
+        failureContext,
+        executionEvidence,
+        inputValidation,
+      });
+      assertSameCanonicalSource(evidence);
+      return { evidence, toolCalls: state.toolCalls + 3 };
+    })
+    .addNode("retrieveGuidance", (state) => {
+      if (!state.evidence) {
+        throw new InvalidModelOutput("Runbook retrieval requires evidence");
+      }
+      if (state.toolCalls >= maxToolCalls) {
+        throw new ToolBudgetExceeded("Runbook tool budget exhausted");
+      }
+      const runbooks = z
+        .array(RunbookMatchSchema)
+        .max(3)
+        .parse(tools.searchRunbooks(retrievalInput(state.evidence)));
+      return { runbooks, toolCalls: state.toolCalls + 1 };
+    })
+    .addNode("diagnose", async (state, config) => {
+      if (!state.evidence) {
+        throw new InvalidModelOutput("Diagnosis requires evidence");
+      }
+      const signal = config.signal;
+      if (!signal)
+        throw new InvestigationTimeout("Missing investigation signal");
+      let usedTokens = 0;
+      let repair: { issue: string } | undefined;
+
+      for (let attempt = 0; attempt <= maxRepairAttempts; attempt++) {
+        const prompt = buildDiagnosisPrompt(
+          state.evidence,
+          state.runbooks,
+          repair,
+        );
+        if (prompt.input.length > maxPromptCharacters) {
+          throw new TokenBudgetExceeded("Diagnosis prompt budget exhausted");
+        }
+        const generation = await generateWithTimeout(
+          model,
+          prompt,
+          modelTimeoutMs,
+          signal,
+        );
+        const usage = ModelUsageSchema.safeParse(generation.usage);
+        if (!usage.success) {
+          throw new InvalidModelOutput(
+            "Diagnosis model returned invalid usage",
+          );
+        }
+        usedTokens += usage.data.total_tokens;
+        if (usedTokens > maxModelTokens) {
+          throw new TokenBudgetExceeded(
+            "Diagnosis model token budget exhausted",
+          );
+        }
+
+        const parsed = IntegratedModelOutputSchema.safeParse(generation.output);
+        const issue = parsed.success
+          ? issueForOutput(state.evidence, state.runbooks, parsed.data)
+          : "schema_validation_failed";
+        if (!issue && parsed.success) {
+          const result = IntegratedDiagnosisResultSchema.parse({
+            contract_version: 1,
+            graph_version: "phase-6-v1",
+            prompt_version: DIAGNOSIS_PROMPT_VERSION,
+            ...parsed.data,
+            proposal: {
+              ...parsed.data.proposal,
+              not_before: replayNotBefore(state.evidence, parsed.data),
+            },
+          });
+          return { result };
+        }
+        repair = { issue: issue! };
+      }
+      throw new InvalidModelOutput(
+        "Diagnosis model returned invalid output after one repair attempt",
+      );
+    })
+    .addEdge(START, "gatherEvidence")
+    .addEdge("gatherEvidence", "retrieveGuidance")
+    .addEdge("retrieveGuidance", "diagnose")
+    .addEdge("diagnose", END)
+    .compile();
+
+  return {
+    async diagnose(): Promise<IntegratedDiagnosisResult> {
+      try {
+        const state = await withInvestigationDeadline(
+          investigationTimeoutMs,
+          (signal) =>
+            workflow.invoke(
+              { toolCalls: 0, runbooks: [] },
+              { recursionLimit: maxGraphSteps, signal },
+            ),
+        );
+        const result = IntegratedDiagnosisResultSchema.safeParse(state.result);
+        if (!result.success) {
+          throw new InvalidModelOutput("Graph returned an invalid diagnosis");
+        }
         return result.data;
       } catch (error) {
         if (error instanceof GraphRecursionError) {

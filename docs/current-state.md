@@ -47,6 +47,21 @@ Phase 4 verification completed with 65 focused tests, 3 PostgreSQL integration t
 - Verification recorded: 8 focused retrieval tests passed; root type-check passed; root build passed with existing Yarn/Corepack warnings; independent review found no remaining Critical or Important findings. Root lint remains blocked by unrelated existing frontend issues (9 errors and 22 warnings). The full AI-agent suite has unrelated failures because the pre-existing modified `apps/ai_agent/evaluation/cases.jsonl` contains a non-JSON comment on line 28.
 - Phase 4 contracts remain unchanged. Phase 5 is read-only retrieval only; embeddings, vector databases, reranking, repository ingestion, Phase 6 graph integration, approval, replay, and frontend triage integration are not implemented.
 
+### 4.2 Phase 6 bounded transient diagnosis graph
+
+- **Transient StateGraph**: LangGraph.js workflow in [`apps/ai_agent/src/graph.ts`](../apps/ai_agent/src/graph.ts) executing `gatherEvidence` (fetching failure context, execution evidence, and input validation concurrently), `retrieveGuidance` (deterministic runbook retrieval), and `diagnose` (LLM generation and structured validation).
+- **Support-operator disposition taxonomy**: Maps diagnosis outcomes into explicit support-operator dispositions:
+  - Dispositions: `replay_candidate`, `owner_action_required`, `engineering_escalation_required`, `insufficient_evidence`, `outcome_unknown`, `duplicate_or_stale`, `resolved_without_replay`.
+  - Proposal kinds: `wait_then_replay`, `request_manual_fix`, `escalate`, `no_action`.
+- **Grounding and safety guardrails**:
+  - `assertSameCanonicalSource` enforces that evidence across failure context, execution evidence, and input validation originates from the exact same `case_id`, `zap_run_id`, and `stage`.
+  - `issueForOutput` and `validateGrounding` verify that all cited `evidence_refs` were actually observed, cited `runbook_citations` match retrieved runbooks, dispositions strictly map to valid proposal kinds, rate-limit 429 failures map to F01 taxonomy and compute `not_before` cooldown timestamps, and unsupported replay candidates are rejected.
+- **Abstention behavior**: Automatically abstains (`status: "abstained"`, disposition `insufficient_evidence` or `outcome_unknown`) when evidence is incomplete, delivery outcome is unknown (e.g. F07 transport timeouts), or contradictory provider outcomes exist across attempts.
+- **Model-adapter boundary**: [`apps/ai_agent/src/gemini-model.ts`](../apps/ai_agent/src/gemini-model.ts) implements `IntegratedDiagnosisModel` wrapping Gemini structured JSON output via `GEMINI_DIAGNOSIS_SCHEMA`. Includes fallback mock adapters for deterministic offline testing and prompt construction in [`apps/ai_agent/src/prompts.ts`](../apps/ai_agent/src/prompts.ts) (supporting a single schema repair attempt).
+- **Budgets & deadlines**: Enforces 15s model timeout (`modelTimeoutMs`), 60s investigation deadline (`investigationTimeoutMs`), max 8 tool calls, max 12 graph steps, max 8,000 output tokens, max 48,000 prompt characters, and max 1 schema repair attempt.
+- **Private scoped endpoint**: Exposes `POST /api/v1/triage/diagnose` on `apps/ai_agent` (`diagnosis-http.ts`), secured by service scope JWT verifying `TRIAGE_SERVICE_SECRET`, requiring `failure_context`, `execution_evidence`, and `validate_action_inputs` operation claims, and validating `x-correlation-id` header matching. Called by primary backend's `TriageAgentClient`.
+- **Explicitly unimplemented scope**: Durable investigation persistence (DB schema/rows), operator authorization/RBAC, human approval APIs, replay execution, and frontend UI components remain unimplemented.
+
 ### 5. Frontend Dashboard & Builder
 
 - **Workflow Builder**: Next.js UI for configuring triggers, adding sequential action nodes, mapping dynamic fields, and testing triggers against live webhook buffers.
@@ -65,8 +80,8 @@ Phase 4 verification completed with 65 focused tests, 3 PostgreSQL integration t
    - Resend requests include an idempotency key and Telegram lacks provider-level idempotency. Provider acceptance followed by persistence failure remains `UNKNOWN` and requires human review; the worker never resends automatically.
 4. **Single-Threaded Outbox Poller**:
    - `apps/processor` runs an unpartitioned single-instance loop polling the outbox table. At extreme scale, this requires database partitioning or CDC (Change Data Capture) tools like Debezium.
-5. **Triage integration remains read-only**:
-   - Phases 4 and 5 provide bounded evidence tools and simulated runbook retrieval only. Model diagnosis, durable investigations, human approval, replay, frontend triage screens, Kafka intake, and provider calls remain unimplemented later phases.
+5. **Triage integration remains transient and read-only**:
+   - Phases 4, 5, and 6 provide bounded evidence gathering, simulated runbook retrieval, and transient LLM diagnosis. Durable investigation persistence, operator authorization, human approval APIs, replay execution, frontend triage screens, Kafka intake, and provider calls remain unimplemented later phases.
 
 ---
 
