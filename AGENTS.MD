@@ -101,6 +101,21 @@ This project uses a multi-tool pipeline to balance reasoning, context limits, an
 - Handles routine documentation after completed phases and Graphify under the milestone policy above. Codex provides a concise handoff; explicitly scoped feature artifacts such as runbooks and evaluation fixtures remain implementation work.
 - Prevents wasting expensive implementation tokens on repository maintenance.
 
+### Manual Git and Antigravity Handoff
+
+- The user performs staging, committing, pushing, merging, branch switching and pulling manually unless they explicitly request one of those actions.
+- Default to two commits for a major phase, not separate implementation, learning-comment and documentation commits:
+  1. **Phase bundle:** implementation, tests, approved learning comments and milestone documentation.
+  2. **Graphify:** regenerated Graphify artifacts after the phase bundle is merged and available on the updated default branch.
+- Before the phase-bundle handoff, inspect all uncommitted diffs and report exact paths under these headings: `Phase implementation`, `Learning comments`, `Documentation`, and `Excluded or uncertain`. Do not rely on the user remembering where comments were added.
+- A file containing both implementation and learning comments is listed once under `Phase implementation`, with the learning comments noted. Comment-only files may be listed under `Learning comments`. Do not silently include unrelated changes.
+- Provide an exact `git add -- <path>...` command and suggested commit subject for the user to run. Never recommend `git add .`, broad globs, or staging an entire dirty directory.
+- After the first handoff, stop. The user stages, commits, pushes and merges the phase bundle, then switches to the default branch, pulls the merged result and explicitly confirms that this step is complete.
+- State `Graphify required: yes` or `Graphify required: no` using the milestone policy in `docs/graphify.md`. Small edits and comment-only changes do not require a Graphify refresh.
+- When Graphify is required, run it only after the user's confirmation and only from a clean, up-to-date default branch or a clean worktree based on it. Stop if unrelated working-tree changes could enter the graph.
+- After regeneration, report only the exact newly generated Graphify paths, provide an exact staging command and suggest a separate Graphify commit subject. Then stop so the user can perform the second commit, push and merge manually.
+- Never stage pre-existing Graphify cache, query-memory or unrelated generated changes unless they were produced by the confirmed milestone refresh and are explicitly listed.
+
 
 ## Token Efficiency & Memory (claude-mem)
 - **Scope Boundaries:** Always specify files to read, modify, and ignore in every prompt.
@@ -130,4 +145,5 @@ When introducing a new subsystem, pattern, or dependency:
 
 1. Work incrementally in discrete phases.
 2. Test and verify the current phase before proceeding to the next.
-3. Finally give handoff prompt for antigravity , which should include doc, graphify and git command file names which should be staged and commited(I will do it manually).
+3. Give Antigravity the implementation handoff for documentation and exact diff classification.
+4. Follow the two-commit manual workflow above; the user performs all Git integration actions.

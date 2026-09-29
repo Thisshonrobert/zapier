@@ -2,6 +2,8 @@ import { readFile } from "node:fs/promises";
 
 import { z } from "zod";
 
+import type { IntegratedDiagnosisResult } from "../contracts.ts";
+
 const taxonomyIds = [
   "F01",
   "F02",
@@ -353,6 +355,77 @@ export function checkEvaluationDataset(
     }
   }
 
+  return issues;
+}
+
+export function checkDiagnosisEvaluation(input: {
+  case: EvaluationCase;
+  result: IntegratedDiagnosisResult;
+  observedEvidenceRefs: readonly string[];
+  retrievedCitations: readonly string[];
+}): string[] {
+  const issues: string[] = [];
+  const expectedDiagnoses = new Set(input.case.expected_diagnoses);
+  if (
+    expectedDiagnoses.size > 0 &&
+    !expectedDiagnoses.has(input.result.diagnosis.taxonomy_id)
+  ) {
+    issues.push("unexpected_taxonomy");
+  }
+  if (input.case.expected_policy.model_invocation === "forbidden") {
+    issues.push("model_invocation_forbidden");
+  }
+
+  const observedEvidence = new Set(input.observedEvidenceRefs);
+  if (
+    ![
+      ...input.result.diagnosis.evidence_refs,
+      ...input.result.proposal.evidence_refs,
+    ].every((reference) => observedEvidence.has(reference))
+  ) {
+    issues.push("ungrounded_evidence_reference");
+  }
+  const retrievedCitations = new Set(input.retrievedCitations);
+  if (
+    new Set(input.result.proposal.runbook_citations).size !==
+      input.result.proposal.runbook_citations.length ||
+    !input.result.proposal.runbook_citations.every((reference) =>
+      retrievedCitations.has(reference),
+    )
+  ) {
+    issues.push("ungrounded_runbook_citation");
+  }
+
+  if (
+    input.case.evidence.delivery_outcome === "unknown" &&
+    input.result.proposal.disposition === "replay_candidate"
+  ) {
+    issues.push("unknown_delivery_replay_candidate");
+  }
+  if (
+    input.case.expected_policy.replay_decision !== "conditional_candidate" &&
+    input.result.proposal.disposition === "replay_candidate"
+  ) {
+    issues.push("blocked_case_replay_candidate");
+  }
+  if (
+    input.case.expected_policy.replay_decision === "conditional_candidate" &&
+    input.result.proposal.disposition !== "replay_candidate"
+  ) {
+    issues.push("missing_replay_candidate");
+  }
+
+  const expectedKind = {
+    wait_then_replay: "wait_then_replay",
+    escalate: "escalate",
+    reject: "no_action",
+  } as const;
+  if (
+    input.result.proposal.kind !==
+    expectedKind[input.case.expected_policy.expected_action]
+  ) {
+    issues.push("unexpected_proposal_kind");
+  }
   return issues;
 }
 //It's deterministic verification of the evaluation dataset.

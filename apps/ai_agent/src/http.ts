@@ -2,6 +2,10 @@ import { createServer, type Server } from "node:http";
 import type { AddressInfo } from "node:net";
 
 import express, { type ErrorRequestHandler } from "express";
+import {
+  createDiagnosisRouter,
+  type DiagnosisRouterOptions,
+} from "./diagnosis-http.ts";
 import { createPrivateToolsRouter } from "./private-http.ts";
 
 import { PreviewRequestSchema, type DiagnosisModel } from "./contracts.ts";
@@ -28,6 +32,7 @@ type HttpServerOptions = {
     serviceSecret: string;
     timeoutMs?: number;
   };
+  diagnosis?: DiagnosisRouterOptions;
 };
 
 export type RunningHttpServer = {
@@ -46,6 +51,7 @@ export function createHttpServer({
   model,
   previewOptions,
   privateTools,
+  diagnosis,
 }: HttpServerOptions) {
   const app = express();
   const previewService = buildPreviewService(
@@ -56,6 +62,12 @@ export function createHttpServer({
   app.use(express.json({ limit: "16kb" }));
   if (privateTools) {
     app.use("/private/v1/tools", createPrivateToolsRouter(privateTools));
+  }
+  if (diagnosis) {
+    app.use(
+      "/private/v1/investigations/diagnose",
+      createDiagnosisRouter(diagnosis),
+    );
   }
 
   app.post("/investigations/preview", async (request, response) => {
@@ -121,7 +133,11 @@ export function createHttpServer({
           if (closed) return;
           closed = true;
           await closeServer(server);
-          await model.close();
+          await Promise.all(
+            [...new Set([model, diagnosis?.model].filter(Boolean))].map(
+              (item) => item!.close(),
+            ),
+          );
         },
       };
     },

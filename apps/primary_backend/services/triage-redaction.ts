@@ -1,3 +1,10 @@
+//privacy boundary.It detects things such as:
+/** Authorization headers
+tokens
+API keysand replaces them with:
+
+[REDACTED]*/
+
 const secretKey = /(?:authorization|password|secret|token|api[_-]?key|credential|cookie)/i;
 const bearer = /\bBearer\s+[A-Za-z0-9._~+/=-]{8,}/gi;
 const telegramToken = /\b\d{6,12}:[A-Za-z0-9_-]{20,}\b/g;

@@ -1,3 +1,4 @@
+//Don't let the AI guess whether an action is configured correctly. Ask deterministic application code.
 import { createHash } from "node:crypto";
 
 import { actionRegistry, getActionHandler } from "./actions/index.ts";

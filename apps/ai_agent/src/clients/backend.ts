@@ -32,32 +32,40 @@ export class BackendClient {
     });
   }
 
-  async getFailureContext(): Promise<FailureContextEvidence> {
+  async getFailureContext(signal?: AbortSignal): Promise<FailureContextEvidence> {
     const scope = this.scope("failure_context");
     return this.read(
       `/api/v1/triage/internal/cases/${encodeURIComponent(scope.caseId)}/failure-context`,
       scope.correlationId,
       FailureContextEvidenceSchema.parse,
+      "GET",
+      signal,
     );
   }
 
-  async getExecutionEvidence(historyLimit = 10): Promise<ExecutionEvidence> {
+  async getExecutionEvidence(
+    historyLimit = 10,
+    signal?: AbortSignal,
+  ): Promise<ExecutionEvidence> {
     const scope = this.scope("execution_evidence");
     const limit = Math.min(Math.max(Number.isInteger(historyLimit) ? historyLimit : 10, 1), 50);
     return this.read(
       `/api/v1/triage/internal/cases/${encodeURIComponent(scope.caseId)}/execution-evidence?historyLimit=${limit}`,
       scope.correlationId,
       ExecutionEvidenceSchema.parse,
+      "GET",
+      signal,
     );
   }
 
-  async validateActionInputs(): Promise<ActionInputValidationEvidence> {
+  async validateActionInputs(signal?: AbortSignal): Promise<ActionInputValidationEvidence> {
     const scope = this.scope("validate_action_inputs");
     return this.read(
       `/api/v1/triage/internal/cases/${encodeURIComponent(scope.caseId)}/validate-action-inputs`,
       scope.correlationId,
       ActionInputValidationEvidenceSchema.parse,
       "POST",
+      signal,
     );
   }
 
@@ -66,9 +74,13 @@ export class BackendClient {
     correlationId: string,
     parse: (value: unknown) => T,
     method: "GET" | "POST" = "GET",
+    externalSignal?: AbortSignal,
   ): Promise<T> {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), this.timeoutMs);
+    const signal = externalSignal
+      ? AbortSignal.any([externalSignal, controller.signal])
+      : controller.signal;
     try {
       const response = await fetch(new URL(path, this.options.baseUrl), {
         method,
@@ -76,7 +88,7 @@ export class BackendClient {
           authorization: `Bearer ${this.options.scopeToken}`,
           "x-correlation-id": correlationId,
         },
-        signal: controller.signal,
+        signal,
       });
       if (!response.ok) throw new BackendResponseError(`backend evidence read failed: ${response.status}`);
       const text = await response.text();

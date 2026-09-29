@@ -241,3 +241,120 @@ export interface DiagnosisModel {
   close(): Promise<void>;
 }
 
+const taxonomyId = z.enum([
+  "F01",
+  "F02",
+  "F03",
+  "F04",
+  "F05",
+  "F06",
+  "F07",
+  "F08",
+  "F09",
+  "F10",
+  "unknown",
+]);
+
+const integratedDiagnosis = z
+  .object({
+    taxonomy_id: taxonomyId,
+    summary: boundedSummary,
+    confidence: z.enum(["low", "medium", "high"]),
+    evidence_refs: z.array(evidenceRef).min(1).max(16),
+    alternate_explanations: z.array(boundedSummary).max(8),
+    missing_evidence: z.array(boundedName).max(16),
+  })
+  .strict();
+
+const proposalDisposition = z.enum([
+  "replay_candidate",
+  "owner_action_required",
+  "engineering_escalation_required",
+  "insufficient_evidence",
+  "outcome_unknown",
+  "duplicate_or_stale",
+  "resolved_without_replay",
+]);
+
+const modelProposal = z
+  .object({
+    disposition: proposalDisposition,
+    kind: z.enum([
+      "wait_then_replay",
+      "request_manual_fix",
+      "escalate",
+      "no_action",
+    ]),
+    summary: boundedSummary,
+    reasons: z.array(boundedSummary).min(1).max(16),
+    evidence_refs: z.array(evidenceRef).min(1).max(16),
+    runbook_citations: z
+      .array(
+        z
+          .string()
+          .min(1)
+          .max(256)
+          .regex(/^RB-[A-Z0-9-]+@\d+\.\d+\.\d+#[a-z0-9-]+$/),
+      )
+      .max(3),
+    preconditions: z.array(boundedSummary).max(16),
+  })
+  .strict();
+
+export const IntegratedModelOutputSchema = z
+  .object({
+    status: z.enum(["completed", "abstained"]),
+    diagnosis: integratedDiagnosis,
+    proposal: modelProposal,
+  })
+  .strict();
+
+export const IntegratedDiagnosisResultSchema = z
+  .object({
+    contract_version: z.literal(1),
+    graph_version: z.literal("phase-6-v1"),
+    prompt_version: z.literal("phase-6-v1"),
+    status: z.enum(["completed", "abstained"]),
+    diagnosis: integratedDiagnosis,
+    proposal: modelProposal.extend({
+      not_before: z.iso.datetime({ offset: true }).nullable(),
+    }),
+  })
+  .strict();
+
+export const ModelUsageSchema = z
+  .object({
+    input_tokens: z.number().int().nonnegative(),
+    output_tokens: z.number().int().nonnegative(),
+    total_tokens: z.number().int().nonnegative(),
+  })
+  .strict()
+  .refine(
+    (usage) => usage.total_tokens >= usage.input_tokens + usage.output_tokens,
+    "total_tokens must cover input and output tokens",
+  );
+
+export type IntegratedModelOutput = z.infer<typeof IntegratedModelOutputSchema>;
+export type IntegratedDiagnosisResult = z.infer<
+  typeof IntegratedDiagnosisResultSchema
+>;
+export type ModelUsage = z.infer<typeof ModelUsageSchema>;
+
+export type DiagnosisPrompt = {
+  instructions: string;
+  input: string;
+  repair?: { issue: string };
+};
+
+export type ModelGeneration = {
+  output: unknown;
+  usage: ModelUsage;
+};
+
+export interface IntegratedDiagnosisModel {
+  generate(
+    prompt: DiagnosisPrompt,
+    signal: AbortSignal,
+  ): Promise<ModelGeneration>;
+  close(): Promise<void>;
+}
