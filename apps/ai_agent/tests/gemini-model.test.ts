@@ -2,6 +2,7 @@ import { describe, expect, test } from "bun:test";
 
 import type { DiagnosisPrompt } from "../src/contracts.ts";
 import {
+  GEMINI_DIAGNOSIS_SCHEMA,
   GeminiDiagnosisModel,
   ModelProviderError,
 } from "../src/gemini-model.ts";
@@ -50,6 +51,62 @@ function completedResponse(output: unknown = modelOutput) {
 }
 
 describe("Gemini Interactions diagnosis adapter", () => {
+  test("accepts a fenced JSON object from Gemini 2.5 Flash", async () => {
+    const adapter = new GeminiDiagnosisModel({
+      apiKey: "test-key",
+      model: "gemini-2.5-flash",
+      fetch: async () =>
+        Response.json({
+          status: "completed",
+          steps: [
+            {
+              type: "model_output",
+              content: [
+                {
+                  type: "text",
+                  text: `\`\`\`json\n${JSON.stringify(modelOutput)}\n\`\`\``,
+                },
+              ],
+            },
+          ],
+          usage: {
+            total_input_tokens: 15,
+            total_output_tokens: 30,
+            total_tokens: 1_194,
+          },
+        }),
+    });
+
+    expect(
+      (await adapter.generate(prompt, new AbortController().signal)).output,
+    ).toEqual(modelOutput);
+  });
+
+  test("the structured output schema requires the diagnosis contract", () => {
+    expect(Object.keys(GEMINI_DIAGNOSIS_SCHEMA.properties).sort()).toEqual([
+      "diagnosis",
+      "proposal",
+      "status",
+    ]);
+  });
+
+  test("allows enough output tokens for thinking and the diagnosis", async () => {
+    let generationConfig: Record<string, unknown> | undefined;
+    const adapter = new GeminiDiagnosisModel({
+      apiKey: "test-key",
+      model: "gemini-2.5-flash",
+      fetch: async (_input, init) => {
+        generationConfig = JSON.parse(String(init?.body)).generation_config;
+        return completedResponse();
+      },
+    });
+
+    await adapter.generate(prompt, new AbortController().signal);
+    expect(generationConfig).toEqual({
+      max_output_tokens: 4_096,
+    });
+  });
+
   test("requests structured output with an explicit model and output-token cap", async () => {
     let request: Request | undefined;
     const adapter = new GeminiDiagnosisModel({
@@ -75,15 +132,22 @@ describe("Gemini Interactions diagnosis adapter", () => {
     expect(body).toMatchObject({
       model: "test-structured-model",
       store: false,
-      system_instruction: prompt.instructions,
       input: prompt.input,
-      generation_config: { max_output_tokens: 1_200 },
-      response_format: {
-        type: "text",
-        mime_type: "application/json",
-        schema: { type: "object", additionalProperties: false },
+      generation_config: {
+        max_output_tokens: 1_200,
       },
+      response_format: [
+        {
+          type: "text",
+          mime_type: "application/json",
+          schema: { type: "object", additionalProperties: false },
+        },
+      ],
     });
+    expect(body.system_instruction).toContain(prompt.instructions);
+    expect(body.system_instruction).toContain(
+      JSON.stringify(GEMINI_DIAGNOSIS_SCHEMA),
+    );
     expect(result.output).toEqual(modelOutput);
     expect(result.usage).toEqual({
       input_tokens: 300,

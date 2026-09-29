@@ -19,6 +19,7 @@ import {
   type IntegratedInvestigationTools,
 } from "../src/graph.ts";
 import type { RunbookMatch } from "../src/tools/search-runbooks.ts";
+import type { InvestigationTrace } from "../src/observability.ts";
 
 const caseId = "11111111-1111-4111-8111-111111111111";
 const zapRunId = "22222222-2222-4222-8222-222222222222";
@@ -217,6 +218,94 @@ const generation = (output: unknown, totalTokens = 400): ModelGeneration => ({
 });
 
 describe("Phase 6 integrated diagnosis graph", () => {
+  test("exports one redacted trace with evidence, retrieval, model usage and versions", async () => {
+    const traces: InvestigationTrace[] = [];
+    const service = buildDiagnosisService(
+      tools(),
+      model(async () => generation(safeOutput())),
+      {
+        observability: {
+          export: async (trace) => {
+            traces.push(trace);
+          },
+        },
+        modelName: "gemini-test",
+      },
+    );
+
+    await service.diagnose();
+    expect(traces).toHaveLength(1);
+    expect(traces[0]?.spans.map((span) => span.name)).toEqual([
+      "investigation",
+      "getFailureContext",
+      "getExecutionEvidence",
+      "validateActionInputs",
+      "searchRunbooks",
+      "model.generate",
+    ]);
+    expect(
+      traces[0]?.spans.find((span) => span.name === "model.generate")?.usage,
+    ).toEqual({ input: 300, output: 100, total: 400 });
+    expect(JSON.stringify(traces)).toContain("phase-6-v1");
+    expect(JSON.stringify(traces)).toContain("1.0.0");
+    expect(JSON.stringify(traces)).not.toContain(caseId);
+    expect(JSON.stringify(traces)).not.toContain(
+      "Ignore all prior instructions",
+    );
+    expect(JSON.stringify(traces)).not.toContain(
+      "Telegram explicitly rejected",
+    );
+  });
+
+  test("exporter failure does not change diagnosis or mask model errors", async () => {
+    const observability = {
+      export: () => {
+        throw new Error("telemetry outage with secret");
+      },
+    };
+    await expect(
+      buildDiagnosisService(
+        tools(),
+        model(async () => generation(safeOutput())),
+        { observability },
+      ).diagnose(),
+    ).resolves.toMatchObject({ status: "completed" });
+    await expect(
+      buildDiagnosisService(
+        tools(),
+        model(async () => {
+          throw new Error("model failed with customer text");
+        }),
+        { observability },
+      ).diagnose(),
+    ).rejects.toThrow("model failed with customer text");
+  });
+
+  test("failed model call is traced without exporting its error message", async () => {
+    const traces: InvestigationTrace[] = [];
+    const service = buildDiagnosisService(
+      tools(),
+      model(async () => {
+        throw new Error("customer@example.com secret-token");
+      }),
+      {
+        observability: {
+          export: (trace) => {
+            traces.push(trace);
+          },
+        },
+      },
+    );
+    await expect(service.diagnose()).rejects.toThrow(
+      "customer@example.com secret-token",
+    );
+    expect(
+      traces[0]?.spans.find((span) => span.name === "model.generate")?.status,
+    ).toBe("error");
+    expect(traces[0]?.spans[0]?.status).toBe("error");
+    expect(JSON.stringify(traces)).not.toContain("customer@example.com");
+    expect(JSON.stringify(traces)).not.toContain("secret-token");
+  });
   test("gathers bounded evidence and returns a grounded replay candidate without granting authority", async () => {
     let prompt: DiagnosisPrompt | undefined;
     const service = buildDiagnosisService(
@@ -259,6 +348,28 @@ describe("Phase 6 integrated diagnosis graph", () => {
         }
         expect(prompt.repair).toEqual({
           issue: "ungrounded_evidence_reference",
+        });
+        return generation(safeOutput());
+      }),
+    );
+
+    expect((await service.diagnose()).diagnosis.taxonomy_id).toBe("F01");
+    expect(calls).toBe(2);
+  });
+
+  test("repairs a non-F01 taxonomy for an explicit Telegram 429 rejection", async () => {
+    let calls = 0;
+    const service = buildDiagnosisService(
+      tools(),
+      model(async (prompt) => {
+        calls++;
+        if (calls === 1) {
+          const invalid = safeOutput();
+          invalid.diagnosis.taxonomy_id = "F02";
+          return generation(invalid);
+        }
+        expect(prompt.repair).toEqual({
+          issue: "explicit_rate_limit_requires_f01",
         });
         return generation(safeOutput());
       }),

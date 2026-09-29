@@ -25,6 +25,12 @@ import {
   type PreviewResult,
 } from "./contracts.ts";
 import { DIAGNOSIS_PROMPT_VERSION, buildDiagnosisPrompt } from "./prompts.ts";
+import {
+  InvestigationTracer,
+  safeIdentifier,
+  safeModelUsage,
+  type TraceExporter,
+} from "./observability.ts";
 import type {
   RunbookMatch,
   RunbookSearchInput,
@@ -308,6 +314,8 @@ const DiagnosisState = new StateSchema({
   toolCalls: z.number().int().nonnegative().default(0),
 });
 
+const DIAGNOSIS_GRAPH_VERSION = "phase-6-v1" as const;
+
 export interface IntegratedInvestigationTools {
   getFailureContext(signal: AbortSignal): Promise<unknown>;
   getExecutionEvidence(
@@ -326,6 +334,8 @@ export type DiagnosisOptions = {
   maxModelTokens?: number;
   maxPromptCharacters?: number;
   maxRepairAttempts?: 0 | 1;
+  observability?: TraceExporter;
+  modelName?: string;
 };
 
 function assertSameCanonicalSource(
@@ -397,6 +407,15 @@ function issueForOutput(
   runbooks: readonly RunbookMatch[],
   output: IntegratedModelOutput,
 ): string | undefined {
+  if (
+    evidence.failureContext.facts.retry.provider === "telegram" &&
+    evidence.failureContext.facts.retry.phase === "send" &&
+    evidence.failureContext.facts.retry.provider_outcome === "rejected" &&
+    evidence.failureContext.facts.retry.provider_status === 429 &&
+    output.diagnosis.taxonomy_id !== "F01"
+  ) {
+    return "explicit_rate_limit_requires_f01";
+  }
   const observedEvidence = new Set([
     evidence.failureContext.evidence_id,
     evidence.executionEvidence.evidence_id,
@@ -588,115 +607,160 @@ export function buildDiagnosisService(
   const maxPromptCharacters = options.maxPromptCharacters ?? 48_000;
   const maxRepairAttempts = options.maxRepairAttempts ?? 1;
 
-  const workflow = new StateGraph(DiagnosisState)
-    .addNode("gatherEvidence", async (state, config) => {
-      if (state.toolCalls + 3 > maxToolCalls) {
-        throw new ToolBudgetExceeded("Evidence tool budget exhausted");
-      }
-      const signal = config.signal;
-      if (!signal)
-        throw new InvestigationTimeout("Missing investigation signal");
-      const [failureContext, executionEvidence, inputValidation] =
-        await Promise.all([
-          tools.getFailureContext(signal),
-          tools.getExecutionEvidence(10, signal),
-          tools.validateActionInputs(signal),
-        ]);
-      const evidence = EvidenceBundleSchema.parse({
-        failureContext,
-        executionEvidence,
-        inputValidation,
-      });
-      assertSameCanonicalSource(evidence);
-      return { evidence, toolCalls: state.toolCalls + 3 };
-    })
-    .addNode("retrieveGuidance", (state) => {
-      if (!state.evidence) {
-        throw new InvalidModelOutput("Runbook retrieval requires evidence");
-      }
-      if (state.toolCalls >= maxToolCalls) {
-        throw new ToolBudgetExceeded("Runbook tool budget exhausted");
-      }
-      const runbooks = z
-        .array(RunbookMatchSchema)
-        .max(3)
-        .parse(tools.searchRunbooks(retrievalInput(state.evidence)));
-      return { runbooks, toolCalls: state.toolCalls + 1 };
-    })
-    .addNode("diagnose", async (state, config) => {
-      if (!state.evidence) {
-        throw new InvalidModelOutput("Diagnosis requires evidence");
-      }
-      const signal = config.signal;
-      if (!signal)
-        throw new InvestigationTimeout("Missing investigation signal");
-      let usedTokens = 0;
-      let repair: { issue: string } | undefined;
+  const workflow = (tracer?: InvestigationTracer) =>
+    new StateGraph(DiagnosisState)
+      .addNode("gatherEvidence", async (state, config) => {
+        if (state.toolCalls + 3 > maxToolCalls) {
+          throw new ToolBudgetExceeded("Evidence tool budget exhausted");
+        }
+        const signal = config.signal;
+        if (!signal)
+          throw new InvestigationTimeout("Missing investigation signal");
+        const observe = <T>(
+          name:
+            | "getFailureContext"
+            | "getExecutionEvidence"
+            | "validateActionInputs",
+          operation: () => Promise<T>,
+        ) => (tracer ? tracer.observe(name, "tool", operation) : operation());
+        const [failureContext, executionEvidence, inputValidation] =
+          await Promise.all([
+            observe("getFailureContext", () => tools.getFailureContext(signal)),
+            observe("getExecutionEvidence", () =>
+              tools.getExecutionEvidence(10, signal),
+            ),
+            observe("validateActionInputs", () =>
+              tools.validateActionInputs(signal),
+            ),
+          ]);
+        const evidence = EvidenceBundleSchema.parse({
+          failureContext,
+          executionEvidence,
+          inputValidation,
+        });
+        assertSameCanonicalSource(evidence);
+        return { evidence, toolCalls: state.toolCalls + 3 };
+      })
+      .addNode("retrieveGuidance", async (state) => {
+        if (!state.evidence) {
+          throw new InvalidModelOutput("Runbook retrieval requires evidence");
+        }
+        if (state.toolCalls >= maxToolCalls) {
+          throw new ToolBudgetExceeded("Runbook tool budget exhausted");
+        }
+        const retrieve = () =>
+          z
+            .array(RunbookMatchSchema)
+            .max(3)
+            .parse(tools.searchRunbooks(retrievalInput(state.evidence!)));
+        const runbooks = tracer
+          ? await tracer.observe(
+              "searchRunbooks",
+              "retriever",
+              retrieve,
+              (matches) => ({
+                runbookVersions: matches.map((match) =>
+                  safeIdentifier(`${match.runbookId}@${match.version}`),
+                ),
+              }),
+            )
+          : retrieve();
+        return { runbooks, toolCalls: state.toolCalls + 1 };
+      })
+      .addNode("diagnose", async (state, config) => {
+        if (!state.evidence) {
+          throw new InvalidModelOutput("Diagnosis requires evidence");
+        }
+        const signal = config.signal;
+        if (!signal)
+          throw new InvestigationTimeout("Missing investigation signal");
+        let usedTokens = 0;
+        let repair: { issue: string } | undefined;
 
-      for (let attempt = 0; attempt <= maxRepairAttempts; attempt++) {
-        const prompt = buildDiagnosisPrompt(
-          state.evidence,
-          state.runbooks,
-          repair,
-        );
-        if (prompt.input.length > maxPromptCharacters) {
-          throw new TokenBudgetExceeded("Diagnosis prompt budget exhausted");
-        }
-        const generation = await generateWithTimeout(
-          model,
-          prompt,
-          modelTimeoutMs,
-          signal,
-        );
-        const usage = ModelUsageSchema.safeParse(generation.usage);
-        if (!usage.success) {
-          throw new InvalidModelOutput(
-            "Diagnosis model returned invalid usage",
+        for (let attempt = 0; attempt <= maxRepairAttempts; attempt++) {
+          const prompt = buildDiagnosisPrompt(
+            state.evidence,
+            state.runbooks,
+            repair,
           );
-        }
-        usedTokens += usage.data.total_tokens;
-        if (usedTokens > maxModelTokens) {
-          throw new TokenBudgetExceeded(
-            "Diagnosis model token budget exhausted",
-          );
-        }
+          if (prompt.input.length > maxPromptCharacters) {
+            throw new TokenBudgetExceeded("Diagnosis prompt budget exhausted");
+          }
+          const generate = () =>
+            generateWithTimeout(model, prompt, modelTimeoutMs, signal);
+          const generation = tracer
+            ? await tracer.observe(
+                "model.generate",
+                "generation",
+                generate,
+                (value) => ({
+                  model: safeIdentifier(options.modelName ?? "unknown"),
+                  attempt: attempt + 1,
+                  ...(ModelUsageSchema.safeParse(value.usage).success
+                    ? { usage: safeModelUsage(value.usage) }
+                    : {}),
+                }),
+              )
+            : await generate();
+          const usage = ModelUsageSchema.safeParse(generation.usage);
+          if (!usage.success) {
+            throw new InvalidModelOutput(
+              "Diagnosis model returned invalid usage",
+            );
+          }
+          usedTokens += usage.data.total_tokens;
+          if (usedTokens > maxModelTokens) {
+            throw new TokenBudgetExceeded(
+              "Diagnosis model token budget exhausted",
+            );
+          }
 
-        const parsed = IntegratedModelOutputSchema.safeParse(generation.output);
-        const issue = parsed.success
-          ? issueForOutput(state.evidence, state.runbooks, parsed.data)
-          : "schema_validation_failed";
-        if (!issue && parsed.success) {
-          const result = IntegratedDiagnosisResultSchema.parse({
-            contract_version: 1,
-            graph_version: "phase-6-v1",
-            prompt_version: DIAGNOSIS_PROMPT_VERSION,
-            ...parsed.data,
-            proposal: {
-              ...parsed.data.proposal,
-              not_before: replayNotBefore(state.evidence, parsed.data),
-            },
-          });
-          return { result };
+          const parsed = IntegratedModelOutputSchema.safeParse(
+            generation.output,
+          );
+          const issue = parsed.success
+            ? issueForOutput(state.evidence, state.runbooks, parsed.data)
+            : "schema_validation_failed";
+          if (!issue && parsed.success) {
+            const result = IntegratedDiagnosisResultSchema.parse({
+              contract_version: 1,
+              graph_version: DIAGNOSIS_GRAPH_VERSION,
+              prompt_version: DIAGNOSIS_PROMPT_VERSION,
+              ...parsed.data,
+              proposal: {
+                ...parsed.data.proposal,
+                not_before: replayNotBefore(state.evidence, parsed.data),
+              },
+            });
+            return { result };
+          }
+          repair = { issue: issue! };
         }
-        repair = { issue: issue! };
-      }
-      throw new InvalidModelOutput(
-        "Diagnosis model returned invalid output after one repair attempt",
-      );
-    })
-    .addEdge(START, "gatherEvidence")
-    .addEdge("gatherEvidence", "retrieveGuidance")
-    .addEdge("retrieveGuidance", "diagnose")
-    .addEdge("diagnose", END)
-    .compile();
+        throw new InvalidModelOutput(
+          "Diagnosis model returned invalid output after one repair attempt",
+        );
+      })
+      .addEdge(START, "gatherEvidence")
+      .addEdge("gatherEvidence", "retrieveGuidance")
+      .addEdge("retrieveGuidance", "diagnose")
+      .addEdge("diagnose", END)
+      .compile();
 
   return {
     async diagnose(): Promise<IntegratedDiagnosisResult> {
+      const tracer = options.observability
+        ? new InvestigationTracer(
+            options.observability,
+            DIAGNOSIS_GRAPH_VERSION,
+            DIAGNOSIS_PROMPT_VERSION,
+          )
+        : undefined;
+      let traceError: unknown;
       try {
         const state = await withInvestigationDeadline(
           investigationTimeoutMs,
           (signal) =>
-            workflow.invoke(
+            workflow(tracer).invoke(
               { toolCalls: 0, runbooks: [] },
               { recursionLimit: maxGraphSteps, signal },
             ),
@@ -707,12 +771,15 @@ export function buildDiagnosisService(
         }
         return result.data;
       } catch (error) {
+        traceError = error;
         if (error instanceof GraphRecursionError) {
           throw new GraphStepLimitExceeded("Graph step limit exhausted", {
             cause: error,
           });
         }
         throw error;
+      } finally {
+        tracer?.finish(traceError);
       }
     },
   };

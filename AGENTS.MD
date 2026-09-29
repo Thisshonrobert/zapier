@@ -90,7 +90,7 @@ This project uses a multi-tool pipeline to balance reasoning, context limits, an
 - Responsible for drafting and expanding `docs/ai-dlq-master-plan.md`.
 - Outputs are mutable; implementation realities update the plan.
 
-### 2. Implementation: Codex (GPT-5.6 Sol / Terra)
+### 2. Implementation: Codex (GPT-6 Sol / Terra)
 - Implements the requested master-plan scope, verifies it, and reports changed files, results, and limitations. Learning is handled separately in ChatGPT using GitHub/Notion; do not require teaching sessions, learner checkpoints, lessons, or interview explanations unless explicitly requested.
 - **Sol (Flagship):** Production implementation, complex architecture, DB transactions, security, and difficult debugging.
 - **Terra (Balanced):** Straightforward implementation, tests, and medium-complexity tasks.
@@ -147,3 +147,4 @@ When introducing a new subsystem, pattern, or dependency:
 2. Test and verify the current phase before proceeding to the next.
 3. Give Antigravity the implementation handoff for documentation and exact diff classification.
 4. Follow the two-commit manual workflow above; the user performs all Git integration actions.
+5. which model and effort should be used for next phase.

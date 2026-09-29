@@ -190,7 +190,7 @@ export class GeminiDiagnosisModel implements IntegratedDiagnosisModel {
       options.endpoint ??
       "https://generativelanguage.googleapis.com/v1beta/interactions";
     this.fetch = options.fetch ?? globalThis.fetch;
-    this.maxOutputTokens = options.maxOutputTokens ?? 1_200;
+    this.maxOutputTokens = options.maxOutputTokens ?? 4_096;
     if (
       !Number.isInteger(this.maxOutputTokens) ||
       this.maxOutputTokens < 1 ||
@@ -215,14 +215,18 @@ export class GeminiDiagnosisModel implements IntegratedDiagnosisModel {
         body: JSON.stringify({
           model: this.options.model,
           store: false,
-          system_instruction: prompt.instructions,
+          system_instruction: `${prompt.instructions}\nReturn JSON matching this exact schema:\n${JSON.stringify(GEMINI_DIAGNOSIS_SCHEMA)}`,
           input: prompt.input,
-          generation_config: { max_output_tokens: this.maxOutputTokens },
-          response_format: {
-            type: "text",
-            mime_type: "application/json",
-            schema: GEMINI_DIAGNOSIS_SCHEMA,
+          generation_config: {
+            max_output_tokens: this.maxOutputTokens,
           },
+          response_format: [
+            {
+              type: "text",
+              mime_type: "application/json",
+              schema: GEMINI_DIAGNOSIS_SCHEMA,
+            },
+          ],
         }),
         signal,
       });
@@ -234,7 +238,9 @@ export class GeminiDiagnosisModel implements IntegratedDiagnosisModel {
 
     const text = await response.text();
     if (text.length > 65_536) {
-      throw new ModelProviderError("Gemini Interactions response was too large");
+      throw new ModelProviderError(
+        "Gemini Interactions response was too large",
+      );
     }
     if (!response.ok) {
       throw new ModelProviderError(
@@ -270,7 +276,8 @@ export class GeminiDiagnosisModel implements IntegratedDiagnosisModel {
 
     let output: unknown;
     try {
-      output = JSON.parse(outputText);
+      const fenced = /^```(?:json)?\s*\n([\s\S]*?)\n```\s*$/.exec(outputText);
+      output = JSON.parse(fenced ? fenced[1]! : outputText);
     } catch (error) {
       throw new ModelProviderError(
         "Gemini Interactions returned malformed structured output",
