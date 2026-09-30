@@ -1077,67 +1077,6 @@
       "packages_db_generated_prisma_models_zaprunoutbox_zaprunoutboxwhereuniqueinput"
     ],
     "12": [
-      "apps_ai_agent_src_contracts_failurecontextevidence",
-      "apps_ai_agent_src_contracts_integrateddiagnosismodel_generate",
-      "apps_ai_agent_src_contracts_integratedmodeloutputschema",
-      "apps_ai_agent_src_contracts_previewrequestschema",
-      "apps_ai_agent_src_contracts_previewresult",
-      "apps_ai_agent_src_diagnosis_http",
-      "apps_ai_agent_src_diagnosis_http_bearer",
-      "apps_ai_agent_src_diagnosis_http_diagnosisrouteroptions",
-      "apps_ai_agent_src_diagnosis_http_emptydiagnosisrequestschema",
-      "apps_ai_agent_src_diagnosis_http_requiredoperations",
-      "apps_ai_agent_src_graph",
-      "apps_ai_agent_src_graph_assertsamecanonicalsource",
-      "apps_ai_agent_src_graph_builddiagnosisservice",
-      "apps_ai_agent_src_graph_buildpreviewservice",
-      "apps_ai_agent_src_graph_decisionschema",
-      "apps_ai_agent_src_graph_diagnosewithtimeout",
-      "apps_ai_agent_src_graph_diagnosis_graph_version",
-      "apps_ai_agent_src_graph_diagnosisstate",
-      "apps_ai_agent_src_graph_evidencebundleschema",
-      "apps_ai_agent_src_graph_failurecontextreader",
-      "apps_ai_agent_src_graph_failurecontextreader_get",
-      "apps_ai_agent_src_graph_generatewithtimeout",
-      "apps_ai_agent_src_graph_graphsteplimitexceeded",
-      "apps_ai_agent_src_graph_integratedinvestigationtools",
-      "apps_ai_agent_src_graph_integratedinvestigationtools_getexecutionevidence",
-      "apps_ai_agent_src_graph_integratedinvestigationtools_getfailurecontext",
-      "apps_ai_agent_src_graph_integratedinvestigationtools_searchrunbooks",
-      "apps_ai_agent_src_graph_integratedinvestigationtools_validateactioninputs",
-      "apps_ai_agent_src_graph_invalidmodeloutput",
-      "apps_ai_agent_src_graph_investigationtimeout",
-      "apps_ai_agent_src_graph_issueforoutput",
-      "apps_ai_agent_src_graph_modeltimeout",
-      "apps_ai_agent_src_graph_previewstate",
-      "apps_ai_agent_src_graph_replaynotbefore",
-      "apps_ai_agent_src_graph_retrievalinput",
-      "apps_ai_agent_src_graph_runbookmatchschema",
-      "apps_ai_agent_src_graph_supportsreplaycandidate",
-      "apps_ai_agent_src_graph_tokenbudgetexceeded",
-      "apps_ai_agent_src_graph_toolbudgetexceeded",
-      "apps_ai_agent_src_graph_validategrounding",
-      "apps_ai_agent_src_graph_withinvestigationdeadline",
-      "apps_ai_agent_src_http",
-      "apps_ai_agent_src_http_closeserver",
-      "apps_ai_agent_src_http_httpserveroptions",
-      "apps_ai_agent_src_prompts",
-      "apps_ai_agent_src_prompts_builddiagnosisprompt",
-      "apps_ai_agent_src_prompts_diagnosis_prompt_version",
-      "apps_ai_agent_src_tools_search_runbooks_runbookmatch",
-      "apps_ai_agent_src_tools_search_runbooks_runbooksearchinput",
-      "apps_ai_agent_tests_diagnosis_graph_test",
-      "apps_ai_agent_tests_diagnosis_graph_test_evidencerefs",
-      "apps_ai_agent_tests_diagnosis_graph_test_executionevidence",
-      "apps_ai_agent_tests_diagnosis_graph_test_failurecontext",
-      "apps_ai_agent_tests_diagnosis_graph_test_generation",
-      "apps_ai_agent_tests_diagnosis_graph_test_inputvalidation",
-      "apps_ai_agent_tests_diagnosis_graph_test_model",
-      "apps_ai_agent_tests_diagnosis_graph_test_runbook",
-      "apps_ai_agent_tests_diagnosis_graph_test_safeoutput",
-      "apps_ai_agent_tests_diagnosis_graph_test_tools"
-    ],
-    "13": [
       "packages_db_generated_prisma_models_testtriggerbuffer",
       "packages_db_generated_prisma_models_testtriggerbuffer_aggregatetesttriggerbuffer",
       "packages_db_generated_prisma_models_testtriggerbuffer_gettesttriggerbufferaggregatetype",
@@ -1198,6 +1137,66 @@
       "packages_db_generated_prisma_models_testtriggerbuffer_testtriggerbufferwhereinput",
       "packages_db_generated_prisma_models_testtriggerbuffer_testtriggerbufferwhereuniqueinput"
     ],
+    "13": [
+      "apps_ai_agent_src_contracts_integrateddiagnosismodel_generate",
+      "apps_ai_agent_src_graph",
+      "apps_ai_agent_src_graph_assertsamecanonicalsource",
+      "apps_ai_agent_src_graph_builddiagnosisservice",
+      "apps_ai_agent_src_graph_decisionschema",
+      "apps_ai_agent_src_graph_diagnosewithtimeout",
+      "apps_ai_agent_src_graph_diagnosis_graph_version",
+      "apps_ai_agent_src_graph_diagnosisstate",
+      "apps_ai_agent_src_graph_evidencebundleschema",
+      "apps_ai_agent_src_graph_generatewithtimeout",
+      "apps_ai_agent_src_graph_integratedinvestigationtools",
+      "apps_ai_agent_src_graph_integratedinvestigationtools_getexecutionevidence",
+      "apps_ai_agent_src_graph_integratedinvestigationtools_getfailurecontext",
+      "apps_ai_agent_src_graph_integratedinvestigationtools_searchrunbooks",
+      "apps_ai_agent_src_graph_integratedinvestigationtools_validateactioninputs",
+      "apps_ai_agent_src_graph_invalidmodeloutput",
+      "apps_ai_agent_src_graph_investigationtimeout",
+      "apps_ai_agent_src_graph_issueforoutput",
+      "apps_ai_agent_src_graph_modeltimeout",
+      "apps_ai_agent_src_graph_previewstate",
+      "apps_ai_agent_src_graph_replaynotbefore",
+      "apps_ai_agent_src_graph_retrievalinput",
+      "apps_ai_agent_src_graph_runbookmatchschema",
+      "apps_ai_agent_src_graph_supportsreplaycandidate",
+      "apps_ai_agent_src_graph_tokenbudgetexceeded",
+      "apps_ai_agent_src_graph_validategrounding",
+      "apps_ai_agent_src_graph_withinvestigationdeadline",
+      "apps_ai_agent_src_observability",
+      "apps_ai_agent_src_observability_createlangfuseexporter",
+      "apps_ai_agent_src_observability_errortype",
+      "apps_ai_agent_src_observability_fetchlike",
+      "apps_ai_agent_src_observability_investigationtrace",
+      "apps_ai_agent_src_observability_investigationtracer",
+      "apps_ai_agent_src_observability_investigationtracer_constructor",
+      "apps_ai_agent_src_observability_investigationtracer_finish",
+      "apps_ai_agent_src_observability_investigationtracer_observe",
+      "apps_ai_agent_src_observability_safeidentifier",
+      "apps_ai_agent_src_observability_safemodelusage",
+      "apps_ai_agent_src_observability_safeversion",
+      "apps_ai_agent_src_observability_traceexporter",
+      "apps_ai_agent_src_observability_traceexporter_export",
+      "apps_ai_agent_src_observability_tracespan",
+      "apps_ai_agent_src_prompts",
+      "apps_ai_agent_src_prompts_builddiagnosisprompt",
+      "apps_ai_agent_src_prompts_diagnosis_prompt_version",
+      "apps_ai_agent_src_tools_search_runbooks_runbookmatch",
+      "apps_ai_agent_src_tools_search_runbooks_runbooksearchinput",
+      "apps_ai_agent_tests_diagnosis_graph_test",
+      "apps_ai_agent_tests_diagnosis_graph_test_evidencerefs",
+      "apps_ai_agent_tests_diagnosis_graph_test_executionevidence",
+      "apps_ai_agent_tests_diagnosis_graph_test_failurecontext",
+      "apps_ai_agent_tests_diagnosis_graph_test_generation",
+      "apps_ai_agent_tests_diagnosis_graph_test_inputvalidation",
+      "apps_ai_agent_tests_diagnosis_graph_test_model",
+      "apps_ai_agent_tests_diagnosis_graph_test_runbook",
+      "apps_ai_agent_tests_diagnosis_graph_test_safeoutput",
+      "apps_ai_agent_tests_diagnosis_graph_test_tools",
+      "apps_ai_agent_tests_observability_test"
+    ],
     "14": [
       "apps_frontend_src_app_connections_page",
       "apps_frontend_src_app_connections_page_connection",
@@ -1243,7 +1242,6 @@
       "apps_frontend_src_mycomponents_app_appflow_zapflow",
       "apps_frontend_src_mycomponents_app_appflow_zapmonogram",
       "apps_frontend_src_mycomponents_app_appshell_appshell",
-      "apps_frontend_src_mycomponents_app_mvpdialog",
       "apps_frontend_src_mycomponents_app_mvpdialog_mvpaction",
       "apps_frontend_src_mycomponents_zaptable",
       "apps_frontend_src_mycomponents_zaptable_copywebhook",
@@ -1258,6 +1256,58 @@
       "apps_frontend_src_types_zap_zaprun"
     ],
     "15": [
+      "apps_ai_agent_src_contracts_previewrequestschema",
+      "apps_ai_agent_src_graph_investigationdecision",
+      "apps_ai_agent_src_graph_previewoptions",
+      "apps_ai_agent_src_http",
+      "apps_ai_agent_src_http_closeserver",
+      "apps_ai_agent_src_http_httpserveroptions",
+      "apps_ai_agent_src_investigation_http",
+      "apps_ai_agent_src_investigation_http_bearer",
+      "apps_ai_agent_src_investigation_http_createinvestigationrouter",
+      "apps_ai_agent_src_investigation_http_startschema",
+      "apps_ai_agent_tests_investigation_http_test",
+      "apps_ai_agent_tests_investigation_http_test_headers",
+      "apps_ai_agent_tests_investigation_http_test_start",
+      "apps_ai_agent_tests_investigation_http_test_token",
+      "apps_ai_agent_tests_investigation_store_test",
+      "apps_ai_agent_tests_investigation_store_test_caseid",
+      "apps_primary_backend_index_notifications",
+      "apps_primary_backend_middleware_authmiddleware",
+      "apps_primary_backend_route_triage",
+      "apps_primary_backend_route_triage_bearer",
+      "apps_primary_backend_route_triage_createtriagerouter",
+      "apps_primary_backend_route_triage_runnerbinding",
+      "apps_primary_backend_route_triage_triagerouteroptions",
+      "apps_primary_backend_route_triage_uuid",
+      "apps_primary_backend_services_triage_agent",
+      "apps_primary_backend_services_triage_agent_agentreadtimeout",
+      "apps_primary_backend_services_triage_agent_triageagentclient",
+      "apps_primary_backend_services_triage_agent_triageagentclient_constructor",
+      "apps_primary_backend_services_triage_agent_triageagentclient_read",
+      "apps_primary_backend_tests_triage_4a_test",
+      "apps_primary_backend_tests_triage_auth_test",
+      "apps_primary_backend_tests_triage_auth_test_contractfixture",
+      "apps_primary_backend_tests_triage_auth_test_servers",
+      "apps_primary_backend_tests_triage_auth_test_startrouter",
+      "apps_primary_backend_tests_triage_auth_test_token",
+      "apps_primary_backend_tests_triage_operator_http_test",
+      "apps_primary_backend_tests_triage_operator_http_test_servers",
+      "apps_primary_backend_tests_triage_operator_http_test_start",
+      "packages_triage_contracts_index",
+      "packages_triage_contracts_index_allowedoperations",
+      "packages_triage_contracts_index_createservicescope",
+      "packages_triage_contracts_index_encode",
+      "packages_triage_contracts_index_parsepayload",
+      "packages_triage_contracts_index_servicescope",
+      "packages_triage_contracts_index_sign",
+      "packages_triage_contracts_index_triage_scope_audience",
+      "packages_triage_contracts_index_triage_scope_issuer",
+      "packages_triage_contracts_index_validsecret",
+      "packages_triage_contracts_index_verifyservicescope",
+      "ref_express"
+    ],
+    "16": [
       "apps_frontend_src_app_layout_metadata",
       "apps_frontend_src_app_store_zapstore",
       "apps_frontend_src_app_store_zapstore_action",
@@ -1287,8 +1337,6 @@
       "apps_frontend_src_app_zap_create_workflow_constants_getinitialnodes",
       "apps_frontend_src_app_zap_create_workflow_constants_initialedges",
       "apps_frontend_src_app_zap_create_workflow_constants_trigger",
-      "apps_frontend_src_components_ui_dialog_dialog",
-      "apps_frontend_src_components_ui_dialog_dialogcontent",
       "apps_frontend_src_hooks_tokendecode",
       "apps_frontend_src_hooks_tokendecode_tokendecode",
       "apps_frontend_src_mycomponents_app_formkit",
@@ -1303,10 +1351,11 @@
       "apps_frontend_src_mycomponents_tokeninput_tokeninput",
       "ref_lucide_react",
       "ref_sonner",
+      "ref_uuid",
       "ref_xyflow_react",
       "ref_zustand"
     ],
-    "16": [
+    "17": [
       "apps_frontend_src_app_triage_page",
       "apps_frontend_src_components_ui_badge",
       "apps_frontend_src_components_ui_badge_badge",
@@ -1353,89 +1402,48 @@
       "ref_radix_ui_react_slot",
       "ref_tailwind_merge"
     ],
-    "17": [
-      "apps_primary_backend_index",
-      "apps_primary_backend_index_agent",
-      "apps_primary_backend_index_app",
-      "apps_primary_backend_index_notifications",
-      "apps_primary_backend_middleware",
-      "apps_primary_backend_middleware_authmiddleware",
-      "apps_primary_backend_middleware_decodedtoken",
-      "apps_primary_backend_middleware_express",
-      "apps_primary_backend_middleware_request",
-      "apps_primary_backend_route_action",
-      "apps_primary_backend_route_action_actionrouter",
-      "apps_primary_backend_route_action_router",
-      "apps_primary_backend_route_trigger",
-      "apps_primary_backend_route_trigger_router",
-      "apps_primary_backend_route_trigger_triggerrouter",
-      "apps_primary_backend_route_user",
-      "apps_primary_backend_route_user_clerk",
-      "apps_primary_backend_route_user_router",
-      "apps_primary_backend_route_user_userrouter",
-      "apps_primary_backend_route_zap",
-      "apps_primary_backend_route_zap_router",
-      "apps_primary_backend_route_zap_zaprouter",
-      "apps_primary_backend_services_triage_agent",
-      "apps_primary_backend_services_triage_agent_agentreadtimeout",
-      "apps_primary_backend_services_triage_agent_triageagentclient",
-      "apps_primary_backend_services_triage_agent_triageagentclient_constructor",
-      "apps_primary_backend_services_triage_agent_triageagentclient_read",
-      "apps_primary_backend_types_zodtypes",
-      "apps_primary_backend_types_zodtypes_signinschema",
-      "apps_primary_backend_types_zodtypes_signupschema",
-      "apps_primary_backend_types_zodtypes_zapscehema",
-      "apps_processor_index",
-      "apps_processor_index_kafka",
-      "apps_processor_index_main",
-      "apps_webhook_index",
-      "apps_webhook_index_app",
-      "packages_db_prisma_db",
-      "packages_db_prisma_db_prisma",
-      "ref_bcrypt",
-      "ref_clerk_backend",
-      "ref_kafkajs"
-    ],
     "18": [
-      "apps_ai_agent_src_contracts_diagnosismodel",
-      "apps_ai_agent_src_contracts_diagnosismodel_close",
-      "apps_ai_agent_src_contracts_diagnosismodel_diagnose",
-      "apps_ai_agent_src_contracts_evidence",
-      "apps_ai_agent_src_contracts_evidenceschema",
-      "apps_ai_agent_src_demo",
-      "apps_ai_agent_src_fixture_model",
-      "apps_ai_agent_src_fixture_model_fixturediagnosismodel",
-      "apps_ai_agent_src_fixture_model_fixturediagnosismodel_close",
-      "apps_ai_agent_src_fixture_model_fixturediagnosismodel_diagnose",
-      "apps_ai_agent_src_graph_previewoptions",
-      "apps_ai_agent_src_http_createhttpserver",
-      "apps_ai_agent_src_http_runninghttpserver",
-      "apps_ai_agent_src_paths",
-      "apps_ai_agent_src_paths_defaultfixturedirectory",
-      "apps_ai_agent_src_paths_defaultrunbookdirectory",
-      "apps_ai_agent_src_tools_failure_context",
-      "apps_ai_agent_src_tools_failure_context_fixturefailurecontexttool",
-      "apps_ai_agent_src_tools_failure_context_fixturefailurecontexttool_constructor",
-      "apps_ai_agent_src_tools_failure_context_fixturefailurecontexttool_get",
-      "apps_ai_agent_src_tools_failure_context_fixturefiles",
-      "apps_ai_agent_src_tools_failure_context_fixtureidentitymismatch",
-      "apps_ai_agent_src_tools_failure_context_fixturenotfound",
-      "apps_ai_agent_tests_diagnosis_http_test",
-      "apps_ai_agent_tests_diagnosis_http_test_backend",
-      "apps_ai_agent_tests_diagnosis_http_test_diagnosisserver",
-      "apps_ai_agent_tests_diagnosis_http_test_listen",
-      "apps_ai_agent_tests_diagnosis_http_test_model",
-      "apps_ai_agent_tests_diagnosis_http_test_scope",
-      "apps_ai_agent_tests_diagnosis_http_test_servers",
-      "apps_ai_agent_tests_graph_test",
-      "apps_ai_agent_tests_graph_test_fixtures",
-      "apps_ai_agent_tests_graph_test_get",
-      "apps_ai_agent_tests_graph_test_service",
-      "apps_ai_agent_tests_http_test",
-      "apps_ai_agent_tests_http_test_start",
-      "apps_ai_agent_tests_test_model",
-      "apps_ai_agent_tests_test_model_taxonomyfixturemodel",
-      "apps_ai_agent_tests_test_model_taxonomyfixturemodel_close"
+      "apps_ai_agent_src_clients_backend",
+      "apps_ai_agent_src_clients_backend_backendclient",
+      "apps_ai_agent_src_clients_backend_backendclient_constructor",
+      "apps_ai_agent_src_clients_backend_backendclient_getexecutionevidence",
+      "apps_ai_agent_src_clients_backend_backendclient_getfailurecontext",
+      "apps_ai_agent_src_clients_backend_backendclient_read",
+      "apps_ai_agent_src_clients_backend_backendclient_scope",
+      "apps_ai_agent_src_clients_backend_backendclient_validateactioninputs",
+      "apps_ai_agent_src_clients_backend_backendclientoptions",
+      "apps_ai_agent_src_clients_backend_backendreadtimeout",
+      "apps_ai_agent_src_clients_backend_backendresponseerror",
+      "apps_ai_agent_src_contracts_actioninputvalidationevidence",
+      "apps_ai_agent_src_contracts_executionevidence",
+      "apps_ai_agent_src_contracts_failurecontextevidence",
+      "apps_ai_agent_src_diagnosis_http_creatediagnosisrouter",
+      "apps_ai_agent_src_private_http",
+      "apps_ai_agent_src_private_http_bearer",
+      "apps_ai_agent_src_private_http_createprivatetoolsrouter",
+      "apps_ai_agent_src_runner_createinvestigationexecutor",
+      "apps_ai_agent_src_tools_execution_evidence",
+      "apps_ai_agent_src_tools_execution_evidence_backendexecutionevidencetool",
+      "apps_ai_agent_src_tools_execution_evidence_backendexecutionevidencetool_constructor",
+      "apps_ai_agent_src_tools_execution_evidence_backendexecutionevidencetool_get",
+      "apps_ai_agent_src_tools_execution_evidence_executionevidencebackend",
+      "apps_ai_agent_src_tools_failure_context_backendfailurecontexttool",
+      "apps_ai_agent_src_tools_failure_context_backendfailurecontexttool_constructor",
+      "apps_ai_agent_src_tools_failure_context_backendfailurecontexttool_get",
+      "apps_ai_agent_src_tools_validate_action_inputs",
+      "apps_ai_agent_src_tools_validate_action_inputs_backendvalidateactioninputstool",
+      "apps_ai_agent_src_tools_validate_action_inputs_backendvalidateactioninputstool_constructor",
+      "apps_ai_agent_src_tools_validate_action_inputs_backendvalidateactioninputstool_validate",
+      "apps_ai_agent_src_tools_validate_action_inputs_validationbackend",
+      "apps_ai_agent_tests_live_tools_4a_test",
+      "apps_ai_agent_tests_live_tools_4a_test_listen",
+      "apps_ai_agent_tests_live_tools_4a_test_scope",
+      "apps_ai_agent_tests_live_tools_4a_test_servers",
+      "apps_ai_agent_tests_live_tools_4b_test",
+      "apps_ai_agent_tests_live_tools_4b_test_getexecutionevidence",
+      "apps_ai_agent_tests_live_tools_4c_test",
+      "apps_ai_agent_tests_live_tools_4c_test_validateactioninputs",
+      "packages_triage_contracts_index_evidenceoperation"
     ],
     "19": [
       "packages_eslint_config_base",
@@ -1479,46 +1487,6 @@
       "ref_typescript_eslint"
     ],
     "20": [
-      "apps_ai_agent_src_graph_investigationdecision",
-      "apps_ai_agent_src_investigation_http",
-      "apps_ai_agent_src_investigation_http_bearer",
-      "apps_ai_agent_src_investigation_http_createinvestigationrouter",
-      "apps_ai_agent_src_investigation_http_startschema",
-      "apps_ai_agent_tests_investigation_http_test",
-      "apps_ai_agent_tests_investigation_http_test_headers",
-      "apps_ai_agent_tests_investigation_http_test_start",
-      "apps_ai_agent_tests_investigation_http_test_token",
-      "apps_primary_backend_route_triage",
-      "apps_primary_backend_route_triage_bearer",
-      "apps_primary_backend_route_triage_createtriagerouter",
-      "apps_primary_backend_route_triage_runnerbinding",
-      "apps_primary_backend_route_triage_triagerouteroptions",
-      "apps_primary_backend_route_triage_uuid",
-      "apps_primary_backend_tests_triage_auth_test",
-      "apps_primary_backend_tests_triage_auth_test_contractfixture",
-      "apps_primary_backend_tests_triage_auth_test_servers",
-      "apps_primary_backend_tests_triage_auth_test_startrouter",
-      "apps_primary_backend_tests_triage_auth_test_token",
-      "apps_primary_backend_tests_triage_operator_http_test",
-      "apps_primary_backend_tests_triage_operator_http_test_servers",
-      "apps_primary_backend_tests_triage_operator_http_test_start",
-      "packages_triage_contracts_index",
-      "packages_triage_contracts_index_allowedoperations",
-      "packages_triage_contracts_index_createservicescope",
-      "packages_triage_contracts_index_encode",
-      "packages_triage_contracts_index_evidenceoperation",
-      "packages_triage_contracts_index_parsepayload",
-      "packages_triage_contracts_index_servicescope",
-      "packages_triage_contracts_index_sign",
-      "packages_triage_contracts_index_triage_scope_audience",
-      "packages_triage_contracts_index_triage_scope_issuer",
-      "packages_triage_contracts_index_validsecret",
-      "packages_triage_contracts_index_verifyservicescope",
-      "ref_express",
-      "ref_jsonwebtoken",
-      "ref_zod"
-    ],
-    "21": [
       "packages_db_generated_prisma_commoninputtypes",
       "packages_db_generated_prisma_commoninputtypes_boolfilter",
       "packages_db_generated_prisma_commoninputtypes_boolwithaggregatesfilter",
@@ -1558,44 +1526,80 @@
       "packages_db_generated_prisma_commoninputtypes_stringnullablewithaggregatesfilter",
       "packages_db_generated_prisma_commoninputtypes_stringwithaggregatesfilter"
     ],
+    "21": [
+      "apps_ai_agent_src_evaluation_retrieval_experiment",
+      "apps_ai_agent_src_evaluation_retrieval_experiment_bm25",
+      "apps_ai_agent_src_evaluation_retrieval_experiment_ignoredterms",
+      "apps_ai_agent_src_evaluation_retrieval_experiment_metrics",
+      "apps_ai_agent_src_evaluation_retrieval_experiment_retrievalexperimentcase",
+      "apps_ai_agent_src_evaluation_retrieval_experiment_retrievalexperimentcases",
+      "apps_ai_agent_src_evaluation_retrieval_experiment_retrievalexperimentresult",
+      "apps_ai_agent_src_evaluation_retrieval_experiment_runretrievalexperiment",
+      "apps_ai_agent_src_evaluation_retrieval_experiment_section",
+      "apps_ai_agent_src_evaluation_retrieval_experiment_split",
+      "apps_ai_agent_src_evaluation_retrieval_experiment_summarize",
+      "apps_ai_agent_src_evaluation_retrieval_experiment_terms",
+      "apps_ai_agent_src_evaluation_retrieval_experiment_variantresult",
+      "apps_ai_agent_src_tools_search_runbooks",
+      "apps_ai_agent_src_tools_search_runbooks_allowedfiles",
+      "apps_ai_agent_src_tools_search_runbooks_commaseparated",
+      "apps_ai_agent_src_tools_search_runbooks_ignoredterms",
+      "apps_ai_agent_src_tools_search_runbooks_indexedsection",
+      "apps_ai_agent_src_tools_search_runbooks_intersects",
+      "apps_ai_agent_src_tools_search_runbooks_loadrunbooks",
+      "apps_ai_agent_src_tools_search_runbooks_normalizedfilters",
+      "apps_ai_agent_src_tools_search_runbooks_parsemetadata",
+      "apps_ai_agent_src_tools_search_runbooks_parserunbook",
+      "apps_ai_agent_src_tools_search_runbooks_runbookindex",
+      "apps_ai_agent_src_tools_search_runbooks_runbookmetadata",
+      "apps_ai_agent_src_tools_search_runbooks_searchrunbooks",
+      "apps_ai_agent_src_tools_search_runbooks_sectionid",
+      "apps_ai_agent_src_tools_search_runbooks_terms",
+      "apps_ai_agent_tests_retrieval_experiment_test",
+      "apps_ai_agent_tests_retrieval_experiment_test_repositoryrunbooks",
+      "apps_ai_agent_tests_search_runbooks_test",
+      "apps_ai_agent_tests_search_runbooks_test_document",
+      "apps_ai_agent_tests_search_runbooks_test_labelledcases",
+      "apps_ai_agent_tests_search_runbooks_test_repositoryrunbooks",
+      "apps_ai_agent_tests_search_runbooks_test_withrunbooks",
+      "apps_primary_backend_tests_seed_f01_case_test"
+    ],
     "22": [
-      "apps_ai_agent_src_clients_backend_backendclient",
-      "apps_ai_agent_src_clients_backend_backendclient_constructor",
-      "apps_ai_agent_src_clients_backend_backendclient_getexecutionevidence",
-      "apps_ai_agent_src_clients_backend_backendclient_getfailurecontext",
-      "apps_ai_agent_src_clients_backend_backendclient_read",
-      "apps_ai_agent_src_clients_backend_backendclient_scope",
-      "apps_ai_agent_src_clients_backend_backendclient_validateactioninputs",
-      "apps_ai_agent_src_clients_backend_backendreadtimeout",
-      "apps_ai_agent_src_clients_backend_backendresponseerror",
-      "apps_ai_agent_src_contracts_actioninputvalidationevidence",
-      "apps_ai_agent_src_contracts_executionevidence",
-      "apps_ai_agent_src_diagnosis_http_creatediagnosisrouter",
-      "apps_ai_agent_src_private_http",
-      "apps_ai_agent_src_private_http_bearer",
-      "apps_ai_agent_src_private_http_createprivatetoolsrouter",
-      "apps_ai_agent_src_runner_createinvestigationexecutor",
-      "apps_ai_agent_src_tools_execution_evidence",
-      "apps_ai_agent_src_tools_execution_evidence_backendexecutionevidencetool",
-      "apps_ai_agent_src_tools_execution_evidence_backendexecutionevidencetool_constructor",
-      "apps_ai_agent_src_tools_execution_evidence_backendexecutionevidencetool_get",
-      "apps_ai_agent_src_tools_execution_evidence_executionevidencebackend",
-      "apps_ai_agent_src_tools_failure_context_backendfailurecontexttool",
-      "apps_ai_agent_src_tools_failure_context_backendfailurecontexttool_constructor",
-      "apps_ai_agent_src_tools_failure_context_backendfailurecontexttool_get",
-      "apps_ai_agent_src_tools_validate_action_inputs",
-      "apps_ai_agent_src_tools_validate_action_inputs_backendvalidateactioninputstool",
-      "apps_ai_agent_src_tools_validate_action_inputs_backendvalidateactioninputstool_constructor",
-      "apps_ai_agent_src_tools_validate_action_inputs_backendvalidateactioninputstool_validate",
-      "apps_ai_agent_src_tools_validate_action_inputs_validationbackend",
-      "apps_ai_agent_tests_live_tools_4a_test",
-      "apps_ai_agent_tests_live_tools_4a_test_listen",
-      "apps_ai_agent_tests_live_tools_4a_test_scope",
-      "apps_ai_agent_tests_live_tools_4a_test_servers",
-      "apps_ai_agent_tests_live_tools_4b_test",
-      "apps_ai_agent_tests_live_tools_4b_test_getexecutionevidence",
-      "apps_ai_agent_tests_live_tools_4c_test",
-      "apps_ai_agent_tests_live_tools_4c_test_validateactioninputs"
+      "apps_frontend_package_dependencies",
+      "apps_frontend_package_dependencies_axios",
+      "apps_frontend_package_dependencies_class_variance_authority",
+      "apps_frontend_package_dependencies_clerk_nextjs",
+      "apps_frontend_package_dependencies_clsx",
+      "apps_frontend_package_dependencies_jwt_decode",
+      "apps_frontend_package_dependencies_lucide_react",
+      "apps_frontend_package_dependencies_motion",
+      "apps_frontend_package_dependencies_next",
+      "apps_frontend_package_dependencies_next_themes",
+      "apps_frontend_package_dependencies_radix_ui_react_avatar",
+      "apps_frontend_package_dependencies_radix_ui_react_dialog",
+      "apps_frontend_package_dependencies_radix_ui_react_dropdown_menu",
+      "apps_frontend_package_dependencies_radix_ui_react_label",
+      "apps_frontend_package_dependencies_radix_ui_react_slot",
+      "apps_frontend_package_dependencies_react",
+      "apps_frontend_package_dependencies_react_dom",
+      "apps_frontend_package_dependencies_sonner",
+      "apps_frontend_package_dependencies_tabler_icons_react",
+      "apps_frontend_package_dependencies_tailwind_merge",
+      "apps_frontend_package_dependencies_tanstack_react_table",
+      "apps_frontend_package_dependencies_types_axios",
+      "apps_frontend_package_dependencies_uuid",
+      "apps_frontend_package_dependencies_xyflow_react",
+      "apps_frontend_package_dependencies_zustand",
+      "apps_frontend_package_devdependencies",
+      "apps_frontend_package_devdependencies_eslint",
+      "apps_frontend_package_devdependencies_eslint_config_next",
+      "apps_frontend_package_devdependencies_tailwindcss",
+      "apps_frontend_package_devdependencies_tailwindcss_postcss",
+      "apps_frontend_package_devdependencies_tw_animate_css",
+      "apps_frontend_package_devdependencies_types_node",
+      "apps_frontend_package_devdependencies_types_react",
+      "apps_frontend_package_devdependencies_types_react_dom",
+      "apps_frontend_package_devdependencies_typescript"
     ],
     "23": [
       "apps_worker_dlq_publisher",
@@ -1634,41 +1638,6 @@
       "apps_worker_dlq_reconciler_test_row"
     ],
     "24": [
-      "apps_ai_agent_src_checkpoint",
-      "apps_ai_agent_src_checkpoint_agentdatabaseurl",
-      "apps_ai_agent_src_checkpoint_createcheckpoint",
-      "apps_ai_agent_src_checkpoint_migrateagent",
-      "apps_ai_agent_src_graph_diagnosisoptions",
-      "apps_ai_agent_src_index",
-      "apps_ai_agent_src_index_poll",
-      "apps_ai_agent_src_index_port",
-      "apps_ai_agent_src_index_shutdown",
-      "apps_ai_agent_src_investigation_store",
-      "apps_ai_agent_src_investigation_store_investigationbinding",
-      "apps_ai_agent_src_investigation_store_investigationstore",
-      "apps_ai_agent_src_investigation_store_investigationstore_applydecision",
-      "apps_ai_agent_src_investigation_store_investigationstore_claimnext",
-      "apps_ai_agent_src_investigation_store_investigationstore_constructor",
-      "apps_ai_agent_src_investigation_store_investigationstore_fail",
-      "apps_ai_agent_src_investigation_store_investigationstore_finish",
-      "apps_ai_agent_src_investigation_store_investigationstore_read",
-      "apps_ai_agent_src_investigation_store_investigationstore_start",
-      "apps_ai_agent_src_investigation_store_jobrow",
-      "apps_ai_agent_src_investigation_store_project",
-      "apps_ai_agent_src_investigation_store_startinvestigation",
-      "apps_ai_agent_src_migrate",
-      "apps_ai_agent_src_migrate_pool",
-      "apps_ai_agent_src_runner",
-      "apps_ai_agent_src_runner_claimedjob",
-      "apps_ai_agent_src_runner_runinvestigationonce",
-      "apps_ai_agent_src_runner_snapshot",
-      "apps_ai_agent_tests_investigation_store_test",
-      "apps_ai_agent_tests_investigation_store_test_caseid",
-      "apps_ai_agent_tests_runner_test",
-      "apps_ai_agent_tests_runner_test_job",
-      "ref_pg"
-    ],
-    "25": [
       "docs_ai_dlq_master_plan_1_current_ai_relevant_architecture",
       "docs_ai_dlq_master_plan_2_release_scope_and_workflow",
       "docs_ai_dlq_master_plan_3_boundaries_state_and_initial_contracts",
@@ -1702,38 +1671,7 @@
       "docs_ai_dlq_master_plan_support_operator_revision_impact",
       "docs_ai_dlq_master_plan_typed_state_and_output"
     ],
-    "26": [
-      "apps_ai_agent_src_clients_backend",
-      "apps_ai_agent_src_clients_backend_backendclientoptions",
-      "apps_ai_agent_src_contracts",
-      "apps_ai_agent_src_contracts_actioninputvalidationevidenceschema",
-      "apps_ai_agent_src_contracts_boundederror",
-      "apps_ai_agent_src_contracts_boundedname",
-      "apps_ai_agent_src_contracts_boundedsummary",
-      "apps_ai_agent_src_contracts_diagnosisschema",
-      "apps_ai_agent_src_contracts_evidenceref",
-      "apps_ai_agent_src_contracts_executionevidenceschema",
-      "apps_ai_agent_src_contracts_failurecontextevidenceschema",
-      "apps_ai_agent_src_contracts_fixtureid",
-      "apps_ai_agent_src_contracts_integrateddiagnosis",
-      "apps_ai_agent_src_contracts_integratedmodeloutput",
-      "apps_ai_agent_src_contracts_modelproposal",
-      "apps_ai_agent_src_contracts_modelusageschema",
-      "apps_ai_agent_src_contracts_previewresultschema",
-      "apps_ai_agent_src_contracts_proposaldisposition",
-      "apps_ai_agent_src_contracts_remediationproposalschema",
-      "apps_ai_agent_src_contracts_structuresummary",
-      "apps_ai_agent_src_contracts_taxonomyid",
-      "apps_ai_agent_src_contracts_uuid",
-      "apps_ai_agent_tests_contracts_phase4_test",
-      "apps_ai_agent_tests_contracts_phase4_test_fixture",
-      "apps_primary_backend_tests_triage_4b_test",
-      "apps_primary_backend_tests_triage_4b_test_owned",
-      "apps_primary_backend_tests_triage_4b_test_queueddb",
-      "apps_primary_backend_tests_triage_4c_test",
-      "apps_primary_backend_tests_triage_4c_test_row"
-    ],
-    "27": [
+    "25": [
       "apps_frontend_package",
       "apps_frontend_package_json_ref_clerk_nextjs",
       "apps_frontend_package_json_ref_eslint",
@@ -1761,10 +1699,9 @@
       "ref_tailwindcss_postcss",
       "ref_tanstack_react_table",
       "ref_tw_animate_css",
-      "ref_types_axios",
-      "ref_uuid"
+      "ref_types_axios"
     ],
-    "28": [
+    "26": [
       "apps_frontend_src_components_ui_avatar",
       "apps_frontend_src_components_ui_avatar_avatar",
       "apps_frontend_src_components_ui_avatar_avatarfallback",
@@ -1794,7 +1731,7 @@
       "apps_frontend_src_mycomponents_fieldpicker",
       "ref_radix_ui_react_avatar"
     ],
-    "29": [
+    "27": [
       "apps_worker_actions_index_getactionhandler",
       "apps_worker_execution_store_attemptowner",
       "apps_worker_idempotency_test",
@@ -1824,7 +1761,7 @@
       "apps_worker_orchestration_unresolved",
       "apps_worker_orchestration_zapevent"
     ],
-    "30": [
+    "28": [
       "packages_ui_package",
       "packages_ui_package_dependencies",
       "packages_ui_package_dependencies_react",
@@ -1854,7 +1791,93 @@
       "ref_repo_eslint_config",
       "ref_repo_typescript_config"
     ],
+    "29": [
+      "apps_ai_agent_src_contracts_diagnosismodel",
+      "apps_ai_agent_src_contracts_diagnosismodel_close",
+      "apps_ai_agent_src_contracts_diagnosismodel_diagnose",
+      "apps_ai_agent_src_demo",
+      "apps_ai_agent_src_fixture_model",
+      "apps_ai_agent_src_fixture_model_fixturediagnosismodel",
+      "apps_ai_agent_src_fixture_model_fixturediagnosismodel_close",
+      "apps_ai_agent_src_http_createhttpserver",
+      "apps_ai_agent_src_http_runninghttpserver",
+      "apps_ai_agent_src_index",
+      "apps_ai_agent_src_index_port",
+      "apps_ai_agent_src_index_shutdown",
+      "apps_ai_agent_src_paths",
+      "apps_ai_agent_src_paths_defaultfixturedirectory",
+      "apps_ai_agent_src_paths_defaultrunbookdirectory",
+      "apps_ai_agent_tests_diagnosis_http_test",
+      "apps_ai_agent_tests_diagnosis_http_test_backend",
+      "apps_ai_agent_tests_diagnosis_http_test_diagnosisserver",
+      "apps_ai_agent_tests_diagnosis_http_test_listen",
+      "apps_ai_agent_tests_diagnosis_http_test_model",
+      "apps_ai_agent_tests_diagnosis_http_test_scope",
+      "apps_ai_agent_tests_diagnosis_http_test_servers",
+      "apps_ai_agent_tests_http_test",
+      "apps_ai_agent_tests_http_test_start",
+      "apps_ai_agent_tests_test_model",
+      "apps_ai_agent_tests_test_model_taxonomyfixturemodel",
+      "apps_ai_agent_tests_test_model_taxonomyfixturemodel_close"
+    ],
+    "30": [
+      "apps_ai_agent_src_contracts_diagnosisprompt",
+      "apps_ai_agent_src_contracts_integrateddiagnosismodel",
+      "apps_ai_agent_src_contracts_integrateddiagnosismodel_close",
+      "apps_ai_agent_src_contracts_modelgeneration",
+      "apps_ai_agent_src_diagnosis_http",
+      "apps_ai_agent_src_diagnosis_http_bearer",
+      "apps_ai_agent_src_diagnosis_http_diagnosisrouteroptions",
+      "apps_ai_agent_src_diagnosis_http_emptydiagnosisrequestschema",
+      "apps_ai_agent_src_diagnosis_http_requiredoperations",
+      "apps_ai_agent_src_gemini_model",
+      "apps_ai_agent_src_gemini_model_boundedstring",
+      "apps_ai_agent_src_gemini_model_evidencereference",
+      "apps_ai_agent_src_gemini_model_fetchlike",
+      "apps_ai_agent_src_gemini_model_gemini_diagnosis_schema",
+      "apps_ai_agent_src_gemini_model_geminidiagnosismodel",
+      "apps_ai_agent_src_gemini_model_geminidiagnosismodel_close",
+      "apps_ai_agent_src_gemini_model_geminidiagnosismodel_constructor",
+      "apps_ai_agent_src_gemini_model_geminidiagnosismodel_generate",
+      "apps_ai_agent_src_gemini_model_geminidiagnosismodeloptions",
+      "apps_ai_agent_src_gemini_model_modelprovidererror",
+      "apps_ai_agent_src_gemini_model_providerresponseschema",
+      "apps_ai_agent_src_graph_graphsteplimitexceeded",
+      "apps_ai_agent_tests_gemini_model_test",
+      "apps_ai_agent_tests_gemini_model_test_completedresponse",
+      "apps_ai_agent_tests_gemini_model_test_modeloutput",
+      "apps_ai_agent_tests_gemini_model_test_prompt",
+      "ref_zod"
+    ],
     "31": [
+      "apps_frontend_src_app_auth_callback_page",
+      "apps_frontend_src_app_auth_callback_page_authcallback",
+      "apps_frontend_src_app_login_page",
+      "apps_frontend_src_app_login_page_login",
+      "apps_frontend_src_app_login_page_loginresponse",
+      "apps_frontend_src_app_page",
+      "apps_frontend_src_app_page_home",
+      "apps_frontend_src_app_signup_page",
+      "apps_frontend_src_app_signup_page_signup",
+      "apps_frontend_src_config",
+      "apps_frontend_src_config_backend_url",
+      "apps_frontend_src_config_hooks_url",
+      "apps_frontend_src_hooks_getuserdetails",
+      "apps_frontend_src_hooks_getuserdetails_getuserdetails",
+      "apps_frontend_src_mycomponents_appbar_appbar",
+      "apps_frontend_src_mycomponents_buttons_primarybutton",
+      "apps_frontend_src_mycomponents_buttons_primarybutton_primarybutton",
+      "apps_frontend_src_mycomponents_checkfeature",
+      "apps_frontend_src_mycomponents_checkfeature_checkfeature",
+      "apps_frontend_src_mycomponents_checkfeature_checkmark",
+      "apps_frontend_src_mycomponents_hero_hero",
+      "apps_frontend_src_mycomponents_herovideo",
+      "apps_frontend_src_mycomponents_herovideo_herovideo",
+      "apps_frontend_src_mycomponents_input",
+      "apps_frontend_src_mycomponents_input_input",
+      "ref_axios"
+    ],
+    "32": [
       "packages_db_generated_prisma_internal_prismanamespacebrowser",
       "packages_db_generated_prisma_internal_prismanamespacebrowser_actionscalarfieldenum",
       "packages_db_generated_prisma_internal_prismanamespacebrowser_anynull",
@@ -1882,119 +1905,38 @@
       "packages_db_generated_prisma_internal_prismanamespacebrowser_zapscalarfieldenum",
       "packages_db_generated_prisma_models"
     ],
-    "32": [
-      "apps_frontend_package_dependencies",
-      "apps_frontend_package_dependencies_axios",
-      "apps_frontend_package_dependencies_class_variance_authority",
-      "apps_frontend_package_dependencies_clerk_nextjs",
-      "apps_frontend_package_dependencies_clsx",
-      "apps_frontend_package_dependencies_jwt_decode",
-      "apps_frontend_package_dependencies_lucide_react",
-      "apps_frontend_package_dependencies_motion",
-      "apps_frontend_package_dependencies_next",
-      "apps_frontend_package_dependencies_next_themes",
-      "apps_frontend_package_dependencies_radix_ui_react_avatar",
-      "apps_frontend_package_dependencies_radix_ui_react_dialog",
-      "apps_frontend_package_dependencies_radix_ui_react_dropdown_menu",
-      "apps_frontend_package_dependencies_radix_ui_react_label",
-      "apps_frontend_package_dependencies_radix_ui_react_slot",
-      "apps_frontend_package_dependencies_react",
-      "apps_frontend_package_dependencies_react_dom",
-      "apps_frontend_package_dependencies_sonner",
-      "apps_frontend_package_dependencies_tabler_icons_react",
-      "apps_frontend_package_dependencies_tailwind_merge",
-      "apps_frontend_package_dependencies_tanstack_react_table",
-      "apps_frontend_package_dependencies_types_axios",
-      "apps_frontend_package_dependencies_uuid",
-      "apps_frontend_package_dependencies_xyflow_react",
-      "apps_frontend_package_dependencies_zustand"
-    ],
     "33": [
-      "apps_primary_backend_services_investigation_proposals",
-      "apps_primary_backend_services_investigation_proposals_database",
-      "apps_primary_backend_services_investigation_proposals_evaluatesnapshotpolicy",
-      "apps_primary_backend_services_investigation_proposals_hash",
-      "apps_primary_backend_services_investigation_proposals_policyrecord",
-      "apps_primary_backend_services_investigation_proposals_submission",
-      "apps_primary_backend_services_replay_policy",
-      "apps_primary_backend_services_replay_policy_evaluatereplaypolicy",
-      "apps_primary_backend_services_replay_policy_facts",
-      "apps_primary_backend_services_replay_policy_facts_buildreplaypolicyfacts",
-      "apps_primary_backend_services_replay_policy_facts_configurationrow",
-      "apps_primary_backend_services_replay_policy_facts_currentconfiguration",
-      "apps_primary_backend_services_replay_policy_facts_parsepolicyevidence",
-      "apps_primary_backend_services_replay_policy_facts_policyevidence",
-      "apps_primary_backend_services_replay_policy_facts_revalidateproposalpolicy",
-      "apps_primary_backend_services_replay_policy_replaypolicyfacts",
-      "apps_primary_backend_services_replay_policy_replaypolicyresult",
-      "apps_primary_backend_tests_replay_policy_facts_test",
-      "apps_primary_backend_tests_replay_policy_facts_test_config",
-      "apps_primary_backend_tests_replay_policy_facts_test_current",
-      "apps_primary_backend_tests_replay_policy_facts_test_hash",
-      "apps_primary_backend_tests_replay_policy_facts_test_saved",
-      "apps_primary_backend_tests_replay_policy_facts_test_source",
-      "apps_primary_backend_tests_replay_policy_test",
-      "apps_primary_backend_tests_replay_policy_test_eligible"
+      "apps_ai_agent_src_contracts",
+      "apps_ai_agent_src_contracts_actioninputvalidationevidenceschema",
+      "apps_ai_agent_src_contracts_boundederror",
+      "apps_ai_agent_src_contracts_boundedname",
+      "apps_ai_agent_src_contracts_boundedsummary",
+      "apps_ai_agent_src_contracts_diagnosisschema",
+      "apps_ai_agent_src_contracts_evidenceref",
+      "apps_ai_agent_src_contracts_executionevidenceschema",
+      "apps_ai_agent_src_contracts_failurecontextevidenceschema",
+      "apps_ai_agent_src_contracts_fixtureid",
+      "apps_ai_agent_src_contracts_integrateddiagnosis",
+      "apps_ai_agent_src_contracts_integratedmodeloutput",
+      "apps_ai_agent_src_contracts_integratedmodeloutputschema",
+      "apps_ai_agent_src_contracts_modelproposal",
+      "apps_ai_agent_src_contracts_modelusage",
+      "apps_ai_agent_src_contracts_modelusageschema",
+      "apps_ai_agent_src_contracts_previewresult",
+      "apps_ai_agent_src_contracts_previewresultschema",
+      "apps_ai_agent_src_contracts_proposaldisposition",
+      "apps_ai_agent_src_contracts_remediationproposalschema",
+      "apps_ai_agent_src_contracts_structuresummary",
+      "apps_ai_agent_src_contracts_taxonomyid",
+      "apps_ai_agent_src_contracts_uuid",
+      "apps_ai_agent_tests_contracts_phase4_test",
+      "apps_ai_agent_tests_contracts_phase4_test_fixture"
     ],
     "34": [
-      "packages_db_generated_prisma_client",
-      "packages_db_generated_prisma_client_action",
-      "packages_db_generated_prisma_client_availableaction",
-      "packages_db_generated_prisma_client_availabletriggertype",
-      "packages_db_generated_prisma_client_enums",
-      "packages_db_generated_prisma_client_prismaclient",
-      "packages_db_generated_prisma_client_testtriggerbuffer",
-      "packages_db_generated_prisma_client_trigger",
-      "packages_db_generated_prisma_client_user",
-      "packages_db_generated_prisma_client_zap",
-      "packages_db_generated_prisma_client_zaprun",
-      "packages_db_generated_prisma_client_zaprunexecution",
-      "packages_db_generated_prisma_client_zaprunexecutionattempt",
-      "packages_db_generated_prisma_client_zaprunoutbox",
-      "packages_db_generated_prisma_client_zaprunretry",
-      "packages_db_prisma_durable_failures_schema_test",
-      "packages_db_prisma_durable_failures_schema_test_assertfield",
-      "packages_db_prisma_durable_failures_schema_test_attempt",
-      "packages_db_prisma_durable_failures_schema_test_attemptfields",
-      "packages_db_prisma_durable_failures_schema_test_dlqmigrationpath",
-      "packages_db_prisma_durable_failures_schema_test_field",
-      "packages_db_prisma_durable_failures_schema_test_generatedclient",
-      "packages_db_prisma_durable_failures_schema_test_migrationpath",
-      "packages_db_prisma_durable_failures_schema_test_model",
-      "packages_db_prisma_durable_failures_schema_test_runtimemodels"
-    ],
-    "35": [
-      "apps_primary_backend_services_replay_policy_facts_loadcurrentpolicystate",
-      "apps_primary_backend_services_triage_evidence",
-      "apps_primary_backend_services_triage_evidence_actionorderrow",
-      "apps_primary_backend_services_triage_evidence_canonical",
-      "apps_primary_backend_services_triage_evidence_executionattemptrow",
-      "apps_primary_backend_services_triage_evidence_hash",
-      "apps_primary_backend_services_triage_evidence_ownedcaserow",
-      "apps_primary_backend_services_triage_evidence_predecessorrow",
-      "apps_primary_backend_services_triage_evidence_sourcekind",
-      "apps_primary_backend_services_triage_evidence_triagecasenotfound",
-      "apps_primary_backend_services_triage_evidence_triageevidenceservice",
-      "apps_primary_backend_services_triage_evidence_triageevidenceservice_assertownedcase",
-      "apps_primary_backend_services_triage_evidence_triageevidenceservice_constructor",
-      "apps_primary_backend_services_triage_evidence_triageevidenceservice_getexecutionevidence",
-      "apps_primary_backend_services_triage_evidence_triageevidenceservice_getfailurecontext",
-      "apps_primary_backend_services_triage_evidence_triageevidenceservice_listcases",
-      "apps_primary_backend_services_triage_evidence_triageevidenceservice_ownedrows",
-      "apps_primary_backend_services_triage_evidence_triageevidenceservice_validateactioninputs",
-      "apps_primary_backend_services_triage_redaction",
-      "apps_primary_backend_services_triage_redaction_redactevidence",
-      "apps_primary_backend_services_triage_redaction_redactstring",
-      "apps_primary_backend_services_triage_redaction_summarizestructure",
-      "apps_primary_backend_services_triage_redaction_valuetype",
-      "apps_primary_backend_tests_triage_4a_test"
-    ],
-    "36": [
       "apps_worker_execution_store",
       "apps_worker_execution_store_canonicaljson",
       "apps_worker_execution_store_claimdecision",
       "apps_worker_execution_store_createexecutionstore",
-      "apps_worker_execution_store_createfingerprints",
       "apps_worker_execution_store_delegate",
       "apps_worker_execution_store_durablefailureevidence",
       "apps_worker_execution_store_executiondb",
@@ -2015,31 +1957,101 @@
       "apps_worker_types_actionresult",
       "apps_worker_types_provideroutcome"
     ],
+    "35": [
+      "apps_primary_backend_services_investigation_proposals",
+      "apps_primary_backend_services_investigation_proposals_database",
+      "apps_primary_backend_services_investigation_proposals_evaluatesnapshotpolicy",
+      "apps_primary_backend_services_investigation_proposals_hash",
+      "apps_primary_backend_services_investigation_proposals_policyrecord",
+      "apps_primary_backend_services_investigation_proposals_submission",
+      "apps_primary_backend_services_replay_policy",
+      "apps_primary_backend_services_replay_policy_evaluatereplaypolicy",
+      "apps_primary_backend_services_replay_policy_facts",
+      "apps_primary_backend_services_replay_policy_facts_configurationrow",
+      "apps_primary_backend_services_replay_policy_facts_currentconfiguration",
+      "apps_primary_backend_services_replay_policy_facts_loadcurrentpolicystate",
+      "apps_primary_backend_services_replay_policy_facts_parsepolicyevidence",
+      "apps_primary_backend_services_replay_policy_facts_policyevidence",
+      "apps_primary_backend_services_replay_policy_facts_revalidateproposalpolicy",
+      "apps_primary_backend_services_replay_policy_replaypolicyfacts",
+      "apps_primary_backend_services_replay_policy_replaypolicyresult",
+      "apps_primary_backend_tests_replay_db_integration_test",
+      "apps_primary_backend_tests_replay_db_integration_test_setup",
+      "apps_primary_backend_tests_replay_policy_test",
+      "apps_primary_backend_tests_replay_policy_test_eligible",
+      "apps_worker_execution_store_createfingerprints"
+    ],
+    "36": [
+      "apps_primary_backend_tests_seed_f01_case",
+      "apps_primary_backend_tests_seed_f01_case_assertlocaldatabase",
+      "apps_primary_backend_tests_seed_f01_case_f01_case_id",
+      "apps_primary_backend_tests_seed_f01_case_failedcompletedat",
+      "apps_primary_backend_tests_seed_f01_case_failedstartedat",
+      "apps_primary_backend_tests_seed_f01_case_predecessorcompletedat",
+      "apps_primary_backend_tests_seed_f01_case_predecessormetadata",
+      "apps_primary_backend_tests_seed_f01_case_runmetadata",
+      "apps_primary_backend_tests_seed_f01_case_seedf01case",
+      "apps_primary_backend_tests_seed_f01_case_telegrammetadata",
+      "apps_worker_actions_index",
+      "apps_worker_actions_index_actionregistry",
+      "apps_worker_types_actionhandler",
+      "apps_worker_validation",
+      "apps_worker_validation_canonical",
+      "apps_worker_validation_fields",
+      "apps_worker_validation_haspath",
+      "apps_worker_validation_templatepaths",
+      "apps_worker_validation_test",
+      "apps_worker_validation_validateactioninputs",
+      "apps_worker_validation_validationdependencies",
+      "apps_worker_validation_validationinput"
+    ],
     "37": [
-      "apps_frontend_src_app_page",
-      "apps_frontend_src_app_page_home",
-      "apps_frontend_src_components_ui_dialog",
-      "apps_frontend_src_components_ui_dialog_dialogclose",
-      "apps_frontend_src_components_ui_dialog_dialogdescription",
-      "apps_frontend_src_components_ui_dialog_dialogfooter",
-      "apps_frontend_src_components_ui_dialog_dialogheader",
-      "apps_frontend_src_components_ui_dialog_dialogoverlay",
-      "apps_frontend_src_components_ui_dialog_dialogportal",
-      "apps_frontend_src_components_ui_dialog_dialogtitle",
-      "apps_frontend_src_components_ui_dialog_dialogtrigger",
-      "apps_frontend_src_mycomponents_appbar_appbar",
-      "apps_frontend_src_mycomponents_buttons_secondarybutton",
-      "apps_frontend_src_mycomponents_buttons_secondarybutton_secondarybutton",
-      "apps_frontend_src_mycomponents_featurecomponent",
-      "apps_frontend_src_mycomponents_featurecomponent_check",
-      "apps_frontend_src_mycomponents_featurecomponent_featurecomponent",
-      "apps_frontend_src_mycomponents_hero",
-      "apps_frontend_src_mycomponents_hero_hero",
-      "apps_frontend_src_mycomponents_herovideo",
-      "apps_frontend_src_mycomponents_herovideo_herovideo",
-      "ref_radix_ui_react_dialog"
+      "apps_ai_agent_src_graph_diagnosisoptions",
+      "apps_ai_agent_src_index_poll",
+      "apps_ai_agent_src_investigation_store",
+      "apps_ai_agent_src_investigation_store_investigationbinding",
+      "apps_ai_agent_src_investigation_store_investigationstore",
+      "apps_ai_agent_src_investigation_store_investigationstore_applydecision",
+      "apps_ai_agent_src_investigation_store_investigationstore_claimnext",
+      "apps_ai_agent_src_investigation_store_investigationstore_constructor",
+      "apps_ai_agent_src_investigation_store_investigationstore_fail",
+      "apps_ai_agent_src_investigation_store_investigationstore_finish",
+      "apps_ai_agent_src_investigation_store_investigationstore_read",
+      "apps_ai_agent_src_investigation_store_investigationstore_start",
+      "apps_ai_agent_src_investigation_store_jobrow",
+      "apps_ai_agent_src_investigation_store_project",
+      "apps_ai_agent_src_investigation_store_startinvestigation",
+      "apps_ai_agent_src_runner",
+      "apps_ai_agent_src_runner_claimedjob",
+      "apps_ai_agent_src_runner_runinvestigationonce",
+      "apps_ai_agent_src_runner_snapshot",
+      "apps_ai_agent_tests_runner_test",
+      "apps_ai_agent_tests_runner_test_job"
     ],
     "38": [
+      "apps_primary_backend_index",
+      "apps_primary_backend_index_agent",
+      "apps_primary_backend_index_app",
+      "apps_primary_backend_route_action",
+      "apps_primary_backend_route_action_actionrouter",
+      "apps_primary_backend_route_action_router",
+      "apps_primary_backend_route_trigger",
+      "apps_primary_backend_route_trigger_router",
+      "apps_primary_backend_route_trigger_triggerrouter",
+      "apps_primary_backend_route_zap",
+      "apps_primary_backend_route_zap_router",
+      "apps_primary_backend_route_zap_zaprouter",
+      "apps_processor_index",
+      "apps_processor_index_kafka",
+      "apps_processor_index_main",
+      "apps_webhook_index",
+      "apps_webhook_index_app",
+      "packages_db_prisma_db",
+      "packages_db_prisma_db_prisma",
+      "ref_cors",
+      "ref_kafkajs"
+    ],
+    "39": [
       "packages_db_generated_prisma_internal_class_prismaclient",
       "packages_db_generated_prisma_internal_class_prismaclient_action",
       "packages_db_generated_prisma_internal_class_prismaclient_availableaction",
@@ -2061,28 +2073,6 @@
       "packages_db_generated_prisma_internal_class_prismaclient_zaprunexecutionattempt",
       "packages_db_generated_prisma_internal_class_prismaclient_zaprunoutbox",
       "packages_db_generated_prisma_internal_class_prismaclient_zaprunretry"
-    ],
-    "39": [
-      "apps_ai_agent_src_contracts_diagnosisprompt",
-      "apps_ai_agent_src_contracts_integrateddiagnosismodel",
-      "apps_ai_agent_src_contracts_integrateddiagnosismodel_close",
-      "apps_ai_agent_src_contracts_modelgeneration",
-      "apps_ai_agent_src_gemini_model",
-      "apps_ai_agent_src_gemini_model_boundedstring",
-      "apps_ai_agent_src_gemini_model_evidencereference",
-      "apps_ai_agent_src_gemini_model_fetchlike",
-      "apps_ai_agent_src_gemini_model_gemini_diagnosis_schema",
-      "apps_ai_agent_src_gemini_model_geminidiagnosismodel",
-      "apps_ai_agent_src_gemini_model_geminidiagnosismodel_close",
-      "apps_ai_agent_src_gemini_model_geminidiagnosismodel_constructor",
-      "apps_ai_agent_src_gemini_model_geminidiagnosismodel_generate",
-      "apps_ai_agent_src_gemini_model_geminidiagnosismodeloptions",
-      "apps_ai_agent_src_gemini_model_modelprovidererror",
-      "apps_ai_agent_src_gemini_model_providerresponseschema",
-      "apps_ai_agent_tests_gemini_model_test",
-      "apps_ai_agent_tests_gemini_model_test_completedresponse",
-      "apps_ai_agent_tests_gemini_model_test_modeloutput",
-      "apps_ai_agent_tests_gemini_model_test_prompt"
     ],
     "40": [
       "apps_ai_agent_src_contracts_integrateddiagnosisresult",
@@ -2107,28 +2097,6 @@
       "apps_ai_agent_tests_diagnosis_checks_test_result"
     ],
     "41": [
-      "apps_ai_agent_src_tools_search_runbooks",
-      "apps_ai_agent_src_tools_search_runbooks_allowedfiles",
-      "apps_ai_agent_src_tools_search_runbooks_commaseparated",
-      "apps_ai_agent_src_tools_search_runbooks_ignoredterms",
-      "apps_ai_agent_src_tools_search_runbooks_indexedsection",
-      "apps_ai_agent_src_tools_search_runbooks_intersects",
-      "apps_ai_agent_src_tools_search_runbooks_loadrunbooks",
-      "apps_ai_agent_src_tools_search_runbooks_normalizedfilters",
-      "apps_ai_agent_src_tools_search_runbooks_parsemetadata",
-      "apps_ai_agent_src_tools_search_runbooks_parserunbook",
-      "apps_ai_agent_src_tools_search_runbooks_runbookindex",
-      "apps_ai_agent_src_tools_search_runbooks_runbookmetadata",
-      "apps_ai_agent_src_tools_search_runbooks_searchrunbooks",
-      "apps_ai_agent_src_tools_search_runbooks_sectionid",
-      "apps_ai_agent_src_tools_search_runbooks_terms",
-      "apps_ai_agent_tests_search_runbooks_test",
-      "apps_ai_agent_tests_search_runbooks_test_document",
-      "apps_ai_agent_tests_search_runbooks_test_labelledcases",
-      "apps_ai_agent_tests_search_runbooks_test_repositoryrunbooks",
-      "apps_ai_agent_tests_search_runbooks_test_withrunbooks"
-    ],
-    "42": [
       "apps_frontend_components",
       "apps_frontend_components_aliases",
       "apps_frontend_components_aliases_components",
@@ -2150,29 +2118,7 @@
       "apps_frontend_components_tailwind_prefix",
       "apps_frontend_components_tsx"
     ],
-    "43": [
-      "apps_frontend_src_app_auth_callback_page",
-      "apps_frontend_src_app_auth_callback_page_authcallback",
-      "apps_frontend_src_app_login_page",
-      "apps_frontend_src_app_login_page_login",
-      "apps_frontend_src_app_login_page_loginresponse",
-      "apps_frontend_src_app_signup_page",
-      "apps_frontend_src_app_signup_page_signup",
-      "apps_frontend_src_config",
-      "apps_frontend_src_config_backend_url",
-      "apps_frontend_src_config_hooks_url",
-      "apps_frontend_src_hooks_getuserdetails",
-      "apps_frontend_src_hooks_getuserdetails_getuserdetails",
-      "apps_frontend_src_mycomponents_buttons_primarybutton",
-      "apps_frontend_src_mycomponents_buttons_primarybutton_primarybutton",
-      "apps_frontend_src_mycomponents_checkfeature",
-      "apps_frontend_src_mycomponents_checkfeature_checkfeature",
-      "apps_frontend_src_mycomponents_checkfeature_checkmark",
-      "apps_frontend_src_mycomponents_input",
-      "apps_frontend_src_mycomponents_input_input",
-      "ref_axios"
-    ],
-    "44": [
+    "42": [
       "apps_frontend_src_app_triage_page_triagepage",
       "apps_frontend_src_app_triage_triageresults",
       "apps_frontend_src_app_triage_triageresults_detaillist",
@@ -2194,7 +2140,7 @@
       "apps_frontend_src_types_triage_triagediagnosis",
       "apps_frontend_src_types_triage_triagedisplaystate"
     ],
-    "45": [
+    "43": [
       "apps_primary_backend_services_triage_operator",
       "apps_primary_backend_services_triage_operator_accessaction",
       "apps_primary_backend_services_triage_operator_caserow",
@@ -2216,7 +2162,7 @@
       "apps_primary_backend_tests_triage_operator_test",
       "apps_primary_backend_tests_triage_operator_test_database"
     ],
-    "46": [
+    "44": [
       "apps_primary_backend_tsconfig",
       "apps_primary_backend_tsconfig_compileroptions",
       "apps_primary_backend_tsconfig_compileroptions_allowimportingtsextensions",
@@ -2238,7 +2184,7 @@
       "apps_primary_backend_tsconfig_compileroptions_target",
       "apps_primary_backend_tsconfig_compileroptions_verbatimmodulesyntax"
     ],
-    "47": [
+    "45": [
       "apps_processor_tsconfig",
       "apps_processor_tsconfig_compileroptions",
       "apps_processor_tsconfig_compileroptions_allowimportingtsextensions",
@@ -2260,7 +2206,7 @@
       "apps_processor_tsconfig_compileroptions_target",
       "apps_processor_tsconfig_compileroptions_verbatimmodulesyntax"
     ],
-    "48": [
+    "46": [
       "apps_webhook_tsconfig",
       "apps_webhook_tsconfig_compileroptions",
       "apps_webhook_tsconfig_compileroptions_allowimportingtsextensions",
@@ -2282,7 +2228,7 @@
       "apps_webhook_tsconfig_compileroptions_target",
       "apps_webhook_tsconfig_compileroptions_verbatimmodulesyntax"
     ],
-    "49": [
+    "47": [
       "apps_worker_actions_telegram",
       "apps_worker_actions_telegram_boundedpositiveinteger",
       "apps_worker_actions_telegram_defaultfetch",
@@ -2304,7 +2250,7 @@
       "apps_worker_types_actionexecutionerror",
       "apps_worker_types_actionexecutionerror_constructor"
     ],
-    "50": [
+    "48": [
       "apps_worker_tsconfig",
       "apps_worker_tsconfig_compileroptions",
       "apps_worker_tsconfig_compileroptions_allowimportingtsextensions",
@@ -2326,7 +2272,28 @@
       "apps_worker_tsconfig_compileroptions_target",
       "apps_worker_tsconfig_compileroptions_verbatimmodulesyntax"
     ],
-    "51": [
+    "49": [
+      "apps_frontend_src_components_ui_dialog",
+      "apps_frontend_src_components_ui_dialog_dialog",
+      "apps_frontend_src_components_ui_dialog_dialogclose",
+      "apps_frontend_src_components_ui_dialog_dialogcontent",
+      "apps_frontend_src_components_ui_dialog_dialogdescription",
+      "apps_frontend_src_components_ui_dialog_dialogfooter",
+      "apps_frontend_src_components_ui_dialog_dialogheader",
+      "apps_frontend_src_components_ui_dialog_dialogoverlay",
+      "apps_frontend_src_components_ui_dialog_dialogportal",
+      "apps_frontend_src_components_ui_dialog_dialogtitle",
+      "apps_frontend_src_components_ui_dialog_dialogtrigger",
+      "apps_frontend_src_mycomponents_app_mvpdialog",
+      "apps_frontend_src_mycomponents_buttons_secondarybutton",
+      "apps_frontend_src_mycomponents_buttons_secondarybutton_secondarybutton",
+      "apps_frontend_src_mycomponents_featurecomponent",
+      "apps_frontend_src_mycomponents_featurecomponent_check",
+      "apps_frontend_src_mycomponents_featurecomponent_featurecomponent",
+      "apps_frontend_src_mycomponents_hero",
+      "ref_radix_ui_react_dialog"
+    ],
+    "50": [
       "apps_frontend_tsconfig",
       "apps_frontend_tsconfig_compileroptions",
       "apps_frontend_tsconfig_compileroptions_allowjs",
@@ -2347,7 +2314,47 @@
       "apps_frontend_tsconfig_exclude",
       "apps_frontend_tsconfig_include"
     ],
+    "51": [
+      "apps_ai_agent_src_contracts_evidence",
+      "apps_ai_agent_src_contracts_evidenceschema",
+      "apps_ai_agent_src_fixture_model_fixturediagnosismodel_diagnose",
+      "apps_ai_agent_src_graph_buildpreviewservice",
+      "apps_ai_agent_src_graph_failurecontextreader",
+      "apps_ai_agent_src_graph_failurecontextreader_get",
+      "apps_ai_agent_src_graph_toolbudgetexceeded",
+      "apps_ai_agent_src_tools_failure_context",
+      "apps_ai_agent_src_tools_failure_context_fixturefailurecontexttool",
+      "apps_ai_agent_src_tools_failure_context_fixturefailurecontexttool_constructor",
+      "apps_ai_agent_src_tools_failure_context_fixturefailurecontexttool_get",
+      "apps_ai_agent_src_tools_failure_context_fixturefiles",
+      "apps_ai_agent_src_tools_failure_context_fixtureidentitymismatch",
+      "apps_ai_agent_src_tools_failure_context_fixturenotfound",
+      "apps_ai_agent_tests_graph_test",
+      "apps_ai_agent_tests_graph_test_fixtures",
+      "apps_ai_agent_tests_graph_test_get",
+      "apps_ai_agent_tests_graph_test_service"
+    ],
     "52": [
+      "apps_primary_backend_services_triage_evidence",
+      "apps_primary_backend_services_triage_evidence_actionorderrow",
+      "apps_primary_backend_services_triage_evidence_canonical",
+      "apps_primary_backend_services_triage_evidence_executionattemptrow",
+      "apps_primary_backend_services_triage_evidence_hash",
+      "apps_primary_backend_services_triage_evidence_ownedcaserow",
+      "apps_primary_backend_services_triage_evidence_predecessorrow",
+      "apps_primary_backend_services_triage_evidence_triageevidencedb",
+      "apps_primary_backend_services_triage_redaction",
+      "apps_primary_backend_services_triage_redaction_redactevidence",
+      "apps_primary_backend_services_triage_redaction_redactstring",
+      "apps_primary_backend_services_triage_redaction_summarizestructure",
+      "apps_primary_backend_services_triage_redaction_valuetype",
+      "apps_primary_backend_tests_triage_4b_test",
+      "apps_primary_backend_tests_triage_4b_test_owned",
+      "apps_primary_backend_tests_triage_4b_test_queueddb",
+      "apps_primary_backend_tests_triage_4c_test",
+      "apps_primary_backend_tests_triage_4c_test_row"
+    ],
+    "53": [
       "packages_db_generated_prisma_models_action_actiondelegate",
       "packages_db_generated_prisma_models_action_actiondelegate_aggregate",
       "packages_db_generated_prisma_models_action_actiondelegate_count",
@@ -2367,7 +2374,7 @@
       "packages_db_generated_prisma_models_action_actiondelegate_updatemanyandreturn",
       "packages_db_generated_prisma_models_action_actiondelegate_upsert"
     ],
-    "53": [
+    "54": [
       "packages_db_generated_prisma_models_availableaction_availableactiondelegate",
       "packages_db_generated_prisma_models_availableaction_availableactiondelegate_aggregate",
       "packages_db_generated_prisma_models_availableaction_availableactiondelegate_count",
@@ -2387,7 +2394,7 @@
       "packages_db_generated_prisma_models_availableaction_availableactiondelegate_updatemanyandreturn",
       "packages_db_generated_prisma_models_availableaction_availableactiondelegate_upsert"
     ],
-    "54": [
+    "55": [
       "packages_db_generated_prisma_models_availabletriggertype_availabletriggertypedelegate",
       "packages_db_generated_prisma_models_availabletriggertype_availabletriggertypedelegate_aggregate",
       "packages_db_generated_prisma_models_availabletriggertype_availabletriggertypedelegate_count",
@@ -2407,7 +2414,7 @@
       "packages_db_generated_prisma_models_availabletriggertype_availabletriggertypedelegate_updatemanyandreturn",
       "packages_db_generated_prisma_models_availabletriggertype_availabletriggertypedelegate_upsert"
     ],
-    "55": [
+    "56": [
       "packages_db_generated_prisma_models_testtriggerbuffer_testtriggerbufferdelegate",
       "packages_db_generated_prisma_models_testtriggerbuffer_testtriggerbufferdelegate_aggregate",
       "packages_db_generated_prisma_models_testtriggerbuffer_testtriggerbufferdelegate_count",
@@ -2427,7 +2434,7 @@
       "packages_db_generated_prisma_models_testtriggerbuffer_testtriggerbufferdelegate_updatemanyandreturn",
       "packages_db_generated_prisma_models_testtriggerbuffer_testtriggerbufferdelegate_upsert"
     ],
-    "56": [
+    "57": [
       "packages_db_generated_prisma_models_trigger_triggerdelegate",
       "packages_db_generated_prisma_models_trigger_triggerdelegate_aggregate",
       "packages_db_generated_prisma_models_trigger_triggerdelegate_count",
@@ -2447,7 +2454,7 @@
       "packages_db_generated_prisma_models_trigger_triggerdelegate_updatemanyandreturn",
       "packages_db_generated_prisma_models_trigger_triggerdelegate_upsert"
     ],
-    "57": [
+    "58": [
       "packages_db_generated_prisma_models_user_userdelegate",
       "packages_db_generated_prisma_models_user_userdelegate_aggregate",
       "packages_db_generated_prisma_models_user_userdelegate_count",
@@ -2467,7 +2474,7 @@
       "packages_db_generated_prisma_models_user_userdelegate_updatemanyandreturn",
       "packages_db_generated_prisma_models_user_userdelegate_upsert"
     ],
-    "58": [
+    "59": [
       "packages_db_generated_prisma_models_zap_zapdelegate",
       "packages_db_generated_prisma_models_zap_zapdelegate_aggregate",
       "packages_db_generated_prisma_models_zap_zapdelegate_count",
@@ -2487,7 +2494,7 @@
       "packages_db_generated_prisma_models_zap_zapdelegate_updatemanyandreturn",
       "packages_db_generated_prisma_models_zap_zapdelegate_upsert"
     ],
-    "59": [
+    "60": [
       "packages_db_generated_prisma_models_zaprun_zaprundelegate",
       "packages_db_generated_prisma_models_zaprun_zaprundelegate_aggregate",
       "packages_db_generated_prisma_models_zaprun_zaprundelegate_count",
@@ -2507,7 +2514,7 @@
       "packages_db_generated_prisma_models_zaprun_zaprundelegate_updatemanyandreturn",
       "packages_db_generated_prisma_models_zaprun_zaprundelegate_upsert"
     ],
-    "60": [
+    "61": [
       "packages_db_generated_prisma_models_zaprunexecution_zaprunexecutiondelegate",
       "packages_db_generated_prisma_models_zaprunexecution_zaprunexecutiondelegate_aggregate",
       "packages_db_generated_prisma_models_zaprunexecution_zaprunexecutiondelegate_count",
@@ -2527,7 +2534,7 @@
       "packages_db_generated_prisma_models_zaprunexecution_zaprunexecutiondelegate_updatemanyandreturn",
       "packages_db_generated_prisma_models_zaprunexecution_zaprunexecutiondelegate_upsert"
     ],
-    "61": [
+    "62": [
       "packages_db_generated_prisma_models_zaprunexecutionattempt_zaprunexecutionattemptdelegate",
       "packages_db_generated_prisma_models_zaprunexecutionattempt_zaprunexecutionattemptdelegate_aggregate",
       "packages_db_generated_prisma_models_zaprunexecutionattempt_zaprunexecutionattemptdelegate_count",
@@ -2547,7 +2554,7 @@
       "packages_db_generated_prisma_models_zaprunexecutionattempt_zaprunexecutionattemptdelegate_updatemanyandreturn",
       "packages_db_generated_prisma_models_zaprunexecutionattempt_zaprunexecutionattemptdelegate_upsert"
     ],
-    "62": [
+    "63": [
       "packages_db_generated_prisma_models_zaprunoutbox_zaprunoutboxdelegate",
       "packages_db_generated_prisma_models_zaprunoutbox_zaprunoutboxdelegate_aggregate",
       "packages_db_generated_prisma_models_zaprunoutbox_zaprunoutboxdelegate_count",
@@ -2567,7 +2574,7 @@
       "packages_db_generated_prisma_models_zaprunoutbox_zaprunoutboxdelegate_updatemanyandreturn",
       "packages_db_generated_prisma_models_zaprunoutbox_zaprunoutboxdelegate_upsert"
     ],
-    "63": [
+    "64": [
       "packages_db_generated_prisma_models_zaprunretry_zaprunretrydelegate",
       "packages_db_generated_prisma_models_zaprunretry_zaprunretrydelegate_aggregate",
       "packages_db_generated_prisma_models_zaprunretry_zaprunretrydelegate_count",
@@ -2586,25 +2593,6 @@
       "packages_db_generated_prisma_models_zaprunretry_zaprunretrydelegate_updatemany",
       "packages_db_generated_prisma_models_zaprunretry_zaprunretrydelegate_updatemanyandreturn",
       "packages_db_generated_prisma_models_zaprunretry_zaprunretrydelegate_upsert"
-    ],
-    "64": [
-      "apps_ai_agent_src_contracts_modelusage",
-      "apps_ai_agent_src_observability",
-      "apps_ai_agent_src_observability_createlangfuseexporter",
-      "apps_ai_agent_src_observability_errortype",
-      "apps_ai_agent_src_observability_fetchlike",
-      "apps_ai_agent_src_observability_investigationtrace",
-      "apps_ai_agent_src_observability_investigationtracer",
-      "apps_ai_agent_src_observability_investigationtracer_constructor",
-      "apps_ai_agent_src_observability_investigationtracer_finish",
-      "apps_ai_agent_src_observability_investigationtracer_observe",
-      "apps_ai_agent_src_observability_safeidentifier",
-      "apps_ai_agent_src_observability_safemodelusage",
-      "apps_ai_agent_src_observability_safeversion",
-      "apps_ai_agent_src_observability_traceexporter",
-      "apps_ai_agent_src_observability_traceexporter_export",
-      "apps_ai_agent_src_observability_tracespan",
-      "apps_ai_agent_tests_observability_test"
     ],
     "65": [
       "apps_ai_agent_tsconfig",
@@ -2702,24 +2690,6 @@
       "packages_typescript_config_base_schema"
     ],
     "70": [
-      "apps_primary_backend_package",
-      "apps_primary_backend_package_json_ref_clerk_nextjs",
-      "apps_primary_backend_package_json_ref_express",
-      "apps_primary_backend_package_json_ref_types_express",
-      "apps_primary_backend_package_json_ref_zod",
-      "apps_primary_backend_package_module",
-      "apps_primary_backend_package_name",
-      "apps_primary_backend_package_private",
-      "apps_primary_backend_package_scripts",
-      "apps_primary_backend_package_scripts_dev",
-      "apps_primary_backend_package_type",
-      "ref_cors",
-      "ref_dotenv",
-      "ref_types_bcrypt",
-      "ref_types_cors",
-      "ref_types_jsonwebtoken"
-    ],
-    "71": [
       "apps_primary_backend_services_investigation_authority",
       "apps_primary_backend_services_investigation_authority_decision",
       "apps_primary_backend_services_investigation_authority_decisionrow",
@@ -2737,40 +2707,56 @@
       "apps_primary_backend_tests_investigation_authority_test_input",
       "apps_primary_backend_tests_investigation_authority_test_proposal"
     ],
+    "71": [
+      "apps_primary_backend_middleware",
+      "apps_primary_backend_middleware_decodedtoken",
+      "apps_primary_backend_middleware_express",
+      "apps_primary_backend_middleware_request",
+      "apps_primary_backend_route_user",
+      "apps_primary_backend_route_user_clerk",
+      "apps_primary_backend_route_user_router",
+      "apps_primary_backend_route_user_userrouter",
+      "apps_primary_backend_types_zodtypes",
+      "apps_primary_backend_types_zodtypes_signinschema",
+      "apps_primary_backend_types_zodtypes_signupschema",
+      "apps_primary_backend_types_zodtypes_zapscehema",
+      "ref_bcrypt",
+      "ref_clerk_backend",
+      "ref_jsonwebtoken"
+    ],
     "72": [
-      "apps_primary_backend_services_investigation_authority_sqlclient",
-      "apps_primary_backend_services_investigation_notifications",
-      "apps_primary_backend_services_investigation_notifications_investigationnotifications",
-      "apps_primary_backend_services_investigation_notifications_investigationnotifications_constructor",
-      "apps_primary_backend_services_investigation_notifications_investigationnotifications_deliver",
-      "apps_primary_backend_services_investigation_notifications_investigationnotifications_drain",
-      "apps_primary_backend_services_investigation_notifications_pendingdecision",
-      "apps_primary_backend_services_investigation_proposals_investigationproposals",
-      "apps_primary_backend_services_investigation_proposals_investigationproposals_constructor",
-      "apps_primary_backend_services_investigation_proposals_investigationproposals_submit",
-      "apps_primary_backend_tests_investigation_notifications_test",
-      "apps_primary_backend_tests_investigation_notifications_test_pending",
-      "apps_primary_backend_tests_investigation_proposals_test",
-      "apps_primary_backend_tests_investigation_proposals_test_fake",
-      "apps_primary_backend_tests_investigation_proposals_test_input",
-      "apps_primary_backend_tests_investigation_proposals_test_policy"
+      "apps_primary_backend_package",
+      "apps_primary_backend_package_json_ref_clerk_nextjs",
+      "apps_primary_backend_package_json_ref_express",
+      "apps_primary_backend_package_json_ref_types_express",
+      "apps_primary_backend_package_json_ref_zod",
+      "apps_primary_backend_package_module",
+      "apps_primary_backend_package_name",
+      "apps_primary_backend_package_private",
+      "apps_primary_backend_package_scripts",
+      "apps_primary_backend_package_scripts_dev",
+      "apps_primary_backend_package_type",
+      "ref_dotenv",
+      "ref_types_bcrypt",
+      "ref_types_cors",
+      "ref_types_jsonwebtoken"
     ],
     "73": [
-      "apps_ai_agent_src_evaluation_retrieval_experiment",
-      "apps_ai_agent_src_evaluation_retrieval_experiment_bm25",
-      "apps_ai_agent_src_evaluation_retrieval_experiment_ignoredterms",
-      "apps_ai_agent_src_evaluation_retrieval_experiment_metrics",
-      "apps_ai_agent_src_evaluation_retrieval_experiment_retrievalexperimentcase",
-      "apps_ai_agent_src_evaluation_retrieval_experiment_retrievalexperimentcases",
-      "apps_ai_agent_src_evaluation_retrieval_experiment_retrievalexperimentresult",
-      "apps_ai_agent_src_evaluation_retrieval_experiment_runretrievalexperiment",
-      "apps_ai_agent_src_evaluation_retrieval_experiment_section",
-      "apps_ai_agent_src_evaluation_retrieval_experiment_split",
-      "apps_ai_agent_src_evaluation_retrieval_experiment_summarize",
-      "apps_ai_agent_src_evaluation_retrieval_experiment_terms",
-      "apps_ai_agent_src_evaluation_retrieval_experiment_variantresult",
-      "apps_ai_agent_tests_retrieval_experiment_test",
-      "apps_ai_agent_tests_retrieval_experiment_test_repositoryrunbooks"
+      "apps_primary_backend_services_investigation_authority_sqlclient",
+      "apps_primary_backend_services_replay",
+      "apps_primary_backend_services_replay_approval",
+      "apps_primary_backend_services_replay_binding",
+      "apps_primary_backend_services_replay_database",
+      "apps_primary_backend_services_replay_replaydenied",
+      "apps_primary_backend_services_replay_replayinput",
+      "apps_primary_backend_services_replay_replayservice",
+      "apps_primary_backend_services_replay_replayservice_constructor",
+      "apps_primary_backend_services_replay_replayservice_dryrun",
+      "apps_primary_backend_services_replay_replayservice_request",
+      "apps_primary_backend_services_replay_replayservice_transaction",
+      "apps_primary_backend_services_replay_replayservice_validate",
+      "apps_primary_backend_services_replay_request",
+      "apps_primary_backend_services_replay_requestschema"
     ],
     "74": [
       "apps_processor_package",
@@ -2874,6 +2860,37 @@
       "docs_ai_failure_taxonomy_safety_vocabulary"
     ],
     "80": [
+      "packages_db_generated_prisma_client",
+      "packages_db_generated_prisma_client_action",
+      "packages_db_generated_prisma_client_availableaction",
+      "packages_db_generated_prisma_client_availabletriggertype",
+      "packages_db_generated_prisma_client_enums",
+      "packages_db_generated_prisma_client_testtriggerbuffer",
+      "packages_db_generated_prisma_client_trigger",
+      "packages_db_generated_prisma_client_user",
+      "packages_db_generated_prisma_client_zap",
+      "packages_db_generated_prisma_client_zaprun",
+      "packages_db_generated_prisma_client_zaprunexecution",
+      "packages_db_generated_prisma_client_zaprunexecutionattempt",
+      "packages_db_generated_prisma_client_zaprunoutbox",
+      "packages_db_generated_prisma_client_zaprunretry"
+    ],
+    "81": [
+      "apps_ai_agent_src_checkpoint",
+      "apps_ai_agent_src_checkpoint_agentdatabaseurl",
+      "apps_ai_agent_src_checkpoint_createcheckpoint",
+      "apps_ai_agent_src_checkpoint_migrateagent",
+      "apps_ai_agent_src_migrate",
+      "apps_ai_agent_src_migrate_pool",
+      "apps_primary_backend_tests_investigation_db_integration_test",
+      "apps_primary_backend_tests_investigation_db_integration_test_setup",
+      "apps_primary_backend_tests_postgres_fixture",
+      "apps_primary_backend_tests_postgres_fixture_createpostgresfixture",
+      "apps_primary_backend_tests_postgres_fixture_setoperator",
+      "packages_db_generated_prisma_client_prismaclient",
+      "ref_pg"
+    ],
+    "82": [
       "apps_primary_backend_package_dependencies",
       "apps_primary_backend_package_dependencies_bcrypt",
       "apps_primary_backend_package_dependencies_clerk_backend",
@@ -2887,34 +2904,6 @@
       "apps_primary_backend_package_dependencies_types_express",
       "apps_primary_backend_package_dependencies_types_jsonwebtoken",
       "apps_primary_backend_package_dependencies_zod"
-    ],
-    "81": [
-      "apps_primary_backend_services_triage_evidence_triageevidencedb",
-      "apps_primary_backend_tests_seed_f01_case",
-      "apps_primary_backend_tests_seed_f01_case_assertlocaldatabase",
-      "apps_primary_backend_tests_seed_f01_case_f01_case_id",
-      "apps_primary_backend_tests_seed_f01_case_failedcompletedat",
-      "apps_primary_backend_tests_seed_f01_case_failedstartedat",
-      "apps_primary_backend_tests_seed_f01_case_predecessorcompletedat",
-      "apps_primary_backend_tests_seed_f01_case_predecessormetadata",
-      "apps_primary_backend_tests_seed_f01_case_runmetadata",
-      "apps_primary_backend_tests_seed_f01_case_seedf01case",
-      "apps_primary_backend_tests_seed_f01_case_telegrammetadata",
-      "apps_primary_backend_tests_seed_f01_case_test"
-    ],
-    "82": [
-      "apps_worker_actions_index",
-      "apps_worker_actions_index_actionregistry",
-      "apps_worker_types_actionhandler",
-      "apps_worker_validation",
-      "apps_worker_validation_canonical",
-      "apps_worker_validation_fields",
-      "apps_worker_validation_haspath",
-      "apps_worker_validation_templatepaths",
-      "apps_worker_validation_test",
-      "apps_worker_validation_validateactioninputs",
-      "apps_worker_validation_validationdependencies",
-      "apps_worker_validation_validationinput"
     ],
     "83": [
       "docs_ai_dlq_master_plan",
@@ -3008,16 +2997,16 @@
       "ref_next"
     ],
     "90": [
-      "apps_frontend_package_devdependencies",
-      "apps_frontend_package_devdependencies_eslint",
-      "apps_frontend_package_devdependencies_eslint_config_next",
-      "apps_frontend_package_devdependencies_tailwindcss",
-      "apps_frontend_package_devdependencies_tailwindcss_postcss",
-      "apps_frontend_package_devdependencies_tw_animate_css",
-      "apps_frontend_package_devdependencies_types_node",
-      "apps_frontend_package_devdependencies_types_react",
-      "apps_frontend_package_devdependencies_types_react_dom",
-      "apps_frontend_package_devdependencies_typescript"
+      "apps_primary_backend_services_triage_evidence_sourcekind",
+      "apps_primary_backend_services_triage_evidence_triagecasenotfound",
+      "apps_primary_backend_services_triage_evidence_triageevidenceservice",
+      "apps_primary_backend_services_triage_evidence_triageevidenceservice_assertownedcase",
+      "apps_primary_backend_services_triage_evidence_triageevidenceservice_constructor",
+      "apps_primary_backend_services_triage_evidence_triageevidenceservice_getexecutionevidence",
+      "apps_primary_backend_services_triage_evidence_triageevidenceservice_getfailurecontext",
+      "apps_primary_backend_services_triage_evidence_triageevidenceservice_listcases",
+      "apps_primary_backend_services_triage_evidence_triageevidenceservice_ownedrows",
+      "apps_primary_backend_services_triage_evidence_triageevidenceservice_validateactioninputs"
     ],
     "91": [
       "docs_ai_runbooks_credentials_and_destinations_allowed_remediation",
@@ -3116,6 +3105,18 @@
       "docs_superpowers_specs_2026_09_22_phase_3b_durable_failures_design_transaction_and_kafka_ack_semantics"
     ],
     "99": [
+      "packages_db_prisma_durable_failures_schema_test",
+      "packages_db_prisma_durable_failures_schema_test_assertfield",
+      "packages_db_prisma_durable_failures_schema_test_attempt",
+      "packages_db_prisma_durable_failures_schema_test_attemptfields",
+      "packages_db_prisma_durable_failures_schema_test_dlqmigrationpath",
+      "packages_db_prisma_durable_failures_schema_test_field",
+      "packages_db_prisma_durable_failures_schema_test_generatedclient",
+      "packages_db_prisma_durable_failures_schema_test_migrationpath",
+      "packages_db_prisma_durable_failures_schema_test_model",
+      "packages_db_prisma_durable_failures_schema_test_runtimemodels"
+    ],
+    "100": [
       "apps_primary_backend_tests_triage_db_integration_test",
       "apps_primary_backend_tests_triage_db_integration_test_executionid",
       "apps_primary_backend_tests_triage_db_integration_test_foreigncaseid",
@@ -3126,7 +3127,17 @@
       "apps_primary_backend_tests_triage_db_integration_test_ownedrunid",
       "apps_primary_backend_tests_triage_db_integration_test_suffix"
     ],
-    "100": [
+    "101": [
+      "apps_primary_backend_services_investigation_notifications",
+      "apps_primary_backend_services_investigation_notifications_investigationnotifications",
+      "apps_primary_backend_services_investigation_notifications_investigationnotifications_constructor",
+      "apps_primary_backend_services_investigation_notifications_investigationnotifications_deliver",
+      "apps_primary_backend_services_investigation_notifications_investigationnotifications_drain",
+      "apps_primary_backend_services_investigation_notifications_pendingdecision",
+      "apps_primary_backend_tests_investigation_notifications_test",
+      "apps_primary_backend_tests_investigation_notifications_test_pending"
+    ],
+    "102": [
       "docs_superpowers_plans_2026_09_22_phase_3a_provider_outcomes",
       "docs_superpowers_plans_2026_09_22_phase_3a_provider_outcomes_file_map",
       "docs_superpowers_plans_2026_09_22_phase_3a_provider_outcomes_global_constraints",
@@ -3136,7 +3147,7 @@
       "docs_superpowers_plans_2026_09_22_phase_3a_provider_outcomes_task_3_normalize_telegram_resolution_and_send_outcomes",
       "docs_superpowers_plans_2026_09_22_phase_3a_provider_outcomes_task_4_wire_and_verify_the_phase_3a_boundary"
     ],
-    "101": [
+    "103": [
       "docs_superpowers_specs_2026_09_23_phase_3c_dlq_publication_design",
       "docs_superpowers_specs_2026_09_23_phase_3c_dlq_publication_design_data_model",
       "docs_superpowers_specs_2026_09_23_phase_3c_dlq_publication_design_goal",
@@ -3146,7 +3157,7 @@
       "docs_superpowers_specs_2026_09_23_phase_3c_dlq_publication_design_runtime",
       "docs_superpowers_specs_2026_09_23_phase_3c_dlq_publication_design_verification"
     ],
-    "102": [
+    "104": [
       "packages_db_generated_prisma_models_zap_prisma_zapclient",
       "packages_db_generated_prisma_models_zap_prisma_zapclient_actions",
       "packages_db_generated_prisma_models_zap_prisma_zapclient_catch",
@@ -3156,7 +3167,7 @@
       "packages_db_generated_prisma_models_zap_prisma_zapclient_user",
       "packages_db_generated_prisma_models_zap_prisma_zapclient_zaprun"
     ],
-    "103": [
+    "105": [
       "apps_ai_agent_package_scripts",
       "apps_ai_agent_package_scripts_build",
       "apps_ai_agent_package_scripts_check_types",
@@ -3165,7 +3176,25 @@
       "apps_ai_agent_package_scripts_migrate",
       "apps_ai_agent_package_scripts_test"
     ],
-    "104": [
+    "106": [
+      "apps_primary_backend_services_investigation_proposals_investigationproposals",
+      "apps_primary_backend_services_investigation_proposals_investigationproposals_constructor",
+      "apps_primary_backend_services_investigation_proposals_investigationproposals_submit",
+      "apps_primary_backend_tests_investigation_proposals_test",
+      "apps_primary_backend_tests_investigation_proposals_test_fake",
+      "apps_primary_backend_tests_investigation_proposals_test_input",
+      "apps_primary_backend_tests_investigation_proposals_test_policy"
+    ],
+    "107": [
+      "apps_primary_backend_services_replay_policy_facts_buildreplaypolicyfacts",
+      "apps_primary_backend_tests_replay_policy_facts_test",
+      "apps_primary_backend_tests_replay_policy_facts_test_config",
+      "apps_primary_backend_tests_replay_policy_facts_test_current",
+      "apps_primary_backend_tests_replay_policy_facts_test_hash",
+      "apps_primary_backend_tests_replay_policy_facts_test_saved",
+      "apps_primary_backend_tests_replay_policy_facts_test_source"
+    ],
+    "108": [
       "docs_superpowers_plans_2026_09_21_phase_2_evaluation_fixtures",
       "docs_superpowers_plans_2026_09_21_phase_2_evaluation_fixtures_global_constraints",
       "docs_superpowers_plans_2026_09_21_phase_2_evaluation_fixtures_phase_2_evaluation_fixtures_implementation_plan",
@@ -3174,7 +3203,7 @@
       "docs_superpowers_plans_2026_09_21_phase_2_evaluation_fixtures_task_3_versioned_26_case_dataset_and_held_out_loader",
       "docs_superpowers_plans_2026_09_21_phase_2_evaluation_fixtures_task_4_privacy_mutation_checks_and_full_verification"
     ],
-    "105": [
+    "109": [
       "docs_superpowers_plans_2026_09_22_phase_3b_durable_failures",
       "docs_superpowers_plans_2026_09_22_phase_3b_durable_failures_global_constraints",
       "docs_superpowers_plans_2026_09_22_phase_3b_durable_failures_phase_3b_durable_failures_implementation_plan",
@@ -3183,7 +3212,7 @@
       "docs_superpowers_plans_2026_09_22_phase_3b_durable_failures_task_2_implement_the_fenced_persistence_state_machine",
       "docs_superpowers_plans_2026_09_22_phase_3b_durable_failures_task_3_integrate_single_shot_execution_ack_gating_and_architecture_docs"
     ],
-    "106": [
+    "110": [
       "package_scripts",
       "package_scripts_build",
       "package_scripts_check_types",
@@ -3192,7 +3221,7 @@
       "package_scripts_lint",
       "package_scripts_postinstall"
     ],
-    "107": [
+    "111": [
       "packages_typescript_config_package",
       "packages_typescript_config_package_license",
       "packages_typescript_config_package_name",
@@ -3201,7 +3230,7 @@
       "packages_typescript_config_package_publishconfig_access",
       "packages_typescript_config_package_version"
     ],
-    "108": [
+    "112": [
       "packages_ui_tsconfig",
       "packages_ui_tsconfig_compileroptions",
       "packages_ui_tsconfig_compileroptions_outdir",
@@ -3210,7 +3239,7 @@
       "packages_ui_tsconfig_include",
       "ref_repo_typescript_config_react_library_json"
     ],
-    "109": [
+    "113": [
       "apps_ai_agent_package_dependencies",
       "apps_ai_agent_package_dependencies_express",
       "apps_ai_agent_package_dependencies_langchain_langgraph",
@@ -3218,7 +3247,7 @@
       "apps_ai_agent_package_dependencies_pg",
       "apps_ai_agent_package_dependencies_zod"
     ],
-    "110": [
+    "114": [
       "apps_ai_agent_package_devdependencies",
       "apps_ai_agent_package_devdependencies_types_bun",
       "apps_ai_agent_package_devdependencies_types_express",
@@ -3226,7 +3255,7 @@
       "apps_ai_agent_package_devdependencies_types_pg",
       "apps_ai_agent_package_devdependencies_typescript"
     ],
-    "111": [
+    "115": [
       "apps_frontend_public_next_nextjs_logo",
       "apps_frontend_public_vercel_vercel_logo",
       "apps_frontend_public_zapier_logo_brand_logo",
@@ -3234,7 +3263,7 @@
       "apps_primary_backend_readme_bun_service",
       "readme_project_overview"
     ],
-    "112": [
+    "116": [
       "mission",
       "mission_constraints",
       "mission_mission_production_style_ai_systems",
@@ -3242,7 +3271,7 @@
       "mission_success_looks_like",
       "mission_why"
     ],
-    "113": [
+    "117": [
       "packages_db_generated_prisma_models_action_prisma_actionclient",
       "packages_db_generated_prisma_models_action_prisma_actionclient_catch",
       "packages_db_generated_prisma_models_action_prisma_actionclient_finally",
@@ -3250,7 +3279,7 @@
       "packages_db_generated_prisma_models_action_prisma_actionclient_type",
       "packages_db_generated_prisma_models_action_prisma_actionclient_zap"
     ],
-    "114": [
+    "118": [
       "packages_db_generated_prisma_models_trigger_prisma_triggerclient",
       "packages_db_generated_prisma_models_trigger_prisma_triggerclient_catch",
       "packages_db_generated_prisma_models_trigger_prisma_triggerclient_finally",
@@ -3258,7 +3287,7 @@
       "packages_db_generated_prisma_models_trigger_prisma_triggerclient_type",
       "packages_db_generated_prisma_models_trigger_prisma_triggerclient_zap"
     ],
-    "115": [
+    "119": [
       "packages_db_generated_prisma_models_zaprun_prisma_zaprunclient",
       "packages_db_generated_prisma_models_zaprun_prisma_zaprunclient_catch",
       "packages_db_generated_prisma_models_zaprun_prisma_zaprunclient_finally",
@@ -3266,7 +3295,7 @@
       "packages_db_generated_prisma_models_zaprun_prisma_zaprunclient_zap",
       "packages_db_generated_prisma_models_zaprun_prisma_zaprunclient_zaprunoutbox"
     ],
-    "116": [
+    "120": [
       "packages_db_generated_prisma_models_zaprunexecution_prisma_zaprunexecutionclient",
       "packages_db_generated_prisma_models_zaprunexecution_prisma_zaprunexecutionclient_attempts",
       "packages_db_generated_prisma_models_zaprunexecution_prisma_zaprunexecutionclient_catch",
@@ -3274,7 +3303,7 @@
       "packages_db_generated_prisma_models_zaprunexecution_prisma_zaprunexecutionclient_finally",
       "packages_db_generated_prisma_models_zaprunexecution_prisma_zaprunexecutionclient_then"
     ],
-    "117": [
+    "121": [
       "packages_typescript_config_react_library",
       "packages_typescript_config_react_library_compileroptions",
       "packages_typescript_config_react_library_compileroptions_jsx",
@@ -3282,197 +3311,197 @@
       "packages_typescript_config_react_library_json_ref_base_json",
       "packages_typescript_config_react_library_schema"
     ],
-    "118": [
+    "122": [
       "apps_webhook_package_dependencies",
       "apps_webhook_package_dependencies_express",
       "apps_webhook_package_dependencies_prisma_client",
       "apps_webhook_package_dependencies_prisma_extension_accelerate",
       "apps_webhook_package_dependencies_types_express"
     ],
-    "119": [
+    "123": [
       "docs_superpowers_plans_2026_09_23_phase_3c_dlq_publication",
       "docs_superpowers_plans_2026_09_23_phase_3c_dlq_publication_global_constraints",
       "docs_superpowers_plans_2026_09_23_phase_3c_dlq_publication_phase_3c_durable_dlq_publication_implementation_plan",
       "docs_superpowers_plans_2026_09_23_phase_3c_dlq_publication_task_1_phase_3c_a_fenced_durable_failure_publisher",
       "docs_superpowers_plans_2026_09_23_phase_3c_dlq_publication_task_2_phase_3c_b_reconciliation_and_separate_runtime"
     ],
-    "120": [
+    "124": [
       "graphify_out_memory_query_20260921_192127_82dd3e00_where_should_phase_3_provider_outcomes_and_durable",
       "graphify_out_memory_query_20260921_192127_82dd3e00_where_should_phase_3_provider_outcomes_and_durable_answer",
       "graphify_out_memory_query_20260921_192127_82dd3e00_where_should_phase_3_provider_outcomes_and_durable_outcome",
       "graphify_out_memory_query_20260921_192127_82dd3e00_where_should_phase_3_provider_outcomes_and_durable_q_where_should_phase_3_provider_outcomes_and_durable_failure_evidence_integrate_in_the_worker",
       "graphify_out_memory_query_20260921_192127_82dd3e00_where_should_phase_3_provider_outcomes_and_durable_source_nodes"
     ],
-    "121": [
+    "125": [
       "graphify_out_memory_query_20260923_064129_82e4530f_start_phase_3c_durable_dlq_publication_and_reconci",
       "graphify_out_memory_query_20260923_064129_82e4530f_start_phase_3c_durable_dlq_publication_and_reconci_answer",
       "graphify_out_memory_query_20260923_064129_82e4530f_start_phase_3c_durable_dlq_publication_and_reconci_outcome",
       "graphify_out_memory_query_20260923_064129_82e4530f_start_phase_3c_durable_dlq_publication_and_reconci_q_start_phase_3c_durable_dlq_publication_and_reconciliation",
       "graphify_out_memory_query_20260923_064129_82e4530f_start_phase_3c_durable_dlq_publication_and_reconci_source_nodes"
     ],
-    "122": [
+    "126": [
       "graphify_out_memory_query_20260927_180846_f1f93e82_oh_but_my_idea_for_this_prj_dlq_system_was_like_in",
       "graphify_out_memory_query_20260927_180846_f1f93e82_oh_but_my_idea_for_this_prj_dlq_system_was_like_in_answer",
       "graphify_out_memory_query_20260927_180846_f1f93e82_oh_but_my_idea_for_this_prj_dlq_system_was_like_in_outcome",
       "graphify_out_memory_query_20260927_180846_f1f93e82_oh_but_my_idea_for_this_prj_dlq_system_was_like_in_q_oh_but_my_idea_for_this_prj_dlq_system_was_like_instead_of_a_support_team_sitting_in_the_backend_and_seeing_and_debugging_the_error_sending_it_to_developing_and_testing_the_ai_agent_checks_that_then_finds_the_error_and_suggests_remedy_to_the_support_team_in_my_case_it_will_be_me_then_after_approval_the_error_is_replayed_for_fix_or_other_option_but_now_it_is_like_the_owner_of_the_zap_checks_this_what_canthe_owner_do_in_the_case_of_humman_approval_now_i_was_learnign_the_phase_4_and_i_got_to_know_this_but_the_phase_5_was_also_completed_now",
       "graphify_out_memory_query_20260927_180846_f1f93e82_oh_but_my_idea_for_this_prj_dlq_system_was_like_in_source_nodes"
     ],
-    "123": [
+    "127": [
       "package_devdependencies",
       "package_devdependencies_prettier",
       "package_devdependencies_prisma",
       "package_devdependencies_turbo",
       "package_devdependencies_typescript"
     ],
-    "124": [
+    "128": [
       "packages_db_generated_prisma_internal_class",
       "packages_db_generated_prisma_internal_class_config",
       "packages_db_generated_prisma_internal_class_getprismaclientclass",
       "packages_db_generated_prisma_internal_class_logoptions",
       "packages_db_generated_prisma_internal_class_prismaclientconstructor"
     ],
-    "125": [
+    "129": [
       "packages_db_generated_prisma_models_availableaction_prisma_availableactionclient",
       "packages_db_generated_prisma_models_availableaction_prisma_availableactionclient_action",
       "packages_db_generated_prisma_models_availableaction_prisma_availableactionclient_catch",
       "packages_db_generated_prisma_models_availableaction_prisma_availableactionclient_finally",
       "packages_db_generated_prisma_models_availableaction_prisma_availableactionclient_then"
     ],
-    "126": [
+    "130": [
       "packages_db_generated_prisma_models_availabletriggertype_prisma_availabletriggertypeclient",
       "packages_db_generated_prisma_models_availabletriggertype_prisma_availabletriggertypeclient_catch",
       "packages_db_generated_prisma_models_availabletriggertype_prisma_availabletriggertypeclient_finally",
       "packages_db_generated_prisma_models_availabletriggertype_prisma_availabletriggertypeclient_then",
       "packages_db_generated_prisma_models_availabletriggertype_prisma_availabletriggertypeclient_trigger"
     ],
-    "127": [
+    "131": [
       "packages_db_generated_prisma_models_user_prisma_userclient",
       "packages_db_generated_prisma_models_user_prisma_userclient_catch",
       "packages_db_generated_prisma_models_user_prisma_userclient_finally",
       "packages_db_generated_prisma_models_user_prisma_userclient_then",
       "packages_db_generated_prisma_models_user_prisma_userclient_zap"
     ],
-    "128": [
+    "132": [
       "packages_db_generated_prisma_models_zaprunexecutionattempt_prisma_zaprunexecutionattemptclient",
       "packages_db_generated_prisma_models_zaprunexecutionattempt_prisma_zaprunexecutionattemptclient_catch",
       "packages_db_generated_prisma_models_zaprunexecutionattempt_prisma_zaprunexecutionattemptclient_execution",
       "packages_db_generated_prisma_models_zaprunexecutionattempt_prisma_zaprunexecutionattemptclient_finally",
       "packages_db_generated_prisma_models_zaprunexecutionattempt_prisma_zaprunexecutionattemptclient_then"
     ],
-    "129": [
+    "133": [
       "packages_db_generated_prisma_models_zaprunoutbox_prisma_zaprunoutboxclient",
       "packages_db_generated_prisma_models_zaprunoutbox_prisma_zaprunoutboxclient_catch",
       "packages_db_generated_prisma_models_zaprunoutbox_prisma_zaprunoutboxclient_finally",
       "packages_db_generated_prisma_models_zaprunoutbox_prisma_zaprunoutboxclient_then",
       "packages_db_generated_prisma_models_zaprunoutbox_prisma_zaprunoutboxclient_zaprun"
     ],
-    "130": [
+    "134": [
       "packages_db_generated_prisma_models_zaprunretry_prisma_zaprunretryclient",
       "packages_db_generated_prisma_models_zaprunretry_prisma_zaprunretryclient_catch",
       "packages_db_generated_prisma_models_zaprunretry_prisma_zaprunretryclient_execution",
       "packages_db_generated_prisma_models_zaprunretry_prisma_zaprunretryclient_finally",
       "packages_db_generated_prisma_models_zaprunretry_prisma_zaprunretryclient_then"
     ],
-    "131": [
+    "135": [
       "patches_kafkajs_bun_fix",
       "patches_kafkajs_bun_fix_content",
       "patches_kafkajs_bun_fix_fs",
       "patches_kafkajs_bun_fix_path",
       "patches_kafkajs_bun_fix_possiblepaths"
     ],
-    "132": [
+    "136": [
       "resources",
       "resources_gaps",
       "resources_knowledge",
       "resources_production_ai_service_resources",
       "resources_wisdom_communities"
     ],
-    "133": [
+    "137": [
       "docs_decisions_execution_lease_adr",
       "docs_kafka_at_least_once_delivery",
       "docs_kafka_manual_offset_commits",
       "docs_worker_execution_lease"
     ],
-    "134": [
+    "138": [
       "packages_db_generated_prisma_models_testtriggerbuffer_prisma_testtriggerbufferclient",
       "packages_db_generated_prisma_models_testtriggerbuffer_prisma_testtriggerbufferclient_catch",
       "packages_db_generated_prisma_models_testtriggerbuffer_prisma_testtriggerbufferclient_finally",
       "packages_db_generated_prisma_models_testtriggerbuffer_prisma_testtriggerbufferclient_then"
     ],
-    "135": [
+    "139": [
       "packages_ui_src_button",
       "packages_ui_src_button_button",
       "packages_ui_src_button_buttonprops"
     ],
-    "136": [
+    "140": [
       "apps_frontend_eslint_config",
       "apps_frontend_eslint_config_eslintconfig"
     ],
-    "137": [
+    "141": [
       "apps_frontend_postcss_config",
       "apps_frontend_postcss_config_config"
     ],
-    "138": [
+    "142": [
       "apps_frontend_src_app_sso_callback_page",
       "apps_frontend_src_app_sso_callback_page_ssocallback"
     ],
-    "139": [
+    "143": [
       "apps_frontend_src_mycomponents_buttons_darkbutton",
       "apps_frontend_src_mycomponents_buttons_darkbutton_darkbutton"
     ],
-    "140": [
+    "144": [
       "apps_frontend_src_proxy",
       "apps_frontend_src_proxy_config"
     ],
-    "141": [
+    "145": [
       "docs_superpowers_plans_2026_08_20_backend_three_features_retry_dlq_design",
       "docs_worker_dual_sink_dead_letter"
     ],
-    "142": [
+    "146": [
       "learning_records_0001_existing_python_fastapi_pydantic_foundation",
       "learning_records_0001_existing_python_fastapi_pydantic_foundation_existing_python_fastapi_and_pydantic_foundation"
     ],
-    "143": [
+    "147": [
       "learning_records_0002_typescript_first_ai_learning",
       "learning_records_0002_typescript_first_ai_learning_typescript_first_ai_learning"
     ],
-    "144": [
+    "148": [
       "notes",
       "notes_teaching_notes"
     ],
-    "145": [
+    "149": [
       "packages_ui_src_card",
       "packages_ui_src_card_card"
     ],
-    "146": [
+    "150": [
       "packages_ui_src_code",
       "packages_ui_src_code_code"
     ],
-    "147": [
+    "151": [
       "apps_frontend_public_file_file_icon"
     ],
-    "148": [
+    "152": [
       "apps_frontend_public_globe_globe_icon"
     ],
-    "149": [
+    "153": [
       "apps_frontend_public_window_window_icon"
     ],
-    "150": [
+    "154": [
       "docs_actions_template_interpolation"
     ],
-    "151": [
+    "155": [
       "docs_current_state_linear_workflow_limitation"
     ],
-    "152": [
+    "156": [
       "docs_superpowers_plans_2026_08_20_backend_three_features_backend_feature_plan"
     ],
-    "153": [
+    "157": [
       "packages_db_prisma_config"
     ],
-    "154": [
+    "158": [
       "packages_eslint_config_readme_eslint_configuration"
     ],
-    "155": [
+    "159": [
       "readme_email_verification_gap"
     ]
   },
@@ -3489,47 +3518,47 @@
     "9": 0.028169014084507043,
     "10": 0.028169014084507043,
     "11": 0.029411764705882353,
-    "12": 0.07071887784921099,
-    "13": 0.03389830508474576,
-    "14": 0.08897243107769423,
-    "15": 0.10453283996299723,
-    "16": 0.08383838383838384,
-    "17": 0.07926829268292683,
-    "18": 0.10121457489878542,
+    "12": 0.03389830508474576,
+    "13": 0.06715063520871144,
+    "14": 0.08896103896103896,
+    "15": 0.0783673469387755,
+    "16": 0.10434782608695652,
+    "17": 0.08383838383838384,
+    "18": 0.09634146341463415,
     "19": 0.07827260458839407,
-    "20": 0.10241820768136557,
-    "21": 0.05263157894736842,
-    "22": 0.1006006006006006,
+    "20": 0.05263157894736842,
+    "21": 0.09365079365079365,
+    "22": 0.05546218487394958,
     "23": 0.08021390374331551,
-    "24": 0.10606060606060606,
-    "25": 0.0625,
-    "26": 0.08866995073891626,
-    "27": 0.06896551724137931,
-    "28": 0.14814814814814814,
-    "29": 0.11375661375661375,
-    "30": 0.07142857142857142,
-    "31": 0.07692307692307693,
-    "32": 0.08,
-    "33": 0.13,
-    "34": 0.09,
-    "35": 0.16666666666666666,
-    "36": 0.11231884057971014,
-    "37": 0.12554112554112554,
-    "38": 0.09523809523809523,
-    "39": 0.14210526315789473,
+    "24": 0.0625,
+    "25": 0.07142857142857142,
+    "26": 0.14814814814814814,
+    "27": 0.11375661375661375,
+    "28": 0.07142857142857142,
+    "29": 0.14814814814814814,
+    "30": 0.10541310541310542,
+    "31": 0.13230769230769232,
+    "32": 0.07692307692307693,
+    "33": 0.09,
+    "34": 0.11462450592885376,
+    "35": 0.20346320346320346,
+    "36": 0.12987012987012986,
+    "37": 0.12380952380952381,
+    "38": 0.1523809523809524,
+    "39": 0.09523809523809523,
     "40": 0.14736842105263157,
-    "41": 0.1631578947368421,
-    "42": 0.1,
+    "41": 0.1,
+    "42": 0.15789473684210525,
     "43": 0.18421052631578946,
-    "44": 0.15789473684210525,
-    "45": 0.18421052631578946,
+    "44": 0.1,
+    "45": 0.1,
     "46": 0.1,
-    "47": 0.1,
+    "47": 0.22105263157894736,
     "48": 0.1,
-    "49": 0.22105263157894736,
-    "50": 0.1,
-    "51": 0.10526315789473684,
-    "52": 0.1111111111111111,
+    "49": 0.18128654970760233,
+    "50": 0.10526315789473684,
+    "51": 0.1895424836601307,
+    "52": 0.1568627450980392,
     "53": 0.1111111111111111,
     "54": 0.1111111111111111,
     "55": 0.1111111111111111,
@@ -3541,25 +3570,25 @@
     "61": 0.1111111111111111,
     "62": 0.1111111111111111,
     "63": 0.1111111111111111,
-    "64": 0.16176470588235295,
+    "64": 0.1111111111111111,
     "65": 0.11764705882352941,
     "66": 0.11764705882352941,
     "67": 0.11764705882352941,
     "68": 0.19852941176470587,
     "69": 0.11764705882352941,
-    "70": 0.125,
-    "71": 0.15833333333333333,
-    "72": 0.15,
-    "73": 0.18095238095238095,
+    "70": 0.15833333333333333,
+    "71": 0.1619047619047619,
+    "72": 0.13333333333333333,
+    "73": 0.20952380952380953,
     "74": 0.13333333333333333,
     "75": 0.14285714285714285,
     "76": 0.13333333333333333,
     "77": 0.13333333333333333,
     "78": 0.13333333333333333,
     "79": 0.14285714285714285,
-    "80": 0.15384615384615385,
-    "81": 0.21212121212121213,
-    "82": 0.25757575757575757,
+    "80": 0.14285714285714285,
+    "81": 0.3076923076923077,
+    "82": 0.15384615384615385,
     "83": 0.19696969696969696,
     "84": 0.16666666666666666,
     "85": 0.2,
@@ -3567,7 +3596,7 @@
     "87": 0.18181818181818182,
     "88": 0.2,
     "89": 0.2222222222222222,
-    "90": 0.2,
+    "90": 0.4,
     "91": 0.2,
     "92": 0.2,
     "93": 0.2,
@@ -3576,29 +3605,29 @@
     "96": 0.2,
     "97": 0.2,
     "98": 0.2,
-    "99": 0.2222222222222222,
-    "100": 0.25,
-    "101": 0.25,
+    "99": 0.24444444444444444,
+    "100": 0.2222222222222222,
+    "101": 0.32142857142857145,
     "102": 0.25,
-    "103": 0.2857142857142857,
-    "104": 0.2857142857142857,
+    "103": 0.25,
+    "104": 0.25,
     "105": 0.2857142857142857,
     "106": 0.2857142857142857,
     "107": 0.2857142857142857,
     "108": 0.2857142857142857,
-    "109": 0.3333333333333333,
-    "110": 0.3333333333333333,
-    "111": 0.3333333333333333,
-    "112": 0.3333333333333333,
+    "109": 0.2857142857142857,
+    "110": 0.2857142857142857,
+    "111": 0.2857142857142857,
+    "112": 0.2857142857142857,
     "113": 0.3333333333333333,
     "114": 0.3333333333333333,
     "115": 0.3333333333333333,
     "116": 0.3333333333333333,
     "117": 0.3333333333333333,
-    "118": 0.4,
-    "119": 0.4,
-    "120": 0.4,
-    "121": 0.4,
+    "118": 0.3333333333333333,
+    "119": 0.3333333333333333,
+    "120": 0.3333333333333333,
+    "121": 0.3333333333333333,
     "122": 0.4,
     "123": 0.4,
     "124": 0.4,
@@ -3610,13 +3639,13 @@
     "130": 0.4,
     "131": 0.4,
     "132": 0.4,
-    "133": 0.5,
-    "134": 0.5,
-    "135": 0.6666666666666666,
-    "136": 1.0,
-    "137": 1.0,
-    "138": 1.0,
-    "139": 1.0,
+    "133": 0.4,
+    "134": 0.4,
+    "135": 0.4,
+    "136": 0.4,
+    "137": 0.5,
+    "138": 0.5,
+    "139": 0.6666666666666666,
     "140": 1.0,
     "141": 1.0,
     "142": 1.0,
@@ -3632,7 +3661,11 @@
     "152": 1.0,
     "153": 1.0,
     "154": 1.0,
-    "155": 1.0
+    "155": 1.0,
+    "156": 1.0,
+    "157": 1.0,
+    "158": 1.0,
+    "159": 1.0
   },
   "gods": [
     {
@@ -3746,23 +3779,23 @@
   "questions": [
     {
       "type": "bridge_node",
-      "question": "Why does `zod` connect `route/triage.ts` to `replay-policy-facts.ts`, `gemini-model.ts`, `checks.ts`, `graph.ts`, `ai_agent/package.json`, `contracts.ts`?",
-      "why": "High betweenness centrality (0.042) - this node is a cross-community bridge."
+      "question": "Why does `zod` connect `diagnosis-http.ts` to `contracts.ts`, `replay-policy-facts.ts`, `checks.ts`, `replay.ts`, `graph.ts`, `route/triage.ts`, `ai_agent/package.json`?",
+      "why": "High betweenness centrality (0.044) - this node is a cross-community bridge."
     },
     {
       "type": "bridge_node",
-      "question": "Why does `kafkajs` connect `primary_backend/index.ts` to `processor/package.json`, `idempotency.test.ts`, `dlq-publisher.ts`?",
-      "why": "High betweenness centrality (0.018) - this node is a cross-community bridge."
+      "question": "Why does `pg` connect `checkpoint.ts` to `runner.ts`, `graph.ts`, `route/triage.ts`, `ai_agent/package.json`, `src/index.ts`?",
+      "why": "High betweenness centrality (0.016) - this node is a cross-community bridge."
     },
     {
       "type": "bridge_node",
-      "question": "Why does `@types/node` connect `ai_agent/package.json` to `ui/package.json`?",
-      "why": "High betweenness centrality (0.013) - this node is a cross-community bridge."
+      "question": "Why does `typescript` connect `worker/package.json` to `ai_agent/package.json`, `package.json`?",
+      "why": "High betweenness centrality (0.015) - this node is a cross-community bridge."
     },
     {
       "type": "isolated_nodes",
       "question": "What connects `ActionScalarFieldEnum`, `Args`, `At` to the rest of the system?",
-      "why": "1975 weakly-connected nodes found - possible documentation gaps or missing edges."
+      "why": "1981 weakly-connected nodes found - possible documentation gaps or missing edges."
     },
     {
       "type": "low_cohesion",
