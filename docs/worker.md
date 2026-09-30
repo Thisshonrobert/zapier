@@ -6,7 +6,7 @@ This document specifies the internal lifecycle, fenced action execution, durable
 
 ## 🔄 Worker Lifecycle & Architecture
 
-The worker service ([`apps/worker/index.ts`](../apps/worker/index.ts)) consumes workflow stage execution events from Kafka, uses PostgreSQL claim fencing for at-least-once delivery, invokes each provider at most once per claimed stage, advances only successful stages, and durably parks failures for human review.
+The worker service ([`apps/worker/index.ts`](../apps/worker/index.ts)) consumes workflow stage execution events from Kafka, uses PostgreSQL claim fencing for at-least-once delivery, invokes each provider at most once per claimed stage, advances only successful stages, and durably parks failures for human review. Replay uses separate additive request/execution history; it does not reset or overwrite the original failed execution.
 
 ```mermaid
 flowchart TD
@@ -49,6 +49,8 @@ flowchart TD
     CommitOffset --> MessageLoop
 ```
 
+This flowchart shows ordinary execution. Events with `replayRequestId` use the separately gated replay-generation path described below.
+
 ---
 
 ## 🔒 Distributed Lease Management (`ZapRunExecution`)
@@ -77,6 +79,8 @@ model ZapRunExecution {
 }
 ```
 
+Replay state is stored separately in immutable `ReplayRequest` rows and mutable `ReplayExecution`, `ReplayExecutionAttempt`, and `ReplayFailure` rows. Each request reserves its own generation and one replay attempt, preserving the original `ZapRunExecution`, attempts, and `ZapRunRetry` failure history. The replay execution records its terminal status and validated `nextStage` independently.
+
 ### Lease Rules & State Transitions
 
 1. **Initial Acquisition**:
@@ -90,6 +94,7 @@ model ZapRunExecution {
 3. **Expired lease quarantine**:
    - An expired or null lease is atomically fenced, marked `FAILED` with `providerOutcome = "unknown"`, and linked to exactly one `ZapRunRetry` row with `requiresHuman = true`.
    - The provider is never invoked to resolve lease uncertainty. A stale worker cannot update the terminal row because every attempt and terminal write checks the current token.
+   - The lease is not reclaimed for another provider attempt.
 
 ---
 
@@ -114,6 +119,14 @@ Once a claim is secured, [`apps/worker/orchestration.ts`](../apps/worker/orchest
    - On success: `status = "SUCCESS"`, `leaseUntil = null`, `completedAt = now()`.
    - On terminal failure: `status = "FAILED"`, `leaseUntil = null`, `completedAt = now()`.
 
+### Replay generation (Phase 9A/9B; release disabled)
+
+- A replay event is bound to a stored `ReplayRequest` and its reserved `ReplayExecution`; the Kafka request ID alone grants no authority. Claim-time checks revalidate approval, ownership, evidence, policy, fingerprints, handler version, and the eligible Telegram input identity.
+- Within the guarded claim, the worker resolves the destination, message, and explicit bot token once. It passes those selected inputs to the handler without reloading mutable action configuration or re-interpolating the payload after claim.
+- The validated successor is stored as `ReplayExecution.nextStage`. A successful replay, including duplicate delivery after a lost progression publication, advances using that stored value rather than recomputing from current configuration.
+- Replay `UNKNOWN` is terminal. An expired `RUNNING` replay is recorded as `UNKNOWN`; it is not reclaimed and the provider is never called again. A terminal replay failure or unknown outcome cannot be replayed again under the original approval and does not advance the workflow.
+- Live replay is disabled until the Phase 9C recovery/provider-semantics gate passes. `REPLAY_RELEASE_READY` is currently false, so setting `REPLAY_ENABLED=true` alone cannot enable dispatch or replay execution.
+
 ---
 
 ## 🪦 Durable Failure Recording
@@ -128,6 +141,9 @@ When a provider rejects an action, persistence fails after a provider call, or a
 
 ## 📐 Invariants Summary
 
-- **Offset Commit Isolation**: Offsets are committed only after durable `SUCCESS` or linked durable `FAILED`. Active leases, unlinked failures, stale ownership, invalid input, and persistence errors remain uncommitted.
+- **Offset Commit Isolation**: Ordinary offsets are committed only after durable `SUCCESS` or linked durable `FAILED`; replay offsets require a durable terminal result, including terminal `UNKNOWN`. Active leases, unlinked failures, stale ownership, invalid input, and persistence errors remain uncommitted.
 - **Lease Boundary**: The default lease duration is `2 minutes`; expiration quarantines the action as unknown rather than reclaiming it for another provider call.
 - **Linear Progression**: Stage $N+1$ is only queued if stage $N$ completes with status `SUCCESS`.
+- **Replay History**: Replay generations and failures are additive; original failed execution and failure records are immutable history.
+- **Replay Outcome**: `UNKNOWN` is terminal and never triggers an automatic resend.
+- **Replay Release Gate**: Phase 9C recovery and provider-semantics verification must pass before live replay is enabled.

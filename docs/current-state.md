@@ -21,6 +21,14 @@ This document provides a factual assessment of what is currently implemented in 
 - **Action Extensibility Registry**: Pluggable `ActionHandler` interface with active handlers for Resend Email and Telegram Bot API.
 - **Template Expression Parsing**: Dot-notated mustache syntax (`{{data.user.email}}`) resolved against execution metadata.
 
+#### Phase 9A/9B Replay Foundation (Not Release-Enabled)
+
+- Replay history is additive: immutable `ReplayRequest` records and separate `ReplayExecution`, attempt, and failure rows preserve the original failed execution, attempts, and failure evidence.
+- The guarded claim revalidates authorization, ownership, policy, fingerprints, handler version, and ordering. It resolves the eligible Telegram destination, message, and explicit bot token once at claim time and passes those selected inputs directly to the handler.
+- The validated successor is stored in `ReplayExecution.nextStage`; successful replay and duplicate-delivery recovery use that stored successor rather than reloading mutable workflow configuration.
+- Replay `UNKNOWN` is terminal. Expired replay leases and ambiguous provider/persistence outcomes do not trigger another provider call, workflow advancement, or reuse of approval.
+- Live replay remains disabled pending Phase 9C recovery and provider-semantics verification. `REPLAY_RELEASE_READY` is false, so `REPLAY_ENABLED=true` cannot enable the dispatcher or worker replay path.
+
 ### 3. API & Management
 
 - **Authentication**: Native username/password signup with bcrypt hashing and JWT generation, alongside Clerk OAuth token exchange endpoint (`POST /api/v1/user/clerk`).
@@ -60,7 +68,7 @@ Phase 4 verification completed with 65 focused tests, 3 PostgreSQL integration t
 - **Model-adapter boundary**: [`apps/ai_agent/src/gemini-model.ts`](../apps/ai_agent/src/gemini-model.ts) implements `IntegratedDiagnosisModel` wrapping Gemini structured JSON output via `GEMINI_DIAGNOSIS_SCHEMA`. Includes fallback mock adapters for deterministic offline testing and prompt construction in [`apps/ai_agent/src/prompts.ts`](../apps/ai_agent/src/prompts.ts) (supporting a single schema repair attempt).
 - **Budgets & deadlines**: Enforces 15s model timeout (`modelTimeoutMs`), 60s investigation deadline (`investigationTimeoutMs`), max 8 tool calls, max 12 graph steps, max 8,000 output tokens, max 48,000 prompt characters, and max 1 schema repair attempt.
 - **Private scoped endpoint**: Exposes `POST /api/v1/triage/diagnose` on `apps/ai_agent` (`diagnosis-http.ts`), secured by service scope JWT verifying `TRIAGE_SERVICE_SECRET`, requiring `failure_context`, `execution_evidence`, and `validate_action_inputs` operation claims, and validating `x-correlation-id` header matching. Called by primary backend's `TriageAgentClient`.
-- **Explicitly unimplemented scope**: Durable investigation persistence (DB schema/rows), operator authorization/RBAC, human approval APIs, replay execution, and frontend UI components remain unimplemented.
+- **Phase boundary**: Phase 6 diagnosis remains bounded and read-only. Later Phase 8 persistence, operator authorization, policy, and approval, plus Phase 9A/9B additive replay request/worker support, are separate layers; live replay is still blocked by the Phase 9C gate. Frontend triage UI remains unimplemented.
 
 ### 5. Frontend Dashboard & Builder
 
@@ -75,13 +83,13 @@ Phase 4 verification completed with 65 focused tests, 3 PostgreSQL integration t
    - Workflows currently execute strictly as a single linear sequence sorted by `sortingOrder: 0, 1, 2...`.
    - Branching conditions, conditional filtering (`if/else`), parallel execution branches, and loops are not yet modeled in the database schema or worker.
 2. **Failure publication and replay**:
-   - Phase 3C publication and reconciliation are implemented as a separate worker runtime. Human-controlled replay and approval APIs remain unimplemented; DLQ publication never authorizes replay.
+   - Phase 3C publication and reconciliation are implemented as a separate worker runtime; DLQ publication never authorizes replay. Phase 8 approval and Phase 9A/9B replay groundwork are implemented, but live replay remains disabled until Phase 9C recovery and provider-semantics checks pass.
 3. **Third-Party delivery uncertainty**:
    - Resend requests include an idempotency key and Telegram lacks provider-level idempotency. Provider acceptance followed by persistence failure remains `UNKNOWN` and requires human review; the worker never resends automatically.
 4. **Single-Threaded Outbox Poller**:
    - `apps/processor` runs an unpartitioned single-instance loop polling the outbox table. At extreme scale, this requires database partitioning or CDC (Change Data Capture) tools like Debezium.
-5. **Triage integration remains transient and read-only**:
-   - Phases 4, 5, and 6 provide bounded evidence gathering, simulated runbook retrieval, and transient LLM diagnosis. Durable investigation persistence, operator authorization, human approval APIs, replay execution, frontend triage screens, Kafka intake, and provider calls remain unimplemented later phases.
+5. **Triage UI and replay release gate**:
+   - Phases 4, 5, and 6 provide bounded evidence gathering, simulated runbook retrieval, and read-only LLM diagnosis; Phase 8 adds durable investigation, operator authorization, policy, and approval. Phase 9A/9B adds the gated additive replay path. Frontend triage screens remain unimplemented, and live replay provider calls remain unavailable until 9C passes.
 
 ---
 

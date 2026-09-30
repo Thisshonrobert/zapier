@@ -17,23 +17,37 @@ This document specifies the Kafka message topics, schemas, producer/consumer top
 
 ### 1. `zap-events` Message Schema
 
-Messages on `zap-events` represent a single action stage execution request for a specific workflow run.
+Messages on `zap-events` represent a single action stage execution request for a specific workflow run. Ordinary workflow events carry `zapRunId` and `stage` only. Replay dispatch events add `replayRequestId`; the worker routes these to the guarded replay path rather than the ordinary execution path.
 
 ```typescript
 type ZapEvent = {
-  zapRunId: string; // UUID of the ZapRun record in PostgreSQL
-  stage: number; // 0-indexed sortingOrder stage in the Zap action sequence
+  zapRunId: string;         // UUID of the ZapRun record in PostgreSQL
+  stage: number;            // 0-indexed sortingOrder stage in the Zap action sequence
+  replayRequestId?: string; // UUID of a ReplayRequest row — present only for dispatched replay events
 };
 ```
 
-**Example Payload**:
+**Ordinary workflow payload**:
 
 ```json
 {
   "zapRunId": "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d",
-  "stage: 0
+  "stage": 0
 }
 ```
+
+**Replay dispatch payload**:
+
+```json
+{
+  "zapRunId": "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d",
+  "stage": 1,
+  "replayRequestId": "a3f1e2d0-5b6c-4f7a-8e9d-0c1b2a3f4e5d"
+}
+```
+
+> [!IMPORTANT]
+> `replayRequestId` is not authorization by itself. When replay is enabled, the worker validates it against a stored `ReplayRequest` and its linked `ReplayExecution` row in a serializable transaction before executing anything. An arbitrary UUID without matching DB state is terminal and cannot invoke a provider. The Phase 9C release gate is currently disabled: replay dispatch is off, and a replay event presented to the worker remains unacknowledged while that gate is closed.
 
 ---
 
@@ -78,6 +92,7 @@ flowchart LR
     subgraph Producers
         Processor["Processor<br/>(clientId: outbox-processor)"]
         WorkerProducer["Worker Producer<br/>(clientId: worker)"]
+        ReplayDispatcher["Replay Dispatcher<br/>(disabled until Phase 9C)"]
     end
 
     subgraph KafkaBroker["Kafka Broker (localhost:9092)"]
@@ -91,6 +106,7 @@ flowchart LR
 
     Processor -->|"Produces {zapRunId, stage: 0}"| ZapEventsTopic
     WorkerProducer -->|"Produces {zapRunId, stage: stage + 1}"| ZapEventsTopic
+    ReplayDispatcher -.->|"gated {zapRunId, stage, replayRequestId}"| ZapEventsTopic
   DlqPublisher["Phase 3C publisher"] -->|"Produces sanitized {failureId, ...}"| DLQTopic
     ZapEventsTopic -->|"Consumes (autoCommit: false)"| WorkerConsumer
 ```
@@ -102,10 +118,15 @@ flowchart LR
    - Produces initial stage events (`stage: 0`) to `zap-events`.
 2. **Worker Producer** ([`apps/worker/index.ts`](../apps/worker/index.ts)):
    - `clientId`: `"worker"`
-   - Produces subsequent stage events (`stage: stage + 1`) to `zap-events`.
+  - Produces subsequent ordinary stage events (`stage: stage + 1`) to `zap-events`.
+  - After a successful replay, publishes the validated successor stored on that replay's `ReplayExecution`; duplicate successful replay delivery can recover a lost publication from the same stored successor.
   - Does not produce to `zap-events-dlq`. The separate Phase 3C publisher claims due `ZapRunRetry` rows and stamps `dlqPublishedAt` only after broker acknowledgement.
 
-3. **DLQ publisher/reconciler** ([`apps/worker/dlq-publisher-index.ts`](../apps/worker/dlq-publisher-index.ts)):
+3. **Replay dispatcher** ([`apps/primary_backend/replay-dispatcher-index.ts`](../apps/primary_backend/replay-dispatcher-index.ts)):
+  - Publishes immutable replay request identities to the existing `zap-events` topic only when the release gate is enabled.
+  - `REPLAY_RELEASE_READY` is currently false, so the dispatcher remains disabled even if `REPLAY_ENABLED=true`. Phase 9C recovery and provider-semantics verification is required before enabling it.
+
+4. **DLQ publisher/reconciler** ([`apps/worker/dlq-publisher-index.ts`](../apps/worker/dlq-publisher-index.ts)):
    - Runs separately from action execution.
    - Publishes bounded, sanitized envelopes keyed by `failureId`.
    - Retries Kafka evidence delivery with bounded backoff, never provider execution.
@@ -131,7 +152,8 @@ flowchart LR
        - Successfully executed and status recorded as `SUCCESS`.
        - Skipped due to existing `SUCCESS` or linked `FAILED` status.
        - Expired/failed and recorded as `FAILED` with one linked `ZapRunRetry`.
-     - Active `PENDING`, unlinked `FAILED`, stale ownership, invalid input, or persistence failure are not committed.
+       - A replay request reaches a durable terminal result; `UNKNOWN` is terminal and does not advance to a successor.
+     - Active `PENDING`, unlinked `FAILED`, stale ownership, invalid input, persistence failure, or replay while the 9C gate is closed are not committed.
 3. **Commit Syntax**:
    ```typescript
    await consumer.commitOffsets([
