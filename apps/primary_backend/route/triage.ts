@@ -10,6 +10,7 @@ import { TriageOperatorCaseNotFound, TriageOperatorDenied, TriageOperatorService
 import { InvestigationAuthority, InvestigationDecisionDenied } from "../services/investigation-authority.ts";
 import { InvestigationProposals } from "../services/investigation-proposals.ts";
 import { InvestigationNotifications } from "../services/investigation-notifications.ts";
+import { ReplayDenied, ReplayService } from "../services/replay.ts";
 import type { EvidenceOperation, ServiceScope } from "../../../packages/triage-contracts/index.ts";
 
 type TriageRouterOptions = {
@@ -19,6 +20,7 @@ type TriageRouterOptions = {
   proposals?: InvestigationProposals;
   authority?: InvestigationAuthority;
   notifications?: InvestigationNotifications;
+  replay?: ReplayService;
   serviceSecret?: string;
 };
 
@@ -40,6 +42,28 @@ export function createTriageRouter(options: TriageRouterOptions) {
   const proposals = options.proposals;
   const authority = options.authority;
   const notifications = options.notifications;
+  for (const operation of ["dry-run", "requests"] as const) {
+    router.post(`/operator/cases/:caseId/replay/${operation}`, authMiddleware, async (request, response) => {
+      const parsed = z.object({ approvalId: uuid, proposalVersion: z.number().int().positive() }).strict().safeParse(request.body);
+      const requestId = operation === "requests" ? request.headers["idempotency-key"] : randomUUID();
+      if (!parsed.success || typeof requestId !== "string" || !uuid.safeParse(requestId).success) {
+        response.status(422).json({ detail: "Invalid replay request" }); return;
+      }
+      let selected;
+      try { selected = await operatorCase(request, "read_case"); }
+      catch (error) { operatorError(response, error); return; }
+      if (!options.replay) { response.status(503).json({ detail: "Replay intent unavailable" }); return; }
+      try {
+        const input = { ...parsed.data, requestId, actorId: request.id,
+          caseId: selected.case_id, subjectOwnerId: selected.subject_owner_id };
+        const result = operation === "requests" ? await options.replay.request(input) : await options.replay.dryRun(input);
+        response.status(operation === "requests" ? 201 : 200).json(result);
+      } catch (error) {
+        if (error instanceof ReplayDenied) response.status(409).json({ detail: error.message, replayEnabled: false });
+        else response.status(503).json({ detail: "Replay intent unavailable", replayEnabled: false });
+      }
+    });
+  }
   const validServiceSecret = (value: string | undefined) => {
     if (!value || secret.length < 32) return false;
     const expected = Buffer.from(secret);

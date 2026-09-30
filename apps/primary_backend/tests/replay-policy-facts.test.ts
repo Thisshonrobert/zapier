@@ -20,7 +20,8 @@ const saved = {
 };
 const current = structuredClone(saved);
 const config = { actionFingerprint: hash, requestFingerprint: hash,
-  handlerVersion: "worker-v1", currentHandlerVersion: "worker-v1", incompatibleSuccessor: false };
+  handlerVersion: "worker-v1", currentHandlerVersion: "worker-v1", incompatibleSuccessor: false,
+  activeReplay: false, previousReplayCount: 0, providerEvidenceConsistent: true };
 
 describe("Phase 8 policy evidence mapping", () => {
   test("uses current source hashes and handler identity before requiring approval", () => {

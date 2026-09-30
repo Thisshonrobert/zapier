@@ -19,6 +19,7 @@ afterEach(async () => {
 async function start(options: { failAudit?: boolean; failNotify?: boolean; saved?: unknown } = {}) {
   const calls: { path: string; token: string; correlationId: string; method: string; body?: unknown }[] = [];
   const authorityCalls: unknown[] = [];
+  const replayCalls: unknown[] = [];
   const events: string[] = [];
   const app = express();
   app.use(express.json());
@@ -50,6 +51,11 @@ async function start(options: { failAudit?: boolean; failNotify?: boolean; saved
       if (options.failNotify) throw new Error("agent offline");
       return true;
     } } as never,
+    replay: { dryRun: async (value: unknown) => {
+      replayCalls.push(value); return { status: "requires_approval", replayEnabled: false };
+    }, request: async (value: unknown) => {
+      replayCalls.push(value); return { id: (value as { requestId: string }).requestId, replayEnabled: false };
+    } } as never,
     serviceSecret: secret,
   }));
   const server = createServer(app);
@@ -57,8 +63,30 @@ async function start(options: { failAudit?: boolean; failNotify?: boolean; saved
   await new Promise<void>((resolve) => server.listen(0, "127.0.0.1", resolve));
   const address = server.address();
   if (!address || typeof address === "string") throw new Error("missing address");
-  return { baseUrl: `http://127.0.0.1:${address.port}/api/v1/triage`, calls, authorityCalls, events };
+  return { baseUrl: `http://127.0.0.1:${address.port}/api/v1/triage`, calls, authorityCalls, events, replayCalls };
 }
+
+test("replay APIs bind actor and owner on the server and reject changed inputs", async () => {
+  const { baseUrl, replayCalls } = await start();
+  const requestId = "99999999-9999-4999-8999-999999999999";
+  const approvalId = "88888888-8888-4888-8888-888888888888";
+  const headers = { authorization: `Bearer ${jwt.sign({ id: 4 }, process.env.JWT_SECRET!)}`,
+    "content-type": "application/json", "idempotency-key": requestId };
+  for (const operation of ["dry-run", "requests"]) {
+    const response = await fetch(`${baseUrl}/operator/cases/${caseId}/replay/${operation}`, {
+      method: "POST", headers, body: JSON.stringify({ approvalId, proposalVersion: 1 }),
+    });
+    expect(response.status).toBe(operation === "requests" ? 201 : 200);
+    expect(await response.json()).toMatchObject({ replayEnabled: false });
+  }
+  expect(replayCalls).toEqual([expect.objectContaining({ actorId: 4, subjectOwnerId: 9, caseId, approvalId }),
+    { requestId, actorId: 4, subjectOwnerId: 9, caseId, approvalId, proposalVersion: 1 }]);
+  const denied = await fetch(`${baseUrl}/operator/cases/${caseId}/replay/requests`, {
+    method: "POST", headers, body: JSON.stringify({ approvalId, proposalVersion: 1, subjectOwnerId: 10, message: "new inputs" }),
+  });
+  expect(denied.status).toBe(422);
+  expect(replayCalls).toHaveLength(2);
+});
 
 describe("Phase 10A operator HTTP binding", () => {
   test("requires authentication", async () => {
