@@ -1,3 +1,4 @@
+//"Is this person authorized to make the decision?
 import { Prisma } from "../../../packages/db/generated/prisma/client.ts";
 
 export type SqlClient = {

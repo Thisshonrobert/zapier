@@ -1,3 +1,4 @@
+//Is this safe enough to present for approval?
 import { createHash, randomUUID } from "node:crypto";
 
 import { Prisma } from "../../../packages/db/generated/prisma/client.ts";
@@ -79,3 +80,37 @@ export class InvestigationProposals {
     });
   }
 }
+// investigation-proposals.ts takes the AI result and asks:
+
+// What does the database say RIGHT NOW?
+
+// It loads:
+
+// saved evidence
+// current evidence
+// current execution state
+// current fingerprints
+// current handler version
+// current configuration
+
+// Then:
+
+// buildReplayPolicyFacts()
+//         ↓
+// evaluateReplayPolicy()
+
+// Example:
+
+// AI says replay_candidate
+//         ↓
+// Policy:
+//   Is failure actually Telegram 429?      YES
+//   Attempts recorded?                     YES
+//   Execution FAILED?                      YES
+//   Active lease?                           NO
+//   Inputs still valid?                     YES
+//   Fingerprint unchanged?                  YES
+//   Handler unchanged?                      YES
+//   Cooldown finished?                      YES
+//         ↓
+// requires_approval 

@@ -1,3 +1,4 @@
+// worker -> pick invetigation and execute it via langraph. If the worker crashes, the investigation will be re-claimed by another worker.
 import { randomUUID } from "node:crypto";
 import type { PostgresSaver } from "@langchain/langgraph-checkpoint-postgres";
 
@@ -69,3 +70,25 @@ export function createInvestigationExecutor(input: {
     }).diagnoseWithEvidence();
   };
 }
+
+/**queued investigation
+        ↓
+runner.claimNext() //Take one pending investigation and execute it.
+        ↓
+gets investigation #123
+        ↓
+creates scoped backend access
+        ↓
+creates LangGraph diagnosis service
+        ↓
+LangGraph gathers evidence
+        ↓
+LangGraph retrieves runbooks
+        ↓
+LangGraph generates diagnosis
+        ↓
+returns { evidence, result }
+        ↓
+store.finish()
+        ↓
+status = proposed */

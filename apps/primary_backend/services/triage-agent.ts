@@ -1,4 +1,4 @@
-//HTTP client used by the primary backend to talk to the AI service.
+//HTTP client used by the primary backend to talk to the AI service.ie case ownership bridge
 export class AgentReadTimeout extends Error {}
 
 export class TriageAgentClient {

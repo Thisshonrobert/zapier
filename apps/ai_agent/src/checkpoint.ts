@@ -1,3 +1,5 @@
+// What happens if the AI is halfway through investigation and the process crashes? 
+//**diagnose -WAIT FOR HUMAN-checkpoint saved - server crashes -server restarts-resume from checkpoint */
 import { PostgresSaver } from "@langchain/langgraph-checkpoint-postgres";
 import type { Pool } from "pg";
 
