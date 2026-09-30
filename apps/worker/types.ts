@@ -7,6 +7,8 @@ export interface ActionContext {
   stage: number;
   idempotencyKey: string;
   zapRunMetadata: Record<string, unknown>;
+  signal?: AbortSignal;
+  telegramInputs?: { botToken: string; destination: string; message: string };
 }
 
 export type ActionProvider = "email" | "telegram";

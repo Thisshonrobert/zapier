@@ -4,7 +4,8 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "bun  run index.ts"
+    "dev": "bun  run index.ts",
+    "dev:replay": "bun run replay-dispatcher-index.ts"
   },
   "dependencies": {
     "@clerk/backend": "^2.23.0",

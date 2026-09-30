@@ -7,6 +7,9 @@ import { loadCurrentPolicyState, revalidateProposalPolicy } from "../services/re
 import { ReplayService } from "../services/replay.ts";
 import { createFingerprints } from "../../worker/execution-store.ts";
 import { createPostgresFixture, setOperator } from "./postgres-fixture.ts";
+import { createReplayDispatcher } from "../services/replay-dispatcher.ts";
+import { createReplayStore, executeReplayStage } from "../../worker/replay.ts";
+import { ActionExecutionError } from "../../worker/types.ts";
 
 let fixture: Awaited<ReturnType<typeof createPostgresFixture>>;
 const previousHandler = process.env.WORKER_HANDLER_VERSION;
@@ -17,15 +20,17 @@ afterAll(async () => {
   if (fixture) await fixture.close();
 });
 
-async function setup(storedFacts: Record<string, unknown> = {}, completedAt = new Date(Date.now() - 120_000)) {
+async function setup(storedFacts: Record<string, unknown> = {}, completedAt = new Date(Date.now() - 120_000), extraStage = false,
+  telegramMetadata: Record<string, string> = {}) {
   const db = fixture.db;
   const owner = await db.user.create({ data: { name: "owner", email: `${randomUUID()}@example.invalid` } });
   const actor = await db.user.create({ data: { name: "operator", email: `${randomUUID()}@example.invalid` } });
   await setOperator(db, actor.id, true);
   await db.availableAction.upsert({ where: { id: "telegram" }, update: {}, create: { id: "telegram", name: "Telegram", imageUrl: "test" } });
   const zap = await db.zap.create({ data: { userId: owner.id } });
-  const metadata = { channelUserName: "test", message: "No send", botToken: "0:test" };
+  const metadata = { channelUserName: "-100123", message: "No send", botToken: "0:test", ...telegramMetadata };
   const action = await db.action.create({ data: { zapId: zap.id, actionId: "telegram", metadata, sortingOrder: 0 } });
+  if (extraStage) await db.action.create({ data: { zapId: zap.id, actionId: "telegram", metadata, sortingOrder: 1 } });
   const run = await db.zapRun.create({ data: { zapId: zap.id, metadata: {} } });
   const fingerprints = createFingerprints({ zapRunId: run.id, stage: 0, actionId: action.id,
     actionTypeId: "telegram", actionMetadata: metadata, zapRunMetadata: {} });
@@ -224,4 +229,182 @@ test("expired and non-approve authority cannot create a request; original approv
   await setOperator(fixture.db, requester.id, true);
   await setOperator(fixture.db, input.actorId, false);
   await expect(new ReplayService(fixture.db).request({ ...input, actorId: requester.id })).rejects.toThrow("approver permission revoked");
+});
+
+const replayEvent = (input: { requestId: string }, run: { id: string }) =>
+  ({ zapRunId: run.id, stage: 0, replayRequestId: input.requestId });
+const replayStore = () => createReplayStore(fixture.db, { enabled: true, handlerVersion: "test-worker-v1" });
+const acceptedHandler = { type: "telegram", execute: async () =>
+  ({ provider: "telegram" as const, phase: "send" as const, outcome: "accepted" as const, safeReceiptId: "receipt" }) };
+
+test("9B is disabled by default and forged/mismatched envelopes cannot invoke a provider", async () => {
+  const { input, run } = await setup();
+  await new ReplayService(fixture.db).request(input);
+  let sends = 0;
+  const handler = { ...acceptedHandler, execute: async () => { sends++; return acceptedHandler.execute(); } };
+  const event = replayEvent(input, run);
+  expect(await executeReplayStage({ event, store: createReplayStore(fixture.db), getHandler: () => handler }))
+    .toEqual({ ack: false, advance: false });
+  for (const invalid of [{ ...event, replayRequestId: randomUUID() }, { ...event, zapRunId: randomUUID() }, { ...event, stage: 1 }]) {
+    expect(await executeReplayStage({ event: invalid, store: replayStore(), getHandler: () => handler }))
+      .toEqual({ ack: true, advance: false });
+  }
+  expect(sends).toBe(0);
+  expect(await createReplayDispatcher(fixture.db, { send: async () => { sends++; } }).dispatchOne()).toBe(false);
+  expect(sends).toBe(0);
+});
+
+test("dispatcher retries with the same request identity, records broker ACK, and preserves immutable authority", async () => {
+  const { input, run } = await setup();
+  await new ReplayService(fixture.db).request(input);
+  const before = await fixture.db.$queryRaw<unknown[]>(Prisma.sql`SELECT * FROM "ReplayRequest" WHERE id = ${input.requestId}`);
+  const messages: string[] = [];
+  let now = new Date();
+  const dispatcher = createReplayDispatcher(fixture.db, { send: async ({ value }) => {
+    if (JSON.parse(value).replayRequestId !== input.requestId) return;
+    messages.push(value); if (messages.length === 1) throw new Error("broker unavailable");
+  } }, { enabled: true, now: () => now });
+  // Earlier cases intentionally leave queued intents in this suite's isolated schema.
+  for (let count = 0; messages.length === 0 && count < 100; count++) await dispatcher.dispatchOne();
+  const [failed] = await fixture.db.$queryRaw<{ publishedAt: Date | null; dispatchAttempts: number }[]>(Prisma.sql`
+    SELECT "publishedAt", "dispatchAttempts" FROM "ReplayExecution" WHERE "requestId" = ${input.requestId}`);
+  expect(failed).toEqual({ publishedAt: null, dispatchAttempts: 1 });
+  while (await dispatcher.dispatchOne()) { /* drain other due fixture intents */ }
+  now = new Date(now.getTime() + 65_000);
+  while (await dispatcher.dispatchOne()) { /* includes the delayed identity */ }
+  expect(messages.map(value => JSON.parse(value))).toEqual([replayEvent(input, run), replayEvent(input, run)]);
+  expect(await dispatcher.dispatchOne()).toBe(false);
+  expect(await fixture.db.$queryRaw<unknown[]>(Prisma.sql`SELECT * FROM "ReplayRequest" WHERE id = ${input.requestId}`)).toEqual(before);
+});
+
+test("competing worker deliveries select one immutable input snapshot and one provider attempt", async () => {
+  const { input, execution, action, run } = await setup();
+  await new ReplayService(fixture.db).request(input);
+  const before = await fixture.db.zapRunExecution.findUnique({ where: { id: execution.id }, include: { attempts: true, failure: true } });
+  let sends = 0;
+  const handler = { ...acceptedHandler, execute: async (metadata: Record<string, unknown>, ctx: { idempotencyKey: string }) => {
+    sends++;
+    await fixture.db.action.update({ where: { id: action.id }, data: { metadata: { message: "changed" } } });
+    expect(metadata.message).toBe("No send");
+    expect(ctx.idempotencyKey).toBe(`zaprun_${run.id}_stage_0`);
+    return acceptedHandler.execute();
+  } };
+  const store = replayStore(), event = replayEvent(input, run);
+  const results = await Promise.all([executeReplayStage({ event, store, getHandler: () => handler }),
+    executeReplayStage({ event, store, getHandler: () => handler })]);
+  expect(results.some(result => result.advance)).toBe(true);
+  expect(sends).toBe(1);
+  expect(await executeReplayStage({ event, store, getHandler: () => handler })).toEqual({ ack: true, advance: true, nextStage: null });
+  expect(sends).toBe(1);
+  expect(await fixture.db.zapRunExecution.findUnique({ where: { id: execution.id }, include: { attempts: true, failure: true } })).toEqual(before);
+  expect(await fixture.db.$queryRaw<unknown[]>(Prisma.sql`SELECT * FROM "ReplayExecutionAttempt" WHERE "requestId" = ${input.requestId}`)).toHaveLength(1);
+  const fingerprints = createFingerprints({ zapRunId: run.id, stage: 0, actionId: action.id,
+    actionTypeId: "telegram", actionMetadata: action.metadata as Record<string, unknown>, zapRunMetadata: {} });
+  expect(await store.stageResolution({ zapRunId: run.id, stage: 0 }, fingerprints)).toEqual({ ack: true, advance: true, nextStage: null });
+  expect(await store.stageResolution({ zapRunId: run.id, stage: 0 }, { ...fingerprints, requestFingerprint: "f".repeat(64) })).toBeNull();
+});
+
+test.each(["SUCCESS", "permission", "fingerprint", "handler", "revision"])("worker revalidation refuses %s after request creation", async kind => {
+  const { input, execution, action, run } = await setup();
+  await new ReplayService(fixture.db).request(input);
+  if (kind === "SUCCESS") await fixture.db.zapRunExecution.update({ where: { id: execution.id }, data: { status: "SUCCESS" } });
+  if (kind === "permission") await setOperator(fixture.db, input.actorId, false);
+  if (kind === "fingerprint") await fixture.db.action.update({ where: { id: action.id }, data: { metadata: { message: "changed" } } });
+  if (kind === "revision") await fixture.db.$executeRaw(Prisma.sql`INSERT INTO "TriageProposal"
+    (id, "investigationId", "caseId", "subjectOwnerId", version, disposition, status, proposal, policy, "evidenceHash", "expiresAt")
+    SELECT ${randomUUID()}, "investigationId", "caseId", "subjectOwnerId", version + 1, disposition, status, proposal, policy, "evidenceHash", "expiresAt"
+    FROM "TriageProposal" WHERE id = (SELECT "proposalId" FROM "TriageApproval" WHERE id = ${input.approvalId})`);
+  let sends = 0;
+  const store = kind === "handler" ? createReplayStore(fixture.db, { enabled: true, handlerVersion: "other" }) : replayStore();
+  expect(await executeReplayStage({ event: replayEvent(input, run), store, getHandler: () => ({ ...acceptedHandler,
+    execute: async () => { sends++; return acceptedHandler.execute(); } }) })).toEqual({ ack: true, advance: false });
+  expect(sends).toBe(0);
+});
+
+test.each(["rejected", "timeout", "expired lease"])("failed/unknown replay %s is terminal and preserves original history", async kind => {
+  const { input, execution, run } = await setup();
+  await new ReplayService(fixture.db).request(input);
+  const before = await fixture.db.zapRunExecution.findUnique({ where: { id: execution.id }, include: { attempts: true, failure: true } });
+  const event = replayEvent(input, run), store = replayStore();
+  let sends = 0;
+  const handler = { ...acceptedHandler, execute: async () => {
+    sends++;
+    if (kind === "timeout") return new Promise<never>(() => {});
+    throw new ActionExecutionError("private error", { provider: "telegram", phase: "send", outcome: "rejected", safeCode: "telegram_http_429", status: 429, retryAfterSeconds: 1 });
+  } };
+  if (kind === "expired lease") {
+    const claim = await store.claim(event);
+    expect(claim.kind).toBe("CLAIMED");
+    await fixture.db.$executeRaw(Prisma.sql`UPDATE "ReplayExecution" SET "leaseUntil" = now() - interval '1 second' WHERE "requestId" = ${input.requestId}`);
+    expect(await executeReplayStage({ event, store, getHandler: () => handler })).toEqual({ ack: true, advance: false });
+    if (claim.kind === "CLAIMED") expect(await store.complete(claim, await acceptedHandler.execute())).toBe(false);
+  } else expect(await executeReplayStage({ event, store, getHandler: () => handler, timeoutMs: 10 })).toEqual({ ack: true, advance: false });
+  expect(await executeReplayStage({ event, store, getHandler: () => handler })).toEqual({ ack: true, advance: false });
+  expect(sends).toBe(kind === "expired lease" ? 0 : 1);
+  const [failure] = await fixture.db.$queryRaw<{ providerOutcome: string }[]>(Prisma.sql`SELECT "providerOutcome" FROM "ReplayFailure" WHERE "requestId" = ${input.requestId}`);
+  expect(failure?.providerOutcome).toBe(kind === "rejected" ? "rejected" : "unknown");
+  expect(await fixture.db.zapRunExecution.findUnique({ where: { id: execution.id }, include: { attempts: true, failure: true } })).toEqual(before);
+  await expect(new ReplayService(fixture.db).request({ ...input, requestId: randomUUID() })).rejects.toThrow("replay_limit");
+});
+
+test("successful replay and duplicate delivery retain the validated successor after mutable configuration changes", async () => {
+  const { input, run, zap } = await setup({}, new Date(Date.now() - 120_000), true);
+  await new ReplayService(fixture.db).request(input);
+  const store = replayStore(), event = replayEvent(input, run);
+  let sends = 0;
+  const handler = { ...acceptedHandler, execute: async () => {
+    sends++;
+    await fixture.db.action.deleteMany({ where: { zapId: zap.id, sortingOrder: 1 } });
+    return acceptedHandler.execute();
+  } };
+  expect(await executeReplayStage({ event, store, getHandler: () => handler })).toEqual({ ack: true, advance: true, nextStage: 1 });
+  expect(await executeReplayStage({ event, store, getHandler: () => handler })).toEqual({ ack: true, advance: true, nextStage: 1 });
+  expect(sends).toBe(1);
+});
+
+test("failed outcome persistence rolls back together and redelivery quarantines without resending", async () => {
+  const { input, run } = await setup();
+  await new ReplayService(fixture.db).request(input);
+  const store = replayStore(), event = replayEvent(input, run);
+  await fixture.db.$executeRawUnsafe(`CREATE FUNCTION fail_test_replay_failure() RETURNS trigger LANGUAGE plpgsql AS $$
+    BEGIN RAISE EXCEPTION 'test replay failure unavailable'; END; $$`);
+  await fixture.db.$executeRawUnsafe(`CREATE TRIGGER fail_test_replay_failure BEFORE INSERT ON "ReplayFailure"
+    FOR EACH ROW EXECUTE FUNCTION fail_test_replay_failure()`);
+  let sends = 0;
+  const handler = { ...acceptedHandler, execute: async () => {
+    sends++;
+    throw new ActionExecutionError("rejected", { provider: "telegram", phase: "send", outcome: "rejected", safeCode: "telegram_http_429", status: 429 });
+  } };
+  try {
+    await expect(executeReplayStage({ event, store, getHandler: () => handler })).rejects.toThrow();
+    const [state] = await fixture.db.$queryRaw<{ status: string; attemptStatus: string }[]>(Prisma.sql`
+      SELECT execution.status, attempt.status AS "attemptStatus" FROM "ReplayExecution" execution
+      JOIN "ReplayExecutionAttempt" attempt ON attempt."requestId" = execution."requestId"
+      WHERE execution."requestId" = ${input.requestId}`);
+    expect(state).toEqual({ status: "RUNNING", attemptStatus: "STARTED" });
+    expect(await executeReplayStage({ event, store, getHandler: () => handler })).toEqual({ ack: false, advance: false });
+  } finally { await fixture.db.$executeRawUnsafe('DROP TRIGGER fail_test_replay_failure ON "ReplayFailure"'); }
+  await fixture.db.$executeRaw(Prisma.sql`UPDATE "ReplayExecution" SET "leaseUntil" = now() - interval '1 second' WHERE "requestId" = ${input.requestId}`);
+  expect(await executeReplayStage({ event, store, getHandler: () => handler })).toEqual({ ack: true, advance: false });
+  expect(sends).toBe(1);
+  const [failure] = await fixture.db.$queryRaw<{ providerOutcome: string }[]>(Prisma.sql`SELECT "providerOutcome" FROM "ReplayFailure" WHERE "requestId" = ${input.requestId}`);
+  expect(failure?.providerOutcome).toBe("unknown");
+});
+
+test.each(["username", "environment credential"])("replay blocks unproven same-input %s", async kind => {
+  const { input, run } = await setup({}, new Date(Date.now() - 120_000), false,
+    kind === "username" ? { channelUserName: "@reassigned" } : { botToken: "" });
+  await new ReplayService(fixture.db).request(input);
+  const previous = process.env.TELEGRAM_BOT_TOKEN;
+  process.env.TELEGRAM_BOT_TOKEN = "rotated:token";
+  let sends = 0;
+  try {
+    expect(await executeReplayStage({ event: replayEvent(input, run), store: replayStore(), getHandler: () => ({
+      ...acceptedHandler, execute: async () => { sends++; return acceptedHandler.execute(); },
+    }) })).toEqual({ ack: true, advance: false });
+    expect(sends).toBe(0);
+  } finally {
+    if (previous === undefined) delete process.env.TELEGRAM_BOT_TOKEN;
+    else process.env.TELEGRAM_BOT_TOKEN = previous;
+  }
 });

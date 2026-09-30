@@ -1,14 +1,16 @@
 import { Kafka } from "kafkajs";
 import { prisma } from "../../packages/db/prisma/db";
 import { getActionHandler } from "./actions";
-import { createExecutionStore, type ExecutionDb } from "./execution-store.ts";
+import { createExecutionStore, createFingerprints, type ExecutionDb } from "./execution-store.ts";
 import { executeStage, parseZapEvent, requireLoadedAction, type ZapEvent } from "./orchestration.ts";
+import { createReplayStore, executeReplayStage } from "./replay.ts";
 
 const TOPIC_NAME = "zap-events";
 const kafka = new Kafka({ clientId: "worker", brokers: ["localhost:9092"] });
 const consumer = kafka.consumer({ groupId: "zap-group" });
 const store = createExecutionStore(prisma as unknown as ExecutionDb,
   { handlerVersion: process.env.WORKER_HANDLER_VERSION });
+const replayStore = createReplayStore(prisma);
 
 async function loadStageExecution({ zapRunId, stage }: ZapEvent) {
   const zapDetails = await prisma.zapRun.findFirst({
@@ -27,9 +29,8 @@ async function processMessage(
   message: { offset: string; value: Buffer | null },
 ) {
   const event = parseZapEvent(message.value);
-  const execution = requireLoadedAction(await loadStageExecution(event));
-
-  const resolution = await executeStage({
+  const execution = event.replayRequestId ? null : requireLoadedAction(await loadStageExecution(event));
+  const ordinaryInput = execution ? {
     event,
     action: {
       id: execution.currentAction.id,
@@ -39,12 +40,21 @@ async function processMessage(
     zapRunMetadata: execution.zapDetails.metadata as Record<string, unknown>,
     store,
     getHandler: getActionHandler,
-  });
+  } : null;
+  const recovered = ordinaryInput ? await replayStore.stageResolution(event, createFingerprints({
+    ...event, actionId: ordinaryInput.action.id, actionTypeId: ordinaryInput.action.typeId,
+    actionMetadata: ordinaryInput.action.metadata, zapRunMetadata: ordinaryInput.zapRunMetadata,
+  })) : null;
+  const resolution = event.replayRequestId
+    ? await executeReplayStage({ event, store: replayStore, getHandler: getActionHandler })
+    : recovered ?? await executeStage(ordinaryInput!);
 
-  if (resolution.advance && execution.zapDetails.zap.actions.length - 1 !== event.stage) {
+  const nextStage = !resolution.advance ? null : resolution.nextStage !== undefined ? resolution.nextStage
+    : execution!.zapDetails.zap.actions.length - 1 !== event.stage ? event.stage + 1 : null;
+  if (nextStage !== null) {
     await producer.send({
       topic: TOPIC_NAME,
-      messages: [{ value: JSON.stringify({ stage: event.stage + 1, zapRunId: event.zapRunId }) }],
+      messages: [{ value: JSON.stringify({ stage: nextStage, zapRunId: event.zapRunId }) }],
     });
   }
 
