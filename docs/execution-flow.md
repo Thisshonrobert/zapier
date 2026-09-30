@@ -35,18 +35,18 @@ sequenceDiagram
         Processor->>DB: DELETE FROM ZapRunOutbox WHERE id IN (processedIds)
     end
 
-    %% 3. Worker Consumption & Stage 0 Execution
+    %% 3. Ordinary Worker Consumption & Stage 0 Execution
     Kafka->>Worker: Consume message { zapRunId, stage: 0 }
     Worker->>DB: loadStageExecution(): Fetch ZapRun & Action where sortingOrder == 0
     Worker->>DB: claimExecution(): INSERT into ZapRunExecution (status: PENDING, leaseUntil)
 
     alt Lease Acquired Successfully
-        Worker->>ExternalAPI: executeClaimedAction(): Execute action with withRetry(attempts: 3)
+        Worker->>ExternalAPI: Execute the selected handler once
         alt Action Succeeded
             ExternalAPI-->>Worker: HTTP 200 / Success
             Worker->>DB: updateExecutionStatus(): Update ZapRunExecution status = SUCCESS
             Worker->>Kafka: publishNextStage(): producer.send(topic: 'zap-events', value: { zapRunId, stage: 1 })
-        else Action Failed Exhaustively (3 attempts)
+        else Action Failed or outcome is unknown
             Worker->>DB: Update ZapRunExecution status = FAILED
             Worker->>Postgres: Atomically persist FAILED + linked ZapRunRetry
             Note over Worker,Postgres: No provider retry and no direct DLQ publication
@@ -57,11 +57,18 @@ sequenceDiagram
     else Already SUCCESS
         Worker->>Kafka: Skip execution, advance next stage if applicable
     else Active Lease Held by another worker
-        Worker-->>Worker: Skip execution (avoid race condition)
+        Worker-->>Worker: Leave offset uncommitted for redelivery
+    else Lease expired
+        Worker->>Postgres: Quarantine as FAILED/UNKNOWN with linked failure
+        Note over Worker,Postgres: No lease reclaim and no provider call
     end
 
-    Worker->>Kafka: consumer.commitOffsets([offset + 1])
+    opt Message reached a durable resolved outcome
+        Worker->>Kafka: consumer.commitOffsets([offset + 1])
+    end
 ```
+
+The sequence above shows ordinary execution. The separately gated replay path is described in Phase 6 below.
 
 ---
 
@@ -109,12 +116,12 @@ sequenceDiagram
      - If the record does not exist, the lease is acquired (`executionClaimed = true`).
      - If `status === "SUCCESS"`, the worker skips execution and considers the stage resolved (`alreadySucceeded = true`).
      - If `status === "FAILED"`, the worker treats it as a terminal failure and skips execution.
-     - If `status === "PENDING"` with an active lease (`leaseUntil > now`), another worker is running; this message is skipped.
-     - If `status === "PENDING"` with an expired lease (`leaseUntil <= now`), the worker reclaims the lease via `updateMany` to recover from a crashed worker.
+      - If `status === "PENDING"` with an active lease (`leaseUntil > now`), another worker is running; leave the Kafka offset uncommitted for redelivery.
+      - If `status === "PENDING"` with an expired or null lease, atomically fence and quarantine it as `FAILED` with provider outcome `unknown`, finalize any started attempt as `UNKNOWN`, and create one linked `ZapRunRetry`. Do not reclaim the lease or call the provider again.
 
 ---
 
-### Phase 4: Action Execution & In-Process Retry
+### Phase 4: Single-Shot Action Execution
 
 1. **Context Preparation**: The worker constructs `ActionContext`:
    ```typescript
@@ -126,9 +133,9 @@ sequenceDiagram
    };
    ```
 2. **Action Resolution**: `getActionHandler(actionType)` retrieves the handler from the action registry ([`apps/worker/actions/index.ts`](../apps/worker/actions/index.ts)).
-3. **Execution with Exponential Backoff**:
-   - [`apps/worker/retry.ts`](../apps/worker/retry.ts) runs `withRetry(handler.execute, 3)`.
-   - Backoff delay: `1000ms * 2^(attempt - 1)` (1s, 2s).
+3. **Single provider attempt**:
+  - The worker records one `STARTED` attempt and invokes the selected handler once. It does not retry provider actions in-process.
+  - A provider rejection, transport uncertainty, or failure persisting a provider result is durably recorded as failure evidence; ambiguous delivery is `UNKNOWN` and is never resent automatically.
 4. **Template Parsing**: Handlers call `parse(templateString, ctx.zapRunMetadata)` in [`apps/worker/parse.ts`](../apps/worker/parse.ts) to resolve dynamic tokens such as `{{body.amount}}` or `{{comment.author}}`.
 
 ---
@@ -138,17 +145,26 @@ sequenceDiagram
 1. **On Success**:
    - `updateExecutionStatus(zapRunId, stage, "SUCCESS")` marks the stage finished in `ZapRunExecution`.
    - If more actions exist in the Zap (`stage < totalActions - 1`), the worker produces `{ zapRunId, stage: stage + 1 }` to `zap-events`.
-2. **On Failure (Exhausted Retries)**:
-   - `updateExecutionStatus(zapRunId, stage, "FAILED")` sets `status: "FAILED"`.
-  - The action worker persists a sanitized, linked `ZapRunRetry` failure record in one transaction.
+    - This computed successor applies to ordinary execution. Successful replay progression uses the validated `nextStage` stored on its separate `ReplayExecution` row.
+  2. **On Terminal Failure**:
+    - `ZapRunExecution` is atomically finalized as `FAILED` with one sanitized, linked `ZapRunRetry` failure record.
+    - Provider actions are not retried automatically; an ambiguous provider result is recorded as `UNKNOWN` and requires human review.
   - The separate Phase 3C runtime publishes that row to `zap-events-dlq` by `failureId`, stamps `dlqPublishedAt` only after broker acknowledgement, and reconciles expired or unlinked execution rows without invoking providers.
 3. **Offset Commit**:
-   - After processing, skipping, or dead-lettering, the worker commits the Kafka offset:
+    - After a durable success, a linked terminal failure, or a safely resolved duplicate, the worker commits the Kafka offset:
      ```typescript
      await consumer.commitOffsets([
        { topic, partition, offset: (parseInt(message.offset) + 1).toString() },
      ]);
      ```
+
+### Phase 6: Additive Replay Generation (Phase 9A/9B; gated)
+
+1. **Separate history**: A replay uses an immutable `ReplayRequest` plus its own `ReplayExecution`, attempt, and failure rows. It never resets or overwrites the original `FAILED` `ZapRunExecution`, attempts, or `ZapRunRetry` evidence.
+2. **Guarded claim and selected inputs**: In a serializable transaction, the worker revalidates the stored approval and request against ownership, current policy, fingerprints, handler version, and stage ordering. It resolves the eligible Telegram destination, message, and explicit bot token once at claim time and passes those exact selected inputs to the handler; the handler does not reload mutable configuration or interpolate them again.
+3. **Stored successor**: The validated `nextStage` is written to `ReplayExecution` when the generation is claimed. On success, the worker publishes that successor. A duplicate successful replay can use the stored value to recover a lost progression publication without recomputing it from mutable workflow configuration.
+4. **Terminal outcomes**: A provider rejection/failure ends this release's replay allowance. An expired replay lease or ambiguous provider/persistence result is recorded as terminal `UNKNOWN`; the worker does not resend, reclaim the generation, advance, or reuse the approval.
+5. **Disabled release gate**: `REPLAY_RELEASE_READY` is false pending Phase 9C PostgreSQL/Kafka crash-window recovery and provider-semantics verification. The dispatcher therefore does not publish replay requests, and a replay event presented to the worker is left unacknowledged while the gate is closed. Setting `REPLAY_ENABLED=true` alone has no effect.
 
 ---
 
