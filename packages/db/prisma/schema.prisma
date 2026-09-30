@@ -27,6 +27,7 @@ model TriageAccessAudit {
   action         String
   outcome        String
   createdAt      DateTime @default(now())
+  replayRequest  ReplayRequest?
 
   @@index([actorId, createdAt])
   @@index([caseId, createdAt])
@@ -64,8 +65,91 @@ model TriageApproval {
   expiresAt       DateTime
   createdAt       DateTime @default(now())
   notification    TriageDecisionNotification?
+  replayRequest   ReplayRequest?
 
   @@index([caseId, subjectOwnerId])
+}
+
+// Immutable authority: the unique approval reference is its one-time consumption.
+// Execution state belongs to ReplayExecution; original Phase 3 rows are never reset.
+model ReplayRequest {
+  id                 String @id
+  approvalId         String @unique
+  approval           TriageApproval @relation(fields: [approvalId], references: [id])
+  proposalVersion    Int
+  caseId             String @unique
+  originalFailure    ZapRunRetry @relation(fields: [caseId], references: [id])
+  subjectOwnerId     Int
+  approvedBy         Int
+  requestedBy        Int
+  zapRunId           String
+  run                ZapRun @relation(fields: [zapRunId], references: [id])
+  stage              Int
+  originalExecutionId String
+  originalExecutionRow ZapRunExecution @relation(fields: [originalExecutionId], references: [id])
+  generation         Int
+  actionFingerprint  String
+  requestFingerprint String
+  handlerVersion     String
+  evidenceHash       String
+  notBefore          DateTime
+  expiresAt          DateTime
+  auditId            String @unique
+  audit              TriageAccessAudit @relation(fields: [auditId], references: [id])
+  originalExecution  Json
+  createdAt          DateTime @default(now())
+  execution          ReplayExecution?
+
+  @@unique([originalExecutionId, generation])
+  @@index([zapRunId, stage])
+}
+
+// A replay has its own one-attempt/failure history, preserving existing uniqueness.
+model ReplayExecution {
+  requestId    String @id
+  request      ReplayRequest @relation(fields: [requestId], references: [id])
+  status       String @default("RESERVED")
+  claimToken   String?
+  leaseUntil   DateTime?
+  completedAt  DateTime?
+  attempts     ReplayExecutionAttempt[]
+  failure      ReplayFailure?
+}
+
+model ReplayExecutionAttempt {
+  id                 String @id @default(uuid())
+  requestId          String
+  execution          ReplayExecution @relation(fields: [requestId], references: [requestId])
+  attemptNumber      Int
+  status             String
+  provider           String?
+  phase              String?
+  safeCode           String?
+  providerStatus     Int?
+  retryAfterSeconds  Int?
+  safeReceiptId      String?
+  actionFingerprint  String
+  requestFingerprint String
+  startedAt          DateTime @default(now())
+  completedAt        DateTime?
+
+  @@unique([requestId, attemptNumber])
+}
+
+model ReplayFailure {
+  id                 String @id @default(uuid())
+  requestId          String @unique
+  execution          ReplayExecution @relation(fields: [requestId], references: [requestId])
+  providerOutcome    String
+  provider           String?
+  phase              String?
+  safeCode           String?
+  providerStatus     Int?
+  retryAfterSeconds  Int?
+  safeReceiptId      String?
+  actionFingerprint  String
+  requestFingerprint String
+  createdAt          DateTime @default(now())
 }
 
 model TriageDecisionNotification {
@@ -134,6 +218,7 @@ model ZapRun {
   zapId        String       
   zap          Zap           @relation(fields: [zapId], references: [id])
   zapRunOutbox ZapRunOutbox?
+  replayRequests ReplayRequest[]
 }
 
 model ZapRunOutbox {
@@ -178,6 +263,7 @@ model ZapRunRetry {
   dlqPublishLeaseUntil DateTime?
   dlqNextAttemptAt   DateTime?
   dlqPublishAttempts Int              @default(0)
+  replayRequest      ReplayRequest?
 
   @@index([zapRunId])
   @@index([dlqPublishedAt, dlqNextAttemptAt])
@@ -200,6 +286,7 @@ model ZapRunExecution {
   requiresHuman      Boolean                  @default(false)
   attempts           ZapRunExecutionAttempt[]
   failure            ZapRunRetry?
+  replayRequests     ReplayRequest[]
 
   @@unique([zapRunId, stage])
   @@index([zapRunId])

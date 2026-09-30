@@ -11,6 +11,7 @@ import { InvestigationAuthority } from './services/investigation-authority';
 import { InvestigationProposals, evaluateSnapshotPolicy } from './services/investigation-proposals';
 import { revalidateProposalPolicy } from './services/replay-policy-facts';
 import { InvestigationNotifications } from './services/investigation-notifications';
+import { ReplayService } from './services/replay';
 import { TriageAgentClient } from './services/triage-agent';
 import { createServiceScope } from '../../packages/triage-contracts';
 import { randomUUID } from 'node:crypto';
@@ -43,6 +44,7 @@ app.use("/api/v1/triage",createTriageRouter({
     operator: new TriageOperatorService(prisma),
     proposals: new InvestigationProposals(prisma, evaluateSnapshotPolicy),
     authority: new InvestigationAuthority(prisma, revalidateProposalPolicy),
+    replay: new ReplayService(prisma),
     notifications,
 }))
 

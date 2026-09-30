@@ -1,5 +1,8 @@
 import { describe, expect, test } from "bun:test";
 import { MemorySaver } from "@langchain/langgraph";
+import { randomUUID } from "node:crypto";
+import pg from "pg";
+import { agentDatabaseUrl, createCheckpoint, migrateAgent } from "../src/checkpoint.ts";
 
 import type {
   ActionInputValidationEvidence,
@@ -217,6 +220,42 @@ const generation = (output: unknown, totalTokens = 400): ModelGeneration => ({
     total_tokens: totalTokens,
   },
 });
+
+test.skipIf(!process.env.DATABASE_URL)("PostgreSQL interrupt survives connection restart and duplicate decision delivery", async () => {
+  const url = process.env.DATABASE_URL!;
+  const pool = new pg.Pool({ connectionString: agentDatabaseUrl(url) });
+  await migrateAgent(pool, url);
+  const threadId = randomUUID();
+  let saver = createCheckpoint(url);
+  let calls = 0;
+  const makeService = () => buildDiagnosisService(tools(), model(async () => {
+    calls++;
+    return generation(safeOutput());
+  }), { checkpointer: saver, threadId, requireDecision: true });
+  try {
+    const snapshot = await makeService().diagnoseWithEvidence();
+    expect(snapshot.result.proposal.disposition).toBe("replay_candidate");
+    expect(calls).toBe(1);
+    await saver.end();
+    saver = createCheckpoint(url);
+    const decision = { id: randomUUID(), decision: "reject" as const };
+    expect(await makeService().resumeDecision(decision)).toEqual(decision);
+    await saver.end();
+    saver = createCheckpoint(url);
+    expect(await makeService().resumeDecision(decision)).toEqual(decision);
+    let conflict: unknown;
+    try { await makeService().resumeDecision({ ...decision, decision: "approve" }); }
+    catch (error) { conflict = error; }
+    expect((conflict as Error)?.message).toBe("Conflicting graph decision");
+    expect(calls).toBe(1);
+  } finally {
+    await saver.end();
+    for (const table of ["checkpoint_writes", "checkpoint_blobs", "checkpoints"]) {
+      await pool.query(`DELETE FROM ai_agent.${table} WHERE thread_id = $1`, [threadId]);
+    }
+    await pool.end();
+  }
+}, 30_000);
 
 describe("Phase 6 integrated diagnosis graph", () => {
   test("holds a durable diagnosis for an authoritative human decision", async () => {
