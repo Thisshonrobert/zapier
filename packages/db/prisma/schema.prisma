@@ -32,6 +32,56 @@ model TriageAccessAudit {
   @@index([caseId, createdAt])
 }
 
+model TriageProposal {
+  id                 String   @id @default(uuid())
+  investigationId    String
+  caseId             String
+  subjectOwnerId     Int
+  version            Int
+  disposition        String
+  status             String
+  proposal           Json
+  policy             Json
+  evidenceHash       String
+  configurationHash  String?
+  expiresAt          DateTime
+  createdAt          DateTime @default(now())
+  approval           TriageApproval?
+
+  @@unique([investigationId, version])
+  @@index([caseId, subjectOwnerId])
+}
+
+model TriageApproval {
+  id              String   @id
+  proposalId      String   @unique
+  proposal        TriageProposal @relation(fields: [proposalId], references: [id])
+  caseId          String
+  subjectOwnerId  Int
+  approvedBy      Int
+  decision        String
+  proposalVersion Int
+  expiresAt       DateTime
+  createdAt       DateTime @default(now())
+  notification    TriageDecisionNotification?
+
+  @@index([caseId, subjectOwnerId])
+}
+
+model TriageDecisionNotification {
+  decisionId      String @id
+  approval        TriageApproval @relation(fields: [decisionId], references: [id])
+  investigationId String
+  caseId          String
+  subjectOwnerId  Int
+  decision        String
+  createdAt       DateTime @default(now())
+  deliveredAt     DateTime?
+  nextAttemptAt   DateTime @default(now())
+
+  @@index([deliveredAt, nextAttemptAt])
+}
+
 model Zap {
   id      String   @id @default(uuid())
   name    String?  @default("Untitled Zap")
@@ -144,6 +194,7 @@ model ZapRunExecution {
   completedAt        DateTime?
   claimToken         String?
   providerOutcome    String?
+  handlerVersion     String?
   actionFingerprint  String?
   requestFingerprint String?
   requiresHuman      Boolean                  @default(false)

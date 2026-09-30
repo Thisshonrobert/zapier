@@ -1,9 +1,12 @@
 import {
+  Command,
   END,
   GraphRecursionError,
   START,
   StateGraph,
   StateSchema,
+  interrupt,
+  type BaseCheckpointSaver,
 } from "@langchain/langgraph";
 import { z } from "zod";
 
@@ -306,11 +309,16 @@ const EvidenceBundleSchema = z
     inputValidation: ActionInputValidationEvidenceSchema,
   })
   .strict();
+const DecisionSchema = z.object({ id: z.string().min(1).max(128),
+  decision: z.enum(["approve", "reject", "mark_owner_action_required",
+    "escalate_to_engineering", "resolve_without_replay", "blocked"]) }).strict();
+export type InvestigationDecision = z.infer<typeof DecisionSchema>;
 
 const DiagnosisState = new StateSchema({
   evidence: EvidenceBundleSchema.optional(),
   runbooks: z.array(RunbookMatchSchema).max(3).default([]),
   result: IntegratedDiagnosisResultSchema.optional(),
+  decision: DecisionSchema.optional(),
   toolCalls: z.number().int().nonnegative().default(0),
 });
 
@@ -336,6 +344,9 @@ export type DiagnosisOptions = {
   maxRepairAttempts?: 0 | 1;
   observability?: TraceExporter;
   modelName?: string;
+  checkpointer?: BaseCheckpointSaver;
+  threadId?: string;
+  requireDecision?: boolean;
 };
 
 function assertSameCanonicalSource(
@@ -606,6 +617,8 @@ export function buildDiagnosisService(
   const maxModelTokens = options.maxModelTokens ?? 8_000;
   const maxPromptCharacters = options.maxPromptCharacters ?? 48_000;
   const maxRepairAttempts = options.maxRepairAttempts ?? 1;
+  if (options.requireDecision && (!options.checkpointer || !options.threadId))
+    throw new Error("Durable decision requires a checkpointer and thread ID");
 
   const workflow = (tracer?: InvestigationTracer) =>
     new StateGraph(DiagnosisState)
@@ -740,14 +753,17 @@ export function buildDiagnosisService(
           "Diagnosis model returned invalid output after one repair attempt",
         );
       })
+      .addNode("awaitDecision", () => options.requireDecision
+        ? { decision: interrupt({ kind: "authoritative_decision" }, { responseSchema: DecisionSchema }) }
+        : {})
       .addEdge(START, "gatherEvidence")
       .addEdge("gatherEvidence", "retrieveGuidance")
       .addEdge("retrieveGuidance", "diagnose")
-      .addEdge("diagnose", END)
-      .compile();
+      .addEdge("diagnose", "awaitDecision")
+      .addEdge("awaitDecision", END)
+      .compile(options.checkpointer ? { checkpointer: options.checkpointer } : {});
 
-  return {
-    async diagnose(): Promise<IntegratedDiagnosisResult> {
+  const diagnoseWithEvidence = async () => {
       const tracer = options.observability
         ? new InvestigationTracer(
             options.observability,
@@ -762,14 +778,16 @@ export function buildDiagnosisService(
           (signal) =>
             workflow(tracer).invoke(
               { toolCalls: 0, runbooks: [] },
-              { recursionLimit: maxGraphSteps, signal },
+              { recursionLimit: maxGraphSteps, signal,
+                ...(options.threadId ? { configurable: { thread_id: options.threadId } } : {}) },
             ),
         );
         const result = IntegratedDiagnosisResultSchema.safeParse(state.result);
         if (!result.success) {
           throw new InvalidModelOutput("Graph returned an invalid diagnosis");
         }
-        return result.data;
+        if (!state.evidence) throw new InvalidModelOutput("Graph returned no evidence");
+        return { result: result.data, evidence: state.evidence };
       } catch (error) {
         traceError = error;
         if (error instanceof GraphRecursionError) {
@@ -781,6 +799,28 @@ export function buildDiagnosisService(
       } finally {
         tracer?.finish(traceError);
       }
+  };
+  return {
+    diagnoseWithEvidence,
+    async resumeDecision(value: z.infer<typeof DecisionSchema>) {
+      if (!options.requireDecision || !options.threadId) throw new Error("Decision is not enabled");
+      const decision = DecisionSchema.parse(value);
+      const graph = workflow();
+      const config = { configurable: { thread_id: options.threadId }, recursionLimit: maxGraphSteps };
+      const before = await graph.getState(config);
+      if (before.values.decision) {
+        if (before.values.decision.id !== decision.id || before.values.decision.decision !== decision.decision)
+          throw new Error("Conflicting graph decision");
+        return before.values.decision;
+      }
+      if (!before.values.result || !before.next.includes("awaitDecision"))
+        throw new Error("Graph is not awaiting a decision");
+      const after = await graph.invoke(new Command({ resume: decision }), config);
+      if (!after.decision) throw new Error("Graph decision did not persist");
+      return after.decision;
+    },
+    async diagnose(): Promise<IntegratedDiagnosisResult> {
+      return (await diagnoseWithEvidence()).result;
     },
   };
 }

@@ -1,22 +1,35 @@
-import { randomUUID } from "node:crypto";
+import { randomUUID, timingSafeEqual } from "node:crypto";
 import { Router, type Request, type Response } from "express";
+import { z } from "zod";
 
 import { createServiceScope, verifyServiceScope } from "../../../packages/triage-contracts/index.ts";
 import { authMiddleware } from "../middleware.ts";
 import { TriageAgentClient } from "../services/triage-agent.ts";
 import { TriageCaseNotFound, TriageEvidenceService } from "../services/triage-evidence.ts";
 import { TriageOperatorCaseNotFound, TriageOperatorDenied, TriageOperatorService } from "../services/triage-operator.ts";
+import { InvestigationAuthority, InvestigationDecisionDenied } from "../services/investigation-authority.ts";
+import { InvestigationProposals } from "../services/investigation-proposals.ts";
+import { InvestigationNotifications } from "../services/investigation-notifications.ts";
 import type { EvidenceOperation, ServiceScope } from "../../../packages/triage-contracts/index.ts";
 
 type TriageRouterOptions = {
   evidence: TriageEvidenceService;
   agent?: TriageAgentClient;
   operator?: TriageOperatorService;
+  proposals?: InvestigationProposals;
+  authority?: InvestigationAuthority;
+  notifications?: InvestigationNotifications;
   serviceSecret?: string;
 };
 
 const bearer = (header: string | undefined) =>
   header?.startsWith("Bearer ") ? header.slice("Bearer ".length) : undefined;
+const uuid = z.uuid();
+const runnerBinding = z.object({
+  id: uuid, caseId: uuid, zapRunId: uuid, stage: z.number().int().min(0).max(1000),
+  subjectOwnerId: z.number().int().positive(), actorId: z.number().int().positive(),
+  supportOperatorId: z.number().int().positive(),
+}).strict();
 
 export function createTriageRouter(options: TriageRouterOptions) {
   const router = Router();
@@ -24,6 +37,15 @@ export function createTriageRouter(options: TriageRouterOptions) {
   const agent = options.agent ?? new TriageAgentClient(process.env.AI_AGENT_URL ?? "http://127.0.0.1:3004");
   const secret = options.serviceSecret ?? process.env.TRIAGE_SERVICE_SECRET ?? "";
   const operator = options.operator;
+  const proposals = options.proposals;
+  const authority = options.authority;
+  const notifications = options.notifications;
+  const validServiceSecret = (value: string | undefined) => {
+    if (!value || secret.length < 32) return false;
+    const expected = Buffer.from(secret);
+    const supplied = Buffer.from(value);
+    return expected.length === supplied.length && timingSafeEqual(expected, supplied);
+  };
   const operatorError = (response: Response, error: unknown) => {
     if (error instanceof TriageOperatorDenied) response.status(403).json({ detail: "Support operator permission required" });
     else if (error instanceof TriageCaseNotFound || error instanceof TriageOperatorCaseNotFound) response.status(404).json({ detail: "Case not found" });
@@ -118,6 +140,114 @@ export function createTriageRouter(options: TriageRouterOptions) {
     operatorAgentRead("validate_action_inputs", () => "/private/v1/tools/validate-action-inputs", "POST"));
   router.post("/operator/cases/:caseId/investigations/diagnose", authMiddleware,
     operatorAgentRead("diagnose", () => "/private/v1/investigations/diagnose", "POST"));
+
+  router.post("/operator/cases/:caseId/investigations", authMiddleware, async (request, response) => {
+    const idempotencyKey = request.headers["idempotency-key"];
+    if (typeof idempotencyKey !== "string" || !uuid.safeParse(idempotencyKey).success) {
+      response.status(422).json({ detail: "Idempotency key required" }); return;
+    }
+    let selected;
+    try { selected = await operatorCase(request, "diagnose"); }
+    catch (error) { operatorError(response, error); return; }
+    const id = randomUUID();
+    const correlationId = randomUUID();
+    try {
+      const scope = createServiceScope({ secret, ownerId: selected.subject_owner_id,
+        caseId: selected.case_id, investigationId: id, correlationId,
+        operations: ["failure_context", "execution_evidence", "validate_action_inputs"] });
+      response.setHeader("x-correlation-id", correlationId);
+      response.json(await agent.read("/private/v1/investigations", scope, correlationId, "POST", 5_000,
+        { id, caseId: selected.case_id, zapRunId: selected.zap_run_id, stage: selected.stage,
+          subjectOwnerId: selected.subject_owner_id, actorId: request.id,
+          supportOperatorId: request.id, idempotencyKey }));
+    } catch { response.status(502).json({ detail: "Investigation service unavailable" }); }
+  });
+
+  router.get("/operator/cases/:caseId/investigations/:investigationId", authMiddleware,
+    async (request, response) => {
+      const id = request.params.investigationId;
+      if (typeof id !== "string" || !uuid.safeParse(id).success) {
+        response.status(404).json({ detail: "Investigation not found" }); return;
+      }
+      let selected;
+      try { selected = await operatorCase(request, "read_case"); }
+      catch (error) { operatorError(response, error); return; }
+      const correlationId = randomUUID();
+      try {
+        const scope = createServiceScope({ secret, ownerId: selected.subject_owner_id,
+          caseId: selected.case_id, investigationId: id, correlationId,
+          operations: ["failure_context"] });
+        response.setHeader("x-correlation-id", correlationId);
+        const saved = await agent.read(`/private/v1/investigations/${id}`, scope, correlationId) as {
+          id?: string; status?: string; binding?: { caseId: string; subjectOwnerId: number;
+            zapRunId: string; stage: number }; result?: unknown; evidence?: unknown };
+        if (saved.status === "proposed" && proposals) {
+          if (saved.id !== id || saved.binding?.caseId !== selected.case_id ||
+            saved.binding.subjectOwnerId !== selected.subject_owner_id ||
+            saved.binding.zapRunId !== selected.zap_run_id || saved.binding.stage !== selected.stage ||
+            !saved.result || !saved.evidence) {
+            response.status(409).json({ detail: "Investigation binding mismatch" }); return;
+          }
+          const proposal = await proposals.submit({ investigationId: id, caseId: selected.case_id,
+            subjectOwnerId: selected.subject_owner_id, actorId: request.id,
+            result: saved.result, evidence: saved.evidence });
+          response.json({ ...saved, authority: proposal });
+        } else response.json(saved);
+      } catch { response.status(502).json({ detail: "Investigation service unavailable" }); }
+    });
+
+  router.post("/operator/cases/:caseId/investigations/:investigationId/decision", authMiddleware,
+    async (request, response) => {
+      const id = request.params.investigationId;
+      const decisionId = request.headers["idempotency-key"];
+      const parsed = z.object({ proposalId: uuid, decision: z.enum(["approve", "reject",
+        "mark_owner_action_required", "escalate_to_engineering", "resolve_without_replay"]) }).strict()
+        .safeParse(request.body);
+      if (typeof id !== "string" || !uuid.safeParse(id).success ||
+        typeof decisionId !== "string" || !uuid.safeParse(decisionId).success || !parsed.success) {
+        response.status(422).json({ detail: "Invalid decision" }); return;
+      }
+      let selected;
+      try { selected = await operatorCase(request, "diagnose"); }
+      catch (error) { operatorError(response, error); return; }
+      try {
+        if (!authority) throw new Error("Decision service unavailable");
+        const decision = await authority.decide({ proposalId: parsed.data.proposalId,
+          investigationId: id, caseId: selected.case_id, subjectOwnerId: selected.subject_owner_id,
+          actorId: request.id, decisionId, decision: parsed.data.decision });
+        try { if (notifications) await notifications.deliver(decision.id); }
+        catch { /* The committed notification remains pending for the retry loop. */ }
+        response.json(decision);
+      } catch (error) {
+        if (error instanceof InvestigationDecisionDenied) response.status(409).json({ detail: error.message });
+        else response.status(503).json({ detail: "Decision unavailable" });
+      }
+    });
+
+  router.post("/internal/investigations/:id/scope", async (request, response) => {
+    if (!validServiceSecret(bearer(request.headers.authorization))) {
+      response.status(401).json({ detail: "Invalid service authentication" }); return;
+    }
+    const parsed = runnerBinding.safeParse(request.body);
+    const correlationId = request.headers["x-correlation-id"];
+    if (!parsed.success || parsed.data.id !== request.params.id ||
+      parsed.data.actorId !== parsed.data.supportOperatorId ||
+      typeof correlationId !== "string" || !uuid.safeParse(correlationId).success) {
+      response.status(422).json({ detail: "Invalid investigation binding" }); return;
+    }
+    try {
+      if (!operator) throw new Error("Operator service unavailable");
+      const selected = await operator.resolveCase(parsed.data.actorId, parsed.data.caseId, "diagnose");
+      if (selected.subject_owner_id !== parsed.data.subjectOwnerId ||
+        selected.zap_run_id !== parsed.data.zapRunId || selected.stage !== parsed.data.stage) {
+        response.status(403).json({ detail: "Investigation binding changed" }); return;
+      }
+      response.json({ scope: createServiceScope({ secret, ownerId: selected.subject_owner_id,
+        caseId: selected.case_id, investigationId: parsed.data.id, correlationId,
+        operations: ["failure_context", "execution_evidence", "validate_action_inputs"],
+        ttlSeconds: 300 }) });
+    } catch (error) { operatorError(response, error); }
+  });
 
   router.get("/cases/:caseId/failure-context", authMiddleware, async (request, response) => {
     try {

@@ -124,9 +124,11 @@ assert.throws(() => createFingerprints({
 const now = new Date("2026-09-22T00:00:00.000Z");
 const { db, state } = fakeDb();
 let token = 0;
-const store = createExecutionStore(db, { now: () => now, randomUUID: () => `token-${++token}` });
+const store = createExecutionStore(db, { now: () => now, randomUUID: () => `token-${++token}`,
+  handlerVersion: "worker-test-v1" });
 const first = await store.claim({ zapRunId: "run-1", stage: 0 }, fingerprints);
 assert.equal(first.kind, "CLAIMED");
+assert.equal(state.executions.get(first.kind === "CLAIMED" ? first.executionId : "")?.handlerVersion, "worker-test-v1");
 assert.equal(first.kind === "CLAIMED" && first.claimToken, "token-1");
 const active = await store.claim({ zapRunId: "run-1", stage: 0 }, fingerprints);
 assert.deepEqual(active, { kind: "ACTIVE_PENDING" });

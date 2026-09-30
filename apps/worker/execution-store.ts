@@ -125,7 +125,7 @@ const safeReceipt = (value: unknown) =>
 
 export function createExecutionStore(
   db: ExecutionDb,
-  options: { now?: () => Date; randomUUID?: () => string } = {},
+  options: { now?: () => Date; randomUUID?: () => string; handlerVersion?: string } = {},
 ) {
   const now = options.now ?? (() => new Date());
   const randomUUID = options.randomUUID ?? nodeRandomUUID;
@@ -203,6 +203,7 @@ export function createExecutionStore(
           status: "PENDING",
           leaseUntil: new Date(now().getTime() + LEASE_DURATION_MS),
           claimToken,
+          handlerVersion: options.handlerVersion ?? null,
           ...fingerprints,
         },
       });

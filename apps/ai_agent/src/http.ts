@@ -7,6 +7,9 @@ import {
   type DiagnosisRouterOptions,
 } from "./diagnosis-http.ts";
 import { createPrivateToolsRouter } from "./private-http.ts";
+import { createInvestigationRouter } from "./investigation-http.ts";
+import type { InvestigationStore } from "./investigation-store.ts";
+import type { InvestigationDecision } from "./graph.ts";
 
 import { PreviewRequestSchema, type DiagnosisModel } from "./contracts.ts";
 import {
@@ -33,6 +36,8 @@ type HttpServerOptions = {
     timeoutMs?: number;
   };
   diagnosis?: DiagnosisRouterOptions;
+  investigations?: { serviceSecret: string; store: InvestigationStore;
+    resumeDecision: (threadId: string, decision: InvestigationDecision) => Promise<unknown> };
 };
 
 export type RunningHttpServer = {
@@ -52,6 +57,7 @@ export function createHttpServer({
   previewOptions,
   privateTools,
   diagnosis,
+  investigations,
 }: HttpServerOptions) {
   const app = express();
   const previewService = buildPreviewService(
@@ -68,6 +74,9 @@ export function createHttpServer({
       "/private/v1/investigations/diagnose",
       createDiagnosisRouter(diagnosis),
     );
+  }
+  if (investigations) {
+    app.use("/private/v1/investigations", createInvestigationRouter(investigations));
   }
 
   app.post("/investigations/preview", async (request, response) => {

@@ -7,7 +7,7 @@ export class TriageAgentClient {
     private readonly timeoutMs = 3_000,
   ) {}
 
-  async read(path: string, scopeToken: string, correlationId: string, method: "GET" | "POST" = "GET", timeoutMs = this.timeoutMs) {
+  async read(path: string, scopeToken: string, correlationId: string, method: "GET" | "POST" = "GET", timeoutMs = this.timeoutMs, body: unknown = {}) {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), timeoutMs);
     try {
@@ -18,7 +18,7 @@ export class TriageAgentClient {
           "x-correlation-id": correlationId,
           ...(method === "POST" ? { "content-type": "application/json" } : {}),
         },
-        ...(method === "POST" ? { body: "{}" } : {}),
+        ...(method === "POST" ? { body: JSON.stringify(body) } : {}),
         signal: controller.signal,
       });
       const text = await response.text();

@@ -1,4 +1,5 @@
 import { describe, expect, test } from "bun:test";
+import { MemorySaver } from "@langchain/langgraph";
 
 import type {
   ActionInputValidationEvidence,
@@ -218,6 +219,31 @@ const generation = (output: unknown, totalTokens = 400): ModelGeneration => ({
 });
 
 describe("Phase 6 integrated diagnosis graph", () => {
+  test("holds a durable diagnosis for an authoritative human decision", async () => {
+    const service = buildDiagnosisService(tools(), model(async () => generation(safeOutput())), {
+      checkpointer: new MemorySaver() as never,
+      threadId: "phase-8-human-decision",
+      requireDecision: true,
+    });
+    expect((await service.diagnoseWithEvidence()).result.status).toBe("completed");
+    expect(await service.resumeDecision({ id: "decision-1", decision: "reject" })).toEqual({
+      id: "decision-1", decision: "reject",
+    });
+    expect(service.resumeDecision({ id: "decision-1", decision: "approve" }))
+      .rejects.toThrow("Conflicting graph decision");
+    expect(await service.resumeDecision({ id: "decision-1", decision: "reject" })).toEqual({
+      id: "decision-1", decision: "reject",
+    });
+  });
+  test("returns the validated evidence snapshot with the diagnosis for durable storage", async () => {
+    const service = buildDiagnosisService(tools(), model(async () => generation(safeOutput())));
+    const snapshot = await service.diagnoseWithEvidence();
+    expect(snapshot.result.diagnosis.taxonomy_id).toBe("F01");
+    expect(snapshot.evidence.failureContext.evidence_id).toBe(failureRef);
+    expect(snapshot.evidence.executionEvidence.evidence_id).toBe(executionRef);
+    expect(snapshot.evidence.inputValidation.evidence_id).toBe(validationRef);
+  });
+
   test("exports one redacted trace with evidence, retrieval, model usage and versions", async () => {
     const traces: InvestigationTrace[] = [];
     const service = buildDiagnosisService(

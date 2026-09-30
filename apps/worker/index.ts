@@ -7,7 +7,8 @@ import { executeStage, parseZapEvent, requireLoadedAction, type ZapEvent } from 
 const TOPIC_NAME = "zap-events";
 const kafka = new Kafka({ clientId: "worker", brokers: ["localhost:9092"] });
 const consumer = kafka.consumer({ groupId: "zap-group" });
-const store = createExecutionStore(prisma as unknown as ExecutionDb);
+const store = createExecutionStore(prisma as unknown as ExecutionDb,
+  { handlerVersion: process.env.WORKER_HANDLER_VERSION });
 
 async function loadStageExecution({ zapRunId, stage }: ZapEvent) {
   const zapDetails = await prisma.zapRun.findFirst({
