@@ -11,6 +11,7 @@ import {
   MoreHorizontal,
   Plus,
   Server,
+  ShieldCheck,
 } from "lucide-react";
 import { MvpAction } from "./MvpDialog";
 
@@ -21,6 +22,7 @@ const NAV = [
   { label: "App connections", href: "/connections", icon: Blocks },
   { label: "MCP servers", icon: Server, badge: "New" },
   { label: "Zap history", href: "/history", icon: History },
+  { label: "Support triage", href: "/triage", icon: ShieldCheck },
   { label: "More", icon: MoreHorizontal },
 ] as const;
 
