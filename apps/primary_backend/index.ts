@@ -6,6 +6,7 @@ import { userRouter } from './route/user';
 import { zapRouter } from './route/zap';
 import { createTriageRouter } from './route/triage';
 import { TriageEvidenceService, type TriageEvidenceDb } from './services/triage-evidence';
+import { TriageOperatorService } from './services/triage-operator';
 import { prisma } from '../../packages/db/prisma/db';
 
 const app = express();
@@ -21,6 +22,7 @@ app.use("/api/v1/trigger",triggerRouter)
 app.use("/api/v1/action",actionRouter)
 app.use("/api/v1/triage",createTriageRouter({
     evidence: new TriageEvidenceService(prisma as unknown as TriageEvidenceDb),
+    operator: new TriageOperatorService(prisma),
 }))
 
 app.listen(PORT,()=>{

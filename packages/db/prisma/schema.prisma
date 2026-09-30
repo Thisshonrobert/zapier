@@ -13,9 +13,23 @@ model User {
   id       Int     @id @default(autoincrement())
   name     String
   email    String  @unique
+  isSupportOperator Boolean @default(false)
   // Null for accounts that sign in through Clerk (Google) — they never set one.
   password String?
   zap      Zap[]
+}
+
+model TriageAccessAudit {
+  id             String   @id @default(uuid())
+  actorId        Int
+  subjectOwnerId Int?
+  caseId         String?
+  action         String
+  outcome        String
+  createdAt      DateTime @default(now())
+
+  @@index([actorId, createdAt])
+  @@index([caseId, createdAt])
 }
 
 model Zap {

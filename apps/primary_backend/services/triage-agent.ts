@@ -7,15 +7,18 @@ export class TriageAgentClient {
     private readonly timeoutMs = 3_000,
   ) {}
 
-  async read(path: string, scopeToken: string, correlationId: string) {
+  async read(path: string, scopeToken: string, correlationId: string, method: "GET" | "POST" = "GET", timeoutMs = this.timeoutMs) {
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), this.timeoutMs);
+    const timeout = setTimeout(() => controller.abort(), timeoutMs);
     try {
       const response = await fetch(new URL(path, this.baseUrl), {
+        method,
         headers: {
           authorization: `Bearer ${scopeToken}`,
           "x-correlation-id": correlationId,
+          ...(method === "POST" ? { "content-type": "application/json" } : {}),
         },
+        ...(method === "POST" ? { body: "{}" } : {}),
         signal: controller.signal,
       });
       const text = await response.text();
