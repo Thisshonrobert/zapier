@@ -98,6 +98,7 @@ export async function resolveChatId(
   input: string,
   telegramBotToken: string,
   fetchImpl: FetchTransport = defaultFetch,
+  signal?: AbortSignal,
 ): Promise<string> {
   const destination = input.trim();
   if (/^-?\d+$/.test(destination)) return destination;
@@ -107,6 +108,7 @@ export async function resolveChatId(
     const username = destination.replace(/^@+/, "");
     response = await fetchImpl(
       `https://api.telegram.org/bot${telegramBotToken}/getChat?chat_id=@${username}`,
+      { signal },
     );
   } catch {
     throw resolutionError("telegram_resolution_transport_error");
@@ -135,6 +137,7 @@ export async function sendTelegram(
   message: string,
   telegramBotToken: string,
   fetchImpl: FetchTransport = defaultFetch,
+  signal?: AbortSignal,
 ): Promise<ActionResult> {
   let response: Response;
   try {
@@ -144,6 +147,7 @@ export async function sendTelegram(
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ chat_id: chatId, text: message }),
+        signal,
       },
     );
   } catch {
@@ -206,20 +210,22 @@ export const telegramAction: ActionHandler = {
       stage: ctx.stage,
     });
 
-    const botToken =
+    const botToken = ctx.telegramInputs?.botToken ?? (
       parse(metadata?.botToken as string, ctx.zapRunMetadata).trim() ||
       process.env.TELEGRAM_BOT_TOKEN ||
-      "";
-    const channelUserName = parse(
+      "");
+    const channelUserName = ctx.telegramInputs?.destination ?? parse(
       metadata?.channelUserName as string,
       ctx.zapRunMetadata,
     ).trim();
-    const chatId = await resolveChatId(channelUserName, botToken);
-    const message = parse(
+    const chatId = await resolveChatId(channelUserName, botToken, defaultFetch, ctx.signal);
+    const message = ctx.telegramInputs?.message ?? parse(
       metadata?.message as string,
       ctx.zapRunMetadata,
     ).trim();
 
-    return sendTelegram(chatId, message, botToken);
+    // Aborting during resolution must never start a subsequent send.
+    ctx.signal?.throwIfAborted();
+    return sendTelegram(chatId, message, botToken, defaultFetch, ctx.signal);
   },
 };

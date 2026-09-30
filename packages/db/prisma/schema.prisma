@@ -112,8 +112,15 @@ model ReplayExecution {
   claimToken   String?
   leaseUntil   DateTime?
   completedAt  DateTime?
+  dispatchToken String?
+  dispatchLeaseUntil DateTime?
+  dispatchAttempts Int @default(0)
+  nextDispatchAt DateTime?
+  publishedAt DateTime?
+  nextStage Int?
   attempts     ReplayExecutionAttempt[]
   failure      ReplayFailure?
+  @@index([status, publishedAt, nextDispatchAt])
 }
 
 model ReplayExecutionAttempt {

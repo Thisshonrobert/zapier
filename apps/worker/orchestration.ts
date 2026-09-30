@@ -6,8 +6,8 @@ import {
   type AttemptOwner,
 } from "./execution-store.ts";
 
-export type MessageResolution = { ack: boolean; advance: boolean };
-export type ZapEvent = { zapRunId: string; stage: number };
+export type MessageResolution = { ack: boolean; advance: boolean; nextStage?: number | null };
+export type ZapEvent = { zapRunId: string; stage: number; replayRequestId?: string };
 
 export function parseZapEvent(value: Buffer | null): ZapEvent {
   if (!value || value.length === 0) throw new Error("empty Kafka message");
@@ -23,7 +23,9 @@ export function parseZapEvent(value: Buffer | null): ZapEvent {
     typeof (parsed as Record<string, unknown>).zapRunId !== "string" ||
     (parsed as Record<string, unknown>).zapRunId === "" ||
     !Number.isInteger((parsed as Record<string, unknown>).stage) ||
-    Number((parsed as Record<string, unknown>).stage) < 0
+    Number((parsed as Record<string, unknown>).stage) < 0 ||
+    ("replayRequestId" in parsed && (typeof parsed.replayRequestId !== "string" ||
+      !/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(parsed.replayRequestId)))
   ) throw new Error("invalid Kafka event");
   return parsed as ZapEvent;
 }

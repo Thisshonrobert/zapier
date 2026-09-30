@@ -106,6 +106,7 @@ export async function loadCurrentPolicyState(
   subjectOwnerId: number,
   caseId: string,
   currentHandlerVersion: string | null,
+  excludeRequestId: string | null = null,
 ) {
   const evidence = new TriageEvidenceService(db);
   const [failureContext, executionEvidence, inputValidation, rows, history] = await Promise.all([
@@ -141,7 +142,7 @@ export async function loadCurrentPolicyState(
       SELECT count(*)::int AS "previousReplayCount",
         coalesce(bool_or(execution.status IN ('RESERVED', 'RUNNING')), false) AS "activeReplay"
       FROM "ReplayRequest" request LEFT JOIN "ReplayExecution" execution ON execution."requestId" = request.id
-      WHERE request."caseId" = ${caseId}
+      WHERE request."caseId" = ${caseId} AND (${excludeRequestId}::text IS NULL OR request.id <> ${excludeRequestId})
     `),
   ]);
   let actionFingerprint: string | null = null;
@@ -168,13 +169,13 @@ export async function loadCurrentPolicyState(
   };
 }
 
-export async function revalidateProposalPolicy(tx: SqlClient, proposal: ProposalRow) {
+export async function revalidateProposalPolicy(tx: SqlClient, proposal: ProposalRow, excludeRequestId: string | null = null) {
   const stored = z.object({
     facts: z.record(z.string(), z.unknown()),
     sourceHashes: z.object({ failure: z.string(), execution: z.string(), validation: z.string() }),
   }).parse(proposal.policy);
   const { current, config } = await loadCurrentPolicyState(tx, proposal.subjectOwnerId,
-    proposal.caseId, process.env.WORKER_HANDLER_VERSION ?? null);
+    proposal.caseId, process.env.WORKER_HANDLER_VERSION ?? null, excludeRequestId);
   const execution = current.executionEvidence.facts;
   const failure = current.failureContext.facts;
   const facts: ReplayPolicyFacts = {
