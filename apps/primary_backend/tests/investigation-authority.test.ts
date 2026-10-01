@@ -13,7 +13,7 @@ const proposal = {
   version: 1,
 };
 
-function db(input: { operator?: boolean; owner?: number; failAudit?: boolean;
+function db(input: { operator?: boolean; owner?: number; failAudit?: boolean; latestVersion?: number;
   existing?: { id: string; decision: string; approvedBy: number } } = {}) {
   const writes: string[] = [];
   let committed = false;
@@ -21,6 +21,7 @@ function db(input: { operator?: boolean; owner?: number; failAudit?: boolean;
     async $queryRaw<T>(query: { strings: readonly string[] }): Promise<T> {
       const sql = query.strings.join("?");
       if (sql.includes('FROM "TriageApproval"') && input.existing) return [input.existing] as T;
+      if (sql.includes('SELECT version FROM "TriageProposal"')) return [{ version: input.latestVersion ?? 1 }] as T;
       if (sql.includes('FROM "TriageProposal"')) return [proposal] as T;
       if (sql.includes('FROM "User"')) return [{ isSupportOperator: input.operator ?? true }] as T;
       if (sql.includes('FROM "ZapRunRetry"')) return [{ subjectOwnerId: input.owner ?? 9 }] as T;
@@ -61,6 +62,18 @@ const authority = (database: ReturnType<typeof db>,
   new InvestigationAuthority(database, policy);
 
 describe("Phase 8 approval authority", () => {
+  test("rejects a stale displayed proposal version before writing", async () => {
+    const database = db();
+    await expect(authority(database).decide({ ...input, proposalVersion: 2 },
+      new Date("2029-01-01T00:00:00Z"))).rejects.toThrow("stale proposal version");
+    expect(database.writes).toHaveLength(0);
+  });
+  test("rejects a superseded proposal even when the displayed version matches its row", async () => {
+    const database = db({ latestVersion: 2 });
+    await expect(authority(database).decide({ ...input, proposalVersion: 1 },
+      new Date("2029-01-01T00:00:00Z"))).rejects.toThrow("stale proposal version");
+    expect(database.writes).toHaveLength(0);
+  });
   test("commits decision and business audit together", async () => {
     const database = db();
     const result = await authority(database).decide(input, new Date("2029-01-01T00:00:00Z"));

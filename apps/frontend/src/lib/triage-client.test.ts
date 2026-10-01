@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 
-import { requestTriage } from "./triage-client";
+import { pollInvestigation, requestTriage } from "./triage-client";
 
 test("passes request cancellation through to the operator request", async () => {
   const controller = new AbortController();
@@ -26,4 +26,23 @@ test("passes request cancellation through to the operator request", async () => 
   await assert.rejects(pending, { name: "AbortError" });
   assert.equal(receivedSignal, controller.signal);
   assert.equal(receivedSignal?.aborted, true);
+});
+
+test("polls saved reads sequentially with a finite bound", async () => {
+  let reads = 0;
+  let updates = 0;
+  await pollInvestigation({ signal: new AbortController().signal,
+    read: async () => { reads++; return { id: "saved", status: "queued", result: null, authority: null }; },
+    onSnapshot: () => { updates++; }, attempts: 3, intervalMs: 0 });
+  assert.equal(reads, 3);
+  assert.equal(updates, 3);
+});
+
+test("cancellation during the polling delay prevents later reads", async () => {
+  const controller = new AbortController();
+  let reads = 0;
+  await assert.rejects(pollInvestigation({ signal: controller.signal,
+    read: async () => { reads++; return { id: "saved", status: "queued", result: null, authority: null }; },
+    onSnapshot: () => { setTimeout(() => controller.abort(), 0); }, intervalMs: 60_000 }), { name: "AbortError" });
+  assert.equal(reads, 1);
 });

@@ -5,10 +5,11 @@ import { Play, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTriage } from "@/hooks/useTriage";
 import { AppShell } from "@/mycomponents/app/AppShell";
-import { TriageResults } from "./TriageResults";
+import { SavedInvestigationControls, TriageResults } from "./TriageResults";
 
 export default function TriagePage() {
-  const { casesState, diagnosisState, selectedCase, selectCase, diagnose } =
+  const { casesState, diagnosisState, selectedCase, selectCase, diagnose,
+    saved, pendingDecision, polling, decide, refresh } =
     useTriage();
   const caseListState =
     casesState.kind === "cases"
@@ -27,8 +28,8 @@ export default function TriagePage() {
               Workflow triage
             </h1>
             <p className="mt-2 max-w-2xl text-sm text-zinc-600">
-              Review a bounded set of failed cases. Investigation is read-only
-              and its diagnosis is not saved.
+              Review saved investigations, record support decisions, and observe
+              replay outcomes. Live replay remains disabled.
             </p>
           </div>
         </div>
@@ -47,7 +48,7 @@ export default function TriagePage() {
               </h2>
               <Button
                 className="bg-[#FF4F00] text-white hover:bg-[#e64700]"
-                disabled={!selectedCase || diagnosisState.kind === "loading"}
+                disabled={!selectedCase || diagnosisState.kind === "loading" || pendingDecision || casesState.kind === "blocked"}
                 onClick={diagnose}
               >
                 <Play className="h-4 w-4" /> Investigate
@@ -60,6 +61,11 @@ export default function TriagePage() {
               </p>
             ) : null}
             <TriageResults state={diagnosisState} onSelectCase={selectCase} />
+            {saved ? <SavedInvestigationControls saved={saved} pending={pendingDecision} onDecision={decide} /> : null}
+            {selectedCase ? <div className="mt-3 flex items-center gap-3 text-xs text-zinc-500">
+              <Button variant="outline" disabled={pendingDecision || casesState.kind === "blocked"} onClick={refresh}>Refresh saved status</Button>
+              <span>{polling ? "Polling saved reads (up to 30 reads)." : "Automatic polling stopped. Refresh to read the current status."}</span>
+            </div> : null}
           </section>
         </div>
       </div>

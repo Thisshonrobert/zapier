@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 
 import { verifyServiceScope } from "../../../packages/triage-contracts/index.ts";
 
-process.env.JWT_SECRET = "phase-10a-http-test-secret";
+process.env.JWT_SECRET ??= "phase-10a-http-test-secret";
 const { createTriageRouter } = await import("../route/triage.ts");
 
 const caseId = "f0100000-0000-4000-8000-000000000001";
@@ -35,13 +35,17 @@ async function start(options: { failAudit?: boolean; failNotify?: boolean; saved
     agent: {
       read: async (path: string, token: string, correlationId: string, method: string, _timeout: number, body?: unknown) => {
         calls.push({ path, token, correlationId, method, body });
-        return options.saved && path.includes("/private/v1/investigations/") ? options.saved : { status: "completed" };
+        return options.saved && path.includes("/private/v1/investigations/") ? options.saved : {
+          id: body ? (body as { id: string }).id : path.split("/").at(-1), status: "queued",
+          binding: { caseId, subjectOwnerId: 9, zapRunId: "11111111-1111-4111-8111-111111111111", stage: 0 },
+        };
       },
     } as never,
     proposals: { submit: async (value: unknown) => {
       authorityCalls.push({ proposal: value }); return { id: "99999999-9999-4999-8999-999999999999", status: "blocked" };
     } } as never,
-    authority: { decide: async (value: unknown) => {
+    authority: { snapshot: async () => ({ id: "99999999-9999-4999-8999-999999999999", version: 1,
+      decision: { decision: "approve" }, replay: null, replayEnabled: false }), decide: async (value: unknown) => {
       events.push("commit");
       authorityCalls.push({ decision: value }); return { id: (value as { decisionId: string }).decisionId,
         decision: "reject" };
@@ -153,6 +157,9 @@ describe("Phase 10A operator HTTP binding", () => {
       method: "POST", headers: { authorization: auth, "idempotency-key": key },
     });
     expect(started.status).toBe(200);
+    const publicStart = await started.json();
+    expect(publicStart).not.toHaveProperty("binding");
+    expect(publicStart).not.toHaveProperty("leaseToken");
     expect(calls[0]?.path).toBe("/private/v1/investigations");
     expect(calls[0]?.body).toMatchObject({ caseId, subjectOwnerId: 9,
       actorId: 4, supportOperatorId: 4, idempotencyKey: key });
@@ -187,11 +194,11 @@ describe("Phase 10A operator HTTP binding", () => {
     const response = await fetch(`${baseUrl}/operator/cases/${caseId}/investigations/${id}/decision`, {
       method: "POST", headers: { authorization: `Bearer ${jwt.sign({ id: 4 }, process.env.JWT_SECRET!)}`,
         "content-type": "application/json", "idempotency-key": decisionId },
-      body: JSON.stringify({ proposalId, decision: "reject" }),
+      body: JSON.stringify({ proposalId, proposalVersion: 1, decision: "reject" }),
     });
     expect(response.status).toBe(200);
     expect(authorityCalls[0]).toMatchObject({ decision: { proposalId, investigationId: id,
-      caseId, subjectOwnerId: 9, actorId: 4, decisionId, decision: "reject" } });
+      caseId, subjectOwnerId: 9, actorId: 4, decisionId, decision: "reject", proposalVersion: 1 } });
     expect(events).toEqual(["commit", "notify"]);
   });
 
@@ -200,9 +207,34 @@ describe("Phase 10A operator HTTP binding", () => {
     const response = await fetch(`${baseUrl}/operator/cases/${caseId}/investigations/88888888-8888-4888-8888-888888888888/decision`, {
       method: "POST", headers: { authorization: `Bearer ${jwt.sign({ id: 4 }, process.env.JWT_SECRET!)}`,
         "content-type": "application/json", "idempotency-key": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa" },
-      body: JSON.stringify({ proposalId: "99999999-9999-4999-8999-999999999999", decision: "reject" }),
+      body: JSON.stringify({ proposalId: "99999999-9999-4999-8999-999999999999", proposalVersion: 1, decision: "reject" }),
     });
     expect(response.status).toBe(200);
     expect(events).toEqual(["commit", "notify"]);
   });
+});
+
+test("saved reads redact internal state and retain committed outcomes after notification lag", async () => {
+  const id = "88888888-8888-4888-8888-888888888888";
+  const { baseUrl } = await start({ saved: { id, status: "approved", binding: { caseId,
+    zapRunId: "11111111-1111-4111-8111-111111111111", stage: 0, subjectOwnerId: 9 },
+    checkpointThreadId: "private", leaseToken: "secret", evidence: { private: true }, result: null } });
+  const response = await fetch(`${baseUrl}/operator/cases/${caseId}/investigations/${id}`, {
+    headers: { authorization: `Bearer ${jwt.sign({ id: 4 }, process.env.JWT_SECRET!)}` },
+  });
+  const saved = await response.json() as Record<string, unknown>;
+  expect(saved.authority).toMatchObject({ decision: { decision: "approve" }, replay: null, replayEnabled: false });
+  expect(saved).not.toHaveProperty("leaseToken");
+  expect(saved).not.toHaveProperty("checkpointThreadId");
+  expect(saved).not.toHaveProperty("evidence");
+});
+
+test("checks saved binding even when the investigation is pending", async () => {
+  const id = "88888888-8888-4888-8888-888888888888";
+  const { baseUrl } = await start({ saved: { id, status: "queued", binding: { caseId,
+    zapRunId: "11111111-1111-4111-8111-111111111111", stage: 0, subjectOwnerId: 10 } } });
+  const response = await fetch(`${baseUrl}/operator/cases/${caseId}/investigations/${id}`, {
+    headers: { authorization: `Bearer ${jwt.sign({ id: 4 }, process.env.JWT_SECRET!)}` },
+  });
+  expect(response.status).toBe(409);
 });

@@ -46,3 +46,21 @@ export type TriageDisplayState =
   | { kind: "error"; message: string }
   | { kind: "cases"; cases: TriageCase[]; selectedCaseId?: string }
   | { kind: "result"; caseId: string; result: TriageDiagnosis };
+
+export type TriageDecision = "approve" | "reject" | "mark_owner_action_required" |
+  "escalate_to_engineering" | "resolve_without_replay";
+
+export type SavedInvestigation = {
+  id: string;
+  status: string;
+  result: TriageDiagnosis | null;
+  authority: {
+    id: string; version: number; status: string; expiresAt: string;
+    reasons: string[]; allowedDecisions: TriageDecision[];
+    decision: { id: string; decision: TriageDecision; approvedBy: number } | null;
+    replay: { id: string; publication: "queued" | "published";
+      execution: "PENDING" | "RUNNING" | "SUCCESS" | "FAILED" | "UNKNOWN";
+      completedAt: string | null } | null;
+    replayEnabled: false;
+  } | null;
+};
