@@ -1,6 +1,6 @@
 # Background Worker
 
-This document specifies the internal lifecycle, fenced action execution, durable failure evidence, and Kafka acknowledgement policy of the background worker service (`apps/worker`).
+This document specifies the internal lifecycle, fenced action execution, durable failure evidence, and Kafka acknowledgement policy of the background worker service (`apps/worker`). Phase 9 recovery has been verified against real PostgreSQL/Kafka with stubbed providers; live replay remains disabled pending separate provider-semantics confirmation.
 
 ---
 
@@ -125,7 +125,8 @@ Once a claim is secured, [`apps/worker/orchestration.ts`](../apps/worker/orchest
 - Within the guarded claim, the worker resolves the destination, message, and explicit bot token once. It passes those selected inputs to the handler without reloading mutable action configuration or re-interpolating the payload after claim.
 - The validated successor is stored as `ReplayExecution.nextStage`. A successful replay, including duplicate delivery after a lost progression publication, advances using that stored value rather than recomputing from current configuration.
 - Replay `UNKNOWN` is terminal. An expired `RUNNING` replay is recorded as `UNKNOWN`; it is not reclaimed and the provider is never called again. A terminal replay failure or unknown outcome cannot be replayed again under the original approval and does not advance the workflow.
-- Live replay is disabled until the Phase 9C recovery/provider-semantics gate passes. `REPLAY_RELEASE_READY` is currently false, so setting `REPLAY_ENABLED=true` alone cannot enable dispatch or replay execution.
+- Phase 9C fault-injection recovery verification uses real PostgreSQL/Kafka fixtures and stubbed providers. It covers authority/history preservation, ordering, kill-switch behavior, terminal UNKNOWN/no resend, and offset handling; it is not evidence of live provider semantics, broker restart, production migration, or rollout behavior.
+- Kafka publication and provider execution are separate outcomes: a dispatcher broker ACK records publication, not action completion. `REPLAY_RELEASE_READY` remains false pending separate provider-semantics confirmation, so setting `REPLAY_ENABLED=true` alone cannot enable dispatch or replay execution.
 
 ---
 
@@ -146,4 +147,4 @@ When a provider rejects an action, persistence fails after a provider call, or a
 - **Linear Progression**: Stage $N+1$ is only queued if stage $N$ completes with status `SUCCESS`.
 - **Replay History**: Replay generations and failures are additive; original failed execution and failure records are immutable history.
 - **Replay Outcome**: `UNKNOWN` is terminal and never triggers an automatic resend.
-- **Replay Release Gate**: Phase 9C recovery and provider-semantics verification must pass before live replay is enabled.
+- **Replay Release Gate**: Recovery is verified, but provider semantics are not; live replay remains disabled.

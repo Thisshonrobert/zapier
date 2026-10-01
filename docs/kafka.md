@@ -47,13 +47,13 @@ type ZapEvent = {
 ```
 
 > [!IMPORTANT]
-> `replayRequestId` is not authorization by itself. When replay is enabled, the worker validates it against a stored `ReplayRequest` and its linked `ReplayExecution` row in a serializable transaction before executing anything. An arbitrary UUID without matching DB state is terminal and cannot invoke a provider. The Phase 9C release gate is currently disabled: replay dispatch is off, and a replay event presented to the worker remains unacknowledged while that gate is closed.
+> `replayRequestId` is not authorization by itself. When replay is enabled, the worker validates it against a stored `ReplayRequest` and its linked `ReplayExecution` row in a serializable transaction before executing anything. An arbitrary UUID without matching DB state is terminal and cannot invoke a provider. Phase 9 recovery has been verified with real PostgreSQL/Kafka and stubbed providers, but live replay remains disabled because provider semantics are not verified. Replay dispatch is off, and a replay event presented to the worker remains unacknowledged while that gate is closed.
 
 ---
 
 ### 2. `zap-events-dlq` Message Schema
 
-Messages published to `zap-events-dlq` contain failure context for offline inspection and replay.
+Messages published to `zap-events-dlq` contain sanitized failure evidence for offline inspection and triage. A broker ACK confirms evidence publication only; it does not mean an action was replayed or executed.
 
 ```typescript
 type DurableFailureEvent = {
@@ -124,7 +124,7 @@ flowchart LR
 
 3. **Replay dispatcher** ([`apps/primary_backend/replay-dispatcher-index.ts`](../apps/primary_backend/replay-dispatcher-index.ts)):
   - Publishes immutable replay request identities to the existing `zap-events` topic only when the release gate is enabled.
-  - `REPLAY_RELEASE_READY` is currently false, so the dispatcher remains disabled even if `REPLAY_ENABLED=true`. Phase 9C recovery and provider-semantics verification is required before enabling it.
+  - `REPLAY_RELEASE_READY` is currently false, so the dispatcher remains disabled even if `REPLAY_ENABLED=true`. Recovery is verified locally; separate provider-semantics confirmation is still required before enabling live replay.
 
 4. **DLQ publisher/reconciler** ([`apps/worker/dlq-publisher-index.ts`](../apps/worker/dlq-publisher-index.ts)):
    - Runs separately from action execution.
@@ -165,4 +165,5 @@ flowchart LR
    ]);
    ```
 4. **Crash Safety Invariant**:
-   - If a worker crashes mid-execution (before offset commit), the Kafka consumer will re-read the message upon restart. The PostgreSQL lease in `ZapRunExecution` prevents duplicate execution.
+    - If a worker crashes before offset commit, Kafka may redeliver the message. The PostgreSQL execution/replay state determines whether it can proceed; the recovery suite verifies selected fault-injection windows with real PostgreSQL/Kafka and stubbed providers, not broker restart behavior.
+    - Offsets are advanced losslessly as decimal strings. For replay, a durable terminal result is required before commit; unresolved work and a closed release gate leave the offset uncommitted. Publication ACK and provider execution outcome remain distinct.

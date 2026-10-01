@@ -1,4 +1,5 @@
 import { randomUUID } from "node:crypto";
+import { readdir, readFile } from "node:fs/promises";
 import pg from "pg";
 import { PrismaClient } from "../../../packages/db/generated/prisma/client.ts";
 import { Prisma } from "../../../packages/db/generated/prisma/client.ts";
@@ -14,8 +15,10 @@ export async function createPostgresFixture() {
   const client = await pool.connect();
   try {
     await client.query(`SET search_path TO "${schema}"`);
-    const files = [...new Bun.Glob("*/migration.sql").scanSync("packages/db/prisma/migrations")].sort();
-    for (const file of files) await client.query(await Bun.file(`packages/db/prisma/migrations/${file}`).text());
+    const directory = "packages/db/prisma/migrations";
+    const entries = await readdir(directory, { withFileTypes: true });
+    const migrations = entries.filter(entry => entry.isDirectory()).map(entry => entry.name).sort();
+    for (const migration of migrations) await client.query(await readFile(`${directory}/${migration}/migration.sql`, "utf8"));
   } finally { client.release(); }
   const url = new URL(databaseUrl);
   url.searchParams.set("schema", schema);

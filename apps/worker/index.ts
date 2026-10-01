@@ -4,6 +4,7 @@ import { getActionHandler } from "./actions";
 import { createExecutionStore, createFingerprints, type ExecutionDb } from "./execution-store.ts";
 import { executeStage, parseZapEvent, requireLoadedAction, type ZapEvent } from "./orchestration.ts";
 import { createReplayStore, executeReplayStage } from "./replay.ts";
+import { settleMessage } from "./message-resolution.ts";
 
 const TOPIC_NAME = "zap-events";
 const kafka = new Kafka({ clientId: "worker", brokers: ["localhost:9092"] });
@@ -49,29 +50,12 @@ async function processMessage(
     ? await executeReplayStage({ event, store: replayStore, getHandler: getActionHandler })
     : recovered ?? await executeStage(ordinaryInput!);
 
-  const nextStage = !resolution.advance ? null : resolution.nextStage !== undefined ? resolution.nextStage
-    : execution!.zapDetails.zap.actions.length - 1 !== event.stage ? event.stage + 1 : null;
-  if (nextStage !== null) {
-    await producer.send({
-      topic: TOPIC_NAME,
-      messages: [{ value: JSON.stringify({ stage: nextStage, zapRunId: event.zapRunId }) }],
-    });
-  }
-
-  if (!resolution.ack) {
-    console.error("stage remains unresolved", {
-      zapRunId: event.zapRunId,
-      stage: event.stage,
-      reason: "durable_resolution_required",
-    });
-    throw new Error("stage remains unresolved");
-  }
-
-  await consumer.commitOffsets([{
-    topic,
-    partition,
-    offset: (Number.parseInt(message.offset, 10) + 1).toString(),
-  }]);
+  const ordinaryNextStage = execution && execution.zapDetails.zap.actions.length - 1 !== event.stage
+    ? event.stage + 1 : null;
+  await settleMessage(resolution, event, ordinaryNextStage, topic, partition, message.offset, {
+    send: input => producer.send(input),
+    commitOffsets: input => consumer.commitOffsets(input),
+  });
 }
 
 async function main() {
