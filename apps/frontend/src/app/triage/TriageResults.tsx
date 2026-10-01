@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   AlertCircle,
   FileWarning,
@@ -5,7 +6,7 @@ import {
   ShieldAlert,
 } from "lucide-react";
 
-import type { TriageCase, TriageDisplayState } from "@/types/triage";
+import type { SavedInvestigation, TriageDecision, TriageCase, TriageDisplayState } from "../../types/triage";
 
 export function TriageResults({
   state,
@@ -93,7 +94,7 @@ export function TriageResults({
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className="text-xs font-semibold uppercase tracking-wide text-zinc-500">
-            Transient diagnosis
+            Diagnosis
           </p>
           <h2 className="mt-1 text-lg font-semibold text-zinc-900">
             {isUnknown ? "Outcome unknown" : diagnosis.taxonomy_id}
@@ -120,11 +121,52 @@ export function TriageResults({
         items={proposal.runbook_citations}
       />
       <p className="text-xs text-zinc-500">
-        This result is read-only and transient. It cannot approve, replay, or
-        change a workflow.
+        Diagnosis is advisory. Only backend policy can authorize replay.
       </p>
     </section>
   );
+}
+
+const decisionLabels: Record<TriageDecision, string> = {
+  approve: "Approve", reject: "Reject", mark_owner_action_required: "Owner action required",
+  escalate_to_engineering: "Escalate to engineering", resolve_without_replay: "Resolve without replay",
+};
+
+export function SavedInvestigationControls({ saved, pending, onDecision }: {
+  saved: SavedInvestigation; pending: boolean; onDecision: (decision: TriageDecision) => void;
+}) {
+  const authority = saved.authority;
+  const [now, setNow] = useState(() => Date.now());
+  const expiresAt = authority?.expiresAt;
+  useEffect(() => {
+    if (!expiresAt) return;
+    const timer = setTimeout(() => setNow(Date.now()), Math.max(0, Date.parse(expiresAt) - Date.now()) + 1);
+    return () => clearTimeout(timer);
+  }, [expiresAt]);
+  const expired = authority ? Date.parse(authority.expiresAt) <= now : false;
+  return <section aria-live="polite" className="mt-4 space-y-3 rounded-xl border border-zinc-200 bg-white p-5 text-sm text-zinc-700">
+    <p className="font-mono text-xs">Saved investigation {saved.id}</p>
+    <p>Status: {saved.status}</p>
+    <p>Live replay is disabled. Approval does not initiate replay.</p>
+    {!authority ? <p>No decision proposal is available yet.</p> : <>
+      <p>Proposal version {authority.version} · Expires {new Date(authority.expiresAt).toLocaleString()}</p>
+      {expired ? <p role="alert">Proposal expired. Start a new investigation.</p> : null}
+      <DetailList title="Decision reasons" items={authority.reasons} />
+      {authority.decision ? <p>Committed decision: {decisionLabels[authority.decision.decision]} · operator {authority.decision.approvedBy}</p>
+        : authority.allowedDecisions.length === 0 ? <p>Decision controls are blocked by backend policy.</p>
+        : <div className="flex flex-wrap gap-2">{authority.allowedDecisions.map((decision) =>
+          <button key={decision} type="button" disabled={pending || expired}
+            className="rounded-lg border border-zinc-300 px-3 py-2 font-medium hover:bg-zinc-50 disabled:cursor-not-allowed disabled:opacity-50"
+            onClick={() => onDecision(decision)}>{decisionLabels[decision]}</button>)}</div>}
+      {pending ? <p role="status">Saving decision… Controls are blocked while this request is pending.</p> : null}
+      {authority.replay ? <div>
+        <p>Publication: {authority.replay.publication}{authority.replay.publication === "queued" ? " (publication not confirmed)" : ""}</p>
+        <p>Execution: {authority.replay.execution}</p>
+        <p>Publication does not prove execution success. This outcome describes the selected replay stage.</p>
+        {authority.replay.execution === "UNKNOWN" ? <p>No resend. Delivery is unknown and terminal.</p> : null}
+      </div> : <p>No replay request exists. An approved decision alone is not execution.</p>}
+    </>}
+  </section>;
 }
 
 function DetailList({ title, items }: { title: string; items: string[] }) {

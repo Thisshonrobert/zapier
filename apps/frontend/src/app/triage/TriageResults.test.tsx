@@ -2,7 +2,38 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 import { renderToStaticMarkup } from "react-dom/server";
 
-import { TriageResults } from "./TriageResults";
+import { SavedInvestigationControls, TriageResults } from "./TriageResults";
+import type { SavedInvestigation } from "../../types/triage";
+
+const saved: SavedInvestigation = { id: "saved", status: "proposed", result: null, authority: {
+  id: "proposal", version: 1, status: "requires_approval", expiresAt: "2099-01-01T00:00:00Z",
+  reasons: [], allowedDecisions: ["approve", "reject"], decision: null, replay: null, replayEnabled: false,
+} };
+const controls = (value: SavedInvestigation, pending = false) => renderToStaticMarkup(
+  <SavedInvestigationControls saved={value} pending={pending} onDecision={() => {}} />);
+
+test("approval controls distinguish approval from replay and lock repeated clicks", () => {
+  assert.match(controls(saved), /Approve/);
+  assert.match(controls(saved), /does not initiate replay/);
+  assert.match(controls(saved, true), /disabled/);
+  assert.match(controls(saved, true), /Saving decision/);
+});
+
+test("expired and blocked proposals cannot offer approval", () => {
+  assert.match(controls({ ...saved, authority: { ...saved.authority!, expiresAt: "2000-01-01" } }), /expired/);
+  assert.doesNotMatch(controls({ ...saved, authority: { ...saved.authority!, allowedDecisions: [], reasons: ["changed_fingerprint"] } }), />Approve</);
+});
+
+test("publication is separate from success, failure and terminal unknown", () => {
+  for (const execution of ["PENDING", "SUCCESS", "FAILED", "UNKNOWN"] as const) {
+    const html = controls({ ...saved, authority: { ...saved.authority!, decision: { id: "decision", decision: "approve", approvedBy: 4 },
+      replay: { id: "request", publication: "published", execution, completedAt: null } } });
+    assert.match(html, /Publication: published/);
+    assert.match(html, new RegExp(`Execution: ${execution}`));
+    assert.doesNotMatch(html, />Approve</);
+    if (execution === "UNKNOWN") assert.match(html, /No resend/);
+  }
+});
 
 test("renders the support access blocked state", () => {
   const html = renderToStaticMarkup(

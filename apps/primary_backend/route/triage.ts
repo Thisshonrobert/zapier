@@ -42,6 +42,11 @@ export function createTriageRouter(options: TriageRouterOptions) {
   const proposals = options.proposals;
   const authority = options.authority;
   const notifications = options.notifications;
+  const decisionError = (response: Response, error: unknown) => {
+    if (error instanceof InvestigationDecisionDenied)
+      response.status(error.message.includes("permission") ? 403 : 409).json({ detail: error.message });
+    else response.status(503).json({ detail: "Decision snapshot unavailable" });
+  };
   for (const operation of ["dry-run", "requests"] as const) {
     router.post(`/operator/cases/:caseId/replay/${operation}`, authMiddleware, async (request, response) => {
       const parsed = z.object({ approvalId: uuid, proposalVersion: z.number().int().positive() }).strict().safeParse(request.body);
@@ -180,10 +185,11 @@ export function createTriageRouter(options: TriageRouterOptions) {
         caseId: selected.case_id, investigationId: id, correlationId,
         operations: ["failure_context", "execution_evidence", "validate_action_inputs"] });
       response.setHeader("x-correlation-id", correlationId);
-      response.json(await agent.read("/private/v1/investigations", scope, correlationId, "POST", 5_000,
+      const started = await agent.read("/private/v1/investigations", scope, correlationId, "POST", 5_000,
         { id, caseId: selected.case_id, zapRunId: selected.zap_run_id, stage: selected.stage,
           subjectOwnerId: selected.subject_owner_id, actorId: request.id,
-          supportOperatorId: request.id, idempotencyKey }));
+          supportOperatorId: request.id, idempotencyKey }) as { id: string; status: string };
+      response.json({ id: started.id, status: started.status });
     } catch { response.status(502).json({ detail: "Investigation service unavailable" }); }
   });
 
@@ -205,26 +211,34 @@ export function createTriageRouter(options: TriageRouterOptions) {
         const saved = await agent.read(`/private/v1/investigations/${id}`, scope, correlationId) as {
           id?: string; status?: string; binding?: { caseId: string; subjectOwnerId: number;
             zapRunId: string; stage: number }; result?: unknown; evidence?: unknown };
-        if (saved.status === "proposed" && proposals) {
-          if (saved.id !== id || saved.binding?.caseId !== selected.case_id ||
+        if (saved.id !== id || saved.binding?.caseId !== selected.case_id ||
             saved.binding.subjectOwnerId !== selected.subject_owner_id ||
-            saved.binding.zapRunId !== selected.zap_run_id || saved.binding.stage !== selected.stage ||
-            !saved.result || !saved.evidence) {
+            saved.binding.zapRunId !== selected.zap_run_id || saved.binding.stage !== selected.stage) {
             response.status(409).json({ detail: "Investigation binding mismatch" }); return;
+        }
+        if (saved.status === "proposed" && proposals) {
+          if (!saved.result || !saved.evidence) {
+            response.status(409).json({ detail: "Investigation evidence unavailable" }); return;
           }
-          const proposal = await proposals.submit({ investigationId: id, caseId: selected.case_id,
+          await proposals.submit({ investigationId: id, caseId: selected.case_id,
             subjectOwnerId: selected.subject_owner_id, actorId: request.id,
             result: saved.result, evidence: saved.evidence });
-          response.json({ ...saved, authority: proposal });
-        } else response.json(saved);
-      } catch { response.status(502).json({ detail: "Investigation service unavailable" }); }
+        }
+        if (!authority) throw new Error("Authority unavailable");
+        const snapshot = await authority.snapshot({ investigationId: id, caseId: selected.case_id,
+          subjectOwnerId: selected.subject_owner_id, actorId: request.id });
+        response.json({ id, status: saved.status, result: saved.result ?? null, authority: snapshot });
+      } catch (error) {
+        if (error instanceof InvestigationDecisionDenied) decisionError(response, error);
+        else response.status(502).json({ detail: "Investigation service unavailable" });
+      }
     });
 
   router.post("/operator/cases/:caseId/investigations/:investigationId/decision", authMiddleware,
     async (request, response) => {
       const id = request.params.investigationId;
       const decisionId = request.headers["idempotency-key"];
-      const parsed = z.object({ proposalId: uuid, decision: z.enum(["approve", "reject",
+      const parsed = z.object({ proposalId: uuid, proposalVersion: z.number().int().positive(), decision: z.enum(["approve", "reject",
         "mark_owner_action_required", "escalate_to_engineering", "resolve_without_replay"]) }).strict()
         .safeParse(request.body);
       if (typeof id !== "string" || !uuid.safeParse(id).success ||
@@ -237,14 +251,14 @@ export function createTriageRouter(options: TriageRouterOptions) {
       try {
         if (!authority) throw new Error("Decision service unavailable");
         const decision = await authority.decide({ proposalId: parsed.data.proposalId,
+          proposalVersion: parsed.data.proposalVersion,
           investigationId: id, caseId: selected.case_id, subjectOwnerId: selected.subject_owner_id,
           actorId: request.id, decisionId, decision: parsed.data.decision });
         try { if (notifications) await notifications.deliver(decision.id); }
         catch { /* The committed notification remains pending for the retry loop. */ }
         response.json(decision);
       } catch (error) {
-        if (error instanceof InvestigationDecisionDenied) response.status(409).json({ detail: error.message });
-        else response.status(503).json({ detail: "Decision unavailable" });
+        decisionError(response, error);
       }
     });
 

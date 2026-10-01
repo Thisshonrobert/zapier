@@ -83,3 +83,19 @@ test("commit before notification survives a new delivery service and a lost ackn
   expect(await new InvestigationNotifications(fixture.db, notify).deliver(input.decisionId)).toBe(true);
   expect(calls).toBe(2);
 });
+
+test("saved authority survives reload and blocks revoked actors, ownership changes and expiry", async () => {
+  const input = await setup();
+  const authority = () => new InvestigationAuthority(fixture.db, async () => ({ status: "requires_approval", reasons: [] }));
+  expect(await authority().snapshot(input)).toMatchObject({ version: 1, decision: null,
+    allowedDecisions: ["approve", "reject"], replay: null, replayEnabled: false });
+  await expect(authority().decide({ ...input, proposalVersion: 2 })).rejects.toThrow("stale proposal version");
+  await authority().decide({ ...input, proposalVersion: 1 });
+  expect(await authority().snapshot(input)).toMatchObject({ decision: { decision: "approve", approvedBy: input.actorId },
+    allowedDecisions: [], replay: null });
+  await expect(authority().snapshot({ ...input, subjectOwnerId: input.subjectOwnerId + 1 })).rejects.toThrow("binding changed");
+  await setOperator(fixture.db, input.actorId, false);
+  await expect(authority().snapshot(input)).rejects.toThrow("permission revoked");
+  const expired = await setup("replay_candidate", new Date(0));
+  expect(await authority().snapshot(expired)).toMatchObject({ allowedDecisions: [], reasons: ["proposal_expired"] });
+});
