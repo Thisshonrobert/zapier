@@ -1,6 +1,10 @@
 import { randomUUID, timingSafeEqual } from "node:crypto";
 import { Router, type Request, type Response } from "express";
 import { z } from "zod";
+import { Readable } from "node:stream";
+import { pipeline } from "node:stream/promises";
+import type { ReadableStream as NodeReadableStream } from "node:stream/web";
+import { parseEventCursor } from "../../../packages/triage-contracts/events.ts";
 
 import { createServiceScope, verifyServiceScope } from "../../../packages/triage-contracts/index.ts";
 import { authMiddleware } from "../middleware.ts";
@@ -231,6 +235,53 @@ export function createTriageRouter(options: TriageRouterOptions) {
       } catch (error) {
         if (error instanceof InvestigationDecisionDenied) decisionError(response, error);
         else response.status(502).json({ detail: "Investigation service unavailable" });
+      }
+    });
+
+  router.get("/operator/cases/:caseId/investigations/:investigationId/events", authMiddleware,
+    async (request, response) => {
+      const id = request.params.investigationId;
+      if (typeof id !== "string" || !uuid.safeParse(id).success) {
+        response.status(404).json({ detail: "Investigation not found" }); return;
+      }
+      let cursor;
+      try { cursor = parseEventCursor(request.headers["last-event-id"]); }
+      catch { response.status(422).json({ detail: "Invalid event cursor" }); return; }
+      let selected;
+      try { selected = await operatorCase(request, "read_case"); }
+      catch (error) { operatorError(response, error); return; }
+      const controller = new AbortController();
+      const closed = () => controller.abort();
+      response.once("close", closed);
+      request.once("aborted", closed);
+      request.socket.once("close", closed);
+      const timeout = setTimeout(closed, 30_000);
+      try {
+        const correlationId = randomUUID();
+        const scope = createServiceScope({ secret, ownerId: selected.subject_owner_id,
+          caseId: selected.case_id, investigationId: id, correlationId, operations: ["failure_context"] });
+        const saved = await agent.read(`/private/v1/investigations/${id}`, scope, correlationId) as {
+          id: string; binding?: { caseId: string; subjectOwnerId: number; zapRunId: string; stage: number } };
+        if (saved.id !== id || saved.binding?.caseId !== selected.case_id ||
+            saved.binding.subjectOwnerId !== selected.subject_owner_id ||
+            saved.binding.zapRunId !== selected.zap_run_id || saved.binding.stage !== selected.stage) {
+          response.status(409).json({ detail: "Investigation binding mismatch" }); return;
+        }
+        const upstream = await agent.stream(`/private/v1/investigations/${id}/events`, scope,
+          correlationId, cursor === null ? undefined : String(cursor), controller.signal);
+        response.set({ "content-type": "text/event-stream", "cache-control": "no-cache, no-transform",
+          "x-accel-buffering": "no", "x-correlation-id": correlationId });
+        response.flushHeaders();
+        // Native pipeline propagates backpressure and cancels the private stream on browser disconnect.
+        await pipeline(Readable.fromWeb(upstream.body as unknown as NodeReadableStream<Uint8Array>),
+          response, { signal: controller.signal });
+      } catch {
+        if (!response.headersSent && !controller.signal.aborted)
+          response.status(502).json({ detail: "Investigation stream unavailable" });
+        else response.destroy();
+      } finally {
+        clearTimeout(timeout); response.off("close", closed);
+        request.off("aborted", closed); request.socket.off("close", closed); controller.abort();
       }
     });
 

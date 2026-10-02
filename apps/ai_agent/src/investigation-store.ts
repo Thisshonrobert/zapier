@@ -1,6 +1,7 @@
 //managing the lifecycle of an investigation job.
 import { createHash, randomUUID } from "node:crypto";
 import type { Pool } from "pg";
+import { sanitizeInvestigationEvent, type InvestigationEvent } from "../../../packages/triage-contracts/events.ts";
 
 export type InvestigationBinding = {
   id: string;
@@ -40,6 +41,30 @@ function project(row: JobRow) {
 
 export class InvestigationStore {
   constructor(private readonly pool: Pool) {}
+
+  async events(id: string, caseId: string, subjectOwnerId: number, cursor: number | null) {
+    // One statement gives a consistent snapshot and history watermark, without pinning a DB connection.
+    const result = await this.pool.query<{ sequence: number; status: string; first: number | null;
+      events: InvestigationEvent[] }>(`
+      SELECT job.event_sequence AS sequence, job.status,
+        (SELECT min(sequence) FROM ai_agent.investigation_event
+          WHERE investigation_id = job.id AND created_at > now() - interval '7 days') AS first,
+        COALESCE((SELECT jsonb_agg(e ORDER BY e.sequence) FROM (
+          SELECT sequence, status FROM ai_agent.investigation_event
+          WHERE investigation_id = job.id AND sequence > $4
+            AND created_at > now() - interval '7 days'
+          ORDER BY sequence LIMIT 64
+        ) e), '[]'::jsonb) AS events
+      FROM ai_agent.investigation job
+      WHERE job.id = $1 AND job.case_id = $2 AND job.subject_owner_id = $3`,
+    [id, caseId, subjectOwnerId, cursor ?? 0]);
+    const row = result.rows[0];
+    if (!row) throw new Error("Investigation not found");
+    const snapshot = sanitizeInvestigationEvent(row);
+    const expired = cursor === null || cursor > row.sequence ||
+      (cursor < row.sequence && (row.first === null || cursor < row.first - 1));
+    return { snapshot: expired ? snapshot : null, events: expired ? [] : row.events.map(sanitizeInvestigationEvent) };
+  }
 
   async start(input: StartInvestigation) {
     const inserted = await this.pool.query<JobRow>(`

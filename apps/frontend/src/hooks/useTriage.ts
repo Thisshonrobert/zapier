@@ -3,7 +3,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { BACKEND_URL } from "@/config";
-import { pollInvestigation, requestTriage } from "@/lib/triage-client";
+import { requestTriage } from "@/lib/triage-client";
+import { useInvestigationStream } from "./useInvestigationStream";
 import type {
   TriageCase,
   SavedInvestigation,
@@ -42,6 +43,7 @@ const errorState = (error: unknown): TriageDisplayState => {
 };
 
 export function useTriage() {
+  const watchSaved = useInvestigationStream(operatorBaseUrl);
   const [casesState, setCasesState] = useState<TriageDisplayState>({
     kind: "loading",
   });
@@ -66,7 +68,8 @@ export function useTriage() {
     setDiagnosisState({ kind: "loading" });
     setPolling(true);
     try {
-      await pollInvestigation({ signal: controller.signal,
+      await watchSaved({ signal: controller.signal,
+        path: `/cases/${encodeURIComponent(caseId)}/investigations/${encodeURIComponent(id)}`,
         read: () => operatorRequest<SavedInvestigation>(
           `/cases/${encodeURIComponent(caseId)}/investigations/${encodeURIComponent(id)}`,
           { method: "GET" }, controller.signal),
@@ -85,7 +88,7 @@ export function useTriage() {
     } finally {
       if (!controller.signal.aborted) setPolling(false);
     }
-  }, []);
+  }, [watchSaved]);
 
   useEffect(() => {
     const controller = new AbortController();

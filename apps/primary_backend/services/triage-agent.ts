@@ -7,6 +7,25 @@ export class TriageAgentClient {
     private readonly timeoutMs = 3_000,
   ) {}
 
+  async stream(path: string, scopeToken: string, correlationId: string,
+    cursor: string | undefined, signal: AbortSignal) {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), this.timeoutMs);
+    try {
+      const response = await fetch(new URL(path, this.baseUrl), {
+        headers: { authorization: `Bearer ${scopeToken}`, "x-correlation-id": correlationId,
+          accept: "text/event-stream", ...(cursor === undefined ? {} : { "last-event-id": cursor }) },
+        signal: AbortSignal.any([signal, controller.signal]),
+      });
+      if (!response.ok || !response.body ||
+          !response.headers.get("content-type")?.startsWith("text/event-stream")) {
+        await response.body?.cancel();
+        throw new Error("Agent stream unavailable");
+      }
+      return response;
+    } finally { clearTimeout(timeout); }
+  }
+
   async read(path: string, scopeToken: string, correlationId: string, method: "GET" | "POST" = "GET", timeoutMs = this.timeoutMs, body: unknown = {}) {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), timeoutMs);
