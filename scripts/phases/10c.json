@@ -31,7 +31,7 @@
     "scripts/tests/finish-phase.test.mjs",
     "scripts/README.md",
     "scripts/github-state.mjs",
-    "AGENTS.md"
+    "AGENTS.MD"
   ],
   "documentation": [
     "docs/ai-dlq-master-plan.md",

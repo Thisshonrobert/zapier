@@ -189,13 +189,15 @@ export class ReleaseRunner {
         if (branch !== this.manifest.baseBranch) throw new Error(`Expected ${this.manifest.baseBranch} or ${this.manifest.branch}`);
         this.git(['switch', '-c', this.manifest.branch]);
       }
-      const changed = this.plan().selected;
-      if (!changed.length) throw new Error('No selected changes');
+      if (!this.plan().selected.length) throw new Error('No selected changes');
+    }
+    if (this.git(['branch', '--show-current']) !== this.manifest.branch) throw new Error('Release branch is no longer checked out');
+    const changed = this.plan().selected;
+    if (changed.length) {
       this.git(['add', '--', ...changed]);
       this.git(['commit', '-m', this.manifest.title]);
       this.state.phaseCommit = this.git(['rev-parse', 'HEAD']); this.save();
     }
-    if (this.git(['branch', '--show-current']) !== this.manifest.branch) throw new Error('Release branch is no longer checked out');
     this.git(['push', '-u', 'origin', this.manifest.branch]);
     if (this.manifest.manualPullRequest) {
       this.state.compareUrl = `https://github.com/${this.manifest.repository}/compare/${encodeURIComponent(this.manifest.baseBranch)}...${encodeURIComponent(this.manifest.branch)}?expand=1`;

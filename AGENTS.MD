@@ -103,6 +103,8 @@ This project uses a multi-tool pipeline to balance reasoning, context limits, an
 
 ### Manual Git and Antigravity Handoff
 
+**Explicit automatic workflow (user-selected):** For phases with a `scripts/phases/<phase>.json` manifest using `manualPullRequest: true`, the implementation agent runs `scripts/finish-phase.mjs Start <phase>` after preparing the exact file scope. Luna low generates scoped documentation; the script verifies, stages exact phase files and selected learning comments, commits and pushes. The user creates and merges the phase PR. A Codex heartbeat then runs `Resume`, verifies the exact pushed head was merged, switches to main and pulls, regenerates Graphify in a clean worktree based on merged main, commits only the named outputs and pushes directly to main. Notify the user on completion or a blocker. The user creates the next branch. These explicitly invoked operations are authorized exceptions to the manual defaults below; no extra staging handoff, Graphify PR or automatic next branch is required. Preserve unrelated edits and never force push. Known lint baselines may be accepted only when the exact diagnostics match and their source files are unchanged; report this accurately.
+
 - The user performs staging, committing, pushing, merging, branch switching and pulling manually unless they explicitly request one of those actions.
 - Default to two commits for a major phase, not separate implementation, learning-comment and documentation commits:
   1. **Phase bundle:** implementation, tests, approved learning comments and milestone documentation.

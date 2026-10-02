@@ -259,3 +259,15 @@ test('matching lint diagnostics do not hide a fatal tool failure', t => {
   manifest.verification.push({ command: 'lint-check', args: [], name: 'lint', baseline: ['src/previous.ts:1:1 Known baseline rule'] });
   assert.throws(() => runner.verify(), /lint/);
 });
+
+test('verified follow-up edits are committed and pushed rather than silently skipped', t => {
+  const { runner, manifest, root, git } = fixture(t);
+  manifest.manualPullRequest = true;
+  runner.docs(); runner.verify(); runner.publish();
+  const oldCommit = runner.state.phaseCommit;
+  writeFileSync(join(root, 'src/phase.ts'), 'export const value = 3;\n');
+  runner.verify(); runner.publish();
+  assert.equal(git('rev-list', '--count', 'HEAD'), '3');
+  assert.notEqual(runner.state.phaseCommit, oldCommit);
+  assert.equal(git('status', '--porcelain', '--', 'src/phase.ts'), '');
+});
