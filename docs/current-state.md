@@ -33,7 +33,7 @@ This document provides a factual assessment of what is currently implemented in 
 
 - **Authentication**: Native username/password signup with bcrypt hashing and JWT generation, alongside Clerk OAuth token exchange endpoint (`POST /api/v1/user/clerk`).
 - **Zap CRUD & Inspect**: Creation of ordered multi-action Zaps, listing user workflows, querying execution history, and calculating failure counts.
-- **Phase 4A-4C read-only triage boundary**: Authenticated `GET /api/v1/triage/cases` lists only the owner's joined retry cases. Owner checks are repeated before each evidence read, including failure context, bounded execution evidence, and deterministic action-input validation. The primary backend signs a case-, operation-, investigation-, and correlation-bound service scope for the private agent boundary; the agent and backend both verify its HMAC, audience, expiry, operation, route binding, and correlation ID.
+- **Support-operator triage boundary**: Authenticated triage routes resolve a selected case to its subject owner, enforce the support-operator permission and current owner/run/stage binding, and audit the operator. The primary backend signs a case-, operation-, investigation-, and correlation-bound service scope for the private agent boundary; the agent and backend both verify its HMAC, audience, expiry, operation, route binding, and correlation ID. Ordinary owner access remains distinct from support-operator authority.
 
 ### 4. AI Triage Evidence
 
@@ -45,6 +45,13 @@ This document provides a factual assessment of what is currently implemented in 
 Required service configuration is `TRIAGE_SERVICE_SECRET` (the same 32-or-more-character secret in both services). `AI_AGENT_URL` configures the primary backend's agent address and `PRIMARY_BACKEND_URL` configures the agent's backend address; both default to loopback URLs for local development and should be set explicitly outside it.
 
 Phase 4 verification completed with 65 focused tests, 3 PostgreSQL integration tests, and passing type check, lint, and build. The repository checks reported the existing Next/Yarn-Corepack warnings; no new implementation or schema change is implied by those warnings.
+
+### 4.3 Phase 10B/10C saved investigations and progress streaming
+
+- **Saved investigations and decisions**: The operator console reads saved investigations, restores selections from the URL, polls durable state, and submits typed decisions. Decisions retain immutable proposal/approval authority and actor audit; publication, stage execution, and `UNKNOWN` outcomes remain distinct. Approval does not itself create a replay request, and live replay remains disabled.
+- **Durable progress history**: Phase 10C adds agent-owned immutable sanitized status milestones with per-investigation sequences, atomic status/event persistence, and a seven-day resume window. Reads use a consistent SQL snapshot and page at most 64 events; initial, aged, and future cursors receive a sanitized status snapshot.
+- **Authenticated stream**: The primary backend proxies a private owner/case/investigation-bound SSE stream with operator authorization, binding checks, no-buffer headers, native backpressure, disconnect cancellation, and bounded deadlines. The frontend uses Bearer and `Last-Event-ID` fetch headers, retries up to four connections, refreshes durable outcomes on heartbeats, aborts stale selections, and falls back to polling. HTTP 401/403/404/409 fail closed; terminal `SUCCESS`, `FAILED`, and `UNKNOWN` stop monitoring.
+- **Verification and limits**: Focused Bun streaming tests passed; the PostgreSQL event-history integration test passed under Node with a disposable schema, covering ordering, atomicity, duplicates, isolation, rollback, and cursor fallback. `bun run check-types`, explicit backend/frontend `tsc --noEmit`, and `bun run build` passed; targeted frontend lint passed. Root lint still has 9 pre-existing errors and 22 warnings. The live agent schema still requires its controlled migration, and production reverse-proxy delivery was not available for verification.
 
 ### 4.1 Phase 5 simulated runbooks and retrieval
 
@@ -83,13 +90,13 @@ Phase 4 verification completed with 65 focused tests, 3 PostgreSQL integration t
    - Workflows currently execute strictly as a single linear sequence sorted by `sortingOrder: 0, 1, 2...`.
    - Branching conditions, conditional filtering (`if/else`), parallel execution branches, and loops are not yet modeled in the database schema or worker.
 2. **Failure publication and replay**:
-   - Phase 3C publication and reconciliation are implemented as a separate worker runtime; DLQ publication never authorizes replay. Phase 8 approval and Phase 9A/9B replay groundwork are implemented, but live replay remains disabled until Phase 9C recovery and provider-semantics checks pass.
+   - Phase 3C publication and reconciliation are implemented as a separate worker runtime; DLQ publication never authorizes replay. Phase 8 approval, Phase 9A/9B replay groundwork, Phase 10B decisions, and Phase 10C progress streaming are implemented, but live replay remains disabled pending the existing provider-semantics/release gate.
 3. **Third-Party delivery uncertainty**:
    - Resend requests include an idempotency key and Telegram lacks provider-level idempotency. Provider acceptance followed by persistence failure remains `UNKNOWN` and requires human review; the worker never resends automatically.
 4. **Single-Threaded Outbox Poller**:
    - `apps/processor` runs an unpartitioned single-instance loop polling the outbox table. At extreme scale, this requires database partitioning or CDC (Change Data Capture) tools like Debezium.
 5. **Triage UI and replay release gate**:
-   - Phases 4, 5, and 6 provide bounded evidence gathering, simulated runbook retrieval, and read-only LLM diagnosis; Phase 8 adds durable investigation, operator authorization, policy, and approval. Phase 9A/9B adds the gated additive replay path. Frontend triage screens remain unimplemented, and live replay provider calls remain unavailable until 9C passes.
+   - Phases 4, 5, and 6 provide bounded evidence gathering, simulated runbook retrieval, and read-only LLM diagnosis; Phase 8 adds durable investigation, operator authorization, policy, and approval. Phase 9A/9B adds the gated additive replay path, Phase 10B adds decisions and outcome views, and Phase 10C adds authenticated resumable progress streaming. Polling remains the fallback and live replay provider calls remain unavailable.
 
 ---
 

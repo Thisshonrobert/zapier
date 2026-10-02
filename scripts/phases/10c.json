@@ -1,0 +1,111 @@
+{
+  "phase": "10C",
+  "baseBranch": "main",
+  "branch": "codex/phase-10c",
+  "nextBranch": "codex/phase-11",
+  "repository": "Thisshonrobert/zapier",
+  "title": "Implement phase 10C investigation streaming and phase release scripts",
+  "docsModel": "gpt-5.6-luna",
+  "handoff": ".agents/progress/phase10c-handoff.md",
+  "implementation": [
+    "apps/ai_agent/migrations/0003_investigation_events.sql",
+    "apps/ai_agent/src/checkpoint.ts",
+    "apps/ai_agent/src/events.ts",
+    "apps/ai_agent/src/investigation-http.ts",
+    "apps/ai_agent/src/investigation-store.ts",
+    "apps/ai_agent/tests/events-db.integration.test.ts",
+    "apps/ai_agent/tests/events-http.test.ts",
+    "apps/ai_agent/tests/events.test.ts",
+    "apps/frontend/src/app/triage/page.tsx",
+    "apps/frontend/src/hooks/useInvestigationStream.ts",
+    "apps/frontend/src/hooks/useTriage.ts",
+    "apps/frontend/src/lib/triage-stream.test.ts",
+    "apps/frontend/src/lib/triage-stream.ts",
+    "apps/primary_backend/route/triage.ts",
+    "apps/primary_backend/services/triage-agent.ts",
+    "apps/primary_backend/tests/triage-stream.test.ts",
+    "packages/triage-contracts/events.ts",
+    "scripts/finish-phase.mjs",
+    "scripts/finish-phase.ps1",
+    "scripts/phases/10c.json",
+    "scripts/tests/finish-phase.test.mjs",
+    "scripts/README.md",
+    "scripts/github-state.mjs",
+    "AGENTS.md"
+  ],
+  "documentation": [
+    "docs/ai-dlq-master-plan.md",
+    "docs/architecture.md",
+    "docs/current-state.md",
+    "docs/decisions.md",
+    "docs/documentation.md"
+  ],
+  "graphifyRequired": true,
+  "graphifyFiles": [
+    "graphify-out/GRAPH_REPORT.md",
+    "graphify-out/graph.json",
+    "graphify-out/graph.html",
+    "graphify-out/.graphify_labels.json",
+    "graphify-out/.graphify_labels.json.sig",
+    "graphify-out/manifest.json"
+  ],
+  "verification": [
+    {
+      "name": "release script tests",
+      "command": "node",
+      "args": [
+        "--test",
+        "scripts/tests/finish-phase.test.mjs"
+      ]
+    },
+    {
+      "name": "streaming tests",
+      "command": "bun",
+      "args": [
+        "test",
+        "apps/ai_agent/tests/events.test.ts",
+        "apps/ai_agent/tests/events-http.test.ts",
+        "apps/frontend/src/lib/triage-stream.test.ts",
+        "apps/primary_backend/tests/triage-stream.test.ts"
+      ]
+    },
+    {
+      "name": "type check",
+      "command": "bun",
+      "args": [
+        "run",
+        "check-types"
+      ]
+    },
+    {
+      "name": "lint",
+      "command": "bun",
+      "args": [
+        "run",
+        "lint"
+      ],
+      "baseline": [
+        "apps/frontend/src/app/login/page.tsx:98:35 Unexpected any. Specify a different type @typescript-eslint/no-explicit-any",
+        "apps/frontend/src/app/signup/page.tsx:78:35 Unexpected any. Specify a different type @typescript-eslint/no-explicit-any",
+        "apps/frontend/src/app/store/zapStore.ts:4:26 Unexpected any. Specify a different type @typescript-eslint/no-explicit-any",
+        "apps/frontend/src/app/store/zapStore.ts:9:14 Unexpected any. Specify a different type @typescript-eslint/no-explicit-any",
+        "apps/frontend/src/app/zap/create/custom/CustonTrigger.tsx:33:48 Unexpected any. Specify a different type @typescript-eslint/no-explicit-any",
+        "apps/frontend/src/hooks/useZaps.ts:21:7 Error: Calling setState synchronously within an effect can trigger cascading renders",
+        "apps/frontend/src/hooks/useZaps.ts:41:7 Error: Calling setState synchronously within an effect can trigger cascading renders",
+        "apps/frontend/src/hooks/useZaps.ts:63:7 Error: Calling setState synchronously within an effect can trigger cascading renders",
+        "apps/frontend/src/mycomponents/Input.tsx:10:17 Unexpected any. Specify a different type @typescript-eslint/no-explicit-any"
+      ]
+    },
+    {
+      "name": "build",
+      "command": "bun",
+      "args": [
+        "run",
+        "build"
+      ]
+    }
+  ],
+  "manualPullRequest": true,
+  "graphifyPushToMain": true,
+  "createNextBranch": false
+}

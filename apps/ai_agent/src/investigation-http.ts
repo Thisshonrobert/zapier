@@ -4,6 +4,8 @@ import { z } from "zod";
 import { verifyServiceScope } from "../../../packages/triage-contracts/index.ts";
 import { InvestigationStore } from "./investigation-store.ts";
 import type { InvestigationDecision } from "./graph.ts";
+import { parseEventCursor } from "../../../packages/triage-contracts/events.ts";
+import { streamInvestigationEvents } from "./events.ts";
 
 const startSchema = z.object({
   id: z.uuid(), caseId: z.uuid(), zapRunId: z.uuid(), stage: z.number().int().min(0).max(1000),
@@ -37,6 +39,39 @@ export function createInvestigationRouter(input: { serviceSecret: string; store:
     }
     try { response.json(await input.store.start(parsed.data)); }
     catch { response.status(409).json({ detail: "Investigation conflict" }); }
+  });
+
+  router.get("/:id/events", async (request, response) => {
+    const id = request.params.id;
+    if (typeof id !== "string" || !z.uuid().safeParse(id).success) {
+      response.status(404).json({ detail: "Investigation not found" }); return;
+    }
+    let scope;
+    try { scope = scopeFor(request, id); }
+    catch { response.status(401).json({ detail: "Invalid service scope" }); return; }
+    let cursor;
+    try { cursor = parseEventCursor(request.headers["last-event-id"]); }
+    catch { response.status(422).json({ detail: "Invalid event cursor" }); return; }
+    try { await input.store.read(id, scope.caseId, scope.ownerId); }
+    catch { response.status(404).json({ detail: "Investigation not found" }); return; }
+    const controller = new AbortController();
+    const closed = () => controller.abort();
+    response.once("close", closed);
+    request.once("aborted", closed);
+    request.socket.once("close", closed);
+    response.set({ "content-type": "text/event-stream", "cache-control": "no-cache, no-transform",
+      "x-accel-buffering": "no" });
+    response.flushHeaders();
+    try {
+      await streamInvestigationEvents({ response, store: input.store, id, caseId: scope.caseId,
+        ownerId: scope.ownerId, cursor, signal: controller.signal,
+        expiresAt: Math.min(Date.now() + 25_000, scope.expiresAt * 1000) });
+      response.end();
+    } catch { response.destroy(); }
+    finally {
+      response.off("close", closed); request.off("aborted", closed); request.socket.off("close", closed);
+      controller.abort();
+    }
   });
 
   router.get("/:id", async (request, response) => {

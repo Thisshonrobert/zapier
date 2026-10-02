@@ -64,7 +64,7 @@ export default function TriagePage() {
             {saved ? <SavedInvestigationControls saved={saved} pending={pendingDecision} onDecision={decide} /> : null}
             {selectedCase ? <div className="mt-3 flex items-center gap-3 text-xs text-zinc-500">
               <Button variant="outline" disabled={pendingDecision || casesState.kind === "blocked"} onClick={refresh}>Refresh saved status</Button>
-              <span>{polling ? "Polling saved reads (up to 30 reads)." : "Automatic polling stopped. Refresh to read the current status."}</span>
+              <span>{polling ? "Saved status updates automatically." : "Automatic updates stopped. Refresh to read the current status."}</span>
             </div> : null}
           </section>
         </div>

@@ -141,13 +141,14 @@ This document records the foundational architectural decisions established in th
 - **Alternatives / consequences**: No MCP server is required for RAG, tool use, observability or approval. A later adapter must prove owner isolation and contract parity; it does not gain a replay/write capability.
 - **Plan**: Optional MCP phase in the [master plan](ai-dlq-master-plan.md).
 
-## ADR 017: Authenticated progress streaming over existing backend
+## ADR 017: Authenticated support-operator progress streaming over existing backend
 
-- **Status**: Proposed.
-- **Context**: The frontend uses app JWT Bearer headers. Graph streaming does not provide browser authorization, durable event history or job ownership.
-- **Decision**: The agent service persists sanitized graph milestones and exposes a private Express stream; the primary backend proxies it through an owner-authorized SSE endpoint. Use fetch streaming with the existing browser token format; reconnect by sequence and fall back to a persisted snapshot. Durable investigation execution is independent of either HTTP connection. Test proxy buffering, disconnects and backpressure.
-- **Alternatives / consequences**: No tokens in URLs, raw model reasoning, full graph-state dump, new WebSocket service or separate frontend. Extend existing Next.js inspect/history views; distinguish queued, executed and unknown outcomes.
-- **Plan**: Phases 10 and 13 in the [master plan](ai-dlq-master-plan.md).
+- **Status**: Implemented in Phase 10C; polling remains the fallback and live replay remains disabled.
+- **Context**: The frontend uses app JWT Bearer headers. Graph streaming does not provide browser authorization, durable event history or job ownership, so progress must be sanitized, persisted, and authorized through the existing backend.
+- **Decision**: The agent service persists immutable sanitized status milestones with per-investigation sequences and a seven-day resume window, and exposes a private bounded Express stream. The primary backend authenticates and audits the support operator, revalidates the current owner/run/stage binding, and proxies the stream through an authenticated SSE endpoint with native backpressure and disconnect cancellation. The browser uses fetch streaming with the existing token format and `Last-Event-ID`, reconnects by sequence, and falls back to a sanitized persisted snapshot or polling. Durable investigation execution is independent of either HTTP connection.
+- **Alternatives / consequences**: No tokens in URLs, raw model reasoning, full graph-state dump, new WebSocket service or separate frontend. Status history is capped per read and older records remain stored outside the seven-day resume window. HTTP authorization failures fail closed; reconnect reauthorizes. The stream is bounded by scope/deadline and does not add replay authority.
+- **Verification**: Focused stream tests passed; the disposable-schema PostgreSQL integration test covered atomic ordered history, duplicate decisions, immutable events, isolation, rollback, and expired/future cursor fallback. Local direct-proxy no-buffer and deadline/backpressure behavior was verified; production reverse-proxy delivery was not available.
+- **Plan**: [Phase 10C](ai-dlq-master-plan.md#phase-10-support-operator-interface-and-optional-streaming).
 
 ## ADR 018: TypeScript agent-service ownership and internal contracts
 

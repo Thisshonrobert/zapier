@@ -15,7 +15,7 @@ export function createCheckpoint(databaseUrl: string) {
 
 // Run this controlled migration before starting the service. Request handlers never call setup().
 export async function migrateAgent(pool: Pool, databaseUrl: string) {
-  for (const filename of ["0001_investigations.sql", "0002_investigation_decisions.sql"]) {
+  for (const filename of ["0001_investigations.sql", "0002_investigation_decisions.sql", "0003_investigation_events.sql"]) {
     const migration = await Bun.file(new URL(`../migrations/${filename}`, import.meta.url)).text();
     await pool.query(migration);
   }
