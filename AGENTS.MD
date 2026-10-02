@@ -147,6 +147,5 @@ When introducing a new subsystem, pattern, or dependency:
 
 1. Work incrementally in discrete phases.
 2. Test and verify the current phase before proceeding to the next.
-3. Give Antigravity the implementation handoff for documentation and exact diff classification.
-4. Follow the two-commit manual workflow above; the user performs all Git integration actions.
-5. which model and effort should be used for next phase.
+3. Follow the two-commit manual workflow above; the user performs all Git integration actions.
+4. which model and effort should be used for next phase.
