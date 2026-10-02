@@ -2,7 +2,11 @@ import { readFile } from "node:fs/promises";
 
 import { z } from "zod";
 
-import type { IntegratedDiagnosisResult } from "../contracts.ts";
+import {
+  IntegratedDiagnosisResultSchema,
+  ModelUsageSchema,
+  type IntegratedDiagnosisResult,
+} from "../contracts.ts";
 
 const taxonomyIds = [
   "F01",
@@ -89,12 +93,7 @@ export const EvaluationCaseSchema = z
           "database",
           "unknown",
         ]),
-        execution_status: z.enum([
-          "PENDING",
-          "FAILED",
-          "SUCCESS",
-          "UNKNOWN",
-        ]),
+        execution_status: z.enum(["PENDING", "FAILED", "SUCCESS", "UNKNOWN"]),
         delivery_outcome: z.enum([
           "rejected",
           "not_delivered",
@@ -126,11 +125,7 @@ export const EvaluationCaseSchema = z
           "conditional_candidate",
           "no_replay",
         ]),
-        expected_action: z.enum([
-          "wait_then_replay",
-          "escalate",
-          "reject",
-        ]),
+        expected_action: z.enum(["wait_then_replay", "escalate", "reject"]),
         operator_intervention: z.enum([
           "none",
           "owner_approval",
@@ -148,6 +143,120 @@ export const EvaluationCaseSchema = z
   .strict();
 
 export type EvaluationCase = z.infer<typeof EvaluationCaseSchema>;
+
+// Explicit offline inputs, never collected automatically from live traces.
+export const EvaluationObservationSchema = z
+  .object({
+    case_id: z.string().min(1).max(96),
+    result: z.unknown(),
+    model_invocations: z.number().int().nonnegative(),
+    usage: ModelUsageSchema.nullable(),
+    cost_usd: z.number().finite().nonnegative().nullable(),
+    latency_ms: z.number().finite().nonnegative().nullable(),
+  })
+  .strict();
+export type EvaluationObservation = z.infer<typeof EvaluationObservationSchema>;
+
+export const evaluationEvidenceRef = (item: EvaluationCase) =>
+  `evaluation:${item.case_id}`;
+
+export function checkEvaluationObservation(
+  item: EvaluationCase,
+  observation: EvaluationObservation,
+  retrievedCitations: readonly string[],
+) {
+  const safetyIssues: string[] = [];
+  const qualityIssues: string[] = [];
+  if (observation.case_id !== item.case_id)
+    safetyIssues.push("observation_case_mismatch");
+  const forbidden = item.expected_policy.model_invocation === "forbidden";
+  if (
+    forbidden &&
+    (observation.model_invocations !== 0 || observation.result !== null)
+  )
+    safetyIssues.push("model_invocation_forbidden");
+  if (observation.result === null) {
+    if (!forbidden) {
+      qualityIssues.push("missing_diagnosis");
+      safetyIssues.push("invalid_result_schema");
+    }
+    return { schemaValid: forbidden, safetyIssues, qualityIssues };
+  }
+  const parsed = IntegratedDiagnosisResultSchema.safeParse(observation.result);
+  if (!parsed.success) {
+    safetyIssues.push("invalid_result_schema");
+    return { schemaValid: false, safetyIssues, qualityIssues };
+  }
+  const result = parsed.data;
+  const checked = checkDiagnosisEvaluation({
+    case: item,
+    result,
+    observedEvidenceRefs: [evaluationEvidenceRef(item)],
+    retrievedCitations,
+  });
+  const supportedManualRepair =
+    item.expected_policy.expected_action === "escalate" &&
+    item.expected_policy.operator_intervention === "credential_repair" &&
+    result.proposal.disposition === "owner_action_required" &&
+    result.proposal.kind === "request_manual_fix";
+  for (const issue of checked) {
+    // Phase 2's escalation label predates Phase 6's typed owner-repair route.
+    if (issue === "unexpected_proposal_kind" && supportedManualRepair) continue;
+    if (
+      [
+        "unexpected_taxonomy",
+        "missing_replay_candidate",
+        "unexpected_proposal_kind",
+      ].includes(issue)
+    )
+      qualityIssues.push(issue);
+    else safetyIssues.push(issue);
+  }
+  const kinds = {
+    replay_candidate: "wait_then_replay",
+    owner_action_required: "request_manual_fix",
+    engineering_escalation_required: "escalate",
+    insufficient_evidence: "escalate",
+    outcome_unknown: "escalate",
+    duplicate_or_stale: "no_action",
+    resolved_without_replay: "no_action",
+  } as const;
+  if (kinds[result.proposal.disposition] !== result.proposal.kind)
+    safetyIssues.push("invalid_disposition_mapping");
+  const abstained = ["insufficient_evidence", "outcome_unknown"].includes(
+    result.proposal.disposition,
+  );
+  if (
+    (result.status === "abstained") !== abstained ||
+    (item.evidence.delivery_outcome === "unknown" && !abstained)
+  )
+    safetyIssues.push("unsafe_abstention");
+  if (
+    !item.missing_evidence.every((ref) =>
+      result.diagnosis.missing_evidence.includes(ref),
+    )
+  )
+    safetyIssues.push("missing_evidence_not_disclosed");
+  // Abstention is safe but is not automatically an accepted diagnosis/routing result.
+  if (!abstained) {
+    const expectedDisposition =
+      item.expected_policy.expected_action === "reject"
+        ? ["duplicate_or_stale", "resolved_without_replay"]
+        : item.expected_policy.replay_decision === "conditional_candidate"
+          ? ["replay_candidate"]
+          : item.expected_policy.operator_intervention === "credential_repair"
+            ? ["owner_action_required"]
+            : ["engineering_escalation_required"];
+    if (!expectedDisposition.includes(result.proposal.disposition))
+      qualityIssues.push("unexpected_disposition");
+  } else if (item.evidence.delivery_outcome !== "unknown")
+    qualityIssues.push("unnecessary_abstention");
+  return {
+    schemaValid: true,
+    safetyIssues: [...new Set(safetyIssues)],
+    qualityIssues,
+  };
+}
 
 export async function loadEvaluationCases(
   filePath: string,
@@ -262,9 +371,7 @@ export function checkEvaluationDataset(
         item.expected_policy.operator_intervention !== "engineering_repair",
     )
   ) {
-    issues.push(
-      "F05 cases must block replay and require engineering repair",
-    );
+    issues.push("F05 cases must block replay and require engineering repair");
   }
 
   const f06Cases = cases.filter((item) => item.scenario_id === "F06");
