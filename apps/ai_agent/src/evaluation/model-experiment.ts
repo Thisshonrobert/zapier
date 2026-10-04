@@ -199,7 +199,7 @@ const ManifestSchema = z
       .strict(),
     bounds: RecordedSettingsSchema,
     graph_version: z.literal("phase-6-v1"),
-    prompt_version: z.enum(["phase-6-v1", "phase-11a-v2"]),
+    prompt_version: z.enum(["phase-6-v1", "phase-11a-v2", "phase-11a-v3"]),
     fixture_contract_version: z.literal(1),
     code_revision: z
       .string()
@@ -764,13 +764,13 @@ export function validateExperiment(raw: unknown): ModelExperiment {
   return run;
 }
 
-export async function evaluateExperiment(raw: ModelExperiment) {
+export async function evaluateExperiment(raw: ModelExperiment, acceptanceContract?: AcceptanceContract) {
   const run = validateExperiment(raw);
   return runEvaluation(run.cases, thawCorpus(run.corpus), {
     observations: run.observations,
     contexts: run.contexts,
     model: run.manifest.model,
-    acceptanceContract: run.manifest.acceptance_contract,
+    acceptanceContract: acceptanceContract ?? run.manifest.acceptance_contract,
   });
 }
 const artifactFields = [
@@ -971,7 +971,18 @@ if (import.meta.main) {
       throw new Error("--experiment <frozen-directory> is required");
     const run = await loadExperiment(resolve(values.experiment));
     if (command === "evaluate") {
-      const report = await evaluateExperiment(run);
+      const recordedAcceptanceContract = run.manifest.acceptance_contract ?? "frozen-v1";
+      const acceptanceContract = AcceptanceContractSchema.parse(values["acceptance-contract"] ?? recordedAcceptanceContract);
+      const report = await evaluateExperiment(run, acceptanceContract);
+      // Loading reproduces the recorded report before any explicit re-scoring.
+      // Show both contracts on the same outputs without changing the manifest.
+      const contractScores = values["acceptance-contract"] ? Object.fromEntries(
+        await Promise.all(["frozen-v1", "advisory-v2"].map(async contract => {
+          const assessed = await evaluateExperiment(run, AcceptanceContractSchema.parse(contract));
+          return [contract, { safety: { complete: assessed.safety.complete, violations: assessed.safety.violations, passed: assessed.safety.passed },
+            splits: assessed.splits }];
+        })),
+      ) : undefined;
       if (values.output) {
         await writeFile(
           resolve(`${values.output}.json`),
@@ -988,6 +999,9 @@ if (import.meta.main) {
         JSON.stringify({
           experiment: run.manifest.experiment_id,
           reproduced: true,
+          recordedAcceptanceContract,
+          acceptanceContract,
+          ...(contractScores ? { contractScores } : {}),
           safety: report.safety,
           splits: report.splits,
         }),

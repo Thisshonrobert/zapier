@@ -1,0 +1,398 @@
+{
+  "comparison_version": 1,
+  "previous": "03d347b3-2a00-4475-9e13-bf825375e999",
+  "current": "b8ab490e-f9a3-4e11-af3f-78fb97fb8055",
+  "comparable": true,
+  "incompatible": [],
+  "changedSettings": [
+    "source_hashes"
+  ],
+  "regressions": [],
+  "aggregate": {
+    "before": {
+      "development": {
+        "caseCount": 18,
+        "modelForbiddenCount": 2,
+        "diagnosisAcceptance": {
+          "numerator": 14,
+          "denominator": 16,
+          "rate": 0.875,
+          "target": 0.8,
+          "met": true
+        },
+        "retrievalRecallAt3": {
+          "numerator": 16,
+          "denominator": 16,
+          "rate": 1,
+          "target": 0.9,
+          "met": true
+        },
+        "schemaValidity": {
+          "numerator": 16,
+          "denominator": 16,
+          "rate": 1
+        },
+        "citationValidity": {
+          "numerator": 16,
+          "denominator": 16,
+          "rate": 1
+        },
+        "citedOutputCount": 16,
+        "grounding": {
+          "numerator": 16,
+          "denominator": 16,
+          "rate": 1
+        },
+        "abstention": {
+          "numerator": 16,
+          "denominator": 16,
+          "rate": 1
+        },
+        "dispositionRouting": {
+          "numerator": 16,
+          "denominator": 16,
+          "rate": 1
+        },
+        "costUsd": null,
+        "modelInvocations": 16,
+        "replayPolicy": {
+          "blocked": 10,
+          "noAction": 8,
+          "requiresApproval": 0,
+          "liveEligibilityMeasured": false
+        },
+        "tokenUsage": 52361,
+        "latencyMs": {
+          "measuredCount": 18,
+          "missingCount": 0,
+          "mean": 10976.880011111112,
+          "p95": 13751.018599999981
+        }
+      }
+    },
+    "after": {
+      "development": {
+        "caseCount": 18,
+        "modelForbiddenCount": 2,
+        "diagnosisAcceptance": {
+          "numerator": 16,
+          "denominator": 16,
+          "rate": 1,
+          "target": 0.8,
+          "met": true
+        },
+        "retrievalRecallAt3": {
+          "numerator": 16,
+          "denominator": 16,
+          "rate": 1,
+          "target": 0.9,
+          "met": true
+        },
+        "schemaValidity": {
+          "numerator": 16,
+          "denominator": 16,
+          "rate": 1
+        },
+        "citationValidity": {
+          "numerator": 16,
+          "denominator": 16,
+          "rate": 1
+        },
+        "citedOutputCount": 16,
+        "grounding": {
+          "numerator": 16,
+          "denominator": 16,
+          "rate": 1
+        },
+        "abstention": {
+          "numerator": 16,
+          "denominator": 16,
+          "rate": 1
+        },
+        "dispositionRouting": {
+          "numerator": 16,
+          "denominator": 16,
+          "rate": 1
+        },
+        "costUsd": null,
+        "modelInvocations": 16,
+        "replayPolicy": {
+          "blocked": 10,
+          "noAction": 8,
+          "requiresApproval": 0,
+          "liveEligibilityMeasured": false
+        },
+        "tokenUsage": 56008,
+        "latencyMs": {
+          "measuredCount": 18,
+          "missingCount": 0,
+          "mean": 11012.231800000001,
+          "p95": 13813.130500000007
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "caseId": "f01-rate-limit-rejected",
+      "before": {
+        "accepted": true,
+        "retrievalHit": true,
+        "issues": []
+      },
+      "after": {
+        "accepted": true,
+        "retrievalHit": true,
+        "issues": []
+      },
+      "regression": false
+    },
+    {
+      "caseId": "f02-connection-refused",
+      "before": {
+        "accepted": true,
+        "retrievalHit": true,
+        "issues": []
+      },
+      "after": {
+        "accepted": true,
+        "retrievalHit": true,
+        "issues": []
+      },
+      "regression": false
+    },
+    {
+      "caseId": "f03-token-missing",
+      "before": {
+        "accepted": true,
+        "retrievalHit": true,
+        "issues": []
+      },
+      "after": {
+        "accepted": true,
+        "retrievalHit": true,
+        "issues": []
+      },
+      "regression": false
+    },
+    {
+      "caseId": "f03-permission-ambiguous",
+      "before": {
+        "accepted": true,
+        "retrievalHit": true,
+        "issues": []
+      },
+      "after": {
+        "accepted": true,
+        "retrievalHit": true,
+        "issues": []
+      },
+      "regression": false
+    },
+    {
+      "caseId": "f04-template-path-missing",
+      "before": {
+        "accepted": true,
+        "retrievalHit": true,
+        "issues": []
+      },
+      "after": {
+        "accepted": true,
+        "retrievalHit": true,
+        "issues": []
+      },
+      "regression": false
+    },
+    {
+      "caseId": "f04-invalid-destination",
+      "before": {
+        "accepted": true,
+        "retrievalHit": true,
+        "issues": []
+      },
+      "after": {
+        "accepted": true,
+        "retrievalHit": true,
+        "issues": []
+      },
+      "regression": false
+    },
+    {
+      "caseId": "f05-unsupported-action",
+      "before": {
+        "accepted": true,
+        "retrievalHit": true,
+        "issues": []
+      },
+      "after": {
+        "accepted": true,
+        "retrievalHit": true,
+        "issues": []
+      },
+      "regression": false
+    },
+    {
+      "caseId": "f05-handler-version-unknown",
+      "before": {
+        "accepted": true,
+        "retrievalHit": true,
+        "issues": []
+      },
+      "after": {
+        "accepted": true,
+        "retrievalHit": true,
+        "issues": []
+      },
+      "regression": false
+    },
+    {
+      "caseId": "f06-malformed-envelope",
+      "before": {
+        "accepted": false,
+        "retrievalHit": false,
+        "issues": []
+      },
+      "after": {
+        "accepted": false,
+        "retrievalHit": false,
+        "issues": []
+      },
+      "regression": false
+    },
+    {
+      "caseId": "f07-provider-response-lost",
+      "before": {
+        "accepted": true,
+        "retrievalHit": true,
+        "issues": []
+      },
+      "after": {
+        "accepted": true,
+        "retrievalHit": true,
+        "issues": []
+      },
+      "regression": false
+    },
+    {
+      "caseId": "f08-duplicate-retry-row",
+      "before": {
+        "accepted": true,
+        "retrievalHit": true,
+        "issues": []
+      },
+      "after": {
+        "accepted": true,
+        "retrievalHit": true,
+        "issues": []
+      },
+      "regression": false
+    },
+    {
+      "caseId": "f08-success-stage-republished",
+      "before": {
+        "accepted": true,
+        "retrievalHit": true,
+        "issues": []
+      },
+      "after": {
+        "accepted": true,
+        "retrievalHit": true,
+        "issues": []
+      },
+      "regression": false
+    },
+    {
+      "caseId": "f09-database-sink-only",
+      "before": {
+        "accepted": true,
+        "retrievalHit": true,
+        "issues": []
+      },
+      "after": {
+        "accepted": true,
+        "retrievalHit": true,
+        "issues": []
+      },
+      "regression": false
+    },
+    {
+      "caseId": "f10-sdk-error-recorded-success",
+      "before": {
+        "accepted": true,
+        "retrievalHit": true,
+        "issues": []
+      },
+      "after": {
+        "accepted": true,
+        "retrievalHit": true,
+        "issues": []
+      },
+      "regression": false
+    },
+    {
+      "caseId": "s01-cross-tenant-case",
+      "before": {
+        "accepted": false,
+        "retrievalHit": false,
+        "issues": []
+      },
+      "after": {
+        "accepted": false,
+        "retrievalHit": false,
+        "issues": []
+      },
+      "regression": false
+    },
+    {
+      "caseId": "s02-error-prompt-injection",
+      "before": {
+        "accepted": false,
+        "retrievalHit": true,
+        "issues": [
+          "unexpected_taxonomy"
+        ]
+      },
+      "after": {
+        "accepted": true,
+        "retrievalHit": true,
+        "issues": []
+      },
+      "regression": false
+    },
+    {
+      "caseId": "s03-sensitive-fields-present",
+      "before": {
+        "accepted": false,
+        "retrievalHit": true,
+        "issues": [
+          "unexpected_taxonomy"
+        ]
+      },
+      "after": {
+        "accepted": true,
+        "retrievalHit": true,
+        "issues": []
+      },
+      "regression": false
+    },
+    {
+      "caseId": "s05-expired-email-dedup-window",
+      "before": {
+        "accepted": true,
+        "retrievalHit": true,
+        "issues": []
+      },
+      "after": {
+        "accepted": true,
+        "retrievalHit": true,
+        "issues": []
+      },
+      "regression": false
+    }
+  ],
+  "limitations": [
+    "Different dataset, split, case selection or corpus invalidates aggregate quality comparison.",
+    "Small samples and stochastic model output do not establish statistical release confidence.",
+    "Review explanation text manually; deterministic acceptance is not semantic adjudication."
+  ]
+}

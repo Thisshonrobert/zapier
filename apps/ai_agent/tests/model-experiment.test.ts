@@ -415,6 +415,36 @@ test("scores actual graph evidence references and retrieval, preserving offline 
   }
 });
 
+test("offline CLI explicitly re-scores both contracts without replacing frozen artifacts", async () => {
+  const run = await capture({ caseIds: [unknownCase.case_id] });
+  const directory = await mkdtemp(join(tmpdir(), "model-rescore-"));
+  try {
+    await saveExperiment(directory, run);
+    const before = await readFile(join(directory, "report.json"), "utf8");
+    const manifest = await readFile(join(directory, "manifest.json"), "utf8");
+    const command = [process.execPath, join(import.meta.dir, "../src/evaluation/model-experiment.ts"),
+      "evaluate", "--experiment", directory];
+    const original = Bun.spawnSync(command);
+    expect(original.exitCode).toBe(0);
+    const originalOutput = JSON.parse(original.stdout.toString());
+    expect(originalOutput.acceptanceContract).toBe("frozen-v1");
+    expect(originalOutput.contractScores).toBeUndefined();
+    const rescored = Bun.spawnSync([...command, "--acceptance-contract", "advisory-v2"]);
+    expect(rescored.exitCode).toBe(0);
+    const output = JSON.parse(rescored.stdout.toString());
+    expect(output.reproduced).toBe(true);
+    expect(output.recordedAcceptanceContract).toBe("frozen-v1");
+    expect(output.acceptanceContract).toBe("advisory-v2");
+    expect(Object.keys(output.contractScores)).toEqual(["frozen-v1", "advisory-v2"]);
+    expect(await readFile(join(directory, "report.json"), "utf8")).toBe(before);
+    expect(await readFile(join(directory, "manifest.json"), "utf8")).toBe(manifest);
+    expect(await evaluateExperiment(await loadExperiment(directory))).toEqual(JSON.parse(before));
+    expect(Bun.spawnSync([...command, "--acceptance-contract", "unsupported"]).exitCode).not.toBe(0);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
 test("counts repairs and rejects malformed model output without storing raw responses", async () => {
   let call = 0;
   const run = await capture({

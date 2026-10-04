@@ -128,6 +128,11 @@ test("advisory-v2 accepts supported routes without relabeling the original gate 
   expect(report.acceptanceContract).toBe("advisory-v2");
   expect(report.rows.every(row => row.accepted)).toBe(true);
   expect(report.safety.violations).toBe(0);
+  const frozenRun = JSON.stringify(run);
+  const rescore = await evaluateExperiment(run, "frozen-v1");
+  expect(rescore.rows.every(row => !row.accepted)).toBe(true);
+  expect(rescore.acceptanceContract).toBeUndefined();
+  expect(JSON.stringify(run)).toBe(frozenRun);
   const original = structuredClone(run);
   delete original.manifest.acceptance_contract;
   const legacy = await evaluateExperiment(original);
