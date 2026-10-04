@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, test } from "bun:test";
+import { afterAll, afterEach, describe, expect, test } from "bun:test";
 import { createServer, type Server } from "node:http";
 import express from "express";
 import jwt from "jsonwebtoken";
@@ -6,6 +6,16 @@ import jwt from "jsonwebtoken";
 import { verifyServiceScope } from "../../../packages/triage-contracts/index.ts";
 
 process.env.JWT_SECRET ??= "phase-10a-http-test-secret";
+const previousInvestigation = process.env.INVESTIGATION_ENABLED;
+const previousReplayIntent = process.env.REPLAY_INTENT_ENABLED;
+process.env.INVESTIGATION_ENABLED = "true";
+process.env.REPLAY_INTENT_ENABLED = "true";
+afterAll(() => {
+  if (previousInvestigation === undefined) delete process.env.INVESTIGATION_ENABLED;
+  else process.env.INVESTIGATION_ENABLED = previousInvestigation;
+  if (previousReplayIntent === undefined) delete process.env.REPLAY_INTENT_ENABLED;
+  else process.env.REPLAY_INTENT_ENABLED = previousReplayIntent;
+});
 const { createTriageRouter } = await import("../route/triage.ts");
 
 const caseId = "f0100000-0000-4000-8000-000000000001";
@@ -92,6 +102,28 @@ test("replay APIs bind actor and owner on the server and reject changed inputs",
   expect(replayCalls).toHaveLength(2);
 });
 
+test("switches stop new work without forwarding to the agent or replay service", async () => {
+  const { baseUrl, calls, replayCalls } = await start();
+  const authorization = `Bearer ${jwt.sign({ id: 4 }, process.env.JWT_SECRET!)}`;
+  process.env.INVESTIGATION_ENABLED = "false";
+  process.env.REPLAY_INTENT_ENABLED = "false";
+  try {
+    expect((await fetch(`${baseUrl}/operator/cases/${caseId}/investigations`, {
+      method: "POST", headers: { authorization, "idempotency-key": "77777777-7777-4777-8777-777777777777" },
+    })).status).toBe(503);
+    expect((await fetch(`${baseUrl}/operator/cases/${caseId}/replay/requests`, {
+      method: "POST", headers: { authorization, "content-type": "application/json",
+        "idempotency-key": "99999999-9999-4999-8999-999999999999" },
+      body: JSON.stringify({ approvalId: "88888888-8888-4888-8888-888888888888", proposalVersion: 1 }),
+    })).status).toBe(503);
+    expect(calls).toHaveLength(0);
+    expect(replayCalls).toHaveLength(0);
+  } finally {
+    process.env.INVESTIGATION_ENABLED = "true";
+    process.env.REPLAY_INTENT_ENABLED = "true";
+  }
+});
+
 describe("Phase 10A operator HTTP binding", () => {
   test("requires authentication", async () => {
     const { baseUrl } = await start();
@@ -99,30 +131,22 @@ describe("Phase 10A operator HTTP binding", () => {
     expect(response.status).toBe(401);
   });
 
-  test("derives the subject owner for a read-only diagnosis scope", async () => {
+  test("synchronous diagnosis is unavailable without quota reservation", async () => {
     const { baseUrl, calls } = await start();
     const response = await fetch(`${baseUrl}/operator/cases/${caseId}/investigations/diagnose`, {
       method: "POST",
       headers: { authorization: `Bearer ${jwt.sign({ id: 4 }, process.env.JWT_SECRET!)}` },
     });
-    expect(response.status).toBe(200);
-    expect(calls).toHaveLength(1);
-    expect(calls[0]?.method).toBe("POST");
-    expect(calls[0]?.path).toBe("/private/v1/investigations/diagnose");
-    const scope = verifyServiceScope(calls[0]!.token, {
-      secret,
-      operation: "failure_context",
-    });
-    expect(scope.ownerId).toBe(9);
-    expect(scope.caseId).toBe(caseId);
-    expect(scope.correlationId).toBe(calls[0]!.correlationId);
+    expect(response.status).toBe(404);
+    expect(calls).toHaveLength(0);
   });
 
   test("fails closed before calling the agent if audit persistence fails", async () => {
     const { baseUrl, calls } = await start({ failAudit: true });
-    const response = await fetch(`${baseUrl}/operator/cases/${caseId}/investigations/diagnose`, {
+    const response = await fetch(`${baseUrl}/operator/cases/${caseId}/investigations`, {
       method: "POST",
-      headers: { authorization: `Bearer ${jwt.sign({ id: 4 }, process.env.JWT_SECRET!)}` },
+      headers: { authorization: `Bearer ${jwt.sign({ id: 4 }, process.env.JWT_SECRET!)}`,
+        "idempotency-key": "77777777-7777-4777-8777-777777777777" },
     });
     expect(response.status).toBe(503);
     expect(calls).toHaveLength(0);

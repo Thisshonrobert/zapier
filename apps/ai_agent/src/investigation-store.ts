@@ -2,6 +2,7 @@
 import { createHash, randomUUID } from "node:crypto";
 import type { Pool } from "pg";
 import { sanitizeInvestigationEvent, type InvestigationEvent } from "../../../packages/triage-contracts/events.ts";
+import { operationalLimits } from "./operational-limits.ts";
 
 export type InvestigationBinding = {
   id: string;
@@ -42,6 +43,19 @@ function project(row: JobRow) {
 export class InvestigationStore {
   constructor(private readonly pool: Pool) {}
 
+  async status() {
+    const { rows } = await this.pool.query<{ queued: number; investigating: number; stale: number;
+      error: number; oldestQueuedAt: Date | null; oldestStaleAt: Date | null }>(`
+      SELECT count(*) FILTER (WHERE status = 'queued')::int AS queued,
+        count(*) FILTER (WHERE status = 'investigating' AND lease_until > now())::int AS investigating,
+        count(*) FILTER (WHERE status = 'investigating' AND lease_until <= now())::int AS stale,
+        count(*) FILTER (WHERE status = 'error')::int AS error,
+        min(created_at) FILTER (WHERE status = 'queued') AS "oldestQueuedAt",
+        min(lease_until) FILTER (WHERE status = 'investigating' AND lease_until <= now()) AS "oldestStaleAt"
+      FROM ai_agent.investigation`);
+    return rows[0]!;
+  }
+
   async events(id: string, caseId: string, subjectOwnerId: number, cursor: number | null) {
     // One statement gives a consistent snapshot and history watermark, without pinning a DB connection.
     const result = await this.pool.query<{ sequence: number; status: string; first: number | null;
@@ -67,30 +81,58 @@ export class InvestigationStore {
   }
 
   async start(input: StartInvestigation) {
-    const inserted = await this.pool.query<JobRow>(`
-      INSERT INTO ai_agent.investigation
-        (id, case_id, zap_run_id, stage, subject_owner_id, actor_id, support_operator_id,
-         idempotency_key, status, checkpoint_thread_id)
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, 'queued', $9)
-      ON CONFLICT DO NOTHING RETURNING *`, [input.id, input.caseId, input.zapRunId, input.stage,
+    const limits = operationalLimits();
+    const client = await this.pool.connect();
+    try {
+      await client.query("BEGIN");
+      await client.query("SELECT pg_advisory_xact_lock(812085)");
+      const existing = await client.query<JobRow>(`
+        SELECT * FROM ai_agent.investigation WHERE actor_id = $1 AND case_id = $2
+          AND idempotency_key = $3`, [input.actorId, input.caseId, input.idempotencyKey]);
+      if (!existing.rows[0]) {
+        const active = await client.query<JobRow>(`
+          SELECT * FROM ai_agent.investigation WHERE case_id = $1
+            AND status IN ('queued', 'investigating', 'proposed', 'awaiting_approval')`, [input.caseId]);
+        if (!active.rows[0]) {
+          const { rows: [counts] } = await client.query<{ owner: number; actor: number }>(`
+            SELECT count(*) FILTER (WHERE subject_owner_id = $1)::int AS owner,
+              count(*) FILTER (WHERE actor_id = $2)::int AS actor
+            FROM ai_agent.investigation WHERE created_at > now() - interval '24 hours'`,
+          [input.subjectOwnerId, input.actorId]);
+          if (counts!.owner >= limits.ownerRequestsPerDay || counts!.actor >= limits.operatorRequestsPerDay)
+            throw new Error("Investigation request budget exhausted");
+        }
+      }
+      const inserted = await client.query<JobRow>(`
+        INSERT INTO ai_agent.investigation
+          (id, case_id, zap_run_id, stage, subject_owner_id, actor_id, support_operator_id,
+           idempotency_key, status, checkpoint_thread_id)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, 'queued', $9)
+        ON CONFLICT DO NOTHING RETURNING *`, [input.id, input.caseId, input.zapRunId, input.stage,
         input.subjectOwnerId, input.actorId, input.supportOperatorId, input.idempotencyKey, randomUUID()]);
-    const repeated = inserted.rows[0] ?? (await this.pool.query<JobRow>(`
-      SELECT * FROM ai_agent.investigation
-      WHERE actor_id = $1 AND case_id = $2 AND idempotency_key = $3`,
-    [input.actorId, input.caseId, input.idempotencyKey])).rows[0];
-    const row = repeated ?? (await this.pool.query<JobRow>(`
-      SELECT * FROM ai_agent.investigation
-      WHERE case_id = $1 AND status IN ('queued', 'investigating', 'proposed', 'awaiting_approval')`,
-    [input.caseId])).rows[0];
-    if (!row) throw new Error("Investigation start conflict");
-    if (row.case_id !== input.caseId || row.subject_owner_id !== input.subjectOwnerId ||
-      row.zap_run_id !== input.zapRunId || row.stage !== input.stage ||
-      row.actor_id !== input.actorId || row.support_operator_id !== input.supportOperatorId)
-      throw new Error("Investigation binding conflict");
-    return project(row);
+      const repeated = inserted.rows[0] ?? (await client.query<JobRow>(`
+        SELECT * FROM ai_agent.investigation
+        WHERE actor_id = $1 AND case_id = $2 AND idempotency_key = $3`,
+      [input.actorId, input.caseId, input.idempotencyKey])).rows[0];
+      const row = repeated ?? (await client.query<JobRow>(`
+        SELECT * FROM ai_agent.investigation
+        WHERE case_id = $1 AND status IN ('queued', 'investigating', 'proposed', 'awaiting_approval')`,
+      [input.caseId])).rows[0];
+      if (!row) throw new Error("Investigation start conflict");
+      if (row.case_id !== input.caseId || row.subject_owner_id !== input.subjectOwnerId ||
+        row.zap_run_id !== input.zapRunId || row.stage !== input.stage ||
+        row.actor_id !== input.actorId || row.support_operator_id !== input.supportOperatorId)
+        throw new Error("Investigation binding conflict");
+      await client.query("COMMIT");
+      return project(row);
+    } catch (error) {
+      await client.query("ROLLBACK");
+      throw error;
+    } finally { client.release(); }
   }
 
   async claimNext(maxConcurrency = 2) {
+    const limits = operationalLimits();
     const client = await this.pool.connect();
     try {
       await client.query("BEGIN");
@@ -108,11 +150,29 @@ export class InvestigationStore {
       const claimed = await client.query<JobRow>(`
         UPDATE ai_agent.investigation SET status = 'investigating', lease_token = $1,
           lease_until = now() + interval '90 seconds', attempts = attempts + 1, updated_at = now()
-        WHERE id = (SELECT id FROM ai_agent.investigation
-          WHERE (status = 'queued' OR (status = 'investigating' AND lease_until < now()))
-            AND attempts < 3
-          ORDER BY created_at FOR UPDATE SKIP LOCKED LIMIT 1)
-        RETURNING *`, [randomUUID()]);
+        WHERE id = (SELECT job.id FROM ai_agent.investigation job
+          WHERE (job.status = 'queued' OR (job.status = 'investigating' AND job.lease_until < now()))
+            AND job.attempts < 3
+            AND (SELECT count(*) FROM ai_agent.investigation active WHERE active.subject_owner_id = job.subject_owner_id
+              AND active.status = 'investigating' AND active.lease_until > now()) < $2
+            AND (SELECT count(*) FROM ai_agent.investigation active WHERE active.actor_id = job.actor_id
+              AND active.status = 'investigating' AND active.lease_until > now()) < $3
+            AND (SELECT coalesce(sum(reserved_tokens), 0) FROM ai_agent.investigation_budget budget
+              WHERE budget.subject_owner_id = job.subject_owner_id AND budget.created_at > now() - interval '24 hours') + $4 <= $5
+            AND (SELECT coalesce(sum(reserved_tokens), 0) FROM ai_agent.investigation_budget budget
+              WHERE budget.actor_id = job.actor_id AND budget.created_at > now() - interval '24 hours') + $4 <= $6
+            AND (SELECT coalesce(sum(reserved_cents), 0) FROM ai_agent.investigation_budget budget
+              WHERE budget.subject_owner_id = job.subject_owner_id AND budget.created_at > now() - interval '24 hours') + $7 <= $8
+            AND (SELECT coalesce(sum(reserved_cents), 0) FROM ai_agent.investigation_budget budget
+              WHERE budget.actor_id = job.actor_id AND budget.created_at > now() - interval '24 hours') + $7 <= $9
+          ORDER BY job.created_at FOR UPDATE SKIP LOCKED LIMIT 1)
+        RETURNING *`, [randomUUID(), limits.ownerConcurrency, limits.operatorConcurrency,
+          limits.tokensPerAttempt, limits.ownerTokenBudgetPerDay, limits.operatorTokenBudgetPerDay,
+          limits.costCentsPerAttempt, limits.ownerSpendCentsPerDay, limits.operatorSpendCentsPerDay]);
+      if (claimed.rows[0]) await client.query(`INSERT INTO ai_agent.investigation_budget
+        (id, investigation_id, subject_owner_id, actor_id, reserved_tokens, reserved_cents) VALUES ($1, $2, $3, $4, $5, $6)`,
+      [randomUUID(), claimed.rows[0].id, claimed.rows[0].subject_owner_id,
+        claimed.rows[0].actor_id, limits.tokensPerAttempt, limits.costCentsPerAttempt]);
       await client.query("COMMIT");
       return claimed.rows[0] ? project(claimed.rows[0]) : null;
     } catch (error) {

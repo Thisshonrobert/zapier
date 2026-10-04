@@ -36,8 +36,8 @@ type HttpServerOptions = {
     timeoutMs?: number;
   };
   diagnosis?: DiagnosisRouterOptions;
-  investigations?: { serviceSecret: string; store: InvestigationStore;
-    resumeDecision: (threadId: string, decision: InvestigationDecision) => Promise<unknown> };
+  investigations?: { serviceSecret: string; store: InvestigationStore; enabled?: () => boolean;
+    resumeDecision?: (threadId: string, decision: InvestigationDecision) => Promise<unknown> };
 };
 
 export type RunningHttpServer = {

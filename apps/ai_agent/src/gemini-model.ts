@@ -253,6 +253,7 @@ type GeminiDiagnosisModelOptions = {
   api?: GeminiApi;
   endpoint?: string;
   maxOutputTokens?: number;
+  maxTotalTokens?: number;
   fetch?: FetchLike;
 };
 
@@ -265,6 +266,7 @@ export class GeminiDiagnosisModel implements IntegratedDiagnosisModel {
   private readonly endpoint: string;
   private readonly fetch: FetchLike;
   private readonly maxOutputTokens: number;
+  private readonly maxTotalTokens: number | undefined;
 
   constructor(private readonly options: GeminiDiagnosisModelOptions) {
     if (!options.apiKey) throw new Error("Gemini API key is required");
@@ -273,6 +275,7 @@ export class GeminiDiagnosisModel implements IntegratedDiagnosisModel {
       options.endpoint ?? geminiEndpoint(options.model, options.api);
     this.fetch = options.fetch ?? globalThis.fetch;
     this.maxOutputTokens = options.maxOutputTokens ?? 4_096;
+    this.maxTotalTokens = options.maxTotalTokens;
     if (
       !Number.isInteger(this.maxOutputTokens) ||
       this.maxOutputTokens < 1 ||
@@ -280,12 +283,60 @@ export class GeminiDiagnosisModel implements IntegratedDiagnosisModel {
     ) {
       throw new RangeError("maxOutputTokens must be between 1 and 4096");
     }
+    if (this.maxTotalTokens !== undefined &&
+      (options.api !== "generate-content" || !Number.isInteger(this.maxTotalTokens) ||
+        this.maxTotalTokens < this.maxOutputTokens || this.maxTotalTokens > 64_000))
+      throw new RangeError("maxTotalTokens requires generate-content and a bound from output tokens to 64000");
   }
 
   async generate(
     prompt: DiagnosisPrompt,
     signal: AbortSignal,
   ): Promise<ModelGeneration> {
+    const body = this.options.api === "generate-content"
+      ? {
+          systemInstruction: { parts: [{ text: `${prompt.instructions}\nReturn JSON matching this exact schema:\n${JSON.stringify(GEMINI_DIAGNOSIS_SCHEMA)}` }] },
+          contents: [{ role: "user", parts: [{ text: prompt.input }] }],
+          generationConfig: { maxOutputTokens: this.maxOutputTokens,
+            responseMimeType: "application/json", responseJsonSchema: GEMINI_DIAGNOSIS_SCHEMA },
+        }
+      : {
+          model: this.options.model, store: false,
+          system_instruction: `${prompt.instructions}\nReturn JSON matching this exact schema:\n${JSON.stringify(GEMINI_DIAGNOSIS_SCHEMA)}`,
+          input: prompt.input, generation_config: { max_output_tokens: this.maxOutputTokens },
+          response_format: [{ type: "text", mime_type: "application/json", schema: GEMINI_DIAGNOSIS_SCHEMA }],
+        };
+    if (this.maxTotalTokens !== undefined) {
+      const endpoint = this.endpoint.replace(/:generateContent$/, ":countTokens");
+      if (endpoint === this.endpoint) throw new ModelProviderError("Gemini token count endpoint unavailable");
+      let countResponse: Response;
+      try {
+        countResponse = await this.fetch(endpoint, {
+          method: "POST", headers: { "content-type": "application/json", "x-goog-api-key": this.options.apiKey },
+          body: JSON.stringify({ generateContentRequest: { model: `models/${this.options.model}`, ...body } }), signal,
+        });
+      } catch (error) {
+        throw new ModelProviderError("Gemini token count failed", { cause: error }, null,
+          { category: "network_error", http_status: null });
+      }
+      if (!countResponse.ok) throw new ModelProviderError("Gemini token count failed", undefined, null,
+        { category: "http_error", http_status: countResponse.status });
+      let counted: unknown;
+      try {
+        const text = await countResponse.text();
+        if (text.length > 4096) throw new Error("large token response");
+        counted = JSON.parse(text);
+      } catch {
+        throw new ModelProviderError("Gemini token count invalid", undefined, null,
+          { category: "invalid_response", http_status: null });
+      }
+      const parsed = z.object({ totalTokens: z.number().int().nonnegative() }).safeParse(counted);
+      if (!parsed.success) throw new ModelProviderError("Gemini token count invalid", undefined, null,
+        { category: "invalid_response", http_status: null });
+      if (parsed.data.totalTokens + this.maxOutputTokens > this.maxTotalTokens)
+        throw new ModelProviderError("Gemini token budget exhausted", undefined, null,
+          { category: "invalid_response", http_status: null });
+    }
     let response: Response;
     try {
       response = await this.fetch(this.endpoint, {
@@ -294,40 +345,7 @@ export class GeminiDiagnosisModel implements IntegratedDiagnosisModel {
           "content-type": "application/json",
           "x-goog-api-key": this.options.apiKey,
         },
-        body: JSON.stringify(
-          this.options.api === "generate-content"
-            ? {
-                systemInstruction: {
-                  parts: [
-                    {
-                      text: `${prompt.instructions}\nReturn JSON matching this exact schema:\n${JSON.stringify(GEMINI_DIAGNOSIS_SCHEMA)}`,
-                    },
-                  ],
-                },
-                contents: [{ role: "user", parts: [{ text: prompt.input }] }],
-                generationConfig: {
-                  maxOutputTokens: this.maxOutputTokens,
-                  responseMimeType: "application/json",
-                  responseJsonSchema: GEMINI_DIAGNOSIS_SCHEMA,
-                },
-              }
-            : {
-                model: this.options.model,
-                store: false,
-                system_instruction: `${prompt.instructions}\nReturn JSON matching this exact schema:\n${JSON.stringify(GEMINI_DIAGNOSIS_SCHEMA)}`,
-                input: prompt.input,
-                generation_config: {
-                  max_output_tokens: this.maxOutputTokens,
-                },
-                response_format: [
-                  {
-                    type: "text",
-                    mime_type: "application/json",
-                    schema: GEMINI_DIAGNOSIS_SCHEMA,
-                  },
-                ],
-              },
-        ),
+        body: JSON.stringify(body),
         signal,
       });
     } catch (error) {

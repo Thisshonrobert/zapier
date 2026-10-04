@@ -31,8 +31,12 @@ const notifications = new InvestigationNotifications(prisma, async (pending) => 
         { decisionId: pending.decisionId, decision: pending.decision });
 });
 
-app.use(cors());
-app.use(express.json());
+const allowedOrigins = (process.env.TRIAGE_ALLOWED_ORIGINS ?? 'http://localhost:3000')
+    .split(',').map(origin => origin.trim()).filter(Boolean);
+app.use(cors({ origin(origin, callback) {
+    callback(null, !origin || allowedOrigins.includes(origin));
+} }));
+app.use(express.json({ limit: '16kb' }));
 
 
 app.use("/api/v1/user",userRouter)
@@ -49,14 +53,26 @@ app.use("/api/v1/triage",createTriageRouter({
 }))
 
 let draining = false;
-setInterval(async () => {
-    if (draining) return;
+let stopping = false;
+let retryPromise: Promise<void> | undefined;
+const retryTimer = setInterval(() => {
+    if (draining || stopping) return;
     draining = true;
-    try { await notifications.drain(); }
-    catch (error) { console.error('Decision notification retry unavailable', error); }
-    finally { draining = false; }
+    retryPromise = notifications.drain().then(() => undefined)
+        .catch(() => { console.error('Decision notification retry unavailable'); })
+        .finally(() => { draining = false; });
 }, 5_000);
 
-app.listen(PORT,()=>{
+const server = app.listen(PORT,()=>{
     console.log("primary-backend running 3002")
 })
+
+async function shutdown() {
+    stopping = true;
+    clearInterval(retryTimer);
+    await new Promise<void>((resolve, reject) => server.close(error => error ? reject(error) : resolve()));
+    await retryPromise;
+    await prisma.$disconnect();
+}
+process.once('SIGINT', () => { void shutdown().catch(() => { process.exitCode = 1; }); });
+process.once('SIGTERM', () => { void shutdown().catch(() => { process.exitCode = 1; }); });

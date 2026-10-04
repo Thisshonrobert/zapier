@@ -27,6 +27,38 @@ export async function runInvestigationOnce(
   return true;
 }
 
+export function createInvestigationPoller(
+  store: Pick<InvestigationStore, "claimNext" | "finish" | "fail"> | undefined,
+  execute: ((job: ClaimedJob) => Promise<Snapshot>) | undefined,
+  enabled: () => boolean,
+  onError: () => void,
+) {
+  let stopping = false;
+  let polling = false;
+  let pending: Promise<void> | undefined;
+  let timer: ReturnType<typeof setInterval> | undefined;
+  const poll = async () => {
+    if (!store || !execute || polling || stopping || !enabled()) return;
+    polling = true;
+    try { while (!stopping && enabled() && await runInvestigationOnce(store, execute)) { /* drain bounded claims */ } }
+    catch { onError(); }
+    finally { polling = false; }
+  };
+  return {
+    accepting: () => !stopping && enabled(),
+    start() {
+      if (!store || !execute) return;
+      timer = setInterval(() => { if (!polling) pending = poll(); }, 2_000);
+      pending = poll();
+    },
+    async stop() {
+      stopping = true;
+      if (timer) clearInterval(timer);
+      await pending;
+    },
+  };
+}
+
 export function createInvestigationExecutor(input: {
   backendBaseUrl: string;
   serviceSecret: string;

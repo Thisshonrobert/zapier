@@ -31,6 +31,8 @@ type TriageRouterOptions = {
 const bearer = (header: string | undefined) =>
   header?.startsWith("Bearer ") ? header.slice("Bearer ".length) : undefined;
 const uuid = z.uuid();
+const investigationEnabled = () => process.env.INVESTIGATION_ENABLED === "true";
+const replayIntentEnabled = () => process.env.REPLAY_INTENT_ENABLED === "true";
 const runnerBinding = z.object({
   id: uuid, caseId: uuid, zapRunId: uuid, stage: z.number().int().min(0).max(1000),
   subjectOwnerId: z.number().int().positive(), actorId: z.number().int().positive(),
@@ -53,6 +55,9 @@ export function createTriageRouter(options: TriageRouterOptions) {
   };
   for (const operation of ["dry-run", "requests"] as const) {
     router.post(`/operator/cases/:caseId/replay/${operation}`, authMiddleware, async (request, response) => {
+      if (operation === "requests" && !replayIntentEnabled()) {
+        response.status(503).json({ detail: "Replay intent disabled", replayEnabled: false }); return;
+      }
       const parsed = z.object({ approvalId: uuid, proposalVersion: z.number().int().positive() }).strict().safeParse(request.body);
       const requestId = operation === "requests" ? request.headers["idempotency-key"] : randomUUID();
       if (!parsed.success || typeof requestId !== "string" || !uuid.safeParse(requestId).success) {
@@ -92,7 +97,7 @@ export function createTriageRouter(options: TriageRouterOptions) {
     return operator.resolveCase(request.id, caseId, action);
   };
   const operatorAgentRead = (
-    action: EvidenceOperation | "diagnose",
+    action: EvidenceOperation,
     path: (request: Request) => string,
     method: "GET" | "POST" = "GET",
   ) => async (request: Request, response: Response) => {
@@ -111,12 +116,10 @@ export function createTriageRouter(options: TriageRouterOptions) {
         caseId: selected.case_id,
         investigationId: randomUUID(),
         correlationId,
-        operations: action === "diagnose"
-          ? ["failure_context", "execution_evidence", "validate_action_inputs"]
-          : [action],
+        operations: [action],
       });
       response.setHeader("x-correlation-id", correlationId);
-      response.json(await agent.read(path(request), scope, correlationId, method, action === "diagnose" ? 65_000 : undefined));
+      response.json(await agent.read(path(request), scope, correlationId, method));
     } catch {
       response.status(502).json({ detail: "Investigation service unavailable" });
     }
@@ -171,10 +174,8 @@ export function createTriageRouter(options: TriageRouterOptions) {
     }));
   router.post("/operator/cases/:caseId/validate-action-inputs", authMiddleware,
     operatorAgentRead("validate_action_inputs", () => "/private/v1/tools/validate-action-inputs", "POST"));
-  router.post("/operator/cases/:caseId/investigations/diagnose", authMiddleware,
-    operatorAgentRead("diagnose", () => "/private/v1/investigations/diagnose", "POST"));
-
   router.post("/operator/cases/:caseId/investigations", authMiddleware, async (request, response) => {
+    if (!investigationEnabled()) { response.status(503).json({ detail: "Investigation disabled" }); return; }
     const idempotencyKey = request.headers["idempotency-key"];
     if (typeof idempotencyKey !== "string" || !uuid.safeParse(idempotencyKey).success) {
       response.status(422).json({ detail: "Idempotency key required" }); return;
@@ -314,6 +315,7 @@ export function createTriageRouter(options: TriageRouterOptions) {
     });
 
   router.post("/internal/investigations/:id/scope", async (request, response) => {
+    if (!investigationEnabled()) { response.status(503).json({ detail: "Investigation disabled" }); return; }
     if (!validServiceSecret(bearer(request.headers.authorization))) {
       response.status(401).json({ detail: "Invalid service authentication" }); return;
     }

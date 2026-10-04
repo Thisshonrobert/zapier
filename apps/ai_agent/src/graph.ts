@@ -778,7 +778,7 @@ export function buildDiagnosisService(
             state.runbooks,
             repair,
           );
-          if (prompt.input.length > maxPromptCharacters) {
+          if (prompt.instructions.length + prompt.input.length > maxPromptCharacters) {
             throw new TokenBudgetExceeded("Diagnosis prompt budget exhausted");
           }
           const generate = async () => {

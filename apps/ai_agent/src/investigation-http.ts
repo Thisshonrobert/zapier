@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { z } from "zod";
+import { timingSafeEqual } from "node:crypto";
 
 import { verifyServiceScope } from "../../../packages/triage-contracts/index.ts";
 import { InvestigationStore } from "./investigation-store.ts";
@@ -16,8 +17,19 @@ const bearer = (header: string | undefined) =>
   header?.startsWith("Bearer ") ? header.slice(7) : undefined;
 
 export function createInvestigationRouter(input: { serviceSecret: string; store: InvestigationStore;
+  enabled?: () => boolean;
   resumeDecision?: (threadId: string, decision: InvestigationDecision) => Promise<unknown> }) {
   const router = Router();
+  router.get("/status", async (request, response) => {
+    const supplied = bearer(request.headers.authorization);
+    const actual = Buffer.from(supplied ?? "");
+    const expected = Buffer.from(input.serviceSecret);
+    if (expected.length < 32 || actual.length !== expected.length || !timingSafeEqual(actual, expected)) {
+      response.status(401).json({ detail: "Invalid service authentication" }); return;
+    }
+    try { response.json(await input.store.status()); }
+    catch { response.status(503).json({ detail: "Investigation store unavailable" }); }
+  });
   const scopeFor = (request: { headers: Record<string, unknown> }, id: string) => {
     const token = bearer(request.headers.authorization as string | undefined);
     if (!token) throw new Error("missing scope");
@@ -28,6 +40,9 @@ export function createInvestigationRouter(input: { serviceSecret: string; store:
   };
 
   router.post("/", async (request, response) => {
+    if (input.enabled && !input.enabled()) {
+      response.status(503).json({ detail: "Investigation disabled" }); return;
+    }
     const parsed = startSchema.safeParse(request.body);
     if (!parsed.success) { response.status(422).json({ detail: "Invalid job" }); return; }
     let scope;

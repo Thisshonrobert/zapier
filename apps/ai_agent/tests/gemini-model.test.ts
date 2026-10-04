@@ -33,6 +33,40 @@ const modelOutput = {
   },
 };
 
+test("production token preflight counts the exact request and fails closed before generation", async () => {
+  for (const [index, counted] of [Response.json({ totalTokens: 61_952 }), Response.json({ totalTokens: 61_953 }),
+    Response.json({ wrong: 1 }), new Response("unavailable", { status: 503 })].entries()) {
+    const calls: string[] = [];
+    let countedBody: unknown;
+    const adapter = new GeminiDiagnosisModel({ apiKey: "offline-key", model: "gemini-2.5-flash",
+      api: "generate-content", maxOutputTokens: 2048, maxTotalTokens: 64_000,
+      fetch: async (url, init) => {
+        calls.push(String(url));
+        if (calls.length === 1) {
+          countedBody = JSON.parse(String(init?.body));
+          return counted;
+        }
+        const { model: _model, ...request } = (countedBody as { generateContentRequest: Record<string, unknown> }).generateContentRequest;
+        expect(JSON.parse(String(init?.body))).toEqual(request);
+        return Response.json({ candidates: [{ finishReason: "STOP",
+          content: { parts: [{ text: JSON.stringify(modelOutput) }] } }],
+          usageMetadata: { promptTokenCount: 62_000, candidatesTokenCount: 100,
+            thoughtsTokenCount: 100, totalTokenCount: 62_200 } });
+      } });
+    if (index === 0) {
+      await adapter.generate(prompt, new AbortController().signal);
+      expect(calls).toHaveLength(2);
+      expect((countedBody as { generateContentRequest: { model: string } }).generateContentRequest.model)
+        .toBe("models/gemini-2.5-flash");
+      expect(calls[0]).toContain(":countTokens");
+      expect(calls[1]).toContain(":generateContent");
+    } else {
+      await expect(adapter.generate(prompt, new AbortController().signal)).rejects.toBeInstanceOf(ModelProviderError);
+      expect(calls).toHaveLength(1);
+    }
+  }
+});
+
 function completedResponse(output: unknown = modelOutput) {
   return Response.json({
     status: "completed",

@@ -4,17 +4,22 @@ import { createHttpServer } from "./http.ts";
 import { defaultFixtureDirectory, defaultRunbookDirectory } from "./paths.ts";
 import { loadRunbooks } from "./tools/search-runbooks.ts";
 import { createLangfuseExporter } from "./observability.ts";
-import pg from "pg";
-import { agentDatabaseUrl, createCheckpoint } from "./checkpoint.ts";
+import { agentPool, createCheckpoint } from "./checkpoint.ts";
 import { InvestigationStore } from "./investigation-store.ts";
-import { createInvestigationExecutor, runInvestigationOnce } from "./runner.ts";
+import { createInvestigationExecutor, createInvestigationPoller } from "./runner.ts";
 import { buildDiagnosisService, type InvestigationDecision } from "./graph.ts";
+import { investigationEnabled, operationalLimits } from "./operational-limits.ts";
 
 const port = Number(process.env.PORT ?? 3004);
 const serviceSecret = process.env.TRIAGE_SERVICE_SECRET;
 const geminiApiKey = process.env.GEMINI_API_KEY;
 const geminiModel = process.env.GEMINI_MODEL ?? "gemini-2.5-flash";
-const databaseUrl = process.env.AI_AGENT_DATABASE_URL ?? process.env.DATABASE_URL;
+const databaseUrl = process.env.AI_AGENT_DATABASE_URL;
+if (investigationEnabled()) operationalLimits();
+if (investigationEnabled() && geminiModel !== "gemini-2.5-flash")
+  throw new Error("Investigation pricing supports only gemini-2.5-flash");
+if (investigationEnabled() && (!databaseUrl || !serviceSecret || serviceSecret.length < 32 || !geminiApiKey))
+  throw new Error("Investigation requires a dedicated database URL, service secret and model key");
 let langfuse;
 if (process.env.LANGFUSE_PUBLIC_KEY && process.env.LANGFUSE_SECRET_KEY) {
   try {
@@ -36,25 +41,40 @@ const diagnosis =
         model: new GeminiDiagnosisModel({
           apiKey: geminiApiKey,
           model: geminiModel,
+          api: "generate-content",
+          maxOutputTokens: 2048,
+          maxTotalTokens: 64000,
         }),
         diagnosisOptions: {
           ...(langfuse ? { observability: langfuse } : {}),
           modelName: geminiModel,
+          maxPromptCharacters: 16000,
+          maxRepairAttempts: 0 as const,
         },
         runbookIndex: await loadRunbooks(defaultRunbookDirectory()),
       }
     : undefined;
-const pool = databaseUrl && diagnosis ? new pg.Pool({ connectionString: agentDatabaseUrl(databaseUrl) }) : undefined;
-const checkpoint = databaseUrl && diagnosis ? createCheckpoint(databaseUrl) : undefined;
+const pool = databaseUrl && serviceSecret ? agentPool(databaseUrl) : undefined;
+const checkpoint = databaseUrl && serviceSecret ? createCheckpoint(databaseUrl) : undefined;
 const store = pool ? new InvestigationStore(pool) : undefined;
-const resumeDecision = checkpoint && diagnosis ? async (threadId: string, decision: InvestigationDecision) =>
+const resumeOnlyModel = { generate: async () => { throw new Error("Model disabled during decision resume"); },
+  close: async () => {} };
+const resumeDecision = checkpoint && store ? async (threadId: string, decision: InvestigationDecision) =>
   buildDiagnosisService({
     getFailureContext: async () => { throw new Error("Evidence reads are unavailable during decision resume"); },
     getExecutionEvidence: async () => { throw new Error("Evidence reads are unavailable during decision resume"); },
     validateActionInputs: async () => { throw new Error("Evidence reads are unavailable during decision resume"); },
     searchRunbooks: () => [],
-  }, diagnosis.model, { checkpointer: checkpoint, threadId, requireDecision: true })
+  }, diagnosis?.model ?? resumeOnlyModel, { checkpointer: checkpoint, threadId, requireDecision: true })
     .resumeDecision(decision) : undefined;
+const execute = investigationEnabled() && store && checkpoint && diagnosis
+  ? createInvestigationExecutor({ backendBaseUrl: diagnosis.backendBaseUrl,
+      serviceSecret: diagnosis.serviceSecret, model: diagnosis.model,
+      runbookIndex: diagnosis.runbookIndex, checkpointer: checkpoint,
+      diagnosisOptions: diagnosis.diagnosisOptions })
+  : undefined;
+const poller = createInvestigationPoller(store, execute, investigationEnabled,
+  () => console.error("Investigation runner unavailable"));
 const running = await createHttpServer({
   fixtureDirectory: defaultFixtureDirectory(),
   model: new FixtureDiagnosisModel(),
@@ -67,37 +87,24 @@ const running = await createHttpServer({
         },
       }
     : {}),
-  ...(diagnosis ? { diagnosis } : {}),
-  ...(store && serviceSecret && resumeDecision
-    ? { investigations: { store, serviceSecret, resumeDecision } } : {}),
+  // The synchronous diagnosis endpoint has no durable quota reservation.
+  ...(store && serviceSecret
+    ? { investigations: { store, serviceSecret, ...(resumeDecision ? { resumeDecision } : {}),
+      enabled: poller.accepting } } : {}),
 }).start(port);
 
-const execute = store && checkpoint && diagnosis
-  ? createInvestigationExecutor({ backendBaseUrl: diagnosis.backendBaseUrl,
-      serviceSecret: diagnosis.serviceSecret, model: diagnosis.model,
-      runbookIndex: diagnosis.runbookIndex, checkpointer: checkpoint,
-      diagnosisOptions: diagnosis.diagnosisOptions })
-  : undefined;
-let polling = false;
-const poll = async () => {
-  if (!store || !execute || polling) return;
-  polling = true;
-  try { while (await runInvestigationOnce(store, execute)) { /* drain bounded claims */ } }
-  catch (error) { console.error("Investigation runner unavailable", error); }
-  finally { polling = false; }
-};
-const timer = execute ? setInterval(() => void poll(), 2_000) : undefined;
-if (execute) void poll();
+poller.start();
 
 console.log(`ai-agent running at ${running.baseUrl}`);
 
 async function shutdown() {
-  if (timer) clearInterval(timer);
+  await poller.stop();
   await running.close();
+  await diagnosis?.model.close();
   await checkpoint?.end();
   await pool?.end();
-  process.exit(0);
+  console.log("Investigation service shutdown complete");
 }
 
-process.once("SIGINT", shutdown);
-process.once("SIGTERM", shutdown);
+process.once("SIGINT", () => { void shutdown().catch(() => { process.exitCode = 1; }); });
+process.once("SIGTERM", () => { void shutdown().catch(() => { process.exitCode = 1; }); });
