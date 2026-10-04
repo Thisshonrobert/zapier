@@ -104,6 +104,12 @@ The agent owns immutable, sanitized status history in its schema, with per-inves
 
 The primary backend authenticates and audits the support operator, revalidates the current owner/run/stage binding, proxies with native pipeline backpressure, disables buffering, and cancels on disconnect or its 30-second deadline. The browser sends its Bearer token and `Last-Event-ID` header through fetch streaming; it retries bounded reconnects, ignores duplicate milestones, refreshes durable decision/replay outcomes on heartbeats, and falls back to polling. No tokens are placed in URLs and no raw graph state or hidden reasoning is streamed. Live replay remains disabled.
 
+### Operational controls (Phase 14A)
+
+`INVESTIGATION_ENABLED` and `REPLAY_INTENT_ENABLED` feature switches (both default off) gate investigation admission and replay-intent recording. `REPLAY_RELEASE_READY` remains false; `REPLAY_ENABLED=true` does not enable the dispatcher or worker replay path. Per-subject-owner and per-operator limits cover request count, concurrency, token budget, and cost ceiling on a rolling 24-hour window. Runtime limits bound model output tokens, prompt characters, model deadline, investigation deadline, backend tool deadline, and database query/connection deadlines. The agent process has a restricted DB role scoped to `ai_agent` tables only; it has no workflow-table write role or Kafka producer capability. The private `/private/v1/investigations/status` status endpoint requires the service secret and returns counts plus oldest queued/stale timestamps for alerting. For configuration, access/visibility/retention rules, outage/restore/rollback drills, and fixture reproduction commands, see [`docs/AI/phase14a-operations.md`](AI/phase14a-operations.md).
+
+Production DB role grants, organizational retention, encrypted whole-database backup/restore (including role metadata and migration history), production reverse-proxy delivery, and paid Gemini provider behavior are not verified by the local fixture suite and remain required before external rollout.
+
 ---
 
 ## 🔌 External Dependencies
