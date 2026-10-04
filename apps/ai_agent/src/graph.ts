@@ -15,6 +15,7 @@ import {
   EvidenceSchema,
   ExecutionEvidenceSchema,
   FailureContextEvidenceSchema,
+  ControlledFixtureEvidenceSchema,
   IntegratedDiagnosisResultSchema,
   IntegratedModelOutputSchema,
   ModelUsageSchema,
@@ -109,8 +110,19 @@ async function diagnoseWithTimeout(
 async function withInvestigationDeadline<T>(
   timeoutMs: number,
   operation: (signal: AbortSignal) => Promise<T>,
+  externalSignal?: AbortSignal,
 ): Promise<T> {
+  externalSignal?.throwIfAborted();
   const controller = new AbortController();
+  const signal = externalSignal
+    ? AbortSignal.any([externalSignal, controller.signal])
+    : controller.signal;
+  let onAbort: (() => void) | undefined;
+  const cancelled = new Promise<never>((_, reject) => {
+    onAbort = () => reject(new InvestigationTimeout("Investigation cancelled"));
+    if (externalSignal?.aborted) onAbort();
+    else externalSignal?.addEventListener("abort", onAbort, { once: true });
+  });
   let timeout: ReturnType<typeof setTimeout> | undefined;
   const deadline = new Promise<never>((_, reject) => {
     timeout = setTimeout(() => {
@@ -120,10 +132,12 @@ async function withInvestigationDeadline<T>(
   });
 
   try {
-    return await Promise.race([operation(controller.signal), deadline]);
+    signal.throwIfAborted();
+    return await Promise.race([operation(signal), deadline, cancelled]);
   } finally {
     if (timeout) clearTimeout(timeout);
     controller.abort();
+    if (onAbort) externalSignal?.removeEventListener("abort", onAbort);
   }
 }
 
@@ -281,7 +295,7 @@ export function buildPreviewService(
   };
 }
 
-const RunbookMatchSchema = z
+export const RunbookMatchSchema = z
   .object({
     runbookId: z.string().min(1).max(64),
     version: z.string().regex(/^\d+\.\d+\.\d+$/),
@@ -309,13 +323,17 @@ const EvidenceBundleSchema = z
     inputValidation: ActionInputValidationEvidenceSchema,
   })
   .strict();
+const DiagnosisEvidenceBundleSchema = z.union([
+  EvidenceBundleSchema,
+  ControlledFixtureEvidenceSchema,
+]);
 const DecisionSchema = z.object({ id: z.string().min(1).max(128),
   decision: z.enum(["approve", "reject", "mark_owner_action_required",
     "escalate_to_engineering", "resolve_without_replay", "blocked"]) }).strict();
 export type InvestigationDecision = z.infer<typeof DecisionSchema>;
 
 const DiagnosisState = new StateSchema({
-  evidence: EvidenceBundleSchema.optional(),
+  evidence: DiagnosisEvidenceBundleSchema.optional(),
   runbooks: z.array(RunbookMatchSchema).max(3).default([]),
   result: IntegratedDiagnosisResultSchema.optional(),
   decision: DecisionSchema.optional(),
@@ -335,7 +353,12 @@ export interface IntegratedInvestigationTools {
 }
 
 export type DiagnosisOptions = {
+  // Only the developer-run fixture experiment opts into simulated contracts.
+  allowSimulatedEvidence?: boolean;
+  signal?: AbortSignal;
   modelTimeoutMs?: number;
+  // Optional experiment pacing uses the investigation signal, before the call deadline.
+  beforeModelInvocation?: (signal: AbortSignal) => Promise<void>;
   investigationTimeoutMs?: number;
   maxToolCalls?: number;
   maxGraphSteps?: number;
@@ -350,7 +373,7 @@ export type DiagnosisOptions = {
 };
 
 function assertSameCanonicalSource(
-  evidence: z.infer<typeof EvidenceBundleSchema>,
+  evidence: z.infer<typeof DiagnosisEvidenceBundleSchema>,
 ) {
   const expected = evidence.failureContext.source_ref;
   for (const actual of [
@@ -369,12 +392,32 @@ function assertSameCanonicalSource(
   }
 }
 
-function retrievalInput(
-  evidence: z.infer<typeof EvidenceBundleSchema>,
+// Error text is untrusted search data. Remove credential/PII-shaped values before
+// truncation; keep only bounded observations, never expected evaluation labels.
+function sanitizedQueryText(value: string): string {
+  return value
+    .replace(/https?:\/\/\S+/gi, " ")
+    .replace(/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/gi, " ")
+    .replace(/\bBearer\s+[A-Za-z0-9._~+/-]+={0,2}/gi, " ")
+    .replace(/\b\d{6,12}:[A-Za-z0-9_-]{20,}\b/g, " ")
+    .replace(
+      /\b(?:[a-z_]*token|[a-z_]*key|password|secret|authorization)\s*[:=]\s*(?:"[^"]*"|'[^']*'|[^\s,;]+)/gi,
+      " ",
+    )
+    .replace(/\b[A-Za-z0-9_-]{32,}\b/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+export function retrievalInput(
+  evidence: z.infer<typeof DiagnosisEvidenceBundleSchema>,
 ): RunbookSearchInput {
   const failure = evidence.failureContext.facts;
   const execution = evidence.executionEvidence.facts;
   const validation = evidence.inputValidation.facts;
+  const fixture = evidence.failureContext.simulated
+    ? evidence.failureContext.fixture_observation
+    : undefined;
   const attempts = execution.attempts.flatMap((attempt) => [
     attempt.provider,
     attempt.phase,
@@ -395,10 +438,15 @@ function retrievalInput(
     execution.ordering.status,
     validation.action_type,
     validation.validation_status,
-    validation.supported ? "supported" : "unsupported",
+    validation.supported === null
+      ? "support_unknown"
+      : validation.supported
+        ? "supported"
+        : "unsupported",
     ...validation.blocked_reasons,
     ...validation.missing_required_fields,
     ...validation.missing_template_paths,
+    fixture?.execution_status,
     ...attempts,
   ].filter((value): value is string => Boolean(value));
   const providers = new Set(
@@ -407,14 +455,37 @@ function retrievalInput(
       .map((value) => value.toLowerCase()),
   );
   return {
-    query: [...new Set(values)].join(" ").slice(0, 500) || "failure evidence",
+    query:
+      [
+        sanitizedQueryText(failure.retry.final_error ?? "").slice(0, 180),
+        sanitizedQueryText(fixture?.observed_facts.join(" ") ?? "").slice(
+          0,
+          180,
+        ),
+        sanitizedQueryText([...new Set(values)].join(" ")).slice(0, 138),
+      ]
+        .filter(Boolean)
+        .join(" ") || "failure evidence",
     ...(providers.size > 0 ? { providers: [...providers] } : {}),
     limit: 3,
   };
 }
 
+// Observed platform faults cannot become customer repairs by changing the model's taxonomy.
+export function requiresPlatformInvestigation(evidence: z.infer<typeof DiagnosisEvidenceBundleSchema>): boolean {
+  const validation = evidence.inputValidation.facts;
+  const retry = evidence.failureContext.facts.retry;
+  const facts = evidence.failureContext.simulated
+    ? evidence.failureContext.fixture_observation.observed_facts : [];
+  if (validation.supported === false || retry.provider === "worker" || facts.includes("handler_not_registered")) return true;
+  const customerInputFault = validation.validation_status === "invalid" && validation.supported === true;
+  return !customerInputFault && (retry.provider_status === 429 ||
+    facts.includes("retry_after_30_seconds") ||
+    (facts.includes("failure_before_send") && facts.includes("all_attempts_not_delivered")));
+}
+
 function issueForOutput(
-  evidence: z.infer<typeof EvidenceBundleSchema>,
+  evidence: z.infer<typeof DiagnosisEvidenceBundleSchema>,
   runbooks: readonly RunbookMatch[],
   output: IntegratedModelOutput,
 ): string | undefined {
@@ -501,11 +572,20 @@ function issueForOutput(
     (observedOutcomes.has("rejected") && observedOutcomes.has("accepted"));
   if (
     contradictoryOutcomes &&
-    !["insufficient_evidence", "outcome_unknown"].includes(
-      output.proposal.disposition,
-    )
+    output.proposal.disposition !== "outcome_unknown"
   ) {
     return "unsafe_delivery_disposition";
+  }
+
+  const customerInputFault =
+    evidence.inputValidation.facts.validation_status === "invalid" &&
+    evidence.inputValidation.facts.supported === true;
+  if (
+    output.proposal.disposition === "owner_action_required" &&
+    (requiresPlatformInvestigation(evidence) || output.diagnosis.taxonomy_id === "F05" ||
+      (["F01", "F02"].includes(output.diagnosis.taxonomy_id) && !customerInputFault))
+  ) {
+    return "platform_ownership_requires_escalation";
   }
 
   if (
@@ -518,8 +598,9 @@ function issueForOutput(
 }
 
 function supportsReplayCandidate(
-  evidence: z.infer<typeof EvidenceBundleSchema>,
+  evidence: z.infer<typeof DiagnosisEvidenceBundleSchema>,
 ) {
+  if (evidence.failureContext.simulated) return false;
   const failure = evidence.failureContext;
   const execution = evidence.executionEvidence;
   const validation = evidence.inputValidation;
@@ -565,7 +646,7 @@ function supportsReplayCandidate(
 }
 
 function replayNotBefore(
-  evidence: z.infer<typeof EvidenceBundleSchema>,
+  evidence: z.infer<typeof DiagnosisEvidenceBundleSchema>,
   output: IntegratedModelOutput,
 ) {
   if (output.proposal.disposition !== "replay_candidate") return null;
@@ -646,7 +727,8 @@ export function buildDiagnosisService(
               tools.validateActionInputs(signal),
             ),
           ]);
-        const evidence = EvidenceBundleSchema.parse({
+        const evidence = (options.allowSimulatedEvidence
+          ? DiagnosisEvidenceBundleSchema : EvidenceBundleSchema).parse({
           failureContext,
           executionEvidence,
           inputValidation,
@@ -699,8 +781,10 @@ export function buildDiagnosisService(
           if (prompt.input.length > maxPromptCharacters) {
             throw new TokenBudgetExceeded("Diagnosis prompt budget exhausted");
           }
-          const generate = () =>
-            generateWithTimeout(model, prompt, modelTimeoutMs, signal);
+          const generate = async () => {
+            await options.beforeModelInvocation?.(signal);
+            return generateWithTimeout(model, prompt, modelTimeoutMs, signal);
+          };
           const generation = tracer
             ? await tracer.observe(
                 "model.generate",
@@ -781,6 +865,7 @@ export function buildDiagnosisService(
               { recursionLimit: maxGraphSteps, signal,
                 ...(options.threadId ? { configurable: { thread_id: options.threadId } } : {}) },
             ),
+          options.signal,
         );
         const result = IntegratedDiagnosisResultSchema.safeParse(state.result);
         if (!result.success) {

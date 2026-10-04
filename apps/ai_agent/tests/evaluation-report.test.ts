@@ -1,5 +1,6 @@
 import { expect, test } from "bun:test";
 import { join } from "node:path";
+import { readFile } from "node:fs/promises";
 import {
   loadEvaluationCases,
   checkEvaluationObservation,
@@ -24,6 +25,12 @@ test("development reports do not run or expose held-out cases", async () => {
   expect(report.rows.some((row) => row.split === "held_out")).toBe(false);
   expect(report.safety.violations).toBe(0);
   expect(report.safety.probes.length).toBeGreaterThan(15);
+});
+
+test("Phase 11A preserves the checked-in Phase 11 control report exactly", async () => {
+  const cases = await loadEvaluationCases(casesPath, { includeHeldOut: true });
+  const saved = JSON.parse(await readFile(join(import.meta.dir, "../evaluation/phase-11-report.json"), "utf8"));
+  expect(await runEvaluation(cases, index)).toEqual(saved);
 });
 
 test("reports explicit denominators, honest misses, and reproducible results", async () => {

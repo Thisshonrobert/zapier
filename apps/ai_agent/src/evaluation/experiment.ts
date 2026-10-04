@@ -4,12 +4,15 @@ import { fileURLToPath } from "node:url";
 import { resolve } from "node:path";
 import {
   EvaluationObservationSchema,
+  CapturedEvaluationContextSchema,
+  type CapturedEvaluationContext,
   checkEvaluationDataset,
   checkEvaluationObservation,
   evaluationEvidenceRef,
   loadEvaluationCases,
   type EvaluationCase,
   type EvaluationObservation,
+  type AcceptanceContract,
 } from "./checks.ts";
 import {
   loadRunbooks,
@@ -97,9 +100,20 @@ export async function runEvaluation(
   options: {
     observations?: readonly EvaluationObservation[];
     model?: string;
+    contexts?: readonly CapturedEvaluationContext[];
+    acceptanceContract?: AcceptanceContract;
   } = {},
 ) {
   const observations = new Map<string, EvaluationObservation>();
+  const contexts = new Map<string, CapturedEvaluationContext>();
+  if (options.contexts && !options.observations) throw new Error("Captured context requires frozen observations");
+  for (const raw of options.contexts ?? []) {
+    const context = CapturedEvaluationContextSchema.parse(raw);
+    if (contexts.has(context.case_id)) throw new Error(`Duplicate context: ${context.case_id}`);
+    if (!cases.some((item) => item.case_id === context.case_id)) throw new Error("Context outside selected split");
+    contexts.set(context.case_id, context);
+  }
+  if (options.contexts && contexts.size !== cases.length) throw new Error("Captured context must account for every selected case");
   if (options.observations !== undefined && !options.model?.trim())
     throw new Error("Frozen observations require a model identifier");
   for (const raw of options.observations ?? []) {
@@ -113,9 +127,10 @@ export async function runEvaluation(
     observations.set(observation.case_id, observation);
   }
   const rows = cases.map((item) => {
+    const context = contexts.get(item.case_id);
     const forbidden = item.expected_policy.model_invocation === "forbidden";
     // No expected taxonomy filters or relevance labels are supplied to retrieval.
-    const query = [
+    const query = context ? context.retrieval?.input.query ?? "" : [
       item.evidence.provider,
       item.evidence.execution_status,
       item.evidence.delivery_outcome,
@@ -125,7 +140,7 @@ export async function runEvaluation(
       .filter(Boolean)
       .join(" ")
       .slice(0, 500);
-    const matches = forbidden ? [] : searchRunbooks(index, { query, limit: 3 });
+    const matches = context ? context.retrieval?.matches ?? [] : forbidden ? [] : searchRunbooks(index, { query, limit: 3 });
     const citations = matches.map((match) => match.citation);
     const families = [
       ...new Set(
@@ -141,7 +156,7 @@ export async function runEvaluation(
         ? fixtureObservation(item)
         : observations.get(item.case_id);
     const check = observation
-      ? checkEvaluationObservation(item, observation, citations)
+      ? checkEvaluationObservation(item, observation, citations, context, options.acceptanceContract)
       : {
           schemaValid: false,
           qualityIssues: ["missing_observation"],
@@ -231,7 +246,7 @@ export async function runEvaluation(
       issues: [...check.safetyIssues, ...check.qualityIssues],
       retrievalEligible,
       retrievalHit,
-      query: forbidden ? null : query,
+      query: forbidden || !query ? null : query,
       citations,
       citedOutputCount: Array.isArray(output?.proposal?.runbook_citations)
         ? output.proposal.runbook_citations.length
@@ -250,6 +265,7 @@ export async function runEvaluation(
       usage: observation?.usage ?? null,
       costUsd: observation?.cost_usd ?? null,
       latencyMs: observation?.latency_ms ?? null,
+      ...(context ? { captureFailure: context.failure, rejection: context.rejection } : {}),
     };
   });
   const probes = await runSafetyProbes();
@@ -404,10 +420,11 @@ export async function runEvaluation(
     rows.reduce((sum, row) => sum + row.safetyIssues.length, 0) +
     probes.filter((probe) => !probe.passed).length;
   const complete = rows.every(
-    (row) => !row.issues.includes("missing_observation"),
+    (row) => !row.issues.includes("missing_observation") && !row.issues.some((issue) => issue.startsWith("capture_failure:")),
   );
   return {
     reportVersion: 1,
+    ...(options.acceptanceContract === "advisory-v2" ? { acceptanceContract: options.acceptanceContract } : {}),
     datasetVersion: 1,
     datasetHash: hash(cases),
     runbookHash: hash(
@@ -421,13 +438,13 @@ export async function runEvaluation(
               a.case_id.localeCompare(b.case_id),
             ),
           ),
-    measurement:
-      options.observations === undefined
+    ...(options.contexts ? { capturedContextHash: hash([...contexts.values()].sort((a, b) => a.case_id.localeCompare(b.case_id))) } : {}),
+    measurement: options.contexts ? "controlled-fixture-graph-model-observations" : options.observations === undefined
         ? "offline-conservative-fixture-control"
         : "explicit-frozen-model-observations",
     model: options.model ?? "no-model-fixture-v1",
     retriever: "production-weighted-keyword",
-    retrievalQuerySource: "observed-fixture-text-without-taxonomy-filters",
+    retrievalQuerySource: options.contexts ? "captured-graph-evidence-query-v1" : "observed-fixture-text-without-taxonomy-filters",
     retrievalLimit: 3,
     heldOutIncluded: cases.some((item) => item.split === "held_out"),
     safety: {
@@ -443,11 +460,11 @@ export async function runEvaluation(
       "Small samples: 18 development / 8 held-out cases; targets are descriptive, not statistical release evidence.",
       "Diagnosis acceptance is deterministic label/action acceptance, not human or semantic adjudication of free-text claims.",
       "Grounding checks evidence-reference membership and missing-evidence disclosure; they do not verify arbitrary natural-language claims. Empty citation lists are structurally valid, not proof of cited guidance.",
-      "Retrieval uses the production ranker with observed fixture-text queries, not full live graph evidence queries. These are offline fixture recall measurements.",
+      options.contexts ? "Retrieval is measured against captured controlled-fixture graph queries and returned context, separately from Phase 11 fixture-query recall; live retrieval quality is unmeasured." : "Retrieval uses the production ranker with observed fixture-text queries, not full live graph evidence queries. These are offline fixture recall measurements.",
       "Retrieval recall counts a case hit when any labelled runbook family appears in the top three sections; it is not section-level recall.",
       "Forbidden-model cases are reported as routing controls and excluded from diagnosis/retrieval denominators.",
       "Fixture results validate the harness only; frozen inputs are explicitly supplied measurements, never automatically ingested traces.",
-      "SQL fixtures do not establish real database transaction isolation. No network/provider calls or replay mutations are executed.",
+      options.contexts ? "Frozen re-evaluation is offline. Original capture may call the selected diagnosis model only; no action providers, replay or approval mutations are permitted." : "SQL fixtures do not establish real database transaction isolation. No network/provider calls or replay mutations are executed.",
       "Unknown cost/usage/latency stays null. Fixture cost is zero local provider spend; provider latency is unmeasured.",
       "Live replay remains disabled; approval is authority only. Provider non-delivery semantics remain unproven.",
       "Phase 2 cases lack complete live replay facts. Final policy is evaluated conservatively; live eligibility is unmeasured. Full eligible-state and mutation controls use separate supported contract fixtures.",
@@ -458,9 +475,14 @@ export async function runEvaluation(
 export function renderEvaluationReport(
   report: Awaited<ReturnType<typeof runEvaluation>>,
 ) {
+  const captured = report.measurement === "controlled-fixture-graph-model-observations";
   const lines = [
     "# Phase 11 deterministic evaluation",
     "",
+    ...(report.acceptanceContract ? [
+      `Acceptance contract: ${report.acceptanceContract}. This is a separately versioned advisory assessment, not a pass of the original frozen-v1 gate.`,
+      "",
+    ] : []),
     `Mode: ${report.measurement}; model: ${report.model}.`,
     `Dataset hash: ${report.datasetHash}. Runbook hash: ${report.runbookHash}.`,
     `Safety: ${report.safety.violations} violations; ${report.safety.probes.filter((probe) => probe.passed).length}/${report.safety.probes.length} probes passed; complete: ${report.safety.complete}; gate: ${report.safety.passed ? "PASS" : "FAIL"}.`,
@@ -485,7 +507,7 @@ export function renderEvaluationReport(
     "Reproduce from repository root:",
     "",
     "```powershell",
-    `bun run apps/ai_agent/src/evaluation/experiment.ts ${report.heldOutIncluded ? "--include-held-out " : ""}--output apps/ai_agent/evaluation/phase-11-report`,
+    captured ? "bun run apps/ai_agent/src/evaluation/model-experiment.ts evaluate --experiment <frozen-directory>" : `bun run apps/ai_agent/src/evaluation/experiment.ts ${report.heldOutIncluded ? "--include-held-out " : ""}--output apps/ai_agent/evaluation/phase-11-report`,
     "```",
     "",
     "Development is selected by default. Held-out data requires --include-held-out; the runner never tunes prompts, retrieval or labels.",
@@ -495,7 +517,7 @@ export function renderEvaluationReport(
     '{"case_id":"<existing-case-id>","result":"<IntegratedDiagnosisResult object, or null for deterministic rejection>","model_invocations":0,"usage":null,"cost_usd":null,"latency_ms":null}',
     "```",
     "",
-    "Use evidence reference evaluation:<case-id>, actual retrieved citations shown in this report, and disclose missing_evidence from the fixture. Never relabel a run using held-out results. Cost/latency/usage must come from explicit recorded measurements; missing observations fail completeness. Exit code 1 signals a safety or completeness failure. Quality shortfalls remain visible without pretending that they are safety violations.",
+    captured ? "This report uses version-1 captured graph context: actual evidence IDs, all supplied unavailable evidence, retrieval query and returned citations/content hashes. Do not substitute evaluation:<case-id> or the Phase 11 fixture-text query. See the Phase 11A reproduction guide for capture and comparison commands. Failed captures keep every selected case in the denominators and fail completeness." : "Use evidence reference evaluation:<case-id>, actual retrieved citations shown in this report, and disclose missing_evidence from the fixture. Never relabel a run using held-out results. Cost/latency/usage must come from explicit recorded measurements; missing observations fail completeness. Exit code 1 signals a safety or completeness failure. Quality shortfalls remain visible without pretending that they are safety violations.",
   );
   lines.push(
     "",
