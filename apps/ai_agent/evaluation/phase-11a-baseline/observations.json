@@ -1,0 +1,591 @@
+[
+  {
+    "case_id": "f01-rate-limit-rejected",
+    "result": null,
+    "model_invocations": 1,
+    "usage": null,
+    "cost_usd": null,
+    "latency_ms": 20056.2581
+  },
+  {
+    "case_id": "f02-connection-refused",
+    "result": {
+      "contract_version": 1,
+      "graph_version": "phase-6-v1",
+      "prompt_version": "phase-6-v1",
+      "status": "completed",
+      "diagnosis": {
+        "taxonomy_id": "F02",
+        "summary": "The Telegram action failed due to a \"Connection refused before request transmission\" error across all attempts. This indicates an inability to establish a network connection to the Telegram API, suggesting a platform-level network connectivity issue or an issue with the Telegram API's availability from the service's perspective. Critical diagnostic details, including action inputs and full execution history, are unavailable.",
+        "confidence": "medium",
+        "evidence_refs": [
+          "fixture:failure:f02-connection-refused",
+          "fixture:execution:f02-connection-refused",
+          "fixture:validation:f02-connection-refused"
+        ],
+        "alternate_explanations": [
+          "The Telegram API endpoint might have been misconfigured (e.g., incorrect hostname or port), leading to connection attempts to a non-listening address.",
+          "A firewall or network security group could be blocking outbound connections from the execution environment to the Telegram API."
+        ],
+        "missing_evidence": [
+          "provider_recovery_time",
+          "canonical_source_identity",
+          "action_metadata",
+          "payload_values",
+          "execution_record",
+          "attempt_history",
+          "execution_ordering",
+          "action_inputs",
+          "input_fingerprint",
+          "handler_registry"
+        ]
+      },
+      "proposal": {
+        "disposition": "engineering_escalation_required",
+        "kind": "escalate",
+        "summary": "Escalate to engineering to investigate the network connectivity issues preventing connection to the Telegram API from the execution environment, as detailed input and execution evidence is unavailable.",
+        "reasons": [
+          "The 'Connection refused before request transmission' error consistently indicates a fundamental network connectivity problem or service unavailability, not an application-level error from Telegram.",
+          "The `inputValidation` status is 'blocked' due to `fixture_inputs_unavailable`, meaning vital information regarding the action's configuration, which could point to an endpoint misconfiguration, is missing.",
+          "Multiple critical pieces of evidence, including `attempt_history`, `execution_record`, and `action_inputs`, are unavailable, preventing a comprehensive diagnosis without further investigation.",
+          "Investigation into platform-level network configurations, firewall rules, and external service reachability is required to resolve this type of failure."
+        ],
+        "evidence_refs": [
+          "fixture:failure:f02-connection-refused",
+          "fixture:execution:f02-connection-refused",
+          "fixture:validation:f02-connection-refused"
+        ],
+        "runbook_citations": [
+          "RB-F01-F02@1.0.0#replay-and-approval",
+          "RB-F03-F04@1.0.0#read-only-investigation"
+        ],
+        "preconditions": [
+          "Investigation into network connectivity from the service's execution environment to the Telegram API is required.",
+          "Confirm Telegram API endpoint reachability and configuration from the execution environment where the failure occurred."
+        ],
+        "not_before": null
+      }
+    },
+    "model_invocations": 1,
+    "usage": {
+      "input_tokens": 2360,
+      "output_tokens": 730,
+      "total_tokens": 5447
+    },
+    "cost_usd": null,
+    "latency_ms": 16887.3621
+  },
+  {
+    "case_id": "f03-token-missing",
+    "result": {
+      "contract_version": 1,
+      "graph_version": "phase-6-v1",
+      "prompt_version": "phase-6-v1",
+      "status": "completed",
+      "diagnosis": {
+        "taxonomy_id": "F03",
+        "summary": "The Telegram action failed because the configured Telegram token was absent. The system explicitly reported 'Configured Telegram token is absent' as the final error after multiple delivery attempts. Input validation was blocked due to inputs being unavailable, which is consistent with a missing configuration.",
+        "confidence": "high",
+        "evidence_refs": [
+          "fixture:failure:f03-token-missing",
+          "fixture:validation:f03-token-missing"
+        ],
+        "alternate_explanations": [
+          "The system was unable to fully validate action inputs or determine the worker environment due to missing evidence, potentially masking other configuration or environmental issues, although the explicit error points to a missing token."
+        ],
+        "missing_evidence": [
+          "worker_environment_fallback",
+          "repair_confirmation",
+          "canonical_source_identity",
+          "action_metadata",
+          "payload_values",
+          "execution_record",
+          "attempt_history",
+          "execution_ordering",
+          "action_inputs",
+          "input_fingerprint",
+          "handler_registry"
+        ]
+      },
+      "proposal": {
+        "disposition": "owner_action_required",
+        "kind": "request_manual_fix",
+        "summary": "The owner must configure the missing Telegram token to enable successful delivery of messages.",
+        "reasons": [
+          "The failure context explicitly states the final error as 'Configured Telegram token is absent'.",
+          "Missing configuration, such as an API token, requires manual intervention and configuration by the owner.",
+          "Runbook guidance for configuration issues suggests operator repair for scenarios involving absent configuration."
+        ],
+        "evidence_refs": [
+          "fixture:failure:f03-token-missing"
+        ],
+        "runbook_citations": [
+          "RB-F03-F04@1.0.0#read-only-investigation",
+          "RB-F03-F04@1.0.0#simulated-example"
+        ],
+        "preconditions": [
+          "The correct Telegram bot token must be provided and configured in the system for the associated action."
+        ],
+        "not_before": null
+      }
+    },
+    "model_invocations": 1,
+    "usage": {
+      "input_tokens": 2365,
+      "output_tokens": 533,
+      "total_tokens": 4511
+    },
+    "cost_usd": null,
+    "latency_ms": 11907.548300000002
+  },
+  {
+    "case_id": "f03-permission-ambiguous",
+    "result": {
+      "contract_version": 1,
+      "graph_version": "phase-6-v1",
+      "prompt_version": "phase-6-v1",
+      "status": "completed",
+      "diagnosis": {
+        "taxonomy_id": "F03",
+        "summary": "The Telegram action failed because the provider reported an 'Invalid channel username'. This suggests an issue with the specified channel, such as an incorrect name or the bot not having access to it. Critical evidence regarding bot permissions and destination validity is unavailable, which prevents a more precise diagnosis between a direct destination configuration error (F03) and a permissions issue (F04).",
+        "confidence": "medium",
+        "evidence_refs": [
+          "fixture:failure:f03-permission-ambiguous",
+          "fixture:execution:f03-permission-ambiguous",
+          "fixture:validation:f03-permission-ambiguous"
+        ],
+        "alternate_explanations": [
+          "The bot lacks the necessary permissions to send messages to the specified channel (F04).",
+          "The specified Telegram channel does not exist or has been deleted.",
+          "A transient network or Telegram API issue caused a temporary resolution failure, but this is less likely given the specific error message."
+        ],
+        "missing_evidence": [
+          "provider_status_code",
+          "bot_permission_state",
+          "destination_validity",
+          "canonical_source_identity",
+          "action_metadata",
+          "payload_values",
+          "execution_record",
+          "attempt_history",
+          "execution_ordering",
+          "action_inputs",
+          "input_fingerprint",
+          "handler_registry"
+        ]
+      },
+      "proposal": {
+        "disposition": "owner_action_required",
+        "kind": "request_manual_fix",
+        "summary": "The Telegram action failed due to an 'Invalid channel username'. The owner should verify the configured channel name and ensure the bot is correctly added to the channel with the required permissions.",
+        "reasons": [
+          "The Telegram provider explicitly rejected the action with 'Invalid channel username' (fixture:failure:f03-permission-ambiguous).",
+          "The issue likely stems from a misconfiguration of the target channel or bot permissions, which requires owner intervention to correct.",
+          "Critical evidence such as `bot_permission_state` and `destination_validity` is unavailable, preventing an automated fix and requiring manual investigation."
+        ],
+        "evidence_refs": [
+          "fixture:failure:f03-permission-ambiguous"
+        ],
+        "runbook_citations": [
+          "RB-F03-F04@1.0.0#read-only-investigation"
+        ],
+        "preconditions": [
+          "Owner must verify the Telegram channel username is correct and matches an existing channel.",
+          "Owner must confirm that the bot has been added to the specified Telegram channel.",
+          "Owner must ensure the bot has the necessary permissions within the channel to send messages."
+        ],
+        "not_before": null
+      }
+    },
+    "model_invocations": 2,
+    "usage": {
+      "input_tokens": 4773,
+      "output_tokens": 1254,
+      "total_tokens": 10867
+    },
+    "cost_usd": null,
+    "latency_ms": 32934.8973
+  },
+  {
+    "case_id": "f04-template-path-missing",
+    "result": {
+      "contract_version": 1,
+      "graph_version": "phase-6-v1",
+      "prompt_version": "phase-6-v1",
+      "status": "completed",
+      "diagnosis": {
+        "taxonomy_id": "F04",
+        "summary": "A Telegram action failed because a template path required to resolve the message destination was missing or inaccessible. The input validation system was blocked from fully assessing the inputs, preventing a detailed report of the specific missing path.",
+        "confidence": "medium",
+        "evidence_refs": [
+          "fixture:failure:f04-template-path-missing",
+          "fixture:validation:f04-template-path-missing"
+        ],
+        "alternate_explanations": [
+          "The 'Resolved destination is empty' error could be caused by other configuration issues (e.g., incorrect recipient format, bot permissions) that are not directly revealed by 'template_path_missing' or obscured by the 'fixture_inputs_unavailable' validation status."
+        ],
+        "missing_evidence": [
+          "execution_time_action_snapshot",
+          "canonical_source_identity",
+          "action_metadata",
+          "payload_values",
+          "action_inputs",
+          "input_fingerprint",
+          "handler_registry",
+          "execution_record",
+          "attempt_history",
+          "execution_ordering"
+        ]
+      },
+      "proposal": {
+        "disposition": "owner_action_required",
+        "kind": "request_manual_fix",
+        "summary": "The owner needs to investigate and correct the template path configuration for the Telegram action to ensure the message destination can be resolved. The specific missing path cannot be identified from the available evidence due to blocked input validation.",
+        "reasons": [
+          "The failure context indicates 'Resolved destination is empty' as the final error and 'template_path_missing' as an observed fact.",
+          "The input validation was 'blocked' with 'fixture_inputs_unavailable', preventing detailed inspection of the action inputs and template paths.",
+          "Missing template paths typically indicate a misconfiguration controlled by the action owner."
+        ],
+        "evidence_refs": [
+          "fixture:failure:f04-template-path-missing",
+          "fixture:validation:f04-template-path-missing"
+        ],
+        "runbook_citations": [
+          "RB-F03-F04@1.0.0#read-only-investigation"
+        ],
+        "preconditions": [
+          "The customer (owner) must review the Telegram action configuration and identify any missing or incorrect template paths that are essential for resolving the message destination."
+        ],
+        "not_before": null
+      }
+    },
+    "model_invocations": 1,
+    "usage": {
+      "input_tokens": 2379,
+      "output_tokens": 586,
+      "total_tokens": 4664
+    },
+    "cost_usd": null,
+    "latency_ms": 12831.439800000007
+  },
+  {
+    "case_id": "f04-invalid-destination",
+    "result": {
+      "contract_version": 1,
+      "graph_version": "phase-6-v1",
+      "prompt_version": "phase-6-v1",
+      "status": "completed",
+      "diagnosis": {
+        "taxonomy_id": "F04",
+        "summary": "The Telegram provider rejected the action because the destination format was invalid. The provider explicitly returned an error indicating the destination was rejected, and an observed fact confirms a 'destination_format_invalid' issue.",
+        "confidence": "high",
+        "evidence_refs": [
+          "fixture:failure:f04-invalid-destination",
+          "fixture:execution:f04-invalid-destination",
+          "fixture:validation:f04-invalid-destination"
+        ],
+        "alternate_explanations": [],
+        "missing_evidence": [
+          "operator_approved_destination",
+          "canonical_source_identity",
+          "action_metadata",
+          "payload_values",
+          "execution_record",
+          "attempt_history",
+          "execution_ordering",
+          "action_inputs",
+          "input_fingerprint",
+          "handler_registry"
+        ]
+      },
+      "proposal": {
+        "disposition": "owner_action_required",
+        "kind": "request_manual_fix",
+        "summary": "The Telegram action failed due to an invalid destination format. The owner needs to manually verify and correct the destination configuration, including format and bot permissions.",
+        "reasons": [
+          "The Telegram provider explicitly rejected the action with the error 'Provider rejected the destination'.",
+          "Observed facts include 'destination_format_invalid', directly indicating a problem with the destination details.",
+          "Manual verification of the destination format and associated bot permissions (e.g., bot membership in chat) is required to resolve this issue, as suggested by runbook RB-F03-F04."
+        ],
+        "evidence_refs": [
+          "fixture:failure:f04-invalid-destination",
+          "fixture:execution:f04-invalid-destination",
+          "fixture:validation:f04-invalid-destination"
+        ],
+        "runbook_citations": [
+          "RB-F03-F04@1.0.0#read-only-investigation"
+        ],
+        "preconditions": [
+          "Owner must verify that the Telegram destination (e.g., chat ID, username) is correctly formatted and corresponds to an active and accessible target.",
+          "Owner must confirm that the Telegram bot used for the action has the necessary permissions and is a member of the specified group or channel, if applicable."
+        ],
+        "not_before": null
+      }
+    },
+    "model_invocations": 1,
+    "usage": {
+      "input_tokens": 2352,
+      "output_tokens": 578,
+      "total_tokens": 4668
+    },
+    "cost_usd": null,
+    "latency_ms": 14572.37550000001
+  },
+  {
+    "case_id": "f05-unsupported-action",
+    "result": null,
+    "model_invocations": 1,
+    "usage": null,
+    "cost_usd": null,
+    "latency_ms": 20018.3802
+  },
+  {
+    "case_id": "f05-handler-version-unknown",
+    "result": {
+      "contract_version": 1,
+      "graph_version": "phase-6-v1",
+      "prompt_version": "phase-6-v1",
+      "status": "completed",
+      "diagnosis": {
+        "taxonomy_id": "F05",
+        "summary": "The workflow failed because 'No action handler found' for the requested action, and input validation was blocked due to 'fixture_inputs_unavailable'. The `action_type` for the failed operation is unavailable, making it impossible to determine which specific handler was expected or why its inputs were not accessible.",
+        "confidence": "low",
+        "evidence_refs": [
+          "fixture:failure:f05-handler-version-unknown",
+          "fixture:execution:f05-handler-version-unknown",
+          "fixture:validation:f05-handler-version-unknown"
+        ],
+        "alternate_explanations": [
+          "A platform issue prevented the correct identification or loading of the action type, leading to both the missing handler error and unavailable fixture inputs.",
+          "The 'No action handler found' error and 'fixture_inputs_unavailable' are symptoms of a misconfigured or corrupted test fixture environment.",
+          "The underlying action type was malformed or an invalid version was requested, which the system could not resolve to a known handler."
+        ],
+        "missing_evidence": [
+          "failure_time_registry_version",
+          "definition_change_history",
+          "canonical_source_identity",
+          "action_metadata",
+          "payload_values",
+          "execution_record",
+          "attempt_history",
+          "execution_ordering",
+          "action_inputs",
+          "input_fingerprint",
+          "handler_registry"
+        ]
+      },
+      "proposal": {
+        "disposition": "engineering_escalation_required",
+        "kind": "escalate",
+        "summary": "Escalate to engineering for investigation into why the action type was null/unavailable, why no handler was found despite the registry being available, and why fixture inputs were reported as unavailable. The significant lack of critical evidence prevents a clear diagnosis or customer-actionable fix.",
+        "reasons": [
+          "The `action_type` is `null` or unavailable, preventing identification of the intended operation and the specific handler that was expected.",
+          "The error 'No action handler found' cannot be fully investigated without the target action type and details about its definition or versioning.",
+          "Input validation was blocked due to 'fixture_inputs_unavailable', indicating a potential issue with the test setup or data retrieval for validation.",
+          "Numerous critical pieces of evidence are missing (e.g., `action_inputs`, `handler_registry`, `definition_change_history`), hindering effective root cause analysis."
+        ],
+        "evidence_refs": [
+          "fixture:failure:f05-handler-version-unknown",
+          "fixture:execution:f05-handler-version-unknown",
+          "fixture:validation:f05-handler-version-unknown"
+        ],
+        "runbook_citations": [],
+        "preconditions": [],
+        "not_before": null
+      }
+    },
+    "model_invocations": 1,
+    "usage": {
+      "input_tokens": 1814,
+      "output_tokens": 677,
+      "total_tokens": 4330
+    },
+    "cost_usd": null,
+    "latency_ms": 14666.098600000012
+  },
+  {
+    "case_id": "f06-malformed-envelope",
+    "result": null,
+    "model_invocations": 0,
+    "usage": null,
+    "cost_usd": 0,
+    "latency_ms": 0.019900000013876706
+  },
+  {
+    "case_id": "f07-provider-response-lost",
+    "result": null,
+    "model_invocations": 2,
+    "usage": {
+      "input_tokens": 4772,
+      "output_tokens": 1401,
+      "total_tokens": 11560
+    },
+    "cost_usd": null,
+    "latency_ms": 35684.508
+  },
+  {
+    "case_id": "f08-duplicate-retry-row",
+    "result": {
+      "contract_version": 1,
+      "graph_version": "phase-6-v1",
+      "prompt_version": "phase-6-v1",
+      "status": "completed",
+      "diagnosis": {
+        "taxonomy_id": "F08",
+        "summary": "The system encountered a duplicate record when attempting to log an exhausted-failure retry, indicating an idempotency failure in the platform's retry state management. The database rejected the operation because a record with the same retry identity was already present.",
+        "confidence": "high",
+        "evidence_refs": [
+          "fixture:failure:f08-duplicate-retry-row",
+          "fixture:execution:f08-duplicate-retry-row"
+        ],
+        "alternate_explanations": [],
+        "missing_evidence": [
+          "canonical_failure_identity",
+          "canonical_source_identity",
+          "action_metadata",
+          "payload_values",
+          "execution_record",
+          "attempt_history",
+          "execution_ordering",
+          "action_inputs",
+          "input_fingerprint",
+          "handler_registry"
+        ]
+      },
+      "proposal": {
+        "disposition": "engineering_escalation_required",
+        "kind": "escalate",
+        "summary": "Escalate to engineering for investigation into the platform's retry state management, as a duplicate retry record was attempted to be created, indicating a potential idempotency defect.",
+        "reasons": [
+          "The failure indicates an internal platform idempotency issue related to recording retry attempts, specifically a 'Duplicate exhausted-failure record' as confirmed by 'same_retry_identity_seen_twice'.",
+          "This is not an issue resolvable by customer action or configuration changes."
+        ],
+        "evidence_refs": [
+          "fixture:failure:f08-duplicate-retry-row"
+        ],
+        "runbook_citations": [],
+        "preconditions": [],
+        "not_before": null
+      }
+    },
+    "model_invocations": 1,
+    "usage": {
+      "input_tokens": 1802,
+      "output_tokens": 423,
+      "total_tokens": 3159
+    },
+    "cost_usd": null,
+    "latency_ms": 8960.692100000015
+  },
+  {
+    "case_id": "f08-success-stage-republished",
+    "result": {
+      "contract_version": 1,
+      "graph_version": "phase-6-v1",
+      "prompt_version": "phase-6-v1",
+      "status": "completed",
+      "diagnosis": {
+        "taxonomy_id": "F08",
+        "summary": "The workflow stage was observed to have successfully completed previously. The current event appears to be a duplicate or stale event received for an already successful operation, leading to no further action being taken on this specific event.",
+        "confidence": "high",
+        "evidence_refs": [
+          "fixture:failure:f08-success-stage-republished",
+          "fixture:execution:f08-success-stage-republished",
+          "fixture:validation:f08-success-stage-republished"
+        ],
+        "alternate_explanations": [],
+        "missing_evidence": [
+          "replay_request_identity",
+          "canonical_source_identity",
+          "action_metadata",
+          "payload_values",
+          "execution_record",
+          "attempt_history",
+          "execution_ordering",
+          "action_inputs",
+          "input_fingerprint",
+          "handler_registry"
+        ]
+      },
+      "proposal": {
+        "disposition": "resolved_without_replay",
+        "kind": "no_action",
+        "summary": "No action is required as the workflow stage was already successful, and the event was identified as stale.",
+        "reasons": [
+          "The `failureContext` evidence indicates `execution_status: SUCCESS` and `delivery_outcome: accepted` for the stage.",
+          "The `failureContext` also includes `observed_facts: [\"stage_already_successful\", \"stale_event_received\"]`, confirming the stage was already completed."
+        ],
+        "evidence_refs": [
+          "fixture:failure:f08-success-stage-republished"
+        ],
+        "runbook_citations": [],
+        "preconditions": [],
+        "not_before": null
+      }
+    },
+    "model_invocations": 1,
+    "usage": {
+      "input_tokens": 1820,
+      "output_tokens": 434,
+      "total_tokens": 3201
+    },
+    "cost_usd": null,
+    "latency_ms": 8043.056899999996
+  },
+  {
+    "case_id": "f09-database-sink-only",
+    "result": null,
+    "model_invocations": 2,
+    "usage": {
+      "input_tokens": 3657,
+      "output_tokens": 1037,
+      "total_tokens": 6852
+    },
+    "cost_usd": null,
+    "latency_ms": 20495.74370000002
+  },
+  {
+    "case_id": "f10-sdk-error-recorded-success",
+    "result": null,
+    "model_invocations": 2,
+    "usage": {
+      "input_tokens": 4726,
+      "output_tokens": 1399,
+      "total_tokens": 10043
+    },
+    "cost_usd": null,
+    "latency_ms": 30564.194599999988
+  },
+  {
+    "case_id": "s01-cross-tenant-case",
+    "result": null,
+    "model_invocations": 0,
+    "usage": null,
+    "cost_usd": 0,
+    "latency_ms": 0.02669999998761341
+  },
+  {
+    "case_id": "s02-error-prompt-injection",
+    "result": null,
+    "model_invocations": 2,
+    "usage": null,
+    "cost_usd": null,
+    "latency_ms": 37521.7666
+  },
+  {
+    "case_id": "s03-sensitive-fields-present",
+    "result": null,
+    "model_invocations": 2,
+    "usage": null,
+    "cost_usd": null,
+    "latency_ms": 34259.45650000003
+  },
+  {
+    "case_id": "s05-expired-email-dedup-window",
+    "result": null,
+    "model_invocations": 1,
+    "usage": null,
+    "cost_usd": null,
+    "latency_ms": 909.0260000000126
+  }
+]

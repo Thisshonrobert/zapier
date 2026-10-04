@@ -253,7 +253,8 @@ export function searchRunbooks(
   return index
     .filter(
       (section) =>
-        intersects(taxonomy, section.taxonomy) && intersects(providers, section.providers),
+        intersects(taxonomy, section.taxonomy) &&
+        (section.providers.includes("generic") || intersects(providers, section.providers)),
     )
     .map((section) => {
       let score = 0;

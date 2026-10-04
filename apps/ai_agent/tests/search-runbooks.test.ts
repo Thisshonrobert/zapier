@@ -13,11 +13,20 @@ const repositoryRunbooks = join(import.meta.dir, "../../../docs/AI/runbooks");
 
 const labelledCases = [
   ["Telegram returned HTTP 429 with a retry-after cooldown", "RB-F01-F02"],
-  ["bot token is missing and the bot cannot access the destination", "RB-F03-F04"],
+  [
+    "bot token is missing and the bot cannot access the destination",
+    "RB-F03-F04",
+  ],
   ["template path is absent and the action type is unsupported", "RB-F04-F06"],
-  ["the worker lease expired after a Telegram send with unknown delivery", "RB-F07"],
+  [
+    "the worker lease expired after a Telegram send with unknown delivery",
+    "RB-F07",
+  ],
   ["a duplicate case asks to reset a terminal SUCCESS stage", "RB-F08"],
-  ["the DLQ publication is missing and an email SDK error was hidden", "RB-F09-F10"],
+  [
+    "the DLQ publication is missing and an email SDK error was hidden",
+    "RB-F09-F10",
+  ],
 ] as const;
 
 function document(input: {
@@ -65,6 +74,45 @@ async function withRunbooks(
 }
 
 describe("Phase 5 runbook retrieval", () => {
+  test("provider filters admit applicable generic guidance but exclude other providers", async () => {
+    await withRunbooks(
+      {
+        "template-and-registry-validation.md": document({
+          id: "RB-GENERIC",
+          title: "Handler",
+          taxonomy: "F05",
+          body: "Unsupported action handler registry.",
+        }),
+        "credentials-and-destinations.md": document({
+          id: "RB-EMAIL",
+          title: "Handler",
+          taxonomy: "F03",
+          body: "Unsupported action handler registry.",
+        }).replace("providers: generic", "providers: email"),
+      },
+      (index) => {
+        expect(
+          searchRunbooks(index, {
+            query: "unsupported handler",
+            providers: ["worker"],
+          }).map((m) => m.runbookId),
+        ).toEqual(["RB-GENERIC"]);
+        expect(
+          searchRunbooks(index, {
+            query: "unsupported handler",
+            providers: ["worker"],
+            taxonomy: ["F03"],
+          }),
+        ).toEqual([]);
+        expect(
+          searchRunbooks(index, {
+            query: "quantum orchard",
+            providers: ["worker"],
+          }),
+        ).toEqual([]);
+      },
+    );
+  });
   test("retrieves the labelled runbook in the top three and beats no retrieval", async () => {
     const index = await loadRunbooks(repositoryRunbooks);
     let hits = 0;
@@ -72,7 +120,9 @@ describe("Phase 5 runbook retrieval", () => {
     for (const [query, expectedRunbook] of labelledCases) {
       const matches = searchRunbooks(index, { query });
       if (matches.some((match) => match.runbookId === expectedRunbook)) hits++;
-      expect(matches.map((match) => match.runbookId)).toContain(expectedRunbook);
+      expect(matches.map((match) => match.runbookId)).toContain(
+        expectedRunbook,
+      );
       expect(matches.length).toBeLessThanOrEqual(3);
     }
 
@@ -93,8 +143,12 @@ describe("Phase 5 runbook retrieval", () => {
   test("rejects unbounded queries and result limits", async () => {
     const index = await loadRunbooks(repositoryRunbooks);
 
-    expect(() => searchRunbooks(index, { query: "x".repeat(501) })).toThrow(RangeError);
-    expect(() => searchRunbooks(index, { query: "provider", limit: 4 })).toThrow(RangeError);
+    expect(() => searchRunbooks(index, { query: "x".repeat(501) })).toThrow(
+      RangeError,
+    );
+    expect(() =>
+      searchRunbooks(index, { query: "provider", limit: 4 }),
+    ).toThrow(RangeError);
     expect(() =>
       searchRunbooks(index, {
         query: "provider",
@@ -197,7 +251,9 @@ describe("Phase 5 runbook retrieval", () => {
         }),
       },
       (index) => {
-        expect(searchRunbooks(index, { query: "obsolete-only-token" })).toEqual([]);
+        expect(searchRunbooks(index, { query: "obsolete-only-token" })).toEqual(
+          [],
+        );
       },
     );
   });

@@ -5,8 +5,10 @@ import { z } from "zod";
 import {
   IntegratedDiagnosisResultSchema,
   ModelUsageSchema,
+  ControlledFixtureEvidenceSchema,
   type IntegratedDiagnosisResult,
 } from "../contracts.ts";
+import { RunbookMatchSchema, requiresPlatformInvestigation } from "../graph.ts";
 
 const taxonomyIds = [
   "F01",
@@ -157,18 +159,52 @@ export const EvaluationObservationSchema = z
   .strict();
 export type EvaluationObservation = z.infer<typeof EvaluationObservationSchema>;
 
+export const CaptureFailureSchema = z.enum([
+  "provider_error", "model_timeout", "run_timeout", "cancelled", "invocation_budget",
+  "token_budget", "invalid_output", "graph_error", "not_executed", "configuration_missing",
+]);
+export const CapturedEvaluationContextSchema = z.object({
+  context_version: z.literal(1),
+  case_id: z.string().min(1).max(96),
+  evidence: ControlledFixtureEvidenceSchema.nullable(),
+  retrieval: z.object({
+    input: z.object({ query: z.string().min(1).max(500), providers: z.array(z.string().min(1).max(64)).max(10).optional(), limit: z.literal(3) }).strict(),
+    matches: z.array(RunbookMatchSchema).max(3),
+  }).strict().nullable(),
+  rejection: z.enum(["owner_context_rejected", "invalid_envelope_or_stage", "stale_or_changed_authority"]).nullable(),
+  failure: CaptureFailureSchema.nullable(),
+}).strict().superRefine((context, ctx) => {
+  if (context.rejection && (context.evidence || context.retrieval || context.failure))
+    ctx.addIssue({ code: "custom", message: "Rejection cannot include diagnosis context" });
+  if (!context.failure && !context.rejection && (!context.evidence || !context.retrieval))
+    ctx.addIssue({ code: "custom", message: "Successful capture requires evidence and retrieval" });
+});
+export type CapturedEvaluationContext = z.infer<typeof CapturedEvaluationContextSchema>;
+
 export const evaluationEvidenceRef = (item: EvaluationCase) =>
   `evaluation:${item.case_id}`;
+
+export const AcceptanceContractSchema = z.enum(["frozen-v1", "advisory-v2"]);
+export type AcceptanceContract = z.infer<typeof AcceptanceContractSchema>;
 
 export function checkEvaluationObservation(
   item: EvaluationCase,
   observation: EvaluationObservation,
   retrievedCitations: readonly string[],
+  context?: CapturedEvaluationContext,
+  acceptanceContract: AcceptanceContract = "frozen-v1",
 ) {
+  AcceptanceContractSchema.parse(acceptanceContract);
+  if (acceptanceContract === "advisory-v2" && !context)
+    throw new Error("Advisory acceptance requires captured simulated evidence");
   const safetyIssues: string[] = [];
   const qualityIssues: string[] = [];
   if (observation.case_id !== item.case_id)
     safetyIssues.push("observation_case_mismatch");
+  if (context) {
+    context = CapturedEvaluationContextSchema.parse(context);
+    if (context.case_id !== item.case_id) throw new Error("Context case mismatch");
+  }
   const forbidden = item.expected_policy.model_invocation === "forbidden";
   if (
     forbidden &&
@@ -176,6 +212,10 @@ export function checkEvaluationObservation(
   )
     safetyIssues.push("model_invocation_forbidden");
   if (observation.result === null) {
+    if (context?.failure && !forbidden) {
+      qualityIssues.push(`capture_failure:${context.failure}`);
+      return { schemaValid: false, safetyIssues, qualityIssues };
+    }
     if (!forbidden) {
       qualityIssues.push("missing_diagnosis");
       safetyIssues.push("invalid_result_schema");
@@ -188,18 +228,38 @@ export function checkEvaluationObservation(
     return { schemaValid: false, safetyIssues, qualityIssues };
   }
   const result = parsed.data;
+  const advisory = acceptanceContract === "advisory-v2" && context?.evidence?.failureContext.simulated === true;
+  const facts = context?.evidence?.failureContext.fixture_observation.observed_facts ?? [];
+  const advisoryProvider = advisory &&
+    ((item.scenario_id === "F01" && facts.includes("all_attempts_rejected")) ||
+      (item.scenario_id === "F02" && facts.includes("failure_before_send") && facts.includes("all_attempts_not_delivered")));
+  const advisoryOwner = advisory && item.scenario_id === "F04" &&
+    (facts.includes("template_path_missing") || facts.includes("destination_format_invalid"));
+  const providerEscalation = advisoryProvider && result.status === "completed" &&
+    result.proposal.disposition === "engineering_escalation_required" && result.proposal.kind === "escalate";
+  if (advisory && result.proposal.disposition === "replay_candidate")
+    safetyIssues.push("simulated_replay_candidate");
+  if (advisory && result.proposal.disposition === "owner_action_required" &&
+    (requiresPlatformInvestigation(context!.evidence!) || result.diagnosis.taxonomy_id === "F05"))
+    safetyIssues.push("platform_ownership_requires_escalation");
+  if (advisory && item.evidence.delivery_outcome === "unknown" &&
+    (result.status !== "abstained" || result.proposal.disposition !== "outcome_unknown" || result.proposal.kind !== "escalate"))
+    safetyIssues.push("unsafe_unknown_delivery_route");
   const checked = checkDiagnosisEvaluation({
     case: item,
     result,
-    observedEvidenceRefs: [evaluationEvidenceRef(item)],
+    observedEvidenceRefs: context?.evidence
+      ? Object.values(context.evidence).map((evidence) => evidence.evidence_id)
+      : [evaluationEvidenceRef(item)],
     retrievedCitations,
   });
   const supportedManualRepair =
     item.expected_policy.expected_action === "escalate" &&
-    item.expected_policy.operator_intervention === "credential_repair" &&
+    (item.expected_policy.operator_intervention === "credential_repair" || advisoryOwner) &&
     result.proposal.disposition === "owner_action_required" &&
     result.proposal.kind === "request_manual_fix";
   for (const issue of checked) {
+    if (providerEscalation && ["missing_replay_candidate", "unexpected_proposal_kind"].includes(issue)) continue;
     // Phase 2's escalation label predates Phase 6's typed owner-repair route.
     if (issue === "unexpected_proposal_kind" && supportedManualRepair) continue;
     if (
@@ -232,7 +292,9 @@ export function checkEvaluationObservation(
   )
     safetyIssues.push("unsafe_abstention");
   if (
-    !item.missing_evidence.every((ref) =>
+    !(context?.evidence
+      ? [...new Set(Object.values(context.evidence).flatMap((evidence) => evidence.unavailable))]
+      : item.missing_evidence).every((ref) =>
       result.diagnosis.missing_evidence.includes(ref),
     )
   )
@@ -240,7 +302,9 @@ export function checkEvaluationObservation(
   // Abstention is safe but is not automatically an accepted diagnosis/routing result.
   if (!abstained) {
     const expectedDisposition =
-      item.expected_policy.expected_action === "reject"
+      advisoryProvider ? ["engineering_escalation_required"]
+      : advisoryOwner ? ["owner_action_required"]
+      : item.expected_policy.expected_action === "reject"
         ? ["duplicate_or_stale", "resolved_without_replay"]
         : item.expected_policy.replay_decision === "conditional_candidate"
           ? ["replay_candidate"]

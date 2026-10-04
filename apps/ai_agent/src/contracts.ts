@@ -137,6 +137,55 @@ export const ActionInputValidationEvidenceSchema = z.object({
 
 export type ActionInputValidationEvidence = z.infer<typeof ActionInputValidationEvidenceSchema>;
 
+// Opt-in evaluation evidence. Production schemas above remain unchanged. Aggregate
+// fixture facts are retained without manufacturing executions, attempts or inputs.
+export const ControlledFixtureObservationSchema = z.object({
+  provider: z.string().min(1).max(32),
+  execution_status: z.enum(["PENDING", "FAILED", "SUCCESS", "UNKNOWN"]),
+  delivery_outcome: z.enum(["rejected", "not_delivered", "unknown", "accepted", "not_applicable"]),
+  attempts: z.number().int().nonnegative().max(10).nullable(),
+  final_error: z.string().max(2_000).nullable(),
+  observed_facts: z.array(z.string().min(1).max(128)).max(32),
+  sensitive_fields_present: z.array(z.string().min(1).max(128)).max(8),
+}).strict();
+
+export const FixtureFailureContextSchema = FailureContextEvidenceSchema.extend({
+  simulated: z.literal(true),
+  fixture_contract_version: z.literal(1),
+  fixture_observation: ControlledFixtureObservationSchema,
+  fixture_source_kind: z.enum(["normal_dlq", "coverage_gap"]),
+  facts: FailureContextEvidenceSchema.shape.facts.extend({
+    source_kind: z.literal("controlled_fixture"),
+    retry: FailureContextEvidenceSchema.shape.facts.shape.retry.extend({ requires_human: z.null() }),
+  }),
+});
+export const FixtureExecutionEvidenceSchema = ExecutionEvidenceSchema.extend({
+  simulated: z.literal(true),
+  fixture_contract_version: z.literal(1),
+  facts: ExecutionEvidenceSchema.shape.facts.extend({
+    provenance: z.literal("controlled_fixture"),
+  }),
+});
+export const FixtureInputValidationSchema = ActionInputValidationEvidenceSchema.extend({
+  simulated: z.literal(true),
+  fixture_contract_version: z.literal(1),
+  facts: ActionInputValidationEvidenceSchema.shape.facts.extend({
+    input_fingerprint: z.null(),
+    supported: z.null(),
+  }),
+});
+export const ControlledFixtureEvidenceSchema = z.object({
+  failureContext: FixtureFailureContextSchema,
+  executionEvidence: FixtureExecutionEvidenceSchema,
+  inputValidation: FixtureInputValidationSchema,
+}).strict();
+export type ControlledFixtureEvidence = z.infer<typeof ControlledFixtureEvidenceSchema>;
+export type DiagnosisEvidence = {
+  failureContext: FailureContextEvidence | ControlledFixtureEvidence["failureContext"];
+  executionEvidence: ExecutionEvidence | ControlledFixtureEvidence["executionEvidence"];
+  inputValidation: ActionInputValidationEvidence | ControlledFixtureEvidence["inputValidation"];
+};
+
 // ============================================================================
 // HTTP API Request Schema
 // Schema for POST /investigations/preview payload validation.
@@ -313,7 +362,7 @@ export const IntegratedDiagnosisResultSchema = z
   .object({
     contract_version: z.literal(1),
     graph_version: z.literal("phase-6-v1"),
-    prompt_version: z.literal("phase-6-v1"),
+    prompt_version: z.enum(["phase-6-v1", "phase-11a-v2"]),
     status: z.enum(["completed", "abstained"]),
     diagnosis: integratedDiagnosis,
     proposal: modelProposal.extend({

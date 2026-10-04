@@ -50,7 +50,200 @@ function completedResponse(output: unknown = modelOutput) {
   });
 }
 
+test("explicit generate-content API sends bounded structured output and excludes thought parts", async () => {
+  const controller = new AbortController();
+  let requests = 0;
+  const adapter = new GeminiDiagnosisModel({
+    apiKey: "offline-key",
+    model: "gemini-2.5-flash-lite",
+    api: "generate-content",
+    maxOutputTokens: 2048,
+    fetch: async (url, init) => {
+      requests++;
+      expect(String(url)).toBe(
+        "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent",
+      );
+      expect(init?.signal).toBe(controller.signal);
+      const body = JSON.parse(String(init?.body));
+      expect(body.contents).toEqual([
+        { role: "user", parts: [{ text: prompt.input }] },
+      ]);
+      expect(body.systemInstruction.parts[0].text).toContain(
+        prompt.instructions,
+      );
+      expect(body.generationConfig).toEqual({
+        maxOutputTokens: 2048,
+        responseMimeType: "application/json",
+        responseJsonSchema: GEMINI_DIAGNOSIS_SCHEMA,
+      });
+      expect(body).not.toHaveProperty("store");
+      return Response.json({
+        candidates: [
+          {
+            finishReason: "STOP",
+            content: {
+              parts: [
+                { thought: true, text: "private-thinking" },
+                { text: JSON.stringify(modelOutput) },
+              ],
+            },
+          },
+        ],
+        usageMetadata: {
+          promptTokenCount: 300,
+          candidatesTokenCount: 100,
+          thoughtsTokenCount: 50,
+          totalTokenCount: 450,
+        },
+      });
+    },
+  });
+  const result = await adapter.generate(prompt, controller.signal);
+  expect(result.output).toEqual(modelOutput);
+  expect(result.usage).toEqual({
+    input_tokens: 300,
+    output_tokens: 150,
+    total_tokens: 450,
+  });
+  expect(requests).toBe(1);
+});
+
+test("generate-content rejects incomplete responses with measured usage and does not retry 404", async () => {
+  const adapter = new GeminiDiagnosisModel({
+    apiKey: "offline-key",
+    model: "gemini-2.5-flash-lite",
+    api: "generate-content",
+    fetch: async () =>
+      Response.json({
+        candidates: [
+          {
+            finishReason: "MAX_TOKENS",
+            content: { parts: [{ text: JSON.stringify(modelOutput) }] },
+          },
+        ],
+        usageMetadata: {
+          promptTokenCount: 30,
+          candidatesTokenCount: 10,
+          totalTokenCount: 40,
+        },
+      }),
+  });
+  try {
+    await adapter.generate(prompt, new AbortController().signal);
+    throw new Error("Expected incomplete response rejection");
+  } catch (error) {
+    expect(error).toBeInstanceOf(ModelProviderError);
+    expect((error as ModelProviderError).usage).toEqual({
+      input_tokens: 30,
+      output_tokens: 10,
+      total_tokens: 40,
+    });
+    expect((error as ModelProviderError).details.category).toBe(
+      "invalid_response",
+    );
+  }
+  let calls = 0;
+  const missing = new GeminiDiagnosisModel({
+    apiKey: "offline-key",
+    model: "gemini-2.5-flash-lite",
+    api: "generate-content",
+    fetch: async () => {
+      calls++;
+      return new Response("sensitive provider message", { status: 404 });
+    },
+  });
+  await expect(
+    missing.generate(prompt, new AbortController().signal),
+  ).rejects.toThrow("404");
+  expect(calls).toBe(1);
+});
+
 describe("Gemini Interactions diagnosis adapter", () => {
+  // The documented steps contain model_output.content arrays. V2 saved no raw
+  // text: these characterize extraction, not the cause of its two parse failures.
+  test("extracts the first model text, ignoring user input and thought content", async () => {
+    const adapter = new GeminiDiagnosisModel({
+      apiKey: "offline-key",
+      model: "offline-model",
+      fetch: async () =>
+        Response.json({
+          status: "completed",
+          steps: [
+            {
+              type: "user_input",
+              content: [{ type: "text", text: "untrusted input" }],
+            },
+            {
+              type: "thought",
+              content: [{ type: "text", text: "hidden reasoning" }],
+            },
+            {
+              type: "model_output",
+              content: [
+                { type: "image" },
+                { type: "text", text: JSON.stringify(modelOutput) },
+              ],
+            },
+          ],
+          usage: {
+            total_input_tokens: 1,
+            total_output_tokens: 1,
+            total_tokens: 2,
+          },
+        }),
+    });
+    expect(
+      (await adapter.generate(prompt, new AbortController().signal)).output,
+    ).toEqual(modelOutput);
+  });
+
+  test("does not salvage partial JSON from later blocks, and exposes only safe diagnostics", async () => {
+    for (const fenced of [false, true]) {
+      const partial = '{"secret":"private-provider-text",';
+      const text = fenced ? `\`\`\`json\n${partial}\n\`\`\`` : partial;
+      const adapter = new GeminiDiagnosisModel({
+        apiKey: "offline-key",
+        model: "offline-model",
+        fetch: async () =>
+          Response.json({
+            status: "completed",
+            steps: [
+              {
+                type: "model_output",
+                content: [
+                  { type: "text", text },
+                  { type: "text", text: JSON.stringify(modelOutput) },
+                ],
+              },
+            ],
+            usage: {
+              total_input_tokens: 1,
+              total_output_tokens: 1,
+              total_tokens: 2,
+            },
+          }),
+      });
+      try {
+        await adapter.generate(prompt, new AbortController().signal);
+        throw new Error("Expected malformed output rejection");
+      } catch (error) {
+        expect(error).toBeInstanceOf(ModelProviderError);
+        const failure = error as ModelProviderError;
+        expect(failure.details).toEqual({
+          category: "malformed_output",
+          http_status: null,
+          output_diagnostics: {
+            text_length: text.length,
+            text_block_count: 2,
+            supported_fence: fenced,
+            parse_failure: "json_syntax",
+          },
+        });
+        expect(failure.cause).toBeUndefined();
+        expect(JSON.stringify(failure)).not.toContain("private-provider-text");
+      }
+    }
+  });
   test("accepts a fenced JSON object from Gemini 2.5 Flash", async () => {
     const adapter = new GeminiDiagnosisModel({
       apiKey: "test-key",
