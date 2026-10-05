@@ -1,17 +1,17 @@
-# Graph Report - zapier  (2026-10-05)
+# Graph Report - zapier  (2026-10-04)
 
 ## Corpus Check
-- 439 files · ~408,443 words
+- 427 files · ~441,059 words
 - Verdict: corpus is large enough that graph structure adds value.
-- Unclassified: 20 file(s) not represented in the graph (top: (none) 8, .toml 2, .css 2)
+- Unclassified: 20 file(s) not represented in the graph (top: (none) 7, .toml 2, .css 2)
 
 ## Summary
-- 4284 nodes · 6088 edges · 244 communities (170 shown, 66 thin omitted)
+- 5203 nodes · 6978 edges · 261 communities (174 shown, 79 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 55 edges (avg confidence: 0.86)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `1df6f0b9`
+- Built from commit: `ca335b21`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -32,7 +32,7 @@
 - graph.ts
 - create/page.tsx
 - ZapTable.tsx
-- BackendClient
+- diagnosis-http.ts
 - cn
 - README.md
 - eslint-config/package.json
@@ -40,31 +40,31 @@
 - triage-evidence.ts
 - replay-policy-facts.ts
 - dlq-publisher-index.ts
-- InvestigationStore
+- investigation-store.test.ts
 - 6. Phases, dependencies and implementation increments
 - ai_agent/package.json
 - seed-f01-case.ts
-- contracts.ts
+- ReplayRequest.ts
 - ui/package.json
 - frontend/package.json
-- db.ts
-- src/index.ts
-- triage-outcome.test.tsx
+- primary_backend/index.ts
+- http.ts
+- safety-probes.ts
 - login/page.tsx
-- judge-runner.ts
+- replay-policy-facts.test.ts
 - prismaNamespaceBrowser.ts
-- gemini-model.ts
+- contracts.ts
 - dependencies
 - client.ts
 - ReleaseRunner
-- primary_backend/index.ts
+- route/triage.ts
 - ai-dlq-master-plan.md
-- Appbar.tsx
-- worker/index.ts
-- search-runbooks.ts
+- TriageResults.tsx
 - replay-recovery.integration.test.ts
+- search-runbooks.ts
+- replay-dispatcher.ts
 - actions/telegram.ts
-- worker/replay.ts
+- execution-store.ts
 - PrismaClient
 - components.json
 - compilerOptions
@@ -72,14 +72,14 @@
 - compilerOptions
 - compilerOptions
 - compilerOptions
-- model-experiment.ts
+- checks.ts
 - investigation-store.ts
-- Independent human review — four pilot pairs
+- InvestigationStore
 - dialog.tsx
 - worker/package.json
 - Architectural Decision Records (ADRs)
 - AGENTS.md
-- primary_backend/package.json
+- ReplayExecution.ts
 - services/replay.ts
 - actions/email.ts
 - ActionDelegate
@@ -94,37 +94,37 @@
 - ZapRunExecutionAttemptDelegate
 - ZapRunOutboxDelegate
 - ZapRunRetryDelegate
-- observability.ts
-- retrieval-experiment.ts
+- TriageApproval.ts
+- ReplayExecutionAttempt.ts
 - compilerOptions
 - compilerOptions
 - execution-store.test.ts
-- investigation-authority.ts
+- TriageAccessAudit.ts
 - processor/package.json
 - webhook/package.json
 - 🚀 Applications (`apps/`)
 - package.json
 - browser.ts
 - tasks
-- user.ts
+- primary_backend/package.json
 - DLQ failure taxonomy and investigation requirements
 - ✅ Implemented Capabilities
 - dependencies
 - Phase 3A Provider Outcomes Design
 - 🗺️ Documentation Map
-- model-experiment.test.ts
-- dlq-reconciler.ts
-- createReplayStore
+- model-experiment.ts
+- useTriage.ts
+- worker/replay.ts
 - Action Registry & Extensibility
 - Global Constraints
 - Kafka Zap Events Topic
 - Template, registry, and stage validation
 - Phase 3B Durable Failures Design
 - compilerOptions
-- layout.tsx
-- prompts.ts
-- Phase 12 calibration status
-- Phase 12: offline advisory semantic judge
+- ReplayFailure.ts
+- devDependencies
+- triage-outcome.test.tsx
+- TriageDecisionNotification.ts
 - Credentials and destinations
 - Evidence gaps and progression failures
 - Replay and stale cases
@@ -134,7 +134,7 @@
 - Idempotency & Deduplication
 - Kafka Messaging Architecture
 - Background Worker
-- dlq-publisher.test.ts
+- TriageProposal.ts
 - File Map
 - Phase 3C Durable DLQ Publication Design
 - Phase 11A manual handoff after experiment v3
@@ -156,8 +156,8 @@
 - phase-11a-baseline-v6/manifest.json
 - Global Constraints
 - Q: Where should Phase 3 provider outcomes and durable failure evidence integrate in the worker?
-- judge-live.md
-- judge-live-replayed-fixed.md
+- Q: Start Phase 3C durable DLQ publication and reconciliation
+- Q: oh but my idea for this prj dlq system was like instead of a support team sitting in the backend and seeing and debugging the error , sending it to developing and testing , the AI agent checks that , then finds the error and suggests remedy to the support team /in my case it will be me , then after approval the error is replayed for fix or other option . But now it is like the owner of the zap checks this .? what canthe owner do in the case of humman approval .? now i was learnign the phase 4 and i got to know this but the phase 5 was also completed now .
 - phase-11a-baseline-v4/manifest.json
 - class.ts
 - Prisma__AvailableActionClient
@@ -199,7 +199,14 @@
 - Turbo ESLint Configuration
 - Email Verification Gap
 - V6: complete advisory gate passes
-- surrogate-comparison.md
+- ReplayExecutionDelegate
+- ReplayExecutionAttemptDelegate
+- ReplayFailureDelegate
+- ReplayRequestDelegate
+- TriageAccessAuditDelegate
+- TriageApprovalDelegate
+- TriageDecisionNotificationDelegate
+- TriageProposalDelegate
 - V5 original-contract failure adjudication
 - Phase 11A: controlled-fixture model observations
 - source_hashes
@@ -216,6 +223,7 @@
 - bounds
 - bounds
 - bounds
+- Prisma__ReplayRequestClient
 - durable-failures-schema.test.ts
 - artifact_hashes
 - artifact_hashes
@@ -223,6 +231,9 @@
 - artifact_hashes
 - artifact_hashes
 - artifact_hashes
+- operationalLimits
+- Prisma__ReplayExecutionClient
+- Prisma__TriageApprovalClient
 - model_settings
 - model_settings
 - model_settings
@@ -236,7 +247,13 @@
 - runtime_versions
 - runtime_versions
 - runtime_versions
+- lib/triage-stream.test.ts
 - Phase 14A operational controls (internal, read-only first)
+- Prisma__ReplayExecutionAttemptClient
+- Prisma__ReplayFailureClient
+- Prisma__TriageAccessAuditClient
+- Prisma__TriageDecisionNotificationClient
+- Prisma__TriageProposalClient
 - Phase 11A development experiment v2
 - fixture-env.mjs
 - advisory-contract-v2.md
@@ -256,8 +273,8 @@
 ## God Nodes (most connected - your core abstractions)
 1. `cn()` - 61 edges
 2. `buildDiagnosisService()` - 34 edges
-3. `lucide-react` - 22 edges
-4. `PrismaClient` - 22 edges
+3. `PrismaClient` - 30 edges
+4. `lucide-react` - 22 edges
 5. `verifyServiceScope()` - 21 edges
 6. `createServiceScope()` - 20 edges
 7. `compilerOptions` - 19 edges
@@ -284,15 +301,15 @@
 - **Zap Execution Event Flow** — readme_transactional_outbox, readme_kafka_zap_events, readme_worker_action_execution [EXTRACTED 1.00]
 - **Idempotency Defense Layers** — docs_architecture_transactional_outbox, docs_worker_execution_lease, docs_kafka_manual_offset_commits [INFERRED 0.95]
 
-## Communities (244 total, 66 thin omitted)
+## Communities (261 total, 79 thin omitted)
 
 ### Community 0 - "prismaNamespace.ts"
-Cohesion: 0.02
-Nodes (130): ActionScalarFieldEnum, AnyNull, Args, At, AtLeast, AtLoose, AtStrict, AvailableActionScalarFieldEnum (+122 more)
+Cohesion: 0.01
+Nodes (138): ActionScalarFieldEnum, AnyNull, Args, At, AtLeast, AtLoose, AtStrict, AvailableActionScalarFieldEnum (+130 more)
 
 ### Community 1 - "Zap.ts"
 Cohesion: 0.02
-Nodes (116): AggregateZap, DateTimeFieldUpdateOperationsInput, GetZapAggregateType, GetZapGroupByPayload, Zap$actionsArgs, Zap$triggerArgs, Zap$zapRunArgs, ZapAggregateArgs (+108 more)
+Nodes (115): AggregateZap, GetZapAggregateType, GetZapGroupByPayload, Zap$actionsArgs, Zap$triggerArgs, Zap$zapRunArgs, ZapAggregateArgs, ZapAvgAggregateInputType (+107 more)
 
 ### Community 2 - "Action.ts"
 Cohesion: 0.02
@@ -300,7 +317,7 @@ Nodes (94): ActionAggregateArgs, ActionAvgAggregateInputType, ActionAvgAggregate
 
 ### Community 3 - "ZapRunExecution.ts"
 Cohesion: 0.02
-Nodes (88): AggregateZapRunExecution, GetZapRunExecutionAggregateType, GetZapRunExecutionGroupByPayload, ZapRunExecution$attemptsArgs, ZapRunExecution$failureArgs, ZapRunExecutionAggregateArgs, ZapRunExecutionAvgAggregateInputType, ZapRunExecutionAvgAggregateOutputType (+80 more)
+Nodes (99): AggregateZapRunExecution, GetZapRunExecutionAggregateType, GetZapRunExecutionGroupByPayload, ZapRunExecution$attemptsArgs, ZapRunExecution$failureArgs, ZapRunExecution$replayRequestsArgs, ZapRunExecutionAggregateArgs, ZapRunExecutionAvgAggregateInputType (+91 more)
 
 ### Community 4 - "Trigger.ts"
 Cohesion: 0.02
@@ -308,19 +325,19 @@ Nodes (85): AggregateTrigger, GetTriggerAggregateType, GetTriggerGroupByPayload,
 
 ### Community 5 - "ZapRun.ts"
 Cohesion: 0.02
-Nodes (84): AggregateZapRun, GetZapRunAggregateType, GetZapRunGroupByPayload, ZapRun$zapRunOutboxArgs, ZapRunAggregateArgs, ZapRunCountAggregateInputType, ZapRunCountAggregateOutputType, ZapRunCountArgs (+76 more)
+Nodes (98): AggregateZapRun, GetZapRunAggregateType, GetZapRunGroupByPayload, ZapRun$replayRequestsArgs, ZapRun$zapRunOutboxArgs, ZapRunAggregateArgs, ZapRunCountAggregateInputType, ZapRunCountAggregateOutputType (+90 more)
 
 ### Community 6 - "ZapRunExecutionAttempt.ts"
 Cohesion: 0.02
 Nodes (80): AggregateZapRunExecutionAttempt, GetZapRunExecutionAttemptAggregateType, GetZapRunExecutionAttemptGroupByPayload, ZapRunExecutionAttemptAggregateArgs, ZapRunExecutionAttemptAvgAggregateInputType, ZapRunExecutionAttemptAvgAggregateOutputType, ZapRunExecutionAttemptAvgOrderByAggregateInput, ZapRunExecutionAttemptCountAggregateInputType (+72 more)
 
 ### Community 7 - "User.ts"
-Cohesion: 0.03
-Nodes (79): AggregateUser, GetUserAggregateType, GetUserGroupByPayload, IntFieldUpdateOperationsInput, NullableStringFieldUpdateOperationsInput, StringFieldUpdateOperationsInput, User$zapArgs, UserAggregateArgs (+71 more)
+Cohesion: 0.02
+Nodes (80): AggregateUser, BoolFieldUpdateOperationsInput, GetUserAggregateType, GetUserGroupByPayload, IntFieldUpdateOperationsInput, NullableStringFieldUpdateOperationsInput, StringFieldUpdateOperationsInput, User$zapArgs (+72 more)
 
 ### Community 8 - "ZapRunRetry.ts"
-Cohesion: 0.03
-Nodes (77): AggregateZapRunRetry, BoolFieldUpdateOperationsInput, GetZapRunRetryAggregateType, GetZapRunRetryGroupByPayload, NullableDateTimeFieldUpdateOperationsInput, NullableIntFieldUpdateOperationsInput, ZapRunRetry$executionArgs, ZapRunRetryAggregateArgs (+69 more)
+Cohesion: 0.02
+Nodes (85): AggregateZapRunRetry, GetZapRunRetryAggregateType, GetZapRunRetryGroupByPayload, ZapRunRetry$executionArgs, ZapRunRetry$replayRequestArgs, ZapRunRetryAggregateArgs, ZapRunRetryAvgAggregateInputType, ZapRunRetryAvgAggregateOutputType (+77 more)
 
 ### Community 9 - "AvailableAction.ts"
 Cohesion: 0.03
@@ -339,24 +356,24 @@ Cohesion: 0.03
 Nodes (58): AggregateTestTriggerBuffer, GetTestTriggerBufferAggregateType, GetTestTriggerBufferGroupByPayload, TestTriggerBufferAggregateArgs, TestTriggerBufferAvgAggregateInputType, TestTriggerBufferAvgAggregateOutputType, TestTriggerBufferAvgOrderByAggregateInput, TestTriggerBufferCountAggregateInputType (+50 more)
 
 ### Community 13 - "graph.ts"
-Cohesion: 0.07
-Nodes (45): Evidence, EvidenceSchema, IntegratedModelOutputSchema, PreviewResult, PreviewResultSchema, bearer(), DiagnosisRouterOptions, EmptyDiagnosisRequestSchema (+37 more)
+Cohesion: 0.06
+Nodes (44): PreviewResult, PreviewResultSchema, assertSameCanonicalSource(), buildDiagnosisService(), buildPreviewService(), DecisionSchema, diagnoseWithTimeout(), DIAGNOSIS_GRAPH_VERSION (+36 more)
 
 ### Community 14 - "create/page.tsx"
-Cohesion: 0.10
-Nodes (36): metadata, action, TriggerTestResult, useZapStore, zapData, Email(), Telegram(), ActionNode (+28 more)
+Cohesion: 0.08
+Nodes (42): geistMono, geistSans, inter, metadata, action, TriggerTestResult, useZapStore, zapData (+34 more)
 
 ### Community 15 - "ZapTable.tsx"
-Cohesion: 0.09
-Nodes (38): Connection, ConnectionsPage(), formatDate(), toConnections(), DashboardPage(), SCRATCH_CARDS, FILTER_CHIPS, HistoryPage() (+30 more)
+Cohesion: 0.08
+Nodes (45): Connection, ConnectionsPage(), formatDate(), toConnections(), DashboardPage(), SCRATCH_CARDS, FILTER_CHIPS, HistoryPage() (+37 more)
 
-### Community 16 - "BackendClient"
-Cohesion: 0.11
-Nodes (15): BackendClient, BackendReadTimeout, ExecutionEvidence, createDiagnosisRouter(), bearer(), createPrivateToolsRouter(), createInvestigationExecutor(), BackendExecutionEvidenceTool (+7 more)
+### Community 16 - "diagnosis-http.ts"
+Cohesion: 0.07
+Nodes (35): BackendClient, BackendClientOptions, BackendReadTimeout, BackendResponseError, ActionInputValidationEvidence, ActionInputValidationEvidenceSchema, ExecutionEvidence, ExecutionEvidenceSchema (+27 more)
 
 ### Community 17 - "cn"
 Cohesion: 0.08
-Nodes (36): Badge(), badgeVariants, Button(), buttonVariants, Card(), CardAction(), CardContent(), CardDescription() (+28 more)
+Nodes (46): Avatar(), AvatarFallback(), AvatarImage(), Badge(), badgeVariants, Button(), buttonVariants, Card() (+38 more)
 
 ### Community 18 - "README.md"
 Cohesion: 0.05
@@ -371,20 +388,20 @@ Cohesion: 0.05
 Nodes (37): BoolFilter, BoolWithAggregatesFilter, DateTimeFilter, DateTimeNullableFilter, DateTimeNullableWithAggregatesFilter, DateTimeWithAggregatesFilter, IntFilter, IntNullableFilter (+29 more)
 
 ### Community 21 - "triage-evidence.ts"
-Cohesion: 0.11
-Nodes (22): eligibleReplayFacts, now, Query, runSafetyProbes(), SafetyProbe, loadCurrentPolicyState(), ActionOrderRow, canonical() (+14 more)
+Cohesion: 0.10
+Nodes (24): runSafetyProbes(), ActionOrderRow, canonical(), ExecutionAttemptRow, hash(), OwnedCaseRow, PredecessorRow, sourceKind() (+16 more)
 
 ### Community 22 - "replay-policy-facts.ts"
-Cohesion: 0.10
-Nodes (20): Database, evaluateSnapshotPolicy(), InvestigationProposals, PolicyRecord, Submission, evaluateReplayPolicy(), buildReplayPolicyFacts(), ConfigurationRow (+12 more)
+Cohesion: 0.07
+Nodes (35): allowedDecisions(), Decision, DecisionRow, InvestigationAuthority, InvestigationDecisionDenied, ProposalRow, TransactionDb, Database (+27 more)
 
 ### Community 23 - "dlq-publisher-index.ts"
-Cohesion: 0.16
-Nodes (12): createDlqPublisher(), DlqPublisherDb, dueWhere(), DurableFailureEvent, evidenceSources, FailureRow, main(), ProcessDependencies (+4 more)
+Cohesion: 0.08
+Nodes (25): createDlqPublisher(), DlqPublisherDb, dueWhere(), DurableFailureEvent, evidenceSources, FailureRow, main(), ProcessDependencies (+17 more)
 
-### Community 24 - "InvestigationStore"
-Cohesion: 0.11
-Nodes (14): agentPool(), createCheckpoint(), migrateAgent(), InvestigationStore, project(), pool, query(), sql() (+6 more)
+### Community 24 - "investigation-store.test.ts"
+Cohesion: 0.16
+Nodes (13): agentDatabaseUrl(), agentPool(), createCheckpoint(), migrateAgent(), pool, query(), sql(), store (+5 more)
 
 ### Community 25 - "6. Phases, dependencies and implementation increments"
 Cohesion: 0.06
@@ -398,85 +415,85 @@ Nodes (31): dependencies, express, @langchain/langgraph, @langchain/langgraph-ch
 Cohesion: 0.13
 Nodes (18): assertLocalDatabase(), F01_CASE_ID, failedCompletedAt, failedStartedAt, predecessorCompletedAt, predecessorMetadata, runMetadata, seedF01Case() (+10 more)
 
-### Community 28 - "contracts.ts"
-Cohesion: 0.05
-Nodes (42): BackendClientOptions, BackendResponseError, ActionInputValidationEvidence, ActionInputValidationEvidenceSchema, boundedError, boundedName, boundedSummary, ControlledFixtureEvidence (+34 more)
+### Community 28 - "ReplayRequest.ts"
+Cohesion: 0.01
+Nodes (140): AggregateReplayRequest, GetReplayRequestAggregateType, GetReplayRequestGroupByPayload, ReplayRequest$executionArgs, ReplayRequestAggregateArgs, ReplayRequestAvgAggregateInputType, ReplayRequestAvgAggregateOutputType, ReplayRequestAvgOrderByAggregateInput (+132 more)
 
 ### Community 29 - "ui/package.json"
 Cohesion: 0.07
 Nodes (28): dependencies, react, react-dom, devDependencies, eslint, @repo/eslint-config, @repo/typescript-config, @types/node (+20 more)
 
 ### Community 30 - "frontend/package.json"
-Cohesion: 0.07
-Nodes (27): @clerk/nextjs, eslint, react, react-dom, @types/node, @types/react, @types/react-dom, typescript (+19 more)
-
-### Community 31 - "db.ts"
-Cohesion: 0.23
-Nodes (6): router, router, triggerRouter, kafka, app, prisma
-
-### Community 32 - "src/index.ts"
-Cohesion: 0.12
-Nodes (18): DiagnosisModel, FixtureDiagnosisModel, InvestigationDecision, PreviewOptions, createHttpServer(), RunningHttpServer, poller, port (+10 more)
-
-### Community 33 - "triage-outcome.test.tsx"
 Cohesion: 0.06
-Nodes (40): TriagePage(), decisionLabels, SavedInvestigationControls(), saved, TriageResults(), useInvestigationStream(), ApiError, errorState() (+32 more)
+Nodes (30): nextConfig, @clerk/nextjs, eslint, react, react-dom, @types/node, @types/react, @types/react-dom (+22 more)
+
+### Community 31 - "primary_backend/index.ts"
+Cohesion: 0.13
+Nodes (13): agent, allowedOrigins, app, server, actionRouter, router, router, triggerRouter (+5 more)
+
+### Community 32 - "http.ts"
+Cohesion: 0.09
+Nodes (28): DiagnosisModel, Evidence, EvidenceSchema, PreviewRequestSchema, DiagnosisRouterOptions, FixtureDiagnosisModel, GraphStepLimitExceeded, InvestigationDecision (+20 more)
+
+### Community 33 - "safety-probes.ts"
+Cohesion: 0.14
+Nodes (13): eligibleReplayFacts, now, Query, SafetyProbe, AccessAction, CaseRow, OperatorDb, project() (+5 more)
 
 ### Community 34 - "login/page.tsx"
 Cohesion: 0.13
 Nodes (10): LoginResponse, BACKEND_URL, HOOKS_URL, Appbar(), PrimaryButton(), CheckFeature(), Hero(), HeroVideo() (+2 more)
 
-### Community 35 - "judge-runner.ts"
-Cohesion: 0.11
-Nodes (31): answer, id, JudgeModel, JudgeModelError, judgePair, JudgePairSchema, JudgeReason, JudgeResult (+23 more)
+### Community 35 - "replay-policy-facts.test.ts"
+Cohesion: 0.33
+Nodes (5): config, current, hash, saved, source
 
 ### Community 36 - "prismaNamespaceBrowser.ts"
-Cohesion: 0.08
-Nodes (24): ActionScalarFieldEnum, AnyNull, AvailableActionScalarFieldEnum, AvailableTriggerTypeScalarFieldEnum, DbNull, Decimal, JsonNull, JsonNullValueFilter (+16 more)
+Cohesion: 0.06
+Nodes (32): ActionScalarFieldEnum, AnyNull, AvailableActionScalarFieldEnum, AvailableTriggerTypeScalarFieldEnum, DbNull, Decimal, JsonNull, JsonNullValueFilter (+24 more)
 
-### Community 37 - "gemini-model.ts"
-Cohesion: 0.10
-Nodes (20): DiagnosisPrompt, IntegratedDiagnosisModel, ModelGeneration, ModelUsage, ModelUsageSchema, boundedString, evidenceReference, FetchLike (+12 more)
+### Community 37 - "contracts.ts"
+Cohesion: 0.05
+Nodes (39): boundedError, boundedName, boundedSummary, ControlledFixtureEvidence, ControlledFixtureObservationSchema, DiagnosisPrompt, DiagnosisSchema, evidenceRef (+31 more)
 
 ### Community 38 - "dependencies"
-Cohesion: 0.06
-Nodes (35): dependencies, axios, class-variance-authority, @clerk/nextjs, clsx, jwt-decode, lucide-react, motion (+27 more)
+Cohesion: 0.08
+Nodes (25): dependencies, axios, class-variance-authority, @clerk/nextjs, clsx, jwt-decode, lucide-react, motion (+17 more)
 
 ### Community 39 - "client.ts"
-Cohesion: 0.11
-Nodes (26): agentDatabaseUrl(), InvestigationAuthority, revalidateProposalPolicy(), dockerTool(), run(), setup(), createPostgresFixture(), setOperator() (+18 more)
+Cohesion: 0.09
+Nodes (21): Action, AvailableAction, AvailableTriggerType, $Enums, ReplayExecution, ReplayExecutionAttempt, ReplayFailure, ReplayRequest (+13 more)
 
 ### Community 40 - "ReleaseRunner"
 Cohesion: 0.23
 Nodes (6): lintErrors(), ReleaseRunner, unexpectedLintFailure(), validateFile(), mergedPhase(), fixture()
 
-### Community 41 - "primary_backend/index.ts"
+### Community 41 - "route/triage.ts"
+Cohesion: 0.09
+Nodes (28): scope(), notifications, authMiddleware(), bearer(), createTriageRouter(), investigationEnabled(), replayIntentEnabled(), runnerBinding (+20 more)
+
+### Community 43 - "TriageResults.tsx"
+Cohesion: 0.21
+Nodes (8): decisionLabels, SavedInvestigationControls(), saved, TriageResults(), TriageCase, TriageDecision, TriageDiagnosis, TriageDisplayState
+
+### Community 44 - "replay-recovery.integration.test.ts"
 Cohesion: 0.08
-Nodes (34): agent, allowedOrigins, app, notifications, server, actionRouter, bearer(), createTriageRouter() (+26 more)
-
-### Community 43 - "Appbar.tsx"
-Cohesion: 0.15
-Nodes (19): Avatar(), AvatarFallback(), AvatarImage(), DropdownMenu(), DropdownMenuContent(), DropdownMenuGroup(), DropdownMenuItem(), DropdownMenuLabel() (+11 more)
-
-### Community 44 - "worker/index.ts"
-Cohesion: 0.11
-Nodes (27): deliver(), getActionHandler(), accepted, acceptedRun, Call, dbFailure, harness(), rejected (+19 more)
+Nodes (32): createKafkaFixture(), accepted, deliver(), handler, getActionHandler(), ExecutionDb, accepted, acceptedRun (+24 more)
 
 ### Community 45 - "search-runbooks.ts"
-Cohesion: 0.11
-Nodes (22): DiagnosisOptions, ClaimedJob, createInvestigationPoller(), runInvestigationOnce(), Snapshot, allowedFiles, commaSeparated(), ignoredTerms (+14 more)
+Cohesion: 0.07
+Nodes (36): evidence, failures, freeze, generated, index, manifest, bm25(), ignoredTerms (+28 more)
 
-### Community 46 - "replay-recovery.integration.test.ts"
-Cohesion: 0.13
-Nodes (12): main(), createReplayDispatcher(), DispatchRow, liveReplayEnabled(), REPLAY_RELEASE_READY, Sink, createKafkaFixture(), accepted (+4 more)
+### Community 46 - "replay-dispatcher.ts"
+Cohesion: 0.33
+Nodes (7): main(), createReplayDispatcher(), DispatchRow, liveReplayEnabled(), REPLAY_RELEASE_READY, Sink, dispatch()
 
 ### Community 47 - "actions/telegram.ts"
-Cohesion: 0.21
-Nodes (15): boundedPositiveInteger(), FetchTransport, readJson(), resolutionError(), resolveChatId(), retryAfter(), safeIdentifier(), sendError() (+7 more)
+Cohesion: 0.23
+Nodes (14): boundedPositiveInteger(), FetchTransport, readJson(), resolutionError(), resolveChatId(), retryAfter(), safeIdentifier(), sendError() (+6 more)
 
-### Community 48 - "worker/replay.ts"
-Cohesion: 0.11
-Nodes (25): canonicalJson(), ClaimDecision, createExecutionStore(), Delegate, DurableFailureEvidence, ExecutionKey, FinalizeDecision, fingerprint() (+17 more)
+### Community 48 - "execution-store.ts"
+Cohesion: 0.14
+Nodes (18): canonicalJson(), ClaimDecision, createExecutionStore(), Delegate, ExecutionKey, FinalizeDecision, fingerprint(), isUniqueError() (+10 more)
 
 ### Community 50 - "components.json"
 Cohesion: 0.10
@@ -502,21 +519,21 @@ Nodes (19): compilerOptions, allowImportingTsExtensions, allowJs, jsx, lib, modu
 Cohesion: 0.10
 Nodes (19): compilerOptions, allowImportingTsExtensions, allowJs, jsx, lib, module, moduleDetection, moduleResolution (+11 more)
 
-### Community 56 - "model-experiment.ts"
-Cohesion: 0.06
-Nodes (54): evidence, failures, freeze, generated, index, manifest, IntegratedDiagnosisResult, IntegratedDiagnosisResultSchema (+46 more)
+### Community 56 - "checks.ts"
+Cohesion: 0.08
+Nodes (35): IntegratedDiagnosisResult, IntegratedDiagnosisResultSchema, AcceptanceContract, boundedCode, CapturedEvaluationContext, CapturedEvaluationContextSchema, CaptureFailureSchema, checkDiagnosisEvaluation() (+27 more)
 
 ### Community 57 - "investigation-store.ts"
-Cohesion: 0.12
-Nodes (22): streamInvestigationEvents(), writeEvent(), bearer(), createInvestigationRouter(), startSchema, InvestigationBinding, JobRow, StartInvestigation (+14 more)
+Cohesion: 0.15
+Nodes (17): streamInvestigationEvents(), writeEvent(), bearer(), createInvestigationRouter(), startSchema, InvestigationBinding, JobRow, StartInvestigation (+9 more)
 
-### Community 58 - "Independent human review — four pilot pairs"
-Cohesion: 0.11
-Nodes (17): Answer A, Answer A, Answer A, Answer A, Answer B, Answer B, Answer B, Answer B (+9 more)
+### Community 58 - "InvestigationStore"
+Cohesion: 0.19
+Nodes (4): InvestigationStore, project(), docker(), start()
 
 ### Community 59 - "dialog.tsx"
 Cohesion: 0.18
-Nodes (12): Dialog(), DialogClose(), DialogContent(), DialogDescription(), DialogFooter(), DialogHeader(), DialogOverlay(), DialogTitle() (+4 more)
+Nodes (11): Dialog(), DialogContent(), DialogDescription(), DialogHeader(), DialogOverlay(), DialogTitle(), DialogTrigger(), NAV (+3 more)
 
 ### Community 60 - "worker/package.json"
 Cohesion: 0.12
@@ -530,25 +547,25 @@ Nodes (19): ADR 001: Transactional Outbox Pattern for Webhook Ingestion, ADR 002
 Cohesion: 0.11
 Nodes (17): 1. Architecture & Master Plan: Astra (ChatGPT), 2. Implementation: Codex (GPT-6 Sol / Terra), 3. Documentation & Ops: Antigravity (Gemini), AGENTS.md, Core Architectural Invariants, Documentation, Engineering Guide, Graphify (+9 more)
 
-### Community 63 - "primary_backend/package.json"
-Cohesion: 0.12
-Nodes (16): @clerk/nextjs, express, @types/express, zod, module, name, private, scripts (+8 more)
+### Community 63 - "ReplayExecution.ts"
+Cohesion: 0.02
+Nodes (99): AggregateReplayExecution, GetReplayExecutionAggregateType, GetReplayExecutionGroupByPayload, NullableDateTimeFieldUpdateOperationsInput, ReplayExecution$attemptsArgs, ReplayExecution$failureArgs, ReplayExecutionAggregateArgs, ReplayExecutionAvgAggregateInputType (+91 more)
 
 ### Community 64 - "services/replay.ts"
 Cohesion: 0.12
 Nodes (13): retryTimer, SqlClient, InvestigationNotifications, PendingDecision, Approval, Binding, Database, ReplayDenied (+5 more)
 
 ### Community 65 - "actions/email.ts"
-Cohesion: 0.20
+Cohesion: 0.21
 Nodes (12): emailAction, EmailTransport, resend, resendErrorNames, safeEmailCode(), safeReceipt(), sendEmail(), captureFailure() (+4 more)
 
-### Community 78 - "observability.ts"
-Cohesion: 0.17
-Nodes (10): createLangfuseExporter(), errorType(), FetchLike, InvestigationTrace, InvestigationTracer, safeIdentifier, safeModelUsage(), safeVersion() (+2 more)
+### Community 78 - "TriageApproval.ts"
+Cohesion: 0.02
+Nodes (94): AggregateTriageApproval, GetTriageApprovalAggregateType, GetTriageApprovalGroupByPayload, TriageApproval$notificationArgs, TriageApproval$replayRequestArgs, TriageApprovalAggregateArgs, TriageApprovalAvgAggregateInputType, TriageApprovalAvgAggregateOutputType (+86 more)
 
-### Community 79 - "retrieval-experiment.ts"
-Cohesion: 0.18
-Nodes (12): bm25(), ignoredTerms, Metrics, RetrievalExperimentCase, retrievalExperimentCases, RetrievalExperimentResult, runRetrievalExperiment(), Split (+4 more)
+### Community 79 - "ReplayExecutionAttempt.ts"
+Cohesion: 0.02
+Nodes (80): AggregateReplayExecutionAttempt, GetReplayExecutionAttemptAggregateType, GetReplayExecutionAttemptGroupByPayload, ReplayExecutionAttemptAggregateArgs, ReplayExecutionAttemptAvgAggregateInputType, ReplayExecutionAttemptAvgAggregateOutputType, ReplayExecutionAttemptAvgOrderByAggregateInput, ReplayExecutionAttemptCountAggregateInputType (+72 more)
 
 ### Community 80 - "compilerOptions"
 Cohesion: 0.12
@@ -562,9 +579,9 @@ Nodes (16): compilerOptions, declaration, declarationMap, esModuleInterop, incre
 Cohesion: 0.14
 Nodes (15): AttemptOwner, { db, state }, failedOwner, fakeDb(), fingerprints, invalid, matches(), normalized (+7 more)
 
-### Community 83 - "investigation-authority.ts"
-Cohesion: 0.16
-Nodes (9): allowedDecisions(), Decision, DecisionRow, InvestigationDecisionDenied, ProposalRow, TransactionDb, authority(), input (+1 more)
+### Community 83 - "TriageAccessAudit.ts"
+Cohesion: 0.03
+Nodes (74): AggregateTriageAccessAudit, DateTimeFieldUpdateOperationsInput, GetTriageAccessAuditAggregateType, GetTriageAccessAuditGroupByPayload, NullableIntFieldUpdateOperationsInput, TriageAccessAudit$replayRequestArgs, TriageAccessAuditAggregateArgs, TriageAccessAuditAvgAggregateInputType (+66 more)
 
 ### Community 84 - "processor/package.json"
 Cohesion: 0.13
@@ -583,16 +600,16 @@ Cohesion: 0.07
 Nodes (28): dependencies, @prisma/client, @prisma/extension-accelerate, devDependencies, prettier, prisma, turbo, typescript (+20 more)
 
 ### Community 88 - "browser.ts"
-Cohesion: 0.13
-Nodes (13): Action, AvailableAction, AvailableTriggerType, $Enums, TestTriggerBuffer, Trigger, User, Zap (+5 more)
+Cohesion: 0.09
+Nodes (21): Action, AvailableAction, AvailableTriggerType, $Enums, ReplayExecution, ReplayExecutionAttempt, ReplayFailure, ReplayRequest (+13 more)
 
 ### Community 89 - "tasks"
 Cohesion: 0.13
 Nodes (14): dependsOn, inputs, outputs, dependsOn, cache, persistent, dependsOn, $schema (+6 more)
 
-### Community 90 - "user.ts"
-Cohesion: 0.13
-Nodes (15): authMiddleware(), DecodedToken, Express, Request, clerk, router, userRouter, router (+7 more)
+### Community 90 - "primary_backend/package.json"
+Cohesion: 0.07
+Nodes (29): DecodedToken, Express, Request, @clerk/nextjs, express, @types/express, zod, module (+21 more)
 
 ### Community 91 - "DLQ failure taxonomy and investigation requirements"
 Cohesion: 0.14
@@ -614,17 +631,17 @@ Nodes (12): Compatibility and Rollout, Contracts, Email Flow, Error Handling and
 Cohesion: 0.18
 Nodes (12): Delivery and State Invariants, Action Handler Contract, Action Registry, Event-Driven System Topology, Transactional Outbox Communication Boundary, ADR Transactional Outbox, Distributed Lease Claim, Workflow Execution Lifecycle (+4 more)
 
-### Community 96 - "model-experiment.test.ts"
-Cohesion: 0.07
-Nodes (42): comparison, manifest, previousDirectory, result, source, [sourceDirectory, currentDirectory, outputFile], comparison, currentPath (+34 more)
+### Community 96 - "model-experiment.ts"
+Cohesion: 0.05
+Nodes (64): comparison, manifest, previousDirectory, result, source, [sourceDirectory, currentDirectory, outputFile], comparison, currentPath (+56 more)
 
-### Community 97 - "dlq-reconciler.ts"
-Cohesion: 0.18
-Nodes (8): createDlqReconciler(), ExecutionRow, ReconcilerDb, ReconcilerTx, STALE, execution, now, Row
+### Community 97 - "useTriage.ts"
+Cohesion: 0.19
+Nodes (14): TriagePage(), useInvestigationStream(), ApiError, errorState(), operatorRequest(), useTriage(), FetchLike, pollInvestigation() (+6 more)
 
-### Community 98 - "createReplayStore"
-Cohesion: 0.30
-Nodes (11): replayStore(), execute(), store(), createReplayStore(), claim(), complete(), deny(), record() (+3 more)
+### Community 98 - "worker/replay.ts"
+Cohesion: 0.15
+Nodes (19): replayStore(), execute(), store(), DurableFailureEvidence, Fingerprints, parse(), Claim, Claimed (+11 more)
 
 ### Community 99 - "Action Registry & Extensibility"
 Cohesion: 0.17
@@ -650,21 +667,21 @@ Nodes (10): Evidence and security rules, Non-goals, Phase 3B Durable Failures De
 Cohesion: 0.18
 Nodes (10): compilerOptions, allowJs, jsx, module, moduleResolution, noEmit, plugins, extends (+2 more)
 
-### Community 105 - "layout.tsx"
-Cohesion: 0.22
-Nodes (6): nextConfig, geistMono, geistSans, inter, Toaster(), next
+### Community 105 - "ReplayFailure.ts"
+Cohesion: 0.03
+Nodes (73): AggregateReplayFailure, GetReplayFailureAggregateType, GetReplayFailureGroupByPayload, ReplayFailureAggregateArgs, ReplayFailureAvgAggregateInputType, ReplayFailureAvgAggregateOutputType, ReplayFailureAvgOrderByAggregateInput, ReplayFailureCountAggregateInputType (+65 more)
 
-### Community 106 - "prompts.ts"
-Cohesion: 0.31
-Nodes (7): DiagnosisEvidence, buildDiagnosisPrompt(), DIAGNOSIS_PROMPT_VERSION, hasUnknownDelivery(), repairGuidance, baseline, contexts
+### Community 106 - "devDependencies"
+Cohesion: 0.20
+Nodes (10): devDependencies, eslint, eslint-config-next, tailwindcss, @tailwindcss/postcss, tw-animate-css, @types/node, @types/react (+2 more)
 
-### Community 107 - "Phase 12 calibration status"
-Cohesion: 0.33
-Nodes (5): Approved live pilot, Earlier offline verification (before the live pilot), Independent agent review, Phase 12 calibration status, Remaining gates
+### Community 107 - "triage-outcome.test.tsx"
+Cohesion: 0.60
+Nodes (4): fixture(), servers, token(), TriageOperatorDenied
 
-### Community 108 - "Phase 12: offline advisory semantic judge"
-Cohesion: 0.33
-Nodes (5): Atomic rubric, Phase 12: offline advisory semantic judge, Real model and human calibration, Reproduce the scripted control, Two passes and no ties
+### Community 108 - "TriageDecisionNotification.ts"
+Cohesion: 0.03
+Nodes (73): AggregateTriageDecisionNotification, GetTriageDecisionNotificationAggregateType, GetTriageDecisionNotificationGroupByPayload, TriageDecisionNotificationAggregateArgs, TriageDecisionNotificationAvgAggregateInputType, TriageDecisionNotificationAvgAggregateOutputType, TriageDecisionNotificationAvgOrderByAggregateInput, TriageDecisionNotificationCountAggregateInputType (+65 more)
 
 ### Community 109 - "Credentials and destinations"
 Cohesion: 0.20
@@ -702,9 +719,9 @@ Nodes (9): 1. `zap-events` Message Schema, 2. `zap-events-dlq` Message Schema, C
 Cohesion: 0.22
 Nodes (9): 🛠️ Action Dispatch & Execution, Background Worker, Database Model, 🔒 Distributed Lease Management (`ZapRunExecution`), 🪦 Durable Failure Recording, 📐 Invariants Summary, Lease Rules & State Transitions, Replay generation (Phase 9A/9B; release disabled) (+1 more)
 
-### Community 118 - "dlq-publisher.test.ts"
-Cohesion: 0.47
-Nodes (5): base, createdAt, fakeDb(), matches(), Row
+### Community 118 - "TriageProposal.ts"
+Cohesion: 0.03
+Nodes (73): AggregateTriageProposal, GetTriageProposalAggregateType, GetTriageProposalGroupByPayload, TriageProposal$approvalArgs, TriageProposalAggregateArgs, TriageProposalAvgAggregateInputType, TriageProposalAvgAggregateOutputType, TriageProposalAvgOrderByAggregateInput (+65 more)
 
 ### Community 119 - "File Map"
 Cohesion: 0.25
@@ -769,6 +786,14 @@ Nodes (4): Global Constraints, Phase 3C Durable DLQ Publication Implementation P
 ### Community 139 - "Q: Where should Phase 3 provider outcomes and durable failure evidence integrate in the worker?"
 Cohesion: 0.40
 Nodes (4): Answer, Outcome, Q: Where should Phase 3 provider outcomes and durable failure evidence integrate in the worker?, Source Nodes
+
+### Community 140 - "Q: Start Phase 3C durable DLQ publication and reconciliation"
+Cohesion: 0.40
+Nodes (4): Answer, Outcome, Q: Start Phase 3C durable DLQ publication and reconciliation, Source Nodes
+
+### Community 141 - "Q: oh but my idea for this prj dlq system was like instead of a support team sitting in the backend and seeing and debugging the error , sending it to developing and testing , the AI agent checks that , then finds the error and suggests remedy to the support team /in my case it will be me , then after approval the error is replayed for fix or other option . But now it is like the owner of the zap checks this .? what canthe owner do in the case of humman approval .? now i was learnign the phase 4 and i got to know this but the phase 5 was also completed now ."
+Cohesion: 0.40
+Nodes (4): Answer, Outcome, Q: oh but my idea for this prj dlq system was like instead of a support team sitting in the backend and seeing and debugging the error , sending it to developing and testing , the AI agent checks that , then finds the error and suggests remedy to the support team /in my case it will be me , then after approval the error is replayed for fix or other option . But now it is like the owner of the zap checks this .? what canthe owner do in the case of humman approval .? now i was learnign the phase 4 and i got to know this but the phase 5 was also completed now ., Source Nodes
 
 ### Community 142 - "phase-11a-baseline-v4/manifest.json"
 Cohesion: 0.09
@@ -906,6 +931,10 @@ Nodes (8): artifact_hashes, cases.json, contexts.json, corpus.json, invocations.
 Cohesion: 0.25
 Nodes (8): artifact_hashes, cases.json, contexts.json, corpus.json, invocations.json, observations.json, report.json, report.md
 
+### Community 223 - "operationalLimits"
+Cohesion: 0.39
+Nodes (6): bounded(), investigationEnabled(), operationalLimits(), positiveMoney(), names, original
+
 ### Community 226 - "model_settings"
 Cohesion: 0.33
 Nodes (6): model_settings, endpoint, max_output_tokens, response_schema_hash, store, unspecified_generation_settings
@@ -958,6 +987,10 @@ Nodes (5): runtime_versions, bun, @langchain/langgraph, node, zod
 Cohesion: 0.40
 Nodes (5): runtime_versions, bun, @langchain/langgraph, node, zod
 
+### Community 239 - "lib/triage-stream.test.ts"
+Cohesion: 0.50
+Nodes (4): cancel(), encoder, event(), start()
+
 ### Community 240 - "Phase 14A operational controls (internal, read-only first)"
 Cohesion: 0.40
 Nodes (5): Access, visibility, and retention, Configuration and limits, Disposable local fixture, Outage, restore, and rollback drill, Phase 14A operational controls (internal, read-only first)
@@ -967,24 +1000,24 @@ Cohesion: 0.50
 Nodes (3): Offline reproduction and comparison, Phase 11A development experiment v2, Repeated-trial metrics
 
 ## Knowledge Gaps
-- **2704 isolated node(s):** `manifest_version`, `experiment_id`, `created_at`, `split`, `selected_case_ids` (+2699 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 3154 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
-- **66 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **3447 isolated node(s):** `manifest_version`, `experiment_id`, `created_at`, `split`, `selected_case_ids` (+3442 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 4080 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **79 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `lucide-react` connect `create/page.tsx` to `triage-outcome.test.tsx`, `layout.tsx`, `Appbar.tsx`, `ZapTable.tsx`, `cn`, `dialog.tsx`, `frontend/package.json`?**
-  _High betweenness centrality (0.067) - this node is a cross-community bridge._
-- **Why does `PrismaClient` connect `PrismaClient` to `prismaNamespace.ts`, `class.ts`?**
+- **Why does `lucide-react` connect `create/page.tsx` to `useTriage.ts`, `TriageResults.tsx`, `ZapTable.tsx`, `cn`, `dialog.tsx`, `frontend/package.json`?**
+  _High betweenness centrality (0.040) - this node is a cross-community bridge._
+- **Why does `TriageAccessAuditDelegate` connect `TriageAccessAuditDelegate` to `TriageAccessAudit.ts`?**
   _High betweenness centrality (0.017) - this node is a cross-community bridge._
-- **Why does `createServiceScope()` connect `primary_backend/index.ts` to `src/index.ts`, `BackendClient`, `triage-evidence.ts`, `InvestigationStore`, `investigation-store.ts`?**
-  _High betweenness centrality (0.016) - this node is a cross-community bridge._
+- **Why does `kafkajs` connect `replay-recovery.integration.test.ts` to `replay-dispatcher.ts`, `linux-and-broker-drills.mjs`, `processor/package.json`, `dlq-publisher-index.ts`, `primary_backend/index.ts`?**
+  _High betweenness centrality (0.011) - this node is a cross-community bridge._
 - **What connects `manifest_version`, `experiment_id`, `created_at` to the rest of the system?**
-  _2704 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _3447 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `prismaNamespace.ts` be split into smaller, more focused modules?**
-  _Cohesion score 0.015267175572519083 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.014388489208633094 - nodes in this community are weakly interconnected._
 - **Should `Zap.ts` be split into smaller, more focused modules?**
-  _Cohesion score 0.017094017094017096 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.017241379310344827 - nodes in this community are weakly interconnected._
 - **Should `Action.ts` be split into smaller, more focused modules?**
   _Cohesion score 0.021052631578947368 - nodes in this community are weakly interconnected._
