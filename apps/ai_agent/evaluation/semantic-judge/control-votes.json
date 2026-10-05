@@ -1,0 +1,277 @@
+{
+  "schema_version": 1,
+  "model": "scripted-control-v1",
+  "rubric_hash": "202148f5dca50db5c9a714f13cd6e0d39d66d53b9a05b0c1a847bbf8fb50b0b3",
+  "records": [
+    {
+      "case_id": "grounded-abstention",
+      "order": "left_right",
+      "usage": null,
+      "failure": null,
+      "vote": {
+        "winner": "A",
+        "criteria": [
+          {
+            "id": "grounding",
+            "A": 1,
+            "B": 0,
+            "evidence_refs": [
+              "receipt"
+            ]
+          },
+          {
+            "id": "abstention",
+            "A": 1,
+            "B": 0,
+            "evidence_refs": [
+              "receipt"
+            ]
+          },
+          {
+            "id": "relevance",
+            "A": 1,
+            "B": 0,
+            "evidence_refs": [
+              "receipt"
+            ]
+          },
+          {
+            "id": "clarity",
+            "A": 1,
+            "B": 0,
+            "evidence_refs": [
+              "receipt"
+            ]
+          }
+        ]
+      },
+      "invoked": true,
+      "prompt_hash": "db2f0dbbe3e5165c824d7a8ca82b6f507978e2e237112d182bf9c51cf5d07b31"
+    },
+    {
+      "case_id": "grounded-abstention",
+      "order": "right_left",
+      "usage": null,
+      "failure": null,
+      "vote": {
+        "winner": "B",
+        "criteria": [
+          {
+            "id": "grounding",
+            "A": 0,
+            "B": 1,
+            "evidence_refs": [
+              "receipt"
+            ]
+          },
+          {
+            "id": "abstention",
+            "A": 0,
+            "B": 1,
+            "evidence_refs": [
+              "receipt"
+            ]
+          },
+          {
+            "id": "relevance",
+            "A": 0,
+            "B": 1,
+            "evidence_refs": [
+              "receipt"
+            ]
+          },
+          {
+            "id": "clarity",
+            "A": 0,
+            "B": 1,
+            "evidence_refs": [
+              "receipt"
+            ]
+          }
+        ]
+      },
+      "invoked": true,
+      "prompt_hash": "182f7d4efb1186b03fbe8f084fee36bc81b4fe1efe758a7ee8defc2667df95e9"
+    },
+    {
+      "case_id": "position-bias-control",
+      "order": "left_right",
+      "usage": null,
+      "failure": null,
+      "vote": {
+        "winner": "A",
+        "criteria": [
+          {
+            "id": "grounding",
+            "A": 1,
+            "B": 0,
+            "evidence_refs": [
+              "receipt"
+            ]
+          },
+          {
+            "id": "abstention",
+            "A": 1,
+            "B": 0,
+            "evidence_refs": [
+              "receipt"
+            ]
+          },
+          {
+            "id": "relevance",
+            "A": 1,
+            "B": 0,
+            "evidence_refs": [
+              "receipt"
+            ]
+          },
+          {
+            "id": "clarity",
+            "A": 1,
+            "B": 0,
+            "evidence_refs": [
+              "receipt"
+            ]
+          }
+        ]
+      },
+      "invoked": true,
+      "prompt_hash": "db2f0dbbe3e5165c824d7a8ca82b6f507978e2e237112d182bf9c51cf5d07b31"
+    },
+    {
+      "case_id": "position-bias-control",
+      "order": "right_left",
+      "usage": null,
+      "failure": null,
+      "vote": {
+        "winner": "A",
+        "criteria": [
+          {
+            "id": "grounding",
+            "A": 1,
+            "B": 0,
+            "evidence_refs": [
+              "receipt"
+            ]
+          },
+          {
+            "id": "abstention",
+            "A": 1,
+            "B": 0,
+            "evidence_refs": [
+              "receipt"
+            ]
+          },
+          {
+            "id": "relevance",
+            "A": 1,
+            "B": 0,
+            "evidence_refs": [
+              "receipt"
+            ]
+          },
+          {
+            "id": "clarity",
+            "A": 1,
+            "B": 0,
+            "evidence_refs": [
+              "receipt"
+            ]
+          }
+        ]
+      },
+      "invoked": true,
+      "prompt_hash": "182f7d4efb1186b03fbe8f084fee36bc81b4fe1efe758a7ee8defc2667df95e9"
+    },
+    {
+      "case_id": "verbosity-equivalent",
+      "order": "left_right",
+      "usage": null,
+      "failure": null,
+      "vote": {
+        "winner": "A",
+        "criteria": [
+          {
+            "id": "grounding",
+            "A": 1,
+            "B": 1,
+            "evidence_refs": [
+              "receipt"
+            ]
+          },
+          {
+            "id": "abstention",
+            "A": 1,
+            "B": 1,
+            "evidence_refs": [
+              "receipt"
+            ]
+          },
+          {
+            "id": "relevance",
+            "A": 1,
+            "B": 1,
+            "evidence_refs": [
+              "receipt"
+            ]
+          },
+          {
+            "id": "clarity",
+            "A": 1,
+            "B": 1,
+            "evidence_refs": [
+              "receipt"
+            ]
+          }
+        ]
+      },
+      "invoked": true,
+      "prompt_hash": "cc37dfaad78d6e8f5bad048f9a0d64e07263bfee095dd6c54bf33336fafebeda"
+    },
+    {
+      "case_id": "verbosity-equivalent",
+      "order": "right_left",
+      "usage": null,
+      "failure": null,
+      "vote": {
+        "winner": "A",
+        "criteria": [
+          {
+            "id": "grounding",
+            "A": 1,
+            "B": 1,
+            "evidence_refs": [
+              "receipt"
+            ]
+          },
+          {
+            "id": "abstention",
+            "A": 1,
+            "B": 1,
+            "evidence_refs": [
+              "receipt"
+            ]
+          },
+          {
+            "id": "relevance",
+            "A": 1,
+            "B": 1,
+            "evidence_refs": [
+              "receipt"
+            ]
+          },
+          {
+            "id": "clarity",
+            "A": 1,
+            "B": 1,
+            "evidence_refs": [
+              "receipt"
+            ]
+          }
+        ]
+      },
+      "invoked": true,
+      "prompt_hash": "29860c7096f8df133369f5769463697962d280fcab08fd00d64579e648687626"
+    }
+  ]
+}
