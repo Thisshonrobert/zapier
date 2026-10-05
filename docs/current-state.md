@@ -64,6 +64,13 @@ Phase 4 verification completed with 65 focused tests, 3 PostgreSQL integration t
 - **Fixture reproduction**: requires `scripts/phases/phase14a/compose.yaml` (PostgreSQL 16 and Kafka 3.7.1 on loopback ports 54329 and 19092). `fixture-env.mjs` creates a new random database per invocation and drops it afterward. Run `bunx prisma generate --schema packages/db/prisma/schema.prisma` before the Node recovery suite if the local generated client is stale. See [`docs/AI/phase14a-operations.md`](../docs/AI/phase14a-operations.md) for exact commands.
 - **Unverified (required before external rollout)**: actual production DB role grants; organizational retention and encrypted whole-database backup/restore including role metadata; production reverse-proxy delivery; paid Gemini provider behavior and rate semantics; live replay readiness. These are not local fixture concerns and are explicitly deferred.
 
+### 4.5 Phase 12 advisory semantic judge
+
+- **Implementation**: Optional offline semantic comparison uses an atomic rubric, swaps candidate order to check order sensitivity, and emits explicit inconclusive flags for equal quality, invalid output, or other non-decisive outcomes. Its authority is advisory only; it cannot authorize or execute replay.
+- **Bounded live pilot**: Eight approved model calls used 12,880 tokens across four development-only pairs. Two pairs were conclusive; surrogate agreement was 1/2 (50%) among those conclusive pairs. One pair had invalid output, so the live run and its frozen replay intentionally retain a failure status. No additional paid calls or prompt tuning were performed.
+- **Replay accounting fix**: Frozen replay now preserves measured usage when a model failure is thrown; a regression failed before and passed after the fix. Replay reproduces verdicts, reasons, invocation counts, votes, and usage, excluding newly measured latency.
+- **Verification and limits**: All 18 judge tests passed; type check and build passed. A broader run had one timeout that passed in isolation. Lint retains 9 existing errors and 22 warnings. Independent human calibration and evidence of useful signal remain pending; surrogate agreement is not human calibration, and this small, preselected pilot establishes no quality or release confidence.
+
 ### 4.1 Phase 5 simulated runbooks and retrieval
 
 - Six labelled simulated runbooks cover taxonomy cases F01 through F10: transient provider failures, credentials and destinations, template/registry/stage validation, uncertain delivery, replay/stale cases, and evidence gaps.
