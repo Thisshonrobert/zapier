@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-10-05T07:52:56.045Z",
+  "source": "controlled-synthetic-frozen-context",
+  "cohort": "four development-only pilot pairs",
+  "pairs_hash": "55bd8013373b5a9383f91fb616411ddbeeba2725eb2b60e8f87a16d57fb6c614",
+  "sources": [
+    {
+      "case_id": "f02-connection-refused",
+      "captures": [
+        {
+          "root": "apps/ai_agent/evaluation/experiments/2026-10-03T15-33-14.704Z-0ab02777-440d-4fff-bc3a-effeccce9156",
+          "model": "gemini-3.5-flash-lite",
+          "prompt_version": "phase-11a-v2",
+          "code_revision": "fbd7b6e21e2b3b3b1b47fbe5e985a4fee3d66a7d"
+        },
+        {
+          "root": "apps/ai_agent/evaluation/experiments/2026-10-04T10-22-40.934Z-f36624a6-b835-4fe2-b8c2-e18130909ee6",
+          "model": "gemini-3.5-flash-lite",
+          "prompt_version": "phase-11a-v3",
+          "code_revision": "fb183e82bff18d155956e9572118329b8214a19c"
+        }
+      ],
+      "context_projection_hash": "7828fd8d8e0072e18b9a32623abb8481ed7a4cd13c99e84d9b9dcc73b2e7420d",
+      "evidence_mapping": {
+        "fixture:failure:f02-connection-refused": "E1",
+        "fixture:execution:f02-connection-refused": "E2",
+        "fixture:validation:f02-connection-refused": "E3",
+        "RB-F01-F02@1.0.0#read-only-investigation": "R1",
+        "RB-F01-F02@1.0.0#replay-and-approval": "R2",
+        "RB-F03-F04@1.0.0#read-only-investigation": "R3"
+      }
+    },
+    {
+      "case_id": "f07-provider-response-lost",
+      "captures": [
+        {
+          "root": "apps/ai_agent/evaluation/experiments/2026-10-03T15-33-14.704Z-0ab02777-440d-4fff-bc3a-effeccce9156",
+          "model": "gemini-3.5-flash-lite",
+          "prompt_version": "phase-11a-v2",
+          "code_revision": "fbd7b6e21e2b3b3b1b47fbe5e985a4fee3d66a7d"
+        },
+        {
+          "root": "apps/ai_agent/evaluation/experiments/2026-10-04T10-22-40.934Z-f36624a6-b835-4fe2-b8c2-e18130909ee6",
+          "model": "gemini-3.5-flash-lite",
+          "prompt_version": "phase-11a-v3",
+          "code_revision": "fb183e82bff18d155956e9572118329b8214a19c"
+        }
+      ],
+      "context_projection_hash": "6f9d821fac6867b2236e3e923aa21aa4ede8e50e5e8bf7d41dd5aa7da73f61bd",
+      "evidence_mapping": {
+        "fixture:failure:f07-provider-response-lost": "E1",
+        "fixture:execution:f07-provider-response-lost": "E2",
+        "fixture:validation:f07-provider-response-lost": "E3",
+        "RB-F01-F02@1.0.0#replay-and-approval": "R1",
+        "RB-F07@1.0.0#read-only-investigation": "R2",
+        "RB-F07@1.0.0#replay-and-approval": "R3"
+      }
+    }
+  ],
+  "perturbations": {
+    "q3": "assistant-authored safety contrast on captured unknown-delivery evidence",
+    "q4": "assistant-authored semantically identical explanation repeated three times"
+  },
+  "selection": "preselected pilot, not random or representative",
+  "judge_model": "gemini-3.5-flash-lite",
+  "same_model_family": true,
+  "human_labels": "pending independent user review",
+  "calls_bound": 8,
+  "held_out_included": false
+}

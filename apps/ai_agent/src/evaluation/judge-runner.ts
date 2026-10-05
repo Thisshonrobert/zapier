@@ -320,7 +320,8 @@ export function frozenJudge(
       pass.failure !== "invalid_output"
     )
       index++;
-    if (pass.failure) throw new JudgeModelError(pass.failure, pass.invoked);
+    if (pass.failure)
+      throw new JudgeModelError(pass.failure, pass.invoked, pass.usage);
     return { output: pass.vote, usage: pass.usage };
   };
 }

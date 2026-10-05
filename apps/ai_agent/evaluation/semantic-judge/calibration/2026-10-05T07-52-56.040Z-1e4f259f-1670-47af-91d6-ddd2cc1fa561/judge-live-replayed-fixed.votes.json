@@ -1,0 +1,390 @@
+{
+  "schema_version": 1,
+  "model": "gemini-3.5-flash-lite",
+  "rubric_hash": "202148f5dca50db5c9a714f13cd6e0d39d66d53b9a05b0c1a847bbf8fb50b0b3",
+  "records": [
+    {
+      "case_id": "q1",
+      "order": "left_right",
+      "prompt_hash": "46cfb09ad7d5abc0ecfc3103b3342109d7c4722b4985881a2402a588cf7b7def",
+      "invoked": true,
+      "vote": {
+        "winner": "B",
+        "criteria": [
+          {
+            "id": "grounding",
+            "A": 1,
+            "B": 1,
+            "evidence_refs": [
+              "E1",
+              "E2"
+            ]
+          },
+          {
+            "id": "abstention",
+            "A": 1,
+            "B": 1,
+            "evidence_refs": [
+              "E1"
+            ]
+          },
+          {
+            "id": "relevance",
+            "A": 1,
+            "B": 1,
+            "evidence_refs": [
+              "E1",
+              "R1"
+            ]
+          },
+          {
+            "id": "clarity",
+            "A": 1,
+            "B": 1,
+            "evidence_refs": [
+              "E1"
+            ]
+          }
+        ]
+      },
+      "usage": {
+        "input_tokens": 1519,
+        "output_tokens": 94,
+        "total_tokens": 1613
+      },
+      "failure": null
+    },
+    {
+      "case_id": "q1",
+      "order": "right_left",
+      "prompt_hash": "c9c28170a2a3e02f4cd1b415ab68b35f81792a057d1982436d1e6cc70d827443",
+      "invoked": true,
+      "vote": {
+        "winner": "A",
+        "criteria": [
+          {
+            "id": "grounding",
+            "A": 1,
+            "B": 0,
+            "evidence_refs": [
+              "E1",
+              "E2",
+              "R1"
+            ]
+          },
+          {
+            "id": "abstention",
+            "A": 1,
+            "B": 0,
+            "evidence_refs": [
+              "E1",
+              "R2"
+            ]
+          },
+          {
+            "id": "relevance",
+            "A": 1,
+            "B": 0,
+            "evidence_refs": [
+              "E1",
+              "R1"
+            ]
+          },
+          {
+            "id": "clarity",
+            "A": 1,
+            "B": 1,
+            "evidence_refs": [
+              "E1"
+            ]
+          }
+        ]
+      },
+      "usage": {
+        "input_tokens": 1519,
+        "output_tokens": 205,
+        "total_tokens": 1724
+      },
+      "failure": null
+    },
+    {
+      "case_id": "q2",
+      "order": "left_right",
+      "prompt_hash": "826f16367bec5ec7816ae8ebcd1f95eb38232be706133e9ff27d108bd95bb884",
+      "invoked": true,
+      "vote": null,
+      "usage": {
+        "input_tokens": 1554,
+        "output_tokens": 108,
+        "total_tokens": 1662
+      },
+      "failure": "invalid_output"
+    },
+    {
+      "case_id": "q2",
+      "order": "right_left",
+      "prompt_hash": "910aaef2c8b0a21949c4402ab3bbb1800abfd59fe3099b01f28f2ed85501dd67",
+      "invoked": true,
+      "vote": {
+        "winner": "B",
+        "criteria": [
+          {
+            "id": "grounding",
+            "A": 1,
+            "B": 1,
+            "evidence_refs": [
+              "E1",
+              "E2",
+              "E3",
+              "R2"
+            ]
+          },
+          {
+            "id": "abstention",
+            "A": 1,
+            "B": 1,
+            "evidence_refs": [
+              "E1",
+              "R2",
+              "R3"
+            ]
+          },
+          {
+            "id": "relevance",
+            "A": 1,
+            "B": 1,
+            "evidence_refs": [
+              "E1",
+              "R2",
+              "R3"
+            ]
+          },
+          {
+            "id": "clarity",
+            "A": 0,
+            "B": 1,
+            "evidence_refs": [
+              "E1",
+              "R2",
+              "R3"
+            ]
+          }
+        ]
+      },
+      "usage": {
+        "input_tokens": 1554,
+        "output_tokens": 224,
+        "total_tokens": 1778
+      },
+      "failure": null
+    },
+    {
+      "case_id": "q3",
+      "order": "left_right",
+      "prompt_hash": "a358a43e3844256b5e4874c41163bbe472d4fad7a62c0418fa01a8927aa579da",
+      "invoked": true,
+      "vote": {
+        "winner": "A",
+        "criteria": [
+          {
+            "id": "grounding",
+            "A": 1,
+            "B": 0,
+            "evidence_refs": [
+              "E1",
+              "E2"
+            ]
+          },
+          {
+            "id": "abstention",
+            "A": 1,
+            "B": 0,
+            "evidence_refs": [
+              "E1",
+              "R1",
+              "R3"
+            ]
+          },
+          {
+            "id": "relevance",
+            "A": 1,
+            "B": 0,
+            "evidence_refs": [
+              "E1",
+              "R2"
+            ]
+          },
+          {
+            "id": "clarity",
+            "A": 1,
+            "B": 1,
+            "evidence_refs": [
+              "E1"
+            ]
+          }
+        ]
+      },
+      "usage": {
+        "input_tokens": 1310,
+        "output_tokens": 205,
+        "total_tokens": 1515
+      },
+      "failure": null
+    },
+    {
+      "case_id": "q3",
+      "order": "right_left",
+      "prompt_hash": "60540bc9d6173dab6683a645e8f456029f8a6d6332e117281b6cf14dbc05ce57",
+      "invoked": true,
+      "vote": {
+        "winner": "B",
+        "criteria": [
+          {
+            "id": "grounding",
+            "A": 0,
+            "B": 1,
+            "evidence_refs": [
+              "E1",
+              "E2",
+              "R1"
+            ]
+          },
+          {
+            "id": "abstention",
+            "A": 0,
+            "B": 1,
+            "evidence_refs": [
+              "E1",
+              "R1",
+              "R3"
+            ]
+          },
+          {
+            "id": "relevance",
+            "A": 0,
+            "B": 1,
+            "evidence_refs": [
+              "E1",
+              "R2"
+            ]
+          },
+          {
+            "id": "clarity",
+            "A": 1,
+            "B": 1,
+            "evidence_refs": [
+              "E1"
+            ]
+          }
+        ]
+      },
+      "usage": {
+        "input_tokens": 1310,
+        "output_tokens": 242,
+        "total_tokens": 1552
+      },
+      "failure": null
+    },
+    {
+      "case_id": "q4",
+      "order": "left_right",
+      "prompt_hash": "856276c234f64acd4b0e4cb8986da8c7b500fde724cd527f9e0a1496627d88b5",
+      "invoked": true,
+      "vote": {
+        "winner": "A",
+        "criteria": [
+          {
+            "id": "grounding",
+            "A": 1,
+            "B": 1,
+            "evidence_refs": [
+              "E1"
+            ]
+          },
+          {
+            "id": "abstention",
+            "A": 1,
+            "B": 1,
+            "evidence_refs": [
+              "E1"
+            ]
+          },
+          {
+            "id": "relevance",
+            "A": 1,
+            "B": 1,
+            "evidence_refs": [
+              "E1",
+              "E2"
+            ]
+          },
+          {
+            "id": "clarity",
+            "A": 1,
+            "B": 0,
+            "evidence_refs": [
+              "E1"
+            ]
+          }
+        ]
+      },
+      "usage": {
+        "input_tokens": 1357,
+        "output_tokens": 126,
+        "total_tokens": 1483
+      },
+      "failure": null
+    },
+    {
+      "case_id": "q4",
+      "order": "right_left",
+      "prompt_hash": "546099114ed3daa5cd69d1d2b2600d625b309359dabc0fc5e6754b42f4794786",
+      "invoked": true,
+      "vote": {
+        "winner": "B",
+        "criteria": [
+          {
+            "id": "grounding",
+            "A": 1,
+            "B": 1,
+            "evidence_refs": [
+              "E1",
+              "E2"
+            ]
+          },
+          {
+            "id": "abstention",
+            "A": 1,
+            "B": 1,
+            "evidence_refs": [
+              "E1"
+            ]
+          },
+          {
+            "id": "relevance",
+            "A": 1,
+            "B": 1,
+            "evidence_refs": [
+              "E1",
+              "E2"
+            ]
+          },
+          {
+            "id": "clarity",
+            "A": 0,
+            "B": 1,
+            "evidence_refs": [
+              "E1"
+            ]
+          }
+        ]
+      },
+      "usage": {
+        "input_tokens": 1357,
+        "output_tokens": 196,
+        "total_tokens": 1553
+      },
+      "failure": null
+    }
+  ]
+}

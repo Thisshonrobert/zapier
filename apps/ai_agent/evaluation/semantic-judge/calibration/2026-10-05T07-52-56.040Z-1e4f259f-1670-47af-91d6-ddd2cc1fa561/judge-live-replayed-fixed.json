@@ -1,0 +1,464 @@
+{
+  "schema_version": 1,
+  "rubric_version": "semantic-judge-v1",
+  "authority": "advisory_only",
+  "model": "gemini-3.5-flash-lite",
+  "settings": {
+    "model": "gemini-3.5-flash-lite",
+    "includeHeldOut": false,
+    "timeoutMs": 30000,
+    "runTimeoutMs": 600000
+  },
+  "dataset_hash": "55bd8013373b5a9383f91fb616411ddbeeba2725eb2b60e8f87a16d57fb6c614",
+  "rubric_hash": "202148f5dca50db5c9a714f13cd6e0d39d66d53b9a05b0c1a847bbf8fb50b0b3",
+  "source_hashes": {
+    "judge.ts": "84f2413003e09097cfc285ff79e29b7f73065892587d1c69ebe9e2c3452dc55e",
+    "rubric.ts": "c788630e0c6cc706d9b74936c264ec8830f503e9b5d40f88fe59cbc8b368b5ba",
+    "judge-runner.ts": "377344c32c7758481e8990f8fc09ef241786ce717bb9d3314910b35b67d3fcbc"
+  },
+  "rows": [
+    {
+      "case_id": "q1",
+      "split": "development",
+      "status": "inconclusive",
+      "winner": null,
+      "reason": "equal_quality",
+      "invocations": 2,
+      "passes": [
+        {
+          "order": "left_right",
+          "winner": null,
+          "vote": {
+            "winner": "B",
+            "criteria": [
+              {
+                "id": "grounding",
+                "A": 1,
+                "B": 1,
+                "evidence_refs": [
+                  "E1",
+                  "E2"
+                ]
+              },
+              {
+                "id": "abstention",
+                "A": 1,
+                "B": 1,
+                "evidence_refs": [
+                  "E1"
+                ]
+              },
+              {
+                "id": "relevance",
+                "A": 1,
+                "B": 1,
+                "evidence_refs": [
+                  "E1",
+                  "R1"
+                ]
+              },
+              {
+                "id": "clarity",
+                "A": 1,
+                "B": 1,
+                "evidence_refs": [
+                  "E1"
+                ]
+              }
+            ]
+          },
+          "reason": "equal_quality",
+          "usage": {
+            "input_tokens": 1519,
+            "output_tokens": 94,
+            "total_tokens": 1613
+          },
+          "latency_ms": 0
+        },
+        {
+          "order": "right_left",
+          "winner": "q1-right",
+          "vote": {
+            "winner": "A",
+            "criteria": [
+              {
+                "id": "grounding",
+                "A": 1,
+                "B": 0,
+                "evidence_refs": [
+                  "E1",
+                  "E2",
+                  "R1"
+                ]
+              },
+              {
+                "id": "abstention",
+                "A": 1,
+                "B": 0,
+                "evidence_refs": [
+                  "E1",
+                  "R2"
+                ]
+              },
+              {
+                "id": "relevance",
+                "A": 1,
+                "B": 0,
+                "evidence_refs": [
+                  "E1",
+                  "R1"
+                ]
+              },
+              {
+                "id": "clarity",
+                "A": 1,
+                "B": 1,
+                "evidence_refs": [
+                  "E1"
+                ]
+              }
+            ]
+          },
+          "reason": "agreed",
+          "usage": {
+            "input_tokens": 1519,
+            "output_tokens": 205,
+            "total_tokens": 1724
+          },
+          "latency_ms": 0
+        }
+      ]
+    },
+    {
+      "case_id": "q2",
+      "split": "development",
+      "status": "inconclusive",
+      "winner": null,
+      "reason": "invalid_output",
+      "invocations": 2,
+      "passes": [
+        {
+          "order": "left_right",
+          "winner": null,
+          "vote": null,
+          "reason": "invalid_output",
+          "usage": {
+            "input_tokens": 1554,
+            "output_tokens": 108,
+            "total_tokens": 1662
+          },
+          "latency_ms": 0
+        },
+        {
+          "order": "right_left",
+          "winner": "q2-left",
+          "vote": {
+            "winner": "B",
+            "criteria": [
+              {
+                "id": "grounding",
+                "A": 1,
+                "B": 1,
+                "evidence_refs": [
+                  "E1",
+                  "E2",
+                  "E3",
+                  "R2"
+                ]
+              },
+              {
+                "id": "abstention",
+                "A": 1,
+                "B": 1,
+                "evidence_refs": [
+                  "E1",
+                  "R2",
+                  "R3"
+                ]
+              },
+              {
+                "id": "relevance",
+                "A": 1,
+                "B": 1,
+                "evidence_refs": [
+                  "E1",
+                  "R2",
+                  "R3"
+                ]
+              },
+              {
+                "id": "clarity",
+                "A": 0,
+                "B": 1,
+                "evidence_refs": [
+                  "E1",
+                  "R2",
+                  "R3"
+                ]
+              }
+            ]
+          },
+          "reason": "agreed",
+          "usage": {
+            "input_tokens": 1554,
+            "output_tokens": 224,
+            "total_tokens": 1778
+          },
+          "latency_ms": 0
+        }
+      ]
+    },
+    {
+      "case_id": "q3",
+      "split": "development",
+      "status": "conclusive",
+      "winner": "q3-left",
+      "reason": "agreed",
+      "invocations": 2,
+      "passes": [
+        {
+          "order": "left_right",
+          "winner": "q3-left",
+          "vote": {
+            "winner": "A",
+            "criteria": [
+              {
+                "id": "grounding",
+                "A": 1,
+                "B": 0,
+                "evidence_refs": [
+                  "E1",
+                  "E2"
+                ]
+              },
+              {
+                "id": "abstention",
+                "A": 1,
+                "B": 0,
+                "evidence_refs": [
+                  "E1",
+                  "R1",
+                  "R3"
+                ]
+              },
+              {
+                "id": "relevance",
+                "A": 1,
+                "B": 0,
+                "evidence_refs": [
+                  "E1",
+                  "R2"
+                ]
+              },
+              {
+                "id": "clarity",
+                "A": 1,
+                "B": 1,
+                "evidence_refs": [
+                  "E1"
+                ]
+              }
+            ]
+          },
+          "reason": "agreed",
+          "usage": {
+            "input_tokens": 1310,
+            "output_tokens": 205,
+            "total_tokens": 1515
+          },
+          "latency_ms": 0
+        },
+        {
+          "order": "right_left",
+          "winner": "q3-left",
+          "vote": {
+            "winner": "B",
+            "criteria": [
+              {
+                "id": "grounding",
+                "A": 0,
+                "B": 1,
+                "evidence_refs": [
+                  "E1",
+                  "E2",
+                  "R1"
+                ]
+              },
+              {
+                "id": "abstention",
+                "A": 0,
+                "B": 1,
+                "evidence_refs": [
+                  "E1",
+                  "R1",
+                  "R3"
+                ]
+              },
+              {
+                "id": "relevance",
+                "A": 0,
+                "B": 1,
+                "evidence_refs": [
+                  "E1",
+                  "R2"
+                ]
+              },
+              {
+                "id": "clarity",
+                "A": 1,
+                "B": 1,
+                "evidence_refs": [
+                  "E1"
+                ]
+              }
+            ]
+          },
+          "reason": "agreed",
+          "usage": {
+            "input_tokens": 1310,
+            "output_tokens": 242,
+            "total_tokens": 1552
+          },
+          "latency_ms": 0
+        }
+      ]
+    },
+    {
+      "case_id": "q4",
+      "split": "development",
+      "status": "conclusive",
+      "winner": "q4-left",
+      "reason": "agreed",
+      "invocations": 2,
+      "passes": [
+        {
+          "order": "left_right",
+          "winner": "q4-left",
+          "vote": {
+            "winner": "A",
+            "criteria": [
+              {
+                "id": "grounding",
+                "A": 1,
+                "B": 1,
+                "evidence_refs": [
+                  "E1"
+                ]
+              },
+              {
+                "id": "abstention",
+                "A": 1,
+                "B": 1,
+                "evidence_refs": [
+                  "E1"
+                ]
+              },
+              {
+                "id": "relevance",
+                "A": 1,
+                "B": 1,
+                "evidence_refs": [
+                  "E1",
+                  "E2"
+                ]
+              },
+              {
+                "id": "clarity",
+                "A": 1,
+                "B": 0,
+                "evidence_refs": [
+                  "E1"
+                ]
+              }
+            ]
+          },
+          "reason": "agreed",
+          "usage": {
+            "input_tokens": 1357,
+            "output_tokens": 126,
+            "total_tokens": 1483
+          },
+          "latency_ms": 0
+        },
+        {
+          "order": "right_left",
+          "winner": "q4-left",
+          "vote": {
+            "winner": "B",
+            "criteria": [
+              {
+                "id": "grounding",
+                "A": 1,
+                "B": 1,
+                "evidence_refs": [
+                  "E1",
+                  "E2"
+                ]
+              },
+              {
+                "id": "abstention",
+                "A": 1,
+                "B": 1,
+                "evidence_refs": [
+                  "E1"
+                ]
+              },
+              {
+                "id": "relevance",
+                "A": 1,
+                "B": 1,
+                "evidence_refs": [
+                  "E1",
+                  "E2"
+                ]
+              },
+              {
+                "id": "clarity",
+                "A": 0,
+                "B": 1,
+                "evidence_refs": [
+                  "E1"
+                ]
+              }
+            ]
+          },
+          "reason": "agreed",
+          "usage": {
+            "input_tokens": 1357,
+            "output_tokens": 196,
+            "total_tokens": 1553
+          },
+          "latency_ms": 0
+        }
+      ]
+    }
+  ],
+  "calibration": {
+    "labelled": 0,
+    "conclusive": 0,
+    "agreements": 0,
+    "agreement_rate": null,
+    "coverage": null
+  },
+  "splits": {
+    "development": {
+      "labelled": 0,
+      "conclusive": 0,
+      "agreements": 0,
+      "agreement_rate": null,
+      "coverage": null
+    }
+  },
+  "invocations": 8,
+  "cost_usd": null,
+  "caveats": [
+    "Human agreement is a small-sample diagnostic, not a release or authorization gate.",
+    "Human labels are supplied separately and their provenance is not independently verified.",
+    "No human calibration is claimed without labels; no usefulness threshold is inferred.",
+    "Two-pass agreement detects order sensitivity but does not eliminate systematic judge bias.",
+    "Synthetic sanitized pairs only; no production effects or changes to deterministic safety checks.",
+    "Held-out pairs require explicit selection and must never be used for tuning.",
+    "Unknown provider cost and missing token usage remain null."
+  ],
+  "execution": "frozen"
+}

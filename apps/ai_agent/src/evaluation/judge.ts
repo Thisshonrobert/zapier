@@ -86,6 +86,7 @@ export class JudgeModelError extends Error {
       | "timeout"
       | "cancelled",
     readonly invoked = true,
+    readonly usage: ModelUsage | null = null,
   ) {
     super(reason);
   }
@@ -192,6 +193,8 @@ export async function judgePair(
       if (error instanceof JudgeModelError) {
         pass.reason = error.reason;
         invoked = error.invoked;
+        const measured = ModelUsageSchema.safeParse(error.usage);
+        if (measured.success) pass.usage = measured.data;
         if (!invoked) result.invocations--;
       }
       if (controller.signal.aborted)

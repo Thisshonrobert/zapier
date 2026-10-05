@@ -475,3 +475,25 @@ test("provider metadata and thought parts are discarded while the vote remains s
   expect(JSON.stringify(response)).not.toContain("private thought");
   expect(JSON.stringify(response)).not.toContain("opaque");
 });
+
+test("frozen failure replay preserves measured usage on invalid output", async () => {
+  const usage = { input_tokens: 10, output_tokens: 5, total_tokens: 15 };
+  let calls = 0;
+  const live = await runJudgeEvaluation(
+    [pair],
+    async () => ({
+      output: ++calls === 1 ? { malformed: true } : vote("B"),
+      usage,
+    }),
+    { model: "stub" },
+  );
+  const replay = await runJudgeEvaluation(
+    [pair],
+    frozenJudge([pair], captureJudgeVotes([pair], live)),
+    { model: "stub" },
+  );
+  expect(live.rows[0]!.reason).toBe("invalid_output");
+  expect(replay.rows[0]!.passes.map((p) => p.usage)).toEqual(
+    live.rows[0]!.passes.map((p) => p.usage),
+  );
+});

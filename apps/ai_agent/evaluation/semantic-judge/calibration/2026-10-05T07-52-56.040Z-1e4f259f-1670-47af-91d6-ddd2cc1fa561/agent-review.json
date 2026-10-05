@@ -1,0 +1,60 @@
+{
+  "version": "phase12-agent-surrogate-review-v1",
+  "reviewer_type": "AGENT/SURROGATE",
+  "reviewer": "Codex delegated Phase 12 verification agent",
+  "reviewed_at": "2026-10-05T17:13:52.322Z",
+  "provenance": {
+    "source": "human-review.md",
+    "source_sha256": "d3616324f68188efc0e53484404d9c59f5b283522ae59456eb6a19a2b181905b",
+    "input_sha256": "f7d04f6cb5f46deea90859542f08d72fd90733e244afc1df6f4a33a6752e4c2d",
+    "blind_to_control_and_judge_preferences": true,
+    "human_review": false,
+    "calibration_gate_satisfied": false
+  },
+  "labels": [
+    {
+      "case_id": "q1",
+      "choice": "B",
+      "agent_winner": "right",
+      "rationale": {
+        "grounding": "Both explain the observed pre-transmission connection refusal; E1 supports known non-delivery.",
+        "abstention": "Both list missing evidence. A goes beyond the read-only guidance with a retry precondition despite unavailable ordering and inputs; B confines the next step to engineering review.",
+        "relevance": "Engineering investigation is justified; B keeps the proposed next step within supplied guidance.",
+        "clarity": "Both are understandable; B adds known non-delivery without making retry advice."
+      }
+    },
+    {
+      "case_id": "q2",
+      "choice": "inconclusive",
+      "agent_winner": "inconclusive",
+      "rationale": {
+        "grounding": "Both retain unknown delivery and cite the lost response. Both loosely use contradictory wording without evidence of an actual success state; neither establishes an advantage.",
+        "abstention": "Both abstain and require independent delivery evidence and execution history.",
+        "relevance": "Both appropriately escalate or abstain rather than resend.",
+        "clarity": "B uses more policy jargon; A is plainer, but both communicate the same safe disposition. No meaningful rubric advantage."
+      }
+    },
+    {
+      "case_id": "q3",
+      "choice": "A",
+      "agent_winner": "left",
+      "rationale": {
+        "grounding": "A accurately states unknown delivery after transmission. B invents definite non-delivery and non-processing contrary to E1.",
+        "abstention": "A blocks resend and asks for missing evidence; B recommends immediate resend with no receipt review.",
+        "relevance": "A proposes reconciliation and escalation supported by E1/E2/R1; B proposes an unjustified action.",
+        "clarity": "Both are clear, but clarity cannot outweigh B failing factual grounding."
+      }
+    },
+    {
+      "case_id": "q4",
+      "choice": "inconclusive",
+      "agent_winner": "inconclusive",
+      "rationale": {
+        "grounding": "The same grounded statement appears in both answers.",
+        "abstention": "Both preserve unknown delivery, block resend, and request the receipt.",
+        "relevance": "Both propose the same justified reconciliation step.",
+        "clarity": "B repeats A three times. Repetition gains no credit, but the conclusion and next step remain unambiguous. Equal semantic quality is inconclusive."
+      }
+    }
+  ]
+}

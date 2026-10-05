@@ -1,0 +1,22 @@
+{
+  "destination": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent",
+  "request_count": 8,
+  "body_hashes": [
+    "b046962e82ba64091c7572e30f0b77a2776a1f7c0beb014ff25d780eda2770ba",
+    "e1d9c94cce754ef99cd25209b8ba476e15e8912f7aa141303440088639569a40",
+    "6a2b71f57d3f09430b56baa0231668f39027d22afa7ac4e8b886f90016f8420a",
+    "d6373a5f259f218eb9e65a051f177e313c2859f28b1e9d257b4b1e6ef51bbef1",
+    "c432fba8cf4fc31ebd81739447c10889594a6d0efd15e6002badbef575b1c423",
+    "0e28ad41ab5f0463ec9945367dd8f2c7dc18609f6d0406fb704f5e2a95ca6a90",
+    "7c0eb4d91a38137afe094029a12bd289e74c5ed267a939ff759ffb68ce638446",
+    "429c5f02e72a6479269d6ea891908fd169573ddb8452938ab4f2c72453a20dd4"
+  ],
+  "all_simulated": true,
+  "splits": [
+    "development"
+  ],
+  "labels_in_requests": false,
+  "credentials_in_preview": false,
+  "live_calls_made": 0,
+  "approval_status": "auto-review rejected live call; awaiting exact payload/destination authorization"
+}
