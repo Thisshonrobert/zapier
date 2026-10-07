@@ -996,9 +996,9 @@
     "semantic_hash": "81124eb1b05f52c7a2f04f4ecd2b465b"
   },
   "apps/ai_agent/src/graph.ts": {
-    "mtime": 1791355864.4581947,
-    "seen": 1791356545.1826928,
-    "ast_hash": "a9d5a62d5de97d342e62bb691af6f634",
+    "mtime": 1791223202.1535552,
+    "seen": 1791223452.2455993,
+    "ast_hash": "77238163de2d44df2f916a5e284cf0d9",
     "semantic_hash": ""
   },
   "apps/ai_agent/src/http.ts": {
@@ -1326,10 +1326,10 @@
     "semantic_hash": "7eb574b84a62a264572e677d3068b166"
   },
   "apps/ai_agent/tests/diagnosis-graph.test.ts": {
-    "mtime": 1791355864.4753945,
-    "seen": 1791356545.1826982,
-    "ast_hash": "4a3411f3ea7e91fc74d856f73149e0b2",
-    "semantic_hash": ""
+    "mtime": 1791223202.2639456,
+    "seen": 1791223452.2456205,
+    "ast_hash": "a6949100a401f1c691e14831ca0c2011",
+    "semantic_hash": "a6949100a401f1c691e14831ca0c2011"
   },
   "apps/ai_agent/tests/diagnosis-http.test.ts": {
     "mtime": 1791223202.2639456,
@@ -1368,9 +1368,9 @@
     "semantic_hash": ""
   },
   "apps/primary_backend/route/triage.ts": {
-    "mtime": 1791355864.5748363,
-    "seen": 1791356545.1827052,
-    "ast_hash": "dc7b0b45b86de750d32ed51abc6bba44",
+    "mtime": 1791223202.3752837,
+    "seen": 1791223452.245725,
+    "ast_hash": "7e53b3ed0891cf21dffd172cb0353738",
     "semantic_hash": ""
   },
   "apps/primary_backend/services/triage-agent.ts": {
@@ -1482,9 +1482,9 @@
     "semantic_hash": ""
   },
   "apps/ai_agent/src/checkpoint.ts": {
-    "mtime": 1791355864.447261,
-    "seen": 1791356545.1826885,
-    "ast_hash": "370047a39658d1f6e235194e4752b6e1",
+    "mtime": 1791223202.1172733,
+    "seen": 1791223452.245581,
+    "ast_hash": "f6865a5a8f96377dc746a5bd72021e56",
     "semantic_hash": ""
   },
   "apps/ai_agent/src/evaluation/retrieval-experiment.ts": {
@@ -1494,15 +1494,15 @@
     "semantic_hash": ""
   },
   "apps/ai_agent/src/investigation-http.ts": {
-    "mtime": 1791355864.4581947,
-    "seen": 1791356545.1826944,
-    "ast_hash": "f509c08f84c708bf4e935bba63b8e5a2",
+    "mtime": 1791223202.1573145,
+    "seen": 1791223452.2456026,
+    "ast_hash": "088d465e474758a0a1e893e6b1f11091",
     "semantic_hash": ""
   },
   "apps/ai_agent/src/investigation-store.ts": {
-    "mtime": 1791355864.4581947,
-    "seen": 1791356545.1826956,
-    "ast_hash": "7c61b15b88d562aca24101272c04a113",
+    "mtime": 1791223202.1583865,
+    "seen": 1791223452.2456036,
+    "ast_hash": "8e7d48610f6208461396f7b8b1eb6e2f",
     "semantic_hash": ""
   },
   "apps/ai_agent/src/migrate.ts": {
@@ -1518,9 +1518,9 @@
     "semantic_hash": ""
   },
   "apps/ai_agent/src/runner.ts": {
-    "mtime": 1791355864.4683695,
-    "seen": 1791356545.1826968,
-    "ast_hash": "1c3f5e67330e386ad5a27196de4470b9",
+    "mtime": 1791223202.2507322,
+    "seen": 1791223452.2456107,
+    "ast_hash": "661e7271467dcee2836afff4f9dd041c",
     "semantic_hash": ""
   },
   "apps/ai_agent/tests/investigation-http.test.ts": {
@@ -1548,9 +1548,9 @@
     "semantic_hash": ""
   },
   "apps/ai_agent/tests/runner.test.ts": {
-    "mtime": 1791355864.4884331,
-    "seen": 1791356545.1826994,
-    "ast_hash": "55b4ed11da16fd1d50f6ec791b3acafe",
+    "mtime": 1791223202.2945063,
+    "seen": 1791223452.2456417,
+    "ast_hash": "8b4d837dc1a9e00925850e60bcec0f0c",
     "semantic_hash": ""
   },
   "apps/frontend/src/app/triage/TriageResults.test.tsx": {
@@ -1560,15 +1560,15 @@
     "semantic_hash": ""
   },
   "apps/frontend/src/app/triage/TriageResults.tsx": {
-    "mtime": 1791355864.5095184,
-    "seen": 1791356545.1827016,
-    "ast_hash": "f05a73e0096111e58b5e2f395a8c4e94",
+    "mtime": 1791223202.323648,
+    "seen": 1791223452.2456634,
+    "ast_hash": "7cc95b5ac0942669c13f84036ef7880d",
     "semantic_hash": ""
   },
   "apps/frontend/src/app/triage/page.tsx": {
-    "mtime": 1791355864.510064,
-    "seen": 1791356545.1827025,
-    "ast_hash": "055ee13966cda11a4b5b9cd7b9eb50b7",
+    "mtime": 1791223202.3247259,
+    "seen": 1791223452.2456646,
+    "ast_hash": "5dbc62b5475d6b2d1442624b1f52fd46",
     "semantic_hash": ""
   },
   "apps/frontend/src/hooks/useTriage.ts": {
@@ -1680,9 +1680,9 @@
     "semantic_hash": "16e772aed88e9bfb18f902c2446e8e78"
   },
   "apps/primary_backend/tests/triage-operator-http.test.ts": {
-    "mtime": 1791355864.602881,
-    "seen": 1791356545.1827078,
-    "ast_hash": "f820e64209d9d582b2a707a42186bb4b",
+    "mtime": 1791223202.4164727,
+    "seen": 1791223452.245762,
+    "ast_hash": "6794e0a0de7898857629d5bbd9f8e624",
     "semantic_hash": ""
   },
   "apps/primary_backend/tests/triage-operator.test.ts": {
@@ -1806,9 +1806,9 @@
     "semantic_hash": ""
   },
   "apps/ai_agent/tests/events-db.integration.test.ts": {
-    "mtime": 1791355864.4771235,
-    "seen": 1791356545.182699,
-    "ast_hash": "154051f548237d5d7a39073cad31e066",
+    "mtime": 1791223202.2639456,
+    "seen": 1791223452.2456236,
+    "ast_hash": "4d17fed88a8f081b1576234a50e12472",
     "semantic_hash": ""
   },
   "apps/ai_agent/tests/events-http.test.ts": {
@@ -2625,60 +2625,6 @@
     "mtime": 1791223202.102383,
     "seen": 1791223452.245889,
     "ast_hash": "e60a3ded2aca8901a16f5df2ccaeec0c",
-    "semantic_hash": ""
-  },
-  "apps/ai_agent/tests/command-center-db.integration.test.ts": {
-    "mtime": 1791355864.473656,
-    "seen": 1791356545.1826975,
-    "ast_hash": "e7ddddfb6c815d2c708883582a48f8b3",
-    "semantic_hash": ""
-  },
-  "apps/frontend/src/app/triage/CommandCenter.test.tsx": {
-    "mtime": 1791355864.5078757,
-    "seen": 1791356545.1827,
-    "ast_hash": "a7bc74270b1737222263c60e2f80470d",
-    "semantic_hash": ""
-  },
-  "apps/frontend/src/app/triage/CommandCenter.tsx": {
-    "mtime": 1791355864.5084207,
-    "seen": 1791356545.1827009,
-    "ast_hash": "8d11db141cc9b05792a88d2322a07d64",
-    "semantic_hash": ""
-  },
-  "apps/frontend/src/hooks/useCommandCenter.ts": {
-    "mtime": 1791355864.52741,
-    "seen": 1791356545.182703,
-    "ast_hash": "2129d73d4489641568d4367ab00da286",
-    "semantic_hash": ""
-  },
-  "apps/frontend/src/lib/triage-command-center.test.ts": {
-    "mtime": 1791355864.5442014,
-    "seen": 1791356545.182704,
-    "ast_hash": "792425bdf6abecb741eb0c50c65b51f3",
-    "semantic_hash": ""
-  },
-  "apps/frontend/src/lib/triage-command-center.ts": {
-    "mtime": 1791355864.544726,
-    "seen": 1791356545.1827044,
-    "ast_hash": "06086e66a2050a0e69ab8fd85cd2edfd",
-    "semantic_hash": ""
-  },
-  "apps/primary_backend/services/triage-command-center.ts": {
-    "mtime": 1791355864.5847137,
-    "seen": 1791356545.182706,
-    "ast_hash": "9bd1a27b9d3d9f981bbab0da7d29a8b6",
-    "semantic_hash": ""
-  },
-  "apps/primary_backend/tests/triage-command-center.test.ts": {
-    "mtime": 1791355864.6012511,
-    "seen": 1791356545.1827068,
-    "ast_hash": "ed18ca67a71ce649905581cacae42a52",
-    "semantic_hash": ""
-  },
-  "packages/triage-contracts/command-center.ts": {
-    "mtime": 1791355865.062109,
-    "seen": 1791356545.1827085,
-    "ast_hash": "1e5b980c953308ac1e4610df9f347a20",
     "semantic_hash": ""
   }
 }
