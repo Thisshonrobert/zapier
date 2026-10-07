@@ -4,6 +4,7 @@ import express from "express";
 import jwt from "jsonwebtoken";
 
 import { verifyServiceScope } from "../../../packages/triage-contracts/index.ts";
+import type { CommandCenter } from "../../../packages/triage-contracts/command-center.ts";
 
 process.env.JWT_SECRET ??= "phase-10a-http-test-secret";
 const previousInvestigation = process.env.INVESTIGATION_ENABLED;
@@ -26,7 +27,7 @@ afterEach(async () => {
   await Promise.all(servers.splice(0).map((server) => new Promise<void>((resolve) => server.close(() => resolve()))));
 });
 
-async function start(options: { failAudit?: boolean; failNotify?: boolean; saved?: unknown } = {}) {
+async function start(options: { failAudit?: boolean; failNotify?: boolean; failHistory?: boolean; saved?: unknown } = {}) {
   const calls: { path: string; token: string; correlationId: string; method: string; body?: unknown }[] = [];
   const authorityCalls: unknown[] = [];
   const replayCalls: unknown[] = [];
@@ -45,6 +46,11 @@ async function start(options: { failAudit?: boolean; failNotify?: boolean; saved
     agent: {
       read: async (path: string, token: string, correlationId: string, method: string, _timeout: number, body?: unknown) => {
         calls.push({ path, token, correlationId, method, body });
+        if (path.endsWith("/history")) {
+          if (options.failHistory) throw new Error("history outage with secret details");
+          return { currentSequence: 1, currentStatus: "queued", truncated: false,
+            events: [{ sequence: 1, status: "queued", observedAt: "2026-10-05T00:00:00.000Z" }] };
+        }
         return options.saved && path.includes("/private/v1/investigations/") ? options.saved : {
           id: body ? (body as { id: string }).id : path.split("/").at(-1), status: "queued",
           binding: { caseId, subjectOwnerId: 9, zapRunId: "11111111-1111-4111-8111-111111111111", stage: 0 },
@@ -79,6 +85,51 @@ async function start(options: { failAudit?: boolean; failNotify?: boolean; saved
   if (!address || typeof address === "string") throw new Error("missing address");
   return { baseUrl: `http://127.0.0.1:${address.port}/api/v1/triage`, calls, authorityCalls, events, replayCalls };
 }
+
+test("command center is audited, scoped and presents aggregate fixture evaluation without raw cases", async () => {
+  const { baseUrl, calls } = await start();
+  const id = "77777777-7777-4777-8777-777777777777";
+  const response = await fetch(`${baseUrl}/operator/cases/${caseId}/investigations/${id}/command-center`, {
+    headers: { authorization: `Bearer ${jwt.sign({ id: 4 }, process.env.JWT_SECRET!)}` },
+  });
+  expect(response.status).toBe(200);
+  const body = await response.json() as CommandCenter;
+  expect(body.history.data?.events[0]?.status).toBe("queued");
+  expect(body.evaluation.data?.model).toBe("no-model-fixture-v1");
+  expect(body.evaluation.data?.splits.development.diagnosisAcceptance).toMatchObject({ numerator: 3, denominator: 16 });
+  expect(JSON.stringify(body)).not.toContain('"rows"');
+  expect(body.trace).toBeNull();
+  for (const call of calls) {
+    const scope = verifyServiceScope(call.token, { secret, operation: "failure_context" });
+    expect(scope.ownerId).toBe(9); expect(scope.caseId).toBe(caseId); expect(scope.investigationId).toBe(id);
+  }
+});
+
+test("command center denies unauthenticated, audit-failed and mismatched investigation reads", async () => {
+  const id = "77777777-7777-4777-8777-777777777777";
+  for (const scenario of [{ options: {}, expected: 401, auth: false },
+    { options: { failAudit: true }, expected: 503, auth: true },
+    { options: { saved: { id, binding: { caseId, subjectOwnerId: 10 } } }, expected: 409, auth: true }]) {
+    const { baseUrl } = await start(scenario.options);
+    const response = await fetch(`${baseUrl}/operator/cases/${caseId}/investigations/${id}/command-center`, {
+      headers: scenario.auth ? { authorization: `Bearer ${jwt.sign({ id: 4 }, process.env.JWT_SECRET!)}` } : {},
+    });
+    expect(response.status).toBe(scenario.expected);
+  }
+});
+
+test("history outage leaves the aggregate evaluation usable and hides upstream errors", async () => {
+  const { baseUrl } = await start({ failHistory: true });
+  const response = await fetch(`${baseUrl}/operator/cases/${caseId}/investigations/77777777-7777-4777-8777-777777777777/command-center`, {
+    headers: { authorization: `Bearer ${jwt.sign({ id: 4 }, process.env.JWT_SECRET!)}` },
+  });
+  expect(response.status).toBe(200);
+  expect(response.headers.get("cache-control")).toBe("no-store");
+  const body = await response.json() as CommandCenter;
+  expect(body.history).toEqual({ data: null, unavailable: true });
+  expect(body.evaluation.unavailable).toBe(false);
+  expect(JSON.stringify(body)).not.toContain("secret details");
+});
 
 test("replay APIs bind actor and owner on the server and reject changed inputs", async () => {
   const { baseUrl, replayCalls } = await start();

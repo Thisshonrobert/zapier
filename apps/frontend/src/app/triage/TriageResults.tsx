@@ -60,6 +60,8 @@ export function TriageResults({
       <div className="divide-y divide-zinc-200 rounded-xl border border-zinc-200 bg-white">
         {state.cases.map((caseItem) => (
           <button
+            type="button"
+            aria-pressed={state.selectedCaseId === caseItem.case_id}
             className={`flex w-full items-center justify-between gap-4 p-4 text-left hover:bg-zinc-50 ${state.selectedCaseId === caseItem.case_id ? "bg-orange-50" : ""}`}
             key={caseItem.case_id}
             onClick={() => onSelectCase(caseItem)}

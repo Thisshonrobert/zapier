@@ -10,7 +10,7 @@ import type { InvestigationStore } from "./investigation-store.ts";
 import { searchRunbooks, type RunbookIndex } from "./tools/search-runbooks.ts";
 
 type ClaimedJob = NonNullable<Awaited<ReturnType<InvestigationStore["claimNext"]>>>;
-type Snapshot = { evidence: unknown; result: unknown };
+type Snapshot = { evidence: unknown; result: unknown; traceId?: string | null };
 
 export async function runInvestigationOnce(
   store: Pick<InvestigationStore, "claimNext" | "finish" | "fail">,
@@ -20,7 +20,7 @@ export async function runInvestigationOnce(
   if (!job) return false;
   try {
     const snapshot = await execute(job);
-    await store.finish(job.id, job.leaseToken!, snapshot.evidence, snapshot.result, "proposed");
+    await store.finish(job.id, job.leaseToken!, snapshot.evidence, snapshot.result, "proposed", snapshot.traceId);
   } catch {
     await store.fail(job.id, job.leaseToken!);
   }

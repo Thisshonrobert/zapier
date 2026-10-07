@@ -23,7 +23,7 @@ export function agentPool(databaseUrl: string) {
 
 // Run this controlled migration before starting the service. Request handlers never call setup().
 export async function migrateAgent(pool: Pool, databaseUrl: string) {
-  for (const filename of ["0001_investigations.sql", "0002_investigation_decisions.sql", "0003_investigation_events.sql", "0004_operational_budget.sql"]) {
+  for (const filename of ["0001_investigations.sql", "0002_investigation_decisions.sql", "0003_investigation_events.sql", "0004_operational_budget.sql", "0005_investigation_trace.sql"]) {
     const migration = await Bun.file(new URL(`../migrations/${filename}`, import.meta.url)).text();
     await pool.query(migration);
   }

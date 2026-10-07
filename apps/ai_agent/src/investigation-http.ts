@@ -89,6 +89,18 @@ export function createInvestigationRouter(input: { serviceSecret: string; store:
     }
   });
 
+  router.get("/:id/history", async (request, response) => {
+    const id = request.params.id;
+    if (typeof id !== "string" || !z.uuid().safeParse(id).success) {
+      response.status(404).json({ detail: "Investigation not found" }); return;
+    }
+    let scope;
+    try { scope = scopeFor(request, id); }
+    catch { response.status(401).json({ detail: "Invalid service scope" }); return; }
+    try { response.json(await input.store.history(id, scope.caseId, scope.ownerId)); }
+    catch { response.status(404).json({ detail: "Investigation history unavailable" }); }
+  });
+
   router.get("/:id", async (request, response) => {
     const id = request.params.id;
     if (typeof id !== "string" || !z.uuid().safeParse(id).success) {

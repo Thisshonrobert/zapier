@@ -872,7 +872,7 @@ export function buildDiagnosisService(
           throw new InvalidModelOutput("Graph returned an invalid diagnosis");
         }
         if (!state.evidence) throw new InvalidModelOutput("Graph returned no evidence");
-        return { result: result.data, evidence: state.evidence };
+        return { result: result.data, evidence: state.evidence, traceId: tracer?.trace.id ?? null };
       } catch (error) {
         traceError = error;
         if (error instanceof GraphRecursionError) {

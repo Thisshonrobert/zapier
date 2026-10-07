@@ -298,7 +298,8 @@ describe("Phase 6 integrated diagnosis graph", () => {
       },
     );
 
-    await service.diagnose();
+    const snapshot = await service.diagnoseWithEvidence();
+    expect(snapshot.traceId).toBe(traces[0]!.id);
     expect(traces).toHaveLength(1);
     expect(traces[0]?.spans.map((span) => span.name)).toEqual([
       "investigation",
