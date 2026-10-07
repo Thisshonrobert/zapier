@@ -18,7 +18,7 @@ const store = new InvestigationStore({ query, connect: async () => {
 } } as never);
 before(async () => {
   if (!pool) return;
-  for (const name of ["0001_investigations.sql", "0002_investigation_decisions.sql", "0003_investigation_events.sql"])
+  for (const name of ["0001_investigations.sql", "0002_investigation_decisions.sql", "0003_investigation_events.sql", "0004_operational_budget.sql", "0005_investigation_trace.sql"])
     await query(await readFile(new URL(`../migrations/${name}`, import.meta.url), "utf8"));
 }, { timeout: 30_000 });
 after(async () => {

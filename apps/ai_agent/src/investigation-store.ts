@@ -3,6 +3,7 @@ import { createHash, randomUUID } from "node:crypto";
 import type { Pool } from "pg";
 import { sanitizeInvestigationEvent, type InvestigationEvent } from "../../../packages/triage-contracts/events.ts";
 import { operationalLimits } from "./operational-limits.ts";
+import { HistorySchema } from "../../../packages/triage-contracts/command-center.ts";
 
 export type InvestigationBinding = {
   id: string;
@@ -183,8 +184,25 @@ export class InvestigationStore {
     }
   }
 
-  async finish(id: string, leaseToken: string, evidence: unknown, result: unknown, status: string) {
+  async history(id: string, caseId: string, subjectOwnerId: number) {
+    const { rows } = await this.pool.query(`
+      SELECT job.event_sequence AS "currentSequence", job.status AS "currentStatus",
+        COALESCE((SELECT jsonb_agg(e ORDER BY e.sequence) FROM (
+          SELECT sequence, status, to_char(created_at AT TIME ZONE 'UTC',
+            'YYYY-MM-DD"T"HH24:MI:SS.MS"Z"') AS "observedAt"
+          FROM ai_agent.investigation_event WHERE investigation_id = job.id
+            AND created_at > now() - interval '7 days' ORDER BY sequence DESC LIMIT 64
+        ) e), '[]'::jsonb) AS events
+      FROM ai_agent.investigation job
+      WHERE job.id = $1 AND job.case_id = $2 AND job.subject_owner_id = $3`, [id, caseId, subjectOwnerId]);
+    const row = rows[0];
+    if (!row) throw new Error("Investigation not found");
+    return HistorySchema.parse({ ...row, truncated: row.events.length < row.currentSequence });
+  }
+
+  async finish(id: string, leaseToken: string, evidence: unknown, result: unknown, status: string, traceId?: string | null) {
     if (status !== "proposed") throw new Error("Invalid investigation status");
+    if (traceId != null && !/^[a-f0-9]{32}$/.test(traceId)) throw new Error("Invalid trace identifier");
     const serialized = JSON.stringify({ evidence, result });
     if (serialized.length > 100_000) throw new Error("Investigation snapshot too large");
     const contentHash = createHash("sha256").update(serialized).digest("hex");
@@ -196,8 +214,8 @@ export class InvestigationStore {
           AND status = 'investigating' AND lease_until > now() FOR UPDATE`, [id, leaseToken]);
       if (!owned.rows[0]) throw new Error("Investigation lease lost");
       await client.query(`INSERT INTO ai_agent.investigation_snapshot
-        (investigation_id, evidence, result, content_hash) VALUES ($1, $2::jsonb, $3::jsonb, $4)`,
-      [id, JSON.stringify(evidence), JSON.stringify(result), contentHash]);
+        (investigation_id, evidence, result, content_hash, trace_id) VALUES ($1, $2::jsonb, $3::jsonb, $4, $5)`,
+      [id, JSON.stringify(evidence), JSON.stringify(result), contentHash, traceId ?? null]);
       await client.query(`UPDATE ai_agent.investigation SET status = $2, lease_token = NULL,
         lease_until = NULL, updated_at = now() WHERE id = $1`, [id, status]);
       await client.query("COMMIT");
@@ -215,13 +233,14 @@ export class InvestigationStore {
   }
 
   async read(id: string, caseId: string, subjectOwnerId: number) {
-    const rows = await this.pool.query<JobRow & { evidence: unknown | null; result: unknown | null }>(`
-      SELECT job.*, snapshot.evidence, snapshot.result FROM ai_agent.investigation job
+    const rows = await this.pool.query<JobRow & { evidence: unknown | null; result: unknown | null; trace_id: string | null }>(`
+      SELECT job.*, snapshot.evidence, snapshot.result, snapshot.trace_id FROM ai_agent.investigation job
       LEFT JOIN ai_agent.investigation_snapshot snapshot ON snapshot.investigation_id = job.id
       WHERE job.id = $1 AND job.case_id = $2 AND job.subject_owner_id = $3`,
     [id, caseId, subjectOwnerId]);
     if (!rows.rows[0]) throw new Error("Investigation not found");
-    return { ...project(rows.rows[0]), evidence: rows.rows[0].evidence, result: rows.rows[0].result };
+    return { ...project(rows.rows[0]), evidence: rows.rows[0].evidence, result: rows.rows[0].result,
+      traceId: rows.rows[0].trace_id };
   }
 
   async applyDecision(id: string, caseId: string, subjectOwnerId: number,

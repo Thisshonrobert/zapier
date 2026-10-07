@@ -4,17 +4,16 @@ import { Play, ShieldCheck } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { useTriage } from "@/hooks/useTriage";
+import { useCommandCenter } from "@/hooks/useCommandCenter";
 import { AppShell } from "@/mycomponents/app/AppShell";
 import { SavedInvestigationControls, TriageResults } from "./TriageResults";
+import { CaseBrowser, CommandCenterPanel } from "./CommandCenter";
 
 export default function TriagePage() {
   const { casesState, diagnosisState, selectedCase, selectCase, diagnose,
     saved, pendingDecision, polling, decide, refresh } =
     useTriage();
-  const caseListState =
-    casesState.kind === "cases"
-      ? { ...casesState, selectedCaseId: selectedCase?.case_id }
-      : casesState;
+  const commandCenter = useCommandCenter(selectedCase?.case_id, casesState.kind === "blocked" ? null : saved);
 
   return (
     <AppShell>
@@ -39,7 +38,8 @@ export default function TriagePage() {
             <h2 className="mb-3 text-sm font-semibold text-zinc-900">
               Recent cases
             </h2>
-            <TriageResults state={caseListState} onSelectCase={selectCase} />
+            {casesState.kind === "cases" ? <CaseBrowser cases={casesState.cases} selectedCaseId={selectedCase?.case_id} onSelectCase={selectCase} /> :
+              <TriageResults state={casesState} onSelectCase={selectCase} />}
           </section>
           <section>
             <div className="mb-3 flex items-center justify-between gap-3">
@@ -62,6 +62,7 @@ export default function TriagePage() {
             ) : null}
             <TriageResults state={diagnosisState} onSelectCase={selectCase} />
             {saved ? <SavedInvestigationControls saved={saved} pending={pendingDecision} onDecision={decide} /> : null}
+            {commandCenter ? <CommandCenterPanel state={commandCenter} /> : null}
             {selectedCase ? <div className="mt-3 flex items-center gap-3 text-xs text-zinc-500">
               <Button variant="outline" disabled={pendingDecision || casesState.kind === "blocked"} onClick={refresh}>Refresh saved status</Button>
               <span>{polling ? "Saved status updates automatically." : "Automatic updates stopped. Refresh to read the current status."}</span>

@@ -15,6 +15,8 @@ import { InvestigationAuthority, InvestigationDecisionDenied } from "../services
 import { InvestigationProposals } from "../services/investigation-proposals.ts";
 import { InvestigationNotifications } from "../services/investigation-notifications.ts";
 import { ReplayDenied, ReplayService } from "../services/replay.ts";
+import { readEvaluationSummary, traceLink } from "../services/triage-command-center.ts";
+import { HistorySchema, type CommandCenter } from "../../../packages/triage-contracts/command-center.ts";
 import type { EvidenceOperation, ServiceScope } from "../../../packages/triage-contracts/index.ts";
 
 type TriageRouterOptions = {
@@ -237,6 +239,40 @@ export function createTriageRouter(options: TriageRouterOptions) {
         if (error instanceof InvestigationDecisionDenied) decisionError(response, error);
         else response.status(502).json({ detail: "Investigation service unavailable" });
       }
+    });
+
+  router.get("/operator/cases/:caseId/investigations/:investigationId/command-center", authMiddleware,
+    async (request, response) => {
+      const id = request.params.investigationId;
+      if (typeof id !== "string" || !uuid.safeParse(id).success) {
+        response.status(404).json({ detail: "Investigation not found" }); return;
+      }
+      let selected;
+      try { selected = await operatorCase(request, "read_case"); }
+      catch (error) { operatorError(response, error); return; }
+      try {
+        const correlationId = randomUUID();
+        const scope = createServiceScope({ secret, ownerId: selected.subject_owner_id,
+          caseId: selected.case_id, investigationId: id, correlationId, operations: ["failure_context"] });
+        const saved = await agent.read(`/private/v1/investigations/${id}`, scope, correlationId) as {
+          id?: string; traceId?: unknown; binding?: { caseId: string; subjectOwnerId: number; zapRunId: string; stage: number } };
+        if (saved.id !== id || saved.binding?.caseId !== selected.case_id ||
+            saved.binding.subjectOwnerId !== selected.subject_owner_id ||
+            saved.binding.zapRunId !== selected.zap_run_id || saved.binding.stage !== selected.stage) {
+          response.status(409).json({ detail: "Investigation binding mismatch" }); return;
+        }
+        const [history, evaluation] = await Promise.allSettled([
+          agent.read(`/private/v1/investigations/${id}/history`, scope, correlationId)
+            .then(value => HistorySchema.parse(value)),
+          readEvaluationSummary(),
+        ]);
+        const projection: CommandCenter = { investigationId: id,
+          history: { data: history.status === "fulfilled" ? history.value : null, unavailable: history.status === "rejected" },
+          evaluation: { data: evaluation.status === "fulfilled" ? evaluation.value : null, unavailable: evaluation.status === "rejected" },
+          trace: traceLink(saved.traceId) };
+        response.setHeader("cache-control", "no-store");
+        response.json(projection);
+      } catch { response.status(502).json({ detail: "Command center unavailable" }); }
     });
 
   router.get("/operator/cases/:caseId/investigations/:investigationId/events", authMiddleware,

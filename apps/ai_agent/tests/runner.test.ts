@@ -10,6 +10,13 @@ const job = { id: "job", leaseToken: "lease", checkpointThreadId: "thread",
 } };
 
 describe("Phase 8 durable runner", () => {
+  test("persists the actual exported trace identity with the fenced snapshot", async () => {
+    let args: unknown[] = [];
+    const store = { claimNext: async () => job,
+      finish: async (...values: unknown[]) => { args = values; }, fail: async () => {} };
+    await runInvestigationOnce(store as never, async () => ({ evidence: {}, result: {}, traceId: "a".repeat(32) }));
+    expect(args[5]).toBe("a".repeat(32));
+  });
   test("persists the diagnosis before reporting a proposed job", async () => {
     const calls: string[] = [];
     const store = {
