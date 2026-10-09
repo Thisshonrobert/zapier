@@ -1,0 +1,41 @@
+{
+  "verifiedAt": "2026-10-09T08:47:06.263Z",
+  "focusedTests": {
+    "passed": 33,
+    "skipped": 1,
+    "failed": 0,
+    "note": "32 passed/1 optional PostgreSQL skipped in the combined suite; added missing-model test passed in the subsequent 5-test retriever suite."
+  },
+  "rootTypeCheck": {
+    "exitCode": 0
+  },
+  "rootBuild": {
+    "exitCode": 0,
+    "cachedFrontend": true
+  },
+  "rootLint": {
+    "exitCode": 1,
+    "errors": 9,
+    "warnings": 22,
+    "source": "unchanged frontend files"
+  },
+  "nativeParity": {
+    "runtime": "Bun service / local Node inference",
+    "developmentQueries": 28,
+    "passed": 28,
+    "externalCalls": 0
+  },
+  "frozenSearchSourceSha256": "7c433e3707ecfbca8d6ca6125ea3a2d0a53938a1481111af7783497e0cdd99f2",
+  "sourceHashes": {
+    "apps/ai_agent/src/graph.ts": "f3dec93c3dd58037f0b62d79f1fe3f5c7bfb12c79e9f07a3c99cc73d4c632e68",
+    "apps/ai_agent/src/index.ts": "1369f01e8b3cf590a95652706aaee7103f34f072dc13d939ffe47f57dea0c200",
+    "apps/ai_agent/src/runner.ts": "5f606c7381c37562428ed1eccca34c8ecc765d9db34497ed54aeda666957a72a",
+    "apps/ai_agent/src/tools/runbook-retriever.ts": "36abb0af8b3185620f2bf14cfce3fb1dcfcd0479a08b5bb00ed553e686683414",
+    "apps/ai_agent/src/tools/minilm-process.mjs": "d42eb66221892bc5511525df21a41177146e5b29fae43352b50a30e50e6920d2",
+    "apps/ai_agent/tests/runbook-retriever.test.ts": "3304352ab3775fc8acd2f85a2133ab2c9291570ae575a851dd42acadacb53355",
+    "apps/ai_agent/tests/diagnosis-graph.test.ts": "ed4be918a4427ec9cef62fcda25476eb4495f9e11810fb8c7a0622dd57171e6f",
+    "apps/ai_agent/evaluation/retrieval-integration/verify-dev.mjs": "afcd371124409eb1edd4cbcad75b3ecb90e0f357af2f2f72892da1ad10553ebd"
+  },
+  "freshDatasetAccessed": false,
+  "productionEnvironmentChanged": false
+}

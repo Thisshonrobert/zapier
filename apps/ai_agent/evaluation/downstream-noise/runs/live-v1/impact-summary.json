@@ -1,0 +1,325 @@
+{
+  "reportSha256": "b8c849c985bb2a32241d26ea65e5b8e1593ebaca1a71ba622c6bc94a7f0ea889",
+  "manifestHash": "7cc9c4486fa996573cf5a4bacbaf914a17ed3804fec95f989bce2057bec9091d",
+  "calls": 30,
+  "tokens": 95835,
+  "paired": {
+    "pairs": 12,
+    "bothPass": 9,
+    "cleanOnlyPass": 1,
+    "baselineOnlyPass": 2,
+    "bothFail": 0
+  },
+  "arms": [
+    {
+      "arm": "clean",
+      "n": 12,
+      "schemaValid": 12,
+      "rootCauseCorrect": 12,
+      "referencesValid": 12,
+      "actionCorrect": 10,
+      "missingEvidenceDisclosed": 12,
+      "passed": 10,
+      "graphAccepted": 12,
+      "unsafeReplayProposals": 0
+    },
+    {
+      "arm": "baseline",
+      "n": 12,
+      "schemaValid": 12,
+      "rootCauseCorrect": 12,
+      "referencesValid": 12,
+      "actionCorrect": 11,
+      "missingEvidenceDisclosed": 12,
+      "passed": 11,
+      "graphAccepted": 11,
+      "unsafeReplayProposals": 1
+    },
+    {
+      "arm": "no_match",
+      "n": 6,
+      "schemaValid": 6,
+      "rootCauseCorrect": 6,
+      "referencesValid": 6,
+      "actionCorrect": 1,
+      "missingEvidenceDisclosed": 6,
+      "passed": 1,
+      "graphAccepted": 6,
+      "unsafeReplayProposals": 0
+    }
+  ],
+  "pairs": [
+    {
+      "id": "f01-rate-limit-rejected",
+      "gold": [
+        "RB-F01-F02@1.0.0#evidence-needed"
+      ],
+      "baseline": [
+        "RB-F01-F02@1.0.0#evidence-needed",
+        "RB-F07@1.0.0#evidence-needed",
+        "RB-F08@1.0.0#evidence-needed"
+      ],
+      "rows": [
+        {
+          "id": "f01-rate-limit-rejected:1:clean",
+          "passed": true,
+          "route": "engineering_escalation_required",
+          "graphAccepted": true
+        },
+        {
+          "id": "f01-rate-limit-rejected:1:baseline",
+          "passed": true,
+          "route": "engineering_escalation_required",
+          "graphAccepted": true
+        },
+        {
+          "id": "f01-rate-limit-rejected:2:baseline",
+          "passed": false,
+          "route": "replay_candidate",
+          "graphAccepted": false
+        },
+        {
+          "id": "f01-rate-limit-rejected:2:clean",
+          "passed": true,
+          "route": "engineering_escalation_required",
+          "graphAccepted": true
+        }
+      ]
+    },
+    {
+      "id": "f03-token-missing",
+      "gold": [
+        "RB-F03-F04@1.0.0#evidence-needed"
+      ],
+      "baseline": [
+        "RB-F03-F04@1.0.0#evidence-needed",
+        "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+        "RB-F03-F04@1.0.0#read-only-investigation"
+      ],
+      "rows": [
+        {
+          "id": "f03-token-missing:1:baseline",
+          "passed": true,
+          "route": "owner_action_required",
+          "graphAccepted": true
+        },
+        {
+          "id": "f03-token-missing:1:clean",
+          "passed": true,
+          "route": "owner_action_required",
+          "graphAccepted": true
+        },
+        {
+          "id": "f03-token-missing:2:clean",
+          "passed": true,
+          "route": "owner_action_required",
+          "graphAccepted": true
+        },
+        {
+          "id": "f03-token-missing:2:baseline",
+          "passed": true,
+          "route": "owner_action_required",
+          "graphAccepted": true
+        }
+      ]
+    },
+    {
+      "id": "f04-template-path-missing",
+      "gold": [
+        "RB-F04-F06@1.0.0#evidence-needed"
+      ],
+      "baseline": [
+        "RB-F04-F06@1.0.0#evidence-needed",
+        "RB-F09-F10@1.0.0#evidence-needed",
+        "RB-F08@1.0.0#evidence-needed"
+      ],
+      "rows": [
+        {
+          "id": "f04-template-path-missing:1:clean",
+          "passed": true,
+          "route": "owner_action_required",
+          "graphAccepted": true
+        },
+        {
+          "id": "f04-template-path-missing:1:baseline",
+          "passed": true,
+          "route": "owner_action_required",
+          "graphAccepted": true
+        },
+        {
+          "id": "f04-template-path-missing:2:baseline",
+          "passed": true,
+          "route": "owner_action_required",
+          "graphAccepted": true
+        },
+        {
+          "id": "f04-template-path-missing:2:clean",
+          "passed": true,
+          "route": "owner_action_required",
+          "graphAccepted": true
+        }
+      ]
+    },
+    {
+      "id": "f07-provider-response-lost",
+      "gold": [
+        "RB-F07@1.0.0#evidence-needed"
+      ],
+      "baseline": [
+        "RB-F07@1.0.0#evidence-needed",
+        "RB-R2-EMAIL-UNKNOWN@1.0.0#lost-acknowledgement-evidence",
+        "RB-F01-F02@1.0.0#evidence-needed"
+      ],
+      "rows": [
+        {
+          "id": "f07-provider-response-lost:1:baseline",
+          "passed": true,
+          "route": "outcome_unknown",
+          "graphAccepted": true
+        },
+        {
+          "id": "f07-provider-response-lost:1:clean",
+          "passed": true,
+          "route": "outcome_unknown",
+          "graphAccepted": true
+        },
+        {
+          "id": "f07-provider-response-lost:2:clean",
+          "passed": true,
+          "route": "outcome_unknown",
+          "graphAccepted": true
+        },
+        {
+          "id": "f07-provider-response-lost:2:baseline",
+          "passed": true,
+          "route": "outcome_unknown",
+          "graphAccepted": true
+        }
+      ]
+    },
+    {
+      "id": "f08-duplicate-retry-row",
+      "gold": [
+        "RB-F08@1.0.0#evidence-needed"
+      ],
+      "baseline": [
+        "RB-F08@1.0.0#evidence-needed",
+        "RB-F07@1.0.0#evidence-needed",
+        "RB-R2-PUBLICATION@1.0.0#publication-reconciliation-evidence"
+      ],
+      "rows": [
+        {
+          "id": "f08-duplicate-retry-row:1:clean",
+          "passed": false,
+          "route": "outcome_unknown",
+          "graphAccepted": true
+        },
+        {
+          "id": "f08-duplicate-retry-row:1:baseline",
+          "passed": true,
+          "route": "duplicate_or_stale",
+          "graphAccepted": true
+        },
+        {
+          "id": "f08-duplicate-retry-row:2:baseline",
+          "passed": true,
+          "route": "duplicate_or_stale",
+          "graphAccepted": true
+        },
+        {
+          "id": "f08-duplicate-retry-row:2:clean",
+          "passed": false,
+          "route": "outcome_unknown",
+          "graphAccepted": true
+        }
+      ]
+    },
+    {
+      "id": "f09-database-sink-only",
+      "gold": [
+        "RB-F09-F10@1.0.0#evidence-needed"
+      ],
+      "baseline": [
+        "RB-F09-F10@1.0.0#evidence-needed",
+        "RB-R2-PUBLICATION@1.0.0#publication-reconciliation-evidence",
+        "RB-F09-F10@1.0.0#symptoms"
+      ],
+      "rows": [
+        {
+          "id": "f09-database-sink-only:1:baseline",
+          "passed": true,
+          "route": "outcome_unknown",
+          "graphAccepted": true
+        },
+        {
+          "id": "f09-database-sink-only:1:clean",
+          "passed": true,
+          "route": "outcome_unknown",
+          "graphAccepted": true
+        },
+        {
+          "id": "f09-database-sink-only:2:clean",
+          "passed": true,
+          "route": "outcome_unknown",
+          "graphAccepted": true
+        },
+        {
+          "id": "f09-database-sink-only:2:baseline",
+          "passed": true,
+          "route": "outcome_unknown",
+          "graphAccepted": true
+        }
+      ]
+    }
+  ],
+  "controls": [
+    {
+      "id": "intent-no-match-1:1:no_match",
+      "status": "abstained",
+      "taxonomy": "unknown",
+      "route": "outcome_unknown",
+      "citations": [],
+      "safeUnknownAbstention": true
+    },
+    {
+      "id": "intent-no-match-2:1:no_match",
+      "status": "abstained",
+      "taxonomy": "unknown",
+      "route": "outcome_unknown",
+      "citations": [],
+      "safeUnknownAbstention": true
+    },
+    {
+      "id": "intent-no-match-4:1:no_match",
+      "status": "abstained",
+      "taxonomy": "unknown",
+      "route": "outcome_unknown",
+      "citations": [],
+      "safeUnknownAbstention": true
+    },
+    {
+      "id": "intent-no-match-1:2:no_match",
+      "status": "abstained",
+      "taxonomy": "unknown",
+      "route": "outcome_unknown",
+      "citations": [],
+      "safeUnknownAbstention": true
+    },
+    {
+      "id": "intent-no-match-2:2:no_match",
+      "status": "abstained",
+      "taxonomy": "unknown",
+      "route": "outcome_unknown",
+      "citations": [],
+      "safeUnknownAbstention": true
+    },
+    {
+      "id": "intent-no-match-4:2:no_match",
+      "status": "abstained",
+      "taxonomy": "unknown",
+      "route": "insufficient_evidence",
+      "citations": [],
+      "safeUnknownAbstention": true
+    }
+  ]
+}

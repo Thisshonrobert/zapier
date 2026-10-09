@@ -1,0 +1,927 @@
+{
+  "datasetHash": "d1b0cb32bdf32a84ba448b612a25c82b941eb014ce9987137ecb58d344d35ff9",
+  "reportHash": "1b9a6d9eced00cb5807b7e7f1fdbdd3e9ea68cc49044aaac1814369ae88b6d95",
+  "rows": [
+    {
+      "id": "r21-recorded-cooldown-1",
+      "query": "Telegram recorded a retry_after duration; which response timestamp starts the waiting period?",
+      "intent": null,
+      "relevant": [
+        "RB-R2-COOLDOWN@1.0.0#cooldown-evidence"
+      ],
+      "returned": [
+        "RB-R2-COOLDOWN@1.0.0#cooldown-evidence",
+        "RB-F01-F02@1.0.0#simulated-example",
+        "RB-F01-F02@1.0.0#verification-rollback-or-escalation"
+      ],
+      "missingGold": [],
+      "extraSections": [
+        {
+          "citation": "RB-F01-F02@1.0.0#simulated-example",
+          "sectionIntent": null,
+          "suspectedIntentMismatch": false
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#verification-rollback-or-escalation",
+          "sectionIntent": null,
+          "suspectedIntentMismatch": false
+        }
+      ]
+    },
+    {
+      "id": "r21-recorded-cooldown-2",
+      "query": "How should a recorded Telegram 429 response time and retry_after be combined into a cooldown deadline?",
+      "intent": null,
+      "relevant": [
+        "RB-R2-COOLDOWN@1.0.0#cooldown-evidence"
+      ],
+      "returned": [
+        "RB-R2-COOLDOWN@1.0.0#cooldown-evidence",
+        "RB-F01-F02@1.0.0#allowed-remediation",
+        "RB-F01-F02@1.0.0#simulated-example"
+      ],
+      "missingGold": [],
+      "extraSections": [
+        {
+          "citation": "RB-F01-F02@1.0.0#allowed-remediation",
+          "sectionIntent": "REMEDIATION",
+          "suspectedIntentMismatch": false
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#simulated-example",
+          "sectionIntent": null,
+          "suspectedIntentMismatch": false
+        }
+      ]
+    },
+    {
+      "id": "r21-recorded-cooldown-3",
+      "query": "The messaging request was explicitly refused for throttling. What clock evidence determines when waiting ends?",
+      "intent": "EVIDENCE_GATHERING",
+      "relevant": [
+        "RB-R2-COOLDOWN@1.0.0#cooldown-evidence"
+      ],
+      "returned": [
+        "RB-R2-COOLDOWN@1.0.0#cooldown-evidence",
+        "RB-F01-F02@1.0.0#read-only-investigation",
+        "RB-F01-F02@1.0.0#replay-and-approval"
+      ],
+      "missingGold": [],
+      "extraSections": [
+        {
+          "citation": "RB-F01-F02@1.0.0#read-only-investigation",
+          "sectionIntent": "ROOT_CAUSE",
+          "suspectedIntentMismatch": true
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#replay-and-approval",
+          "sectionIntent": "CONSTRAINTS",
+          "suspectedIntentMismatch": true
+        }
+      ]
+    },
+    {
+      "id": "r21-recorded-cooldown-4",
+      "query": "A Telegram rejection says wait 45 seconds. Does time spent queued prove that the cooldown has elapsed?",
+      "intent": null,
+      "relevant": [
+        "RB-R2-COOLDOWN@1.0.0#cooldown-evidence"
+      ],
+      "returned": [
+        "RB-R2-COOLDOWN@1.0.0#cooldown-evidence",
+        "RB-F01-F02@1.0.0#allowed-remediation",
+        "RB-F01-F02@1.0.0#replay-and-approval"
+      ],
+      "missingGold": [],
+      "extraSections": [
+        {
+          "citation": "RB-F01-F02@1.0.0#allowed-remediation",
+          "sectionIntent": "REMEDIATION",
+          "suspectedIntentMismatch": false
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#replay-and-approval",
+          "sectionIntent": "CONSTRAINTS",
+          "suspectedIntentMismatch": false
+        }
+      ]
+    },
+    {
+      "id": "r21-bot-removal-1",
+      "query": "A chat administrator removed our bot; what captured information supports an owner permission repair?",
+      "intent": "EVIDENCE_GATHERING",
+      "relevant": [
+        "RB-R2-DESTINATION@1.0.0#destination-permission-evidence"
+      ],
+      "returned": [
+        "RB-R2-DESTINATION@1.0.0#destination-permission-evidence",
+        "RB-F03-F04@1.0.0#allowed-remediation"
+      ],
+      "missingGold": [],
+      "extraSections": [
+        {
+          "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+          "sectionIntent": "REMEDIATION",
+          "suspectedIntentMismatch": true
+        }
+      ]
+    },
+    {
+      "id": "r21-bot-removal-2",
+      "query": "Messages stopped after the robot lost its membership in the destination conversation.",
+      "intent": null,
+      "relevant": [
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-R2-DESTINATION@1.0.0#destination-permission-evidence"
+      ],
+      "returned": [
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-R2-DESTINATION@1.0.0#destination-permission-evidence"
+      ],
+      "missingGold": [],
+      "extraSections": []
+    },
+    {
+      "id": "r21-bot-removal-3",
+      "query": "Telegram says the bot cannot post to the channel after an administrator changed its permissions.",
+      "intent": "CONSTRAINTS",
+      "relevant": [
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-R2-DESTINATION@1.0.0#destination-permission-evidence"
+      ],
+      "returned": [
+        "RB-R2-DESTINATION@1.0.0#destination-permission-evidence",
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F03-F04@1.0.0#simulated-example"
+      ],
+      "missingGold": [],
+      "extraSections": [
+        {
+          "citation": "RB-F03-F04@1.0.0#simulated-example",
+          "sectionIntent": null,
+          "suspectedIntentMismatch": false
+        }
+      ]
+    },
+    {
+      "id": "r21-bot-removal-4",
+      "query": "The messaging robot was expelled from its chat. Can investigation send a test to check restored access?",
+      "intent": "CONSTRAINTS",
+      "relevant": [
+        "RB-F03-F04@1.0.0#forbidden-actions",
+        "RB-R2-DESTINATION@1.0.0#destination-permission-evidence"
+      ],
+      "returned": [
+        "RB-R2-DESTINATION@1.0.0#destination-permission-evidence",
+        "RB-F01-F02@1.0.0#allowed-remediation",
+        "RB-F03-F04@1.0.0#forbidden-actions"
+      ],
+      "missingGold": [],
+      "extraSections": [
+        {
+          "citation": "RB-F01-F02@1.0.0#allowed-remediation",
+          "sectionIntent": "REMEDIATION",
+          "suspectedIntentMismatch": true
+        }
+      ]
+    },
+    {
+      "id": "r21-recipient-validation-1",
+      "query": "Email recipient validation rejected the destination before sending; what non-secret field checks are appropriate?",
+      "intent": null,
+      "relevant": [
+        "RB-R2-EMAIL-REJECT@1.0.0#email-rejection-evidence"
+      ],
+      "returned": [
+        "RB-R2-EMAIL-REJECT@1.0.0#email-rejection-evidence",
+        "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+        "RB-R2-EMAIL-UNKNOWN@1.0.0#lost-acknowledgement-evidence"
+      ],
+      "missingGold": [],
+      "extraSections": [
+        {
+          "citation": "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+          "sectionIntent": null,
+          "suspectedIntentMismatch": false
+        },
+        {
+          "citation": "RB-R2-EMAIL-UNKNOWN@1.0.0#lost-acknowledgement-evidence",
+          "sectionIntent": null,
+          "suspectedIntentMismatch": false
+        }
+      ]
+    },
+    {
+      "id": "r21-recipient-validation-2",
+      "query": "The mail SDK explicitly rejected a malformed recipient field. How should the owner correct configuration?",
+      "intent": "REMEDIATION",
+      "relevant": [
+        "RB-R2-EMAIL-REJECT@1.0.0#email-rejection-evidence"
+      ],
+      "returned": [
+        "RB-R2-EMAIL-REJECT@1.0.0#email-rejection-evidence",
+        "RB-R2-EMAIL-UNKNOWN@1.0.0#lost-acknowledgement-evidence",
+        "RB-F01-F02@1.0.0#read-only-investigation"
+      ],
+      "missingGold": [],
+      "extraSections": [
+        {
+          "citation": "RB-R2-EMAIL-UNKNOWN@1.0.0#lost-acknowledgement-evidence",
+          "sectionIntent": null,
+          "suspectedIntentMismatch": false
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#read-only-investigation",
+          "sectionIntent": "ROOT_CAUSE",
+          "suspectedIntentMismatch": true
+        }
+      ]
+    },
+    {
+      "id": "r21-recipient-validation-3",
+      "query": "A local address validation failure prevented the email call. Is email replay supported after repairing the recipient?",
+      "intent": null,
+      "relevant": [
+        "RB-F03-F04@1.0.0#replay-and-approval",
+        "RB-F07@1.0.0#replay-and-approval",
+        "RB-R2-EMAIL-REJECT@1.0.0#email-rejection-evidence"
+      ],
+      "returned": [
+        "RB-R2-EMAIL-REJECT@1.0.0#email-rejection-evidence",
+        "RB-F09-F10@1.0.0#forbidden-actions",
+        "RB-F07@1.0.0#replay-and-approval"
+      ],
+      "missingGold": [
+        "RB-F03-F04@1.0.0#replay-and-approval"
+      ],
+      "extraSections": [
+        {
+          "citation": "RB-F09-F10@1.0.0#forbidden-actions",
+          "sectionIntent": "CONSTRAINTS",
+          "suspectedIntentMismatch": false
+        }
+      ]
+    },
+    {
+      "id": "r21-recipient-validation-4",
+      "query": "Captured evidence shows an invalid recipient structure, with no request sent. Which configuration repair guidance applies?",
+      "intent": null,
+      "relevant": [
+        "RB-F03-F04@1.0.0#allowed-remediation",
+        "RB-R2-EMAIL-REJECT@1.0.0#email-rejection-evidence"
+      ],
+      "returned": [
+        "RB-R2-EMAIL-REJECT@1.0.0#email-rejection-evidence",
+        "RB-R2-EMAIL-UNKNOWN@1.0.0#lost-acknowledgement-evidence",
+        "RB-F03-F04@1.0.0#allowed-remediation"
+      ],
+      "missingGold": [],
+      "extraSections": [
+        {
+          "citation": "RB-R2-EMAIL-UNKNOWN@1.0.0#lost-acknowledgement-evidence",
+          "sectionIntent": null,
+          "suspectedIntentMismatch": false
+        }
+      ]
+    },
+    {
+      "id": "r21-mail-socket-loss-1",
+      "query": "The mail transport disconnected after the send started, and there is no acknowledgement.",
+      "intent": null,
+      "relevant": [
+        "RB-F01-F02@1.0.0#read-only-investigation",
+        "RB-R2-EMAIL-UNKNOWN@1.0.0#lost-acknowledgement-evidence"
+      ],
+      "returned": [
+        "RB-R2-EMAIL-UNKNOWN@1.0.0#lost-acknowledgement-evidence",
+        "RB-F01-F02@1.0.0#read-only-investigation"
+      ],
+      "missingGold": [],
+      "extraSections": []
+    },
+    {
+      "id": "r21-mail-socket-loss-2",
+      "query": "An email socket closed before we received an answer; the remote system could already have accepted the message.",
+      "intent": null,
+      "relevant": [
+        "RB-R2-EMAIL-UNKNOWN@1.0.0#lost-acknowledgement-evidence"
+      ],
+      "returned": [
+        "RB-R2-EMAIL-UNKNOWN@1.0.0#lost-acknowledgement-evidence"
+      ],
+      "missingGold": [],
+      "extraSections": []
+    },
+    {
+      "id": "r21-mail-socket-loss-3",
+      "query": "A mail send timed out after transmission began. Is an expired lease proof that nobody received it?",
+      "intent": null,
+      "relevant": [
+        "RB-R2-EMAIL-UNKNOWN@1.0.0#lost-acknowledgement-evidence"
+      ],
+      "returned": [
+        "RB-R2-EMAIL-UNKNOWN@1.0.0#lost-acknowledgement-evidence",
+        "RB-F07@1.0.0#simulated-example",
+        "RB-F07@1.0.0#forbidden-actions"
+      ],
+      "missingGold": [],
+      "extraSections": [
+        {
+          "citation": "RB-F07@1.0.0#simulated-example",
+          "sectionIntent": null,
+          "suspectedIntentMismatch": false
+        },
+        {
+          "citation": "RB-F07@1.0.0#forbidden-actions",
+          "sectionIntent": "CONSTRAINTS",
+          "suspectedIntentMismatch": false
+        }
+      ]
+    },
+    {
+      "id": "r21-mail-socket-loss-4",
+      "query": "The email connection vanished while waiting for the server response. What reconciliation evidence is required?",
+      "intent": "EVIDENCE_GATHERING",
+      "relevant": [
+        "RB-F09-F10@1.0.0#evidence-needed",
+        "RB-R2-EMAIL-UNKNOWN@1.0.0#lost-acknowledgement-evidence"
+      ],
+      "returned": [
+        "RB-R2-EMAIL-UNKNOWN@1.0.0#lost-acknowledgement-evidence",
+        "RB-R2-EMAIL-REJECT@1.0.0#email-rejection-evidence",
+        "RB-F09-F10@1.0.0#evidence-needed"
+      ],
+      "missingGold": [],
+      "extraSections": [
+        {
+          "citation": "RB-R2-EMAIL-REJECT@1.0.0#email-rejection-evidence",
+          "sectionIntent": null,
+          "suspectedIntentMismatch": false
+        }
+      ]
+    },
+    {
+      "id": "r21-pending-predecessor-1",
+      "query": "A successor arrived while its predecessor is PENDING; which ordering evidence should be inspected?",
+      "intent": "EVIDENCE_GATHERING",
+      "relevant": [
+        "RB-F04-F06@1.0.0#evidence-needed",
+        "RB-F08@1.0.0#evidence-needed",
+        "RB-R2-ORDERING@1.0.0#predecessor-ordering-evidence"
+      ],
+      "returned": [
+        "RB-R2-ORDERING@1.0.0#predecessor-ordering-evidence",
+        "RB-F04-F06@1.0.0#evidence-needed",
+        "RB-F08@1.0.0#evidence-needed"
+      ],
+      "missingGold": [],
+      "extraSections": []
+    },
+    {
+      "id": "r21-pending-predecessor-2",
+      "query": "Workflow stage three is ready but stage two has not finished. Can the later stage run?",
+      "intent": null,
+      "relevant": [
+        "RB-R2-ORDERING@1.0.0#predecessor-ordering-evidence"
+      ],
+      "returned": [
+        "RB-R2-ORDERING@1.0.0#predecessor-ordering-evidence"
+      ],
+      "missingGold": [],
+      "extraSections": []
+    },
+    {
+      "id": "r21-pending-predecessor-3",
+      "query": "Captured predecessor state is FAILED although the next stage event exists. What should investigation recommend?",
+      "intent": null,
+      "relevant": [
+        "RB-R2-ORDERING@1.0.0#predecessor-ordering-evidence"
+      ],
+      "returned": [
+        "RB-R2-ORDERING@1.0.0#predecessor-ordering-evidence",
+        "RB-F09-F10@1.0.0#evidence-needed",
+        "RB-F08@1.0.0#evidence-needed"
+      ],
+      "missingGold": [],
+      "extraSections": [
+        {
+          "citation": "RB-F09-F10@1.0.0#evidence-needed",
+          "sectionIntent": "EVIDENCE_GATHERING",
+          "suspectedIntentMismatch": false
+        },
+        {
+          "citation": "RB-F08@1.0.0#evidence-needed",
+          "sectionIntent": "EVIDENCE_GATHERING",
+          "suspectedIntentMismatch": false
+        }
+      ]
+    },
+    {
+      "id": "r21-pending-predecessor-4",
+      "query": "A predecessor record is missing. Does the numerical stage index establish safe dependency ordering?",
+      "intent": null,
+      "relevant": [
+        "RB-R2-ORDERING@1.0.0#predecessor-ordering-evidence"
+      ],
+      "returned": [
+        "RB-R2-ORDERING@1.0.0#predecessor-ordering-evidence",
+        "RB-F01-F02@1.0.0#evidence-needed",
+        "RB-F04-F06@1.0.0#evidence-needed"
+      ],
+      "missingGold": [],
+      "extraSections": [
+        {
+          "citation": "RB-F01-F02@1.0.0#evidence-needed",
+          "sectionIntent": "EVIDENCE_GATHERING",
+          "suspectedIntentMismatch": false
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#evidence-needed",
+          "sectionIntent": "EVIDENCE_GATHERING",
+          "suspectedIntentMismatch": false
+        }
+      ]
+    },
+    {
+      "id": "r21-broker-outage-outbox-1",
+      "query": "Kafka is unavailable and a durable failure outbox row remains unpublished. Which reconciliation guidance applies?",
+      "intent": null,
+      "relevant": [
+        "RB-R2-PUBLICATION@1.0.0#publication-reconciliation-evidence"
+      ],
+      "returned": [
+        "RB-R2-PUBLICATION@1.0.0#publication-reconciliation-evidence",
+        "RB-F08@1.0.0#simulated-example",
+        "RB-F09-F10@1.0.0#sources"
+      ],
+      "missingGold": [],
+      "extraSections": [
+        {
+          "citation": "RB-F08@1.0.0#simulated-example",
+          "sectionIntent": null,
+          "suspectedIntentMismatch": false
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#sources",
+          "sectionIntent": null,
+          "suspectedIntentMismatch": false
+        }
+      ]
+    },
+    {
+      "id": "r21-broker-outage-outbox-2",
+      "query": "The saved dead-letter publication has no broker acknowledgement during an outage.",
+      "intent": null,
+      "relevant": [
+        "RB-R2-PUBLICATION@1.0.0#publication-reconciliation-evidence"
+      ],
+      "returned": [
+        "RB-R2-PUBLICATION@1.0.0#publication-reconciliation-evidence",
+        "RB-R2-EMAIL-UNKNOWN@1.0.0#lost-acknowledgement-evidence"
+      ],
+      "missingGold": [],
+      "extraSections": [
+        {
+          "citation": "RB-R2-EMAIL-UNKNOWN@1.0.0#lost-acknowledgement-evidence",
+          "sectionIntent": null,
+          "suspectedIntentMismatch": false
+        }
+      ]
+    },
+    {
+      "id": "r21-broker-outage-outbox-3",
+      "query": "A failure is persisted but its notification cannot reach Kafka. Should investigation mark the row published?",
+      "intent": "CONSTRAINTS",
+      "relevant": [
+        "RB-R2-PUBLICATION@1.0.0#publication-reconciliation-evidence"
+      ],
+      "returned": [
+        "RB-R2-PUBLICATION@1.0.0#publication-reconciliation-evidence",
+        "RB-F09-F10@1.0.0#sources",
+        "RB-F08@1.0.0#simulated-example"
+      ],
+      "missingGold": [],
+      "extraSections": [
+        {
+          "citation": "RB-F09-F10@1.0.0#sources",
+          "sectionIntent": null,
+          "suspectedIntentMismatch": false
+        },
+        {
+          "citation": "RB-F08@1.0.0#simulated-example",
+          "sectionIntent": null,
+          "suspectedIntentMismatch": false
+        }
+      ]
+    },
+    {
+      "id": "r21-broker-outage-outbox-4",
+      "query": "The broker rejected the DLQ outbox publication. Does that publication failure establish external non-delivery?",
+      "intent": null,
+      "relevant": [
+        "RB-F07@1.0.0#evidence-needed",
+        "RB-R2-PUBLICATION@1.0.0#publication-reconciliation-evidence"
+      ],
+      "returned": [
+        "RB-R2-PUBLICATION@1.0.0#publication-reconciliation-evidence",
+        "RB-F09-F10@1.0.0#symptoms",
+        "RB-F07@1.0.0#evidence-needed"
+      ],
+      "missingGold": [],
+      "extraSections": [
+        {
+          "citation": "RB-F09-F10@1.0.0#symptoms",
+          "sectionIntent": null,
+          "suspectedIntentMismatch": false
+        }
+      ]
+    },
+    {
+      "id": "r21-template-empty-replacement-1",
+      "query": "The parser replaced an absent template field with empty text. How should the missing path be reported?",
+      "intent": null,
+      "relevant": [
+        "RB-F04-F06@1.0.0#read-only-investigation"
+      ],
+      "returned": [
+        "RB-F04-F06@1.0.0#read-only-investigation",
+        "RB-F04-F06@1.0.0#symptoms",
+        "RB-F03-F04@1.0.0#evidence-needed"
+      ],
+      "missingGold": [],
+      "extraSections": [
+        {
+          "citation": "RB-F04-F06@1.0.0#symptoms",
+          "sectionIntent": null,
+          "suspectedIntentMismatch": false
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#evidence-needed",
+          "sectionIntent": "EVIDENCE_GATHERING",
+          "suspectedIntentMismatch": false
+        }
+      ]
+    },
+    {
+      "id": "r21-template-empty-replacement-2",
+      "query": "An input references a field that does not exist; the rendered message is blank rather than a validation exception.",
+      "intent": null,
+      "relevant": [
+        "RB-F04-F06@1.0.0#read-only-investigation"
+      ],
+      "returned": [
+        "RB-F04-F06@1.0.0#read-only-investigation",
+        "RB-R2-EMAIL-REJECT@1.0.0#email-rejection-evidence",
+        "RB-F03-F04@1.0.0#read-only-investigation"
+      ],
+      "missingGold": [],
+      "extraSections": [
+        {
+          "citation": "RB-R2-EMAIL-REJECT@1.0.0#email-rejection-evidence",
+          "sectionIntent": null,
+          "suspectedIntentMismatch": false
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+          "sectionIntent": "ROOT_CAUSE",
+          "suspectedIntentMismatch": false
+        }
+      ]
+    },
+    {
+      "id": "r21-template-empty-replacement-3",
+      "query": "A workflow placeholder resolves to an empty string because the payload lacks the requested property.",
+      "intent": null,
+      "relevant": [
+        "RB-F04-F06@1.0.0#read-only-investigation"
+      ],
+      "returned": [
+        "RB-F04-F06@1.0.0#read-only-investigation"
+      ],
+      "missingGold": [],
+      "extraSections": []
+    },
+    {
+      "id": "r21-template-empty-replacement-4",
+      "query": "Should investigation report the rendered value or the absent template path when interpolation silently empties it?",
+      "intent": null,
+      "relevant": [
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F04-F06@1.0.0#read-only-investigation"
+      ],
+      "returned": [
+        "RB-F04-F06@1.0.0#read-only-investigation",
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F03-F04@1.0.0#evidence-needed"
+      ],
+      "missingGold": [],
+      "extraSections": [
+        {
+          "citation": "RB-F03-F04@1.0.0#evidence-needed",
+          "sectionIntent": "EVIDENCE_GATHERING",
+          "suspectedIntentMismatch": false
+        }
+      ]
+    },
+    {
+      "id": "r21-duplicate-failure-investigation-1",
+      "query": "Two failure notifications share the same source reference. Should they create separate investigations?",
+      "intent": null,
+      "relevant": [
+        "RB-F08@1.0.0#read-only-investigation"
+      ],
+      "returned": [
+        "RB-F09-F10@1.0.0#read-only-investigation",
+        "RB-F08@1.0.0#read-only-investigation",
+        "RB-F07@1.0.0#read-only-investigation"
+      ],
+      "missingGold": [],
+      "extraSections": [
+        {
+          "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+          "sectionIntent": "ROOT_CAUSE",
+          "suspectedIntentMismatch": false
+        },
+        {
+          "citation": "RB-F07@1.0.0#read-only-investigation",
+          "sectionIntent": "ROOT_CAUSE",
+          "suspectedIntentMismatch": false
+        }
+      ]
+    },
+    {
+      "id": "r21-duplicate-failure-investigation-2",
+      "query": "Repeated investigations refer to an identical failure identity. What deduplication check is needed?",
+      "intent": null,
+      "relevant": [
+        "RB-F08@1.0.0#read-only-investigation"
+      ],
+      "returned": [
+        "RB-F08@1.0.0#read-only-investigation",
+        "RB-F08@1.0.0#symptoms",
+        "RB-F09-F10@1.0.0#read-only-investigation"
+      ],
+      "missingGold": [],
+      "extraSections": [
+        {
+          "citation": "RB-F08@1.0.0#symptoms",
+          "sectionIntent": null,
+          "suspectedIntentMismatch": false
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+          "sectionIntent": "ROOT_CAUSE",
+          "suspectedIntentMismatch": false
+        }
+      ]
+    },
+    {
+      "id": "r21-duplicate-failure-investigation-3",
+      "query": "The same canonical failure was investigated twice after broker redelivery; distinguish this from a new failure.",
+      "intent": "ROOT_CAUSE",
+      "relevant": [
+        "RB-F08@1.0.0#read-only-investigation"
+      ],
+      "returned": [
+        "RB-F08@1.0.0#read-only-investigation",
+        "RB-F08@1.0.0#symptoms",
+        "RB-F07@1.0.0#read-only-investigation"
+      ],
+      "missingGold": [],
+      "extraSections": [
+        {
+          "citation": "RB-F08@1.0.0#symptoms",
+          "sectionIntent": null,
+          "suspectedIntentMismatch": false
+        },
+        {
+          "citation": "RB-F07@1.0.0#read-only-investigation",
+          "sectionIntent": "ROOT_CAUSE",
+          "suspectedIntentMismatch": false
+        }
+      ]
+    },
+    {
+      "id": "r21-duplicate-failure-investigation-4",
+      "query": "Which read-only procedure deduplicates identical source references before diagnosing duplicate failure delivery?",
+      "intent": null,
+      "relevant": [
+        "RB-F08@1.0.0#read-only-investigation"
+      ],
+      "returned": [
+        "RB-F08@1.0.0#read-only-investigation",
+        "RB-F01-F02@1.0.0#read-only-investigation",
+        "RB-F07@1.0.0#read-only-investigation"
+      ],
+      "missingGold": [],
+      "extraSections": [
+        {
+          "citation": "RB-F01-F02@1.0.0#read-only-investigation",
+          "sectionIntent": "ROOT_CAUSE",
+          "suspectedIntentMismatch": false
+        },
+        {
+          "citation": "RB-F07@1.0.0#read-only-investigation",
+          "sectionIntent": "ROOT_CAUSE",
+          "suspectedIntentMismatch": false
+        }
+      ]
+    },
+    {
+      "id": "r21-missing-request-evidence-1",
+      "query": "The only evidence is a provider error string. What request phase and attempt details are missing?",
+      "intent": "EVIDENCE_GATHERING",
+      "relevant": [
+        "RB-F01-F02@1.0.0#evidence-needed",
+        "RB-F03-F04@1.0.0#evidence-needed",
+        "RB-F07@1.0.0#evidence-needed"
+      ],
+      "returned": [
+        "RB-F01-F02@1.0.0#evidence-needed",
+        "RB-F07@1.0.0#evidence-needed",
+        "RB-F03-F04@1.0.0#evidence-needed"
+      ],
+      "missingGold": [],
+      "extraSections": []
+    },
+    {
+      "id": "r21-missing-request-evidence-2",
+      "query": "No safe status, completion timestamp or retry delay was captured for the Telegram failure.",
+      "intent": null,
+      "relevant": [
+        "RB-F01-F02@1.0.0#evidence-needed",
+        "RB-R2-COOLDOWN@1.0.0#cooldown-evidence"
+      ],
+      "returned": [
+        "RB-R2-COOLDOWN@1.0.0#cooldown-evidence",
+        "RB-F01-F02@1.0.0#evidence-needed",
+        "RB-F01-F02@1.0.0#simulated-example"
+      ],
+      "missingGold": [],
+      "extraSections": [
+        {
+          "citation": "RB-F01-F02@1.0.0#simulated-example",
+          "sectionIntent": null,
+          "suspectedIntentMismatch": false
+        }
+      ]
+    },
+    {
+      "id": "r21-missing-request-evidence-3",
+      "query": "Which provider request facts are necessary before interpreting a reported rate-limit error?",
+      "intent": null,
+      "relevant": [
+        "RB-F01-F02@1.0.0#evidence-needed"
+      ],
+      "returned": [
+        "RB-F01-F02@1.0.0#evidence-needed",
+        "RB-F01-F02@1.0.0#symptoms",
+        "RB-F07@1.0.0#read-only-investigation"
+      ],
+      "missingGold": [],
+      "extraSections": [
+        {
+          "citation": "RB-F01-F02@1.0.0#symptoms",
+          "sectionIntent": null,
+          "suspectedIntentMismatch": false
+        },
+        {
+          "citation": "RB-F07@1.0.0#read-only-investigation",
+          "sectionIntent": "ROOT_CAUSE",
+          "suspectedIntentMismatch": false
+        }
+      ]
+    },
+    {
+      "id": "r21-missing-request-evidence-4",
+      "query": "A final message says the provider failed but there are no bounded outcomes or current fingerprints. What evidence is needed?",
+      "intent": "EVIDENCE_GATHERING",
+      "relevant": [
+        "RB-F01-F02@1.0.0#evidence-needed",
+        "RB-F07@1.0.0#evidence-needed"
+      ],
+      "returned": [
+        "RB-F01-F02@1.0.0#evidence-needed",
+        "RB-F07@1.0.0#evidence-needed",
+        "RB-F09-F10@1.0.0#evidence-needed"
+      ],
+      "missingGold": [],
+      "extraSections": [
+        {
+          "citation": "RB-F09-F10@1.0.0#evidence-needed",
+          "sectionIntent": "EVIDENCE_GATHERING",
+          "suspectedIntentMismatch": false
+        }
+      ]
+    },
+    {
+      "id": "r21-dashboard-styling-1",
+      "query": "How do I align a dashboard sidebar using CSS grid?",
+      "intent": null,
+      "relevant": [],
+      "returned": [],
+      "missingGold": [],
+      "extraSections": []
+    },
+    {
+      "id": "r21-dashboard-styling-2",
+      "query": "Which font sizes make a workflow editor readable on a phone?",
+      "intent": null,
+      "relevant": [],
+      "returned": [],
+      "missingGold": [],
+      "extraSections": []
+    },
+    {
+      "id": "r21-dashboard-styling-3",
+      "query": "How can a dark theme retain contrast for disabled navigation links?",
+      "intent": null,
+      "relevant": [],
+      "returned": [],
+      "missingGold": [],
+      "extraSections": []
+    },
+    {
+      "id": "r21-dashboard-styling-4",
+      "query": "Recommend a responsive layout for billing settings and account tabs.",
+      "intent": null,
+      "relevant": [],
+      "returned": [],
+      "missingGold": [],
+      "extraSections": []
+    },
+    {
+      "id": "r21-billing-analysis-1",
+      "query": "Calculate subscription proration when a customer upgrades halfway through the month.",
+      "intent": null,
+      "relevant": [],
+      "returned": [],
+      "missingGold": [],
+      "extraSections": []
+    },
+    {
+      "id": "r21-billing-analysis-2",
+      "query": "How should workflow usage be converted into invoice line items?",
+      "intent": null,
+      "relevant": [],
+      "returned": [],
+      "missingGold": [],
+      "extraSections": []
+    },
+    {
+      "id": "r21-billing-analysis-3",
+      "query": "Which formula compares monthly recurring revenue across subscription tiers?",
+      "intent": null,
+      "relevant": [],
+      "returned": [],
+      "missingGold": [],
+      "extraSections": []
+    },
+    {
+      "id": "r21-billing-analysis-4",
+      "query": "Design a dashboard chart showing churn and annual contract revenue.",
+      "intent": null,
+      "relevant": [],
+      "returned": [],
+      "missingGold": [],
+      "extraSections": []
+    },
+    {
+      "id": "r21-database-capacity-1",
+      "query": "How many PostgreSQL connection pool slots should each service allocate?",
+      "intent": null,
+      "relevant": [],
+      "returned": [],
+      "missingGold": [],
+      "extraSections": []
+    },
+    {
+      "id": "r21-database-capacity-2",
+      "query": "What autovacuum settings suit a large append-only analytics table?",
+      "intent": null,
+      "relevant": [],
+      "returned": [],
+      "missingGold": [],
+      "extraSections": []
+    },
+    {
+      "id": "r21-database-capacity-3",
+      "query": "Choose PostgreSQL shared_buffers and work_mem for a memory-constrained host.",
+      "intent": null,
+      "relevant": [],
+      "returned": [],
+      "missingGold": [],
+      "extraSections": []
+    },
+    {
+      "id": "r21-database-capacity-4",
+      "query": "How do I estimate disk growth for an analytics database over two years?",
+      "intent": null,
+      "relevant": [],
+      "returned": [],
+      "missingGold": [],
+      "extraSections": []
+    }
+  ],
+  "limitation": "Extra sections are not automatically irrelevant; heading/task mismatches are heuristic flags. Existing labels were not modified."
+}

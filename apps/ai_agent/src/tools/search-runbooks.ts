@@ -148,7 +148,7 @@ function sectionId(heading: string): string {
   return value;
 }
 
-function parseRunbook(source: string, filename: string): IndexedSection[] {
+export function parseRunbook(source: string, filename: string): IndexedSection[] {
   const frontmatter = source.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n/);
   if (!frontmatter?.[1]) throw new Error(`${filename}: missing frontmatter`);
 

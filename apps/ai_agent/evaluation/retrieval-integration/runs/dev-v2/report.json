@@ -1,0 +1,574 @@
+{
+  "version": "retrieval-integration-dev-v1",
+  "createdAt": "2026-10-09T08:44:09.277Z",
+  "corpusDocuments": 6,
+  "corpusSections": 54,
+  "benchmarkHash": "584af4fc0eb3f75c1a6ee89492d04d6b9e0214477be4d572c625946d890c7f0a",
+  "savedInputHash": "a2d6ae4ff3ef0f1516fa6d14b1c08d95b707b5627dbe3bf8c0c32ab9395114f3",
+  "captureHash": "403f1af2fec048b8754fe15138fc7032749b1867c3f38d339c6f0cdd80ae3fd4",
+  "modelLoadMs": 522.4698999999999,
+  "externalCalls": 0,
+  "defaultMethod": "keyword",
+  "model": "minilm-original",
+  "target": 0.8,
+  "keyword": {
+    "positiveCount": 24,
+    "recallAt3": 1,
+    "noMatchCount": 4,
+    "noMatchAbstentions": 1
+  },
+  "minilm": {
+    "positiveCount": 24,
+    "recallAt3": 1,
+    "noMatchCount": 4,
+    "noMatchAbstentions": 3
+  },
+  "frozenParityCount": 28,
+  "restrictedSavedRankingMatchCount": 28,
+  "maximumReturnedScoreDrift": 0.03543428715652627,
+  "meanLatencyMs": 1080.8764749999998,
+  "rows": [
+    {
+      "id": "intent-transient-1",
+      "relevant": [
+        "RB-F01-F02@1.0.0#evidence-needed"
+      ],
+      "returned": [
+        "RB-F01-F02@1.0.0#evidence-needed",
+        "RB-F07@1.0.0#evidence-needed",
+        "RB-F08@1.0.0#evidence-needed"
+      ],
+      "keyword": [
+        "RB-F01-F02@1.0.0#evidence-needed",
+        "RB-F07@1.0.0#evidence-needed",
+        "RB-F08@1.0.0#evidence-needed"
+      ],
+      "latencyMs": 284.07190000000014,
+      "frozenParity": true,
+      "restrictedSavedRankingMatches": true,
+      "maximumReturnedScoreDrift": 0
+    },
+    {
+      "id": "intent-transient-2",
+      "relevant": [
+        "RB-F01-F02@1.0.0#allowed-remediation"
+      ],
+      "returned": [
+        "RB-F01-F02@1.0.0#allowed-remediation",
+        "RB-F01-F02@1.0.0#replay-and-approval",
+        "RB-F01-F02@1.0.0#simulated-example"
+      ],
+      "keyword": [
+        "RB-F01-F02@1.0.0#allowed-remediation",
+        "RB-F03-F04@1.0.0#allowed-remediation",
+        "RB-F04-F06@1.0.0#allowed-remediation"
+      ],
+      "latencyMs": 292.6113,
+      "frozenParity": true,
+      "restrictedSavedRankingMatches": true,
+      "maximumReturnedScoreDrift": 0
+    },
+    {
+      "id": "intent-transient-3",
+      "relevant": [
+        "RB-F01-F02@1.0.0#forbidden-actions"
+      ],
+      "returned": [
+        "RB-F01-F02@1.0.0#forbidden-actions",
+        "RB-F01-F02@1.0.0#symptoms",
+        "RB-F09-F10@1.0.0#forbidden-actions"
+      ],
+      "keyword": [
+        "RB-F01-F02@1.0.0#forbidden-actions",
+        "RB-F03-F04@1.0.0#forbidden-actions",
+        "RB-F04-F06@1.0.0#forbidden-actions"
+      ],
+      "latencyMs": 401.96849999999995,
+      "frozenParity": true,
+      "restrictedSavedRankingMatches": true,
+      "maximumReturnedScoreDrift": 0
+    },
+    {
+      "id": "intent-transient-4",
+      "relevant": [
+        "RB-F01-F02@1.0.0#read-only-investigation"
+      ],
+      "returned": [
+        "RB-F01-F02@1.0.0#read-only-investigation",
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F01-F02@1.0.0#symptoms"
+      ],
+      "keyword": [
+        "RB-F01-F02@1.0.0#read-only-investigation",
+        "RB-F01-F02@1.0.0#allowed-remediation",
+        "RB-F01-F02@1.0.0#symptoms"
+      ],
+      "latencyMs": 564.1898000000001,
+      "frozenParity": true,
+      "restrictedSavedRankingMatches": true,
+      "maximumReturnedScoreDrift": 0
+    },
+    {
+      "id": "intent-credentials-1",
+      "relevant": [
+        "RB-F03-F04@1.0.0#evidence-needed"
+      ],
+      "returned": [
+        "RB-F03-F04@1.0.0#evidence-needed",
+        "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+        "RB-F03-F04@1.0.0#read-only-investigation"
+      ],
+      "keyword": [
+        "RB-F03-F04@1.0.0#evidence-needed",
+        "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+        "RB-F03-F04@1.0.0#read-only-investigation"
+      ],
+      "latencyMs": 756.4853000000003,
+      "frozenParity": true,
+      "restrictedSavedRankingMatches": true,
+      "maximumReturnedScoreDrift": 0
+    },
+    {
+      "id": "intent-credentials-2",
+      "relevant": [
+        "RB-F03-F04@1.0.0#allowed-remediation"
+      ],
+      "returned": [
+        "RB-F03-F04@1.0.0#allowed-remediation",
+        "RB-F03-F04@1.0.0#replay-and-approval",
+        "RB-F03-F04@1.0.0#forbidden-actions"
+      ],
+      "keyword": [
+        "RB-F03-F04@1.0.0#allowed-remediation",
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F07@1.0.0#allowed-remediation"
+      ],
+      "latencyMs": 713.7407999999996,
+      "frozenParity": true,
+      "restrictedSavedRankingMatches": true,
+      "maximumReturnedScoreDrift": 0
+    },
+    {
+      "id": "intent-credentials-3",
+      "relevant": [
+        "RB-F03-F04@1.0.0#forbidden-actions"
+      ],
+      "returned": [
+        "RB-F03-F04@1.0.0#forbidden-actions",
+        "RB-F01-F02@1.0.0#forbidden-actions",
+        "RB-F09-F10@1.0.0#forbidden-actions"
+      ],
+      "keyword": [
+        "RB-F03-F04@1.0.0#forbidden-actions",
+        "RB-F01-F02@1.0.0#forbidden-actions",
+        "RB-F09-F10@1.0.0#forbidden-actions"
+      ],
+      "latencyMs": 1126.8670999999995,
+      "frozenParity": true,
+      "restrictedSavedRankingMatches": true,
+      "maximumReturnedScoreDrift": 0
+    },
+    {
+      "id": "intent-credentials-4",
+      "relevant": [
+        "RB-F03-F04@1.0.0#read-only-investigation"
+      ],
+      "returned": [
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+        "RB-F03-F04@1.0.0#evidence-needed"
+      ],
+      "keyword": [
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F03-F04@1.0.0#evidence-needed",
+        "RB-F03-F04@1.0.0#verification-rollback-or-escalation"
+      ],
+      "latencyMs": 1600.4429999999993,
+      "frozenParity": true,
+      "restrictedSavedRankingMatches": true,
+      "maximumReturnedScoreDrift": 0
+    },
+    {
+      "id": "intent-templates-1",
+      "relevant": [
+        "RB-F04-F06@1.0.0#evidence-needed"
+      ],
+      "returned": [
+        "RB-F04-F06@1.0.0#evidence-needed",
+        "RB-F09-F10@1.0.0#evidence-needed",
+        "RB-F08@1.0.0#evidence-needed"
+      ],
+      "keyword": [
+        "RB-F04-F06@1.0.0#evidence-needed",
+        "RB-F08@1.0.0#evidence-needed",
+        "RB-F09-F10@1.0.0#evidence-needed"
+      ],
+      "latencyMs": 1324.1612999999998,
+      "frozenParity": true,
+      "restrictedSavedRankingMatches": true,
+      "maximumReturnedScoreDrift": 0
+    },
+    {
+      "id": "intent-templates-2",
+      "relevant": [
+        "RB-F04-F06@1.0.0#allowed-remediation"
+      ],
+      "returned": [
+        "RB-F04-F06@1.0.0#allowed-remediation",
+        "RB-F09-F10@1.0.0#verification-rollback-or-escalation",
+        "RB-F04-F06@1.0.0#forbidden-actions"
+      ],
+      "keyword": [
+        "RB-F04-F06@1.0.0#allowed-remediation",
+        "RB-F01-F02@1.0.0#allowed-remediation",
+        "RB-F03-F04@1.0.0#allowed-remediation"
+      ],
+      "latencyMs": 1196.323199999999,
+      "frozenParity": true,
+      "restrictedSavedRankingMatches": true,
+      "maximumReturnedScoreDrift": 0.03543428715652627
+    },
+    {
+      "id": "intent-templates-3",
+      "relevant": [
+        "RB-F04-F06@1.0.0#forbidden-actions"
+      ],
+      "returned": [
+        "RB-F04-F06@1.0.0#forbidden-actions",
+        "RB-F04-F06@1.0.0#simulated-example",
+        "RB-F04-F06@1.0.0#replay-and-approval"
+      ],
+      "keyword": [
+        "RB-F04-F06@1.0.0#forbidden-actions",
+        "RB-F01-F02@1.0.0#forbidden-actions",
+        "RB-F03-F04@1.0.0#forbidden-actions"
+      ],
+      "latencyMs": 1977.739999999998,
+      "frozenParity": true,
+      "restrictedSavedRankingMatches": true,
+      "maximumReturnedScoreDrift": 0
+    },
+    {
+      "id": "intent-templates-4",
+      "relevant": [
+        "RB-F04-F06@1.0.0#read-only-investigation"
+      ],
+      "returned": [
+        "RB-F04-F06@1.0.0#read-only-investigation",
+        "RB-F04-F06@1.0.0#symptoms",
+        "RB-F03-F04@1.0.0#evidence-needed"
+      ],
+      "keyword": [
+        "RB-F04-F06@1.0.0#read-only-investigation",
+        "RB-F03-F04@1.0.0#evidence-needed",
+        "RB-F04-F06@1.0.0#forbidden-actions"
+      ],
+      "latencyMs": 2052.3057999999983,
+      "frozenParity": true,
+      "restrictedSavedRankingMatches": true,
+      "maximumReturnedScoreDrift": 0
+    },
+    {
+      "id": "intent-unknown-1",
+      "relevant": [
+        "RB-F07@1.0.0#evidence-needed"
+      ],
+      "returned": [
+        "RB-F07@1.0.0#evidence-needed",
+        "RB-F01-F02@1.0.0#evidence-needed",
+        "RB-F07@1.0.0#allowed-remediation"
+      ],
+      "keyword": [
+        "RB-F07@1.0.0#evidence-needed",
+        "RB-F01-F02@1.0.0#evidence-needed",
+        "RB-F03-F04@1.0.0#evidence-needed"
+      ],
+      "latencyMs": 1648.7911000000022,
+      "frozenParity": true,
+      "restrictedSavedRankingMatches": true,
+      "maximumReturnedScoreDrift": 0
+    },
+    {
+      "id": "intent-unknown-2",
+      "relevant": [
+        "RB-F07@1.0.0#allowed-remediation"
+      ],
+      "returned": [
+        "RB-F07@1.0.0#allowed-remediation",
+        "RB-F07@1.0.0#replay-and-approval",
+        "RB-F07@1.0.0#evidence-needed"
+      ],
+      "keyword": [
+        "RB-F07@1.0.0#allowed-remediation",
+        "RB-F09-F10@1.0.0#allowed-remediation",
+        "RB-F04-F06@1.0.0#allowed-remediation"
+      ],
+      "latencyMs": 1257.347600000001,
+      "frozenParity": true,
+      "restrictedSavedRankingMatches": true,
+      "maximumReturnedScoreDrift": 0
+    },
+    {
+      "id": "intent-unknown-3",
+      "relevant": [
+        "RB-F07@1.0.0#forbidden-actions"
+      ],
+      "returned": [
+        "RB-F07@1.0.0#forbidden-actions",
+        "RB-F08@1.0.0#forbidden-actions",
+        "RB-F01-F02@1.0.0#forbidden-actions"
+      ],
+      "keyword": [
+        "RB-F07@1.0.0#forbidden-actions",
+        "RB-F01-F02@1.0.0#forbidden-actions",
+        "RB-F08@1.0.0#forbidden-actions"
+      ],
+      "latencyMs": 471.69600000000355,
+      "frozenParity": true,
+      "restrictedSavedRankingMatches": true,
+      "maximumReturnedScoreDrift": 0
+    },
+    {
+      "id": "intent-unknown-4",
+      "relevant": [
+        "RB-F07@1.0.0#read-only-investigation"
+      ],
+      "returned": [
+        "RB-F07@1.0.0#read-only-investigation",
+        "RB-F07@1.0.0#verification-rollback-or-escalation",
+        "RB-F09-F10@1.0.0#allowed-remediation"
+      ],
+      "keyword": [
+        "RB-F07@1.0.0#read-only-investigation",
+        "RB-F01-F02@1.0.0#read-only-investigation",
+        "RB-F04-F06@1.0.0#forbidden-actions"
+      ],
+      "latencyMs": 1690.6877999999997,
+      "frozenParity": true,
+      "restrictedSavedRankingMatches": true,
+      "maximumReturnedScoreDrift": 0
+    },
+    {
+      "id": "intent-stale-1",
+      "relevant": [
+        "RB-F08@1.0.0#evidence-needed"
+      ],
+      "returned": [
+        "RB-F08@1.0.0#evidence-needed",
+        "RB-F07@1.0.0#evidence-needed",
+        "RB-F08@1.0.0#replay-and-approval"
+      ],
+      "keyword": [
+        "RB-F08@1.0.0#evidence-needed",
+        "RB-F01-F02@1.0.0#replay-and-approval",
+        "RB-F08@1.0.0#replay-and-approval"
+      ],
+      "latencyMs": 1993.4392999999982,
+      "frozenParity": true,
+      "restrictedSavedRankingMatches": true,
+      "maximumReturnedScoreDrift": 0
+    },
+    {
+      "id": "intent-stale-2",
+      "relevant": [
+        "RB-F08@1.0.0#allowed-remediation"
+      ],
+      "returned": [
+        "RB-F08@1.0.0#allowed-remediation",
+        "RB-F03-F04@1.0.0#replay-and-approval",
+        "RB-F07@1.0.0#allowed-remediation"
+      ],
+      "keyword": [
+        "RB-F08@1.0.0#allowed-remediation",
+        "RB-F03-F04@1.0.0#replay-and-approval",
+        "RB-F01-F02@1.0.0#replay-and-approval"
+      ],
+      "latencyMs": 1601.805800000002,
+      "frozenParity": true,
+      "restrictedSavedRankingMatches": true,
+      "maximumReturnedScoreDrift": 0
+    },
+    {
+      "id": "intent-stale-3",
+      "relevant": [
+        "RB-F08@1.0.0#forbidden-actions"
+      ],
+      "returned": [
+        "RB-F08@1.0.0#forbidden-actions",
+        "RB-F09-F10@1.0.0#forbidden-actions",
+        "RB-F07@1.0.0#forbidden-actions"
+      ],
+      "keyword": [
+        "RB-F08@1.0.0#forbidden-actions",
+        "RB-F04-F06@1.0.0#forbidden-actions",
+        "RB-F07@1.0.0#forbidden-actions"
+      ],
+      "latencyMs": 882.0086999999985,
+      "frozenParity": true,
+      "restrictedSavedRankingMatches": true,
+      "maximumReturnedScoreDrift": 0
+    },
+    {
+      "id": "intent-stale-4",
+      "relevant": [
+        "RB-F08@1.0.0#read-only-investigation"
+      ],
+      "returned": [
+        "RB-F08@1.0.0#read-only-investigation",
+        "RB-F08@1.0.0#symptoms",
+        "RB-F08@1.0.0#evidence-needed"
+      ],
+      "keyword": [
+        "RB-F08@1.0.0#read-only-investigation",
+        "RB-F08@1.0.0#symptoms",
+        "RB-F01-F02@1.0.0#forbidden-actions"
+      ],
+      "latencyMs": 864.9192000000039,
+      "frozenParity": true,
+      "restrictedSavedRankingMatches": true,
+      "maximumReturnedScoreDrift": 0
+    },
+    {
+      "id": "intent-gaps-1",
+      "relevant": [
+        "RB-F09-F10@1.0.0#evidence-needed"
+      ],
+      "returned": [
+        "RB-F09-F10@1.0.0#evidence-needed",
+        "RB-F09-F10@1.0.0#symptoms",
+        "RB-F08@1.0.0#evidence-needed"
+      ],
+      "keyword": [
+        "RB-F09-F10@1.0.0#evidence-needed",
+        "RB-F08@1.0.0#evidence-needed",
+        "RB-F07@1.0.0#evidence-needed"
+      ],
+      "latencyMs": 1090.0967000000019,
+      "frozenParity": true,
+      "restrictedSavedRankingMatches": true,
+      "maximumReturnedScoreDrift": 0.004971450462371574
+    },
+    {
+      "id": "intent-gaps-2",
+      "relevant": [
+        "RB-F09-F10@1.0.0#allowed-remediation"
+      ],
+      "returned": [
+        "RB-F09-F10@1.0.0#allowed-remediation",
+        "RB-F09-F10@1.0.0#read-only-investigation",
+        "RB-F09-F10@1.0.0#verification-rollback-or-escalation"
+      ],
+      "keyword": [
+        "RB-F09-F10@1.0.0#allowed-remediation",
+        "RB-F07@1.0.0#allowed-remediation",
+        "RB-F04-F06@1.0.0#allowed-remediation"
+      ],
+      "latencyMs": 1102.9481000000014,
+      "frozenParity": true,
+      "restrictedSavedRankingMatches": true,
+      "maximumReturnedScoreDrift": 0.032168776354621065
+    },
+    {
+      "id": "intent-gaps-3",
+      "relevant": [
+        "RB-F09-F10@1.0.0#forbidden-actions"
+      ],
+      "returned": [
+        "RB-F09-F10@1.0.0#forbidden-actions",
+        "RB-F08@1.0.0#forbidden-actions",
+        "RB-F01-F02@1.0.0#forbidden-actions"
+      ],
+      "keyword": [
+        "RB-F09-F10@1.0.0#forbidden-actions",
+        "RB-F01-F02@1.0.0#forbidden-actions",
+        "RB-F03-F04@1.0.0#forbidden-actions"
+      ],
+      "latencyMs": 822.0595999999932,
+      "frozenParity": true,
+      "restrictedSavedRankingMatches": true,
+      "maximumReturnedScoreDrift": 0
+    },
+    {
+      "id": "intent-gaps-4",
+      "relevant": [
+        "RB-F09-F10@1.0.0#read-only-investigation"
+      ],
+      "returned": [
+        "RB-F09-F10@1.0.0#read-only-investigation",
+        "RB-F09-F10@1.0.0#replay-and-approval",
+        "RB-F09-F10@1.0.0#allowed-remediation"
+      ],
+      "keyword": [
+        "RB-F09-F10@1.0.0#read-only-investigation",
+        "RB-F09-F10@1.0.0#forbidden-actions",
+        "RB-F09-F10@1.0.0#replay-and-approval"
+      ],
+      "latencyMs": 836.6829999999973,
+      "frozenParity": true,
+      "restrictedSavedRankingMatches": true,
+      "maximumReturnedScoreDrift": 0.01081300094983706
+    },
+    {
+      "id": "intent-no-match-1",
+      "relevant": [],
+      "returned": [],
+      "keyword": [
+        "RB-F07@1.0.0#evidence-needed",
+        "RB-F08@1.0.0#evidence-needed",
+        "RB-F01-F02@1.0.0#evidence-needed"
+      ],
+      "latencyMs": 768.2460999999967,
+      "frozenParity": true,
+      "restrictedSavedRankingMatches": true,
+      "maximumReturnedScoreDrift": 0
+    },
+    {
+      "id": "intent-no-match-2",
+      "relevant": [],
+      "returned": [],
+      "keyword": [
+        "RB-F03-F04@1.0.0#allowed-remediation",
+        "RB-F04-F06@1.0.0#allowed-remediation",
+        "RB-F07@1.0.0#allowed-remediation"
+      ],
+      "latencyMs": 1745.5311000000002,
+      "frozenParity": true,
+      "restrictedSavedRankingMatches": true,
+      "maximumReturnedScoreDrift": 0
+    },
+    {
+      "id": "intent-no-match-3",
+      "relevant": [],
+      "returned": [
+        "RB-F01-F02@1.0.0#forbidden-actions",
+        "RB-F03-F04@1.0.0#forbidden-actions",
+        "RB-F09-F10@1.0.0#forbidden-actions"
+      ],
+      "keyword": [
+        "RB-F03-F04@1.0.0#forbidden-actions",
+        "RB-F09-F10@1.0.0#forbidden-actions",
+        "RB-F01-F02@1.0.0#forbidden-actions"
+      ],
+      "latencyMs": 555.5210000000079,
+      "frozenParity": true,
+      "restrictedSavedRankingMatches": true,
+      "maximumReturnedScoreDrift": 0
+    },
+    {
+      "id": "intent-no-match-4",
+      "relevant": [],
+      "returned": [],
+      "keyword": [],
+      "latencyMs": 641.8521999999939,
+      "frozenParity": true,
+      "restrictedSavedRankingMatches": true,
+      "maximumReturnedScoreDrift": 0
+    }
+  ],
+  "limitations": [
+    "Repeated synthetic development questions; does not establish independent 80% acceptance.",
+    "Uses production runbook loader and runtime scorer, but standalone questions rather than incident evidence queries.",
+    "Frozen parity uses the original 60-section corpus; production uses 54. Different padded batches can change q8 scores.",
+    "No downstream LLM comparison or fresh held-out evaluation performed."
+  ]
+}

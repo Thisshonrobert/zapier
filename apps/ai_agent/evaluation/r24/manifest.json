@@ -1,0 +1,36 @@
+{
+  "versions": [
+    "r23-v1",
+    "r24-v1"
+  ],
+  "files": {
+    "apps/ai_agent/evaluation/r23/README.md": "3a49697b6d41d9b6fbb3342d28766961a1ea263290642a2709e580f2c25af17e",
+    "apps/ai_agent/evaluation/r23/config.json": "56bb275c20522a5a977ef00cc656f9318592637f987041ec9fba2d0b523d987c",
+    "apps/ai_agent/evaluation/r23/runs/r23-v1-local/config.json": "df1825c37e7df6a7b341045f2e1740a6795a37df73ec40d1fc2895c886edb06e",
+    "apps/ai_agent/evaluation/r23/runs/r23-v1-local/dataset.json": "5cbeb67ddc1c707c2535445abba032a3d28c239040145313a2e9a9708bfdd7bf",
+    "apps/ai_agent/evaluation/r23/runs/r23-v1-local/inference-inputs.json": "86c1b298ecf5494091290c7c4e8d6402365a13431eb011a63deb980fea1a46f1",
+    "apps/ai_agent/evaluation/r23/runs/r23-v1-local/report.json": "2614b3d32378c9a09745e8a1977b64545621d4baf2ace53ae50a3818422d6ac9",
+    "apps/ai_agent/evaluation/r23/runs/r23-v1-local/report.md": "e362e527a9a210cd9741f24ae2f2030a38dcd47e407a156c7946c578703615ad",
+    "apps/ai_agent/evaluation/r23/runs/r23-v1-local/scores.json": "4e78c855697e14119ea2438afadbdcc097ce0c567d16ed4da099000616432c07",
+    "apps/ai_agent/evaluation/r24/README.md": "7f2438d20176392028ed229a6d85a449123fb5086f6c1417b4024fe4b1b993ac",
+    "apps/ai_agent/evaluation/r24/cache-model.mjs": "94357b90ea1fa4f792a94ef33b4a6448171c41bc0536bd4ec462c214643a5a20",
+    "apps/ai_agent/evaluation/r24/comparison.json": "99eb00bb0eefadaccbf3f7dedb57fda0782b1c61fa709e33f6201a448d04e9bb",
+    "apps/ai_agent/evaluation/r24/comparison.md": "44913da7d907f0eae77759ada0a84d62164f909e15fcdce7635a625bc0f41ad7",
+    "apps/ai_agent/evaluation/r24/config.json": "261d858f635dddc70d3483caebb8ad66ab4677e5e193967a08b00c0dadfc56c5",
+    "apps/ai_agent/evaluation/r24/handoff.md": "ac0214a9db9d41fb3cd56ba43ed25d71e59d4d7486c86bd07d8019e6909f5484",
+    "apps/ai_agent/evaluation/r24/runs/r24-v1-local/config.json": "ff5b54466f68065e640b6900fd66c883161aca780dca0ab7e610f563cad2b594",
+    "apps/ai_agent/evaluation/r24/runs/r24-v1-local/dataset.json": "5cbeb67ddc1c707c2535445abba032a3d28c239040145313a2e9a9708bfdd7bf",
+    "apps/ai_agent/evaluation/r24/runs/r24-v1-local/inference-inputs.json": "c72552a07b864d06e36c396320438681a756b3ec820b0fbbe72c6a4b34beb1e2",
+    "apps/ai_agent/evaluation/r24/runs/r24-v1-local/report.json": "c7db9ff5e217daa3af573e1fd096898b9d63c681a1640ee1ede5863481dc72b8",
+    "apps/ai_agent/evaluation/r24/runs/r24-v1-local/report.md": "c07ab3c2b116e9eb62d60136fdb41390f1a404908fdb5fab7331e305b1b9890c",
+    "apps/ai_agent/evaluation/r24/runs/r24-v1-local/scores.json": "3a50fd683c9a48e7506f0b5bde5cfe48ea04c519bc7ccf08dc6a0979680c7648",
+    "apps/ai_agent/src/evaluation/r23-analysis.ts": "6fb8b37789fe76bd2ad3573490f0f013e5864695ca5f5ff4cebb97ba179e35e6",
+    "apps/ai_agent/src/evaluation/r23-models.mjs": "7d9c93c2b8d3708a67fbb8fbc5b832124d1fbd2d76e1022133f5198985e41e01",
+    "apps/ai_agent/src/evaluation/r24-analysis.ts": "464b379ac2d457152d8e9fd6ede00778dbd992ed47d6f61bd47ce78e2d6b8917",
+    "apps/ai_agent/src/evaluation/r24-models.mjs": "8a2a7d85721b905a5821ba32614e83a853aca6eede9ff867b814508fe4859fea",
+    "apps/ai_agent/src/evaluation/retrieval-r23.ts": "3e725fb6549fbd2beadc63f72aa6221efb5df88353682f450058be387e4a4b5b",
+    "apps/ai_agent/src/evaluation/retrieval-r24.ts": "a67b508cd84ca9f17d6abf4faddac083147453bd5cb39b3b6ec6c8e7174ffb60",
+    "apps/ai_agent/tests/retrieval-r23.test.ts": "f2c66d0c8bfa1182e402c5736b373f159bae3b2319b762b2962a7720e2a58b21",
+    "apps/ai_agent/tests/retrieval-r24.test.ts": "a205e8351f24b2f0830a07bb13b83b05475fa634f72285704d8844795bb7621d"
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "originalReportHash": "1b9a6d9eced00cb5807b7e7f1fdbdd3e9ea68cc49044aaac1814369ae88b6d95",
+  "descriptionReportHash": "0443d6d4824a7fb542c72843d5eb1a9070fda075a7f9365773c8b3958fa31959",
+  "variants": [
+    {
+      "method": "minilm-original",
+      "metrics": {
+        "queryCount": 48,
+        "positiveQueryCount": 36,
+        "noMatchQueryCount": 12,
+        "recallAt3": 0.9907407407407407,
+        "mrr": 0.9861111111111112,
+        "noMatchConfusion": {
+          "tp": 12,
+          "fp": 0,
+          "fn": 0,
+          "tn": 36
+        },
+        "noMatchAccuracy": 1,
+        "noMatchPrecision": 1,
+        "noMatchAbstentionRate": 1,
+        "answerableAbstentionRate": 0,
+        "overallAbstentionRate": 0.25,
+        "latency": {
+          "meanMs": 1108.3730937499993,
+          "p95Ms": 2630.1606
+        }
+      },
+      "preference": 0
+    },
+    {
+      "method": "minilm-descriptions",
+      "metrics": {
+        "queryCount": 48,
+        "positiveQueryCount": 36,
+        "noMatchQueryCount": 12,
+        "recallAt3": 0.9444444444444444,
+        "mrr": 0.9583333333333334,
+        "noMatchConfusion": {
+          "tp": 12,
+          "fp": 0,
+          "fn": 0,
+          "tn": 36
+        },
+        "noMatchAccuracy": 1,
+        "noMatchPrecision": 1,
+        "noMatchAbstentionRate": 1,
+        "answerableAbstentionRate": 0,
+        "overallAbstentionRate": 0.25,
+        "latency": {
+          "meanMs": 369.55341666666664,
+          "p95Ms": 420.8621000000021
+        }
+      },
+      "preference": 1
+    }
+  ],
+  "selectedMethod": "minilm-original"
+}

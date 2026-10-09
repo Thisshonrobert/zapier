@@ -1,0 +1,1520 @@
+{
+  "packetHash": "cecc48cc00f642b2693c9a8c88249b79ec16fe25afed11e0f6e2e4885607c86d",
+  "reviewer": "",
+  "independent": true,
+  "reviews": [
+    {
+      "id": "audit-080",
+      "sections": [
+        {
+          "citation": "RB-F07@1.0.0#forbidden-actions",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#evidence-needed",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#symptoms",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#symptoms",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#evidence-needed",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-021",
+      "sections": [
+        {
+          "citation": "RB-R2-PUBLICATION@1.0.0#publication-reconciliation-evidence",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#sources",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#simulated-example",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-022",
+      "sections": [
+        {
+          "citation": "RB-R2-PUBLICATION@1.0.0#publication-reconciliation-evidence",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-R2-EMAIL-UNKNOWN@1.0.0#lost-acknowledgement-evidence",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-089",
+      "sections": []
+    },
+    {
+      "id": "audit-035",
+      "sections": [
+        {
+          "citation": "RB-F01-F02@1.0.0#symptoms",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#read-only-investigation",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#evidence-needed",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-016",
+      "sections": [
+        {
+          "citation": "RB-F09-F10@1.0.0#evidence-needed",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-R2-EMAIL-REJECT@1.0.0#email-rejection-evidence",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-R2-EMAIL-UNKNOWN@1.0.0#lost-acknowledgement-evidence",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-024",
+      "sections": [
+        {
+          "citation": "RB-R2-PUBLICATION@1.0.0#publication-reconciliation-evidence",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#evidence-needed",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#symptoms",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-017",
+      "sections": [
+        {
+          "citation": "RB-F04-F06@1.0.0#evidence-needed",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#evidence-needed",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-R2-ORDERING@1.0.0#predecessor-ordering-evidence",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-078",
+      "sections": [
+        {
+          "citation": "RB-F07@1.0.0#symptoms",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#read-only-investigation",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#forbidden-actions",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#symptoms",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-005",
+      "sections": [
+        {
+          "citation": "RB-F03-F04@1.0.0#simulated-example",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-R2-DESTINATION@1.0.0#destination-permission-evidence",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-044",
+      "sections": []
+    },
+    {
+      "id": "audit-088",
+      "sections": []
+    },
+    {
+      "id": "audit-072",
+      "sections": [
+        {
+          "citation": "RB-F04-F06@1.0.0#symptoms",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#allowed-remediation",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#verification-rollback-or-escalation",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#simulated-example",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-084",
+      "sections": [
+        {
+          "citation": "RB-F07@1.0.0#verification-rollback-or-escalation",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#forbidden-actions",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#forbidden-actions",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-011",
+      "sections": [
+        {
+          "citation": "RB-R2-EMAIL-REJECT@1.0.0#email-rejection-evidence",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#replay-and-approval",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#replay-and-approval",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-007",
+      "sections": [
+        {
+          "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#simulated-example",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-R2-DESTINATION@1.0.0#destination-permission-evidence",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-077",
+      "sections": [
+        {
+          "citation": "RB-F07@1.0.0#symptoms",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#symptoms",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-R2-COOLDOWN@1.0.0#cooldown-evidence",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#simulated-example",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#allowed-remediation",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-031",
+      "sections": [
+        {
+          "citation": "RB-F08@1.0.0#read-only-investigation",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#read-only-investigation",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#symptoms",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-055",
+      "sections": [
+        {
+          "citation": "RB-F07@1.0.0#symptoms",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#evidence-needed",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#verification-rollback-or-escalation",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-032",
+      "sections": [
+        {
+          "citation": "RB-F07@1.0.0#read-only-investigation",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#read-only-investigation",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#read-only-investigation",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-040",
+      "sections": []
+    },
+    {
+      "id": "audit-041",
+      "sections": []
+    },
+    {
+      "id": "audit-071",
+      "sections": [
+        {
+          "citation": "RB-F04-F06@1.0.0#simulated-example",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#allowed-remediation",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#symptoms",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-054",
+      "sections": [
+        {
+          "citation": "RB-F07@1.0.0#evidence-needed",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-075",
+      "sections": [
+        {
+          "citation": "RB-R2-EMAIL-UNKNOWN@1.0.0#lost-acknowledgement-evidence",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-R2-EMAIL-REJECT@1.0.0#email-rejection-evidence",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#symptoms",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-066",
+      "sections": [
+        {
+          "citation": "RB-F09-F10@1.0.0#replay-and-approval",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#simulated-example",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-063",
+      "sections": [
+        {
+          "citation": "RB-F08@1.0.0#read-only-investigation",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#evidence-needed",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-058",
+      "sections": [
+        {
+          "citation": "RB-F04-F06@1.0.0#forbidden-actions",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-070",
+      "sections": [
+        {
+          "citation": "RB-F04-F06@1.0.0#simulated-example",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#symptoms",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#replay-and-approval",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-043",
+      "sections": []
+    },
+    {
+      "id": "audit-086",
+      "sections": [
+        {
+          "citation": "RB-R2-PUBLICATION@1.0.0#publication-reconciliation-evidence",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-053",
+      "sections": [
+        {
+          "citation": "RB-F07@1.0.0#evidence-needed",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#evidence-needed",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#evidence-needed",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-068",
+      "sections": [
+        {
+          "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#replay-and-approval",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#read-only-investigation",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#forbidden-actions",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-008",
+      "sections": [
+        {
+          "citation": "RB-F03-F04@1.0.0#forbidden-actions",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#allowed-remediation",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-R2-DESTINATION@1.0.0#destination-permission-evidence",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-026",
+      "sections": [
+        {
+          "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-R2-EMAIL-REJECT@1.0.0#email-rejection-evidence",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#simulated-example",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-095",
+      "sections": []
+    },
+    {
+      "id": "audit-030",
+      "sections": [
+        {
+          "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#read-only-investigation",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#symptoms",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-029",
+      "sections": [
+        {
+          "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#read-only-investigation",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#read-only-investigation",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-002",
+      "sections": [
+        {
+          "citation": "RB-F01-F02@1.0.0#simulated-example",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#allowed-remediation",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-R2-COOLDOWN@1.0.0#cooldown-evidence",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-003",
+      "sections": [
+        {
+          "citation": "RB-F01-F02@1.0.0#read-only-investigation",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#replay-and-approval",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-R2-COOLDOWN@1.0.0#cooldown-evidence",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-091",
+      "sections": []
+    },
+    {
+      "id": "audit-083",
+      "sections": [
+        {
+          "citation": "RB-R2-DESTINATION@1.0.0#destination-permission-evidence",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#forbidden-actions",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#replay-and-approval",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-074",
+      "sections": [
+        {
+          "citation": "RB-F01-F02@1.0.0#evidence-needed",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#read-only-investigation",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#symptoms",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-R2-EMAIL-REJECT@1.0.0#email-rejection-evidence",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-049",
+      "sections": [
+        {
+          "citation": "RB-R2-DESTINATION@1.0.0#destination-permission-evidence",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-028",
+      "sections": [
+        {
+          "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-012",
+      "sections": [
+        {
+          "citation": "RB-R2-EMAIL-UNKNOWN@1.0.0#lost-acknowledgement-evidence",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-R2-EMAIL-REJECT@1.0.0#email-rejection-evidence",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-001",
+      "sections": [
+        {
+          "citation": "RB-F01-F02@1.0.0#verification-rollback-or-escalation",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#simulated-example",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-R2-COOLDOWN@1.0.0#cooldown-evidence",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-039",
+      "sections": []
+    },
+    {
+      "id": "audit-051",
+      "sections": [
+        {
+          "citation": "RB-R2-DESTINATION@1.0.0#destination-permission-evidence",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-019",
+      "sections": [
+        {
+          "citation": "RB-F08@1.0.0#evidence-needed",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#read-only-investigation",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-R2-ORDERING@1.0.0#predecessor-ordering-evidence",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-033",
+      "sections": [
+        {
+          "citation": "RB-F03-F04@1.0.0#evidence-needed",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#evidence-needed",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#evidence-needed",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-093",
+      "sections": []
+    },
+    {
+      "id": "audit-069",
+      "sections": [
+        {
+          "citation": "RB-F04-F06@1.0.0#evidence-needed",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#allowed-remediation",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#symptoms",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#simulated-example",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-037",
+      "sections": []
+    },
+    {
+      "id": "audit-025",
+      "sections": [
+        {
+          "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#evidence-needed",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#symptoms",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-050",
+      "sections": [
+        {
+          "citation": "RB-R2-DESTINATION@1.0.0#destination-permission-evidence",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-087",
+      "sections": [
+        {
+          "citation": "RB-R2-PUBLICATION@1.0.0#publication-reconciliation-evidence",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-006",
+      "sections": [
+        {
+          "citation": "RB-R2-DESTINATION@1.0.0#destination-permission-evidence",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-018",
+      "sections": [
+        {
+          "citation": "RB-R2-ORDERING@1.0.0#predecessor-ordering-evidence",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-047",
+      "sections": []
+    },
+    {
+      "id": "audit-092",
+      "sections": []
+    },
+    {
+      "id": "audit-076",
+      "sections": [
+        {
+          "citation": "RB-F09-F10@1.0.0#symptoms",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-R2-EMAIL-REJECT@1.0.0#email-rejection-evidence",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#simulated-example",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-R2-EMAIL-UNKNOWN@1.0.0#lost-acknowledgement-evidence",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-020",
+      "sections": [
+        {
+          "citation": "RB-R2-ORDERING@1.0.0#predecessor-ordering-evidence",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#evidence-needed",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-061",
+      "sections": [
+        {
+          "citation": "RB-F08@1.0.0#read-only-investigation",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-R2-ORDERING@1.0.0#predecessor-ordering-evidence",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-094",
+      "sections": []
+    },
+    {
+      "id": "audit-014",
+      "sections": [
+        {
+          "citation": "RB-R2-EMAIL-UNKNOWN@1.0.0#lost-acknowledgement-evidence",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-023",
+      "sections": [
+        {
+          "citation": "RB-R2-PUBLICATION@1.0.0#publication-reconciliation-evidence",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#sources",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#simulated-example",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-034",
+      "sections": [
+        {
+          "citation": "RB-R2-COOLDOWN@1.0.0#cooldown-evidence",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#evidence-needed",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#simulated-example",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-065",
+      "sections": [
+        {
+          "citation": "RB-F09-F10@1.0.0#replay-and-approval",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#forbidden-actions",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-081",
+      "sections": [
+        {
+          "citation": "RB-F03-F04@1.0.0#simulated-example",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#forbidden-actions",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-R2-DESTINATION@1.0.0#destination-permission-evidence",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-027",
+      "sections": [
+        {
+          "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-045",
+      "sections": []
+    },
+    {
+      "id": "audit-096",
+      "sections": []
+    },
+    {
+      "id": "audit-064",
+      "sections": [
+        {
+          "citation": "RB-F08@1.0.0#read-only-investigation",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#read-only-investigation",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-010",
+      "sections": [
+        {
+          "citation": "RB-F01-F02@1.0.0#read-only-investigation",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-R2-EMAIL-REJECT@1.0.0#email-rejection-evidence",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-R2-EMAIL-UNKNOWN@1.0.0#lost-acknowledgement-evidence",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-042",
+      "sections": []
+    },
+    {
+      "id": "audit-046",
+      "sections": []
+    },
+    {
+      "id": "audit-073",
+      "sections": [
+        {
+          "citation": "RB-R2-EMAIL-UNKNOWN@1.0.0#lost-acknowledgement-evidence",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-R2-EMAIL-REJECT@1.0.0#email-rejection-evidence",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#symptoms",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-057",
+      "sections": [
+        {
+          "citation": "RB-F09-F10@1.0.0#allowed-remediation",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#forbidden-actions",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#forbidden-actions",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-062",
+      "sections": [
+        {
+          "citation": "RB-F08@1.0.0#replay-and-approval",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#read-only-investigation",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#read-only-investigation",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-048",
+      "sections": []
+    },
+    {
+      "id": "audit-059",
+      "sections": [
+        {
+          "citation": "RB-F04-F06@1.0.0#forbidden-actions",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#allowed-remediation",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#symptoms",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#replay-and-approval",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-052",
+      "sections": [
+        {
+          "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-R2-DESTINATION@1.0.0#destination-permission-evidence",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-036",
+      "sections": [
+        {
+          "citation": "RB-F09-F10@1.0.0#evidence-needed",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#evidence-needed",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#evidence-needed",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-004",
+      "sections": [
+        {
+          "citation": "RB-F01-F02@1.0.0#simulated-example",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-R2-COOLDOWN@1.0.0#cooldown-evidence",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#allowed-remediation",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-038",
+      "sections": []
+    },
+    {
+      "id": "audit-079",
+      "sections": [
+        {
+          "citation": "RB-F07@1.0.0#symptoms",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-R2-COOLDOWN@1.0.0#cooldown-evidence",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#read-only-investigation",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#symptoms",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-067",
+      "sections": [
+        {
+          "citation": "RB-F09-F10@1.0.0#replay-and-approval",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#read-only-investigation",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-R2-ORDERING@1.0.0#predecessor-ordering-evidence",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-060",
+      "sections": [
+        {
+          "citation": "RB-F09-F10@1.0.0#allowed-remediation",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#forbidden-actions",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-009",
+      "sections": [
+        {
+          "citation": "RB-R2-EMAIL-UNKNOWN@1.0.0#lost-acknowledgement-evidence",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-R2-EMAIL-REJECT@1.0.0#email-rejection-evidence",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-082",
+      "sections": [
+        {
+          "citation": "RB-F01-F02@1.0.0#read-only-investigation",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#forbidden-actions",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-R2-DESTINATION@1.0.0#destination-permission-evidence",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-090",
+      "sections": []
+    },
+    {
+      "id": "audit-085",
+      "sections": []
+    },
+    {
+      "id": "audit-013",
+      "sections": [
+        {
+          "citation": "RB-F01-F02@1.0.0#read-only-investigation",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-R2-EMAIL-UNKNOWN@1.0.0#lost-acknowledgement-evidence",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-056",
+      "sections": [
+        {
+          "citation": "RB-F07@1.0.0#evidence-needed",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#evidence-needed",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "audit-015",
+      "sections": [
+        {
+          "citation": "RB-F07@1.0.0#simulated-example",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#forbidden-actions",
+          "relevance": "",
+          "rationale": ""
+        },
+        {
+          "citation": "RB-R2-EMAIL-UNKNOWN@1.0.0#lost-acknowledgement-evidence",
+          "relevance": "",
+          "rationale": ""
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+{"id":"r21-duplicate-failure-investigation-2","selected":["RB-F08@1.0.0#read-only-investigation"],"usage":{"promptTokenCount":5042,"candidatesTokenCount":34,"totalTokenCount":5076},"reservedTokens":9138,"latencyMs":15108.141800000001}
+{"id":"r21-dashboard-styling-2","selected":[],"usage":{"promptTokenCount":5037,"candidatesTokenCount":4,"totalTokenCount":5041},"reservedTokens":9133,"latencyMs":6155.749100000001}
+{"id":"r21-dashboard-styling-3","selected":[],"usage":{"promptTokenCount":5037,"candidatesTokenCount":9,"totalTokenCount":5046},"reservedTokens":9133,"latencyMs":29103.633199999997}

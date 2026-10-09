@@ -1,0 +1,7 @@
+{"id":"r21-duplicate-failure-investigation-3","selected":["RB-F08@1.0.0#read-only-investigation"],"usage":{"promptTokenCount":5044,"candidatesTokenCount":22,"totalTokenCount":5066},"reservedTokens":9140,"latencyMs":1853.0946000000004}
+{"id":"r21-duplicate-failure-investigation-4","selected":["RB-F08@1.0.0#read-only-investigation"],"usage":{"promptTokenCount":5041,"candidatesTokenCount":22,"totalTokenCount":5063},"reservedTokens":9137,"latencyMs":10830.5261}
+{"id":"r21-missing-request-evidence-1","selected":["RB-F01-F02@1.0.0#evidence-needed"],"usage":{"promptTokenCount":4737,"candidatesTokenCount":23,"totalTokenCount":4760},"reservedTokens":8833,"latencyMs":1800.4037000000026}
+{"id":"r21-missing-request-evidence-2","selected":["RB-F01-F02@1.0.0#evidence-needed"],"usage":{"promptTokenCount":4735,"candidatesTokenCount":35,"totalTokenCount":4770},"reservedTokens":8831,"latencyMs":1568.6699000000008}
+{"id":"r21-missing-request-evidence-3","selected":["RB-F01-F02@1.0.0#evidence-needed"],"usage":{"promptTokenCount":4734,"candidatesTokenCount":35,"totalTokenCount":4769},"reservedTokens":8830,"latencyMs":1918.4743000000017}
+{"id":"r21-missing-request-evidence-4","selected":["RB-F01-F02@1.0.0#evidence-needed"],"usage":{"promptTokenCount":4741,"candidatesTokenCount":23,"totalTokenCount":4764},"reservedTokens":8837,"latencyMs":2011.5}
+{"id":"r21-dashboard-styling-1","selected":[],"usage":{"promptTokenCount":5036,"candidatesTokenCount":9,"totalTokenCount":5045},"reservedTokens":9132,"latencyMs":10647.981100000005}

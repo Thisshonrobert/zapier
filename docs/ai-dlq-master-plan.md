@@ -318,6 +318,8 @@ After 10B, extend timeline/filtering/trace links and evaluation presentation wit
 
 ### Optional R2 — Expanded Retrieval Experiment — After Phase 14
 
+- **Authorized targeted development follow-up (2026-10-08):** Audit development intent mismatches, freeze a benchmark for evidence gathering, remediation, constraints and root-cause investigation, and compare one intent-conditioned query intervention with the frozen MiniLM baseline. The current retrieval Recall@3 target for this follow-up is **80%**, reduced from 90%; historical reports and frozen baseline configurations retain their original targets for reproducibility. Do not access or change the fresh held-out set. Report precision, no-match abstention and intent mismatch flags alongside recall. See [targeted evaluation](../apps/ai_agent/evaluation/intent-dev/README.md). This authorization is for offline evaluation only; production retrieval remains unchanged.
+
 - **Status/sequence:** Deferred. R2 follows the required core implementation through Phase 14; it is not a prerequisite or release gate.
 - **Variants:** Compare weighted keyword, BM25, semantic retrieval, hybrid BM25 plus semantic retrieval using reciprocal rank fusion, and that hybrid with cross-encoder reranking.
 - **Corpus and queries:** Expand from six to roughly 10–20 genuinely useful runbooks without filler. Build roughly 30–50 labelled queries with development and held-out splits, covering exact provider/error terms, paraphrased symptoms, ambiguous cases, and no-match queries. Label relevance at the section level.

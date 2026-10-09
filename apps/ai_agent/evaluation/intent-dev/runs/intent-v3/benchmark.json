@@ -1,0 +1,417 @@
+{
+  "version": "intent-dev-v1",
+  "recallTarget": 0.8,
+  "provenance": {
+    "synthetic": true,
+    "humanAdjudication": false,
+    "source": "Six existing runbooks and audited development-only error patterns; no fresh scenarios loaded.",
+    "labelRule": "Direct answer to all requested facts; adjacent partial/supporting sections are excluded. Labels and support spans frozen before inference.",
+    "limitation": "Author-labeled targeted diagnostics; requires independent adjudication before release claims."
+  },
+  "queries": [
+    {
+      "id": "intent-transient-1",
+      "scenarioGroup": "transient",
+      "split": "development",
+      "intent": "EVIDENCE_GATHERING",
+      "query": "What evidence should I collect for a provider failure, including request phase, retry-after, completion time and current fingerprints?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F01-F02@1.0.0#evidence-needed"
+      ],
+      "support": {
+        "RB-F01-F02@1.0.0#evidence-needed": "Require the provider, request phase, bounded status and safe code"
+      }
+    },
+    {
+      "id": "intent-transient-2",
+      "scenarioGroup": "transient",
+      "split": "development",
+      "intent": "REMEDIATION",
+      "query": "Which repair is allowed for sending pressure and a proven Telegram 429, including cooldown and reinvestigation?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F01-F02@1.0.0#allowed-remediation"
+      ],
+      "support": {
+        "RB-F01-F02@1.0.0#allowed-remediation": "An operator may restore connectivity or reduce sending pressure."
+      }
+    },
+    {
+      "id": "intent-transient-3",
+      "scenarioGroup": "transient",
+      "split": "development",
+      "intent": "CONSTRAINTS",
+      "query": "What actions are forbidden for a provider failure, including infrastructure restarts and treating a 5xx as rejection?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F01-F02@1.0.0#forbidden-actions"
+      ],
+      "support": {
+        "RB-F01-F02@1.0.0#forbidden-actions": "Do not describe a 5xx response as proof of rejection."
+      }
+    },
+    {
+      "id": "intent-transient-4",
+      "scenarioGroup": "transient",
+      "split": "development",
+      "intent": "ROOT_CAUSE",
+      "query": "How do I distinguish a failure before sending, an explicit rejection and ambiguity after sending began?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F01-F02@1.0.0#read-only-investigation"
+      ],
+      "support": {
+        "RB-F01-F02@1.0.0#read-only-investigation": "Confirm whether the failure happened before a send, was explicitly rejected, or became ambiguous after a send began."
+      }
+    },
+    {
+      "id": "intent-credentials-1",
+      "scenarioGroup": "credentials",
+      "split": "development",
+      "intent": "EVIDENCE_GATHERING",
+      "query": "What evidence should I collect for missing credentials, including credential source, destination structure and the unknown worker environment fallback?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F03-F04@1.0.0#evidence-needed"
+      ],
+      "support": {
+        "RB-F03-F04@1.0.0#evidence-needed": "The API cannot prove whether a worker environment fallback contains a valid secret."
+      }
+    },
+    {
+      "id": "intent-credentials-2",
+      "scenarioGroup": "credentials",
+      "split": "development",
+      "intent": "REMEDIATION",
+      "query": "Which repair is allowed for credential rotation and destination membership, and when should a fresh investigation start?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F03-F04@1.0.0#allowed-remediation"
+      ],
+      "support": {
+        "RB-F03-F04@1.0.0#allowed-remediation": "An authorized operator may rotate or configure credentials and repair destination membership or permissions."
+      }
+    },
+    {
+      "id": "intent-credentials-3",
+      "scenarioGroup": "credentials",
+      "split": "development",
+      "intent": "CONSTRAINTS",
+      "query": "What actions are forbidden for secrets, test messages and interpreting a generic resolver error as invalid credentials?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F03-F04@1.0.0#forbidden-actions"
+      ],
+      "support": {
+        "RB-F03-F04@1.0.0#forbidden-actions": "claim a generic resolver error proves invalid credentials"
+      }
+    },
+    {
+      "id": "intent-credentials-4",
+      "scenarioGroup": "credentials",
+      "split": "development",
+      "intent": "ROOT_CAUSE",
+      "query": "How do I distinguish an absent action field from an unknown worker environment fallback and destination-resolution failure from send failure?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F03-F04@1.0.0#read-only-investigation"
+      ],
+      "support": {
+        "RB-F03-F04@1.0.0#read-only-investigation": "Distinguish an absent action field from an unknown worker environment fallback."
+      }
+    },
+    {
+      "id": "intent-templates-1",
+      "scenarioGroup": "templates",
+      "split": "development",
+      "intent": "EVIDENCE_GATHERING",
+      "query": "What evidence should I collect for validation failure, including deployed registry version, run and stage identity, provenance and historical-definition uncertainty?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F04-F06@1.0.0#evidence-needed"
+      ],
+      "support": {
+        "RB-F04-F06@1.0.0#evidence-needed": "Current definitions are not proof of the historical execution-time definition."
+      }
+    },
+    {
+      "id": "intent-templates-2",
+      "scenarioGroup": "templates",
+      "split": "development",
+      "intent": "REMEDIATION",
+      "query": "Which repair is allowed for producing data and seeded action IDs that disagree with deployed handlers?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F04-F06@1.0.0#allowed-remediation"
+      ],
+      "support": {
+        "RB-F04-F06@1.0.0#allowed-remediation": "Engineering may align seeded action IDs with deployed handlers."
+      }
+    },
+    {
+      "id": "intent-templates-3",
+      "scenarioGroup": "templates",
+      "split": "development",
+      "intent": "CONSTRAINTS",
+      "query": "What actions are forbidden for orphaned events, missing IDs, registry edits and invoking handlers during validation?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F04-F06@1.0.0#forbidden-actions"
+      ],
+      "support": {
+        "RB-F04-F06@1.0.0#forbidden-actions": "Do not invent missing IDs, map an orphan event to a user"
+      }
+    },
+    {
+      "id": "intent-templates-4",
+      "scenarioGroup": "templates",
+      "split": "development",
+      "intent": "ROOT_CAUSE",
+      "query": "Why did interpolation produce an empty value when a template path is missing, and how should validation report it?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F04-F06@1.0.0#read-only-investigation"
+      ],
+      "support": {
+        "RB-F04-F06@1.0.0#read-only-investigation": "The parser replaces a missing template path with an empty string"
+      }
+    },
+    {
+      "id": "intent-unknown-1",
+      "scenarioGroup": "unknown",
+      "split": "development",
+      "intent": "EVIDENCE_GATHERING",
+      "query": "What evidence should I collect for uncertain delivery, including every attempt, receipts, fingerprints, fencing and provider reconciliation?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F07@1.0.0#evidence-needed"
+      ],
+      "support": {
+        "RB-F07@1.0.0#evidence-needed": "Require every attempt outcome, provider phase, safe receipt if captured"
+      }
+    },
+    {
+      "id": "intent-unknown-2",
+      "scenarioGroup": "unknown",
+      "split": "development",
+      "intent": "REMEDIATION",
+      "query": "Which repair is allowed for future capture or fencing, and when can email be reconsidered within provider deduplication?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F07@1.0.0#allowed-remediation"
+      ],
+      "support": {
+        "RB-F07@1.0.0#allowed-remediation": "Engineering may repair capture or fencing for future executions."
+      }
+    },
+    {
+      "id": "intent-unknown-3",
+      "scenarioGroup": "unknown",
+      "split": "development",
+      "intent": "CONSTRAINTS",
+      "query": "What actions are forbidden for an expired execution lease, deleting execution records and human approval of unknown delivery?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F07@1.0.0#forbidden-actions"
+      ],
+      "support": {
+        "RB-F07@1.0.0#forbidden-actions": "Human approval cannot turn unknown delivery into known non-delivery."
+      }
+    },
+    {
+      "id": "intent-unknown-4",
+      "scenarioGroup": "unknown",
+      "split": "development",
+      "intent": "ROOT_CAUSE",
+      "query": "How do I distinguish action failure from persistence failure across the provider boundary when receipts are missing?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F07@1.0.0#read-only-investigation"
+      ],
+      "support": {
+        "RB-F07@1.0.0#read-only-investigation": "Separate action failure from persistence failure."
+      }
+    },
+    {
+      "id": "intent-stale-1",
+      "scenarioGroup": "stale",
+      "split": "development",
+      "intent": "EVIDENCE_GATHERING",
+      "query": "What evidence should I collect for stale investigations, including canonical case IDs, evidence versions, active leases and future replay-request identity?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F08@1.0.0#evidence-needed"
+      ],
+      "support": {
+        "RB-F08@1.0.0#evidence-needed": "Require canonical case and failure IDs"
+      }
+    },
+    {
+      "id": "intent-stale-2",
+      "scenarioGroup": "stale",
+      "split": "development",
+      "intent": "REMEDIATION",
+      "query": "Which repair is allowed for duplicate investigations, including closing or superseding them and any future durable replay intent?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F08@1.0.0#allowed-remediation"
+      ],
+      "support": {
+        "RB-F08@1.0.0#allowed-remediation": "An operator may close or supersede a duplicate investigation."
+      }
+    },
+    {
+      "id": "intent-stale-3",
+      "scenarioGroup": "stale",
+      "split": "development",
+      "intent": "CONSTRAINTS",
+      "query": "What actions are forbidden for terminal stages, raw-event republishing, expired approvals and creating a new run to evade deduplication?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F08@1.0.0#forbidden-actions"
+      ],
+      "support": {
+        "RB-F08@1.0.0#forbidden-actions": "create a new run to evade deduplication"
+      }
+    },
+    {
+      "id": "intent-stale-4",
+      "scenarioGroup": "stale",
+      "split": "development",
+      "intent": "ROOT_CAUSE",
+      "query": "How do I distinguish duplicate delivery from a new failure and identify stale investigations using source references and fingerprints?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F08@1.0.0#read-only-investigation"
+      ],
+      "support": {
+        "RB-F08@1.0.0#read-only-investigation": "Distinguish duplicate delivery from a new failure."
+      }
+    },
+    {
+      "id": "intent-gaps-1",
+      "scenarioGroup": "gaps",
+      "split": "development",
+      "intent": "EVIDENCE_GATHERING",
+      "query": "What evidence should I collect for missing DLQ publication, including linked failure IDs, publication acknowledgement, dlqPublishedAt and successor state?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F09-F10@1.0.0#evidence-needed"
+      ],
+      "support": {
+        "RB-F09-F10@1.0.0#evidence-needed": "publication claim and acknowledgement state"
+      }
+    },
+    {
+      "id": "intent-gaps-2",
+      "scenarioGroup": "gaps",
+      "split": "development",
+      "intent": "REMEDIATION",
+      "query": "Which repair is allowed for publishing a stored failure by existing ID and repairing future stage progression or provider-result normalization?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F09-F10@1.0.0#allowed-remediation"
+      ],
+      "support": {
+        "RB-F09-F10@1.0.0#allowed-remediation": "The deterministic reconciler may publish a stored failure by its existing failure ID."
+      }
+    },
+    {
+      "id": "intent-gaps-3",
+      "scenarioGroup": "gaps",
+      "split": "development",
+      "intent": "CONSTRAINTS",
+      "query": "What actions are forbidden for evidence gaps, including bulk republishing, fabricating errors and reinterpreting SUCCESS from an error substring?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F09-F10@1.0.0#forbidden-actions"
+      ],
+      "support": {
+        "RB-F09-F10@1.0.0#forbidden-actions": "Do not fabricate an error, reinterpret SUCCESS from an error substring"
+      }
+    },
+    {
+      "id": "intent-gaps-4",
+      "scenarioGroup": "gaps",
+      "split": "development",
+      "intent": "ROOT_CAUSE",
+      "query": "How do I distinguish failure-publication repair, stage-progression recovery and repeating an external action while preserving historical SUCCESS?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F09-F10@1.0.0#read-only-investigation"
+      ],
+      "support": {
+        "RB-F09-F10@1.0.0#read-only-investigation": "Separate failure-publication repair from stage-progression recovery"
+      }
+    },
+    {
+      "id": "intent-no-match-1",
+      "scenarioGroup": "out-of-domain-1",
+      "split": "development",
+      "intent": "EVIDENCE_GATHERING",
+      "query": "What evidence should I collect for a lunar rover battery incident?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [],
+      "support": {}
+    },
+    {
+      "id": "intent-no-match-2",
+      "scenarioGroup": "out-of-domain-2",
+      "split": "development",
+      "intent": "REMEDIATION",
+      "query": "Which repair is allowed for a broken dishwasher pump?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [],
+      "support": {}
+    },
+    {
+      "id": "intent-no-match-3",
+      "scenarioGroup": "out-of-domain-3",
+      "split": "development",
+      "intent": "CONSTRAINTS",
+      "query": "What actions are forbidden when filing a maritime insurance claim?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [],
+      "support": {}
+    },
+    {
+      "id": "intent-no-match-4",
+      "scenarioGroup": "out-of-domain-4",
+      "split": "development",
+      "intent": "ROOT_CAUSE",
+      "query": "Why did a sourdough starter stop fermenting?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [],
+      "support": {}
+    }
+  ]
+}

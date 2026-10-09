@@ -1,0 +1,24 @@
+{
+  "experimentVersion": "r21-v1",
+  "datasetVersion": "r21-v1",
+  "corpusHash": "17b89d4cef1f05defead5b977804582fd19b76534673a57745d038931e934d7e",
+  "semanticThreshold": 0.2,
+  "candidateLimit": 12,
+  "rerankThresholds": [
+    0, 0.00001, 0.0001, 0.001, 0.01, 0.05, 0.1, 0.3, 0.5, 0.7, 0.9
+  ],
+  "calibrationObjective": "macro_recall_at_3_plus_no_match_abstention",
+  "tieBreak": "MRR_then_lower_answerable_abstention_then_lower_threshold",
+  "models": {
+    "embedding": {
+      "id": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff37182d3f1213fa05d7196b954e230abad9",
+      "dtype": "q8"
+    },
+    "reranker": {
+      "id": "Xenova/ms-marco-MiniLM-L-6-v2",
+      "revision": "a09144355adeed5f58c8ed011d209bf8ee5a1fec",
+      "dtype": "q8"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "algorithmVersion": "r22-v1",
+  "files": {
+    "apps/ai_agent/src/evaluation/r22-candidates.ts": "e4317449bd6da71e34cd36f334a734bc5d0a3acea2bbf03f2341ac6262005b16",
+    "apps/ai_agent/src/evaluation/r22-models.mjs": "c5e38ac1b627ba14ccc576530d44334c134bfb7a1ed3653a1825b7227a9e051f",
+    "apps/ai_agent/src/evaluation/retrieval-r22.ts": "fcbeb477bd16b1073f251a4d1e66d75973e2211bc240b0fad99e6e1be80c4e28",
+    "apps/ai_agent/tests/retrieval-r22.test.ts": "c564f79ec09287a6d057937aefcc1319b813aeeed9eab099a5e159117caad6db",
+    "apps/ai_agent/evaluation/r22/README.md": "10e2fbc2f089a3836d69f18dba79975e9685d240d9a15d159dc2b54a7d715c2a",
+    "apps/ai_agent/evaluation/r22/config.json": "01d7797eb617866a95b2d7899964ef4a3e58e99ef61912199e3a8f4b1a9f6de6",
+    "apps/ai_agent/evaluation/r22/handoff.md": "570f6aadc956ece3aa6765b5ba79fc774a440f2184fd3b23df5757ab4d8db35f",
+    "apps/ai_agent/evaluation/r22/investigation.json": "2157512976310baab9447fa3d857847bf05379df67e6391593fe216ce56f609c",
+    "apps/ai_agent/evaluation/r22/runs/r22-v1-local/config.json": "1bbe88d05bc296b90a4ed48fc4789fae1b89efa470f0c1c215678eb317bd79f6",
+    "apps/ai_agent/evaluation/r22/runs/r22-v1-local/dataset.json": "5cbeb67ddc1c707c2535445abba032a3d28c239040145313a2e9a9708bfdd7bf",
+    "apps/ai_agent/evaluation/r22/runs/r22-v1-local/inference-inputs.json": "2b315e9af06f4e21a07d9e5227b9993fd5e18e53a0bd34966579e22fded0e217",
+    "apps/ai_agent/evaluation/r22/runs/r22-v1-local/report.json": "056bc6d5683edf3e37ff18757e40ec327598d5c2339c5a43e8c4a4150ab5f8e3",
+    "apps/ai_agent/evaluation/r22/runs/r22-v1-local/report.md": "1515bb80ddbfc490da3aa201fd7f660585bb31fe10380cbfe7cafb8a73ddc931",
+    "apps/ai_agent/evaluation/r22/runs/r22-v1-local/scores.json": "c137b3b39eddef287292f69b9da205c4e87e255933a3ec3230abe14c71921a65",
+    "apps/ai_agent/evaluation/r22/runs/r22-v1-local/sensitivity.json": "7a6b69d49627518dfa01828baddcbb1033a899389beeded3f491a01425fa3c8d",
+    "apps/ai_agent/evaluation/r22/sensitivity.ts": "388bc1a6029529163765a7111cb2274b4e0e11d081ffd22d47631c2c2972144f"
+  }
+}

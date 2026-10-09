@@ -1,0 +1,503 @@
+{
+  "inputHash": "d44724071a305eb210aec87965b41b7088858f10386761850e3a2bfe100b890c",
+  "model": "gemini-3.5-flash-lite",
+  "promptHash": "de3ec9d1f843e798abcd83f5013ef36f4757ca7f8020d000eb4e4bf9e1e56c0b",
+  "records": {
+    "r21-recorded-cooldown-1": {
+      "selected": [
+        "RB-R2-COOLDOWN@1.0.0#cooldown-evidence"
+      ],
+      "usage": {
+        "promptTokenCount": 4735,
+        "candidatesTokenCount": 23,
+        "totalTokenCount": 4758
+      },
+      "reservedTokens": 8831,
+      "latencyMs": 15287.531400000002
+    },
+    "r21-recorded-cooldown-2": {
+      "selected": [
+        "RB-R2-COOLDOWN@1.0.0#cooldown-evidence"
+      ],
+      "usage": {
+        "promptTokenCount": 4741,
+        "candidatesTokenCount": 23,
+        "totalTokenCount": 4764
+      },
+      "reservedTokens": 8837,
+      "latencyMs": 2015.7895999999982
+    },
+    "r21-recorded-cooldown-3": {
+      "selected": [
+        "RB-R2-COOLDOWN@1.0.0#cooldown-evidence"
+      ],
+      "usage": {
+        "promptTokenCount": 4736,
+        "candidatesTokenCount": 23,
+        "totalTokenCount": 4759
+      },
+      "reservedTokens": 8832,
+      "latencyMs": 1757.7612000000008
+    },
+    "r21-recorded-cooldown-4": {
+      "selected": [
+        "RB-R2-COOLDOWN@1.0.0#cooldown-evidence"
+      ],
+      "usage": {
+        "promptTokenCount": 4740,
+        "candidatesTokenCount": 23,
+        "totalTokenCount": 4763
+      },
+      "reservedTokens": 8836,
+      "latencyMs": 1817.5610000000015
+    },
+    "r21-bot-removal-1": {
+      "selected": [
+        "RB-R2-DESTINATION@1.0.0#destination-permission-evidence"
+      ],
+      "usage": {
+        "promptTokenCount": 4735,
+        "candidatesTokenCount": 23,
+        "totalTokenCount": 4758
+      },
+      "reservedTokens": 8831,
+      "latencyMs": 1830.3219000000026
+    },
+    "r21-bot-removal-2": {
+      "selected": [
+        "RB-R2-DESTINATION@1.0.0#destination-permission-evidence"
+      ],
+      "usage": {
+        "promptTokenCount": 4732,
+        "candidatesTokenCount": 23,
+        "totalTokenCount": 4755
+      },
+      "reservedTokens": 8828,
+      "latencyMs": 1804.3895000000048
+    },
+    "r21-bot-removal-3": {
+      "selected": [
+        "RB-R2-DESTINATION@1.0.0#destination-permission-evidence",
+        "RB-F03-F04@1.0.0#symptoms",
+        "RB-F03-F04@1.0.0#allowed-remediation"
+      ],
+      "usage": {
+        "promptTokenCount": 4735,
+        "candidatesTokenCount": 81,
+        "totalTokenCount": 4816
+      },
+      "reservedTokens": 8831,
+      "latencyMs": 2100.303700000004
+    },
+    "r21-bot-removal-4": {
+      "selected": [
+        "RB-R2-DESTINATION@1.0.0#destination-permission-evidence",
+        "RB-F03-F04@1.0.0#forbidden-actions"
+      ],
+      "usage": {
+        "promptTokenCount": 4738,
+        "candidatesTokenCount": 43,
+        "totalTokenCount": 4781
+      },
+      "reservedTokens": 8834,
+      "latencyMs": 2051.9010000000126
+    },
+    "r21-recipient-validation-1": {
+      "selected": [
+        "RB-R2-EMAIL-REJECT@1.0.0#email-rejection-evidence"
+      ],
+      "usage": {
+        "promptTokenCount": 4739,
+        "candidatesTokenCount": 26,
+        "totalTokenCount": 4765
+      },
+      "reservedTokens": 8835,
+      "latencyMs": 1957.6679000000004
+    },
+    "r21-recipient-validation-2": {
+      "selected": [
+        "RB-R2-EMAIL-REJECT@1.0.0#email-rejection-evidence"
+      ],
+      "usage": {
+        "promptTokenCount": 4739,
+        "candidatesTokenCount": 26,
+        "totalTokenCount": 4765
+      },
+      "reservedTokens": 8835,
+      "latencyMs": 1913.0529000000097
+    },
+    "r21-recipient-validation-3": {
+      "selected": [
+        "RB-R2-EMAIL-REJECT@1.0.0#email-rejection-evidence"
+      ],
+      "usage": {
+        "promptTokenCount": 4740,
+        "candidatesTokenCount": 26,
+        "totalTokenCount": 4766
+      },
+      "reservedTokens": 8836,
+      "latencyMs": 1819.8963999999978
+    },
+    "r21-recipient-validation-4": {
+      "selected": [
+        "RB-R2-EMAIL-REJECT@1.0.0#email-rejection-evidence",
+        "RB-F03-F04@1.0.0#allowed-remediation"
+      ],
+      "usage": {
+        "promptTokenCount": 4740,
+        "candidatesTokenCount": 62,
+        "totalTokenCount": 4802
+      },
+      "reservedTokens": 8836,
+      "latencyMs": 1874.383999999991
+    },
+    "r21-mail-socket-loss-1": {
+      "selected": [
+        "RB-R2-EMAIL-UNKNOWN@1.0.0#lost-acknowledgement-evidence"
+      ],
+      "usage": {
+        "promptTokenCount": 4736,
+        "candidatesTokenCount": 37,
+        "totalTokenCount": 4773
+      },
+      "reservedTokens": 8832,
+      "latencyMs": 1782.1479000000108
+    },
+    "r21-mail-socket-loss-2": {
+      "selected": [
+        "RB-R2-EMAIL-UNKNOWN@1.0.0#lost-acknowledgement-evidence",
+        "RB-F07@1.0.0#symptoms"
+      ],
+      "usage": {
+        "promptTokenCount": 4741,
+        "candidatesTokenCount": 55,
+        "totalTokenCount": 4796
+      },
+      "reservedTokens": 8837,
+      "latencyMs": 1862.9879000000074
+    },
+    "r21-mail-socket-loss-3": {
+      "selected": [
+        "RB-R2-EMAIL-UNKNOWN@1.0.0#lost-acknowledgement-evidence",
+        "RB-F07@1.0.0#symptoms"
+      ],
+      "usage": {
+        "promptTokenCount": 4740,
+        "candidatesTokenCount": 55,
+        "totalTokenCount": 4795
+      },
+      "reservedTokens": 8836,
+      "latencyMs": 1428.7325000000128
+    },
+    "r21-mail-socket-loss-4": {
+      "selected": [
+        "RB-R2-EMAIL-UNKNOWN@1.0.0#lost-acknowledgement-evidence"
+      ],
+      "usage": {
+        "promptTokenCount": 4738,
+        "candidatesTokenCount": 25,
+        "totalTokenCount": 4763
+      },
+      "reservedTokens": 8834,
+      "latencyMs": 1958.3417999999947
+    },
+    "r21-pending-predecessor-1": {
+      "selected": [
+        "RB-R2-ORDERING@1.0.0#predecessor-ordering-evidence"
+      ],
+      "usage": {
+        "promptTokenCount": 5042,
+        "candidatesTokenCount": 37,
+        "totalTokenCount": 5079
+      },
+      "reservedTokens": 9138,
+      "latencyMs": 1882.485400000005
+    },
+    "r21-pending-predecessor-2": {
+      "selected": [
+        "RB-R2-ORDERING@1.0.0#predecessor-ordering-evidence"
+      ],
+      "usage": {
+        "promptTokenCount": 5043,
+        "candidatesTokenCount": 37,
+        "totalTokenCount": 5080
+      },
+      "reservedTokens": 9139,
+      "latencyMs": 3686.7883999999904
+    },
+    "r21-pending-predecessor-3": {
+      "selected": [
+        "RB-R2-ORDERING@1.0.0#predecessor-ordering-evidence"
+      ],
+      "usage": {
+        "promptTokenCount": 5043,
+        "candidatesTokenCount": 37,
+        "totalTokenCount": 5080
+      },
+      "reservedTokens": 9139,
+      "latencyMs": 1510.90830000001
+    },
+    "r21-pending-predecessor-4": {
+      "selected": [
+        "RB-R2-ORDERING@1.0.0#predecessor-ordering-evidence"
+      ],
+      "usage": {
+        "promptTokenCount": 5041,
+        "candidatesTokenCount": 37,
+        "totalTokenCount": 5078
+      },
+      "reservedTokens": 9137,
+      "latencyMs": 1848.093600000022
+    },
+    "r21-broker-outage-outbox-1": {
+      "selected": [
+        "RB-R2-PUBLICATION@1.0.0#publication-reconciliation-evidence"
+      ],
+      "usage": {
+        "promptTokenCount": 5043,
+        "candidatesTokenCount": 36,
+        "totalTokenCount": 5079
+      },
+      "reservedTokens": 9139,
+      "latencyMs": 1721.540399999998
+    },
+    "r21-broker-outage-outbox-2": {
+      "selected": [
+        "RB-R2-PUBLICATION@1.0.0#publication-reconciliation-evidence"
+      ],
+      "usage": {
+        "promptTokenCount": 5039,
+        "candidatesTokenCount": 36,
+        "totalTokenCount": 5075
+      },
+      "reservedTokens": 9135,
+      "latencyMs": 1721.7148999999627
+    },
+    "r21-broker-outage-outbox-3": {
+      "selected": [
+        "RB-R2-PUBLICATION@1.0.0#publication-reconciliation-evidence"
+      ],
+      "usage": {
+        "promptTokenCount": 5043,
+        "candidatesTokenCount": 24,
+        "totalTokenCount": 5067
+      },
+      "reservedTokens": 9139,
+      "latencyMs": 1843.5467000000062
+    },
+    "r21-broker-outage-outbox-4": {
+      "selected": [
+        "RB-R2-PUBLICATION@1.0.0#publication-reconciliation-evidence"
+      ],
+      "usage": {
+        "promptTokenCount": 5045,
+        "candidatesTokenCount": 36,
+        "totalTokenCount": 5081
+      },
+      "reservedTokens": 9141,
+      "latencyMs": 1876.4406000000308
+    },
+    "r21-template-empty-replacement-1": {
+      "selected": [
+        "RB-F04-F06@1.0.0#read-only-investigation"
+      ],
+      "usage": {
+        "promptTokenCount": 5044,
+        "candidatesTokenCount": 26,
+        "totalTokenCount": 5070
+      },
+      "reservedTokens": 9140,
+      "latencyMs": 1907.0354999999981
+    },
+    "r21-template-empty-replacement-2": {
+      "selected": [
+        "RB-F04-F06@1.0.0#symptoms",
+        "RB-F04-F06@1.0.0#read-only-investigation"
+      ],
+      "usage": {
+        "promptTokenCount": 5046,
+        "candidatesTokenCount": 60,
+        "totalTokenCount": 5106
+      },
+      "reservedTokens": 9142,
+      "latencyMs": 1872.7083000000566
+    },
+    "r21-template-empty-replacement-3": {
+      "selected": [
+        "RB-F04-F06@1.0.0#read-only-investigation",
+        "RB-F04-F06@1.0.0#symptoms"
+      ],
+      "usage": {
+        "promptTokenCount": 5041,
+        "candidatesTokenCount": 60,
+        "totalTokenCount": 5101
+      },
+      "reservedTokens": 9137,
+      "latencyMs": 1713.5400000000373
+    },
+    "r21-template-empty-replacement-4": {
+      "selected": [
+        "RB-F04-F06@1.0.0#read-only-investigation"
+      ],
+      "usage": {
+        "promptTokenCount": 5043,
+        "candidatesTokenCount": 38,
+        "totalTokenCount": 5081
+      },
+      "reservedTokens": 9139,
+      "latencyMs": 1824.3959000000032
+    },
+    "r21-duplicate-failure-investigation-1": {
+      "selected": [
+        "RB-F08@1.0.0#read-only-investigation"
+      ],
+      "usage": {
+        "promptTokenCount": 5040,
+        "candidatesTokenCount": 22,
+        "totalTokenCount": 5062
+      },
+      "reservedTokens": 9136,
+      "latencyMs": 1722.186699999962
+    },
+    "r21-duplicate-failure-investigation-3": {
+      "selected": [
+        "RB-F08@1.0.0#read-only-investigation"
+      ],
+      "usage": {
+        "promptTokenCount": 5044,
+        "candidatesTokenCount": 22,
+        "totalTokenCount": 5066
+      },
+      "reservedTokens": 9140,
+      "latencyMs": 1853.0946000000004
+    },
+    "r21-duplicate-failure-investigation-4": {
+      "selected": [
+        "RB-F08@1.0.0#read-only-investigation"
+      ],
+      "usage": {
+        "promptTokenCount": 5041,
+        "candidatesTokenCount": 22,
+        "totalTokenCount": 5063
+      },
+      "reservedTokens": 9137,
+      "latencyMs": 10830.5261
+    },
+    "r21-missing-request-evidence-1": {
+      "selected": [
+        "RB-F01-F02@1.0.0#evidence-needed"
+      ],
+      "usage": {
+        "promptTokenCount": 4737,
+        "candidatesTokenCount": 23,
+        "totalTokenCount": 4760
+      },
+      "reservedTokens": 8833,
+      "latencyMs": 1800.4037000000026
+    },
+    "r21-missing-request-evidence-2": {
+      "selected": [
+        "RB-F01-F02@1.0.0#evidence-needed"
+      ],
+      "usage": {
+        "promptTokenCount": 4735,
+        "candidatesTokenCount": 35,
+        "totalTokenCount": 4770
+      },
+      "reservedTokens": 8831,
+      "latencyMs": 1568.6699000000008
+    },
+    "r21-missing-request-evidence-3": {
+      "selected": [
+        "RB-F01-F02@1.0.0#evidence-needed"
+      ],
+      "usage": {
+        "promptTokenCount": 4734,
+        "candidatesTokenCount": 35,
+        "totalTokenCount": 4769
+      },
+      "reservedTokens": 8830,
+      "latencyMs": 1918.4743000000017
+    },
+    "r21-missing-request-evidence-4": {
+      "selected": [
+        "RB-F01-F02@1.0.0#evidence-needed"
+      ],
+      "usage": {
+        "promptTokenCount": 4741,
+        "candidatesTokenCount": 23,
+        "totalTokenCount": 4764
+      },
+      "reservedTokens": 8837,
+      "latencyMs": 2011.5
+    },
+    "r21-dashboard-styling-1": {
+      "selected": [],
+      "usage": {
+        "promptTokenCount": 5036,
+        "candidatesTokenCount": 9,
+        "totalTokenCount": 5045
+      },
+      "reservedTokens": 9132,
+      "latencyMs": 10647.981100000005
+    },
+    "r21-duplicate-failure-investigation-2": {
+      "selected": [
+        "RB-F08@1.0.0#read-only-investigation"
+      ],
+      "usage": {
+        "promptTokenCount": 5042,
+        "candidatesTokenCount": 34,
+        "totalTokenCount": 5076
+      },
+      "reservedTokens": 9138,
+      "latencyMs": 15108.141800000001
+    },
+    "r21-dashboard-styling-2": {
+      "selected": [],
+      "usage": {
+        "promptTokenCount": 5037,
+        "candidatesTokenCount": 4,
+        "totalTokenCount": 5041
+      },
+      "reservedTokens": 9133,
+      "latencyMs": 6155.749100000001
+    },
+    "r21-dashboard-styling-3": {
+      "selected": [],
+      "usage": {
+        "promptTokenCount": 5037,
+        "candidatesTokenCount": 9,
+        "totalTokenCount": 5046
+      },
+      "reservedTokens": 9133,
+      "latencyMs": 29103.633199999997
+    }
+  },
+  "failures": [
+    {
+      "id": "r21-dashboard-styling-4",
+      "attempt": 1,
+      "success": false,
+      "category": "Gemini HTTP 503",
+      "latencyMs": 2468
+    },
+    {
+      "id": "r21-dashboard-styling-4",
+      "attempt": 2,
+      "success": false,
+      "category": "Gemini HTTP 503",
+      "latencyMs": 2364
+    }
+  ],
+  "historicalFailures": [
+    {
+      "id": "r21-duplicate-failure-investigation-2",
+      "category": "bounded inference failure"
+    },
+    {
+      "id": "r21-dashboard-styling-2",
+      "category": "Gemini HTTP 503"
+    }
+  ]
+}

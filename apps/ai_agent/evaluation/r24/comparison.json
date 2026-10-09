@@ -1,0 +1,319 @@
+{
+  "targetRecallAt3": 0.9,
+  "datasetVersion": "r21-v1",
+  "comparisonStatus": "exploratory_reused_held_out",
+  "bestTestedSupportedBaseline": "r21-v1 hybrid-reranked, cutoff 0.001",
+  "bestBaselineRecallAt3": 0.625,
+  "targetShortfallPercentagePoints": 27.5,
+  "productionReplacementRecommended": false,
+  "decision": "No tested method reaches or approaches 90% recall while preserving no-match behavior. Keep production weighted-keyword retrieval unchanged; retain R2.1 as research baseline.",
+  "candidateRecallAt12": 0.8472222222222222,
+  "candidateRecallAt24": 0.9166666666666666,
+  "rows": [
+    {
+      "method": "R2.1 weighted-keyword",
+      "status": "baseline",
+      "metrics": {
+        "queryCount": 48,
+        "positiveQueryCount": 36,
+        "noMatchQueryCount": 12,
+        "recallAt3": 0.4861111111111111,
+        "mrr": 0.42129629629629634,
+        "noMatchConfusion": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 12,
+          "tn": 36
+        },
+        "noMatchAccuracy": 0.75,
+        "noMatchPrecision": null,
+        "noMatchAbstentionRate": 0,
+        "answerableAbstentionRate": 0,
+        "overallAbstentionRate": 0,
+        "latency": {
+          "meanMs": 0.8444333333330482,
+          "p95Ms": 1.1683999999986554
+        }
+      },
+      "latencyKind": "historical retrieval pipeline"
+    },
+    {
+      "method": "R2.1 bm25",
+      "status": "baseline",
+      "metrics": {
+        "queryCount": 48,
+        "positiveQueryCount": 36,
+        "noMatchQueryCount": 12,
+        "recallAt3": 0.5416666666666666,
+        "mrr": 0.5138888888888888,
+        "noMatchConfusion": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 12,
+          "tn": 36
+        },
+        "noMatchAccuracy": 0.75,
+        "noMatchPrecision": null,
+        "noMatchAbstentionRate": 0,
+        "answerableAbstentionRate": 0,
+        "overallAbstentionRate": 0,
+        "latency": {
+          "meanMs": 5.487312500000068,
+          "p95Ms": 9.238000000001193
+        }
+      },
+      "latencyKind": "historical retrieval pipeline"
+    },
+    {
+      "method": "R2.1 semantic",
+      "status": "baseline",
+      "metrics": {
+        "queryCount": 48,
+        "positiveQueryCount": 36,
+        "noMatchQueryCount": 12,
+        "recallAt3": 0.4583333333333333,
+        "mrr": 0.4305555555555556,
+        "noMatchConfusion": {
+          "tp": 5,
+          "fp": 0,
+          "fn": 7,
+          "tn": 36
+        },
+        "noMatchAccuracy": 0.8541666666666666,
+        "noMatchPrecision": 1,
+        "noMatchAbstentionRate": 0.4166666666666667,
+        "answerableAbstentionRate": 0,
+        "overallAbstentionRate": 0.10416666666666667,
+        "latency": {
+          "meanMs": 16.923924999999713,
+          "p95Ms": 63
+        }
+      },
+      "latencyKind": "historical retrieval pipeline"
+    },
+    {
+      "method": "R2.1 hybrid",
+      "status": "baseline",
+      "metrics": {
+        "queryCount": 48,
+        "positiveQueryCount": 36,
+        "noMatchQueryCount": 12,
+        "recallAt3": 0.5972222222222222,
+        "mrr": 0.5277777777777777,
+        "noMatchConfusion": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 12,
+          "tn": 36
+        },
+        "noMatchAccuracy": 0.75,
+        "noMatchPrecision": null,
+        "noMatchAbstentionRate": 0,
+        "answerableAbstentionRate": 0,
+        "overallAbstentionRate": 0,
+        "latency": {
+          "meanMs": 21.55318124999951,
+          "p95Ms": 67.0692999999992
+        }
+      },
+      "latencyKind": "historical retrieval pipeline"
+    },
+    {
+      "method": "R2.1 hybrid-reranked",
+      "status": "baseline",
+      "metrics": {
+        "queryCount": 48,
+        "positiveQueryCount": 36,
+        "noMatchQueryCount": 12,
+        "recallAt3": 0.625,
+        "mrr": 0.6111111111111112,
+        "noMatchConfusion": {
+          "tp": 10,
+          "fp": 3,
+          "fn": 2,
+          "tn": 33
+        },
+        "noMatchAccuracy": 0.8958333333333334,
+        "noMatchPrecision": 0.7692307692307693,
+        "noMatchAbstentionRate": 0.8333333333333334,
+        "answerableAbstentionRate": 0.08333333333333333,
+        "overallAbstentionRate": 0.2708333333333333,
+        "latency": {
+          "meanMs": 109.93312291666689,
+          "p95Ms": 162.97080000000096
+        }
+      },
+      "latencyKind": "historical retrieval pipeline"
+    },
+    {
+      "method": "R2.2 full-union MiniLM",
+      "status": "rejected pool expansion",
+      "metrics": {
+        "queryCount": 48,
+        "positiveQueryCount": 36,
+        "noMatchQueryCount": 12,
+        "recallAt3": 0.5972222222222222,
+        "mrr": 0.6018518518518519,
+        "noMatchConfusion": {
+          "tp": 10,
+          "fp": 3,
+          "fn": 2,
+          "tn": 33
+        },
+        "noMatchAccuracy": 0.8958333333333334,
+        "noMatchPrecision": 0.7692307692307693,
+        "noMatchAbstentionRate": 0.8333333333333334,
+        "answerableAbstentionRate": 0.08333333333333333,
+        "overallAbstentionRate": 0.2708333333333333,
+        "latency": {
+          "meanMs": 267.00344999999965,
+          "p95Ms": 478.0752999999986
+        },
+        "candidateRecallAt12": 0.8472222222222222,
+        "candidateRecallAt24": 0.9166666666666666
+      },
+      "latencyKind": "historical retrieval pipeline"
+    },
+    {
+      "method": "R2.3 original",
+      "status": "development selected",
+      "metrics": {
+        "queryCount": 48,
+        "positiveQueryCount": 36,
+        "noMatchQueryCount": 12,
+        "recallAt3": 0.5972222222222222,
+        "mrr": 0.6018518518518519,
+        "noMatchConfusion": {
+          "tp": 10,
+          "fp": 3,
+          "fn": 2,
+          "tn": 33
+        },
+        "noMatchAccuracy": 0.8958333333333334,
+        "noMatchPrecision": 0.7692307692307693,
+        "noMatchAbstentionRate": 0.8333333333333334,
+        "answerableAbstentionRate": 0.08333333333333333,
+        "overallAbstentionRate": 0.2708333333333333,
+        "latency": {
+          "meanMs": 88.64643749999998,
+          "p95Ms": 135.6270000000004
+        }
+      },
+      "latencyKind": "fresh reranker only"
+    },
+    {
+      "method": "R2.3 runbook-context",
+      "status": "development rejected",
+      "metrics": {
+        "queryCount": 48,
+        "positiveQueryCount": 36,
+        "noMatchQueryCount": 12,
+        "recallAt3": 0.5694444444444444,
+        "mrr": 0.6064814814814815,
+        "noMatchConfusion": {
+          "tp": 10,
+          "fp": 2,
+          "fn": 2,
+          "tn": 34
+        },
+        "noMatchAccuracy": 0.9166666666666666,
+        "noMatchPrecision": 0.8333333333333334,
+        "noMatchAbstentionRate": 0.8333333333333334,
+        "answerableAbstentionRate": 0.05555555555555555,
+        "overallAbstentionRate": 0.25,
+        "latency": {
+          "meanMs": 112.46278124999992,
+          "p95Ms": 159.8041000000012
+        }
+      },
+      "latencyKind": "fresh reranker only"
+    },
+    {
+      "method": "R2.4 BGE-base cutoff 0.01",
+      "status": "development-selected cutoff",
+      "metrics": {
+        "queryCount": 48,
+        "positiveQueryCount": 36,
+        "noMatchQueryCount": 12,
+        "recallAt3": 0.5833333333333334,
+        "mrr": 0.5648148148148149,
+        "noMatchConfusion": {
+          "tp": 12,
+          "fp": 2,
+          "fn": 0,
+          "tn": 34
+        },
+        "noMatchAccuracy": 0.9583333333333334,
+        "noMatchPrecision": 0.8571428571428571,
+        "noMatchAbstentionRate": 1,
+        "answerableAbstentionRate": 0.05555555555555555,
+        "overallAbstentionRate": 0.2916666666666667,
+        "latency": {
+          "meanMs": 827.4107708333327,
+          "p95Ms": 1290.9663999999975
+        }
+      },
+      "latencyKind": "fresh reranker only"
+    },
+    {
+      "method": "R2.4 BGE-base cutoff 0.001",
+      "status": "diagnostic only, not selected",
+      "metrics": {
+        "queryCount": 48,
+        "positiveQueryCount": 36,
+        "noMatchQueryCount": 12,
+        "recallAt3": 0.625,
+        "mrr": 0.6018518518518519,
+        "noMatchConfusion": {
+          "tp": 10,
+          "fp": 0,
+          "fn": 2,
+          "tn": 36
+        },
+        "noMatchAccuracy": 0.9583333333333334,
+        "noMatchPrecision": 1,
+        "noMatchAbstentionRate": 0.8333333333333334,
+        "answerableAbstentionRate": 0,
+        "overallAbstentionRate": 0.20833333333333334,
+        "latency": {
+          "meanMs": 827.4107708333327,
+          "p95Ms": 1290.9663999999975
+        }
+      },
+      "latencyKind": "fresh reranker only"
+    },
+    {
+      "method": "R2.1 MiniLM zero cutoff",
+      "status": "diagnostic only, no-match regression",
+      "metrics": {
+        "queryCount": 48,
+        "positiveQueryCount": 36,
+        "noMatchQueryCount": 12,
+        "recallAt3": 0.6805555555555556,
+        "mrr": 0.6666666666666666,
+        "noMatchConfusion": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 12,
+          "tn": 36
+        },
+        "noMatchAccuracy": 0.75,
+        "noMatchPrecision": null,
+        "noMatchAbstentionRate": 0,
+        "answerableAbstentionRate": 0,
+        "overallAbstentionRate": 0,
+        "latency": {
+          "meanMs": 109.65623958333322,
+          "p95Ms": 162.88800000000083
+        }
+      },
+      "latencyKind": "historical retrieval pipeline"
+    }
+  ],
+  "sourceReports": {
+    "apps/ai_agent/evaluation/r21/runs/r21-v1-local/report.json": "af4857fb6265a8fc7aa3b0d89520efba77b2fcb0beaa523b6819b025105cd38c",
+    "apps/ai_agent/evaluation/r22/runs/r22-v1-local/report.json": "056bc6d5683edf3e37ff18757e40ec327598d5c2339c5a43e8c4a4150ab5f8e3",
+    "apps/ai_agent/evaluation/r23/runs/r23-v1-local/report.json": "2614b3d32378c9a09745e8a1977b64545621d4baf2ace53ae50a3818422d6ac9",
+    "apps/ai_agent/evaluation/r24/runs/r24-v1-local/report.json": "c7db9ff5e217daa3af573e1fd096898b9d63c681a1640ee1ede5863481dc72b8"
+  }
+}

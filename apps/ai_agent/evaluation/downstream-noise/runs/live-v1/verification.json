@@ -1,0 +1,9 @@
+{
+  "reportSha256": "b8c849c985bb2a32241d26ea65e5b8e1593ebaca1a71ba622c6bc94a7f0ea889",
+  "manifestHash": "7cc9c4486fa996573cf5a4bacbaf914a17ed3804fec95f989bce2057bec9091d",
+  "replayedOutputs": 30,
+  "externalReplayCalls": 0,
+  "identicalGenerationsAssessmentsAndGraphResults": true,
+  "qualitativeReviewHashMatches": true,
+  "credentialLeakDetected": false
+}

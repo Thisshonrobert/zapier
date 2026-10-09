@@ -1,0 +1,209 @@
+{
+  "inputHash": "d44724071a305eb210aec87965b41b7088858f10386761850e3a2bfe100b890c",
+  "model": "gemini-3.5-flash-lite",
+  "promptHash": "de3ec9d1f843e798abcd83f5013ef36f4757ca7f8020d000eb4e4bf9e1e56c0b",
+  "sourceHashes": {
+    "r25-reasoning.ts": "2723c8b6c9cf796f39452efe21bcec2a09f0a7b07dbe25dbebe14a34ca0a7cbb",
+    "r25-gemini.ts": "2ef31d4a2c483b4fe9ee28803f1115ff23e2f190b93b659897fa0e5fd7e83752",
+    "r25-analysis.ts": "f98c0316fca3259350398c4dd64766c01db3a3656ac6ce42442e670c6d753d13",
+    "retrieval-r21.ts": "f2972f4f36c58d38655e65e180527258c2e164e98ee0ce2a7bf0718c654156a1"
+  },
+  "generationConfig": {
+    "maxOutputTokens": 4096,
+    "temperature": 1,
+    "thinkingConfig": {
+      "thinkingLevel": "LOW",
+      "includeThoughts": false
+    },
+    "responseMimeType": "application/json",
+    "schema": "strict selected array, up to three enum citations"
+  },
+  "generationConfigHash": "928cf78274bbe08e7600a1a63f08a3b80b7f261980b08e29c98be35e7aa32ca9",
+  "originalDatasetHash": "430b040b3527d1eea4732affda6955e237feeb72809cd0f5a6e2f073ad562ab7",
+  "auditedDatasetHash": "d1b0cb32bdf32a84ba448b612a25c82b941eb014ce9987137ecb58d344d35ff9",
+  "auditHash": "63dd85842236f2b53b47dd84ba0fa54c4904ece94412d2343324e071c9eb5ca2",
+  "exhaustiveReportHash": "1b9a6d9eced00cb5807b7e7f1fdbdd3e9ea68cc49044aaac1814369ae88b6d95",
+  "freeTier": "User-declared free-tier project; no billing changes or provider fallback",
+  "maxGenerations": 96,
+  "maxHttpRequests": 192,
+  "maxTokensPerCall": 20000,
+  "maxReservedTokens": 1920000,
+  "deadlineMs": 3600000,
+  "spacingMs": 15000,
+  "productionReady": false,
+  "monetaryCostUsd": null,
+  "priorManifestHash": "bfdf3111e881dd09b6352f58e80b57891f84c29700b8be18e394fae22c2f8902",
+  "priorFailureHash": "0cde0a4eb68e3cb67d70245305264b9708a44e15cbb883d88812742c80537b65",
+  "skippedFailedQuery": "r21-duplicate-failure-investigation-2",
+  "priorPath": "apps/ai_agent/evaluation/r25/runs/reasoning-v1",
+  "continuationHash": "8cdde3f696182ae38bd52d5edecaee7268dc447bf2d6971c0db5882e2d14e3cc",
+  "generationSettings": {
+    "maxOutputTokens": 4096,
+    "temperature": 1,
+    "thinkingConfig": {
+      "thinkingLevel": "LOW",
+      "includeThoughts": false
+    },
+    "responseMimeType": "application/json"
+  },
+  "continuationPolicy": "One continuation only, failed query skipped; total generation attempts <=96. Stop on any further failure.",
+  "complete": false,
+  "generationAttemptsUpperBound": 38,
+  "providerHttpRequestsUpperBound": 76,
+  "successfulGenerations": 36,
+  "failures": [
+    {
+      "id": "r21-duplicate-failure-investigation-2",
+      "category": "bounded inference failure"
+    },
+    {
+      "id": "r21-dashboard-styling-2",
+      "category": "Gemini HTTP 503"
+    }
+  ],
+  "unattempted": 58,
+  "results": [
+    {
+      "labelVersion": "r21-v1",
+      "splits": [
+        {
+          "split": "development",
+          "expected": 48,
+          "successful": 36,
+          "failed": 2,
+          "unattempted": 10,
+          "successfulOnlyMetrics": {
+            "queryCount": 36,
+            "positiveQueryCount": 35,
+            "noMatchQueryCount": 1,
+            "recallAt3": 1,
+            "mrr": 0.9857142857142858,
+            "noMatchConfusion": {
+              "tp": 1,
+              "fp": 0,
+              "fn": 0,
+              "tn": 35
+            },
+            "noMatchAccuracy": 1,
+            "noMatchPrecision": 1,
+            "noMatchAbstentionRate": 1,
+            "answerableAbstentionRate": 0,
+            "overallAbstentionRate": 0.027777777777777776,
+            "latency": {
+              "meanMs": 2750.689027777782,
+              "p95Ms": 10830.5261
+            }
+          }
+        },
+        {
+          "split": "held_out",
+          "expected": 48,
+          "successful": 0,
+          "failed": 0,
+          "unattempted": 48,
+          "successfulOnlyMetrics": {
+            "queryCount": 0,
+            "positiveQueryCount": 0,
+            "noMatchQueryCount": 0,
+            "recallAt3": null,
+            "mrr": null,
+            "noMatchConfusion": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0
+            },
+            "noMatchAccuracy": null,
+            "noMatchPrecision": null,
+            "noMatchAbstentionRate": null,
+            "answerableAbstentionRate": null,
+            "overallAbstentionRate": null,
+            "latency": {
+              "meanMs": null,
+              "p95Ms": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "labelVersion": "r25-audited-v1",
+      "splits": [
+        {
+          "split": "development",
+          "expected": 48,
+          "successful": 36,
+          "failed": 2,
+          "unattempted": 10,
+          "successfulOnlyMetrics": {
+            "queryCount": 36,
+            "positiveQueryCount": 35,
+            "noMatchQueryCount": 1,
+            "recallAt3": 0.8285714285714286,
+            "mrr": 0.9857142857142858,
+            "noMatchConfusion": {
+              "tp": 1,
+              "fp": 0,
+              "fn": 0,
+              "tn": 35
+            },
+            "noMatchAccuracy": 1,
+            "noMatchPrecision": 1,
+            "noMatchAbstentionRate": 1,
+            "answerableAbstentionRate": 0,
+            "overallAbstentionRate": 0.027777777777777776,
+            "latency": {
+              "meanMs": 2750.689027777782,
+              "p95Ms": 10830.5261
+            }
+          }
+        },
+        {
+          "split": "held_out",
+          "expected": 48,
+          "successful": 0,
+          "failed": 0,
+          "unattempted": 48,
+          "successfulOnlyMetrics": {
+            "queryCount": 0,
+            "positiveQueryCount": 0,
+            "noMatchQueryCount": 0,
+            "recallAt3": null,
+            "mrr": null,
+            "noMatchConfusion": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0
+            },
+            "noMatchAccuracy": null,
+            "noMatchPrecision": null,
+            "noMatchAbstentionRate": null,
+            "answerableAbstentionRate": null,
+            "overallAbstentionRate": null,
+            "latency": {
+              "meanMs": null,
+              "p95Ms": null
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "sourceCaptureHashes": {
+    "first": "0cde0a4eb68e3cb67d70245305264b9708a44e15cbb883d88812742c80537b65",
+    "second": "1f6fbed93da414a268fa560434eefc6ee55b3b68ba3e05d8c6383082cfdb60e3"
+  },
+  "recordsHash": "6576da83a9fb638b52c638040504592bd2aecf4102d05b55c8c9d7964704dbca",
+  "measuredSuccessfulTokens": 176655,
+  "reportSourceHash": "24acabc6a02bb13b64e0b9541908b5c4337b3acfc2185e3865f222ea98f678a6",
+  "failedUsage": null,
+  "failedReservedTokens": 40000,
+  "costUsd": null,
+  "limitations": [
+    "No held-out generation was attempted; no held-out quality or overall no-match claim is possible.",
+    "The first failure's subtype was not captured; the second is provider HTTP 503. Neither is a retrieval abstention.",
+    "Only one failed query was skipped in one bounded continuation; no failed query was retried and no fallback was used.",
+    "Model and API key were configured on the user's declared free-tier project; billing was not inspected or changed."
+  ]
+}

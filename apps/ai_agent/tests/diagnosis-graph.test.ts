@@ -283,6 +283,23 @@ describe("Phase 6 integrated diagnosis graph", () => {
     expect(snapshot.evidence.inputValidation.evidence_id).toBe(validationRef);
   });
 
+  test("awaits asynchronous retrieval before diagnosis and fails before model generation on retrieval error", async () => {
+    const asyncTools = { ...tools(), searchRunbooks: async () => [runbook()] };
+    const result = await buildDiagnosisService(asyncTools, model(async prompt => {
+      expect(prompt.input).toContain(citation);
+      return generation(safeOutput());
+    })).diagnose();
+    expect(result.diagnosis.taxonomy_id).toBe("F01");
+    let calls = 0;
+    await expect(buildDiagnosisService({ ...tools(), searchRunbooks: async () => {
+      throw new Error("MiniLM unavailable");
+    } }, model(async () => {
+      calls++;
+      return generation(safeOutput());
+    })).diagnose()).rejects.toThrow("MiniLM unavailable");
+    expect(calls).toBe(0);
+  });
+
   test("exports one redacted trace with evidence, retrieval, model usage and versions", async () => {
     const traces: InvestigationTrace[] = [];
     const service = buildDiagnosisService(

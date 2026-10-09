@@ -1,0 +1,92 @@
+{
+  "experimentVersion": "r24-v1",
+  "datasetVersion": "r21-v1",
+  "candidateSource": "r22-v1-local",
+  "candidateLimit": 24,
+  "maxLength": 512,
+  "batchSize": 8,
+  "device": "cpu",
+  "models": {
+    "embedding": {
+      "id": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff37182d3f1213fa05d7196b954e230abad9",
+      "dtype": "q8"
+    },
+    "reranker": {
+      "id": "Xenova/bge-reranker-base",
+      "revision": "280bcc27a84e0b898c251e06fddb25171bd9b101",
+      "dtype": "q8"
+    }
+  },
+  "modelFiles": [
+    {
+      "rfilename": "config.json",
+      "blobId": "ef36f7221740ddc57b6cfae14977840d1fc0fc95",
+      "size": 782
+    },
+    {
+      "rfilename": "onnx/model_quantized.onnx",
+      "blobId": "14719861ece3e704fd414f1b0578d7187835c535",
+      "size": 279301077,
+      "lfs": {
+        "sha256": "dd98f3e67837d23210a6b7550c08cced4f61845b940ac45be3565840a10f3244",
+        "size": 279301077,
+        "pointerSize": 134
+      }
+    },
+    {
+      "rfilename": "special_tokens_map.json",
+      "blobId": "68171d1ff68b731a33d119708476692c094a466b",
+      "size": 279
+    },
+    {
+      "rfilename": "tokenizer.json",
+      "blobId": "049c11e136035ca76208375905ec98d7667fa8cb",
+      "size": 17098079,
+      "lfs": {
+        "sha256": "48564c5c7d3fa64d85d95e65414a542385f88b0f128fd8d4163fd7a57f2be05c",
+        "size": 17098079,
+        "pointerSize": 133
+      }
+    },
+    {
+      "rfilename": "tokenizer_config.json",
+      "blobId": "059214673d9d6d2ee319411e2ffec8c024b816d5",
+      "size": 443
+    }
+  ],
+  "modelFileHashes": {
+    "config.json": "b6575b9d5be20d6747417c8e20c5a0db1636356e0b6d422d7244c628423c4d4c",
+    "onnx/model_quantized.onnx": "dd98f3e67837d23210a6b7550c08cced4f61845b940ac45be3565840a10f3244",
+    "tokenizer.json": "48564c5c7d3fa64d85d95e65414a542385f88b0f128fd8d4163fd7a57f2be05c",
+    "tokenizer_config.json": "a1d6bc8734a6f635dc158508bef000f8e2e5a759c7d92f984b2c86e5ff53425b"
+  },
+  "baselineHashes": {
+    "apps/ai_agent/evaluation/r23/config.json": "56bb275c20522a5a977ef00cc656f9318592637f987041ec9fba2d0b523d987c",
+    "apps/ai_agent/evaluation/r23/runs/r23-v1-local/config.json": "df1825c37e7df6a7b341045f2e1740a6795a37df73ec40d1fc2895c886edb06e",
+    "apps/ai_agent/evaluation/r23/runs/r23-v1-local/dataset.json": "5cbeb67ddc1c707c2535445abba032a3d28c239040145313a2e9a9708bfdd7bf",
+    "apps/ai_agent/evaluation/r23/runs/r23-v1-local/inference-inputs.json": "86c1b298ecf5494091290c7c4e8d6402365a13431eb011a63deb980fea1a46f1",
+    "apps/ai_agent/evaluation/r23/runs/r23-v1-local/report.json": "2614b3d32378c9a09745e8a1977b64545621d4baf2ace53ae50a3818422d6ac9",
+    "apps/ai_agent/evaluation/r23/runs/r23-v1-local/report.md": "e362e527a9a210cd9741f24ae2f2030a38dcd47e407a156c7946c578703615ad",
+    "apps/ai_agent/evaluation/r23/runs/r23-v1-local/scores.json": "4e78c855697e14119ea2438afadbdcc097ce0c567d16ed4da099000616432c07",
+    "apps/ai_agent/src/evaluation/retrieval-r23.ts": "3e725fb6549fbd2beadc63f72aa6221efb5df88353682f450058be387e4a4b5b",
+    "apps/ai_agent/src/evaluation/r23-analysis.ts": "6fb8b37789fe76bd2ad3573490f0f013e5864695ca5f5ff4cebb97ba179e35e6",
+    "apps/ai_agent/src/evaluation/r23-models.mjs": "7d9c93c2b8d3708a67fbb8fbc5b832124d1fbd2d76e1022133f5198985e41e01",
+    "apps/ai_agent/tests/retrieval-r23.test.ts": "f2c66d0c8bfa1182e402c5736b373f159bae3b2319b762b2962a7720e2a58b21"
+  },
+  "thresholds": [
+    0,
+    0.00001,
+    0.0001,
+    0.001,
+    0.01,
+    0.05,
+    0.1,
+    0.3,
+    0.5,
+    0.7,
+    0.9
+  ],
+  "recallTarget": 0.9,
+  "selection": "development_recall_plus_no_match_then_MRR_then_lower_answerable_abstention_then_lower_threshold"
+}

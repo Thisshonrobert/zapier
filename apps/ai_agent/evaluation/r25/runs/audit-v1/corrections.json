@@ -1,0 +1,245 @@
+{
+  "oldVersion": "r21-v1",
+  "newVersion": "r25-audited-v1",
+  "changedQuestions": 32,
+  "removedLabels": 0,
+  "addedLabels": 44,
+  "changes": [
+    {
+      "id": "r21-bot-removal-2",
+      "removed": [],
+      "added": [
+        "RB-F03-F04@1.0.0#read-only-investigation"
+      ]
+    },
+    {
+      "id": "r21-bot-removal-3",
+      "removed": [],
+      "added": [
+        "RB-F03-F04@1.0.0#read-only-investigation"
+      ]
+    },
+    {
+      "id": "r21-bot-removal-4",
+      "removed": [],
+      "added": [
+        "RB-F03-F04@1.0.0#forbidden-actions"
+      ]
+    },
+    {
+      "id": "r21-recipient-validation-3",
+      "removed": [],
+      "added": [
+        "RB-F03-F04@1.0.0#replay-and-approval",
+        "RB-F07@1.0.0#replay-and-approval"
+      ]
+    },
+    {
+      "id": "r21-recipient-validation-4",
+      "removed": [],
+      "added": [
+        "RB-F03-F04@1.0.0#allowed-remediation"
+      ]
+    },
+    {
+      "id": "r21-mail-socket-loss-1",
+      "removed": [],
+      "added": [
+        "RB-F01-F02@1.0.0#read-only-investigation"
+      ]
+    },
+    {
+      "id": "r21-mail-socket-loss-4",
+      "removed": [],
+      "added": [
+        "RB-F09-F10@1.0.0#evidence-needed"
+      ]
+    },
+    {
+      "id": "r21-pending-predecessor-1",
+      "removed": [],
+      "added": [
+        "RB-F04-F06@1.0.0#evidence-needed",
+        "RB-F08@1.0.0#evidence-needed"
+      ]
+    },
+    {
+      "id": "r21-broker-outage-outbox-4",
+      "removed": [],
+      "added": [
+        "RB-F07@1.0.0#evidence-needed"
+      ]
+    },
+    {
+      "id": "r21-template-empty-replacement-4",
+      "removed": [],
+      "added": [
+        "RB-F03-F04@1.0.0#read-only-investigation"
+      ]
+    },
+    {
+      "id": "r21-missing-request-evidence-1",
+      "removed": [],
+      "added": [
+        "RB-F03-F04@1.0.0#evidence-needed",
+        "RB-F07@1.0.0#evidence-needed"
+      ]
+    },
+    {
+      "id": "r21-missing-request-evidence-2",
+      "removed": [],
+      "added": [
+        "RB-R2-COOLDOWN@1.0.0#cooldown-evidence"
+      ]
+    },
+    {
+      "id": "r21-missing-request-evidence-4",
+      "removed": [],
+      "added": [
+        "RB-F07@1.0.0#evidence-needed"
+      ]
+    },
+    {
+      "id": "r21-group-migration-4",
+      "removed": [],
+      "added": [
+        "RB-F03-F04@1.0.0#verification-rollback-or-escalation"
+      ]
+    },
+    {
+      "id": "r21-late-worker-fencing-4",
+      "removed": [],
+      "added": [
+        "RB-F01-F02@1.0.0#evidence-needed"
+      ]
+    },
+    {
+      "id": "r21-superseded-evidence-2",
+      "removed": [],
+      "added": [
+        "RB-F08@1.0.0#replay-and-approval"
+      ]
+    },
+    {
+      "id": "r21-superseded-evidence-3",
+      "removed": [],
+      "added": [
+        "RB-F08@1.0.0#evidence-needed"
+      ]
+    },
+    {
+      "id": "r21-success-progression-gap-1",
+      "removed": [],
+      "added": [
+        "RB-F08@1.0.0#forbidden-actions"
+      ]
+    },
+    {
+      "id": "r21-success-progression-gap-2",
+      "removed": [],
+      "added": [
+        "RB-F09-F10@1.0.0#simulated-example"
+      ]
+    },
+    {
+      "id": "r21-success-progression-gap-4",
+      "removed": [],
+      "added": [
+        "RB-F09-F10@1.0.0#forbidden-actions"
+      ]
+    },
+    {
+      "id": "r21-registry-mismatch-1",
+      "removed": [],
+      "added": [
+        "RB-F04-F06@1.0.0#allowed-remediation",
+        "RB-F04-F06@1.0.0#evidence-needed",
+        "RB-F04-F06@1.0.0#simulated-example"
+      ]
+    },
+    {
+      "id": "r21-registry-mismatch-2",
+      "removed": [],
+      "added": [
+        "RB-F04-F06@1.0.0#replay-and-approval",
+        "RB-F04-F06@1.0.0#simulated-example"
+      ]
+    },
+    {
+      "id": "r21-registry-mismatch-3",
+      "removed": [],
+      "added": [
+        "RB-F04-F06@1.0.0#allowed-remediation",
+        "RB-F04-F06@1.0.0#simulated-example"
+      ]
+    },
+    {
+      "id": "r21-registry-mismatch-4",
+      "removed": [],
+      "added": [
+        "RB-F04-F06@1.0.0#allowed-remediation",
+        "RB-F04-F06@1.0.0#simulated-example"
+      ]
+    },
+    {
+      "id": "r21-swallowed-authentication-4",
+      "removed": [],
+      "added": [
+        "RB-F09-F10@1.0.0#simulated-example"
+      ]
+    },
+    {
+      "id": "r21-server-error-after-send-2",
+      "removed": [],
+      "added": [
+        "RB-F01-F02@1.0.0#forbidden-actions",
+        "RB-F01-F02@1.0.0#read-only-investigation"
+      ]
+    },
+    {
+      "id": "r21-server-error-after-send-3",
+      "removed": [],
+      "added": [
+        "RB-F01-F02@1.0.0#read-only-investigation"
+      ]
+    },
+    {
+      "id": "r21-server-error-after-send-4",
+      "removed": [],
+      "added": [
+        "RB-F01-F02@1.0.0#evidence-needed",
+        "RB-F07@1.0.0#evidence-needed"
+      ]
+    },
+    {
+      "id": "r21-secret-verification-request-1",
+      "removed": [],
+      "added": [
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-R2-DESTINATION@1.0.0#destination-permission-evidence"
+      ]
+    },
+    {
+      "id": "r21-secret-verification-request-2",
+      "removed": [],
+      "added": [
+        "RB-F01-F02@1.0.0#read-only-investigation",
+        "RB-R2-DESTINATION@1.0.0#destination-permission-evidence"
+      ]
+    },
+    {
+      "id": "r21-secret-verification-request-3",
+      "removed": [],
+      "added": [
+        "RB-R2-DESTINATION@1.0.0#destination-permission-evidence"
+      ]
+    },
+    {
+      "id": "r21-secret-verification-request-4",
+      "removed": [],
+      "added": [
+        "RB-F01-F02@1.0.0#forbidden-actions"
+      ]
+    }
+  ]
+}

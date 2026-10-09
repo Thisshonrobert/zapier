@@ -1,0 +1,33 @@
+{
+  "version": "r25-method-v1",
+  "method": "minilm-original",
+  "config": {
+    "model": {
+      "id": "Xenova/ms-marco-MiniLM-L-6-v2",
+      "revision": "a09144355adeed5f58c8ed011d209bf8ee5a1fec",
+      "dtype": "q8"
+    },
+    "cutoff": 0.001,
+    "maxLength": 512,
+    "batchSize": 8,
+    "candidateBound": 60
+  },
+  "corpusHash": "4478bce380245ce109d409bf6b1972fd71d4b830f64eea3e697bc1f088c35a87",
+  "descriptionHash": null,
+  "geminiModel": null,
+  "promptHash": null,
+  "generationConfigHash": null,
+  "sourceHashes": {
+    "r25-fresh.ts": "c6f97dec69df2cad403bb1d5a5c10d7fd5f6a60d64de18537bf1f92d9b69f480",
+    "r25-models.mjs": "d694d00cea16bccce93f13bfcab573b0ccd14ebf1e557df988a70ab2300b2865",
+    "r25-analysis.ts": "f98c0316fca3259350398c4dd64766c01db3a3656ac6ce42442e670c6d753d13",
+    "r25-descriptions.ts": "c0462091eabcf675884b6f9811a93311fb3ae06d898e4feb2543ca42cb46d1a7",
+    "retrieval-r21.ts": "f2972f4f36c58d38655e65e180527258c2e164e98ee0ce2a7bf0718c654156a1",
+    "retrieval-r2.ts": "ebc8b06ec719bf9ea49d714071fe2207d01603b07e9326aaa8812d3592d42c9d",
+    "r24-analysis.ts": "464b379ac2d457152d8e9fd6ede00778dbd992ed47d6f61bd47ce78e2d6b8917",
+    "r23-analysis.ts": "6fb8b37789fe76bd2ad3573490f0f013e5864695ca5f5ff4cebb97ba179e35e6"
+  },
+  "frozenAt": "2026-10-07T17:30:34.387Z",
+  "productionReady": false,
+  "selectionEvidence": "Development-only audited-label Recall@3 + no-match abstention, ties prefer original. Fixed .001 cutoff. Gemini pilot incomplete and excluded. Fresh scenario questions/labels were not loaded by this selector."
+}

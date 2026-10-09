@@ -1,0 +1,197 @@
+{
+  "baseline": "r21-v1",
+  "candidateRecallAt12": 0.8472222222222222,
+  "missingGoldCount": 8,
+  "missingQueryCount": 6,
+  "withinExistingBranchTop12": 3,
+  "outsideBothBranches": 5,
+  "fullDepthProbeCandidateRecallAt12": 0.8333333333333334,
+  "probeStatus": "Read-only diagnostic, not selected or implemented in R2.2.",
+  "selectedChange": "Retain full deduplicated top12 BM25/top12 dense union before reranking; <=24 candidates.",
+  "queries": [
+    {
+      "id": "r21-orphan-source-identity-2",
+      "query": "The failed envelope is orphaned; is guessing the owner from a payload field permitted?",
+      "missing": [
+        {
+          "citation": "RB-F04-F06@1.0.0#forbidden-actions",
+          "semantic": 0.26788272346859854,
+          "lexRank": 0,
+          "denseRank": 36,
+          "eligibleCount": 60,
+          "recovered": false
+        }
+      ],
+      "baselineCandidates": [
+        "RB-R2-EMAIL-REJECT@1.0.0#email-rejection-evidence",
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F01-F02@1.0.0#forbidden-actions",
+        "RB-R2-DESTINATION@1.0.0#destination-permission-evidence",
+        "RB-R2-EMAIL-UNKNOWN@1.0.0#lost-acknowledgement-evidence",
+        "RB-F07@1.0.0#simulated-example",
+        "RB-F04-F06@1.0.0#replay-and-approval",
+        "RB-F07@1.0.0#forbidden-actions",
+        "RB-F07@1.0.0#read-only-investigation",
+        "RB-F01-F02@1.0.0#evidence-needed",
+        "RB-R2-COOLDOWN@1.0.0#cooldown-evidence",
+        "RB-R2-PUBLICATION@1.0.0#publication-reconciliation-evidence"
+      ]
+    },
+    {
+      "id": "r21-superseded-evidence-1",
+      "query": "A proposal refers to an older evidence version after the workflow fingerprint changed.",
+      "missing": [
+        {
+          "citation": "RB-F08@1.0.0#read-only-investigation",
+          "semantic": 0.37318175576187296,
+          "lexRank": 0,
+          "denseRank": 7,
+          "eligibleCount": 60,
+          "recovered": false
+        }
+      ],
+      "baselineCandidates": [
+        "RB-F04-F06@1.0.0#evidence-needed",
+        "RB-F08@1.0.0#evidence-needed",
+        "RB-R2-ORDERING@1.0.0#predecessor-ordering-evidence",
+        "RB-F08@1.0.0#replay-and-approval",
+        "RB-F01-F02@1.0.0#evidence-needed",
+        "RB-F04-F06@1.0.0#allowed-remediation",
+        "RB-F08@1.0.0#forbidden-actions",
+        "RB-F03-F04@1.0.0#allowed-remediation",
+        "RB-F09-F10@1.0.0#allowed-remediation",
+        "RB-F04-F06@1.0.0#replay-and-approval",
+        "RB-F08@1.0.0#verification-rollback-or-escalation",
+        "RB-F07@1.0.0#forbidden-actions"
+      ]
+    },
+    {
+      "id": "r21-success-progression-gap-3",
+      "query": "An action succeeded before the successor publication failed. Should diagnosis recommend sending the action again?",
+      "missing": [
+        {
+          "citation": "RB-F09-F10@1.0.0#replay-and-approval",
+          "semantic": 0.34292945921969575,
+          "lexRank": 19,
+          "denseRank": 25,
+          "eligibleCount": 60,
+          "recovered": false
+        }
+      ],
+      "baselineCandidates": [
+        "RB-R2-PUBLICATION@1.0.0#publication-reconciliation-evidence",
+        "RB-F09-F10@1.0.0#read-only-investigation",
+        "RB-F09-F10@1.0.0#symptoms",
+        "RB-F01-F02@1.0.0#verification-rollback-or-escalation",
+        "RB-R2-ORDERING@1.0.0#predecessor-ordering-evidence",
+        "RB-F07@1.0.0#read-only-investigation",
+        "RB-F09-F10@1.0.0#simulated-example",
+        "RB-F01-F02@1.0.0#allowed-remediation",
+        "RB-F09-F10@1.0.0#evidence-needed",
+        "RB-F08@1.0.0#symptoms",
+        "RB-F09-F10@1.0.0#allowed-remediation",
+        "RB-F03-F04@1.0.0#read-only-investigation"
+      ]
+    },
+    {
+      "id": "r21-registry-mismatch-3",
+      "query": "An automation action identifier exists in seed data but its executor is absent from the running worker.",
+      "missing": [
+        {
+          "citation": "RB-F04-F06@1.0.0#symptoms",
+          "semantic": 0.2981702794968981,
+          "lexRank": 35,
+          "denseRank": 9,
+          "eligibleCount": 60,
+          "recovered": false
+        }
+      ],
+      "baselineCandidates": [
+        "RB-F04-F06@1.0.0#sources",
+        "RB-F04-F06@1.0.0#simulated-example",
+        "RB-F04-F06@1.0.0#allowed-remediation",
+        "RB-F07@1.0.0#symptoms",
+        "RB-F07@1.0.0#sources",
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F08@1.0.0#sources",
+        "RB-R2-DESTINATION@1.0.0#destination-permission-evidence",
+        "RB-F03-F04@1.0.0#simulated-example",
+        "RB-F01-F02@1.0.0#sources",
+        "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+        "RB-F03-F04@1.0.0#sources"
+      ]
+    },
+    {
+      "id": "r21-server-error-after-send-1",
+      "query": "Telegram returned a server error after our request began. Does HTTP 503 prove that delivery was rejected?",
+      "missing": [
+        {
+          "citation": "RB-F01-F02@1.0.0#symptoms",
+          "semantic": 0.4159493058205035,
+          "lexRank": 14,
+          "denseRank": 14,
+          "eligibleCount": 58,
+          "recovered": true
+        },
+        {
+          "citation": "RB-F07@1.0.0#symptoms",
+          "semantic": 0.17270729390420944,
+          "lexRank": 19,
+          "denseRank": 45,
+          "eligibleCount": 58,
+          "recovered": false
+        }
+      ],
+      "baselineCandidates": [
+        "RB-R2-COOLDOWN@1.0.0#cooldown-evidence",
+        "RB-F01-F02@1.0.0#allowed-remediation",
+        "RB-F01-F02@1.0.0#simulated-example",
+        "RB-F07@1.0.0#forbidden-actions",
+        "RB-F07@1.0.0#replay-and-approval",
+        "RB-F07@1.0.0#read-only-investigation",
+        "RB-F03-F04@1.0.0#symptoms",
+        "RB-F01-F02@1.0.0#evidence-needed",
+        "RB-F01-F02@1.0.0#read-only-investigation",
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F09-F10@1.0.0#simulated-example",
+        "RB-F01-F02@1.0.0#replay-and-approval"
+      ]
+    },
+    {
+      "id": "r21-server-error-after-send-3",
+      "query": "The messaging endpoint returned 502 while processing a send. We cannot prove whether it accepted the action.",
+      "missing": [
+        {
+          "citation": "RB-F01-F02@1.0.0#symptoms",
+          "semantic": 0.3586811180800876,
+          "lexRank": 0,
+          "denseRank": 17,
+          "eligibleCount": 58,
+          "recovered": false
+        },
+        {
+          "citation": "RB-F07@1.0.0#symptoms",
+          "semantic": 0.2320619591081946,
+          "lexRank": 7,
+          "denseRank": 38,
+          "eligibleCount": 58,
+          "recovered": false
+        }
+      ],
+      "baselineCandidates": [
+        "RB-R2-DESTINATION@1.0.0#destination-permission-evidence",
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F01-F02@1.0.0#allowed-remediation",
+        "RB-F03-F04@1.0.0#simulated-example",
+        "RB-F08@1.0.0#simulated-example",
+        "RB-F03-F04@1.0.0#evidence-needed",
+        "RB-R2-COOLDOWN@1.0.0#cooldown-evidence",
+        "RB-F07@1.0.0#replay-and-approval",
+        "RB-F01-F02@1.0.0#read-only-investigation",
+        "RB-F01-F02@1.0.0#forbidden-actions",
+        "RB-F09-F10@1.0.0#read-only-investigation",
+        "RB-F07@1.0.0#simulated-example"
+      ]
+    }
+  ]
+}

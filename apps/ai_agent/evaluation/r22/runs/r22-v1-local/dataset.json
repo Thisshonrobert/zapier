@@ -1,0 +1,1209 @@
+{
+  "version": "r21-v1",
+  "queries": [
+    {
+      "id": "r21-recorded-cooldown-1",
+      "split": "development",
+      "kind": "exact",
+      "query": "Telegram recorded a retry_after duration; which response timestamp starts the waiting period?",
+      "taxonomy": [],
+      "providers": [
+        "telegram"
+      ],
+      "relevantCitations": [
+        "RB-R2-COOLDOWN@1.0.0#cooldown-evidence"
+      ],
+      "scenarioGroup": "recorded-cooldown"
+    },
+    {
+      "id": "r21-recorded-cooldown-2",
+      "split": "development",
+      "kind": "exact",
+      "query": "How should a recorded Telegram 429 response time and retry_after be combined into a cooldown deadline?",
+      "taxonomy": [],
+      "providers": [
+        "telegram"
+      ],
+      "relevantCitations": [
+        "RB-R2-COOLDOWN@1.0.0#cooldown-evidence"
+      ],
+      "scenarioGroup": "recorded-cooldown"
+    },
+    {
+      "id": "r21-recorded-cooldown-3",
+      "split": "development",
+      "kind": "exact",
+      "query": "The messaging request was explicitly refused for throttling. What clock evidence determines when waiting ends?",
+      "taxonomy": [],
+      "providers": [
+        "telegram"
+      ],
+      "relevantCitations": [
+        "RB-R2-COOLDOWN@1.0.0#cooldown-evidence"
+      ],
+      "scenarioGroup": "recorded-cooldown"
+    },
+    {
+      "id": "r21-recorded-cooldown-4",
+      "split": "development",
+      "kind": "exact",
+      "query": "A Telegram rejection says wait 45 seconds. Does time spent queued prove that the cooldown has elapsed?",
+      "taxonomy": [],
+      "providers": [
+        "telegram"
+      ],
+      "relevantCitations": [
+        "RB-R2-COOLDOWN@1.0.0#cooldown-evidence"
+      ],
+      "scenarioGroup": "recorded-cooldown"
+    },
+    {
+      "id": "r21-bot-removal-1",
+      "split": "development",
+      "kind": "paraphrase",
+      "query": "A chat administrator removed our bot; what captured information supports an owner permission repair?",
+      "taxonomy": [],
+      "providers": [
+        "telegram"
+      ],
+      "relevantCitations": [
+        "RB-R2-DESTINATION@1.0.0#destination-permission-evidence"
+      ],
+      "scenarioGroup": "bot-removal"
+    },
+    {
+      "id": "r21-bot-removal-2",
+      "split": "development",
+      "kind": "paraphrase",
+      "query": "Messages stopped after the robot lost its membership in the destination conversation.",
+      "taxonomy": [],
+      "providers": [
+        "telegram"
+      ],
+      "relevantCitations": [
+        "RB-R2-DESTINATION@1.0.0#destination-permission-evidence"
+      ],
+      "scenarioGroup": "bot-removal"
+    },
+    {
+      "id": "r21-bot-removal-3",
+      "split": "development",
+      "kind": "paraphrase",
+      "query": "Telegram says the bot cannot post to the channel after an administrator changed its permissions.",
+      "taxonomy": [],
+      "providers": [
+        "telegram"
+      ],
+      "relevantCitations": [
+        "RB-R2-DESTINATION@1.0.0#destination-permission-evidence"
+      ],
+      "scenarioGroup": "bot-removal"
+    },
+    {
+      "id": "r21-bot-removal-4",
+      "split": "development",
+      "kind": "paraphrase",
+      "query": "The messaging robot was expelled from its chat. Can investigation send a test to check restored access?",
+      "taxonomy": [],
+      "providers": [
+        "telegram"
+      ],
+      "relevantCitations": [
+        "RB-R2-DESTINATION@1.0.0#destination-permission-evidence"
+      ],
+      "scenarioGroup": "bot-removal"
+    },
+    {
+      "id": "r21-recipient-validation-1",
+      "split": "development",
+      "kind": "exact",
+      "query": "Email recipient validation rejected the destination before sending; what non-secret field checks are appropriate?",
+      "taxonomy": [],
+      "providers": [
+        "email"
+      ],
+      "relevantCitations": [
+        "RB-R2-EMAIL-REJECT@1.0.0#email-rejection-evidence"
+      ],
+      "scenarioGroup": "recipient-validation"
+    },
+    {
+      "id": "r21-recipient-validation-2",
+      "split": "development",
+      "kind": "exact",
+      "query": "The mail SDK explicitly rejected a malformed recipient field. How should the owner correct configuration?",
+      "taxonomy": [],
+      "providers": [
+        "email"
+      ],
+      "relevantCitations": [
+        "RB-R2-EMAIL-REJECT@1.0.0#email-rejection-evidence"
+      ],
+      "scenarioGroup": "recipient-validation"
+    },
+    {
+      "id": "r21-recipient-validation-3",
+      "split": "development",
+      "kind": "exact",
+      "query": "A local address validation failure prevented the email call. Is email replay supported after repairing the recipient?",
+      "taxonomy": [],
+      "providers": [
+        "email"
+      ],
+      "relevantCitations": [
+        "RB-R2-EMAIL-REJECT@1.0.0#email-rejection-evidence"
+      ],
+      "scenarioGroup": "recipient-validation"
+    },
+    {
+      "id": "r21-recipient-validation-4",
+      "split": "development",
+      "kind": "exact",
+      "query": "Captured evidence shows an invalid recipient structure, with no request sent. Which configuration repair guidance applies?",
+      "taxonomy": [],
+      "providers": [
+        "email"
+      ],
+      "relevantCitations": [
+        "RB-R2-EMAIL-REJECT@1.0.0#email-rejection-evidence"
+      ],
+      "scenarioGroup": "recipient-validation"
+    },
+    {
+      "id": "r21-mail-socket-loss-1",
+      "split": "development",
+      "kind": "paraphrase",
+      "query": "The mail transport disconnected after the send started, and there is no acknowledgement.",
+      "taxonomy": [],
+      "providers": [
+        "email"
+      ],
+      "relevantCitations": [
+        "RB-R2-EMAIL-UNKNOWN@1.0.0#lost-acknowledgement-evidence"
+      ],
+      "scenarioGroup": "mail-socket-loss"
+    },
+    {
+      "id": "r21-mail-socket-loss-2",
+      "split": "development",
+      "kind": "paraphrase",
+      "query": "An email socket closed before we received an answer; the remote system could already have accepted the message.",
+      "taxonomy": [],
+      "providers": [
+        "email"
+      ],
+      "relevantCitations": [
+        "RB-R2-EMAIL-UNKNOWN@1.0.0#lost-acknowledgement-evidence"
+      ],
+      "scenarioGroup": "mail-socket-loss"
+    },
+    {
+      "id": "r21-mail-socket-loss-3",
+      "split": "development",
+      "kind": "paraphrase",
+      "query": "A mail send timed out after transmission began. Is an expired lease proof that nobody received it?",
+      "taxonomy": [],
+      "providers": [
+        "email"
+      ],
+      "relevantCitations": [
+        "RB-R2-EMAIL-UNKNOWN@1.0.0#lost-acknowledgement-evidence"
+      ],
+      "scenarioGroup": "mail-socket-loss"
+    },
+    {
+      "id": "r21-mail-socket-loss-4",
+      "split": "development",
+      "kind": "paraphrase",
+      "query": "The email connection vanished while waiting for the server response. What reconciliation evidence is required?",
+      "taxonomy": [],
+      "providers": [
+        "email"
+      ],
+      "relevantCitations": [
+        "RB-R2-EMAIL-UNKNOWN@1.0.0#lost-acknowledgement-evidence"
+      ],
+      "scenarioGroup": "mail-socket-loss"
+    },
+    {
+      "id": "r21-pending-predecessor-1",
+      "split": "development",
+      "kind": "exact",
+      "query": "A successor arrived while its predecessor is PENDING; which ordering evidence should be inspected?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-R2-ORDERING@1.0.0#predecessor-ordering-evidence"
+      ],
+      "scenarioGroup": "pending-predecessor"
+    },
+    {
+      "id": "r21-pending-predecessor-2",
+      "split": "development",
+      "kind": "exact",
+      "query": "Workflow stage three is ready but stage two has not finished. Can the later stage run?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-R2-ORDERING@1.0.0#predecessor-ordering-evidence"
+      ],
+      "scenarioGroup": "pending-predecessor"
+    },
+    {
+      "id": "r21-pending-predecessor-3",
+      "split": "development",
+      "kind": "exact",
+      "query": "Captured predecessor state is FAILED although the next stage event exists. What should investigation recommend?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-R2-ORDERING@1.0.0#predecessor-ordering-evidence"
+      ],
+      "scenarioGroup": "pending-predecessor"
+    },
+    {
+      "id": "r21-pending-predecessor-4",
+      "split": "development",
+      "kind": "exact",
+      "query": "A predecessor record is missing. Does the numerical stage index establish safe dependency ordering?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-R2-ORDERING@1.0.0#predecessor-ordering-evidence"
+      ],
+      "scenarioGroup": "pending-predecessor"
+    },
+    {
+      "id": "r21-broker-outage-outbox-1",
+      "split": "development",
+      "kind": "exact",
+      "query": "Kafka is unavailable and a durable failure outbox row remains unpublished. Which reconciliation guidance applies?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-R2-PUBLICATION@1.0.0#publication-reconciliation-evidence"
+      ],
+      "scenarioGroup": "broker-outage-outbox"
+    },
+    {
+      "id": "r21-broker-outage-outbox-2",
+      "split": "development",
+      "kind": "exact",
+      "query": "The saved dead-letter publication has no broker acknowledgement during an outage.",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-R2-PUBLICATION@1.0.0#publication-reconciliation-evidence"
+      ],
+      "scenarioGroup": "broker-outage-outbox"
+    },
+    {
+      "id": "r21-broker-outage-outbox-3",
+      "split": "development",
+      "kind": "exact",
+      "query": "A failure is persisted but its notification cannot reach Kafka. Should investigation mark the row published?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-R2-PUBLICATION@1.0.0#publication-reconciliation-evidence"
+      ],
+      "scenarioGroup": "broker-outage-outbox"
+    },
+    {
+      "id": "r21-broker-outage-outbox-4",
+      "split": "development",
+      "kind": "exact",
+      "query": "The broker rejected the DLQ outbox publication. Does that publication failure establish external non-delivery?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-R2-PUBLICATION@1.0.0#publication-reconciliation-evidence"
+      ],
+      "scenarioGroup": "broker-outage-outbox"
+    },
+    {
+      "id": "r21-template-empty-replacement-1",
+      "split": "development",
+      "kind": "paraphrase",
+      "query": "The parser replaced an absent template field with empty text. How should the missing path be reported?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F04-F06@1.0.0#read-only-investigation"
+      ],
+      "scenarioGroup": "template-empty-replacement"
+    },
+    {
+      "id": "r21-template-empty-replacement-2",
+      "split": "development",
+      "kind": "paraphrase",
+      "query": "An input references a field that does not exist; the rendered message is blank rather than a validation exception.",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F04-F06@1.0.0#read-only-investigation"
+      ],
+      "scenarioGroup": "template-empty-replacement"
+    },
+    {
+      "id": "r21-template-empty-replacement-3",
+      "split": "development",
+      "kind": "paraphrase",
+      "query": "A workflow placeholder resolves to an empty string because the payload lacks the requested property.",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F04-F06@1.0.0#read-only-investigation"
+      ],
+      "scenarioGroup": "template-empty-replacement"
+    },
+    {
+      "id": "r21-template-empty-replacement-4",
+      "split": "development",
+      "kind": "paraphrase",
+      "query": "Should investigation report the rendered value or the absent template path when interpolation silently empties it?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F04-F06@1.0.0#read-only-investigation"
+      ],
+      "scenarioGroup": "template-empty-replacement"
+    },
+    {
+      "id": "r21-duplicate-failure-investigation-1",
+      "split": "development",
+      "kind": "exact",
+      "query": "Two failure notifications share the same source reference. Should they create separate investigations?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F08@1.0.0#read-only-investigation"
+      ],
+      "scenarioGroup": "duplicate-failure-investigation"
+    },
+    {
+      "id": "r21-duplicate-failure-investigation-2",
+      "split": "development",
+      "kind": "exact",
+      "query": "Repeated investigations refer to an identical failure identity. What deduplication check is needed?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F08@1.0.0#read-only-investigation"
+      ],
+      "scenarioGroup": "duplicate-failure-investigation"
+    },
+    {
+      "id": "r21-duplicate-failure-investigation-3",
+      "split": "development",
+      "kind": "exact",
+      "query": "The same canonical failure was investigated twice after broker redelivery; distinguish this from a new failure.",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F08@1.0.0#read-only-investigation"
+      ],
+      "scenarioGroup": "duplicate-failure-investigation"
+    },
+    {
+      "id": "r21-duplicate-failure-investigation-4",
+      "split": "development",
+      "kind": "exact",
+      "query": "Which read-only procedure deduplicates identical source references before diagnosing duplicate failure delivery?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F08@1.0.0#read-only-investigation"
+      ],
+      "scenarioGroup": "duplicate-failure-investigation"
+    },
+    {
+      "id": "r21-missing-request-evidence-1",
+      "split": "development",
+      "kind": "paraphrase",
+      "query": "The only evidence is a provider error string. What request phase and attempt details are missing?",
+      "taxonomy": [],
+      "providers": [
+        "telegram"
+      ],
+      "relevantCitations": [
+        "RB-F01-F02@1.0.0#evidence-needed"
+      ],
+      "scenarioGroup": "missing-request-evidence"
+    },
+    {
+      "id": "r21-missing-request-evidence-2",
+      "split": "development",
+      "kind": "paraphrase",
+      "query": "No safe status, completion timestamp or retry delay was captured for the Telegram failure.",
+      "taxonomy": [],
+      "providers": [
+        "telegram"
+      ],
+      "relevantCitations": [
+        "RB-F01-F02@1.0.0#evidence-needed"
+      ],
+      "scenarioGroup": "missing-request-evidence"
+    },
+    {
+      "id": "r21-missing-request-evidence-3",
+      "split": "development",
+      "kind": "paraphrase",
+      "query": "Which provider request facts are necessary before interpreting a reported rate-limit error?",
+      "taxonomy": [],
+      "providers": [
+        "telegram"
+      ],
+      "relevantCitations": [
+        "RB-F01-F02@1.0.0#evidence-needed"
+      ],
+      "scenarioGroup": "missing-request-evidence"
+    },
+    {
+      "id": "r21-missing-request-evidence-4",
+      "split": "development",
+      "kind": "paraphrase",
+      "query": "A final message says the provider failed but there are no bounded outcomes or current fingerprints. What evidence is needed?",
+      "taxonomy": [],
+      "providers": [
+        "telegram"
+      ],
+      "relevantCitations": [
+        "RB-F01-F02@1.0.0#evidence-needed"
+      ],
+      "scenarioGroup": "missing-request-evidence"
+    },
+    {
+      "id": "r21-dashboard-styling-1",
+      "split": "development",
+      "kind": "no_match",
+      "query": "How do I align a dashboard sidebar using CSS grid?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [],
+      "scenarioGroup": "dashboard-styling"
+    },
+    {
+      "id": "r21-dashboard-styling-2",
+      "split": "development",
+      "kind": "no_match",
+      "query": "Which font sizes make a workflow editor readable on a phone?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [],
+      "scenarioGroup": "dashboard-styling"
+    },
+    {
+      "id": "r21-dashboard-styling-3",
+      "split": "development",
+      "kind": "no_match",
+      "query": "How can a dark theme retain contrast for disabled navigation links?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [],
+      "scenarioGroup": "dashboard-styling"
+    },
+    {
+      "id": "r21-dashboard-styling-4",
+      "split": "development",
+      "kind": "no_match",
+      "query": "Recommend a responsive layout for billing settings and account tabs.",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [],
+      "scenarioGroup": "dashboard-styling"
+    },
+    {
+      "id": "r21-billing-analysis-1",
+      "split": "development",
+      "kind": "no_match",
+      "query": "Calculate subscription proration when a customer upgrades halfway through the month.",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [],
+      "scenarioGroup": "billing-analysis"
+    },
+    {
+      "id": "r21-billing-analysis-2",
+      "split": "development",
+      "kind": "no_match",
+      "query": "How should workflow usage be converted into invoice line items?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [],
+      "scenarioGroup": "billing-analysis"
+    },
+    {
+      "id": "r21-billing-analysis-3",
+      "split": "development",
+      "kind": "no_match",
+      "query": "Which formula compares monthly recurring revenue across subscription tiers?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [],
+      "scenarioGroup": "billing-analysis"
+    },
+    {
+      "id": "r21-billing-analysis-4",
+      "split": "development",
+      "kind": "no_match",
+      "query": "Design a dashboard chart showing churn and annual contract revenue.",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [],
+      "scenarioGroup": "billing-analysis"
+    },
+    {
+      "id": "r21-database-capacity-1",
+      "split": "development",
+      "kind": "no_match",
+      "query": "How many PostgreSQL connection pool slots should each service allocate?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [],
+      "scenarioGroup": "database-capacity"
+    },
+    {
+      "id": "r21-database-capacity-2",
+      "split": "development",
+      "kind": "no_match",
+      "query": "What autovacuum settings suit a large append-only analytics table?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [],
+      "scenarioGroup": "database-capacity"
+    },
+    {
+      "id": "r21-database-capacity-3",
+      "split": "development",
+      "kind": "no_match",
+      "query": "Choose PostgreSQL shared_buffers and work_mem for a memory-constrained host.",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [],
+      "scenarioGroup": "database-capacity"
+    },
+    {
+      "id": "r21-database-capacity-4",
+      "split": "development",
+      "kind": "no_match",
+      "query": "How do I estimate disk growth for an analytics database over two years?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [],
+      "scenarioGroup": "database-capacity"
+    },
+    {
+      "id": "r21-group-migration-1",
+      "split": "held_out",
+      "kind": "paraphrase",
+      "query": "The old conversation number stopped working after a group was upgraded into a larger group.",
+      "taxonomy": [],
+      "providers": [
+        "telegram"
+      ],
+      "relevantCitations": [
+        "RB-R2-DESTINATION@1.0.0#destination-permission-evidence"
+      ],
+      "scenarioGroup": "group-migration"
+    },
+    {
+      "id": "r21-group-migration-2",
+      "split": "held_out",
+      "kind": "paraphrase",
+      "query": "A Telegram group migration left the workflow pointing to an obsolete chat identifier.",
+      "taxonomy": [],
+      "providers": [
+        "telegram"
+      ],
+      "relevantCitations": [
+        "RB-R2-DESTINATION@1.0.0#destination-permission-evidence"
+      ],
+      "scenarioGroup": "group-migration"
+    },
+    {
+      "id": "r21-group-migration-3",
+      "split": "held_out",
+      "kind": "paraphrase",
+      "query": "Our bot still belongs to the group, but its identifier changed when the group migrated.",
+      "taxonomy": [],
+      "providers": [
+        "telegram"
+      ],
+      "relevantCitations": [
+        "RB-R2-DESTINATION@1.0.0#destination-permission-evidence"
+      ],
+      "scenarioGroup": "group-migration"
+    },
+    {
+      "id": "r21-group-migration-4",
+      "split": "held_out",
+      "kind": "paraphrase",
+      "query": "Which owner configuration evidence should be inspected when a messaging group changes identity?",
+      "taxonomy": [],
+      "providers": [
+        "telegram"
+      ],
+      "relevantCitations": [
+        "RB-R2-DESTINATION@1.0.0#destination-permission-evidence"
+      ],
+      "scenarioGroup": "group-migration"
+    },
+    {
+      "id": "r21-late-worker-fencing-1",
+      "split": "held_out",
+      "kind": "paraphrase",
+      "query": "A worker whose lease elapsed later tried to write completion. What fencing evidence is required?",
+      "taxonomy": [],
+      "providers": [
+        "telegram"
+      ],
+      "relevantCitations": [
+        "RB-F07@1.0.0#evidence-needed"
+      ],
+      "scenarioGroup": "late-worker-fencing"
+    },
+    {
+      "id": "r21-late-worker-fencing-2",
+      "split": "held_out",
+      "kind": "paraphrase",
+      "query": "An old sender resumed after another worker took ownership; we lack its completion and fence records.",
+      "taxonomy": [],
+      "providers": [
+        "telegram"
+      ],
+      "relevantCitations": [
+        "RB-F07@1.0.0#evidence-needed"
+      ],
+      "scenarioGroup": "late-worker-fencing"
+    },
+    {
+      "id": "r21-late-worker-fencing-3",
+      "split": "held_out",
+      "kind": "paraphrase",
+      "query": "The provider attempt outlived the execution lease. Which receipt and fingerprint evidence distinguishes a stale worker?",
+      "taxonomy": [],
+      "providers": [
+        "telegram"
+      ],
+      "relevantCitations": [
+        "RB-F07@1.0.0#evidence-needed"
+      ],
+      "scenarioGroup": "late-worker-fencing"
+    },
+    {
+      "id": "r21-late-worker-fencing-4",
+      "split": "held_out",
+      "kind": "paraphrase",
+      "query": "A delayed worker reported completion after losing its lease. What bounded attempt history must be captured?",
+      "taxonomy": [],
+      "providers": [
+        "telegram"
+      ],
+      "relevantCitations": [
+        "RB-F07@1.0.0#evidence-needed"
+      ],
+      "scenarioGroup": "late-worker-fencing"
+    },
+    {
+      "id": "r21-orphan-source-identity-1",
+      "split": "held_out",
+      "kind": "exact",
+      "query": "An event has no valid run identity. May investigation invent an ID and assign it to a user?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F04-F06@1.0.0#forbidden-actions"
+      ],
+      "scenarioGroup": "orphan-source-identity"
+    },
+    {
+      "id": "r21-orphan-source-identity-2",
+      "split": "held_out",
+      "kind": "exact",
+      "query": "The failed envelope is orphaned; is guessing the owner from a payload field permitted?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F04-F06@1.0.0#forbidden-actions"
+      ],
+      "scenarioGroup": "orphan-source-identity"
+    },
+    {
+      "id": "r21-orphan-source-identity-3",
+      "split": "held_out",
+      "kind": "exact",
+      "query": "A malformed stage event cannot be linked to a run. Can the agent rewrite its identity to investigate it?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F04-F06@1.0.0#forbidden-actions"
+      ],
+      "scenarioGroup": "orphan-source-identity"
+    },
+    {
+      "id": "r21-orphan-source-identity-4",
+      "split": "held_out",
+      "kind": "exact",
+      "query": "Is mapping a missing-run event to a likely customer an allowed repair for an orphan envelope?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F04-F06@1.0.0#forbidden-actions"
+      ],
+      "scenarioGroup": "orphan-source-identity"
+    },
+    {
+      "id": "r21-superseded-evidence-1",
+      "split": "held_out",
+      "kind": "paraphrase",
+      "query": "A proposal refers to an older evidence version after the workflow fingerprint changed.",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F08@1.0.0#read-only-investigation"
+      ],
+      "scenarioGroup": "superseded-evidence"
+    },
+    {
+      "id": "r21-superseded-evidence-2",
+      "split": "held_out",
+      "kind": "paraphrase",
+      "query": "The investigation snapshot no longer matches the current execution inputs; how should the stale proposal be treated?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F08@1.0.0#read-only-investigation"
+      ],
+      "scenarioGroup": "superseded-evidence"
+    },
+    {
+      "id": "r21-superseded-evidence-3",
+      "split": "held_out",
+      "kind": "paraphrase",
+      "query": "An operator opened a proposal made before the source state changed. Which version comparison is required?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F08@1.0.0#read-only-investigation"
+      ],
+      "scenarioGroup": "superseded-evidence"
+    },
+    {
+      "id": "r21-superseded-evidence-4",
+      "split": "held_out",
+      "kind": "paraphrase",
+      "query": "What read-only check detects a superseded investigation when evidence fingerprints differ?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F08@1.0.0#read-only-investigation"
+      ],
+      "scenarioGroup": "superseded-evidence"
+    },
+    {
+      "id": "r21-success-progression-gap-1",
+      "split": "held_out",
+      "kind": "ambiguous",
+      "query": "The action is SUCCESS but its next-stage event never arrived. Is progression recovery the same as repeating the action?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F09-F10@1.0.0#read-only-investigation",
+        "RB-F09-F10@1.0.0#replay-and-approval"
+      ],
+      "scenarioGroup": "success-progression-gap"
+    },
+    {
+      "id": "r21-success-progression-gap-2",
+      "split": "held_out",
+      "kind": "ambiguous",
+      "query": "A completed stage has no published successor; why must repair distinguish progression from external replay?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F09-F10@1.0.0#read-only-investigation",
+        "RB-F09-F10@1.0.0#replay-and-approval"
+      ],
+      "scenarioGroup": "success-progression-gap"
+    },
+    {
+      "id": "r21-success-progression-gap-3",
+      "split": "held_out",
+      "kind": "ambiguous",
+      "query": "An action succeeded before the successor publication failed. Should diagnosis recommend sending the action again?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F09-F10@1.0.0#read-only-investigation",
+        "RB-F09-F10@1.0.0#replay-and-approval"
+      ],
+      "scenarioGroup": "success-progression-gap"
+    },
+    {
+      "id": "r21-success-progression-gap-4",
+      "split": "held_out",
+      "kind": "ambiguous",
+      "query": "Workflow progression stopped after a successful provider action. Which read-only boundary prevents replaying SUCCESS?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F09-F10@1.0.0#read-only-investigation",
+        "RB-F09-F10@1.0.0#replay-and-approval"
+      ],
+      "scenarioGroup": "success-progression-gap"
+    },
+    {
+      "id": "r21-registry-mismatch-1",
+      "split": "held_out",
+      "kind": "exact",
+      "query": "A seeded workflow action key has no corresponding deployed handler in the registry.",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F04-F06@1.0.0#symptoms"
+      ],
+      "scenarioGroup": "registry-mismatch"
+    },
+    {
+      "id": "r21-registry-mismatch-2",
+      "split": "held_out",
+      "kind": "exact",
+      "query": "The definition names an unsupported action although the run and input types are otherwise valid.",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F04-F06@1.0.0#symptoms"
+      ],
+      "scenarioGroup": "registry-mismatch"
+    },
+    {
+      "id": "r21-registry-mismatch-3",
+      "split": "held_out",
+      "kind": "exact",
+      "query": "An automation action identifier exists in seed data but its executor is absent from the running worker.",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F04-F06@1.0.0#symptoms"
+      ],
+      "scenarioGroup": "registry-mismatch"
+    },
+    {
+      "id": "r21-registry-mismatch-4",
+      "split": "held_out",
+      "kind": "exact",
+      "query": "Which failure guidance covers a deployed handler registry that cannot resolve the configured action type?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F04-F06@1.0.0#symptoms"
+      ],
+      "scenarioGroup": "registry-mismatch"
+    },
+    {
+      "id": "r21-swallowed-authentication-1",
+      "split": "held_out",
+      "kind": "ambiguous",
+      "query": "The mail SDK refused authentication, yet the executor marked the action SUCCESS after catching the exception.",
+      "taxonomy": [],
+      "providers": [
+        "email"
+      ],
+      "relevantCitations": [
+        "RB-R2-EMAIL-REJECT@1.0.0#email-rejection-evidence",
+        "RB-F09-F10@1.0.0#symptoms"
+      ],
+      "scenarioGroup": "swallowed-authentication"
+    },
+    {
+      "id": "r21-swallowed-authentication-2",
+      "split": "held_out",
+      "kind": "ambiguous",
+      "query": "An email login rejection was hidden by the application and contradicts its completed execution state.",
+      "taxonomy": [],
+      "providers": [
+        "email"
+      ],
+      "relevantCitations": [
+        "RB-R2-EMAIL-REJECT@1.0.0#email-rejection-evidence",
+        "RB-F09-F10@1.0.0#symptoms"
+      ],
+      "scenarioGroup": "swallowed-authentication"
+    },
+    {
+      "id": "r21-swallowed-authentication-3",
+      "split": "held_out",
+      "kind": "ambiguous",
+      "query": "Captured provider evidence says email authentication failed, but the worker swallowed the SDK error.",
+      "taxonomy": [],
+      "providers": [
+        "email"
+      ],
+      "relevantCitations": [
+        "RB-R2-EMAIL-REJECT@1.0.0#email-rejection-evidence",
+        "RB-F09-F10@1.0.0#symptoms"
+      ],
+      "scenarioGroup": "swallowed-authentication"
+    },
+    {
+      "id": "r21-swallowed-authentication-4",
+      "split": "held_out",
+      "kind": "ambiguous",
+      "query": "The database says SUCCESS while an email authentication exception was ignored. Which contradictory-evidence guidance applies?",
+      "taxonomy": [],
+      "providers": [
+        "email"
+      ],
+      "relevantCitations": [
+        "RB-R2-EMAIL-REJECT@1.0.0#email-rejection-evidence",
+        "RB-F09-F10@1.0.0#symptoms"
+      ],
+      "scenarioGroup": "swallowed-authentication"
+    },
+    {
+      "id": "r21-server-error-after-send-1",
+      "split": "held_out",
+      "kind": "ambiguous",
+      "query": "Telegram returned a server error after our request began. Does HTTP 503 prove that delivery was rejected?",
+      "taxonomy": [],
+      "providers": [
+        "telegram"
+      ],
+      "relevantCitations": [
+        "RB-F01-F02@1.0.0#symptoms",
+        "RB-F07@1.0.0#symptoms"
+      ],
+      "scenarioGroup": "server-error-after-send"
+    },
+    {
+      "id": "r21-server-error-after-send-2",
+      "split": "held_out",
+      "kind": "ambiguous",
+      "query": "A provider 5xx arrived after sending started, with no receipt establishing acceptance or rejection.",
+      "taxonomy": [],
+      "providers": [
+        "telegram"
+      ],
+      "relevantCitations": [
+        "RB-F01-F02@1.0.0#symptoms",
+        "RB-F07@1.0.0#symptoms"
+      ],
+      "scenarioGroup": "server-error-after-send"
+    },
+    {
+      "id": "r21-server-error-after-send-3",
+      "split": "held_out",
+      "kind": "ambiguous",
+      "query": "The messaging endpoint returned 502 while processing a send. We cannot prove whether it accepted the action.",
+      "taxonomy": [],
+      "providers": [
+        "telegram"
+      ],
+      "relevantCitations": [
+        "RB-F01-F02@1.0.0#symptoms",
+        "RB-F07@1.0.0#symptoms"
+      ],
+      "scenarioGroup": "server-error-after-send"
+    },
+    {
+      "id": "r21-server-error-after-send-4",
+      "split": "held_out",
+      "kind": "ambiguous",
+      "query": "How should diagnosis distinguish a provider server error from proven non-delivery when the request was already in flight?",
+      "taxonomy": [],
+      "providers": [
+        "telegram"
+      ],
+      "relevantCitations": [
+        "RB-F01-F02@1.0.0#symptoms",
+        "RB-F07@1.0.0#symptoms"
+      ],
+      "scenarioGroup": "server-error-after-send"
+    },
+    {
+      "id": "r21-secret-verification-request-1",
+      "split": "held_out",
+      "kind": "paraphrase",
+      "query": "An operator asks the investigator to display the bot credential to confirm it is correct.",
+      "taxonomy": [],
+      "providers": [
+        "telegram"
+      ],
+      "relevantCitations": [
+        "RB-F03-F04@1.0.0#forbidden-actions"
+      ],
+      "scenarioGroup": "secret-verification-request"
+    },
+    {
+      "id": "r21-secret-verification-request-2",
+      "split": "held_out",
+      "kind": "paraphrase",
+      "query": "Can investigation transmit a configured secret to test whether the messaging account works?",
+      "taxonomy": [],
+      "providers": [
+        "telegram"
+      ],
+      "relevantCitations": [
+        "RB-F03-F04@1.0.0#forbidden-actions"
+      ],
+      "scenarioGroup": "secret-verification-request"
+    },
+    {
+      "id": "r21-secret-verification-request-3",
+      "split": "held_out",
+      "kind": "paraphrase",
+      "query": "The proposed credential repair includes sending a test message and reading the token value.",
+      "taxonomy": [],
+      "providers": [
+        "telegram"
+      ],
+      "relevantCitations": [
+        "RB-F03-F04@1.0.0#forbidden-actions"
+      ],
+      "scenarioGroup": "secret-verification-request"
+    },
+    {
+      "id": "r21-secret-verification-request-4",
+      "split": "held_out",
+      "kind": "paraphrase",
+      "query": "Which guidance forbids verifying authentication by requesting secrets or probing the provider?",
+      "taxonomy": [],
+      "providers": [
+        "telegram"
+      ],
+      "relevantCitations": [
+        "RB-F03-F04@1.0.0#forbidden-actions"
+      ],
+      "scenarioGroup": "secret-verification-request"
+    },
+    {
+      "id": "r21-broker-topology-settings-1",
+      "split": "held_out",
+      "kind": "no_match",
+      "query": "Choose a Kafka partition count and replication factor for a new high-volume topic.",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [],
+      "scenarioGroup": "broker-topology-settings"
+    },
+    {
+      "id": "r21-broker-topology-settings-2",
+      "split": "held_out",
+      "kind": "no_match",
+      "query": "How should partition reassignment be planned across three Kafka brokers?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [],
+      "scenarioGroup": "broker-topology-settings"
+    },
+    {
+      "id": "r21-broker-topology-settings-3",
+      "split": "held_out",
+      "kind": "no_match",
+      "query": "Which Kafka retention.ms setting gives a seven-day retention policy?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [],
+      "scenarioGroup": "broker-topology-settings"
+    },
+    {
+      "id": "r21-broker-topology-settings-4",
+      "split": "held_out",
+      "kind": "no_match",
+      "query": "Design Kafka consumer-group assignment for a cluster with uneven partitions.",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [],
+      "scenarioGroup": "broker-topology-settings"
+    },
+    {
+      "id": "r21-calendar-scheduling-1",
+      "split": "held_out",
+      "kind": "no_match",
+      "query": "What cron expression runs on the last weekday of each month?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [],
+      "scenarioGroup": "calendar-scheduling"
+    },
+    {
+      "id": "r21-calendar-scheduling-2",
+      "split": "held_out",
+      "kind": "no_match",
+      "query": "How do recurring calendar triggers handle a daylight-saving transition?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [],
+      "scenarioGroup": "calendar-scheduling"
+    },
+    {
+      "id": "r21-calendar-scheduling-3",
+      "split": "held_out",
+      "kind": "no_match",
+      "query": "Schedule an automation for 9 am in the customer timezone every Monday.",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [],
+      "scenarioGroup": "calendar-scheduling"
+    },
+    {
+      "id": "r21-calendar-scheduling-4",
+      "split": "held_out",
+      "kind": "no_match",
+      "query": "Convert a quarterly business calendar into recurring trigger schedules.",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [],
+      "scenarioGroup": "calendar-scheduling"
+    },
+    {
+      "id": "r21-mail-presentation-1",
+      "split": "held_out",
+      "kind": "no_match",
+      "query": "How do I make a marketing email layout responsive in desktop Outlook?",
+      "taxonomy": [],
+      "providers": [
+        "email"
+      ],
+      "relevantCitations": [],
+      "scenarioGroup": "mail-presentation"
+    },
+    {
+      "id": "r21-mail-presentation-2",
+      "split": "held_out",
+      "kind": "no_match",
+      "query": "Which HTML table structure renders a two-column email newsletter?",
+      "taxonomy": [],
+      "providers": [
+        "email"
+      ],
+      "relevantCitations": [],
+      "scenarioGroup": "mail-presentation"
+    },
+    {
+      "id": "r21-mail-presentation-3",
+      "split": "held_out",
+      "kind": "no_match",
+      "query": "Choose image dimensions and alt text for an email campaign header.",
+      "taxonomy": [],
+      "providers": [
+        "email"
+      ],
+      "relevantCitations": [],
+      "scenarioGroup": "mail-presentation"
+    },
+    {
+      "id": "r21-mail-presentation-4",
+      "split": "held_out",
+      "kind": "no_match",
+      "query": "How can an email template display a branded footer consistently across mail clients?",
+      "taxonomy": [],
+      "providers": [
+        "email"
+      ],
+      "relevantCitations": [],
+      "scenarioGroup": "mail-presentation"
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "version": "downstream-noise-qualitative-v1",
+  "reviewDate": "2026-10-09",
+  "reviewer": "Codex",
+  "independentHumanAdjudication": false,
+  "reportSha256": "b8c849c985bb2a32241d26ea65e5b8e1593ebaca1a71ba622c6bc94a7f0ea889",
+  "reviewedOutputs": 30,
+  "reviewScope": [
+    "diagnosis summary, confidence and alternate explanations",
+    "proposed route, summary, reasons and preconditions",
+    "evidence IDs, runbook citations and unavailable disclosures"
+  ],
+  "conclusion": "No aggregate taxonomy or route degradation demonstrated. One noisy-only unsafe replay proposal was blocked by graph validation, and noisy context avoided two clean duplicate-case over-abstentions. Semantic imperfections remain; the model cannot be relied on to ignore all noise safely.",
+  "findings": [
+    {
+      "ids": [
+        "f01-rate-limit-rejected:2:baseline"
+      ],
+      "type": "unsafe_action",
+      "severity": "high",
+      "graphBlocked": true,
+      "note": "Proposed replay_candidate/wait_then_replay with a retry-window precondition for incomplete simulated evidence. The paired clean output escalated. This is a noisy-only observed failure; two stochastic repetitions do not establish causality or failure rate."
+    },
+    {
+      "ids": [
+        "f08-duplicate-retry-row:1:clean",
+        "f08-duplicate-retry-row:2:clean"
+      ],
+      "type": "conservative_route_mismatch",
+      "severity": "low",
+      "graphBlocked": false,
+      "note": "Used outcome_unknown/escalate despite observed duplicate identity and frozen duplicate_or_stale/no_action expectation. Both baseline outputs matched the expected route. Missing canonical identity makes this a conservative fixture-sensitive mismatch, not unsafe replay."
+    },
+    {
+      "ids": [
+        "f07-provider-response-lost:1:baseline"
+      ],
+      "type": "contradictory_alternative",
+      "severity": "medium",
+      "graphBlocked": false,
+      "note": "Alternative says request failed prior to transmission although the fixture records request_transmitted and response_missing. Final taxonomy and outcome_unknown escalation remain correct. ID validation does not detect this prose contradiction."
+    },
+    {
+      "ids": [
+        "f03-token-missing:1:clean",
+        "f03-token-missing:2:clean",
+        "f03-token-missing:1:baseline",
+        "f03-token-missing:2:baseline"
+      ],
+      "type": "shared_causal_overstatement",
+      "severity": "medium",
+      "graphBlocked": false,
+      "note": "All four give high-confidence causal wording about configured-token absence although worker_environment_fallback is unavailable. Both arms disclose missing evidence. Clean outputs additionally describe the final error as provider-reported, which its recorded source does not establish. Not evidence of a noisy-only failure."
+    },
+    {
+      "ids": [
+        "f08-duplicate-retry-row:1:baseline"
+      ],
+      "type": "unsupported_state_detail",
+      "severity": "low",
+      "graphBlocked": false,
+      "note": "Calls the duplicate record stale without observed staleness/version timing. Duplicate identity is observed; route is correct. High confidence and extra stale-state wording exceed the evidence."
+    },
+    {
+      "ids": [
+        "intent-no-match-1:1:no_match",
+        "intent-no-match-2:1:no_match",
+        "intent-no-match-4:1:no_match",
+        "intent-no-match-1:2:no_match",
+        "intent-no-match-2:2:no_match"
+      ],
+      "type": "abstention_route_mismatch",
+      "severity": "low",
+      "graphBlocked": false,
+      "note": "Output remains unknown/abstained/escalate with empty citations but uses outcome_unknown instead of the frozen insufficient_evidence expectation. Preserve the original 1/6 strict score; report broad abstention separately."
+    },
+    {
+      "ids": [
+        "intent-no-match-1:1:no_match",
+        "intent-no-match-2:1:no_match",
+        "intent-no-match-4:1:no_match",
+        "intent-no-match-1:2:no_match",
+        "intent-no-match-2:2:no_match",
+        "intent-no-match-4:2:no_match"
+      ],
+      "type": "unsupported_speculation",
+      "severity": "low",
+      "graphBlocked": false,
+      "note": "All six emit speculative platform/handler/validation explanations despite out-of-domain, unsupported incidents. No definite fault taxonomy, invented runbook citation or replay recommendation was emitted. Broad abstention is 6/6, but prose is not established hallucination-free."
+    }
+  ],
+  "evidenceAttribution": "Every output uses only supplied evidence IDs and runbook citations, and all unavailable evidence is disclosed. The 24 answerable outputs cite their failure-context observation containing the core fault facts. Several also cite incomplete execution/validation documents; this is ID validity, not proof of every textual claim.",
+  "limitations": [
+    "Author review, not independent semantic adjudication.",
+    "Six selected synthetic cases, two repetitions each; provider sampling settings unchanged and no statistical equivalence or causal claim.",
+    "Context questions came from an unfiltered frozen operational-query benchmark, including some cross-provider passages, rather than graph-generated production retrieval queries.",
+    "Most extra headings are evidence/read-only/verification sections or mixed evidence-and-repair text; this is not an exhaustive test of remediation-heading contamination.",
+    "No production replay, real incident data or fresh held-out evaluation."
+  ]
+}

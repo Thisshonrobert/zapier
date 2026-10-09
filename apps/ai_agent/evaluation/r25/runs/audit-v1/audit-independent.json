@@ -1,0 +1,1520 @@
+{
+  "packetHash": "cecc48cc00f642b2693c9a8c88249b79ec16fe25afed11e0f6e2e4885607c86d",
+  "reviewer": "independent Codex blinded reviewer",
+  "independent": true,
+  "reviews": [
+    {
+      "id": "audit-080",
+      "sections": [
+        {
+          "citation": "RB-F07@1.0.0#forbidden-actions",
+          "relevance": "supporting",
+          "rationale": "Maintains unknown-delivery blocks without explaining server-error diagnosis."
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#evidence-needed",
+          "relevance": "direct",
+          "rationale": "Requires request/attempt evidence and says an error alone cannot prove non-delivery."
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#symptoms",
+          "relevance": "direct",
+          "rationale": "Explicitly distinguishes 5xx uncertainty from explicit rejection."
+        },
+        {
+          "citation": "RB-F07@1.0.0#symptoms",
+          "relevance": "direct",
+          "rationale": "Explains requests may be accepted despite lost responses or writes."
+        },
+        {
+          "citation": "RB-F07@1.0.0#evidence-needed",
+          "relevance": "direct",
+          "rationale": "Requires phase/receipt/reconciliation evidence and rejects database-only non-delivery claims."
+        }
+      ]
+    },
+    {
+      "id": "audit-021",
+      "sections": [
+        {
+          "citation": "RB-R2-PUBLICATION@1.0.0#publication-reconciliation-evidence",
+          "relevance": "direct",
+          "rationale": "Covers unpublished durable outbox records during Kafka outages and escalation."
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#sources",
+          "relevance": "supporting",
+          "rationale": "Points to publication and reconciliation sources without giving their procedures."
+        },
+        {
+          "citation": "RB-F08@1.0.0#simulated-example",
+          "relevance": "irrelevant",
+          "rationale": "A duplicate SUCCESS-stage reset example does not address unpublished failure records."
+        }
+      ]
+    },
+    {
+      "id": "audit-022",
+      "sections": [
+        {
+          "citation": "RB-R2-PUBLICATION@1.0.0#publication-reconciliation-evidence",
+          "relevance": "direct",
+          "rationale": "Explicitly covers lost broker acknowledgement and publication-state inspection."
+        },
+        {
+          "citation": "RB-R2-EMAIL-UNKNOWN@1.0.0#lost-acknowledgement-evidence",
+          "relevance": "irrelevant",
+          "rationale": "Email-provider acknowledgement loss is a different boundary from broker publication."
+        }
+      ]
+    },
+    {
+      "id": "audit-089",
+      "sections": []
+    },
+    {
+      "id": "audit-035",
+      "sections": [
+        {
+          "citation": "RB-F01-F02@1.0.0#symptoms",
+          "relevance": "supporting",
+          "rationale": "Distinguishes throttling from unknown outcomes without listing all needed facts."
+        },
+        {
+          "citation": "RB-F07@1.0.0#read-only-investigation",
+          "relevance": "supporting",
+          "rationale": "Provides provider-boundary reconstruction but lacks rate-limit evidence specifics."
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#evidence-needed",
+          "relevance": "direct",
+          "rationale": "Lists request phase, status/code, retry-after and attempt details."
+        }
+      ]
+    },
+    {
+      "id": "audit-016",
+      "sections": [
+        {
+          "citation": "RB-F09-F10@1.0.0#evidence-needed",
+          "relevance": "direct",
+          "rationale": "Lists attempt provenance, receipt metadata and reconciliation results."
+        },
+        {
+          "citation": "RB-R2-EMAIL-REJECT@1.0.0#email-rejection-evidence",
+          "relevance": "supporting",
+          "rationale": "Mentions reconciliation for contradictory email states but focuses on explicit rejection."
+        },
+        {
+          "citation": "RB-R2-EMAIL-UNKNOWN@1.0.0#lost-acknowledgement-evidence",
+          "relevance": "direct",
+          "rationale": "Requires bounded attempt history, captured outcomes and provider receipt reconciliation."
+        }
+      ]
+    },
+    {
+      "id": "audit-024",
+      "sections": [
+        {
+          "citation": "RB-R2-PUBLICATION@1.0.0#publication-reconciliation-evidence",
+          "relevance": "direct",
+          "rationale": "Explicitly says a missing DLQ message is not evidence external delivery failed."
+        },
+        {
+          "citation": "RB-F07@1.0.0#evidence-needed",
+          "relevance": "direct",
+          "rationale": "States database state alone cannot establish non-delivery and requires provider evidence."
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#symptoms",
+          "relevance": "supporting",
+          "rationale": "Identifies split publication evidence without answering its implication for delivery."
+        }
+      ]
+    },
+    {
+      "id": "audit-017",
+      "sections": [
+        {
+          "citation": "RB-F04-F06@1.0.0#evidence-needed",
+          "relevance": "direct",
+          "rationale": "Requires ordered predecessor states, run identity and provenance."
+        },
+        {
+          "citation": "RB-F08@1.0.0#evidence-needed",
+          "relevance": "direct",
+          "rationale": "Requires predecessor and successor states and current execution status."
+        },
+        {
+          "citation": "RB-R2-ORDERING@1.0.0#predecessor-ordering-evidence",
+          "relevance": "direct",
+          "rationale": "Explicitly requires captured predecessor states and ordering gaps."
+        }
+      ]
+    },
+    {
+      "id": "audit-078",
+      "sections": [
+        {
+          "citation": "RB-F07@1.0.0#symptoms",
+          "relevance": "direct",
+          "rationale": "Covers possible acceptance with missing receipts."
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#read-only-investigation",
+          "relevance": "direct",
+          "rationale": "Directs confirming ambiguity after a send begins."
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#forbidden-actions",
+          "relevance": "direct",
+          "rationale": "Explicitly forbids treating 5xx as proof of rejection."
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#symptoms",
+          "relevance": "direct",
+          "rationale": "Explicitly identifies 5xx delivery as potentially unknown."
+        }
+      ]
+    },
+    {
+      "id": "audit-005",
+      "sections": [
+        {
+          "citation": "RB-F03-F04@1.0.0#simulated-example",
+          "relevance": "supporting",
+          "rationale": "Illustrates 403 and credential uncertainty without permission-evidence checks."
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+          "relevance": "supporting",
+          "rationale": "Authorizes operator permission repair without stating captured information."
+        },
+        {
+          "citation": "RB-R2-DESTINATION@1.0.0#destination-permission-evidence",
+          "relevance": "direct",
+          "rationale": "Requires safe code and validation evidence to distinguish destination access."
+        }
+      ]
+    },
+    {
+      "id": "audit-044",
+      "sections": []
+    },
+    {
+      "id": "audit-088",
+      "sections": []
+    },
+    {
+      "id": "audit-072",
+      "sections": [
+        {
+          "citation": "RB-F04-F06@1.0.0#symptoms",
+          "relevance": "direct",
+          "rationale": "Explicitly names unsupported action types as covered symptoms."
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#allowed-remediation",
+          "relevance": "direct",
+          "rationale": "Provides engineering remediation for mismatched seeded IDs and deployed handlers."
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#verification-rollback-or-escalation",
+          "relevance": "irrelevant",
+          "rationale": "Publication and hidden SDK escalation does not address handler registry resolution."
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#simulated-example",
+          "relevance": "direct",
+          "rationale": "Illustrates a configured action missing from the registry."
+        }
+      ]
+    },
+    {
+      "id": "audit-084",
+      "sections": [
+        {
+          "citation": "RB-F07@1.0.0#verification-rollback-or-escalation",
+          "relevance": "irrelevant",
+          "rationale": "Manual receipt reconciliation does not state credential-request or probe prohibitions."
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#forbidden-actions",
+          "relevance": "direct",
+          "rationale": "Explicitly forbids requesting/testing secrets and test messages."
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#forbidden-actions",
+          "relevance": "direct",
+          "rationale": "Explicitly forbids calling providers and exposing credentials."
+        }
+      ]
+    },
+    {
+      "id": "audit-011",
+      "sections": [
+        {
+          "citation": "RB-R2-EMAIL-REJECT@1.0.0#email-rejection-evidence",
+          "relevance": "direct",
+          "rationale": "Explicitly excludes email replay even with non-delivery evidence."
+        },
+        {
+          "citation": "RB-F07@1.0.0#replay-and-approval",
+          "relevance": "direct",
+          "rationale": "States email replay is deferred and Phase 5 has no replay."
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#replay-and-approval",
+          "relevance": "direct",
+          "rationale": "States Phase 5 cannot replay and repairs do not suffice for later approval."
+        }
+      ]
+    },
+    {
+      "id": "audit-007",
+      "sections": [
+        {
+          "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+          "relevance": "direct",
+          "rationale": "Directs operator confirmation of membership and permissions."
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#simulated-example",
+          "relevance": "supporting",
+          "rationale": "A 403 example provides context but does not identify this permission change."
+        },
+        {
+          "citation": "RB-R2-DESTINATION@1.0.0#destination-permission-evidence",
+          "relevance": "direct",
+          "rationale": "Explicitly covers a bot unable to post and owner permission repair."
+        }
+      ]
+    },
+    {
+      "id": "audit-077",
+      "sections": [
+        {
+          "citation": "RB-F07@1.0.0#symptoms",
+          "relevance": "direct",
+          "rationale": "States possible acceptance and missing receipts leave delivery uncertain."
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#symptoms",
+          "relevance": "direct",
+          "rationale": "Explicitly distinguishes 5xx unknown outcomes from proven 429 rejection."
+        },
+        {
+          "citation": "RB-R2-COOLDOWN@1.0.0#cooldown-evidence",
+          "relevance": "supporting",
+          "rationale": "Warns earlier timeouts mean unknown delivery but focuses on 429 cooldown."
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#simulated-example",
+          "relevance": "supporting",
+          "rationale": "Shows a 429 rejection contrast without addressing 503."
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#allowed-remediation",
+          "relevance": "supporting",
+          "rationale": "Limits cooldown guidance to proven 429 rejection without answering 503 delivery."
+        }
+      ]
+    },
+    {
+      "id": "audit-031",
+      "sections": [
+        {
+          "citation": "RB-F08@1.0.0#read-only-investigation",
+          "relevance": "direct",
+          "rationale": "Explicitly distinguishes duplicate delivery from a new failure."
+        },
+        {
+          "citation": "RB-F07@1.0.0#read-only-investigation",
+          "relevance": "irrelevant",
+          "rationale": "Provider delivery ambiguity does not distinguish repeated failure investigations."
+        },
+        {
+          "citation": "RB-F08@1.0.0#symptoms",
+          "relevance": "supporting",
+          "rationale": "Identifies duplicate failures and repeated investigations without comparison instructions."
+        }
+      ]
+    },
+    {
+      "id": "audit-055",
+      "sections": [
+        {
+          "citation": "RB-F07@1.0.0#symptoms",
+          "relevance": "supporting",
+          "rationale": "Explains expired lease symptoms without listing receipt/fingerprint evidence."
+        },
+        {
+          "citation": "RB-F07@1.0.0#evidence-needed",
+          "relevance": "direct",
+          "rationale": "Explicitly requires safe receipts, fingerprints, lease/completion and fencing evidence."
+        },
+        {
+          "citation": "RB-F07@1.0.0#verification-rollback-or-escalation",
+          "relevance": "supporting",
+          "rationale": "Directs manual receipt reconciliation and stale-worker escalation without fingerprint details."
+        }
+      ]
+    },
+    {
+      "id": "audit-032",
+      "sections": [
+        {
+          "citation": "RB-F07@1.0.0#read-only-investigation",
+          "relevance": "irrelevant",
+          "rationale": "Reconstructs provider delivery rather than duplicate source references."
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#read-only-investigation",
+          "relevance": "irrelevant",
+          "rationale": "Checks send phase rather than investigation identity."
+        },
+        {
+          "citation": "RB-F08@1.0.0#read-only-investigation",
+          "relevance": "direct",
+          "rationale": "Explicitly provides deduplication of identical source references."
+        }
+      ]
+    },
+    {
+      "id": "audit-040",
+      "sections": []
+    },
+    {
+      "id": "audit-041",
+      "sections": []
+    },
+    {
+      "id": "audit-071",
+      "sections": [
+        {
+          "citation": "RB-F04-F06@1.0.0#simulated-example",
+          "relevance": "direct",
+          "rationale": "Illustrates a configured action absent from the current registry."
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#allowed-remediation",
+          "relevance": "direct",
+          "rationale": "Explicitly directs engineering alignment of seeded action IDs and handlers."
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+          "relevance": "irrelevant",
+          "rationale": "Credential and destination validation does not resolve missing deployed executors."
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#symptoms",
+          "relevance": "direct",
+          "rationale": "Explicitly covers unsupported action types."
+        }
+      ]
+    },
+    {
+      "id": "audit-054",
+      "sections": [
+        {
+          "citation": "RB-F07@1.0.0#evidence-needed",
+          "relevance": "direct",
+          "rationale": "Requires fencing, lease, completion and attempt evidence for the stale worker."
+        }
+      ]
+    },
+    {
+      "id": "audit-075",
+      "sections": [
+        {
+          "citation": "RB-R2-EMAIL-UNKNOWN@1.0.0#lost-acknowledgement-evidence",
+          "relevance": "supporting",
+          "rationale": "Gives email outcome uncertainty context without an authentication-rejection rule."
+        },
+        {
+          "citation": "RB-R2-EMAIL-REJECT@1.0.0#email-rejection-evidence",
+          "relevance": "direct",
+          "rationale": "Explicitly requires rejected SDK authentication to propagate as failed execution."
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#symptoms",
+          "relevance": "direct",
+          "rationale": "Covers hidden historical email SDK results treated as success."
+        }
+      ]
+    },
+    {
+      "id": "audit-066",
+      "sections": [
+        {
+          "citation": "RB-F09-F10@1.0.0#replay-and-approval",
+          "relevance": "direct",
+          "rationale": "States SUCCESS blocks replay and progression recovery is separate."
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#simulated-example",
+          "relevance": "direct",
+          "rationale": "Example explicitly rejects resending and requires separate progression review."
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+          "relevance": "direct",
+          "rationale": "Explicitly separates progression recovery from external repetition and preserves SUCCESS."
+        }
+      ]
+    },
+    {
+      "id": "audit-063",
+      "sections": [
+        {
+          "citation": "RB-F08@1.0.0#read-only-investigation",
+          "relevance": "direct",
+          "rationale": "Explicitly directs comparing fingerprints and versions."
+        },
+        {
+          "citation": "RB-F08@1.0.0#evidence-needed",
+          "relevance": "direct",
+          "rationale": "Requires evidence version, fingerprints and current execution status."
+        }
+      ]
+    },
+    {
+      "id": "audit-058",
+      "sections": [
+        {
+          "citation": "RB-F04-F06@1.0.0#forbidden-actions",
+          "relevance": "direct",
+          "rationale": "Explicitly forbids mapping an orphan event to a user."
+        }
+      ]
+    },
+    {
+      "id": "audit-070",
+      "sections": [
+        {
+          "citation": "RB-F04-F06@1.0.0#simulated-example",
+          "relevance": "direct",
+          "rationale": "Illustrates an unsupported action absent from the registry."
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#symptoms",
+          "relevance": "direct",
+          "rationale": "Identifies unsupported action type as a covered failure."
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#replay-and-approval",
+          "relevance": "direct",
+          "rationale": "Blocks unsupported handlers until deployment and inputs are verified."
+        }
+      ]
+    },
+    {
+      "id": "audit-043",
+      "sections": []
+    },
+    {
+      "id": "audit-086",
+      "sections": [
+        {
+          "citation": "RB-R2-PUBLICATION@1.0.0#publication-reconciliation-evidence",
+          "relevance": "irrelevant",
+          "rationale": "Failure-publication reconciliation does not plan partition reassignment."
+        }
+      ]
+    },
+    {
+      "id": "audit-053",
+      "sections": [
+        {
+          "citation": "RB-F07@1.0.0#evidence-needed",
+          "relevance": "direct",
+          "rationale": "Explicitly requires fencing evidence, lease and completion state."
+        },
+        {
+          "citation": "RB-F08@1.0.0#evidence-needed",
+          "relevance": "supporting",
+          "rationale": "Requires active lease and execution identity but no fencing evidence."
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#evidence-needed",
+          "relevance": "supporting",
+          "rationale": "Requires completion time and execution state but no fencing specifics."
+        }
+      ]
+    },
+    {
+      "id": "audit-068",
+      "sections": [
+        {
+          "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+          "relevance": "direct",
+          "rationale": "Explicitly preserves SUCCESS and separates progression from repeated actions."
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#replay-and-approval",
+          "relevance": "direct",
+          "rationale": "Explicitly makes SUCCESS action states hard replay blocks."
+        },
+        {
+          "citation": "RB-F07@1.0.0#read-only-investigation",
+          "relevance": "supporting",
+          "rationale": "Separates persistence from action failure without the SUCCESS-specific rule."
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#forbidden-actions",
+          "relevance": "direct",
+          "rationale": "Explicitly forbids replaying actions to repair progression."
+        }
+      ]
+    },
+    {
+      "id": "audit-008",
+      "sections": [
+        {
+          "citation": "RB-F03-F04@1.0.0#forbidden-actions",
+          "relevance": "direct",
+          "rationale": "Explicitly prohibits sending a test message."
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#allowed-remediation",
+          "relevance": "irrelevant",
+          "rationale": "Connectivity and throttling remediation do not address destination access testing."
+        },
+        {
+          "citation": "RB-R2-DESTINATION@1.0.0#destination-permission-evidence",
+          "relevance": "direct",
+          "rationale": "Explicitly forbids test messages after destination problems."
+        }
+      ]
+    },
+    {
+      "id": "audit-026",
+      "sections": [
+        {
+          "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+          "relevance": "direct",
+          "rationale": "Explains missing paths become empty strings and directs reporting the missing path."
+        },
+        {
+          "citation": "RB-R2-EMAIL-REJECT@1.0.0#email-rejection-evidence",
+          "relevance": "irrelevant",
+          "rationale": "Email recipient rejection is not silent interpolation of an absent payload field."
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#simulated-example",
+          "relevance": "supporting",
+          "rationale": "Shows a missing template path but does not explain silent empty rendering."
+        }
+      ]
+    },
+    {
+      "id": "audit-095",
+      "sections": []
+    },
+    {
+      "id": "audit-030",
+      "sections": [
+        {
+          "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+          "relevance": "irrelevant",
+          "rationale": "Discusses completeness and progression rather than deduplication."
+        },
+        {
+          "citation": "RB-F08@1.0.0#read-only-investigation",
+          "relevance": "direct",
+          "rationale": "Directs source-reference deduplication and distinction from new failures."
+        },
+        {
+          "citation": "RB-F08@1.0.0#symptoms",
+          "relevance": "supporting",
+          "rationale": "Identifies repeated investigations as the runbook scope without a check procedure."
+        }
+      ]
+    },
+    {
+      "id": "audit-029",
+      "sections": [
+        {
+          "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+          "relevance": "irrelevant",
+          "rationale": "Publication/progression separation does not address duplicate source references."
+        },
+        {
+          "citation": "RB-F07@1.0.0#read-only-investigation",
+          "relevance": "irrelevant",
+          "rationale": "Provider-boundary reconstruction does not address investigation deduplication."
+        },
+        {
+          "citation": "RB-F08@1.0.0#read-only-investigation",
+          "relevance": "direct",
+          "rationale": "Explicitly says deduplicate identical source references."
+        }
+      ]
+    },
+    {
+      "id": "audit-002",
+      "sections": [
+        {
+          "citation": "RB-F01-F02@1.0.0#simulated-example",
+          "relevance": "supporting",
+          "rationale": "Gives a retry_after example without deadline arithmetic."
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#allowed-remediation",
+          "relevance": "supporting",
+          "rationale": "Calls for a conservative deadline without explaining its inputs."
+        },
+        {
+          "citation": "RB-R2-COOLDOWN@1.0.0#cooldown-evidence",
+          "relevance": "direct",
+          "rationale": "Explicitly combines response timestamp and retry_after duration."
+        }
+      ]
+    },
+    {
+      "id": "audit-003",
+      "sections": [
+        {
+          "citation": "RB-F01-F02@1.0.0#read-only-investigation",
+          "relevance": "supporting",
+          "rationale": "Distinguishes rejection from ambiguity but provides no clock rule."
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#replay-and-approval",
+          "relevance": "supporting",
+          "rationale": "Lists replay gates without the waiting-period calculation."
+        },
+        {
+          "citation": "RB-R2-COOLDOWN@1.0.0#cooldown-evidence",
+          "relevance": "direct",
+          "rationale": "States the recorded response timestamp and duration determine cooldown."
+        }
+      ]
+    },
+    {
+      "id": "audit-091",
+      "sections": []
+    },
+    {
+      "id": "audit-083",
+      "sections": [
+        {
+          "citation": "RB-R2-DESTINATION@1.0.0#destination-permission-evidence",
+          "relevance": "direct",
+          "rationale": "Explicitly prohibits bot-secret fetching and test messages."
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#forbidden-actions",
+          "relevance": "direct",
+          "rationale": "Explicitly prohibits secret access/testing and test messages."
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#replay-and-approval",
+          "relevance": "supporting",
+          "rationale": "Makes credential repair manual without specifying secret/test-message prohibitions."
+        }
+      ]
+    },
+    {
+      "id": "audit-074",
+      "sections": [
+        {
+          "citation": "RB-F01-F02@1.0.0#evidence-needed",
+          "relevance": "supporting",
+          "rationale": "Provides provider and execution evidence requirements without swallowed-rejection guidance."
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#read-only-investigation",
+          "relevance": "supporting",
+          "rationale": "Separates rejected and ambiguous request phases without SUCCESS contradiction policy."
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#symptoms",
+          "relevance": "direct",
+          "rationale": "Covers historical email SDK errors treated as success."
+        },
+        {
+          "citation": "RB-R2-EMAIL-REJECT@1.0.0#email-rejection-evidence",
+          "relevance": "direct",
+          "rationale": "Explicitly addresses authentication rejection swallowed into SUCCESS."
+        }
+      ]
+    },
+    {
+      "id": "audit-049",
+      "sections": [
+        {
+          "citation": "RB-R2-DESTINATION@1.0.0#destination-permission-evidence",
+          "relevance": "direct",
+          "rationale": "Explicitly covers migrated groups with obsolete configured chat identifiers."
+        }
+      ]
+    },
+    {
+      "id": "audit-028",
+      "sections": [
+        {
+          "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+          "relevance": "direct",
+          "rationale": "Says validate inputs without returning values, directly constraining rendered-value disclosure."
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+          "relevance": "direct",
+          "rationale": "Explicitly selects the missing path rather than the rendered value."
+        }
+      ]
+    },
+    {
+      "id": "audit-012",
+      "sections": [
+        {
+          "citation": "RB-R2-EMAIL-UNKNOWN@1.0.0#lost-acknowledgement-evidence",
+          "relevance": "irrelevant",
+          "rationale": "Lost acknowledgements after sending do not address proven pre-send rejection."
+        },
+        {
+          "citation": "RB-R2-EMAIL-REJECT@1.0.0#email-rejection-evidence",
+          "relevance": "direct",
+          "rationale": "States invalid recipient evidence requires owner configuration repair."
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+          "relevance": "direct",
+          "rationale": "Directs correction of invalid workflow configuration through the owning application."
+        }
+      ]
+    },
+    {
+      "id": "audit-001",
+      "sections": [
+        {
+          "citation": "RB-F01-F02@1.0.0#verification-rollback-or-escalation",
+          "relevance": "supporting",
+          "rationale": "Requests delay and timestamps but does not identify the response timestamp as the start."
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#simulated-example",
+          "relevance": "supporting",
+          "rationale": "Illustrates retry_after, without a timestamp rule."
+        },
+        {
+          "citation": "RB-R2-COOLDOWN@1.0.0#cooldown-evidence",
+          "relevance": "direct",
+          "rationale": "Computes cooldown from recorded response timestamp and duration."
+        }
+      ]
+    },
+    {
+      "id": "audit-039",
+      "sections": []
+    },
+    {
+      "id": "audit-051",
+      "sections": [
+        {
+          "citation": "RB-R2-DESTINATION@1.0.0#destination-permission-evidence",
+          "relevance": "direct",
+          "rationale": "Explains group migration can obsolete the configured chat identifier."
+        }
+      ]
+    },
+    {
+      "id": "audit-019",
+      "sections": [
+        {
+          "citation": "RB-F08@1.0.0#evidence-needed",
+          "relevance": "supporting",
+          "rationale": "Lists predecessor-state evidence without recommending how to handle FAILED."
+        },
+        {
+          "citation": "RB-F08@1.0.0#read-only-investigation",
+          "relevance": "supporting",
+          "rationale": "Provides state comparison and deduplication context without predecessor-failure guidance."
+        },
+        {
+          "citation": "RB-R2-ORDERING@1.0.0#predecessor-ordering-evidence",
+          "relevance": "direct",
+          "rationale": "Blocks execution with failed predecessors and requires escalation for ordering gaps."
+        }
+      ]
+    },
+    {
+      "id": "audit-033",
+      "sections": [
+        {
+          "citation": "RB-F03-F04@1.0.0#evidence-needed",
+          "relevance": "direct",
+          "rationale": "Requires provider phase/status, fingerprints and prior delivery outcomes."
+        },
+        {
+          "citation": "RB-F07@1.0.0#evidence-needed",
+          "relevance": "direct",
+          "rationale": "Requires every attempt outcome, provider phase and completion state."
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#evidence-needed",
+          "relevance": "direct",
+          "rationale": "Lists bounded status/code, retry delay, attempt outcome and completion time."
+        }
+      ]
+    },
+    {
+      "id": "audit-093",
+      "sections": []
+    },
+    {
+      "id": "audit-069",
+      "sections": [
+        {
+          "citation": "RB-F04-F06@1.0.0#evidence-needed",
+          "relevance": "direct",
+          "rationale": "Requires comparing action type to deployed registry keys/version."
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#allowed-remediation",
+          "relevance": "direct",
+          "rationale": "States engineering may align seeded IDs with deployed handlers."
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#symptoms",
+          "relevance": "direct",
+          "rationale": "Explicitly covers unsupported action types."
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#simulated-example",
+          "relevance": "direct",
+          "rationale": "Illustrates an action type absent from the current registry."
+        }
+      ]
+    },
+    {
+      "id": "audit-037",
+      "sections": []
+    },
+    {
+      "id": "audit-025",
+      "sections": [
+        {
+          "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+          "relevance": "direct",
+          "rationale": "Explicitly says report the missing template path rather than rendered value."
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#evidence-needed",
+          "relevance": "supporting",
+          "rationale": "Requires missing template paths as evidence without giving the reporting rule."
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#symptoms",
+          "relevance": "supporting",
+          "rationale": "Identifies missing template paths as symptoms without reporting instructions."
+        }
+      ]
+    },
+    {
+      "id": "audit-050",
+      "sections": [
+        {
+          "citation": "RB-R2-DESTINATION@1.0.0#destination-permission-evidence",
+          "relevance": "direct",
+          "rationale": "Explicitly covers group migration and owner destination repair."
+        }
+      ]
+    },
+    {
+      "id": "audit-087",
+      "sections": [
+        {
+          "citation": "RB-R2-PUBLICATION@1.0.0#publication-reconciliation-evidence",
+          "relevance": "irrelevant",
+          "rationale": "Failure-publication reconciliation provides no Kafka retention setting."
+        }
+      ]
+    },
+    {
+      "id": "audit-006",
+      "sections": [
+        {
+          "citation": "RB-R2-DESTINATION@1.0.0#destination-permission-evidence",
+          "relevance": "direct",
+          "rationale": "Covers removal from a chat and owner permission repair."
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+          "relevance": "direct",
+          "rationale": "Directs an operator to confirm bot membership and permissions."
+        }
+      ]
+    },
+    {
+      "id": "audit-018",
+      "sections": [
+        {
+          "citation": "RB-R2-ORDERING@1.0.0#predecessor-ordering-evidence",
+          "relevance": "direct",
+          "rationale": "Explicitly says a stage cannot execute safely with a pending predecessor."
+        }
+      ]
+    },
+    {
+      "id": "audit-047",
+      "sections": []
+    },
+    {
+      "id": "audit-092",
+      "sections": []
+    },
+    {
+      "id": "audit-076",
+      "sections": [
+        {
+          "citation": "RB-F09-F10@1.0.0#symptoms",
+          "relevance": "direct",
+          "rationale": "Identifies historical SDK errors treated as success as runbook scope."
+        },
+        {
+          "citation": "RB-R2-EMAIL-REJECT@1.0.0#email-rejection-evidence",
+          "relevance": "direct",
+          "rationale": "Explicitly states swallowed authentication rejection and SUCCESS are contradictory."
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#simulated-example",
+          "relevance": "direct",
+          "rationale": "Explains an old email error does not justify changing SUCCESS and requires engineering review."
+        },
+        {
+          "citation": "RB-R2-EMAIL-UNKNOWN@1.0.0#lost-acknowledgement-evidence",
+          "relevance": "supporting",
+          "rationale": "Warns SUCCESS cannot resolve earlier unknown attempts, without authentication-rejection specifics."
+        }
+      ]
+    },
+    {
+      "id": "audit-020",
+      "sections": [
+        {
+          "citation": "RB-R2-ORDERING@1.0.0#predecessor-ordering-evidence",
+          "relevance": "direct",
+          "rationale": "Explicitly says a numeric index alone does not establish predecessor completion."
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#evidence-needed",
+          "relevance": "supporting",
+          "rationale": "Requires predecessor states but does not address numeric-index sufficiency."
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+          "relevance": "supporting",
+          "rationale": "Calls for contiguous ordering inspection without stating missing-record policy."
+        }
+      ]
+    },
+    {
+      "id": "audit-061",
+      "sections": [
+        {
+          "citation": "RB-F08@1.0.0#read-only-investigation",
+          "relevance": "direct",
+          "rationale": "Directs comparing fingerprints/versions and marking stale investigations."
+        },
+        {
+          "citation": "RB-R2-ORDERING@1.0.0#predecessor-ordering-evidence",
+          "relevance": "irrelevant",
+          "rationale": "Predecessor ordering does not address superseded evidence versions."
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+          "relevance": "supporting",
+          "rationale": "Requires fresh investigation after configuration repair but gives no version-comparison rule."
+        }
+      ]
+    },
+    {
+      "id": "audit-094",
+      "sections": []
+    },
+    {
+      "id": "audit-014",
+      "sections": [
+        {
+          "citation": "RB-R2-EMAIL-UNKNOWN@1.0.0#lost-acknowledgement-evidence",
+          "relevance": "direct",
+          "rationale": "Explicitly covers an accepted email whose acknowledgement was lost."
+        }
+      ]
+    },
+    {
+      "id": "audit-023",
+      "sections": [
+        {
+          "citation": "RB-R2-PUBLICATION@1.0.0#publication-reconciliation-evidence",
+          "relevance": "direct",
+          "rationale": "Explicitly forbids marking records published from investigation."
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#sources",
+          "relevance": "supporting",
+          "rationale": "Links publisher and reconciler resources but states no marking rule."
+        },
+        {
+          "citation": "RB-F08@1.0.0#simulated-example",
+          "relevance": "irrelevant",
+          "rationale": "SUCCESS-stage reset refusal is unrelated to marking failure publication."
+        }
+      ]
+    },
+    {
+      "id": "audit-034",
+      "sections": [
+        {
+          "citation": "RB-R2-COOLDOWN@1.0.0#cooldown-evidence",
+          "relevance": "direct",
+          "rationale": "Requires response timestamp and retry duration and escalates missing timestamps."
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#evidence-needed",
+          "relevance": "direct",
+          "rationale": "Lists the missing safe status/code, completion time and retry delay."
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#simulated-example",
+          "relevance": "supporting",
+          "rationale": "Illustrates retry_after but supplies no requirements for incomplete evidence."
+        }
+      ]
+    },
+    {
+      "id": "audit-065",
+      "sections": [
+        {
+          "citation": "RB-F09-F10@1.0.0#replay-and-approval",
+          "relevance": "direct",
+          "rationale": "Explicitly separates progression recovery from action replay approval."
+        },
+        {
+          "citation": "RB-F08@1.0.0#forbidden-actions",
+          "relevance": "direct",
+          "rationale": "Explicitly forbids resetting SUCCESS and republishing raw events."
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+          "relevance": "direct",
+          "rationale": "Explicitly separates progression recovery from repeating external actions."
+        }
+      ]
+    },
+    {
+      "id": "audit-081",
+      "sections": [
+        {
+          "citation": "RB-F03-F04@1.0.0#simulated-example",
+          "relevance": "supporting",
+          "rationale": "Illustrates uncertainty and rejects secret discovery without explicit display prohibition."
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+          "relevance": "direct",
+          "rationale": "Requires validating inputs without returning values."
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#forbidden-actions",
+          "relevance": "direct",
+          "rationale": "Explicitly forbids requesting or displaying secrets."
+        },
+        {
+          "citation": "RB-R2-DESTINATION@1.0.0#destination-permission-evidence",
+          "relevance": "direct",
+          "rationale": "Explicitly forbids fetching bot secrets."
+        }
+      ]
+    },
+    {
+      "id": "audit-027",
+      "sections": [
+        {
+          "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+          "relevance": "direct",
+          "rationale": "Explicitly explains absent template paths are replaced with empty strings."
+        }
+      ]
+    },
+    {
+      "id": "audit-045",
+      "sections": []
+    },
+    {
+      "id": "audit-096",
+      "sections": []
+    },
+    {
+      "id": "audit-064",
+      "sections": [
+        {
+          "citation": "RB-F08@1.0.0#read-only-investigation",
+          "relevance": "direct",
+          "rationale": "Explicitly compares fingerprints and versions to mark stale investigations."
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#read-only-investigation",
+          "relevance": "supporting",
+          "rationale": "Checks current inputs without a supersession comparison."
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+          "relevance": "irrelevant",
+          "rationale": "Template, handler and stage validation does not compare investigation fingerprints."
+        }
+      ]
+    },
+    {
+      "id": "audit-010",
+      "sections": [
+        {
+          "citation": "RB-F01-F02@1.0.0#read-only-investigation",
+          "relevance": "supporting",
+          "rationale": "Permits configuration validation but does not state owner repair guidance."
+        },
+        {
+          "citation": "RB-R2-EMAIL-REJECT@1.0.0#email-rejection-evidence",
+          "relevance": "direct",
+          "rationale": "States invalid recipients require owner configuration repair."
+        },
+        {
+          "citation": "RB-R2-EMAIL-UNKNOWN@1.0.0#lost-acknowledgement-evidence",
+          "relevance": "irrelevant",
+          "rationale": "Concerns possibly accepted sends rather than a malformed recipient rejection."
+        }
+      ]
+    },
+    {
+      "id": "audit-042",
+      "sections": []
+    },
+    {
+      "id": "audit-046",
+      "sections": []
+    },
+    {
+      "id": "audit-073",
+      "sections": [
+        {
+          "citation": "RB-R2-EMAIL-UNKNOWN@1.0.0#lost-acknowledgement-evidence",
+          "relevance": "supporting",
+          "rationale": "Warns SUCCESS cannot resolve earlier unknown email attempts, but does not address authentication rejection."
+        },
+        {
+          "citation": "RB-R2-EMAIL-REJECT@1.0.0#email-rejection-evidence",
+          "relevance": "direct",
+          "rationale": "Explicitly identifies swallowed rejection and SUCCESS as contradictory evidence."
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#symptoms",
+          "relevance": "direct",
+          "rationale": "Covers historical email SDK errors treated as success."
+        }
+      ]
+    },
+    {
+      "id": "audit-057",
+      "sections": [
+        {
+          "citation": "RB-F09-F10@1.0.0#allowed-remediation",
+          "relevance": "supporting",
+          "rationale": "Requires abstention for missing evidence but does not explicitly forbid assigning invented IDs."
+        },
+        {
+          "citation": "RB-F08@1.0.0#forbidden-actions",
+          "relevance": "supporting",
+          "rationale": "Prohibits identity-adjacent deduplication evasions without addressing orphan owner assignment."
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#forbidden-actions",
+          "relevance": "direct",
+          "rationale": "Explicitly prohibits inventing IDs and mapping orphan events to users."
+        }
+      ]
+    },
+    {
+      "id": "audit-062",
+      "sections": [
+        {
+          "citation": "RB-F08@1.0.0#replay-and-approval",
+          "relevance": "direct",
+          "rationale": "Requires unchanged evidence and inputs for a valid replay proposal."
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#read-only-investigation",
+          "relevance": "supporting",
+          "rationale": "Validates current inputs but does not address stale proposals."
+        },
+        {
+          "citation": "RB-F08@1.0.0#read-only-investigation",
+          "relevance": "direct",
+          "rationale": "Explicitly directs marking stale investigations after fingerprint/version comparison."
+        }
+      ]
+    },
+    {
+      "id": "audit-048",
+      "sections": []
+    },
+    {
+      "id": "audit-059",
+      "sections": [
+        {
+          "citation": "RB-F04-F06@1.0.0#forbidden-actions",
+          "relevance": "direct",
+          "rationale": "Prohibits inventing IDs and rewriting historical payloads."
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#allowed-remediation",
+          "relevance": "supporting",
+          "rationale": "Requires abstention and escalation for missing evidence without the identity rule."
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#symptoms",
+          "relevance": "supporting",
+          "rationale": "Identifies missing runs and unowned events as abnormal cases."
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#replay-and-approval",
+          "relevance": "supporting",
+          "rationale": "Blocks replay for malformed/orphan events without directly addressing identity rewriting."
+        }
+      ]
+    },
+    {
+      "id": "audit-052",
+      "sections": [
+        {
+          "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+          "relevance": "supporting",
+          "rationale": "Describes owner repair but does not specify evidence to inspect."
+        },
+        {
+          "citation": "RB-R2-DESTINATION@1.0.0#destination-permission-evidence",
+          "relevance": "direct",
+          "rationale": "Requires safe code and validation evidence for obsolete migrated destinations."
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+          "relevance": "direct",
+          "rationale": "Requires non-secret configuration presence and operator permission evidence."
+        }
+      ]
+    },
+    {
+      "id": "audit-036",
+      "sections": [
+        {
+          "citation": "RB-F09-F10@1.0.0#evidence-needed",
+          "relevance": "supporting",
+          "rationale": "Provides publication and receipt evidence context but omits current fingerprints."
+        },
+        {
+          "citation": "RB-F07@1.0.0#evidence-needed",
+          "relevance": "direct",
+          "rationale": "Requires every attempt outcome and request/action fingerprints."
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#evidence-needed",
+          "relevance": "direct",
+          "rationale": "Requires bounded status/code, attempt outcome and current fingerprints."
+        }
+      ]
+    },
+    {
+      "id": "audit-004",
+      "sections": [
+        {
+          "citation": "RB-F01-F02@1.0.0#simulated-example",
+          "relevance": "supporting",
+          "rationale": "Illustrates throttling but does not address queue time."
+        },
+        {
+          "citation": "RB-R2-COOLDOWN@1.0.0#cooldown-evidence",
+          "relevance": "direct",
+          "rationale": "Explicitly says a queued message does not prove the deadline passed."
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#allowed-remediation",
+          "relevance": "supporting",
+          "rationale": "Requires a cooldown deadline but does not discuss queue time."
+        }
+      ]
+    },
+    {
+      "id": "audit-038",
+      "sections": []
+    },
+    {
+      "id": "audit-079",
+      "sections": [
+        {
+          "citation": "RB-F07@1.0.0#symptoms",
+          "relevance": "direct",
+          "rationale": "Covers possible acceptance despite missing provider response."
+        },
+        {
+          "citation": "RB-R2-COOLDOWN@1.0.0#cooldown-evidence",
+          "relevance": "supporting",
+          "rationale": "Earlier-timeout warning supports uncertainty but focuses on 429 scenarios."
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#read-only-investigation",
+          "relevance": "direct",
+          "rationale": "Requires determining whether ambiguity began after sending."
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#symptoms",
+          "relevance": "direct",
+          "rationale": "Explicitly identifies 5xx responses as potentially unknown delivery."
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+          "relevance": "supporting",
+          "rationale": "Requests distinguishing destination resolution from sending without server-error outcome guidance."
+        }
+      ]
+    },
+    {
+      "id": "audit-067",
+      "sections": [
+        {
+          "citation": "RB-F09-F10@1.0.0#replay-and-approval",
+          "relevance": "direct",
+          "rationale": "SUCCESS is an explicit hard replay block."
+        },
+        {
+          "citation": "RB-F07@1.0.0#read-only-investigation",
+          "relevance": "supporting",
+          "rationale": "Separates action failure from persistence failure without a SUCCESS replay rule."
+        },
+        {
+          "citation": "RB-R2-ORDERING@1.0.0#predecessor-ordering-evidence",
+          "relevance": "supporting",
+          "rationale": "Preserves terminal idempotency and ordering without addressing successor publication repair."
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+          "relevance": "direct",
+          "rationale": "Preserves historical SUCCESS and separates recovery from repeating external actions."
+        }
+      ]
+    },
+    {
+      "id": "audit-060",
+      "sections": [
+        {
+          "citation": "RB-F09-F10@1.0.0#allowed-remediation",
+          "relevance": "supporting",
+          "rationale": "Requires abstention and escalation when evidence is missing."
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#forbidden-actions",
+          "relevance": "direct",
+          "rationale": "Explicitly forbids mapping an orphan event to a user."
+        }
+      ]
+    },
+    {
+      "id": "audit-009",
+      "sections": [
+        {
+          "citation": "RB-R2-EMAIL-UNKNOWN@1.0.0#lost-acknowledgement-evidence",
+          "relevance": "irrelevant",
+          "rationale": "Discusses lost acknowledgement after sending rather than pre-send field validation."
+        },
+        {
+          "citation": "RB-R2-EMAIL-REJECT@1.0.0#email-rejection-evidence",
+          "relevance": "direct",
+          "rationale": "Specifies recipient validation and credential-presence checks without exposing values."
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+          "relevance": "supporting",
+          "rationale": "Sets non-secret verification limits without recipient-field specifics."
+        }
+      ]
+    },
+    {
+      "id": "audit-082",
+      "sections": [
+        {
+          "citation": "RB-F01-F02@1.0.0#read-only-investigation",
+          "relevance": "direct",
+          "rationale": "Explicitly prohibits provider probing."
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#forbidden-actions",
+          "relevance": "direct",
+          "rationale": "Explicitly forbids testing or transmitting secrets."
+        },
+        {
+          "citation": "RB-R2-DESTINATION@1.0.0#destination-permission-evidence",
+          "relevance": "direct",
+          "rationale": "Explicitly forbids fetching secrets and sending test messages."
+        }
+      ]
+    },
+    {
+      "id": "audit-090",
+      "sections": []
+    },
+    {
+      "id": "audit-085",
+      "sections": []
+    },
+    {
+      "id": "audit-013",
+      "sections": [
+        {
+          "citation": "RB-F01-F02@1.0.0#read-only-investigation",
+          "relevance": "direct",
+          "rationale": "Directs distinguishing ambiguity after send begins and prohibits provider probing."
+        },
+        {
+          "citation": "RB-R2-EMAIL-UNKNOWN@1.0.0#lost-acknowledgement-evidence",
+          "relevance": "direct",
+          "rationale": "Explicitly addresses a socket disconnect after sending and receipt reconciliation."
+        }
+      ]
+    },
+    {
+      "id": "audit-056",
+      "sections": [
+        {
+          "citation": "RB-F07@1.0.0#evidence-needed",
+          "relevance": "direct",
+          "rationale": "Requires every attempt outcome, provider phase, completion and fencing evidence."
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#evidence-needed",
+          "relevance": "direct",
+          "rationale": "Requires attempt outcomes, completion time, request phase and execution state."
+        }
+      ]
+    },
+    {
+      "id": "audit-015",
+      "sections": [
+        {
+          "citation": "RB-F07@1.0.0#simulated-example",
+          "relevance": "supporting",
+          "rationale": "Telegram example illustrates unknown delivery after lease expiry, rather than mail specifically."
+        },
+        {
+          "citation": "RB-F07@1.0.0#forbidden-actions",
+          "relevance": "supporting",
+          "rationale": "Warns against lease reclamation and treating uncertainty as non-delivery."
+        },
+        {
+          "citation": "RB-R2-EMAIL-UNKNOWN@1.0.0#lost-acknowledgement-evidence",
+          "relevance": "direct",
+          "rationale": "Explicitly says expired leases or timeouts do not prove email non-delivery."
+        }
+      ]
+    }
+  ]
+}

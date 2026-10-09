@@ -1,0 +1,16 @@
+{
+  "reportHash": "e30838e789c94aecafef561817a4dc6ff44e742d9a0168e7ce563c8fe0230fee",
+  "developmentAnswerableAvailable": 36,
+  "developmentAnswerableExpected": 36,
+  "developmentCompleteAnswerableRecall": 0.8333333333333334,
+  "miniLMDevelopmentRecall": 0.9907407407407407,
+  "developmentNoMatchAvailable": 3,
+  "developmentNoMatchExpected": 12,
+  "developmentCompleteNoMatchAbstention": null,
+  "heldOutCompleteRecall": null,
+  "decision": "Retain production retrieval. Current frozen Gemini method loses 15.74 percentage points audited development recall; full no-match and held-out comparison is incomplete.",
+  "semanticDownstreamValidation": "Not performed; previous checks cover recorded contracts/safety only.",
+  "newMethodFrozen": false,
+  "newIndependentScenariosGenerated": false,
+  "costUsd": null
+}

@@ -1,0 +1,498 @@
+[
+  {
+    "id": "r2-01",
+    "split": "development",
+    "kind": "exact",
+    "query": "Telegram HTTP 429 rate limit provider outage",
+    "providers": [
+      "telegram"
+    ],
+    "taxonomy": [],
+    "relevantCitations": [
+      "RB-F01-F02@1.0.0#symptoms"
+    ]
+  },
+  {
+    "id": "r2-02",
+    "split": "held_out",
+    "kind": "paraphrase",
+    "query": "Remote endpoint is throttling our messages",
+    "providers": [
+      "telegram"
+    ],
+    "taxonomy": [],
+    "relevantCitations": [
+      "RB-F01-F02@1.0.0#symptoms"
+    ]
+  },
+  {
+    "id": "r2-03",
+    "split": "development",
+    "kind": "exact",
+    "query": "Telegram bot token missing destination access denied",
+    "providers": [
+      "telegram"
+    ],
+    "taxonomy": [],
+    "relevantCitations": [
+      "RB-F03-F04@1.0.0#symptoms"
+    ]
+  },
+  {
+    "id": "r2-04",
+    "split": "held_out",
+    "kind": "paraphrase",
+    "query": "The bot cannot enter its configured conversation",
+    "providers": [
+      "telegram"
+    ],
+    "taxonomy": [],
+    "relevantCitations": [
+      "RB-F03-F04@1.0.0#symptoms"
+    ]
+  },
+  {
+    "id": "r2-05",
+    "split": "development",
+    "kind": "exact",
+    "query": "template path absent unsupported action type",
+    "providers": [
+      "generic"
+    ],
+    "taxonomy": [],
+    "relevantCitations": [
+      "RB-F04-F06@1.0.0#symptoms"
+    ]
+  },
+  {
+    "id": "r2-06",
+    "split": "held_out",
+    "kind": "paraphrase",
+    "query": "An automation refers to a field that the payload does not contain",
+    "providers": [
+      "generic"
+    ],
+    "taxonomy": [],
+    "relevantCitations": [
+      "RB-F04-F06@1.0.0#symptoms"
+    ]
+  },
+  {
+    "id": "r2-07",
+    "split": "development",
+    "kind": "exact",
+    "query": "provider response lost delivery unknown expired lease",
+    "providers": [
+      "telegram"
+    ],
+    "taxonomy": [],
+    "relevantCitations": [
+      "RB-F07@1.0.0#symptoms"
+    ]
+  },
+  {
+    "id": "r2-08",
+    "split": "held_out",
+    "kind": "paraphrase",
+    "query": "The call may have completed but its answer disappeared",
+    "providers": [
+      "telegram"
+    ],
+    "taxonomy": [],
+    "relevantCitations": [
+      "RB-F07@1.0.0#symptoms"
+    ]
+  },
+  {
+    "id": "r2-09",
+    "split": "development",
+    "kind": "exact",
+    "query": "duplicate message terminal SUCCESS stage",
+    "providers": [
+      "generic"
+    ],
+    "taxonomy": [],
+    "relevantCitations": [
+      "RB-F08@1.0.0#symptoms"
+    ]
+  },
+  {
+    "id": "r2-10",
+    "split": "held_out",
+    "kind": "paraphrase",
+    "query": "The broker sent the same event for a finished execution",
+    "providers": [
+      "generic"
+    ],
+    "taxonomy": [],
+    "relevantCitations": [
+      "RB-F08@1.0.0#symptoms"
+    ]
+  },
+  {
+    "id": "r2-11",
+    "split": "development",
+    "kind": "exact",
+    "query": "DLQ publication missing email SDK error hidden",
+    "providers": [
+      "email"
+    ],
+    "taxonomy": [],
+    "relevantCitations": [
+      "RB-F09-F10@1.0.0#symptoms"
+    ]
+  },
+  {
+    "id": "r2-12",
+    "split": "held_out",
+    "kind": "paraphrase",
+    "query": "The queue has no failure item although the executor reported trouble",
+    "providers": [
+      "email"
+    ],
+    "taxonomy": [],
+    "relevantCitations": [
+      "RB-F09-F10@1.0.0#symptoms"
+    ]
+  },
+  {
+    "id": "r2-13",
+    "split": "development",
+    "kind": "exact",
+    "query": "Telegram retry_after 30 cooldown deadline recorded timestamp",
+    "providers": [
+      "telegram"
+    ],
+    "taxonomy": [],
+    "relevantCitations": [
+      "RB-R2-COOLDOWN@1.0.0#cooldown-evidence"
+    ]
+  },
+  {
+    "id": "r2-14",
+    "split": "held_out",
+    "kind": "paraphrase",
+    "query": "We must wait until the messaging service allows another attempt; where does that waiting period start?",
+    "providers": [
+      "telegram"
+    ],
+    "taxonomy": [],
+    "relevantCitations": [
+      "RB-R2-COOLDOWN@1.0.0#cooldown-evidence"
+    ]
+  },
+  {
+    "id": "r2-15",
+    "split": "development",
+    "kind": "exact",
+    "query": "Telegram group migrated chat identifier bot removed channel permissions",
+    "providers": [
+      "telegram"
+    ],
+    "taxonomy": [],
+    "relevantCitations": [
+      "RB-R2-DESTINATION@1.0.0#destination-permission-evidence"
+    ]
+  },
+  {
+    "id": "r2-16",
+    "split": "held_out",
+    "kind": "paraphrase",
+    "query": "Our messaging robot was kicked out of the conversation after the group changed its identity",
+    "providers": [
+      "telegram"
+    ],
+    "taxonomy": [],
+    "relevantCitations": [
+      "RB-R2-DESTINATION@1.0.0#destination-permission-evidence"
+    ]
+  },
+  {
+    "id": "r2-17",
+    "split": "development",
+    "kind": "exact",
+    "query": "email SDK authentication rejected invalid recipient exception SUCCESS",
+    "providers": [
+      "email"
+    ],
+    "taxonomy": [],
+    "relevantCitations": [
+      "RB-R2-EMAIL-REJECT@1.0.0#email-rejection-evidence"
+    ]
+  },
+  {
+    "id": "r2-18",
+    "split": "held_out",
+    "kind": "paraphrase",
+    "query": "The mail service refused login or the addressee format and the application hid the exception",
+    "providers": [
+      "email"
+    ],
+    "taxonomy": [],
+    "relevantCitations": [
+      "RB-R2-EMAIL-REJECT@1.0.0#email-rejection-evidence"
+    ]
+  },
+  {
+    "id": "r2-19",
+    "split": "development",
+    "kind": "exact",
+    "query": "email socket disconnect after send lost acknowledgement receipt",
+    "providers": [
+      "email"
+    ],
+    "taxonomy": [],
+    "relevantCitations": [
+      "RB-R2-EMAIL-UNKNOWN@1.0.0#lost-acknowledgement-evidence"
+    ]
+  },
+  {
+    "id": "r2-20",
+    "split": "held_out",
+    "kind": "paraphrase",
+    "query": "The mail server may have accepted it before the connection dropped",
+    "providers": [
+      "email"
+    ],
+    "taxonomy": [],
+    "relevantCitations": [
+      "RB-R2-EMAIL-UNKNOWN@1.0.0#lost-acknowledgement-evidence"
+    ]
+  },
+  {
+    "id": "r2-21",
+    "split": "development",
+    "kind": "exact",
+    "query": "workflow pending missing failed predecessor ordering gap",
+    "providers": [
+      "generic"
+    ],
+    "taxonomy": [],
+    "relevantCitations": [
+      "RB-R2-ORDERING@1.0.0#predecessor-ordering-evidence"
+    ]
+  },
+  {
+    "id": "r2-22",
+    "split": "held_out",
+    "kind": "paraphrase",
+    "query": "A later workflow step arrived while the earlier step was still unfinished",
+    "providers": [
+      "generic"
+    ],
+    "taxonomy": [],
+    "relevantCitations": [
+      "RB-R2-ORDERING@1.0.0#predecessor-ordering-evidence"
+    ]
+  },
+  {
+    "id": "r2-23",
+    "split": "development",
+    "kind": "exact",
+    "query": "Kafka dead letter outbox unpublished lost broker acknowledgement",
+    "providers": [
+      "generic"
+    ],
+    "taxonomy": [],
+    "relevantCitations": [
+      "RB-R2-PUBLICATION@1.0.0#publication-reconciliation-evidence"
+    ]
+  },
+  {
+    "id": "r2-24",
+    "split": "held_out",
+    "kind": "paraphrase",
+    "query": "A saved failure never reached the event bus because its receipt went missing",
+    "providers": [
+      "generic"
+    ],
+    "taxonomy": [],
+    "relevantCitations": [
+      "RB-R2-PUBLICATION@1.0.0#publication-reconciliation-evidence"
+    ]
+  },
+  {
+    "id": "r2-25",
+    "split": "development",
+    "kind": "ambiguous",
+    "query": "Telegram final 429 earlier timeout delivery unknown",
+    "providers": [
+      "telegram"
+    ],
+    "taxonomy": [],
+    "relevantCitations": [
+      "RB-F01-F02@1.0.0#symptoms",
+      "RB-F07@1.0.0#symptoms"
+    ]
+  },
+  {
+    "id": "r2-26",
+    "split": "development",
+    "kind": "ambiguous",
+    "query": "Email SDK SUCCESS contradicts socket timeout receipt missing",
+    "providers": [
+      "email"
+    ],
+    "taxonomy": [],
+    "relevantCitations": [
+      "RB-F09-F10@1.0.0#symptoms",
+      "RB-R2-EMAIL-UNKNOWN@1.0.0#lost-acknowledgement-evidence"
+    ]
+  },
+  {
+    "id": "r2-27",
+    "split": "development",
+    "kind": "ambiguous",
+    "query": "duplicate completed stage and missing predecessor ordering",
+    "providers": [
+      "generic"
+    ],
+    "taxonomy": [],
+    "relevantCitations": [
+      "RB-R2-ORDERING@1.0.0#predecessor-ordering-evidence",
+      "RB-F08@1.0.0#symptoms"
+    ]
+  },
+  {
+    "id": "r2-28",
+    "split": "development",
+    "kind": "ambiguous",
+    "query": "Kafka outbox unpublished after provider failure missing DLQ",
+    "providers": [
+      "generic"
+    ],
+    "taxonomy": [],
+    "relevantCitations": [
+      "RB-R2-PUBLICATION@1.0.0#publication-reconciliation-evidence",
+      "RB-F09-F10@1.0.0#symptoms"
+    ]
+  },
+  {
+    "id": "r2-29",
+    "split": "held_out",
+    "kind": "ambiguous",
+    "query": "A final throttling refusal followed an earlier call whose outcome nobody knows",
+    "providers": [
+      "telegram"
+    ],
+    "taxonomy": [],
+    "relevantCitations": [
+      "RB-F01-F02@1.0.0#symptoms",
+      "RB-F07@1.0.0#symptoms"
+    ]
+  },
+  {
+    "id": "r2-30",
+    "split": "held_out",
+    "kind": "ambiguous",
+    "query": "Mail shows completion despite losing the remote receipt",
+    "providers": [
+      "email"
+    ],
+    "taxonomy": [],
+    "relevantCitations": [
+      "RB-F09-F10@1.0.0#symptoms",
+      "RB-R2-EMAIL-UNKNOWN@1.0.0#lost-acknowledgement-evidence"
+    ]
+  },
+  {
+    "id": "r2-31",
+    "split": "held_out",
+    "kind": "ambiguous",
+    "query": "An already finished step was redelivered while its ancestor was absent",
+    "providers": [
+      "generic"
+    ],
+    "taxonomy": [],
+    "relevantCitations": [
+      "RB-R2-ORDERING@1.0.0#predecessor-ordering-evidence",
+      "RB-F08@1.0.0#symptoms"
+    ]
+  },
+  {
+    "id": "r2-32",
+    "split": "held_out",
+    "kind": "ambiguous",
+    "query": "The failure was saved but its notification never appeared on the broker",
+    "providers": [
+      "generic"
+    ],
+    "taxonomy": [],
+    "relevantCitations": [
+      "RB-R2-PUBLICATION@1.0.0#publication-reconciliation-evidence",
+      "RB-F09-F10@1.0.0#symptoms"
+    ]
+  },
+  {
+    "id": "r2-33",
+    "split": "development",
+    "kind": "no_match",
+    "query": "quantum orchard photosynthesis",
+    "providers": [],
+    "taxonomy": [],
+    "relevantCitations": []
+  },
+  {
+    "id": "r2-34",
+    "split": "development",
+    "kind": "no_match",
+    "query": "CSS sidebar font kerning",
+    "providers": [],
+    "taxonomy": [],
+    "relevantCitations": []
+  },
+  {
+    "id": "r2-35",
+    "split": "development",
+    "kind": "no_match",
+    "query": "payroll pension contribution formula",
+    "providers": [],
+    "taxonomy": [],
+    "relevantCitations": []
+  },
+  {
+    "id": "r2-36",
+    "split": "development",
+    "kind": "no_match",
+    "query": "travel visa processing schedule",
+    "providers": [],
+    "taxonomy": [],
+    "relevantCitations": []
+  },
+  {
+    "id": "r2-37",
+    "split": "held_out",
+    "kind": "no_match",
+    "query": "How do I bake a sourdough loaf?",
+    "providers": [],
+    "taxonomy": [],
+    "relevantCitations": []
+  },
+  {
+    "id": "r2-38",
+    "split": "held_out",
+    "kind": "no_match",
+    "query": "What are the planetary orbital periods?",
+    "providers": [],
+    "taxonomy": [],
+    "relevantCitations": []
+  },
+  {
+    "id": "r2-39",
+    "split": "held_out",
+    "kind": "no_match",
+    "query": "Design a birthday invitation illustration",
+    "providers": [],
+    "taxonomy": [],
+    "relevantCitations": []
+  },
+  {
+    "id": "r2-40",
+    "split": "held_out",
+    "kind": "no_match",
+    "query": "Translate a poem from French",
+    "providers": [],
+    "taxonomy": [],
+    "relevantCitations": []
+  }
+]

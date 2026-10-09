@@ -1,0 +1,56 @@
+{
+  "experimentVersion": "r22-v1",
+  "datasetVersion": "r21-v1",
+  "candidateStrategy": "full_top12_branch_union",
+  "candidateLimit": 24,
+  "branchDepth": 12,
+  "rrfConstant": 60,
+  "semanticThreshold": 0.2,
+  "rerankThreshold": 0.001,
+  "corpusHash": "17b89d4cef1f05defead5b977804582fd19b76534673a57745d038931e934d7e",
+  "models": {
+    "embedding": {
+      "id": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff37182d3f1213fa05d7196b954e230abad9",
+      "dtype": "q8"
+    },
+    "reranker": {
+      "id": "Xenova/ms-marco-MiniLM-L-6-v2",
+      "revision": "a09144355adeed5f58c8ed011d209bf8ee5a1fec",
+      "dtype": "q8"
+    }
+  },
+  "baselineFiles": {
+    "apps/ai_agent/evaluation/r21/config.json": "a5cc61536adced4e4bee80671967ad7f8bc26bd24cd146be76326ac5163a6a21",
+    "apps/ai_agent/evaluation/r21/queries.json": "25ef7ddf60b5b78ec5e02f694a1462be1433ccc2ac9a66aa73c1dfd99ec43e2f",
+    "apps/ai_agent/evaluation/r21/README.md": "c7a0bf56ea30767a70ca8833ec7393e3f8c8154c18f3662b1134d57f900ded06",
+    "apps/ai_agent/evaluation/r21/runs/r21-v1-local/config.json": "43ec854e8dbb19c17dfe2736c5d707572ba1c2474f9bc64ff24b752f0962ef6e",
+    "apps/ai_agent/evaluation/r21/runs/r21-v1-local/dataset.json": "5cbeb67ddc1c707c2535445abba032a3d28c239040145313a2e9a9708bfdd7bf",
+    "apps/ai_agent/evaluation/r21/runs/r21-v1-local/inference-inputs.json": "4d192c9e37a1772f799af9f7e2033a94aad80b83cf3ee5700b440a577eb541aa",
+    "apps/ai_agent/evaluation/r21/runs/r21-v1-local/report.json": "af4857fb6265a8fc7aa3b0d89520efba77b2fcb0beaa523b6819b025105cd38c",
+    "apps/ai_agent/evaluation/r21/runs/r21-v1-local/report.md": "1a4f36bed7eb18305d8d2cdc2616167483d1088ebba79340d1f88fe3a051a3c5",
+    "apps/ai_agent/evaluation/r21/runs/r21-v1-local/scores.json": "fac40422f9499bc7965c1376f4948576915d1095210b568b24508fa6d9d1e38a",
+    "apps/ai_agent/evaluation/r2/handoff.md": "20872b34f70ee046f03d777f017671fa3d61af1cf7ffef930fb513386c1f885a",
+    "apps/ai_agent/evaluation/r2/queries.json": "50329cbb81ec16b4d649fb7ce7a60baf8b949389ab066552cd5b8df4b425c368",
+    "apps/ai_agent/evaluation/r2/README.md": "b23b5a477e36fe758512d38b265e05545119d04d0fdb036a5a22c3bf0a2fb4c9",
+    "apps/ai_agent/evaluation/r2/results/diagnosis-progress.json": "5442624ba74cd175f4111d3f0d7550d4b88785b9399d74900a3fd7c61568d1e7",
+    "apps/ai_agent/evaluation/r2/results/inputs.json": "2162b9400959b1b7a748eb66f222e4f4ae33cf79ed900d29933ec639d838acec",
+    "apps/ai_agent/evaluation/r2/results/report.json": "81875e3144aaad73fe8d83da52cd961fdd0226cf34776efc00324dce8b6bce9c",
+    "apps/ai_agent/evaluation/r2/results/report.md": "0c2fd148e309b34abd85a8ca63f94642b2b3dc5672d96cbca38ff0ec37130a56",
+    "apps/ai_agent/evaluation/r2/results/scores.json": "dd1b98ff157f45f49e9468eaef20e866106f1849e90b23b4b7d91d1a0cc8a507",
+    "apps/ai_agent/evaluation/r2/runbooks/dlq-publication.md": "672cc7f64eb16595c61906c61aed7a2d8e562283535e74e49160bd4878c188d6",
+    "apps/ai_agent/evaluation/r2/runbooks/email-rejection.md": "e58fd3eac9d5169decdae8b4a3bb7c582ad4e34ccf0df38edd5891435e5fcdb1",
+    "apps/ai_agent/evaluation/r2/runbooks/email-uncertain.md": "2d4217410af20e4a785df6254f7154efbac302ca86e1e42c36d7b792f13c1602",
+    "apps/ai_agent/evaluation/r2/runbooks/ordering-gap.md": "f2a308b314cc666d4bc565a73cae2148994d32898cb9ce39b7a653dfde88639b",
+    "apps/ai_agent/evaluation/r2/runbooks/telegram-cooldown.md": "204efa8bfd9c4aeb7d42278fd91fae0407270ce2ede302ff8a9acbfeec2263bf",
+    "apps/ai_agent/evaluation/r2/runbooks/telegram-destination.md": "150e56a7d62bce10bb84526e624e39c2a01336549526f45b8fac9ec8f0000c10",
+    "apps/ai_agent/src/evaluation/retrieval-r21.ts": "f2972f4f36c58d38655e65e180527258c2e164e98ee0ce2a7bf0718c654156a1",
+    "apps/ai_agent/src/evaluation/r21-models.mjs": "b8c6068d12c437dd8d34124bbca0abd148c48f20e187e87e2e9cebf1d98abdaf",
+    "apps/ai_agent/src/evaluation/retrieval-r2.ts": "ebc8b06ec719bf9ea49d714071fe2207d01603b07e9326aaa8812d3592d42c9d",
+    "apps/ai_agent/src/evaluation/r2-models.mjs": "68d800f9016373d9dcef81e1c42a250e4657c415cb0dd29aa148593d6e141edd",
+    "apps/ai_agent/tests/retrieval-r21.test.ts": "cbcc1f8535bf1a6eb6db59f65a20a77036a95f7ca2de9b7daf652c0baae51120",
+    "apps/ai_agent/src/tools/search-runbooks.ts": "7c433e3707ecfbca8d6ca6125ea3a2d0a53938a1481111af7783497e0cdd99f2",
+    "apps/ai_agent/package.json": "b5924d78b0794e03fdd1f6a4a79f168fc0c0c1b79e3c5546021eb61449d04a22",
+    "bun.lock": "c7b3fb09ba8ac2cc28aeb6dda101746dafc09caae1ae9b851ecd75847a353afa"
+  }
+}

@@ -1,0 +1,5 @@
+{"id":"r21-duplicate-failure-investigation-2","attempt":1,"success":true,"latencyMs":15136}
+{"id":"r21-dashboard-styling-2","attempt":1,"success":true,"latencyMs":6193}
+{"id":"r21-dashboard-styling-3","attempt":1,"success":true,"latencyMs":29128}
+{"id":"r21-dashboard-styling-4","attempt":1,"success":false,"category":"Gemini HTTP 503","latencyMs":2468}
+{"id":"r21-dashboard-styling-4","attempt":2,"success":false,"category":"Gemini HTTP 503","latencyMs":2364}

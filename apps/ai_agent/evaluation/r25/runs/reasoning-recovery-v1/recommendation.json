@@ -1,0 +1,539 @@
+{
+  "decision": "retain production retrieval; Gemini remains an incomplete diagnostic comparison",
+  "reason": "Transient HTTP 503 persisted after the capped retry. No complete comparison or held-out Gemini evidence exists.",
+  "complete": false,
+  "productionChanged": false,
+  "newMethodFrozen": false,
+  "newScenariosGenerated": false,
+  "successfulQuestions": 39,
+  "expectedQuestions": 96,
+  "overallAvailability": 0.40625,
+  "unavailableFailedQuestionIds": [
+    "r21-dashboard-styling-4"
+  ],
+  "unattemptedQuestionIds": [
+    "r21-billing-analysis-1",
+    "r21-billing-analysis-2",
+    "r21-billing-analysis-3",
+    "r21-billing-analysis-4",
+    "r21-database-capacity-1",
+    "r21-database-capacity-2",
+    "r21-database-capacity-3",
+    "r21-database-capacity-4",
+    "r21-group-migration-1",
+    "r21-group-migration-2",
+    "r21-group-migration-3",
+    "r21-group-migration-4",
+    "r21-late-worker-fencing-1",
+    "r21-late-worker-fencing-2",
+    "r21-late-worker-fencing-3",
+    "r21-late-worker-fencing-4",
+    "r21-orphan-source-identity-1",
+    "r21-orphan-source-identity-2",
+    "r21-orphan-source-identity-3",
+    "r21-orphan-source-identity-4",
+    "r21-superseded-evidence-1",
+    "r21-superseded-evidence-2",
+    "r21-superseded-evidence-3",
+    "r21-superseded-evidence-4",
+    "r21-success-progression-gap-1",
+    "r21-success-progression-gap-2",
+    "r21-success-progression-gap-3",
+    "r21-success-progression-gap-4",
+    "r21-registry-mismatch-1",
+    "r21-registry-mismatch-2",
+    "r21-registry-mismatch-3",
+    "r21-registry-mismatch-4",
+    "r21-swallowed-authentication-1",
+    "r21-swallowed-authentication-2",
+    "r21-swallowed-authentication-3",
+    "r21-swallowed-authentication-4",
+    "r21-server-error-after-send-1",
+    "r21-server-error-after-send-2",
+    "r21-server-error-after-send-3",
+    "r21-server-error-after-send-4",
+    "r21-secret-verification-request-1",
+    "r21-secret-verification-request-2",
+    "r21-secret-verification-request-3",
+    "r21-secret-verification-request-4",
+    "r21-broker-topology-settings-1",
+    "r21-broker-topology-settings-2",
+    "r21-broker-topology-settings-3",
+    "r21-broker-topology-settings-4",
+    "r21-calendar-scheduling-1",
+    "r21-calendar-scheduling-2",
+    "r21-calendar-scheduling-3",
+    "r21-calendar-scheduling-4",
+    "r21-mail-presentation-1",
+    "r21-mail-presentation-2",
+    "r21-mail-presentation-3",
+    "r21-mail-presentation-4"
+  ],
+  "cumulativeGenerationAttemptsUpperBound": 43,
+  "newGenerationRequests": 5,
+  "cumulativeHttpRequestsUpperBound": 86,
+  "newHttpRequests": 10,
+  "newFailures": [
+    {
+      "id": "r21-dashboard-styling-4",
+      "attempt": 1,
+      "success": false,
+      "category": "Gemini HTTP 503",
+      "latencyMs": 2468
+    },
+    {
+      "id": "r21-dashboard-styling-4",
+      "attempt": 2,
+      "success": false,
+      "category": "Gemini HTTP 503",
+      "latencyMs": 2364
+    }
+  ],
+  "measuredSuccessfulTokens": 191818,
+  "measuredNewSuccessfulTokens": 15163,
+  "tokenUsageByField": {
+    "promptTokenCount": 190542,
+    "candidatesTokenCount": 1276,
+    "thoughtsTokenCount": null,
+    "totalTokenCount": 191818
+  },
+  "failureUsage": null,
+  "costUsd": null,
+  "newConservativeReservedTokens": 100000,
+  "recoveryWallTimeMs": 182672,
+  "fullBenchmarkRecall": null,
+  "fullBenchmarkNoMatchAbstention": null,
+  "fullBenchmarkAnswerableAbstention": null,
+  "reportHash": "e30838e789c94aecafef561817a4dc6ff44e742d9a0168e7ce563c8fe0230fee",
+  "results": [
+    {
+      "labelVersion": "r21-v1",
+      "splits": [
+        {
+          "split": "development",
+          "expected": 48,
+          "successful": 39,
+          "unavailableIds": [
+            "r21-dashboard-styling-4",
+            "r21-billing-analysis-1",
+            "r21-billing-analysis-2",
+            "r21-billing-analysis-3",
+            "r21-billing-analysis-4",
+            "r21-database-capacity-1",
+            "r21-database-capacity-2",
+            "r21-database-capacity-3",
+            "r21-database-capacity-4"
+          ],
+          "availability": 0.8125,
+          "completeMetrics": null,
+          "successfulOnlyMetrics": {
+            "queryCount": 39,
+            "positiveQueryCount": 36,
+            "noMatchQueryCount": 3,
+            "recallAt3": 1,
+            "mrr": 0.9861111111111112,
+            "noMatchConfusion": {
+              "tp": 3,
+              "fp": 0,
+              "fn": 0,
+              "tn": 36
+            },
+            "noMatchAccuracy": 1,
+            "noMatchPrecision": 1,
+            "noMatchAbstentionRate": 1,
+            "answerableAbstentionRate": 0,
+            "overallAbstentionRate": 0.07692307692307693,
+            "latency": {
+              "meanMs": 3830.572541025645,
+              "p95Ms": 15287.531400000002
+            }
+          },
+          "availabilityAdjustedRecall": 1,
+          "miniLMAllMetrics": {
+            "queryCount": 48,
+            "positiveQueryCount": 36,
+            "noMatchQueryCount": 12,
+            "recallAt3": 1,
+            "mrr": 0.9583333333333334,
+            "noMatchConfusion": {
+              "tp": 12,
+              "fp": 0,
+              "fn": 0,
+              "tn": 36
+            },
+            "noMatchAccuracy": 1,
+            "noMatchPrecision": 1,
+            "noMatchAbstentionRate": 1,
+            "answerableAbstentionRate": 0,
+            "overallAbstentionRate": 0.25,
+            "latency": {
+              "meanMs": 1108.3730937499993,
+              "p95Ms": 2630.1606
+            }
+          },
+          "miniLMPairedSuccessfulMetrics": {
+            "queryCount": 39,
+            "positiveQueryCount": 36,
+            "noMatchQueryCount": 3,
+            "recallAt3": 1,
+            "mrr": 0.9583333333333334,
+            "noMatchConfusion": {
+              "tp": 3,
+              "fp": 0,
+              "fn": 0,
+              "tn": 36
+            },
+            "noMatchAccuracy": 1,
+            "noMatchPrecision": 1,
+            "noMatchAbstentionRate": 1,
+            "answerableAbstentionRate": 0,
+            "overallAbstentionRate": 0.07692307692307693,
+            "latency": {
+              "meanMs": 1111.6507923076917,
+              "p95Ms": 3804.411899999999
+            }
+          }
+        },
+        {
+          "split": "held_out",
+          "expected": 48,
+          "successful": 0,
+          "unavailableIds": [
+            "r21-group-migration-1",
+            "r21-group-migration-2",
+            "r21-group-migration-3",
+            "r21-group-migration-4",
+            "r21-late-worker-fencing-1",
+            "r21-late-worker-fencing-2",
+            "r21-late-worker-fencing-3",
+            "r21-late-worker-fencing-4",
+            "r21-orphan-source-identity-1",
+            "r21-orphan-source-identity-2",
+            "r21-orphan-source-identity-3",
+            "r21-orphan-source-identity-4",
+            "r21-superseded-evidence-1",
+            "r21-superseded-evidence-2",
+            "r21-superseded-evidence-3",
+            "r21-superseded-evidence-4",
+            "r21-success-progression-gap-1",
+            "r21-success-progression-gap-2",
+            "r21-success-progression-gap-3",
+            "r21-success-progression-gap-4",
+            "r21-registry-mismatch-1",
+            "r21-registry-mismatch-2",
+            "r21-registry-mismatch-3",
+            "r21-registry-mismatch-4",
+            "r21-swallowed-authentication-1",
+            "r21-swallowed-authentication-2",
+            "r21-swallowed-authentication-3",
+            "r21-swallowed-authentication-4",
+            "r21-server-error-after-send-1",
+            "r21-server-error-after-send-2",
+            "r21-server-error-after-send-3",
+            "r21-server-error-after-send-4",
+            "r21-secret-verification-request-1",
+            "r21-secret-verification-request-2",
+            "r21-secret-verification-request-3",
+            "r21-secret-verification-request-4",
+            "r21-broker-topology-settings-1",
+            "r21-broker-topology-settings-2",
+            "r21-broker-topology-settings-3",
+            "r21-broker-topology-settings-4",
+            "r21-calendar-scheduling-1",
+            "r21-calendar-scheduling-2",
+            "r21-calendar-scheduling-3",
+            "r21-calendar-scheduling-4",
+            "r21-mail-presentation-1",
+            "r21-mail-presentation-2",
+            "r21-mail-presentation-3",
+            "r21-mail-presentation-4"
+          ],
+          "availability": 0,
+          "completeMetrics": null,
+          "successfulOnlyMetrics": {
+            "queryCount": 0,
+            "positiveQueryCount": 0,
+            "noMatchQueryCount": 0,
+            "recallAt3": null,
+            "mrr": null,
+            "noMatchConfusion": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0
+            },
+            "noMatchAccuracy": null,
+            "noMatchPrecision": null,
+            "noMatchAbstentionRate": null,
+            "answerableAbstentionRate": null,
+            "overallAbstentionRate": null,
+            "latency": {
+              "meanMs": null,
+              "p95Ms": null
+            }
+          },
+          "availabilityAdjustedRecall": 0,
+          "miniLMAllMetrics": {
+            "queryCount": 48,
+            "positiveQueryCount": 36,
+            "noMatchQueryCount": 12,
+            "recallAt3": 0.6527777777777778,
+            "mrr": 0.6435185185185186,
+            "noMatchConfusion": {
+              "tp": 10,
+              "fp": 1,
+              "fn": 2,
+              "tn": 35
+            },
+            "noMatchAccuracy": 0.9375,
+            "noMatchPrecision": 0.9090909090909091,
+            "noMatchAbstentionRate": 0.8333333333333334,
+            "answerableAbstentionRate": 0.027777777777777776,
+            "overallAbstentionRate": 0.22916666666666666,
+            "latency": {
+              "meanMs": 1841.8592104166673,
+              "p95Ms": 3561.2459000000017
+            }
+          },
+          "miniLMPairedSuccessfulMetrics": {
+            "queryCount": 0,
+            "positiveQueryCount": 0,
+            "noMatchQueryCount": 0,
+            "recallAt3": null,
+            "mrr": null,
+            "noMatchConfusion": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0
+            },
+            "noMatchAccuracy": null,
+            "noMatchPrecision": null,
+            "noMatchAbstentionRate": null,
+            "answerableAbstentionRate": null,
+            "overallAbstentionRate": null,
+            "latency": {
+              "meanMs": null,
+              "p95Ms": null
+            }
+          }
+        }
+      ]
+    },
+    {
+      "labelVersion": "r25-audited-v1",
+      "splits": [
+        {
+          "split": "development",
+          "expected": 48,
+          "successful": 39,
+          "unavailableIds": [
+            "r21-dashboard-styling-4",
+            "r21-billing-analysis-1",
+            "r21-billing-analysis-2",
+            "r21-billing-analysis-3",
+            "r21-billing-analysis-4",
+            "r21-database-capacity-1",
+            "r21-database-capacity-2",
+            "r21-database-capacity-3",
+            "r21-database-capacity-4"
+          ],
+          "availability": 0.8125,
+          "completeMetrics": null,
+          "successfulOnlyMetrics": {
+            "queryCount": 39,
+            "positiveQueryCount": 36,
+            "noMatchQueryCount": 3,
+            "recallAt3": 0.8333333333333334,
+            "mrr": 0.9861111111111112,
+            "noMatchConfusion": {
+              "tp": 3,
+              "fp": 0,
+              "fn": 0,
+              "tn": 36
+            },
+            "noMatchAccuracy": 1,
+            "noMatchPrecision": 1,
+            "noMatchAbstentionRate": 1,
+            "answerableAbstentionRate": 0,
+            "overallAbstentionRate": 0.07692307692307693,
+            "latency": {
+              "meanMs": 3830.572541025645,
+              "p95Ms": 15287.531400000002
+            }
+          },
+          "availabilityAdjustedRecall": 0.8333333333333334,
+          "miniLMAllMetrics": {
+            "queryCount": 48,
+            "positiveQueryCount": 36,
+            "noMatchQueryCount": 12,
+            "recallAt3": 0.9907407407407407,
+            "mrr": 0.9861111111111112,
+            "noMatchConfusion": {
+              "tp": 12,
+              "fp": 0,
+              "fn": 0,
+              "tn": 36
+            },
+            "noMatchAccuracy": 1,
+            "noMatchPrecision": 1,
+            "noMatchAbstentionRate": 1,
+            "answerableAbstentionRate": 0,
+            "overallAbstentionRate": 0.25,
+            "latency": {
+              "meanMs": 1108.3730937499993,
+              "p95Ms": 2630.1606
+            }
+          },
+          "miniLMPairedSuccessfulMetrics": {
+            "queryCount": 39,
+            "positiveQueryCount": 36,
+            "noMatchQueryCount": 3,
+            "recallAt3": 0.9907407407407407,
+            "mrr": 0.9861111111111112,
+            "noMatchConfusion": {
+              "tp": 3,
+              "fp": 0,
+              "fn": 0,
+              "tn": 36
+            },
+            "noMatchAccuracy": 1,
+            "noMatchPrecision": 1,
+            "noMatchAbstentionRate": 1,
+            "answerableAbstentionRate": 0,
+            "overallAbstentionRate": 0.07692307692307693,
+            "latency": {
+              "meanMs": 1111.6507923076917,
+              "p95Ms": 3804.411899999999
+            }
+          }
+        },
+        {
+          "split": "held_out",
+          "expected": 48,
+          "successful": 0,
+          "unavailableIds": [
+            "r21-group-migration-1",
+            "r21-group-migration-2",
+            "r21-group-migration-3",
+            "r21-group-migration-4",
+            "r21-late-worker-fencing-1",
+            "r21-late-worker-fencing-2",
+            "r21-late-worker-fencing-3",
+            "r21-late-worker-fencing-4",
+            "r21-orphan-source-identity-1",
+            "r21-orphan-source-identity-2",
+            "r21-orphan-source-identity-3",
+            "r21-orphan-source-identity-4",
+            "r21-superseded-evidence-1",
+            "r21-superseded-evidence-2",
+            "r21-superseded-evidence-3",
+            "r21-superseded-evidence-4",
+            "r21-success-progression-gap-1",
+            "r21-success-progression-gap-2",
+            "r21-success-progression-gap-3",
+            "r21-success-progression-gap-4",
+            "r21-registry-mismatch-1",
+            "r21-registry-mismatch-2",
+            "r21-registry-mismatch-3",
+            "r21-registry-mismatch-4",
+            "r21-swallowed-authentication-1",
+            "r21-swallowed-authentication-2",
+            "r21-swallowed-authentication-3",
+            "r21-swallowed-authentication-4",
+            "r21-server-error-after-send-1",
+            "r21-server-error-after-send-2",
+            "r21-server-error-after-send-3",
+            "r21-server-error-after-send-4",
+            "r21-secret-verification-request-1",
+            "r21-secret-verification-request-2",
+            "r21-secret-verification-request-3",
+            "r21-secret-verification-request-4",
+            "r21-broker-topology-settings-1",
+            "r21-broker-topology-settings-2",
+            "r21-broker-topology-settings-3",
+            "r21-broker-topology-settings-4",
+            "r21-calendar-scheduling-1",
+            "r21-calendar-scheduling-2",
+            "r21-calendar-scheduling-3",
+            "r21-calendar-scheduling-4",
+            "r21-mail-presentation-1",
+            "r21-mail-presentation-2",
+            "r21-mail-presentation-3",
+            "r21-mail-presentation-4"
+          ],
+          "availability": 0,
+          "completeMetrics": null,
+          "successfulOnlyMetrics": {
+            "queryCount": 0,
+            "positiveQueryCount": 0,
+            "noMatchQueryCount": 0,
+            "recallAt3": null,
+            "mrr": null,
+            "noMatchConfusion": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0
+            },
+            "noMatchAccuracy": null,
+            "noMatchPrecision": null,
+            "noMatchAbstentionRate": null,
+            "answerableAbstentionRate": null,
+            "overallAbstentionRate": null,
+            "latency": {
+              "meanMs": null,
+              "p95Ms": null
+            }
+          },
+          "availabilityAdjustedRecall": 0,
+          "miniLMAllMetrics": {
+            "queryCount": 48,
+            "positiveQueryCount": 36,
+            "noMatchQueryCount": 12,
+            "recallAt3": 0.763888888888889,
+            "mrr": 0.8148148148148149,
+            "noMatchConfusion": {
+              "tp": 10,
+              "fp": 1,
+              "fn": 2,
+              "tn": 35
+            },
+            "noMatchAccuracy": 0.9375,
+            "noMatchPrecision": 0.9090909090909091,
+            "noMatchAbstentionRate": 0.8333333333333334,
+            "answerableAbstentionRate": 0.027777777777777776,
+            "overallAbstentionRate": 0.22916666666666666,
+            "latency": {
+              "meanMs": 1841.8592104166673,
+              "p95Ms": 3561.2459000000017
+            }
+          },
+          "miniLMPairedSuccessfulMetrics": {
+            "queryCount": 0,
+            "positiveQueryCount": 0,
+            "noMatchQueryCount": 0,
+            "recallAt3": null,
+            "mrr": null,
+            "noMatchConfusion": {
+              "tp": 0,
+              "fp": 0,
+              "fn": 0,
+              "tn": 0
+            },
+            "noMatchAccuracy": null,
+            "noMatchPrecision": null,
+            "noMatchAbstentionRate": null,
+            "answerableAbstentionRate": null,
+            "overallAbstentionRate": null,
+            "latency": {
+              "meanMs": null,
+              "p95Ms": null
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "followup": "Only a separately authorized and verified recovery policy can resume provider work. Preserve successful outputs, inspect availability, then complete the diagnostic comparison before considering new independent retrieval and semantic diagnosis evaluation."
+}

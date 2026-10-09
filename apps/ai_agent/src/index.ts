@@ -3,6 +3,7 @@ import { GeminiDiagnosisModel } from "./gemini-model.ts";
 import { createHttpServer } from "./http.ts";
 import { defaultFixtureDirectory, defaultRunbookDirectory } from "./paths.ts";
 import { loadRunbooks } from "./tools/search-runbooks.ts";
+import { createRunbookRetriever } from "./tools/runbook-retriever.ts";
 import { createLangfuseExporter } from "./observability.ts";
 import { agentPool, createCheckpoint } from "./checkpoint.ts";
 import { InvestigationStore } from "./investigation-store.ts";
@@ -67,10 +68,12 @@ const resumeDecision = checkpoint && store ? async (threadId: string, decision: 
     searchRunbooks: () => [],
   }, diagnosis?.model ?? resumeOnlyModel, { checkpointer: checkpoint, threadId, requireDecision: true })
     .resumeDecision(decision) : undefined;
+const runbookRetriever = diagnosis
+  ? await createRunbookRetriever(diagnosis.runbookIndex) : undefined;
 const execute = investigationEnabled() && store && checkpoint && diagnosis
   ? createInvestigationExecutor({ backendBaseUrl: diagnosis.backendBaseUrl,
       serviceSecret: diagnosis.serviceSecret, model: diagnosis.model,
-      runbookIndex: diagnosis.runbookIndex, checkpointer: checkpoint,
+      runbookIndex: diagnosis.runbookIndex, runbookRetriever, checkpointer: checkpoint,
       diagnosisOptions: diagnosis.diagnosisOptions })
   : undefined;
 const poller = createInvestigationPoller(store, execute, investigationEnabled,
@@ -101,6 +104,7 @@ async function shutdown() {
   await poller.stop();
   await running.close();
   await diagnosis?.model.close();
+  await runbookRetriever?.close();
   await checkpoint?.end();
   await pool?.end();
   console.log("Investigation service shutdown complete");

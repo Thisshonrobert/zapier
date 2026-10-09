@@ -1,0 +1,1073 @@
+{
+  "mode": "offline recorded-output contract replay with refreshed citations",
+  "inputHash": "9b5d2211df04e5a73761721dacaeb9cc2b95e73cc2d784ed3a689ccc31aeefb2",
+  "freezeHash": "4ed599020bef7299b46c20e2ad5133bc624c8d3f337873409754aad823ca8690",
+  "scoresHash": "dd69533d8c65c289b6202820f318d800b53b48410264a1b2800a781b00ed4edb",
+  "historicalInputsHash": "70c201f5bd3ac785f2d788df7b4785b0339e14a3ce8e4335ab11a10fa25026cf",
+  "historicalReportHash": "61392eef5ab7c3f2fecc1324f0b855fea3a826627bfaed607b6fd4084e791ccf",
+  "sourceHash": "5618f2bd24b055f50a3255211cf79463feeb4675349a1ab908fd692595b2a8e2",
+  "rows": [
+    {
+      "id": "f01-rate-limit-rejected",
+      "context": {
+        "context_version": 1,
+        "case_id": "f01-rate-limit-rejected",
+        "evidence": {
+          "failureContext": {
+            "contract_version": 1,
+            "evidence_id": "fixture:failure:f01-rate-limit-rejected",
+            "type": "failure_context",
+            "source_ref": {
+              "case_id": "82d618b2-60ae-4811-85e8-8d1e3292767f",
+              "zap_run_id": "39c0928f-e090-4cb2-8b36-e2bd2b336ced",
+              "stage": 0
+            },
+            "observed_at": "2026-10-07T00:00:00.000Z",
+            "content_hash": "ac5cb8e453bfd86e9a894725611e1e2a1c114c874bf1e12b4d2f555ba5057c33",
+            "facts": {
+              "source_kind": "controlled_fixture",
+              "current_action_type": "telegram",
+              "retry": {
+                "provider": "telegram",
+                "provider_outcome": "rejected",
+                "requires_human": null,
+                "final_error": "Telegram sendMessage returned 429 with retry_after 30"
+              },
+              "action_metadata": {
+                "paths": [],
+                "truncated": true
+              },
+              "payload": {
+                "paths": [],
+                "truncated": true
+              }
+            },
+            "unavailable": [
+              "provider_request_ids",
+              "canonical_source_identity",
+              "action_metadata",
+              "payload_values"
+            ],
+            "complete": false,
+            "simulated": true,
+            "fixture_contract_version": 1,
+            "fixture_observation": {
+              "provider": "telegram",
+              "execution_status": "FAILED",
+              "delivery_outcome": "rejected",
+              "attempts": 3,
+              "final_error": "Telegram sendMessage returned 429 with retry_after 30",
+              "observed_facts": [
+                "all_attempts_rejected",
+                "retry_after_30_seconds"
+              ],
+              "sensitive_fields_present": []
+            },
+            "fixture_source_kind": "normal_dlq"
+          },
+          "executionEvidence": {
+            "contract_version": 1,
+            "evidence_id": "fixture:execution:f01-rate-limit-rejected",
+            "type": "execution_evidence",
+            "source_ref": {
+              "case_id": "82d618b2-60ae-4811-85e8-8d1e3292767f",
+              "zap_run_id": "39c0928f-e090-4cb2-8b36-e2bd2b336ced",
+              "stage": 0
+            },
+            "observed_at": "2026-10-07T00:00:00.000Z",
+            "content_hash": "d7739035e9619f521b3c579302e595c68a6ff87009da7c236e2ab10c26ae538b",
+            "facts": {
+              "provenance": "controlled_fixture",
+              "current_execution": null,
+              "attempts": [],
+              "history_limit": 10,
+              "history_truncated": true,
+              "predecessors": [],
+              "ordering": {
+                "status": "unknown",
+                "missing_predecessor_stages": []
+              }
+            },
+            "unavailable": [
+              "execution_record",
+              "attempt_history",
+              "execution_ordering"
+            ],
+            "complete": false,
+            "simulated": true,
+            "fixture_contract_version": 1
+          },
+          "inputValidation": {
+            "contract_version": 1,
+            "evidence_id": "fixture:validation:f01-rate-limit-rejected",
+            "type": "action_input_validation",
+            "source_ref": {
+              "case_id": "82d618b2-60ae-4811-85e8-8d1e3292767f",
+              "zap_run_id": "39c0928f-e090-4cb2-8b36-e2bd2b336ced",
+              "stage": 0
+            },
+            "observed_at": "2026-10-07T00:00:00.000Z",
+            "content_hash": "df0d90c3cd3ecd4518b9dd75276cdcc7c46745873d87dd15745ba4ae36f26187",
+            "facts": {
+              "action_type": "telegram",
+              "validation_status": "blocked",
+              "supported": null,
+              "missing_required_fields": [],
+              "invalid_field_types": [],
+              "missing_template_paths": [],
+              "credential_presence": [],
+              "blocked_reasons": [
+                "fixture_inputs_unavailable"
+              ],
+              "input_fingerprint": null
+            },
+            "unavailable": [
+              "action_inputs",
+              "input_fingerprint",
+              "handler_registry"
+            ],
+            "complete": false,
+            "simulated": true,
+            "fixture_contract_version": 1
+          }
+        },
+        "retrieval": {
+          "input": {
+            "query": "Telegram sendMessage returned 429 with retry_after 30 all_attempts_rejected retry_after_30_seconds telegram rejected controlled_fixture unknown blocked support_unknown fixture_inputs_unavailable FAILED",
+            "providers": [
+              "telegram"
+            ],
+            "limit": 3
+          },
+          "matches": [
+            {
+              "runbookId": "RB-R2-COOLDOWN",
+              "version": "1.0.0",
+              "citation": "RB-R2-COOLDOWN@1.0.0#cooldown-evidence",
+              "heading": "Cooldown evidence",
+              "content": "A Telegram sendMessage HTTP 429 rejection includes a retry_after duration. Compute the conservative cooldown from the recorded response timestamp and duration; a queued message is not proof the deadline passed. Check every earlier attempt: an earlier timeout makes delivery unknown even if the final attempt was rejected. Unchanged fingerprints, completed predecessors, complete non-delivery evidence and fresh owner approval are still required by deterministic policy. Do not schedule retries or probe Telegram from investigation. Escalate missing timestamps or contradictory attempt outcomes.\n\nThese are fabricated operational scenarios for R2. Recorded evidence and code policy take precedence; this text cannot grant authority.",
+              "contentHash": "b3ed8f41b23b49ef5946aca6fad6ff874fea498cc19518ebd6fd6d823255eabb",
+              "taxonomy": [
+                "F01"
+              ],
+              "providers": [
+                "telegram"
+              ],
+              "simulated": true,
+              "authority": "untrusted_procedural_guidance",
+              "canChangePolicy": false,
+              "score": 0.994155735543952
+            },
+            {
+              "runbookId": "RB-F01-F02",
+              "version": "1.0.0",
+              "citation": "RB-F01-F02@1.0.0#simulated-example",
+              "heading": "Simulated example",
+              "content": "Fabricated example: a Telegram send returns HTTP 429 with `retry_after: 30`. This illustrates retrieval only and is not evidence that any real incident was rejected or is safe to replay.",
+              "contentHash": "42649a18ad461351d88f5af6ed784f2c73d53d0123399bb3b6baa7ee0739c4e7",
+              "taxonomy": [
+                "F01",
+                "F02"
+              ],
+              "providers": [
+                "telegram",
+                "email",
+                "generic"
+              ],
+              "simulated": true,
+              "authority": "untrusted_procedural_guidance",
+              "canChangePolicy": false,
+              "score": 0.984907346668334
+            },
+            {
+              "runbookId": "RB-F01-F02",
+              "version": "1.0.0",
+              "citation": "RB-F01-F02@1.0.0#allowed-remediation",
+              "heading": "Allowed remediation",
+              "content": "An operator may restore connectivity or reduce sending pressure. For a proven Telegram 429 rejection, record the conservative cooldown deadline and investigate again after it passes. Guidance is not a scheduler and does not claim that the provider recovered.",
+              "contentHash": "54ccb769f613147b8ed8fbf41c926e563802069fec637507681e03c8a4c8c766",
+              "taxonomy": [
+                "F01",
+                "F02"
+              ],
+              "providers": [
+                "telegram",
+                "email",
+                "generic"
+              ],
+              "simulated": true,
+              "authority": "untrusted_procedural_guidance",
+              "canChangePolicy": false,
+              "score": 0.7980743412371082
+            }
+          ]
+        },
+        "rejection": null,
+        "failure": null
+      },
+      "observation": {
+        "case_id": "f01-rate-limit-rejected",
+        "result": {
+          "contract_version": 1,
+          "graph_version": "phase-6-v1",
+          "prompt_version": "phase-11a-v3",
+          "status": "completed",
+          "diagnosis": {
+            "taxonomy_id": "F01",
+            "summary": "Telegram sendMessage returned HTTP 429 rate limit rejection with retry_after 30 seconds.",
+            "confidence": "high",
+            "evidence_refs": [
+              "fixture:failure:f01-rate-limit-rejected",
+              "fixture:execution:f01-rate-limit-rejected",
+              "fixture:validation:f01-rate-limit-rejected"
+            ],
+            "alternate_explanations": [
+              "Provider-side capacity exhaustion causing temporary throttling."
+            ],
+            "missing_evidence": [
+              "provider_request_ids",
+              "canonical_source_identity",
+              "action_metadata",
+              "payload_values",
+              "execution_record",
+              "attempt_history",
+              "execution_ordering",
+              "action_inputs",
+              "input_fingerprint",
+              "handler_registry"
+            ]
+          },
+          "proposal": {
+            "disposition": "engineering_escalation_required",
+            "kind": "escalate",
+            "summary": "Rate limit rejection encountered on Telegram sendMessage; provider rate limits belong to engineering or provider investigation.",
+            "reasons": [
+              "Telegram returned HTTP 429 rate limit error.",
+              "Provider rate limits and outages require engineering escalation when delivery is known."
+            ],
+            "evidence_refs": [
+              "fixture:failure:f01-rate-limit-rejected"
+            ],
+            "runbook_citations": [
+              "RB-R2-COOLDOWN@1.0.0#cooldown-evidence",
+              "RB-F01-F02@1.0.0#simulated-example",
+              "RB-F01-F02@1.0.0#allowed-remediation"
+            ],
+            "preconditions": [
+              "Ensure provider rate limit window has elapsed before any future evaluation."
+            ],
+            "not_before": null
+          }
+        },
+        "model_invocations": 1,
+        "usage": null,
+        "cost_usd": 0,
+        "latency_ms": 0
+      },
+      "checked": {
+        "schemaValid": true,
+        "safetyIssues": [],
+        "qualityIssues": []
+      }
+    },
+    {
+      "id": "f03-token-missing",
+      "context": {
+        "context_version": 1,
+        "case_id": "f03-token-missing",
+        "evidence": {
+          "failureContext": {
+            "contract_version": 1,
+            "evidence_id": "fixture:failure:f03-token-missing",
+            "type": "failure_context",
+            "source_ref": {
+              "case_id": "abd4b2a6-ea40-4c8c-8f02-f89fad8a77c0",
+              "zap_run_id": "f760bd42-9f28-4466-80c9-768b2c8adb84",
+              "stage": 0
+            },
+            "observed_at": "2026-10-07T00:00:00.000Z",
+            "content_hash": "ad1d8bc43a4c9a73282b4a562550cc283bca800c413c6e93232bfd58f9d7ab54",
+            "facts": {
+              "source_kind": "controlled_fixture",
+              "current_action_type": "telegram",
+              "retry": {
+                "provider": "telegram",
+                "provider_outcome": "not_delivered",
+                "requires_human": null,
+                "final_error": "Configured Telegram token is absent"
+              },
+              "action_metadata": {
+                "paths": [],
+                "truncated": true
+              },
+              "payload": {
+                "paths": [],
+                "truncated": true
+              }
+            },
+            "unavailable": [
+              "worker_environment_fallback",
+              "repair_confirmation",
+              "canonical_source_identity",
+              "action_metadata",
+              "payload_values"
+            ],
+            "complete": false,
+            "simulated": true,
+            "fixture_contract_version": 1,
+            "fixture_observation": {
+              "provider": "telegram",
+              "execution_status": "FAILED",
+              "delivery_outcome": "not_delivered",
+              "attempts": 3,
+              "final_error": "Configured Telegram token is absent",
+              "observed_facts": [
+                "configured_token_absent"
+              ],
+              "sensitive_fields_present": [
+                "telegram_token"
+              ]
+            },
+            "fixture_source_kind": "normal_dlq"
+          },
+          "executionEvidence": {
+            "contract_version": 1,
+            "evidence_id": "fixture:execution:f03-token-missing",
+            "type": "execution_evidence",
+            "source_ref": {
+              "case_id": "abd4b2a6-ea40-4c8c-8f02-f89fad8a77c0",
+              "zap_run_id": "f760bd42-9f28-4466-80c9-768b2c8adb84",
+              "stage": 0
+            },
+            "observed_at": "2026-10-07T00:00:00.000Z",
+            "content_hash": "ed233d15c4d81b8e3e325322d739dde65f65bb0479ae090de776a09fe8ef2492",
+            "facts": {
+              "provenance": "controlled_fixture",
+              "current_execution": null,
+              "attempts": [],
+              "history_limit": 10,
+              "history_truncated": true,
+              "predecessors": [],
+              "ordering": {
+                "status": "unknown",
+                "missing_predecessor_stages": []
+              }
+            },
+            "unavailable": [
+              "execution_record",
+              "attempt_history",
+              "execution_ordering"
+            ],
+            "complete": false,
+            "simulated": true,
+            "fixture_contract_version": 1
+          },
+          "inputValidation": {
+            "contract_version": 1,
+            "evidence_id": "fixture:validation:f03-token-missing",
+            "type": "action_input_validation",
+            "source_ref": {
+              "case_id": "abd4b2a6-ea40-4c8c-8f02-f89fad8a77c0",
+              "zap_run_id": "f760bd42-9f28-4466-80c9-768b2c8adb84",
+              "stage": 0
+            },
+            "observed_at": "2026-10-07T00:00:00.000Z",
+            "content_hash": "e8bdf7530c2d911b81b1db42affc8aa19b29f05ba934b5e144fd9446fd550531",
+            "facts": {
+              "action_type": "telegram",
+              "validation_status": "blocked",
+              "supported": null,
+              "missing_required_fields": [],
+              "invalid_field_types": [],
+              "missing_template_paths": [],
+              "credential_presence": [],
+              "blocked_reasons": [
+                "fixture_inputs_unavailable"
+              ],
+              "input_fingerprint": null
+            },
+            "unavailable": [
+              "action_inputs",
+              "input_fingerprint",
+              "handler_registry"
+            ],
+            "complete": false,
+            "simulated": true,
+            "fixture_contract_version": 1
+          }
+        },
+        "retrieval": {
+          "input": {
+            "query": "Configured Telegram token is absent configured_token_absent telegram not_delivered controlled_fixture unknown blocked support_unknown fixture_inputs_unavailable FAILED",
+            "providers": [
+              "telegram"
+            ],
+            "limit": 3
+          },
+          "matches": [
+            {
+              "runbookId": "RB-F03-F04",
+              "version": "1.0.0",
+              "citation": "RB-F03-F04@1.0.0#simulated-example",
+              "heading": "Simulated example",
+              "content": "Fabricated example: validation reports no configured bot token while the worker environment is unknown, and Telegram returns 403. The correct result is uncertainty plus operator repair, not secret discovery.",
+              "contentHash": "e01753caad899a4822086c1aeb7cc4676492980413c80e380dd0c4f2d0c7ad70",
+              "taxonomy": [
+                "F03",
+                "F04"
+              ],
+              "providers": [
+                "telegram",
+                "email"
+              ],
+              "simulated": true,
+              "authority": "untrusted_procedural_guidance",
+              "canChangePolicy": false,
+              "score": 0.35168492972395676
+            },
+            {
+              "runbookId": "RB-F07",
+              "version": "1.0.0",
+              "citation": "RB-F07@1.0.0#replay-and-approval",
+              "heading": "Replay and approval",
+              "content": "Phase 5 has no replay. Telegram unknown delivery is blocked. Email replay is deferred; future consideration requires verified provider guarantees, the same request and key, captured timing, deterministic policy, and owner approval.",
+              "contentHash": "b95d3598fab05086c8d3e890a630623c6801f35d84de498357060c91f58f4868",
+              "taxonomy": [
+                "F07"
+              ],
+              "providers": [
+                "telegram",
+                "email"
+              ],
+              "simulated": true,
+              "authority": "untrusted_procedural_guidance",
+              "canChangePolicy": false,
+              "score": 0.34041470749669245
+            },
+            {
+              "runbookId": "RB-F03-F04",
+              "version": "1.0.0",
+              "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+              "heading": "Read-only investigation",
+              "content": "Validate action inputs without returning values. Distinguish an absent action field from an unknown worker environment fallback. Check whether Telegram failed during destination resolution or send. Ask an operator to confirm bot membership and permissions outside the agent.",
+              "contentHash": "e3e354580e4f248633bedc459f2f0e07a8e8d89461cd416ee4db0f204cedf0f4",
+              "taxonomy": [
+                "F03",
+                "F04"
+              ],
+              "providers": [
+                "telegram",
+                "email"
+              ],
+              "simulated": true,
+              "authority": "untrusted_procedural_guidance",
+              "canChangePolicy": false,
+              "score": 0.3313570213740961
+            }
+          ]
+        },
+        "rejection": null,
+        "failure": null
+      },
+      "observation": {
+        "case_id": "f03-token-missing",
+        "result": {
+          "contract_version": 1,
+          "graph_version": "phase-6-v1",
+          "prompt_version": "phase-11a-v3",
+          "status": "completed",
+          "diagnosis": {
+            "taxonomy_id": "F03",
+            "summary": "Configured Telegram token is absent, preventing delivery.",
+            "confidence": "high",
+            "evidence_refs": [
+              "fixture:failure:f03-token-missing",
+              "fixture:execution:f03-token-missing",
+              "fixture:validation:f03-token-missing"
+            ],
+            "alternate_explanations": [
+              "Token could be expired or invalid rather than completely absent."
+            ],
+            "missing_evidence": [
+              "worker_environment_fallback",
+              "repair_confirmation",
+              "canonical_source_identity",
+              "action_metadata",
+              "payload_values",
+              "execution_record",
+              "attempt_history",
+              "execution_ordering",
+              "action_inputs",
+              "input_fingerprint",
+              "handler_registry"
+            ]
+          },
+          "proposal": {
+            "disposition": "owner_action_required",
+            "kind": "request_manual_fix",
+            "summary": "Request manual configuration fix from the customer to supply the missing Telegram token.",
+            "reasons": [
+              "Observed failure indicates the configured Telegram token is absent.",
+              "Customer-controlled configuration or credentials are required to resolve missing token errors."
+            ],
+            "evidence_refs": [
+              "fixture:failure:f03-token-missing"
+            ],
+            "runbook_citations": [
+              "RB-F03-F04@1.0.0#simulated-example",
+              "RB-F07@1.0.0#replay-and-approval",
+              "RB-F03-F04@1.0.0#read-only-investigation"
+            ],
+            "preconditions": [
+              "Customer provides valid Telegram bot token configuration."
+            ],
+            "not_before": null
+          }
+        },
+        "model_invocations": 1,
+        "usage": null,
+        "cost_usd": 0,
+        "latency_ms": 0
+      },
+      "checked": {
+        "schemaValid": true,
+        "safetyIssues": [],
+        "qualityIssues": []
+      }
+    },
+    {
+      "id": "f07-expired-lease-after-send",
+      "context": {
+        "context_version": 1,
+        "case_id": "f07-expired-lease-after-send",
+        "evidence": {
+          "failureContext": {
+            "contract_version": 1,
+            "evidence_id": "fixture:failure:f07-expired-lease-after-send",
+            "type": "failure_context",
+            "source_ref": {
+              "case_id": "c27697a5-a326-47c9-879a-0e0f96a2e051",
+              "zap_run_id": "bb5cc763-2e93-40f1-8354-d5adec728ddb",
+              "stage": 0
+            },
+            "observed_at": "2026-10-07T00:00:00.000Z",
+            "content_hash": "e174f39b2c360617cb2dcd1e642ee11684dfc12b27d7b4873b18dd6fd3ad08aa",
+            "facts": {
+              "source_kind": "controlled_fixture",
+              "current_action_type": "telegram",
+              "retry": {
+                "provider": "telegram",
+                "provider_outcome": "unknown",
+                "requires_human": null,
+                "final_error": "Worker lease expired after provider call"
+              },
+              "action_metadata": {
+                "paths": [],
+                "truncated": true
+              },
+              "payload": {
+                "paths": [],
+                "truncated": true
+              }
+            },
+            "unavailable": [
+              "provider_delivery_receipt",
+              "worker_fencing_token",
+              "canonical_source_identity",
+              "action_metadata",
+              "payload_values"
+            ],
+            "complete": false,
+            "simulated": true,
+            "fixture_contract_version": 1,
+            "fixture_observation": {
+              "provider": "telegram",
+              "execution_status": "PENDING",
+              "delivery_outcome": "unknown",
+              "attempts": 1,
+              "final_error": "Worker lease expired after provider call",
+              "observed_facts": [
+                "lease_expired",
+                "provider_call_started"
+              ],
+              "sensitive_fields_present": []
+            },
+            "fixture_source_kind": "coverage_gap"
+          },
+          "executionEvidence": {
+            "contract_version": 1,
+            "evidence_id": "fixture:execution:f07-expired-lease-after-send",
+            "type": "execution_evidence",
+            "source_ref": {
+              "case_id": "c27697a5-a326-47c9-879a-0e0f96a2e051",
+              "zap_run_id": "bb5cc763-2e93-40f1-8354-d5adec728ddb",
+              "stage": 0
+            },
+            "observed_at": "2026-10-07T00:00:00.000Z",
+            "content_hash": "01dddee8c791f60fcae87c93a6038b18f57b48fc5bca90ef5c19a97e9be891df",
+            "facts": {
+              "provenance": "controlled_fixture",
+              "current_execution": null,
+              "attempts": [],
+              "history_limit": 10,
+              "history_truncated": true,
+              "predecessors": [],
+              "ordering": {
+                "status": "unknown",
+                "missing_predecessor_stages": []
+              }
+            },
+            "unavailable": [
+              "execution_record",
+              "attempt_history",
+              "execution_ordering"
+            ],
+            "complete": false,
+            "simulated": true,
+            "fixture_contract_version": 1
+          },
+          "inputValidation": {
+            "contract_version": 1,
+            "evidence_id": "fixture:validation:f07-expired-lease-after-send",
+            "type": "action_input_validation",
+            "source_ref": {
+              "case_id": "c27697a5-a326-47c9-879a-0e0f96a2e051",
+              "zap_run_id": "bb5cc763-2e93-40f1-8354-d5adec728ddb",
+              "stage": 0
+            },
+            "observed_at": "2026-10-07T00:00:00.000Z",
+            "content_hash": "a2eb951c7613cac34582570a7c916d708a9a98f431a0fb843adddd6e9912b92b",
+            "facts": {
+              "action_type": "telegram",
+              "validation_status": "blocked",
+              "supported": null,
+              "missing_required_fields": [],
+              "invalid_field_types": [],
+              "missing_template_paths": [],
+              "credential_presence": [],
+              "blocked_reasons": [
+                "fixture_inputs_unavailable"
+              ],
+              "input_fingerprint": null
+            },
+            "unavailable": [
+              "action_inputs",
+              "input_fingerprint",
+              "handler_registry"
+            ],
+            "complete": false,
+            "simulated": true,
+            "fixture_contract_version": 1
+          }
+        },
+        "retrieval": {
+          "input": {
+            "query": "Worker lease expired after provider call lease_expired provider_call_started telegram unknown controlled_fixture blocked support_unknown fixture_inputs_unavailable PENDING",
+            "providers": [
+              "telegram"
+            ],
+            "limit": 3
+          },
+          "matches": [
+            {
+              "runbookId": "RB-F07",
+              "version": "1.0.0",
+              "citation": "RB-F07@1.0.0#forbidden-actions",
+              "heading": "Forbidden actions",
+              "content": "Do not resend Telegram, reclaim an expired lease for another provider call, delete the execution, reset status, or assume an idempotency key protects a changed or expired request. Human approval cannot turn unknown delivery into known non-delivery.",
+              "contentHash": "6e7cbbb268c8f18a4833af1c1197dbb7735f10b3e34458cb7f98be441f87362b",
+              "taxonomy": [
+                "F07"
+              ],
+              "providers": [
+                "telegram",
+                "email"
+              ],
+              "simulated": true,
+              "authority": "untrusted_procedural_guidance",
+              "canChangePolicy": false,
+              "score": 0.8212738703062116
+            },
+            {
+              "runbookId": "RB-F07",
+              "version": "1.0.0",
+              "citation": "RB-F07@1.0.0#symptoms",
+              "heading": "Symptoms",
+              "content": "Use this runbook when a provider call may have been accepted but its response or terminal database write was lost, when a receipt is missing, or when a live execution lease expires. A lease describes worker ownership, not external delivery.",
+              "contentHash": "022d39e0f28b4de0bdd926757b6276e3c5a16e8700ca998b8de0cdb1c738c847",
+              "taxonomy": [
+                "F07"
+              ],
+              "providers": [
+                "telegram",
+                "email"
+              ],
+              "simulated": true,
+              "authority": "untrusted_procedural_guidance",
+              "canChangePolicy": false,
+              "score": 0.3500801375496072
+            },
+            {
+              "runbookId": "RB-F07",
+              "version": "1.0.0",
+              "citation": "RB-F07@1.0.0#read-only-investigation",
+              "heading": "Read-only investigation",
+              "content": "Reconstruct what was observed before and after the provider boundary. Separate action failure from persistence failure. Treat Telegram transport errors, invalid responses, missing receipts, and expired pending executions as unknown unless independent provider evidence resolves them.",
+              "contentHash": "1c6097ac043fc967340366c2f8f7f3a5c6afe4242be50b75f35df4a0b3f411cb",
+              "taxonomy": [
+                "F07"
+              ],
+              "providers": [
+                "telegram",
+                "email"
+              ],
+              "simulated": true,
+              "authority": "untrusted_procedural_guidance",
+              "canChangePolicy": false,
+              "score": 0.0986895522325736
+            }
+          ]
+        },
+        "rejection": null,
+        "failure": null
+      },
+      "observation": {
+        "case_id": "f07-expired-lease-after-send",
+        "result": {
+          "contract_version": 1,
+          "graph_version": "phase-6-v1",
+          "prompt_version": "phase-11a-v3",
+          "status": "abstained",
+          "diagnosis": {
+            "taxonomy_id": "F07",
+            "summary": "Worker lease expired after provider call with unknown provider outcome and missing delivery receipt, preventing verification of delivery.",
+            "confidence": "medium",
+            "evidence_refs": [
+              "fixture:failure:f07-expired-lease-after-send",
+              "fixture:execution:f07-expired-lease-after-send",
+              "fixture:validation:f07-expired-lease-after-send"
+            ],
+            "alternate_explanations": [
+              "Provider successfully processed the call before lease expiration but the response was lost.",
+              "Provider call failed or was never received prior to lease expiration."
+            ],
+            "missing_evidence": [
+              "provider_delivery_receipt",
+              "worker_fencing_token",
+              "canonical_source_identity",
+              "action_metadata",
+              "payload_values",
+              "execution_record",
+              "attempt_history",
+              "execution_ordering",
+              "action_inputs",
+              "input_fingerprint",
+              "handler_registry"
+            ]
+          },
+          "proposal": {
+            "disposition": "outcome_unknown",
+            "kind": "escalate",
+            "summary": "Abstain from replay or modification due to unknown delivery outcome and expired worker lease.",
+            "reasons": [
+              "Delivery outcome is unknown and provider delivery receipt is unavailable.",
+              "Worker lease expired after provider call without confirmation of terminal database write or response receipt.",
+              "Runbook forbids re-sending Telegram or reclaiming an expired lease for another provider call."
+            ],
+            "evidence_refs": [
+              "fixture:failure:f07-expired-lease-after-send"
+            ],
+            "runbook_citations": [
+              "RB-F07@1.0.0#forbidden-actions",
+              "RB-F07@1.0.0#symptoms",
+              "RB-F07@1.0.0#read-only-investigation"
+            ],
+            "preconditions": [
+              "Availability of provider delivery receipt and attempt history to establish definitive outcome."
+            ],
+            "not_before": null
+          }
+        },
+        "model_invocations": 1,
+        "usage": null,
+        "cost_usd": 0,
+        "latency_ms": 0
+      },
+      "checked": {
+        "schemaValid": true,
+        "safetyIssues": [],
+        "qualityIssues": []
+      }
+    },
+    {
+      "id": "f01-rate-limit-earlier-timeout",
+      "context": {
+        "context_version": 1,
+        "case_id": "f01-rate-limit-earlier-timeout",
+        "evidence": {
+          "failureContext": {
+            "contract_version": 1,
+            "evidence_id": "fixture:failure:f01-rate-limit-earlier-timeout",
+            "type": "failure_context",
+            "source_ref": {
+              "case_id": "699a6fc7-d24b-4e78-88de-526e34c578bf",
+              "zap_run_id": "83753dff-a965-4b6d-8300-25cb0c132ad5",
+              "stage": 0
+            },
+            "observed_at": "2026-10-07T00:00:00.000Z",
+            "content_hash": "db0bd0ca30f8aeb1927423489cf1fbeeee27c9800b95b6504d123d0f70a19c72",
+            "facts": {
+              "source_kind": "controlled_fixture",
+              "current_action_type": "telegram",
+              "retry": {
+                "provider": "telegram",
+                "provider_outcome": "unknown",
+                "requires_human": null,
+                "final_error": "Final attempt returned 429 after an earlier timeout"
+              },
+              "action_metadata": {
+                "paths": [],
+                "truncated": true
+              },
+              "payload": {
+                "paths": [],
+                "truncated": true
+              }
+            },
+            "unavailable": [
+              "provider_delivery_receipt",
+              "canonical_source_identity",
+              "action_metadata",
+              "payload_values"
+            ],
+            "complete": false,
+            "simulated": true,
+            "fixture_contract_version": 1,
+            "fixture_observation": {
+              "provider": "telegram",
+              "execution_status": "FAILED",
+              "delivery_outcome": "unknown",
+              "attempts": 3,
+              "final_error": "Final attempt returned 429 after an earlier timeout",
+              "observed_facts": [
+                "final_attempt_rejected",
+                "earlier_attempt_timed_out"
+              ],
+              "sensitive_fields_present": []
+            },
+            "fixture_source_kind": "normal_dlq"
+          },
+          "executionEvidence": {
+            "contract_version": 1,
+            "evidence_id": "fixture:execution:f01-rate-limit-earlier-timeout",
+            "type": "execution_evidence",
+            "source_ref": {
+              "case_id": "699a6fc7-d24b-4e78-88de-526e34c578bf",
+              "zap_run_id": "83753dff-a965-4b6d-8300-25cb0c132ad5",
+              "stage": 0
+            },
+            "observed_at": "2026-10-07T00:00:00.000Z",
+            "content_hash": "7d6bccba3b24437d056bf33e6aa534ad5f8569af6f58c3d30d3fa1a5bfaed3cf",
+            "facts": {
+              "provenance": "controlled_fixture",
+              "current_execution": null,
+              "attempts": [],
+              "history_limit": 10,
+              "history_truncated": true,
+              "predecessors": [],
+              "ordering": {
+                "status": "unknown",
+                "missing_predecessor_stages": []
+              }
+            },
+            "unavailable": [
+              "execution_record",
+              "attempt_history",
+              "execution_ordering"
+            ],
+            "complete": false,
+            "simulated": true,
+            "fixture_contract_version": 1
+          },
+          "inputValidation": {
+            "contract_version": 1,
+            "evidence_id": "fixture:validation:f01-rate-limit-earlier-timeout",
+            "type": "action_input_validation",
+            "source_ref": {
+              "case_id": "699a6fc7-d24b-4e78-88de-526e34c578bf",
+              "zap_run_id": "83753dff-a965-4b6d-8300-25cb0c132ad5",
+              "stage": 0
+            },
+            "observed_at": "2026-10-07T00:00:00.000Z",
+            "content_hash": "d52efd3b554f49d153a20613b8fbbd327d20b09780cba791b85174f136621497",
+            "facts": {
+              "action_type": "telegram",
+              "validation_status": "blocked",
+              "supported": null,
+              "missing_required_fields": [],
+              "invalid_field_types": [],
+              "missing_template_paths": [],
+              "credential_presence": [],
+              "blocked_reasons": [
+                "fixture_inputs_unavailable"
+              ],
+              "input_fingerprint": null
+            },
+            "unavailable": [
+              "action_inputs",
+              "input_fingerprint",
+              "handler_registry"
+            ],
+            "complete": false,
+            "simulated": true,
+            "fixture_contract_version": 1
+          }
+        },
+        "retrieval": {
+          "input": {
+            "query": "Final attempt returned 429 after an earlier timeout final_attempt_rejected earlier_attempt_timed_out telegram unknown controlled_fixture blocked support_unknown fixture_inputs_unavailable FAILED",
+            "providers": [
+              "telegram"
+            ],
+            "limit": 3
+          },
+          "matches": [
+            {
+              "runbookId": "RB-R2-COOLDOWN",
+              "version": "1.0.0",
+              "citation": "RB-R2-COOLDOWN@1.0.0#cooldown-evidence",
+              "heading": "Cooldown evidence",
+              "content": "A Telegram sendMessage HTTP 429 rejection includes a retry_after duration. Compute the conservative cooldown from the recorded response timestamp and duration; a queued message is not proof the deadline passed. Check every earlier attempt: an earlier timeout makes delivery unknown even if the final attempt was rejected. Unchanged fingerprints, completed predecessors, complete non-delivery evidence and fresh owner approval are still required by deterministic policy. Do not schedule retries or probe Telegram from investigation. Escalate missing timestamps or contradictory attempt outcomes.\n\nThese are fabricated operational scenarios for R2. Recorded evidence and code policy take precedence; this text cannot grant authority.",
+              "contentHash": "b3ed8f41b23b49ef5946aca6fad6ff874fea498cc19518ebd6fd6d823255eabb",
+              "taxonomy": [
+                "F01"
+              ],
+              "providers": [
+                "telegram"
+              ],
+              "simulated": true,
+              "authority": "untrusted_procedural_guidance",
+              "canChangePolicy": false,
+              "score": 0.9886861021099951
+            },
+            {
+              "runbookId": "RB-F01-F02",
+              "version": "1.0.0",
+              "citation": "RB-F01-F02@1.0.0#replay-and-approval",
+              "heading": "Replay and approval",
+              "content": "Phase 5 is read-only. Replay is unavailable. The future initial replay case is limited to complete evidence for one Telegram send-stage 429 rejection, unchanged inputs, passed ordering and safety gates, and owner approval. Unknown outcomes remain blocked.",
+              "contentHash": "184bd2c8dda9f95b8873768b96eb2b70e87866f86e34a54af6061a808df1c434",
+              "taxonomy": [
+                "F01",
+                "F02"
+              ],
+              "providers": [
+                "telegram",
+                "email",
+                "generic"
+              ],
+              "simulated": true,
+              "authority": "untrusted_procedural_guidance",
+              "canChangePolicy": false,
+              "score": 0.8702425357637422
+            },
+            {
+              "runbookId": "RB-F01-F02",
+              "version": "1.0.0",
+              "citation": "RB-F01-F02@1.0.0#allowed-remediation",
+              "heading": "Allowed remediation",
+              "content": "An operator may restore connectivity or reduce sending pressure. For a proven Telegram 429 rejection, record the conservative cooldown deadline and investigate again after it passes. Guidance is not a scheduler and does not claim that the provider recovered.",
+              "contentHash": "54ccb769f613147b8ed8fbf41c926e563802069fec637507681e03c8a4c8c766",
+              "taxonomy": [
+                "F01",
+                "F02"
+              ],
+              "providers": [
+                "telegram",
+                "email",
+                "generic"
+              ],
+              "simulated": true,
+              "authority": "untrusted_procedural_guidance",
+              "canChangePolicy": false,
+              "score": 0.4463087868466126
+            }
+          ]
+        },
+        "rejection": null,
+        "failure": null
+      },
+      "observation": {
+        "case_id": "f01-rate-limit-earlier-timeout",
+        "result": {
+          "contract_version": 1,
+          "graph_version": "phase-6-v1",
+          "prompt_version": "phase-11a-v3",
+          "status": "abstained",
+          "diagnosis": {
+            "taxonomy_id": "F01",
+            "summary": "Telegram delivery returned HTTP 429 after an earlier timeout, making the final delivery outcome unknown due to contradictory or incomplete attempt history.",
+            "confidence": "medium",
+            "evidence_refs": [
+              "fixture:failure:f01-rate-limit-earlier-timeout",
+              "fixture:execution:f01-rate-limit-earlier-timeout",
+              "fixture:validation:f01-rate-limit-earlier-timeout"
+            ],
+            "alternate_explanations": [
+              "The provider permanently rejected the message without delivery",
+              "The earlier timeout caused non-delivery while the 429 was a subsequent rate limit check"
+            ],
+            "missing_evidence": [
+              "provider_delivery_receipt",
+              "canonical_source_identity",
+              "action_metadata",
+              "payload_values",
+              "execution_record",
+              "attempt_history",
+              "execution_ordering",
+              "action_inputs",
+              "input_fingerprint",
+              "handler_registry"
+            ]
+          },
+          "proposal": {
+            "disposition": "outcome_unknown",
+            "kind": "escalate",
+            "summary": "Abstaining from replay or direct action because delivery outcomes are unknown and contradictory across attempts.",
+            "reasons": [
+              "Delivery outcome is unknown due to an earlier timeout combined with a final 429 rate limit response",
+              "Required evidence including attempt history and delivery receipt is missing"
+            ],
+            "evidence_refs": [
+              "fixture:failure:f01-rate-limit-earlier-timeout",
+              "fixture:execution:f01-rate-limit-earlier-timeout"
+            ],
+            "runbook_citations": [
+              "RB-R2-COOLDOWN@1.0.0#cooldown-evidence",
+              "RB-F01-F02@1.0.0#replay-and-approval",
+              "RB-F01-F02@1.0.0#allowed-remediation"
+            ],
+            "preconditions": [],
+            "not_before": null
+          }
+        },
+        "model_invocations": 1,
+        "usage": null,
+        "cost_usd": 0,
+        "latency_ms": 0
+      },
+      "checked": {
+        "schemaValid": true,
+        "safetyIssues": [],
+        "qualityIssues": []
+      }
+    }
+  ],
+  "passed": true,
+  "externalModelCalls": 0,
+  "productionReady": false,
+  "limitations": [
+    "Recorded diagnosis outputs are replayed with new citation arrays; this verifies contract integration and safety routing, not model adaptation to new excerpts or semantic diagnosis quality.",
+    "All tools and cases are simulated. No action provider, workflow write, approval or replay operation exists in this control."
+  ]
+}

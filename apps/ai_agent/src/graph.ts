@@ -349,7 +349,7 @@ export interface IntegratedInvestigationTools {
     signal: AbortSignal,
   ): Promise<unknown>;
   validateActionInputs(signal: AbortSignal): Promise<unknown>;
-  searchRunbooks(input: RunbookSearchInput): RunbookMatch[];
+  searchRunbooks(input: RunbookSearchInput): RunbookMatch[] | Promise<RunbookMatch[]>;
 }
 
 export type DiagnosisOptions = {
@@ -743,11 +743,11 @@ export function buildDiagnosisService(
         if (state.toolCalls >= maxToolCalls) {
           throw new ToolBudgetExceeded("Runbook tool budget exhausted");
         }
-        const retrieve = () =>
+        const retrieve = async () =>
           z
             .array(RunbookMatchSchema)
             .max(3)
-            .parse(tools.searchRunbooks(retrievalInput(state.evidence!)));
+            .parse(await tools.searchRunbooks(retrievalInput(state.evidence!)));
         const runbooks = tracer
           ? await tracer.observe(
               "searchRunbooks",
@@ -759,7 +759,7 @@ export function buildDiagnosisService(
                 ),
               }),
             )
-          : retrieve();
+          : await retrieve();
         return { runbooks, toolCalls: state.toolCalls + 1 };
       })
       .addNode("diagnose", async (state, config) => {

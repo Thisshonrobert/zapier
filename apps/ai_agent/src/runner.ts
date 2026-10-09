@@ -8,6 +8,7 @@ import type { IntegratedDiagnosisModel } from "./contracts.ts";
 import { buildDiagnosisService, type DiagnosisOptions, type IntegratedInvestigationTools } from "./graph.ts";
 import type { InvestigationStore } from "./investigation-store.ts";
 import { searchRunbooks, type RunbookIndex } from "./tools/search-runbooks.ts";
+import type { RunbookRetriever } from "./tools/runbook-retriever.ts";
 
 type ClaimedJob = NonNullable<Awaited<ReturnType<InvestigationStore["claimNext"]>>>;
 type Snapshot = { evidence: unknown; result: unknown; traceId?: string | null };
@@ -64,6 +65,7 @@ export function createInvestigationExecutor(input: {
   serviceSecret: string;
   model: IntegratedDiagnosisModel;
   runbookIndex: RunbookIndex;
+  runbookRetriever?: RunbookRetriever;
   checkpointer: PostgresSaver;
   diagnosisOptions?: DiagnosisOptions;
 }) {
@@ -93,7 +95,8 @@ export function createInvestigationExecutor(input: {
       getFailureContext: (signal) => client.getFailureContext(signal),
       getExecutionEvidence: (limit, signal) => client.getExecutionEvidence(limit, signal),
       validateActionInputs: (signal) => client.validateActionInputs(signal),
-      searchRunbooks: (query) => searchRunbooks(input.runbookIndex, query),
+      searchRunbooks: (query) => input.runbookRetriever
+        ? input.runbookRetriever.search(query) : searchRunbooks(input.runbookIndex, query),
     };
     return buildDiagnosisService(tools, input.model, {
       ...input.diagnosisOptions, checkpointer: input.checkpointer,
