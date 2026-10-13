@@ -1,0 +1,16 @@
+{
+  "caseId": "f07-provider-response-lost",
+  "variant": "baseline",
+  "attempts": 0,
+  "startedAt": 1791834558915,
+  "promptHash": "fc4d5d0104a2999083954948b95e9b92d83936822b8365ec6934001dffe9242f",
+  "configHash": "c087890dc02b52a11a2c8577faf7b8d3fdd2e18a71a132dd7c65817de5a36d19",
+  "output": null,
+  "usage": null,
+  "latencyMs": 0,
+  "schemaValid": false,
+  "citationMembership": null,
+  "serviceValid": false,
+  "providerError": null,
+  "failure": null
+}

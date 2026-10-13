@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "date": "2026-10-13",
+  "authority": "User: use a subagent for review and no match case to act in my place, then continue task b. User scope choice: Use no direct procedural answer consistently for all cases, while scoring supporting guidance separately.",
+  "supersedes": "Only Task A/B development label adjudication and no-match semantics in protocol.json; all numerical gates, release boundaries and experiment budgets remain unchanged.",
+  "task": "Retrieve direct procedural guidance for the problem observed in the production incident query. Generic evidence gathering, uncertainty, safety and escalation are supporting guidance unless they directly address that observed problem.",
+  "noMatch": "No eligible direct procedural answer; supporting guidance may exist and must be reported separately. Apply this definition identically to every positive and negative case. Provider exclusion is not no-match.",
+  "adjudication": "Agent adjudication under explicit user authorization for development; not independent human acceptance evidence.",
+  "freeze": "Re-review all development cases and every corpus section; version and freeze labels/corpus/config before the matrix. Preserve v1 artifacts.",
+  "productionReady": false,
+  "taskC": "Independent authorship, review and semantic/release gates remain required before adoption."
+}

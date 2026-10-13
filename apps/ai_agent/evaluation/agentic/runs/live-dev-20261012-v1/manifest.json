@@ -1,0 +1,63 @@
+{
+  "version": "bounded-agentic-dev-v1",
+  "createdAt": "2026-10-12T17:29:33.608Z",
+  "runtime": {
+    "node": "24.3.0",
+    "bun": "1.2.20",
+    "boringssl": "29a2cd359458c9384694b75456026e4b57e3e567",
+    "openssl": "1.1.0",
+    "libarchive": "898dc8319355b7e985f68a9819f182aaed61b53a",
+    "mimalloc": "4c283af60cdae205df5a872530c77e2a6a307d43",
+    "picohttpparser": "066d2b1e9ab820703db0837a7255d92d30f0c9f5",
+    "uwebsockets": "6ad208bc32e01c20e35e286a3194be60565254fa",
+    "webkit": "684d4551ce5f62683476409d7402424e0f6eafb5",
+    "zig": "0.14.1",
+    "zlib": "886098f3f339617b4243b286f5ed364b9989e245",
+    "tinycc": "ab631362d839333660a265d3084d8ff060b96753",
+    "lolhtml": "8d4c273ded322193d017042d1f48df2766b0f88b",
+    "ares": "d1722e6e8acaf10eb73fa995798a9cd421d9f85e",
+    "libdeflate": "dc76454a39e7e83b68c3704b6e3784654f8d5ac5",
+    "usockets": "6ad208bc32e01c20e35e286a3194be60565254fa",
+    "lshpack": "3d0f1fc1d6e66a642e7a98c55deb38aa986eb4b0",
+    "zstd": "794ea1b0afca0f020f4e57b6732332231fb23c70",
+    "v8": "13.6.233.10-node.18",
+    "uv": "1.46.1-dev",
+    "napi": "10",
+    "icu": "73.2",
+    "unicode": "15.0",
+    "modules": "137"
+  },
+  "codeRevision": "b8aca2348fc1954d627a5462950112dbae785519",
+  "dirty": true,
+  "inputHashes": {
+    "apps/ai_agent/evaluation/phase-11a-baseline-v6/manifest.json": "668cea0b07e59a8fdb8446c619885869ae8d0174182913b8b69a010742b7435f",
+    "apps/ai_agent/evaluation/phase-11a-baseline-v6/cases.json": "4d34b56a6460c918ef4aa64ad02b4d29b7706eeec3b1dfa0e64bef3365c46efb",
+    "apps/ai_agent/evaluation/phase-11a-baseline-v6/contexts.json": "e5025d50fa72a32fa9a17d52ca298bd785beec1a9232cd0c83ed357ceef95d92",
+    "apps/ai_agent/evaluation/intent-dev/benchmark.json": "239c8c5f078744f0e7bb1e1fb99aff78b17849eda8ca5f7533ab49e2b3432691"
+  },
+  "sourceHashes": {
+    "apps/ai_agent/src/evaluation/agentic-experiment.ts": "259a7b96de0e3ef392ef265fefbc0386bb1449b47e42720dd090cdd4dbff4d14",
+    "apps/ai_agent/src/evaluation/retrieval-agentic.ts": "d3ab5bebee7bcbb2b52a4e6889183b6417274f9124045c8bd6c03a39d78432de",
+    "apps/ai_agent/src/evaluation/checks.ts": "e1d812ce3c6951b4c6b0e5d26c99fd79466abeeaf6d24319fc6cbf9d599b4178",
+    "apps/ai_agent/src/evaluation/experiment.ts": "79b65da9cbc1317761cdcc38b9a3174d6e5aca4fe76e2a3357241d233f22bb0a",
+    "apps/ai_agent/src/evaluation/fixture-tools.ts": "c6c01ea849f5aa49f0971927bec3f69c2175eec5269d743bdbc8187ce9b0adf6",
+    "apps/ai_agent/src/evaluation/retrieval-intent.ts": "7a47fff604cb6564379af395c879fa36c5c785a87a7cbdf70c84b77ae858632f",
+    "apps/ai_agent/src/graph.ts": "f3dec93c3dd58037f0b62d79f1fe3f5c7bfb12c79e9f07a3c99cc73d4c632e68",
+    "apps/ai_agent/src/prompts.ts": "aa4a038a8b2748826933a9deb13aa883546d9d6cb79369a5424402d1c9485a9f",
+    "apps/ai_agent/src/contracts.ts": "2db41bcdde5b4539c8b0d5514e2bf9dd61a3c26e8166bbf867b6f0d0435711eb",
+    "apps/ai_agent/src/gemini-model.ts": "18a909519c9bd16437e7ca54e125eb8c02430978d44b5501b572243e17a7c257",
+    "apps/ai_agent/src/tools/search-runbooks.ts": "7c433e3707ecfbca8d6ca6125ea3a2d0a53938a1481111af7783497e0cdd99f2"
+  },
+  "freezeHash": "700365cf2f595a5a2f0fc88489548043573c676d0f01bc78e9fb2cd4fc5190c4",
+  "artifactHashes": {
+    "report.json": "f0ec3a61590d35bd0fc0857f1bd5e43f9c2ab1aa22554decdaaa736827d88256",
+    "report.md": "9ce204045e6af3c3e6cdaebd1385e1ba3b412b308a66c567c650f0eff7687e4e"
+  },
+  "modelSettings": {
+    "api": "generate-content",
+    "diagnosisMaxOutputTokens": 4096,
+    "plannerMaxOutputTokens": 512,
+    "generationSettings": "provider_defaults"
+  },
+  "corpusHash": "a1a54a38871c59b13ec3fbc4c63f1c74801728f79e4c2773718948d7848bde97"
+}

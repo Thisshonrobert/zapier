@@ -1,0 +1,83 @@
+{
+  "name": "causal-v2-4",
+  "caseId": "f04-invalid-destination",
+  "variant": "current",
+  "originalServiceAccepted": true,
+  "originalFailure": null,
+  "review": {
+    "categories": [
+      "destination_format"
+    ],
+    "repair": "supported",
+    "legitimateRepair": true,
+    "targetedInvestigation": false,
+    "note": "Correction is justified by the separate fixture format finding, not the error text. No replacement value or replay is proposed."
+  },
+  "evaluation": {
+    "rawOutput": {
+      "status": "completed",
+      "diagnosis": {
+        "taxonomy_id": "F04",
+        "summary": "Provider rejected the destination due to an invalid destination format for the telegram action.",
+        "confidence": "high",
+        "evidence_refs": [
+          "fixture:failure:f04-invalid-destination",
+          "fixture:execution:f04-invalid-destination",
+          "fixture:validation:f04-invalid-destination"
+        ],
+        "alternate_explanations": [
+          "Destination might be missing required bot permissions or chat membership"
+        ],
+        "missing_evidence": [
+          "operator_approved_destination",
+          "canonical_source_identity",
+          "action_metadata",
+          "payload_values",
+          "execution_record",
+          "attempt_history",
+          "execution_ordering",
+          "action_inputs",
+          "input_fingerprint",
+          "handler_registry"
+        ]
+      },
+      "proposal": {
+        "disposition": "owner_action_required",
+        "kind": "request_manual_fix",
+        "summary": "Request operator to review and fix the invalid telegram destination format.",
+        "reasons": [
+          "Provider rejected the destination with an invalid destination format error.",
+          "Customer-controlled destination configuration needs correction."
+        ],
+        "evidence_refs": [
+          "fixture:failure:f04-invalid-destination"
+        ],
+        "runbook_citations": [
+          "RB-F03-F04@1.0.0#read-only-investigation"
+        ],
+        "preconditions": [
+          "Operator must review destination format and configuration."
+        ]
+      }
+    },
+    "schemaValid": true,
+    "serviceAcceptance": {
+      "accepted": true,
+      "failure": null
+    },
+    "deliveryConsistency": [],
+    "repairSupport": {
+      "status": "supported",
+      "assessments": [
+        {
+          "category": "destination_format",
+          "status": "supported",
+          "provenance": "controlled_fixture_only",
+          "reason": "cited_independent_finding_for_assessed_category"
+        }
+      ]
+    },
+    "experimentalAcceptance": "accepted",
+    "externalModelCalls": 0
+  }
+}

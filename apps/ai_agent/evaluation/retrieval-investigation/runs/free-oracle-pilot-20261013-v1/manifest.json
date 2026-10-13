@@ -1,0 +1,33 @@
+{
+  "artifactHashes": {
+    "attempt-1.json": "e87e3a5cc308f4a0528275e52c1355b21ec8641961344d5a1735a0985bae2a66",
+    "attempt-2.json": "1cd4cb7cb938e22fbb985a6492f33a169990e38511136a3d4799263cce9a1b49",
+    "attempt-3.json": "bdbfa44e81f2ada892153d5fbc3066eda95b2a164efa4d220fe8a0d1215d15f2",
+    "attempt-4.json": "eb71d588361eb1e82d389342c5e7dc73a7da3b230249dba3088a1684a3bffc3c",
+    "binding.json": "62e50a9ee053abb934037a1b197b0956d846da14ef1265718d949829d7d4454c",
+    "blind-mapping.json": "6fdea800d31c594f7147f74b34f6d264af2a06b4f1eb4ea4dde6fc6dab64e812",
+    "blind-packets.json": "39f45ad6282c1174c3ae13553167b09346b42735ce44036c8900ca581daeb0bf",
+    "blind-review.json": "e8651c8ce5316195158ea77fcd9a21a1ce2d128df6b25d7c80af8af1ddb49f8f",
+    "free-tier-confirmation.json": "03c748c36c9de2bd60058d12eeca7c790ad0f25a478cb7c7cc508957f9a6f5ff",
+    "plan.json": "865aad8491a13b9bb64af5c4647561d3c9017308f5f8ac8a459415740ee930e0",
+    "report.json": "0bf936b49fa3739593618259c352cea3352801ec5c1862338cba062033191cc5",
+    "report.md": "4b34bcd825a38bd41944fa28f94397c1393972f572e6a7c9b5ce63291086e142",
+    "requests.jsonl": "19fffcdc1167d6b62d6abe282d002ebb68f9672ec8857204e74029c728b44334",
+    "result-1.json": "5fd0cb1719894a2f4b2e28b97e7a7f00192a1dff570a0963b748c3d1271fb30d",
+    "result-2.json": "ba2cb5b6bc6a5bf16b0e3cc65e00081fb9786742c783df4e7c1000ea5b04a85e",
+    "result-3.json": "6da5aa9d297863be13ac354929e0d1e8697b564f5a2221d9d35d0b535dd643ef",
+    "result-4.json": "7ee2356b1d48754e9afca6fb4927a380123c7072596f395bdfd8a1d34db3e74b",
+    "slot-1.started.json": "79e99a42079e60b3b57b98ccae8afc6bdcdde53c5216b6ac1fe155e22374a1da",
+    "slot-2.started.json": "1b249b4832ed3067e6f574561965b1fa85506d4e4b6d616e7b04dbe2489fbd98",
+    "slot-3.started.json": "ad3e2b14d8342018eb02d9d3208ab3ba01267be6923daa299669c9a662687024",
+    "slot-4.started.json": "2eeba992329eddb5acf76ed7194ef824532e0f8d45fb52c8f1239150f372d6e2"
+  },
+  "finalVerifiedSourceHashes": {
+    "apps/ai_agent/src/evaluation/oracle-pilot.ts": "89b85a961100b719020beeda125d425b01576d298c206c8a1f91990ddf9b02f3",
+    "apps/ai_agent/tests/oracle-pilot.test.ts": "d16ff53e7d36f32cdd61ac6b3ba4af11c39e362ef8c4f2cee36a5f0707d1cc30",
+    "apps/ai_agent/src/gemini-model.ts": "18a909519c9bd16437e7ca54e125eb8c02430978d44b5501b572243e17a7c257",
+    "apps/ai_agent/src/graph.ts": "f3dec93c3dd58037f0b62d79f1fe3f5c7bfb12c79e9f07a3c99cc73d4c632e68",
+    "apps/ai_agent/src/prompts.ts": "aa4a038a8b2748826933a9deb13aa883546d9d6cb79369a5424402d1c9485a9f"
+  },
+  "note": "Runner formatting and one additional offline preflight regression test followed live execution; adapter, graph and prompts unchanged."
+}

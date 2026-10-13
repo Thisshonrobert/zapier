@@ -1,0 +1,15 @@
+{
+  "name": "causal-v1-3",
+  "caseId": "f04-invalid-destination",
+  "variant": "candidate",
+  "originalServiceAccepted": false,
+  "originalFailure": "generation_failed",
+  "review": {
+    "categories": [],
+    "repair": "unmeasured",
+    "legitimateRepair": null,
+    "targetedInvestigation": false,
+    "note": "HTTP 503: no model output; no semantic conclusion."
+  },
+  "evaluation": null
+}

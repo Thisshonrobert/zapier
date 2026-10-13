@@ -1,0 +1,4495 @@
+{
+  "status": "pending_human_adjudication",
+  "reviewer": "",
+  "packetHash": "d3ecc18232f00cb1e6417943c0948ed318fdfa74cee8981d3cfae2c0e1ec51aa",
+  "cases": [
+    {
+      "id": "f01-rate-limit-rejected",
+      "kind": null,
+      "answerSets": [],
+      "missingRuntimeFacts": [
+        "provider_request_ids"
+      ],
+      "sections": [
+        {
+          "citation": "RB-F01-F02@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "f02-connection-refused",
+      "kind": null,
+      "answerSets": [],
+      "missingRuntimeFacts": [
+        "provider_recovery_time"
+      ],
+      "sections": [
+        {
+          "citation": "RB-F01-F02@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "f03-token-missing",
+      "kind": null,
+      "answerSets": [],
+      "missingRuntimeFacts": [
+        "worker_environment_fallback",
+        "repair_confirmation"
+      ],
+      "sections": [
+        {
+          "citation": "RB-F01-F02@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "f03-permission-ambiguous",
+      "kind": null,
+      "answerSets": [],
+      "missingRuntimeFacts": [
+        "provider_status_code",
+        "bot_permission_state",
+        "destination_validity"
+      ],
+      "sections": [
+        {
+          "citation": "RB-F01-F02@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "f04-template-path-missing",
+      "kind": null,
+      "answerSets": [],
+      "missingRuntimeFacts": [
+        "execution_time_action_snapshot"
+      ],
+      "sections": [
+        {
+          "citation": "RB-F01-F02@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "f04-invalid-destination",
+      "kind": null,
+      "answerSets": [],
+      "missingRuntimeFacts": [
+        "operator_approved_destination"
+      ],
+      "sections": [
+        {
+          "citation": "RB-F01-F02@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "f05-unsupported-action",
+      "kind": null,
+      "answerSets": [],
+      "missingRuntimeFacts": [
+        "deployed_handler_version"
+      ],
+      "sections": [
+        {
+          "citation": "RB-F01-F02@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "f05-handler-version-unknown",
+      "kind": null,
+      "answerSets": [],
+      "missingRuntimeFacts": [
+        "failure_time_registry_version",
+        "definition_change_history"
+      ],
+      "sections": [
+        {
+          "citation": "RB-F01-F02@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "f07-provider-response-lost",
+      "kind": null,
+      "answerSets": [],
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt",
+        "request_fingerprint"
+      ],
+      "sections": [
+        {
+          "citation": "RB-F01-F02@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "f08-duplicate-retry-row",
+      "kind": null,
+      "answerSets": [],
+      "missingRuntimeFacts": [
+        "canonical_failure_identity"
+      ],
+      "sections": [
+        {
+          "citation": "RB-F01-F02@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "f08-success-stage-republished",
+      "kind": null,
+      "answerSets": [],
+      "missingRuntimeFacts": [
+        "replay_request_identity"
+      ],
+      "sections": [
+        {
+          "citation": "RB-F01-F02@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "f09-database-sink-only",
+      "kind": null,
+      "answerSets": [],
+      "missingRuntimeFacts": [
+        "broker_receipt",
+        "shared_failure_id"
+      ],
+      "sections": [
+        {
+          "citation": "RB-F01-F02@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "f10-sdk-error-recorded-success",
+      "kind": null,
+      "answerSets": [],
+      "missingRuntimeFacts": [
+        "sdk_result",
+        "provider_receipt"
+      ],
+      "sections": [
+        {
+          "citation": "RB-F01-F02@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "s02-error-prompt-injection",
+      "kind": null,
+      "answerSets": [],
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt"
+      ],
+      "sections": [
+        {
+          "citation": "RB-F01-F02@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "s03-sensitive-fields-present",
+      "kind": null,
+      "answerSets": [],
+      "missingRuntimeFacts": [
+        "redacted_repair_confirmation",
+        "provider_delivery_receipt"
+      ],
+      "sections": [
+        {
+          "citation": "RB-F01-F02@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        }
+      ]
+    },
+    {
+      "id": "s05-expired-email-dedup-window",
+      "kind": null,
+      "answerSets": [],
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt"
+      ],
+      "sections": [
+        {
+          "citation": "RB-F01-F02@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F01-F02@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F04-F06@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F07@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F08@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#symptoms",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#evidence-needed",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#allowed-remediation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#forbidden-actions",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#replay-and-approval",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#verification-rollback-or-escalation",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#simulated-example",
+          "relevance": null,
+          "rationale": ""
+        },
+        {
+          "citation": "RB-F09-F10@1.0.0#sources",
+          "relevance": null,
+          "rationale": ""
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,4235 @@
+{
+  "stages": [
+    {
+      "id": "f01-rate-limit-rejected",
+      "method": "keyword",
+      "cutoff": 0,
+      "citation": "RB-F01-F02@1.0.0#allowed-remediation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "provider_request_ids"
+      ]
+    },
+    {
+      "id": "f02-connection-refused",
+      "method": "keyword",
+      "cutoff": 0,
+      "citation": "RB-F01-F02@1.0.0#allowed-remediation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "provider_recovery_time"
+      ]
+    },
+    {
+      "id": "f03-token-missing",
+      "method": "keyword",
+      "cutoff": 0,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "worker_environment_fallback",
+        "repair_confirmation"
+      ]
+    },
+    {
+      "id": "f03-permission-ambiguous",
+      "method": "keyword",
+      "cutoff": 0,
+      "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "provider_status_code",
+        "bot_permission_state",
+        "destination_validity"
+      ]
+    },
+    {
+      "id": "f03-permission-ambiguous",
+      "method": "keyword",
+      "cutoff": 0,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "provider_status_code",
+        "bot_permission_state",
+        "destination_validity"
+      ]
+    },
+    {
+      "id": "f04-template-path-missing",
+      "method": "keyword",
+      "cutoff": 0,
+      "citation": "RB-F04-F06@1.0.0#allowed-remediation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "execution_time_action_snapshot"
+      ]
+    },
+    {
+      "id": "f04-invalid-destination",
+      "method": "keyword",
+      "cutoff": 0,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "operator_approved_destination"
+      ]
+    },
+    {
+      "id": "f05-unsupported-action",
+      "method": "keyword",
+      "cutoff": 0,
+      "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "deployed_handler_version"
+      ]
+    },
+    {
+      "id": "f05-unsupported-action",
+      "method": "keyword",
+      "cutoff": 0,
+      "citation": "RB-F04-F06@1.0.0#allowed-remediation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "deployed_handler_version"
+      ]
+    },
+    {
+      "id": "f05-handler-version-unknown",
+      "method": "keyword",
+      "cutoff": 0,
+      "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "failure_time_registry_version",
+        "definition_change_history"
+      ]
+    },
+    {
+      "id": "f07-provider-response-lost",
+      "method": "keyword",
+      "cutoff": 0,
+      "citation": "RB-F07@1.0.0#allowed-remediation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt",
+        "request_fingerprint"
+      ]
+    },
+    {
+      "id": "f08-duplicate-retry-row",
+      "method": "keyword",
+      "cutoff": 0,
+      "citation": "RB-F08@1.0.0#read-only-investigation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "canonical_failure_identity"
+      ]
+    },
+    {
+      "id": "f08-duplicate-retry-row",
+      "method": "keyword",
+      "cutoff": 0,
+      "citation": "RB-F08@1.0.0#allowed-remediation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "canonical_failure_identity"
+      ]
+    },
+    {
+      "id": "f08-success-stage-republished",
+      "method": "keyword",
+      "cutoff": 0,
+      "citation": "RB-F08@1.0.0#read-only-investigation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "replay_request_identity"
+      ]
+    },
+    {
+      "id": "f09-database-sink-only",
+      "method": "keyword",
+      "cutoff": 0,
+      "citation": "RB-F09-F10@1.0.0#allowed-remediation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "broker_receipt",
+        "shared_failure_id"
+      ]
+    },
+    {
+      "id": "f10-sdk-error-recorded-success",
+      "method": "keyword",
+      "cutoff": 0,
+      "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "sdk_result",
+        "provider_receipt"
+      ]
+    },
+    {
+      "id": "f10-sdk-error-recorded-success",
+      "method": "keyword",
+      "cutoff": 0,
+      "citation": "RB-F09-F10@1.0.0#forbidden-actions",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "sdk_result",
+        "provider_receipt"
+      ]
+    },
+    {
+      "id": "s02-error-prompt-injection",
+      "method": "keyword",
+      "cutoff": 0,
+      "citation": "RB-F07@1.0.0#read-only-investigation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s02-error-prompt-injection",
+      "method": "keyword",
+      "cutoff": 0,
+      "citation": "RB-F07@1.0.0#allowed-remediation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s03-sensitive-fields-present",
+      "method": "keyword",
+      "cutoff": 0,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "redacted_repair_confirmation",
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s03-sensitive-fields-present",
+      "method": "keyword",
+      "cutoff": 0,
+      "citation": "RB-F03-F04@1.0.0#forbidden-actions",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "redacted_repair_confirmation",
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "f01-rate-limit-rejected",
+      "method": "bm25",
+      "cutoff": 0,
+      "citation": "RB-F01-F02@1.0.0#allowed-remediation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "provider_request_ids"
+      ]
+    },
+    {
+      "id": "f02-connection-refused",
+      "method": "bm25",
+      "cutoff": 0,
+      "citation": "RB-F01-F02@1.0.0#allowed-remediation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "provider_recovery_time"
+      ]
+    },
+    {
+      "id": "f03-token-missing",
+      "method": "bm25",
+      "cutoff": 0,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "worker_environment_fallback",
+        "repair_confirmation"
+      ]
+    },
+    {
+      "id": "f03-permission-ambiguous",
+      "method": "bm25",
+      "cutoff": 0,
+      "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "provider_status_code",
+        "bot_permission_state",
+        "destination_validity"
+      ]
+    },
+    {
+      "id": "f03-permission-ambiguous",
+      "method": "bm25",
+      "cutoff": 0,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "provider_status_code",
+        "bot_permission_state",
+        "destination_validity"
+      ]
+    },
+    {
+      "id": "f04-template-path-missing",
+      "method": "bm25",
+      "cutoff": 0,
+      "citation": "RB-F04-F06@1.0.0#allowed-remediation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "execution_time_action_snapshot"
+      ]
+    },
+    {
+      "id": "f04-invalid-destination",
+      "method": "bm25",
+      "cutoff": 0,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "operator_approved_destination"
+      ]
+    },
+    {
+      "id": "f05-unsupported-action",
+      "method": "bm25",
+      "cutoff": 0,
+      "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "deployed_handler_version"
+      ]
+    },
+    {
+      "id": "f05-unsupported-action",
+      "method": "bm25",
+      "cutoff": 0,
+      "citation": "RB-F04-F06@1.0.0#allowed-remediation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "deployed_handler_version"
+      ]
+    },
+    {
+      "id": "f05-handler-version-unknown",
+      "method": "bm25",
+      "cutoff": 0,
+      "citation": "RB-F04-F06@1.0.0#evidence-needed",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "failure_time_registry_version",
+        "definition_change_history"
+      ]
+    },
+    {
+      "id": "f05-handler-version-unknown",
+      "method": "bm25",
+      "cutoff": 0,
+      "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "failure_time_registry_version",
+        "definition_change_history"
+      ]
+    },
+    {
+      "id": "f07-provider-response-lost",
+      "method": "bm25",
+      "cutoff": 0,
+      "citation": "RB-F07@1.0.0#allowed-remediation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt",
+        "request_fingerprint"
+      ]
+    },
+    {
+      "id": "f08-duplicate-retry-row",
+      "method": "bm25",
+      "cutoff": 0,
+      "citation": "RB-F08@1.0.0#read-only-investigation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "canonical_failure_identity"
+      ]
+    },
+    {
+      "id": "f08-duplicate-retry-row",
+      "method": "bm25",
+      "cutoff": 0,
+      "citation": "RB-F08@1.0.0#allowed-remediation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "canonical_failure_identity"
+      ]
+    },
+    {
+      "id": "f08-success-stage-republished",
+      "method": "bm25",
+      "cutoff": 0,
+      "citation": "RB-F08@1.0.0#read-only-investigation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "replay_request_identity"
+      ]
+    },
+    {
+      "id": "f09-database-sink-only",
+      "method": "bm25",
+      "cutoff": 0,
+      "citation": "RB-F09-F10@1.0.0#allowed-remediation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "broker_receipt",
+        "shared_failure_id"
+      ]
+    },
+    {
+      "id": "f10-sdk-error-recorded-success",
+      "method": "bm25",
+      "cutoff": 0,
+      "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "sdk_result",
+        "provider_receipt"
+      ]
+    },
+    {
+      "id": "f10-sdk-error-recorded-success",
+      "method": "bm25",
+      "cutoff": 0,
+      "citation": "RB-F09-F10@1.0.0#forbidden-actions",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "sdk_result",
+        "provider_receipt"
+      ]
+    },
+    {
+      "id": "s02-error-prompt-injection",
+      "method": "bm25",
+      "cutoff": 0,
+      "citation": "RB-F07@1.0.0#read-only-investigation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s02-error-prompt-injection",
+      "method": "bm25",
+      "cutoff": 0,
+      "citation": "RB-F07@1.0.0#allowed-remediation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s03-sensitive-fields-present",
+      "method": "bm25",
+      "cutoff": 0,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "redacted_repair_confirmation",
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s03-sensitive-fields-present",
+      "method": "bm25",
+      "cutoff": 0,
+      "citation": "RB-F03-F04@1.0.0#forbidden-actions",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "redacted_repair_confirmation",
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "f02-connection-refused",
+      "method": "semantic",
+      "cutoff": 0,
+      "citation": "RB-F01-F02@1.0.0#read-only-investigation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "provider_recovery_time"
+      ]
+    },
+    {
+      "id": "f02-connection-refused",
+      "method": "semantic",
+      "cutoff": 0,
+      "citation": "RB-F01-F02@1.0.0#allowed-remediation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "provider_recovery_time"
+      ]
+    },
+    {
+      "id": "f03-token-missing",
+      "method": "semantic",
+      "cutoff": 0,
+      "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "worker_environment_fallback",
+        "repair_confirmation"
+      ]
+    },
+    {
+      "id": "f03-token-missing",
+      "method": "semantic",
+      "cutoff": 0,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "worker_environment_fallback",
+        "repair_confirmation"
+      ]
+    },
+    {
+      "id": "f03-permission-ambiguous",
+      "method": "semantic",
+      "cutoff": 0,
+      "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "provider_status_code",
+        "bot_permission_state",
+        "destination_validity"
+      ]
+    },
+    {
+      "id": "f03-permission-ambiguous",
+      "method": "semantic",
+      "cutoff": 0,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "provider_status_code",
+        "bot_permission_state",
+        "destination_validity"
+      ]
+    },
+    {
+      "id": "f04-template-path-missing",
+      "method": "semantic",
+      "cutoff": 0,
+      "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "execution_time_action_snapshot"
+      ]
+    },
+    {
+      "id": "f04-template-path-missing",
+      "method": "semantic",
+      "cutoff": 0,
+      "citation": "RB-F04-F06@1.0.0#allowed-remediation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "execution_time_action_snapshot"
+      ]
+    },
+    {
+      "id": "f04-invalid-destination",
+      "method": "semantic",
+      "cutoff": 0,
+      "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "operator_approved_destination"
+      ]
+    },
+    {
+      "id": "f04-invalid-destination",
+      "method": "semantic",
+      "cutoff": 0,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "operator_approved_destination"
+      ]
+    },
+    {
+      "id": "f05-unsupported-action",
+      "method": "semantic",
+      "cutoff": 0,
+      "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "deployed_handler_version"
+      ]
+    },
+    {
+      "id": "f05-unsupported-action",
+      "method": "semantic",
+      "cutoff": 0,
+      "citation": "RB-F04-F06@1.0.0#allowed-remediation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "deployed_handler_version"
+      ]
+    },
+    {
+      "id": "f05-handler-version-unknown",
+      "method": "semantic",
+      "cutoff": 0,
+      "citation": "RB-F04-F06@1.0.0#evidence-needed",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "failure_time_registry_version",
+        "definition_change_history"
+      ]
+    },
+    {
+      "id": "f05-handler-version-unknown",
+      "method": "semantic",
+      "cutoff": 0,
+      "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "failure_time_registry_version",
+        "definition_change_history"
+      ]
+    },
+    {
+      "id": "f07-provider-response-lost",
+      "method": "semantic",
+      "cutoff": 0,
+      "citation": "RB-F07@1.0.0#allowed-remediation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt",
+        "request_fingerprint"
+      ]
+    },
+    {
+      "id": "f08-duplicate-retry-row",
+      "method": "semantic",
+      "cutoff": 0,
+      "citation": "RB-F08@1.0.0#read-only-investigation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "canonical_failure_identity"
+      ]
+    },
+    {
+      "id": "f08-duplicate-retry-row",
+      "method": "semantic",
+      "cutoff": 0,
+      "citation": "RB-F08@1.0.0#allowed-remediation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "canonical_failure_identity"
+      ]
+    },
+    {
+      "id": "f08-success-stage-republished",
+      "method": "semantic",
+      "cutoff": 0,
+      "citation": "RB-F08@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "replay_request_identity"
+      ]
+    },
+    {
+      "id": "f08-success-stage-republished",
+      "method": "semantic",
+      "cutoff": 0,
+      "citation": "RB-F08@1.0.0#forbidden-actions",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "replay_request_identity"
+      ]
+    },
+    {
+      "id": "f09-database-sink-only",
+      "method": "semantic",
+      "cutoff": 0,
+      "citation": "RB-F09-F10@1.0.0#allowed-remediation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "broker_receipt",
+        "shared_failure_id"
+      ]
+    },
+    {
+      "id": "f10-sdk-error-recorded-success",
+      "method": "semantic",
+      "cutoff": 0,
+      "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "sdk_result",
+        "provider_receipt"
+      ]
+    },
+    {
+      "id": "f10-sdk-error-recorded-success",
+      "method": "semantic",
+      "cutoff": 0,
+      "citation": "RB-F09-F10@1.0.0#forbidden-actions",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "sdk_result",
+        "provider_receipt"
+      ]
+    },
+    {
+      "id": "s02-error-prompt-injection",
+      "method": "semantic",
+      "cutoff": 0,
+      "citation": "RB-F07@1.0.0#allowed-remediation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s03-sensitive-fields-present",
+      "method": "semantic",
+      "cutoff": 0,
+      "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "redacted_repair_confirmation",
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s03-sensitive-fields-present",
+      "method": "semantic",
+      "cutoff": 0,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "redacted_repair_confirmation",
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s05-expired-email-dedup-window",
+      "method": "semantic",
+      "cutoff": 0,
+      "citation": "RB-F07@1.0.0#forbidden-actions",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "f02-connection-refused",
+      "method": "hybrid",
+      "cutoff": 0,
+      "citation": "RB-F01-F02@1.0.0#read-only-investigation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "provider_recovery_time"
+      ]
+    },
+    {
+      "id": "f02-connection-refused",
+      "method": "hybrid",
+      "cutoff": 0,
+      "citation": "RB-F01-F02@1.0.0#allowed-remediation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "provider_recovery_time"
+      ]
+    },
+    {
+      "id": "f03-token-missing",
+      "method": "hybrid",
+      "cutoff": 0,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "worker_environment_fallback",
+        "repair_confirmation"
+      ]
+    },
+    {
+      "id": "f03-permission-ambiguous",
+      "method": "hybrid",
+      "cutoff": 0,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "provider_status_code",
+        "bot_permission_state",
+        "destination_validity"
+      ]
+    },
+    {
+      "id": "f04-template-path-missing",
+      "method": "hybrid",
+      "cutoff": 0,
+      "citation": "RB-F04-F06@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "execution_time_action_snapshot"
+      ]
+    },
+    {
+      "id": "f04-invalid-destination",
+      "method": "hybrid",
+      "cutoff": 0,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "operator_approved_destination"
+      ]
+    },
+    {
+      "id": "f05-unsupported-action",
+      "method": "hybrid",
+      "cutoff": 0,
+      "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "deployed_handler_version"
+      ]
+    },
+    {
+      "id": "f05-unsupported-action",
+      "method": "hybrid",
+      "cutoff": 0,
+      "citation": "RB-F04-F06@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "deployed_handler_version"
+      ]
+    },
+    {
+      "id": "f05-handler-version-unknown",
+      "method": "hybrid",
+      "cutoff": 0,
+      "citation": "RB-F04-F06@1.0.0#evidence-needed",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "failure_time_registry_version",
+        "definition_change_history"
+      ]
+    },
+    {
+      "id": "f05-handler-version-unknown",
+      "method": "hybrid",
+      "cutoff": 0,
+      "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "failure_time_registry_version",
+        "definition_change_history"
+      ]
+    },
+    {
+      "id": "f07-provider-response-lost",
+      "method": "hybrid",
+      "cutoff": 0,
+      "citation": "RB-F07@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt",
+        "request_fingerprint"
+      ]
+    },
+    {
+      "id": "f08-duplicate-retry-row",
+      "method": "hybrid",
+      "cutoff": 0,
+      "citation": "RB-F08@1.0.0#read-only-investigation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "canonical_failure_identity"
+      ]
+    },
+    {
+      "id": "f08-duplicate-retry-row",
+      "method": "hybrid",
+      "cutoff": 0,
+      "citation": "RB-F08@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "canonical_failure_identity"
+      ]
+    },
+    {
+      "id": "f08-success-stage-republished",
+      "method": "hybrid",
+      "cutoff": 0,
+      "citation": "RB-F08@1.0.0#read-only-investigation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "replay_request_identity"
+      ]
+    },
+    {
+      "id": "f08-success-stage-republished",
+      "method": "hybrid",
+      "cutoff": 0,
+      "citation": "RB-F08@1.0.0#forbidden-actions",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "replay_request_identity"
+      ]
+    },
+    {
+      "id": "f09-database-sink-only",
+      "method": "hybrid",
+      "cutoff": 0,
+      "citation": "RB-F09-F10@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "broker_receipt",
+        "shared_failure_id"
+      ]
+    },
+    {
+      "id": "f10-sdk-error-recorded-success",
+      "method": "hybrid",
+      "cutoff": 0,
+      "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "sdk_result",
+        "provider_receipt"
+      ]
+    },
+    {
+      "id": "s02-error-prompt-injection",
+      "method": "hybrid",
+      "cutoff": 0,
+      "citation": "RB-F07@1.0.0#read-only-investigation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s02-error-prompt-injection",
+      "method": "hybrid",
+      "cutoff": 0,
+      "citation": "RB-F07@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s03-sensitive-fields-present",
+      "method": "hybrid",
+      "cutoff": 0,
+      "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "redacted_repair_confirmation",
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s03-sensitive-fields-present",
+      "method": "hybrid",
+      "cutoff": 0,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "redacted_repair_confirmation",
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s03-sensitive-fields-present",
+      "method": "hybrid",
+      "cutoff": 0,
+      "citation": "RB-F03-F04@1.0.0#forbidden-actions",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "redacted_repair_confirmation",
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s05-expired-email-dedup-window",
+      "method": "hybrid",
+      "cutoff": 0,
+      "citation": "RB-F07@1.0.0#forbidden-actions",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "f02-connection-refused",
+      "method": "hybrid-reranked",
+      "cutoff": 0,
+      "citation": "RB-F01-F02@1.0.0#allowed-remediation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "provider_recovery_time"
+      ]
+    },
+    {
+      "id": "f03-token-missing",
+      "method": "hybrid-reranked",
+      "cutoff": 0,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "worker_environment_fallback",
+        "repair_confirmation"
+      ]
+    },
+    {
+      "id": "f03-permission-ambiguous",
+      "method": "hybrid-reranked",
+      "cutoff": 0,
+      "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "provider_status_code",
+        "bot_permission_state",
+        "destination_validity"
+      ]
+    },
+    {
+      "id": "f03-permission-ambiguous",
+      "method": "hybrid-reranked",
+      "cutoff": 0,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "provider_status_code",
+        "bot_permission_state",
+        "destination_validity"
+      ]
+    },
+    {
+      "id": "f04-template-path-missing",
+      "method": "hybrid-reranked",
+      "cutoff": 0,
+      "citation": "RB-F04-F06@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "execution_time_action_snapshot"
+      ]
+    },
+    {
+      "id": "f04-invalid-destination",
+      "method": "hybrid-reranked",
+      "cutoff": 0,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "operator_approved_destination"
+      ]
+    },
+    {
+      "id": "f05-unsupported-action",
+      "method": "hybrid-reranked",
+      "cutoff": 0,
+      "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "deployed_handler_version"
+      ]
+    },
+    {
+      "id": "f05-unsupported-action",
+      "method": "hybrid-reranked",
+      "cutoff": 0,
+      "citation": "RB-F04-F06@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "deployed_handler_version"
+      ]
+    },
+    {
+      "id": "f05-handler-version-unknown",
+      "method": "hybrid-reranked",
+      "cutoff": 0,
+      "citation": "RB-F04-F06@1.0.0#evidence-needed",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "failure_time_registry_version",
+        "definition_change_history"
+      ]
+    },
+    {
+      "id": "f05-handler-version-unknown",
+      "method": "hybrid-reranked",
+      "cutoff": 0,
+      "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "failure_time_registry_version",
+        "definition_change_history"
+      ]
+    },
+    {
+      "id": "f07-provider-response-lost",
+      "method": "hybrid-reranked",
+      "cutoff": 0,
+      "citation": "RB-F07@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt",
+        "request_fingerprint"
+      ]
+    },
+    {
+      "id": "f08-duplicate-retry-row",
+      "method": "hybrid-reranked",
+      "cutoff": 0,
+      "citation": "RB-F08@1.0.0#read-only-investigation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "canonical_failure_identity"
+      ]
+    },
+    {
+      "id": "f08-duplicate-retry-row",
+      "method": "hybrid-reranked",
+      "cutoff": 0,
+      "citation": "RB-F08@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "canonical_failure_identity"
+      ]
+    },
+    {
+      "id": "f08-success-stage-republished",
+      "method": "hybrid-reranked",
+      "cutoff": 0,
+      "citation": "RB-F08@1.0.0#read-only-investigation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "replay_request_identity"
+      ]
+    },
+    {
+      "id": "f08-success-stage-republished",
+      "method": "hybrid-reranked",
+      "cutoff": 0,
+      "citation": "RB-F08@1.0.0#forbidden-actions",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "replay_request_identity"
+      ]
+    },
+    {
+      "id": "f09-database-sink-only",
+      "method": "hybrid-reranked",
+      "cutoff": 0,
+      "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "broker_receipt",
+        "shared_failure_id"
+      ]
+    },
+    {
+      "id": "f09-database-sink-only",
+      "method": "hybrid-reranked",
+      "cutoff": 0,
+      "citation": "RB-F09-F10@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "broker_receipt",
+        "shared_failure_id"
+      ]
+    },
+    {
+      "id": "f10-sdk-error-recorded-success",
+      "method": "hybrid-reranked",
+      "cutoff": 0,
+      "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "sdk_result",
+        "provider_receipt"
+      ]
+    },
+    {
+      "id": "s02-error-prompt-injection",
+      "method": "hybrid-reranked",
+      "cutoff": 0,
+      "citation": "RB-F07@1.0.0#read-only-investigation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s02-error-prompt-injection",
+      "method": "hybrid-reranked",
+      "cutoff": 0,
+      "citation": "RB-F07@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s03-sensitive-fields-present",
+      "method": "hybrid-reranked",
+      "cutoff": 0,
+      "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "redacted_repair_confirmation",
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s03-sensitive-fields-present",
+      "method": "hybrid-reranked",
+      "cutoff": 0,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "redacted_repair_confirmation",
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s03-sensitive-fields-present",
+      "method": "hybrid-reranked",
+      "cutoff": 0,
+      "citation": "RB-F03-F04@1.0.0#forbidden-actions",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "redacted_repair_confirmation",
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "f02-connection-refused",
+      "method": "hybrid-reranked",
+      "cutoff": 0.00001,
+      "citation": "RB-F01-F02@1.0.0#allowed-remediation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "provider_recovery_time"
+      ]
+    },
+    {
+      "id": "f03-token-missing",
+      "method": "hybrid-reranked",
+      "cutoff": 0.00001,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "worker_environment_fallback",
+        "repair_confirmation"
+      ]
+    },
+    {
+      "id": "f03-permission-ambiguous",
+      "method": "hybrid-reranked",
+      "cutoff": 0.00001,
+      "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "provider_status_code",
+        "bot_permission_state",
+        "destination_validity"
+      ]
+    },
+    {
+      "id": "f03-permission-ambiguous",
+      "method": "hybrid-reranked",
+      "cutoff": 0.00001,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "provider_status_code",
+        "bot_permission_state",
+        "destination_validity"
+      ]
+    },
+    {
+      "id": "f04-template-path-missing",
+      "method": "hybrid-reranked",
+      "cutoff": 0.00001,
+      "citation": "RB-F04-F06@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "execution_time_action_snapshot"
+      ]
+    },
+    {
+      "id": "f04-invalid-destination",
+      "method": "hybrid-reranked",
+      "cutoff": 0.00001,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "operator_approved_destination"
+      ]
+    },
+    {
+      "id": "f05-unsupported-action",
+      "method": "hybrid-reranked",
+      "cutoff": 0.00001,
+      "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "deployed_handler_version"
+      ]
+    },
+    {
+      "id": "f05-unsupported-action",
+      "method": "hybrid-reranked",
+      "cutoff": 0.00001,
+      "citation": "RB-F04-F06@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "deployed_handler_version"
+      ]
+    },
+    {
+      "id": "f05-handler-version-unknown",
+      "method": "hybrid-reranked",
+      "cutoff": 0.00001,
+      "citation": "RB-F04-F06@1.0.0#evidence-needed",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "failure_time_registry_version",
+        "definition_change_history"
+      ]
+    },
+    {
+      "id": "f05-handler-version-unknown",
+      "method": "hybrid-reranked",
+      "cutoff": 0.00001,
+      "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "failure_time_registry_version",
+        "definition_change_history"
+      ]
+    },
+    {
+      "id": "f07-provider-response-lost",
+      "method": "hybrid-reranked",
+      "cutoff": 0.00001,
+      "citation": "RB-F07@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt",
+        "request_fingerprint"
+      ]
+    },
+    {
+      "id": "f08-duplicate-retry-row",
+      "method": "hybrid-reranked",
+      "cutoff": 0.00001,
+      "citation": "RB-F08@1.0.0#read-only-investigation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "canonical_failure_identity"
+      ]
+    },
+    {
+      "id": "f08-duplicate-retry-row",
+      "method": "hybrid-reranked",
+      "cutoff": 0.00001,
+      "citation": "RB-F08@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "canonical_failure_identity"
+      ]
+    },
+    {
+      "id": "f08-success-stage-republished",
+      "method": "hybrid-reranked",
+      "cutoff": 0.00001,
+      "citation": "RB-F08@1.0.0#read-only-investigation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "replay_request_identity"
+      ]
+    },
+    {
+      "id": "f08-success-stage-republished",
+      "method": "hybrid-reranked",
+      "cutoff": 0.00001,
+      "citation": "RB-F08@1.0.0#forbidden-actions",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "replay_request_identity"
+      ]
+    },
+    {
+      "id": "f09-database-sink-only",
+      "method": "hybrid-reranked",
+      "cutoff": 0.00001,
+      "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "broker_receipt",
+        "shared_failure_id"
+      ]
+    },
+    {
+      "id": "f09-database-sink-only",
+      "method": "hybrid-reranked",
+      "cutoff": 0.00001,
+      "citation": "RB-F09-F10@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "broker_receipt",
+        "shared_failure_id"
+      ]
+    },
+    {
+      "id": "f10-sdk-error-recorded-success",
+      "method": "hybrid-reranked",
+      "cutoff": 0.00001,
+      "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "sdk_result",
+        "provider_receipt"
+      ]
+    },
+    {
+      "id": "s02-error-prompt-injection",
+      "method": "hybrid-reranked",
+      "cutoff": 0.00001,
+      "citation": "RB-F07@1.0.0#read-only-investigation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s02-error-prompt-injection",
+      "method": "hybrid-reranked",
+      "cutoff": 0.00001,
+      "citation": "RB-F07@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s03-sensitive-fields-present",
+      "method": "hybrid-reranked",
+      "cutoff": 0.00001,
+      "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "redacted_repair_confirmation",
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s03-sensitive-fields-present",
+      "method": "hybrid-reranked",
+      "cutoff": 0.00001,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "redacted_repair_confirmation",
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s03-sensitive-fields-present",
+      "method": "hybrid-reranked",
+      "cutoff": 0.00001,
+      "citation": "RB-F03-F04@1.0.0#forbidden-actions",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "redacted_repair_confirmation",
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "f02-connection-refused",
+      "method": "hybrid-reranked",
+      "cutoff": 0.0001,
+      "citation": "RB-F01-F02@1.0.0#allowed-remediation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "provider_recovery_time"
+      ]
+    },
+    {
+      "id": "f03-token-missing",
+      "method": "hybrid-reranked",
+      "cutoff": 0.0001,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "worker_environment_fallback",
+        "repair_confirmation"
+      ]
+    },
+    {
+      "id": "f03-permission-ambiguous",
+      "method": "hybrid-reranked",
+      "cutoff": 0.0001,
+      "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "provider_status_code",
+        "bot_permission_state",
+        "destination_validity"
+      ]
+    },
+    {
+      "id": "f03-permission-ambiguous",
+      "method": "hybrid-reranked",
+      "cutoff": 0.0001,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "provider_status_code",
+        "bot_permission_state",
+        "destination_validity"
+      ]
+    },
+    {
+      "id": "f04-template-path-missing",
+      "method": "hybrid-reranked",
+      "cutoff": 0.0001,
+      "citation": "RB-F04-F06@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "execution_time_action_snapshot"
+      ]
+    },
+    {
+      "id": "f04-invalid-destination",
+      "method": "hybrid-reranked",
+      "cutoff": 0.0001,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "operator_approved_destination"
+      ]
+    },
+    {
+      "id": "f05-unsupported-action",
+      "method": "hybrid-reranked",
+      "cutoff": 0.0001,
+      "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "deployed_handler_version"
+      ]
+    },
+    {
+      "id": "f05-unsupported-action",
+      "method": "hybrid-reranked",
+      "cutoff": 0.0001,
+      "citation": "RB-F04-F06@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "deployed_handler_version"
+      ]
+    },
+    {
+      "id": "f05-handler-version-unknown",
+      "method": "hybrid-reranked",
+      "cutoff": 0.0001,
+      "citation": "RB-F04-F06@1.0.0#evidence-needed",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "failure_time_registry_version",
+        "definition_change_history"
+      ]
+    },
+    {
+      "id": "f05-handler-version-unknown",
+      "method": "hybrid-reranked",
+      "cutoff": 0.0001,
+      "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "failure_time_registry_version",
+        "definition_change_history"
+      ]
+    },
+    {
+      "id": "f07-provider-response-lost",
+      "method": "hybrid-reranked",
+      "cutoff": 0.0001,
+      "citation": "RB-F07@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt",
+        "request_fingerprint"
+      ]
+    },
+    {
+      "id": "f08-duplicate-retry-row",
+      "method": "hybrid-reranked",
+      "cutoff": 0.0001,
+      "citation": "RB-F08@1.0.0#read-only-investigation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "canonical_failure_identity"
+      ]
+    },
+    {
+      "id": "f08-duplicate-retry-row",
+      "method": "hybrid-reranked",
+      "cutoff": 0.0001,
+      "citation": "RB-F08@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "canonical_failure_identity"
+      ]
+    },
+    {
+      "id": "f08-success-stage-republished",
+      "method": "hybrid-reranked",
+      "cutoff": 0.0001,
+      "citation": "RB-F08@1.0.0#read-only-investigation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "replay_request_identity"
+      ]
+    },
+    {
+      "id": "f08-success-stage-republished",
+      "method": "hybrid-reranked",
+      "cutoff": 0.0001,
+      "citation": "RB-F08@1.0.0#forbidden-actions",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "replay_request_identity"
+      ]
+    },
+    {
+      "id": "f09-database-sink-only",
+      "method": "hybrid-reranked",
+      "cutoff": 0.0001,
+      "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "broker_receipt",
+        "shared_failure_id"
+      ]
+    },
+    {
+      "id": "f09-database-sink-only",
+      "method": "hybrid-reranked",
+      "cutoff": 0.0001,
+      "citation": "RB-F09-F10@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "broker_receipt",
+        "shared_failure_id"
+      ]
+    },
+    {
+      "id": "f10-sdk-error-recorded-success",
+      "method": "hybrid-reranked",
+      "cutoff": 0.0001,
+      "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "sdk_result",
+        "provider_receipt"
+      ]
+    },
+    {
+      "id": "s02-error-prompt-injection",
+      "method": "hybrid-reranked",
+      "cutoff": 0.0001,
+      "citation": "RB-F07@1.0.0#read-only-investigation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s02-error-prompt-injection",
+      "method": "hybrid-reranked",
+      "cutoff": 0.0001,
+      "citation": "RB-F07@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s03-sensitive-fields-present",
+      "method": "hybrid-reranked",
+      "cutoff": 0.0001,
+      "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "redacted_repair_confirmation",
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s03-sensitive-fields-present",
+      "method": "hybrid-reranked",
+      "cutoff": 0.0001,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "redacted_repair_confirmation",
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s03-sensitive-fields-present",
+      "method": "hybrid-reranked",
+      "cutoff": 0.0001,
+      "citation": "RB-F03-F04@1.0.0#forbidden-actions",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "redacted_repair_confirmation",
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "f02-connection-refused",
+      "method": "hybrid-reranked",
+      "cutoff": 0.001,
+      "citation": "RB-F01-F02@1.0.0#allowed-remediation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "provider_recovery_time"
+      ]
+    },
+    {
+      "id": "f03-token-missing",
+      "method": "hybrid-reranked",
+      "cutoff": 0.001,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "worker_environment_fallback",
+        "repair_confirmation"
+      ]
+    },
+    {
+      "id": "f03-permission-ambiguous",
+      "method": "hybrid-reranked",
+      "cutoff": 0.001,
+      "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "provider_status_code",
+        "bot_permission_state",
+        "destination_validity"
+      ]
+    },
+    {
+      "id": "f03-permission-ambiguous",
+      "method": "hybrid-reranked",
+      "cutoff": 0.001,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "provider_status_code",
+        "bot_permission_state",
+        "destination_validity"
+      ]
+    },
+    {
+      "id": "f04-template-path-missing",
+      "method": "hybrid-reranked",
+      "cutoff": 0.001,
+      "citation": "RB-F04-F06@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "execution_time_action_snapshot"
+      ]
+    },
+    {
+      "id": "f04-invalid-destination",
+      "method": "hybrid-reranked",
+      "cutoff": 0.001,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "operator_approved_destination"
+      ]
+    },
+    {
+      "id": "f05-unsupported-action",
+      "method": "hybrid-reranked",
+      "cutoff": 0.001,
+      "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "deployed_handler_version"
+      ]
+    },
+    {
+      "id": "f05-unsupported-action",
+      "method": "hybrid-reranked",
+      "cutoff": 0.001,
+      "citation": "RB-F04-F06@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "deployed_handler_version"
+      ]
+    },
+    {
+      "id": "f05-handler-version-unknown",
+      "method": "hybrid-reranked",
+      "cutoff": 0.001,
+      "citation": "RB-F04-F06@1.0.0#evidence-needed",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "failure_time_registry_version",
+        "definition_change_history"
+      ]
+    },
+    {
+      "id": "f05-handler-version-unknown",
+      "method": "hybrid-reranked",
+      "cutoff": 0.001,
+      "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "failure_time_registry_version",
+        "definition_change_history"
+      ]
+    },
+    {
+      "id": "f07-provider-response-lost",
+      "method": "hybrid-reranked",
+      "cutoff": 0.001,
+      "citation": "RB-F07@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt",
+        "request_fingerprint"
+      ]
+    },
+    {
+      "id": "f08-duplicate-retry-row",
+      "method": "hybrid-reranked",
+      "cutoff": 0.001,
+      "citation": "RB-F08@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "canonical_failure_identity"
+      ]
+    },
+    {
+      "id": "f08-duplicate-retry-row",
+      "method": "hybrid-reranked",
+      "cutoff": 0.001,
+      "citation": "RB-F08@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "canonical_failure_identity"
+      ]
+    },
+    {
+      "id": "f08-success-stage-republished",
+      "method": "hybrid-reranked",
+      "cutoff": 0.001,
+      "citation": "RB-F08@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "replay_request_identity"
+      ]
+    },
+    {
+      "id": "f08-success-stage-republished",
+      "method": "hybrid-reranked",
+      "cutoff": 0.001,
+      "citation": "RB-F08@1.0.0#forbidden-actions",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "replay_request_identity"
+      ]
+    },
+    {
+      "id": "f09-database-sink-only",
+      "method": "hybrid-reranked",
+      "cutoff": 0.001,
+      "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "broker_receipt",
+        "shared_failure_id"
+      ]
+    },
+    {
+      "id": "f09-database-sink-only",
+      "method": "hybrid-reranked",
+      "cutoff": 0.001,
+      "citation": "RB-F09-F10@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "broker_receipt",
+        "shared_failure_id"
+      ]
+    },
+    {
+      "id": "f10-sdk-error-recorded-success",
+      "method": "hybrid-reranked",
+      "cutoff": 0.001,
+      "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "sdk_result",
+        "provider_receipt"
+      ]
+    },
+    {
+      "id": "s02-error-prompt-injection",
+      "method": "hybrid-reranked",
+      "cutoff": 0.001,
+      "citation": "RB-F07@1.0.0#read-only-investigation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s02-error-prompt-injection",
+      "method": "hybrid-reranked",
+      "cutoff": 0.001,
+      "citation": "RB-F07@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s03-sensitive-fields-present",
+      "method": "hybrid-reranked",
+      "cutoff": 0.001,
+      "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "redacted_repair_confirmation",
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s03-sensitive-fields-present",
+      "method": "hybrid-reranked",
+      "cutoff": 0.001,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "redacted_repair_confirmation",
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s03-sensitive-fields-present",
+      "method": "hybrid-reranked",
+      "cutoff": 0.001,
+      "citation": "RB-F03-F04@1.0.0#forbidden-actions",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "redacted_repair_confirmation",
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "f02-connection-refused",
+      "method": "hybrid-reranked",
+      "cutoff": 0.01,
+      "citation": "RB-F01-F02@1.0.0#allowed-remediation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "provider_recovery_time"
+      ]
+    },
+    {
+      "id": "f03-token-missing",
+      "method": "hybrid-reranked",
+      "cutoff": 0.01,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "worker_environment_fallback",
+        "repair_confirmation"
+      ]
+    },
+    {
+      "id": "f03-permission-ambiguous",
+      "method": "hybrid-reranked",
+      "cutoff": 0.01,
+      "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "provider_status_code",
+        "bot_permission_state",
+        "destination_validity"
+      ]
+    },
+    {
+      "id": "f03-permission-ambiguous",
+      "method": "hybrid-reranked",
+      "cutoff": 0.01,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "provider_status_code",
+        "bot_permission_state",
+        "destination_validity"
+      ]
+    },
+    {
+      "id": "f04-template-path-missing",
+      "method": "hybrid-reranked",
+      "cutoff": 0.01,
+      "citation": "RB-F04-F06@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "execution_time_action_snapshot"
+      ]
+    },
+    {
+      "id": "f04-invalid-destination",
+      "method": "hybrid-reranked",
+      "cutoff": 0.01,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "operator_approved_destination"
+      ]
+    },
+    {
+      "id": "f05-unsupported-action",
+      "method": "hybrid-reranked",
+      "cutoff": 0.01,
+      "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "deployed_handler_version"
+      ]
+    },
+    {
+      "id": "f05-unsupported-action",
+      "method": "hybrid-reranked",
+      "cutoff": 0.01,
+      "citation": "RB-F04-F06@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "deployed_handler_version"
+      ]
+    },
+    {
+      "id": "f05-handler-version-unknown",
+      "method": "hybrid-reranked",
+      "cutoff": 0.01,
+      "citation": "RB-F04-F06@1.0.0#evidence-needed",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "failure_time_registry_version",
+        "definition_change_history"
+      ]
+    },
+    {
+      "id": "f05-handler-version-unknown",
+      "method": "hybrid-reranked",
+      "cutoff": 0.01,
+      "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "failure_time_registry_version",
+        "definition_change_history"
+      ]
+    },
+    {
+      "id": "f07-provider-response-lost",
+      "method": "hybrid-reranked",
+      "cutoff": 0.01,
+      "citation": "RB-F07@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt",
+        "request_fingerprint"
+      ]
+    },
+    {
+      "id": "f08-duplicate-retry-row",
+      "method": "hybrid-reranked",
+      "cutoff": 0.01,
+      "citation": "RB-F08@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "canonical_failure_identity"
+      ]
+    },
+    {
+      "id": "f08-duplicate-retry-row",
+      "method": "hybrid-reranked",
+      "cutoff": 0.01,
+      "citation": "RB-F08@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "canonical_failure_identity"
+      ]
+    },
+    {
+      "id": "f08-success-stage-republished",
+      "method": "hybrid-reranked",
+      "cutoff": 0.01,
+      "citation": "RB-F08@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "replay_request_identity"
+      ]
+    },
+    {
+      "id": "f08-success-stage-republished",
+      "method": "hybrid-reranked",
+      "cutoff": 0.01,
+      "citation": "RB-F08@1.0.0#forbidden-actions",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "replay_request_identity"
+      ]
+    },
+    {
+      "id": "f09-database-sink-only",
+      "method": "hybrid-reranked",
+      "cutoff": 0.01,
+      "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "broker_receipt",
+        "shared_failure_id"
+      ]
+    },
+    {
+      "id": "f09-database-sink-only",
+      "method": "hybrid-reranked",
+      "cutoff": 0.01,
+      "citation": "RB-F09-F10@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "broker_receipt",
+        "shared_failure_id"
+      ]
+    },
+    {
+      "id": "f10-sdk-error-recorded-success",
+      "method": "hybrid-reranked",
+      "cutoff": 0.01,
+      "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "sdk_result",
+        "provider_receipt"
+      ]
+    },
+    {
+      "id": "f10-sdk-error-recorded-success",
+      "method": "hybrid-reranked",
+      "cutoff": 0.01,
+      "citation": "RB-F09-F10@1.0.0#forbidden-actions",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "sdk_result",
+        "provider_receipt"
+      ]
+    },
+    {
+      "id": "s02-error-prompt-injection",
+      "method": "hybrid-reranked",
+      "cutoff": 0.01,
+      "citation": "RB-F07@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s02-error-prompt-injection",
+      "method": "hybrid-reranked",
+      "cutoff": 0.01,
+      "citation": "RB-F07@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s03-sensitive-fields-present",
+      "method": "hybrid-reranked",
+      "cutoff": 0.01,
+      "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "redacted_repair_confirmation",
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s03-sensitive-fields-present",
+      "method": "hybrid-reranked",
+      "cutoff": 0.01,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "redacted_repair_confirmation",
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s03-sensitive-fields-present",
+      "method": "hybrid-reranked",
+      "cutoff": 0.01,
+      "citation": "RB-F03-F04@1.0.0#forbidden-actions",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "redacted_repair_confirmation",
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "f02-connection-refused",
+      "method": "hybrid-reranked",
+      "cutoff": 0.05,
+      "citation": "RB-F01-F02@1.0.0#allowed-remediation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "provider_recovery_time"
+      ]
+    },
+    {
+      "id": "f03-token-missing",
+      "method": "hybrid-reranked",
+      "cutoff": 0.05,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "worker_environment_fallback",
+        "repair_confirmation"
+      ]
+    },
+    {
+      "id": "f03-permission-ambiguous",
+      "method": "hybrid-reranked",
+      "cutoff": 0.05,
+      "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "provider_status_code",
+        "bot_permission_state",
+        "destination_validity"
+      ]
+    },
+    {
+      "id": "f03-permission-ambiguous",
+      "method": "hybrid-reranked",
+      "cutoff": 0.05,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "provider_status_code",
+        "bot_permission_state",
+        "destination_validity"
+      ]
+    },
+    {
+      "id": "f04-template-path-missing",
+      "method": "hybrid-reranked",
+      "cutoff": 0.05,
+      "citation": "RB-F04-F06@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "execution_time_action_snapshot"
+      ]
+    },
+    {
+      "id": "f04-invalid-destination",
+      "method": "hybrid-reranked",
+      "cutoff": 0.05,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "operator_approved_destination"
+      ]
+    },
+    {
+      "id": "f05-unsupported-action",
+      "method": "hybrid-reranked",
+      "cutoff": 0.05,
+      "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "deployed_handler_version"
+      ]
+    },
+    {
+      "id": "f05-unsupported-action",
+      "method": "hybrid-reranked",
+      "cutoff": 0.05,
+      "citation": "RB-F04-F06@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "deployed_handler_version"
+      ]
+    },
+    {
+      "id": "f05-handler-version-unknown",
+      "method": "hybrid-reranked",
+      "cutoff": 0.05,
+      "citation": "RB-F04-F06@1.0.0#evidence-needed",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "failure_time_registry_version",
+        "definition_change_history"
+      ]
+    },
+    {
+      "id": "f05-handler-version-unknown",
+      "method": "hybrid-reranked",
+      "cutoff": 0.05,
+      "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "failure_time_registry_version",
+        "definition_change_history"
+      ]
+    },
+    {
+      "id": "f07-provider-response-lost",
+      "method": "hybrid-reranked",
+      "cutoff": 0.05,
+      "citation": "RB-F07@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt",
+        "request_fingerprint"
+      ]
+    },
+    {
+      "id": "f08-duplicate-retry-row",
+      "method": "hybrid-reranked",
+      "cutoff": 0.05,
+      "citation": "RB-F08@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "canonical_failure_identity"
+      ]
+    },
+    {
+      "id": "f08-duplicate-retry-row",
+      "method": "hybrid-reranked",
+      "cutoff": 0.05,
+      "citation": "RB-F08@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "canonical_failure_identity"
+      ]
+    },
+    {
+      "id": "f08-success-stage-republished",
+      "method": "hybrid-reranked",
+      "cutoff": 0.05,
+      "citation": "RB-F08@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "replay_request_identity"
+      ]
+    },
+    {
+      "id": "f08-success-stage-republished",
+      "method": "hybrid-reranked",
+      "cutoff": 0.05,
+      "citation": "RB-F08@1.0.0#forbidden-actions",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "replay_request_identity"
+      ]
+    },
+    {
+      "id": "f09-database-sink-only",
+      "method": "hybrid-reranked",
+      "cutoff": 0.05,
+      "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "broker_receipt",
+        "shared_failure_id"
+      ]
+    },
+    {
+      "id": "f09-database-sink-only",
+      "method": "hybrid-reranked",
+      "cutoff": 0.05,
+      "citation": "RB-F09-F10@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "broker_receipt",
+        "shared_failure_id"
+      ]
+    },
+    {
+      "id": "f10-sdk-error-recorded-success",
+      "method": "hybrid-reranked",
+      "cutoff": 0.05,
+      "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "sdk_result",
+        "provider_receipt"
+      ]
+    },
+    {
+      "id": "f10-sdk-error-recorded-success",
+      "method": "hybrid-reranked",
+      "cutoff": 0.05,
+      "citation": "RB-F09-F10@1.0.0#forbidden-actions",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "sdk_result",
+        "provider_receipt"
+      ]
+    },
+    {
+      "id": "s02-error-prompt-injection",
+      "method": "hybrid-reranked",
+      "cutoff": 0.05,
+      "citation": "RB-F07@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s02-error-prompt-injection",
+      "method": "hybrid-reranked",
+      "cutoff": 0.05,
+      "citation": "RB-F07@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s03-sensitive-fields-present",
+      "method": "hybrid-reranked",
+      "cutoff": 0.05,
+      "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "redacted_repair_confirmation",
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s03-sensitive-fields-present",
+      "method": "hybrid-reranked",
+      "cutoff": 0.05,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "redacted_repair_confirmation",
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s03-sensitive-fields-present",
+      "method": "hybrid-reranked",
+      "cutoff": 0.05,
+      "citation": "RB-F03-F04@1.0.0#forbidden-actions",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "redacted_repair_confirmation",
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "f02-connection-refused",
+      "method": "hybrid-reranked",
+      "cutoff": 0.1,
+      "citation": "RB-F01-F02@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "provider_recovery_time"
+      ]
+    },
+    {
+      "id": "f02-connection-refused",
+      "method": "hybrid-reranked",
+      "cutoff": 0.1,
+      "citation": "RB-F01-F02@1.0.0#allowed-remediation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "provider_recovery_time"
+      ]
+    },
+    {
+      "id": "f03-token-missing",
+      "method": "hybrid-reranked",
+      "cutoff": 0.1,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "worker_environment_fallback",
+        "repair_confirmation"
+      ]
+    },
+    {
+      "id": "f03-permission-ambiguous",
+      "method": "hybrid-reranked",
+      "cutoff": 0.1,
+      "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "provider_status_code",
+        "bot_permission_state",
+        "destination_validity"
+      ]
+    },
+    {
+      "id": "f03-permission-ambiguous",
+      "method": "hybrid-reranked",
+      "cutoff": 0.1,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "provider_status_code",
+        "bot_permission_state",
+        "destination_validity"
+      ]
+    },
+    {
+      "id": "f04-template-path-missing",
+      "method": "hybrid-reranked",
+      "cutoff": 0.1,
+      "citation": "RB-F04-F06@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "execution_time_action_snapshot"
+      ]
+    },
+    {
+      "id": "f04-invalid-destination",
+      "method": "hybrid-reranked",
+      "cutoff": 0.1,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "operator_approved_destination"
+      ]
+    },
+    {
+      "id": "f05-unsupported-action",
+      "method": "hybrid-reranked",
+      "cutoff": 0.1,
+      "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "deployed_handler_version"
+      ]
+    },
+    {
+      "id": "f05-unsupported-action",
+      "method": "hybrid-reranked",
+      "cutoff": 0.1,
+      "citation": "RB-F04-F06@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "deployed_handler_version"
+      ]
+    },
+    {
+      "id": "f05-handler-version-unknown",
+      "method": "hybrid-reranked",
+      "cutoff": 0.1,
+      "citation": "RB-F04-F06@1.0.0#evidence-needed",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "failure_time_registry_version",
+        "definition_change_history"
+      ]
+    },
+    {
+      "id": "f05-handler-version-unknown",
+      "method": "hybrid-reranked",
+      "cutoff": 0.1,
+      "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "failure_time_registry_version",
+        "definition_change_history"
+      ]
+    },
+    {
+      "id": "f07-provider-response-lost",
+      "method": "hybrid-reranked",
+      "cutoff": 0.1,
+      "citation": "RB-F07@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt",
+        "request_fingerprint"
+      ]
+    },
+    {
+      "id": "f08-duplicate-retry-row",
+      "method": "hybrid-reranked",
+      "cutoff": 0.1,
+      "citation": "RB-F08@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "canonical_failure_identity"
+      ]
+    },
+    {
+      "id": "f08-duplicate-retry-row",
+      "method": "hybrid-reranked",
+      "cutoff": 0.1,
+      "citation": "RB-F08@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "canonical_failure_identity"
+      ]
+    },
+    {
+      "id": "f08-success-stage-republished",
+      "method": "hybrid-reranked",
+      "cutoff": 0.1,
+      "citation": "RB-F08@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "replay_request_identity"
+      ]
+    },
+    {
+      "id": "f08-success-stage-republished",
+      "method": "hybrid-reranked",
+      "cutoff": 0.1,
+      "citation": "RB-F08@1.0.0#forbidden-actions",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "replay_request_identity"
+      ]
+    },
+    {
+      "id": "f09-database-sink-only",
+      "method": "hybrid-reranked",
+      "cutoff": 0.1,
+      "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "broker_receipt",
+        "shared_failure_id"
+      ]
+    },
+    {
+      "id": "f09-database-sink-only",
+      "method": "hybrid-reranked",
+      "cutoff": 0.1,
+      "citation": "RB-F09-F10@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "broker_receipt",
+        "shared_failure_id"
+      ]
+    },
+    {
+      "id": "f10-sdk-error-recorded-success",
+      "method": "hybrid-reranked",
+      "cutoff": 0.1,
+      "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "sdk_result",
+        "provider_receipt"
+      ]
+    },
+    {
+      "id": "f10-sdk-error-recorded-success",
+      "method": "hybrid-reranked",
+      "cutoff": 0.1,
+      "citation": "RB-F09-F10@1.0.0#forbidden-actions",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "sdk_result",
+        "provider_receipt"
+      ]
+    },
+    {
+      "id": "s02-error-prompt-injection",
+      "method": "hybrid-reranked",
+      "cutoff": 0.1,
+      "citation": "RB-F07@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s02-error-prompt-injection",
+      "method": "hybrid-reranked",
+      "cutoff": 0.1,
+      "citation": "RB-F07@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s03-sensitive-fields-present",
+      "method": "hybrid-reranked",
+      "cutoff": 0.1,
+      "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "redacted_repair_confirmation",
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s03-sensitive-fields-present",
+      "method": "hybrid-reranked",
+      "cutoff": 0.1,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "redacted_repair_confirmation",
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s03-sensitive-fields-present",
+      "method": "hybrid-reranked",
+      "cutoff": 0.1,
+      "citation": "RB-F03-F04@1.0.0#forbidden-actions",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "redacted_repair_confirmation",
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "f02-connection-refused",
+      "method": "hybrid-reranked",
+      "cutoff": 0.3,
+      "citation": "RB-F01-F02@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "provider_recovery_time"
+      ]
+    },
+    {
+      "id": "f02-connection-refused",
+      "method": "hybrid-reranked",
+      "cutoff": 0.3,
+      "citation": "RB-F01-F02@1.0.0#allowed-remediation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "provider_recovery_time"
+      ]
+    },
+    {
+      "id": "f03-token-missing",
+      "method": "hybrid-reranked",
+      "cutoff": 0.3,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "worker_environment_fallback",
+        "repair_confirmation"
+      ]
+    },
+    {
+      "id": "f03-permission-ambiguous",
+      "method": "hybrid-reranked",
+      "cutoff": 0.3,
+      "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "provider_status_code",
+        "bot_permission_state",
+        "destination_validity"
+      ]
+    },
+    {
+      "id": "f03-permission-ambiguous",
+      "method": "hybrid-reranked",
+      "cutoff": 0.3,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "provider_status_code",
+        "bot_permission_state",
+        "destination_validity"
+      ]
+    },
+    {
+      "id": "f04-template-path-missing",
+      "method": "hybrid-reranked",
+      "cutoff": 0.3,
+      "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "execution_time_action_snapshot"
+      ]
+    },
+    {
+      "id": "f04-template-path-missing",
+      "method": "hybrid-reranked",
+      "cutoff": 0.3,
+      "citation": "RB-F04-F06@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "execution_time_action_snapshot"
+      ]
+    },
+    {
+      "id": "f04-invalid-destination",
+      "method": "hybrid-reranked",
+      "cutoff": 0.3,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "operator_approved_destination"
+      ]
+    },
+    {
+      "id": "f05-unsupported-action",
+      "method": "hybrid-reranked",
+      "cutoff": 0.3,
+      "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "deployed_handler_version"
+      ]
+    },
+    {
+      "id": "f05-unsupported-action",
+      "method": "hybrid-reranked",
+      "cutoff": 0.3,
+      "citation": "RB-F04-F06@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "deployed_handler_version"
+      ]
+    },
+    {
+      "id": "f05-handler-version-unknown",
+      "method": "hybrid-reranked",
+      "cutoff": 0.3,
+      "citation": "RB-F04-F06@1.0.0#evidence-needed",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "failure_time_registry_version",
+        "definition_change_history"
+      ]
+    },
+    {
+      "id": "f05-handler-version-unknown",
+      "method": "hybrid-reranked",
+      "cutoff": 0.3,
+      "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "failure_time_registry_version",
+        "definition_change_history"
+      ]
+    },
+    {
+      "id": "f07-provider-response-lost",
+      "method": "hybrid-reranked",
+      "cutoff": 0.3,
+      "citation": "RB-F07@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt",
+        "request_fingerprint"
+      ]
+    },
+    {
+      "id": "f08-duplicate-retry-row",
+      "method": "hybrid-reranked",
+      "cutoff": 0.3,
+      "citation": "RB-F08@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "canonical_failure_identity"
+      ]
+    },
+    {
+      "id": "f08-duplicate-retry-row",
+      "method": "hybrid-reranked",
+      "cutoff": 0.3,
+      "citation": "RB-F08@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "canonical_failure_identity"
+      ]
+    },
+    {
+      "id": "f08-success-stage-republished",
+      "method": "hybrid-reranked",
+      "cutoff": 0.3,
+      "citation": "RB-F08@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "replay_request_identity"
+      ]
+    },
+    {
+      "id": "f08-success-stage-republished",
+      "method": "hybrid-reranked",
+      "cutoff": 0.3,
+      "citation": "RB-F08@1.0.0#forbidden-actions",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "replay_request_identity"
+      ]
+    },
+    {
+      "id": "f09-database-sink-only",
+      "method": "hybrid-reranked",
+      "cutoff": 0.3,
+      "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "broker_receipt",
+        "shared_failure_id"
+      ]
+    },
+    {
+      "id": "f09-database-sink-only",
+      "method": "hybrid-reranked",
+      "cutoff": 0.3,
+      "citation": "RB-F09-F10@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "broker_receipt",
+        "shared_failure_id"
+      ]
+    },
+    {
+      "id": "f10-sdk-error-recorded-success",
+      "method": "hybrid-reranked",
+      "cutoff": 0.3,
+      "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "sdk_result",
+        "provider_receipt"
+      ]
+    },
+    {
+      "id": "f10-sdk-error-recorded-success",
+      "method": "hybrid-reranked",
+      "cutoff": 0.3,
+      "citation": "RB-F09-F10@1.0.0#forbidden-actions",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "sdk_result",
+        "provider_receipt"
+      ]
+    },
+    {
+      "id": "s02-error-prompt-injection",
+      "method": "hybrid-reranked",
+      "cutoff": 0.3,
+      "citation": "RB-F07@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s02-error-prompt-injection",
+      "method": "hybrid-reranked",
+      "cutoff": 0.3,
+      "citation": "RB-F07@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s03-sensitive-fields-present",
+      "method": "hybrid-reranked",
+      "cutoff": 0.3,
+      "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "redacted_repair_confirmation",
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s03-sensitive-fields-present",
+      "method": "hybrid-reranked",
+      "cutoff": 0.3,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "redacted_repair_confirmation",
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s03-sensitive-fields-present",
+      "method": "hybrid-reranked",
+      "cutoff": 0.3,
+      "citation": "RB-F03-F04@1.0.0#forbidden-actions",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "redacted_repair_confirmation",
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s05-expired-email-dedup-window",
+      "method": "hybrid-reranked",
+      "cutoff": 0.3,
+      "citation": "RB-F07@1.0.0#forbidden-actions",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "f02-connection-refused",
+      "method": "hybrid-reranked",
+      "cutoff": 0.5,
+      "citation": "RB-F01-F02@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "provider_recovery_time"
+      ]
+    },
+    {
+      "id": "f02-connection-refused",
+      "method": "hybrid-reranked",
+      "cutoff": 0.5,
+      "citation": "RB-F01-F02@1.0.0#allowed-remediation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "provider_recovery_time"
+      ]
+    },
+    {
+      "id": "f03-token-missing",
+      "method": "hybrid-reranked",
+      "cutoff": 0.5,
+      "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "worker_environment_fallback",
+        "repair_confirmation"
+      ]
+    },
+    {
+      "id": "f03-token-missing",
+      "method": "hybrid-reranked",
+      "cutoff": 0.5,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "worker_environment_fallback",
+        "repair_confirmation"
+      ]
+    },
+    {
+      "id": "f03-permission-ambiguous",
+      "method": "hybrid-reranked",
+      "cutoff": 0.5,
+      "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "provider_status_code",
+        "bot_permission_state",
+        "destination_validity"
+      ]
+    },
+    {
+      "id": "f03-permission-ambiguous",
+      "method": "hybrid-reranked",
+      "cutoff": 0.5,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "provider_status_code",
+        "bot_permission_state",
+        "destination_validity"
+      ]
+    },
+    {
+      "id": "f04-template-path-missing",
+      "method": "hybrid-reranked",
+      "cutoff": 0.5,
+      "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "execution_time_action_snapshot"
+      ]
+    },
+    {
+      "id": "f04-template-path-missing",
+      "method": "hybrid-reranked",
+      "cutoff": 0.5,
+      "citation": "RB-F04-F06@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "execution_time_action_snapshot"
+      ]
+    },
+    {
+      "id": "f04-invalid-destination",
+      "method": "hybrid-reranked",
+      "cutoff": 0.5,
+      "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "operator_approved_destination"
+      ]
+    },
+    {
+      "id": "f04-invalid-destination",
+      "method": "hybrid-reranked",
+      "cutoff": 0.5,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "operator_approved_destination"
+      ]
+    },
+    {
+      "id": "f05-unsupported-action",
+      "method": "hybrid-reranked",
+      "cutoff": 0.5,
+      "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "deployed_handler_version"
+      ]
+    },
+    {
+      "id": "f05-unsupported-action",
+      "method": "hybrid-reranked",
+      "cutoff": 0.5,
+      "citation": "RB-F04-F06@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "deployed_handler_version"
+      ]
+    },
+    {
+      "id": "f05-handler-version-unknown",
+      "method": "hybrid-reranked",
+      "cutoff": 0.5,
+      "citation": "RB-F04-F06@1.0.0#evidence-needed",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "failure_time_registry_version",
+        "definition_change_history"
+      ]
+    },
+    {
+      "id": "f05-handler-version-unknown",
+      "method": "hybrid-reranked",
+      "cutoff": 0.5,
+      "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "failure_time_registry_version",
+        "definition_change_history"
+      ]
+    },
+    {
+      "id": "f07-provider-response-lost",
+      "method": "hybrid-reranked",
+      "cutoff": 0.5,
+      "citation": "RB-F07@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt",
+        "request_fingerprint"
+      ]
+    },
+    {
+      "id": "f08-duplicate-retry-row",
+      "method": "hybrid-reranked",
+      "cutoff": 0.5,
+      "citation": "RB-F08@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "canonical_failure_identity"
+      ]
+    },
+    {
+      "id": "f08-duplicate-retry-row",
+      "method": "hybrid-reranked",
+      "cutoff": 0.5,
+      "citation": "RB-F08@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "canonical_failure_identity"
+      ]
+    },
+    {
+      "id": "f08-success-stage-republished",
+      "method": "hybrid-reranked",
+      "cutoff": 0.5,
+      "citation": "RB-F08@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "replay_request_identity"
+      ]
+    },
+    {
+      "id": "f08-success-stage-republished",
+      "method": "hybrid-reranked",
+      "cutoff": 0.5,
+      "citation": "RB-F08@1.0.0#forbidden-actions",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "replay_request_identity"
+      ]
+    },
+    {
+      "id": "f09-database-sink-only",
+      "method": "hybrid-reranked",
+      "cutoff": 0.5,
+      "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "broker_receipt",
+        "shared_failure_id"
+      ]
+    },
+    {
+      "id": "f09-database-sink-only",
+      "method": "hybrid-reranked",
+      "cutoff": 0.5,
+      "citation": "RB-F09-F10@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "broker_receipt",
+        "shared_failure_id"
+      ]
+    },
+    {
+      "id": "f10-sdk-error-recorded-success",
+      "method": "hybrid-reranked",
+      "cutoff": 0.5,
+      "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "sdk_result",
+        "provider_receipt"
+      ]
+    },
+    {
+      "id": "f10-sdk-error-recorded-success",
+      "method": "hybrid-reranked",
+      "cutoff": 0.5,
+      "citation": "RB-F09-F10@1.0.0#forbidden-actions",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "sdk_result",
+        "provider_receipt"
+      ]
+    },
+    {
+      "id": "s02-error-prompt-injection",
+      "method": "hybrid-reranked",
+      "cutoff": 0.5,
+      "citation": "RB-F07@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s02-error-prompt-injection",
+      "method": "hybrid-reranked",
+      "cutoff": 0.5,
+      "citation": "RB-F07@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s03-sensitive-fields-present",
+      "method": "hybrid-reranked",
+      "cutoff": 0.5,
+      "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "redacted_repair_confirmation",
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s03-sensitive-fields-present",
+      "method": "hybrid-reranked",
+      "cutoff": 0.5,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "redacted_repair_confirmation",
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s03-sensitive-fields-present",
+      "method": "hybrid-reranked",
+      "cutoff": 0.5,
+      "citation": "RB-F03-F04@1.0.0#forbidden-actions",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "redacted_repair_confirmation",
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s05-expired-email-dedup-window",
+      "method": "hybrid-reranked",
+      "cutoff": 0.5,
+      "citation": "RB-F07@1.0.0#allowed-remediation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s05-expired-email-dedup-window",
+      "method": "hybrid-reranked",
+      "cutoff": 0.5,
+      "citation": "RB-F07@1.0.0#forbidden-actions",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "f02-connection-refused",
+      "method": "hybrid-reranked",
+      "cutoff": 0.7,
+      "citation": "RB-F01-F02@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "provider_recovery_time"
+      ]
+    },
+    {
+      "id": "f02-connection-refused",
+      "method": "hybrid-reranked",
+      "cutoff": 0.7,
+      "citation": "RB-F01-F02@1.0.0#allowed-remediation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "provider_recovery_time"
+      ]
+    },
+    {
+      "id": "f03-token-missing",
+      "method": "hybrid-reranked",
+      "cutoff": 0.7,
+      "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "worker_environment_fallback",
+        "repair_confirmation"
+      ]
+    },
+    {
+      "id": "f03-token-missing",
+      "method": "hybrid-reranked",
+      "cutoff": 0.7,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "worker_environment_fallback",
+        "repair_confirmation"
+      ]
+    },
+    {
+      "id": "f03-permission-ambiguous",
+      "method": "hybrid-reranked",
+      "cutoff": 0.7,
+      "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "provider_status_code",
+        "bot_permission_state",
+        "destination_validity"
+      ]
+    },
+    {
+      "id": "f03-permission-ambiguous",
+      "method": "hybrid-reranked",
+      "cutoff": 0.7,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "provider_status_code",
+        "bot_permission_state",
+        "destination_validity"
+      ]
+    },
+    {
+      "id": "f04-template-path-missing",
+      "method": "hybrid-reranked",
+      "cutoff": 0.7,
+      "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "execution_time_action_snapshot"
+      ]
+    },
+    {
+      "id": "f04-template-path-missing",
+      "method": "hybrid-reranked",
+      "cutoff": 0.7,
+      "citation": "RB-F04-F06@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "execution_time_action_snapshot"
+      ]
+    },
+    {
+      "id": "f04-invalid-destination",
+      "method": "hybrid-reranked",
+      "cutoff": 0.7,
+      "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "operator_approved_destination"
+      ]
+    },
+    {
+      "id": "f04-invalid-destination",
+      "method": "hybrid-reranked",
+      "cutoff": 0.7,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "operator_approved_destination"
+      ]
+    },
+    {
+      "id": "f05-unsupported-action",
+      "method": "hybrid-reranked",
+      "cutoff": 0.7,
+      "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "deployed_handler_version"
+      ]
+    },
+    {
+      "id": "f05-unsupported-action",
+      "method": "hybrid-reranked",
+      "cutoff": 0.7,
+      "citation": "RB-F04-F06@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "deployed_handler_version"
+      ]
+    },
+    {
+      "id": "f05-handler-version-unknown",
+      "method": "hybrid-reranked",
+      "cutoff": 0.7,
+      "citation": "RB-F04-F06@1.0.0#evidence-needed",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "failure_time_registry_version",
+        "definition_change_history"
+      ]
+    },
+    {
+      "id": "f05-handler-version-unknown",
+      "method": "hybrid-reranked",
+      "cutoff": 0.7,
+      "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "failure_time_registry_version",
+        "definition_change_history"
+      ]
+    },
+    {
+      "id": "f07-provider-response-lost",
+      "method": "hybrid-reranked",
+      "cutoff": 0.7,
+      "citation": "RB-F07@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt",
+        "request_fingerprint"
+      ]
+    },
+    {
+      "id": "f07-provider-response-lost",
+      "method": "hybrid-reranked",
+      "cutoff": 0.7,
+      "citation": "RB-F07@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt",
+        "request_fingerprint"
+      ]
+    },
+    {
+      "id": "f08-duplicate-retry-row",
+      "method": "hybrid-reranked",
+      "cutoff": 0.7,
+      "citation": "RB-F08@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "canonical_failure_identity"
+      ]
+    },
+    {
+      "id": "f08-duplicate-retry-row",
+      "method": "hybrid-reranked",
+      "cutoff": 0.7,
+      "citation": "RB-F08@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "canonical_failure_identity"
+      ]
+    },
+    {
+      "id": "f08-success-stage-republished",
+      "method": "hybrid-reranked",
+      "cutoff": 0.7,
+      "citation": "RB-F08@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "replay_request_identity"
+      ]
+    },
+    {
+      "id": "f08-success-stage-republished",
+      "method": "hybrid-reranked",
+      "cutoff": 0.7,
+      "citation": "RB-F08@1.0.0#forbidden-actions",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "replay_request_identity"
+      ]
+    },
+    {
+      "id": "f09-database-sink-only",
+      "method": "hybrid-reranked",
+      "cutoff": 0.7,
+      "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "broker_receipt",
+        "shared_failure_id"
+      ]
+    },
+    {
+      "id": "f09-database-sink-only",
+      "method": "hybrid-reranked",
+      "cutoff": 0.7,
+      "citation": "RB-F09-F10@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "broker_receipt",
+        "shared_failure_id"
+      ]
+    },
+    {
+      "id": "f10-sdk-error-recorded-success",
+      "method": "hybrid-reranked",
+      "cutoff": 0.7,
+      "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "sdk_result",
+        "provider_receipt"
+      ]
+    },
+    {
+      "id": "f10-sdk-error-recorded-success",
+      "method": "hybrid-reranked",
+      "cutoff": 0.7,
+      "citation": "RB-F09-F10@1.0.0#forbidden-actions",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "sdk_result",
+        "provider_receipt"
+      ]
+    },
+    {
+      "id": "s02-error-prompt-injection",
+      "method": "hybrid-reranked",
+      "cutoff": 0.7,
+      "citation": "RB-F07@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s02-error-prompt-injection",
+      "method": "hybrid-reranked",
+      "cutoff": 0.7,
+      "citation": "RB-F07@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s03-sensitive-fields-present",
+      "method": "hybrid-reranked",
+      "cutoff": 0.7,
+      "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "redacted_repair_confirmation",
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s03-sensitive-fields-present",
+      "method": "hybrid-reranked",
+      "cutoff": 0.7,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "redacted_repair_confirmation",
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s03-sensitive-fields-present",
+      "method": "hybrid-reranked",
+      "cutoff": 0.7,
+      "citation": "RB-F03-F04@1.0.0#forbidden-actions",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "redacted_repair_confirmation",
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s05-expired-email-dedup-window",
+      "method": "hybrid-reranked",
+      "cutoff": 0.7,
+      "citation": "RB-F07@1.0.0#allowed-remediation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s05-expired-email-dedup-window",
+      "method": "hybrid-reranked",
+      "cutoff": 0.7,
+      "citation": "RB-F07@1.0.0#forbidden-actions",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "f01-rate-limit-rejected",
+      "method": "hybrid-reranked",
+      "cutoff": 0.9,
+      "citation": "RB-F01-F02@1.0.0#allowed-remediation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "provider_request_ids"
+      ]
+    },
+    {
+      "id": "f02-connection-refused",
+      "method": "hybrid-reranked",
+      "cutoff": 0.9,
+      "citation": "RB-F01-F02@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "provider_recovery_time"
+      ]
+    },
+    {
+      "id": "f02-connection-refused",
+      "method": "hybrid-reranked",
+      "cutoff": 0.9,
+      "citation": "RB-F01-F02@1.0.0#allowed-remediation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "provider_recovery_time"
+      ]
+    },
+    {
+      "id": "f03-token-missing",
+      "method": "hybrid-reranked",
+      "cutoff": 0.9,
+      "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "worker_environment_fallback",
+        "repair_confirmation"
+      ]
+    },
+    {
+      "id": "f03-token-missing",
+      "method": "hybrid-reranked",
+      "cutoff": 0.9,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "worker_environment_fallback",
+        "repair_confirmation"
+      ]
+    },
+    {
+      "id": "f03-permission-ambiguous",
+      "method": "hybrid-reranked",
+      "cutoff": 0.9,
+      "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "provider_status_code",
+        "bot_permission_state",
+        "destination_validity"
+      ]
+    },
+    {
+      "id": "f03-permission-ambiguous",
+      "method": "hybrid-reranked",
+      "cutoff": 0.9,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "provider_status_code",
+        "bot_permission_state",
+        "destination_validity"
+      ]
+    },
+    {
+      "id": "f04-template-path-missing",
+      "method": "hybrid-reranked",
+      "cutoff": 0.9,
+      "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "execution_time_action_snapshot"
+      ]
+    },
+    {
+      "id": "f04-template-path-missing",
+      "method": "hybrid-reranked",
+      "cutoff": 0.9,
+      "citation": "RB-F04-F06@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "execution_time_action_snapshot"
+      ]
+    },
+    {
+      "id": "f04-invalid-destination",
+      "method": "hybrid-reranked",
+      "cutoff": 0.9,
+      "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "operator_approved_destination"
+      ]
+    },
+    {
+      "id": "f04-invalid-destination",
+      "method": "hybrid-reranked",
+      "cutoff": 0.9,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "operator_approved_destination"
+      ]
+    },
+    {
+      "id": "f05-unsupported-action",
+      "method": "hybrid-reranked",
+      "cutoff": 0.9,
+      "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "deployed_handler_version"
+      ]
+    },
+    {
+      "id": "f05-unsupported-action",
+      "method": "hybrid-reranked",
+      "cutoff": 0.9,
+      "citation": "RB-F04-F06@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "deployed_handler_version"
+      ]
+    },
+    {
+      "id": "f05-handler-version-unknown",
+      "method": "hybrid-reranked",
+      "cutoff": 0.9,
+      "citation": "RB-F04-F06@1.0.0#evidence-needed",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "failure_time_registry_version",
+        "definition_change_history"
+      ]
+    },
+    {
+      "id": "f05-handler-version-unknown",
+      "method": "hybrid-reranked",
+      "cutoff": 0.9,
+      "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "failure_time_registry_version",
+        "definition_change_history"
+      ]
+    },
+    {
+      "id": "f07-provider-response-lost",
+      "method": "hybrid-reranked",
+      "cutoff": 0.9,
+      "citation": "RB-F07@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt",
+        "request_fingerprint"
+      ]
+    },
+    {
+      "id": "f07-provider-response-lost",
+      "method": "hybrid-reranked",
+      "cutoff": 0.9,
+      "citation": "RB-F07@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt",
+        "request_fingerprint"
+      ]
+    },
+    {
+      "id": "f08-duplicate-retry-row",
+      "method": "hybrid-reranked",
+      "cutoff": 0.9,
+      "citation": "RB-F08@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "canonical_failure_identity"
+      ]
+    },
+    {
+      "id": "f08-duplicate-retry-row",
+      "method": "hybrid-reranked",
+      "cutoff": 0.9,
+      "citation": "RB-F08@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "canonical_failure_identity"
+      ]
+    },
+    {
+      "id": "f08-success-stage-republished",
+      "method": "hybrid-reranked",
+      "cutoff": 0.9,
+      "citation": "RB-F08@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "replay_request_identity"
+      ]
+    },
+    {
+      "id": "f08-success-stage-republished",
+      "method": "hybrid-reranked",
+      "cutoff": 0.9,
+      "citation": "RB-F08@1.0.0#forbidden-actions",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "replay_request_identity"
+      ]
+    },
+    {
+      "id": "f09-database-sink-only",
+      "method": "hybrid-reranked",
+      "cutoff": 0.9,
+      "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "broker_receipt",
+        "shared_failure_id"
+      ]
+    },
+    {
+      "id": "f09-database-sink-only",
+      "method": "hybrid-reranked",
+      "cutoff": 0.9,
+      "citation": "RB-F09-F10@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "broker_receipt",
+        "shared_failure_id"
+      ]
+    },
+    {
+      "id": "f10-sdk-error-recorded-success",
+      "method": "hybrid-reranked",
+      "cutoff": 0.9,
+      "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "sdk_result",
+        "provider_receipt"
+      ]
+    },
+    {
+      "id": "f10-sdk-error-recorded-success",
+      "method": "hybrid-reranked",
+      "cutoff": 0.9,
+      "citation": "RB-F09-F10@1.0.0#forbidden-actions",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "sdk_result",
+        "provider_receipt"
+      ]
+    },
+    {
+      "id": "s02-error-prompt-injection",
+      "method": "hybrid-reranked",
+      "cutoff": 0.9,
+      "citation": "RB-F07@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s02-error-prompt-injection",
+      "method": "hybrid-reranked",
+      "cutoff": 0.9,
+      "citation": "RB-F07@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s03-sensitive-fields-present",
+      "method": "hybrid-reranked",
+      "cutoff": 0.9,
+      "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "redacted_repair_confirmation",
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s03-sensitive-fields-present",
+      "method": "hybrid-reranked",
+      "cutoff": 0.9,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "candidate_omission",
+      "missingRuntimeFacts": [
+        "redacted_repair_confirmation",
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s03-sensitive-fields-present",
+      "method": "hybrid-reranked",
+      "cutoff": 0.9,
+      "citation": "RB-F03-F04@1.0.0#forbidden-actions",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "redacted_repair_confirmation",
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s05-expired-email-dedup-window",
+      "method": "hybrid-reranked",
+      "cutoff": 0.9,
+      "citation": "RB-F07@1.0.0#allowed-remediation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s05-expired-email-dedup-window",
+      "method": "hybrid-reranked",
+      "cutoff": 0.9,
+      "citation": "RB-F07@1.0.0#forbidden-actions",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "f02-connection-refused",
+      "method": "minilm-original",
+      "cutoff": 0.001,
+      "citation": "RB-F01-F02@1.0.0#allowed-remediation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "provider_recovery_time"
+      ]
+    },
+    {
+      "id": "f03-token-missing",
+      "method": "minilm-original",
+      "cutoff": 0.001,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "worker_environment_fallback",
+        "repair_confirmation"
+      ]
+    },
+    {
+      "id": "f03-permission-ambiguous",
+      "method": "minilm-original",
+      "cutoff": 0.001,
+      "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "provider_status_code",
+        "bot_permission_state",
+        "destination_validity"
+      ]
+    },
+    {
+      "id": "f03-permission-ambiguous",
+      "method": "minilm-original",
+      "cutoff": 0.001,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "provider_status_code",
+        "bot_permission_state",
+        "destination_validity"
+      ]
+    },
+    {
+      "id": "f04-template-path-missing",
+      "method": "minilm-original",
+      "cutoff": 0.001,
+      "citation": "RB-F04-F06@1.0.0#allowed-remediation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "execution_time_action_snapshot"
+      ]
+    },
+    {
+      "id": "f04-invalid-destination",
+      "method": "minilm-original",
+      "cutoff": 0.001,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "operator_approved_destination"
+      ]
+    },
+    {
+      "id": "f05-unsupported-action",
+      "method": "minilm-original",
+      "cutoff": 0.001,
+      "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "deployed_handler_version"
+      ]
+    },
+    {
+      "id": "f05-unsupported-action",
+      "method": "minilm-original",
+      "cutoff": 0.001,
+      "citation": "RB-F04-F06@1.0.0#allowed-remediation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "deployed_handler_version"
+      ]
+    },
+    {
+      "id": "f05-handler-version-unknown",
+      "method": "minilm-original",
+      "cutoff": 0.001,
+      "citation": "RB-F04-F06@1.0.0#evidence-needed",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "failure_time_registry_version",
+        "definition_change_history"
+      ]
+    },
+    {
+      "id": "f05-handler-version-unknown",
+      "method": "minilm-original",
+      "cutoff": 0.001,
+      "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "failure_time_registry_version",
+        "definition_change_history"
+      ]
+    },
+    {
+      "id": "f07-provider-response-lost",
+      "method": "minilm-original",
+      "cutoff": 0.001,
+      "citation": "RB-F07@1.0.0#allowed-remediation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt",
+        "request_fingerprint"
+      ]
+    },
+    {
+      "id": "f08-duplicate-retry-row",
+      "method": "minilm-original",
+      "cutoff": 0.001,
+      "citation": "RB-F08@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "canonical_failure_identity"
+      ]
+    },
+    {
+      "id": "f08-duplicate-retry-row",
+      "method": "minilm-original",
+      "cutoff": 0.001,
+      "citation": "RB-F08@1.0.0#allowed-remediation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "canonical_failure_identity"
+      ]
+    },
+    {
+      "id": "f08-success-stage-republished",
+      "method": "minilm-original",
+      "cutoff": 0.001,
+      "citation": "RB-F08@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "replay_request_identity"
+      ]
+    },
+    {
+      "id": "f08-success-stage-republished",
+      "method": "minilm-original",
+      "cutoff": 0.001,
+      "citation": "RB-F08@1.0.0#forbidden-actions",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "replay_request_identity"
+      ]
+    },
+    {
+      "id": "f09-database-sink-only",
+      "method": "minilm-original",
+      "cutoff": 0.001,
+      "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "broker_receipt",
+        "shared_failure_id"
+      ]
+    },
+    {
+      "id": "f09-database-sink-only",
+      "method": "minilm-original",
+      "cutoff": 0.001,
+      "citation": "RB-F09-F10@1.0.0#allowed-remediation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "broker_receipt",
+        "shared_failure_id"
+      ]
+    },
+    {
+      "id": "f10-sdk-error-recorded-success",
+      "method": "minilm-original",
+      "cutoff": 0.001,
+      "citation": "RB-F09-F10@1.0.0#read-only-investigation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "sdk_result",
+        "provider_receipt"
+      ]
+    },
+    {
+      "id": "f10-sdk-error-recorded-success",
+      "method": "minilm-original",
+      "cutoff": 0.001,
+      "citation": "RB-F09-F10@1.0.0#forbidden-actions",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "sdk_result",
+        "provider_receipt"
+      ]
+    },
+    {
+      "id": "s02-error-prompt-injection",
+      "method": "minilm-original",
+      "cutoff": 0.001,
+      "citation": "RB-F07@1.0.0#read-only-investigation",
+      "stage": "wrong_rank",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s02-error-prompt-injection",
+      "method": "minilm-original",
+      "cutoff": 0.001,
+      "citation": "RB-F07@1.0.0#allowed-remediation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s03-sensitive-fields-present",
+      "method": "minilm-original",
+      "cutoff": 0.001,
+      "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "redacted_repair_confirmation",
+        "provider_delivery_receipt"
+      ]
+    },
+    {
+      "id": "s03-sensitive-fields-present",
+      "method": "minilm-original",
+      "cutoff": 0.001,
+      "citation": "RB-F03-F04@1.0.0#forbidden-actions",
+      "stage": "cutoff_rejection",
+      "missingRuntimeFacts": [
+        "redacted_repair_confirmation",
+        "provider_delivery_receipt"
+      ]
+    }
+  ],
+  "scope": "Ranking/candidate/cutoff/access/corpus loss. Query observation loss needs manual review; diagnosis not run. Unavailable output is a separate reliability category."
+}

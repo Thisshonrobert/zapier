@@ -1,0 +1,13 @@
+{
+  "verifiedAt": 1791834499276,
+  "project": "gen-lang-client-0124525712",
+  "model": "gemini-3.5-flash-lite",
+  "keyHash": "9199498a4a37d5c853dbdaf748562bfe00485eb7fa9a5fc92b96042470a3cd2a",
+  "freeTier": true,
+  "freeGeneration": true,
+  "evidence": "AI Studio API Keys: existing credential matches one of the three masked keys, all belonging to gen-lang-client-0124525712, Free tier. Existing project rate-limit page: Gemini 3.5 Flash Lite 15 RPM, 250K TPM, 500 RPD. Credential not changed.",
+  "pricingSource": "https://ai.google.dev/gemini-api/docs/pricing",
+  "pricingEvidence": "Gemini 3.5 Flash-Lite standard input/output free of charge on Free Tier.",
+  "lastRateLimitRequestAt": null,
+  "recentRateLimitKnown": false
+}

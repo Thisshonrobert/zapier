@@ -1,0 +1,9 @@
+{
+  "recordedAt": 1791863626576,
+  "project": "gen-lang-client-0124525712",
+  "model": "gemini-3.5-flash-lite",
+  "confirmationHash": "03c748c36c9de2bd60058d12eeca7c790ad0f25a478cb7c7cc508957f9a6f5ff",
+  "originalVerifiedAt": 1791834499276,
+  "reuseConfirmedAccess": true,
+  "availabilityCheck": "first planned generation; no extra smoke-test generation"
+}

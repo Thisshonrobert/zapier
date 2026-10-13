@@ -1,0 +1,1 @@
+{"caseId":"f03-permission-ambiguous","arm":"minilm-procedure-question","startedAt":1791888905928,"status":200,"countedInputTokens":3102,"outputLimitTokens":2048,"totalLimitTokens":64000,"latencyMs":218.4947000000102,"failure":null,"networkCode":null,"tokenBudgetAccepted":true,"state":"finished"}

@@ -1,0 +1,16 @@
+{
+  "caseId": "f07-provider-response-lost",
+  "variant": "oracle",
+  "attempts": 0,
+  "startedAt": 1791834548908,
+  "promptHash": "b06b51353b4b2ea5ea028043111ab95d208a344467d927b0b1f64d73db94b1a9",
+  "configHash": "c087890dc02b52a11a2c8577faf7b8d3fdd2e18a71a132dd7c65817de5a36d19",
+  "output": null,
+  "usage": null,
+  "latencyMs": 0,
+  "schemaValid": false,
+  "citationMembership": null,
+  "serviceValid": false,
+  "providerError": null,
+  "failure": null
+}

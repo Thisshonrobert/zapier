@@ -1,0 +1,1 @@
+{"caseId":"f04-invalid-destination","arm":"minilm-procedure-question","startedAt":1791889025964,"status":200,"countedInputTokens":3054,"outputLimitTokens":2048,"totalLimitTokens":64000,"latencyMs":254.57209999999031,"failure":null,"networkCode":null,"tokenBudgetAccepted":true,"state":"finished"}

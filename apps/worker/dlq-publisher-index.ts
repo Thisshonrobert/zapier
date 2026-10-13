@@ -32,7 +32,7 @@ async function main() {
   ]);
   const kafka = new Kafka({
     clientId: "dlq-publisher",
-    brokers: ["localhost:9092"],
+    brokers: process.env.KAFKA_BROKERS?.split(",") ?? ["localhost:9092"],
   });
   const producer = kafka.producer();
   let stopping = false;
@@ -51,7 +51,7 @@ async function main() {
       reconciler: createDlqReconciler(db),
       publisher: createDlqPublisher(db, {
         send: async (message) => {
-          await producer.send({ topic: "zap-events-dlq", messages: [message] });
+          await producer.send({ topic: process.env.KAFKA_DLQ_TOPIC ?? "zap-events-dlq", messages: [message] });
         },
       }),
       isStopping: () => stopping,

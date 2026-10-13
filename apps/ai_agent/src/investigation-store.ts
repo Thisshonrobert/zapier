@@ -96,8 +96,12 @@ export class InvestigationStore {
             AND status IN ('queued', 'investigating', 'proposed', 'awaiting_approval')`, [input.caseId]);
         if (!active.rows[0]) {
           const { rows: [counts] } = await client.query<{ owner: number; actor: number }>(`
-            SELECT count(*) FILTER (WHERE subject_owner_id = $1)::int AS owner,
-              count(*) FILTER (WHERE actor_id = $2)::int AS actor
+            SELECT (count(*) FILTER (WHERE subject_owner_id = $1) +
+              (SELECT count(*) FROM ai_agent.task_c_evaluation_reservation
+                WHERE started_at > now() - interval '24 hours'))::int AS owner,
+              (count(*) FILTER (WHERE actor_id = $2) +
+              (SELECT count(*) FROM ai_agent.task_c_evaluation_reservation
+                WHERE started_at > now() - interval '24 hours'))::int AS actor
             FROM ai_agent.investigation WHERE created_at > now() - interval '24 hours'`,
           [input.subjectOwnerId, input.actorId]);
           if (counts!.owner >= limits.ownerRequestsPerDay || counts!.actor >= limits.operatorRequestsPerDay)
@@ -159,13 +163,21 @@ export class InvestigationStore {
             AND (SELECT count(*) FROM ai_agent.investigation active WHERE active.actor_id = job.actor_id
               AND active.status = 'investigating' AND active.lease_until > now()) < $3
             AND (SELECT coalesce(sum(reserved_tokens), 0) FROM ai_agent.investigation_budget budget
-              WHERE budget.subject_owner_id = job.subject_owner_id AND budget.created_at > now() - interval '24 hours') + $4 <= $5
+              WHERE budget.subject_owner_id = job.subject_owner_id AND budget.created_at > now() - interval '24 hours')
+              + (SELECT coalesce(sum(reserved_tokens), 0) FROM ai_agent.task_c_evaluation_reservation
+                WHERE started_at > now() - interval '24 hours') + $4 <= $5
             AND (SELECT coalesce(sum(reserved_tokens), 0) FROM ai_agent.investigation_budget budget
-              WHERE budget.actor_id = job.actor_id AND budget.created_at > now() - interval '24 hours') + $4 <= $6
+              WHERE budget.actor_id = job.actor_id AND budget.created_at > now() - interval '24 hours')
+              + (SELECT coalesce(sum(reserved_tokens), 0) FROM ai_agent.task_c_evaluation_reservation
+                WHERE started_at > now() - interval '24 hours') + $4 <= $6
             AND (SELECT coalesce(sum(reserved_cents), 0) FROM ai_agent.investigation_budget budget
-              WHERE budget.subject_owner_id = job.subject_owner_id AND budget.created_at > now() - interval '24 hours') + $7 <= $8
+              WHERE budget.subject_owner_id = job.subject_owner_id AND budget.created_at > now() - interval '24 hours')
+              + (SELECT coalesce(sum(reserved_cents), 0) FROM ai_agent.task_c_evaluation_reservation
+                WHERE started_at > now() - interval '24 hours') + $7 <= $8
             AND (SELECT coalesce(sum(reserved_cents), 0) FROM ai_agent.investigation_budget budget
-              WHERE budget.actor_id = job.actor_id AND budget.created_at > now() - interval '24 hours') + $7 <= $9
+              WHERE budget.actor_id = job.actor_id AND budget.created_at > now() - interval '24 hours')
+              + (SELECT coalesce(sum(reserved_cents), 0) FROM ai_agent.task_c_evaluation_reservation
+                WHERE started_at > now() - interval '24 hours') + $7 <= $9
           ORDER BY job.created_at FOR UPDATE SKIP LOCKED LIMIT 1)
         RETURNING *`, [randomUUID(), limits.ownerConcurrency, limits.operatorConcurrency,
           limits.tokensPerAttempt, limits.ownerTokenBudgetPerDay, limits.operatorTokenBudgetPerDay,
@@ -266,3 +278,23 @@ export class InvestigationStore {
     throw new Error("Investigation decision conflict");
   }
 }
+
+// queued
+//    ↓
+// investigating
+//    ↓
+// proposed
+//    ↓
+// awaiting approval / decision
+//    ↓
+// approved / rejected / ...
+
+// The store also handles:
+// - idempotency
+// - leases
+// - attempts
+// - quotas
+// - concurrency
+// - evidence snapshots
+// - decisions
+// - event history

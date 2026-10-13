@@ -1,0 +1,27 @@
+{
+  "artifacts": {
+    "corpus-historical.json": "4ac4f29d9901cd30e33c411b55bc783f5521864be329040989ca0049972f4112",
+    "corpus-production.json": "a84aae31a5518ecaf83b8ecb117f90e42d46e446e9fc919a86a0c530ebc5c796",
+    "datasets.json": "a1fc29ccf2b118bf55ccca6acb6c634de816172aaf18c1157454083c87c369b9",
+    "decision.md": "7a2d2fbb1129e6ca73807766f839f3d5d9016bab679c6c96736f9246b7554033",
+    "freeze.json": "b2adc3a6b38b30caf820ab2bf86c3ea61d498960c79c548ca9da75e7b183671c",
+    "inputs-historical-fresh-original.json": "a89531a5001efe86d16b956b8b3e7991babade22d0bec37f7db836758a5a6acf",
+    "inputs-historical-fresh-procedure.json": "269ff3cfc1cddd387e1514172d876adda0b2f4ad831fcec98adf532d8619f62e",
+    "inputs-historical-reused-original.json": "9aa3acfb33b38e9192aa5be815a37cf010988fcfa9268abb75c81c351b37a04b",
+    "inputs-historical-reused-procedure.json": "1c9844167618c6287b757b519a8dfbac434b1c3b043ca7051dbf1c46bc3f0b31",
+    "inputs-production-fresh-original.json": "3643d87bc9d96deea565fe71bff011f810db44803e377cb42a6760cc6d0f0128",
+    "inputs-production-fresh-procedure.json": "b60cb8871cae2278fea9045fecc3228fcad2eb94b1be6645881baefaaa72e3e3",
+    "inputs-production-reused-original.json": "005768e78c7fe8c06d9dbba52fc02db4025744f292fff873b28d1625e09c1641",
+    "inputs-production-reused-procedure.json": "e12d651db16fe14f55fb43335bd6c491135cdd9072daa15fe38ad7f7a4b0443e",
+    "report.json": "03e4fcc8be559c3b59c99e88fe3f8ca110e471a35c560d2c78da83e96c9734be",
+    "scores-historical-fresh-original.json": "0ad60843b248ce2cc7c924570fbd3db277c9be44d54e307bc77d1cae7f473813",
+    "scores-historical-fresh-procedure.json": "490e867a6bc3f4faf37692e8c9b9fb9893954256acf11fd83ba088e9120b53cf",
+    "scores-historical-reused-original.json": "20b169223271accaf5bc76d6959d0c073beaa37f45d33acc0dde73f8dd241f5b",
+    "scores-historical-reused-procedure.json": "60cec0377addbf0beea6f2ff6fff1fecb2b66128915cca5b376ed4d3e8d98331",
+    "scores-production-fresh-original.json": "1fc2d12db2c1c0835ac96ace3316800f669f970087c6936627f075da1fbb1bf7",
+    "scores-production-fresh-procedure.json": "c6401547a9ee9d683ceb54cf4f0bb60b7dbdb0a5522369babf58505ac6e15488",
+    "scores-production-reused-original.json": "4f410d739f027007c77aef5f56b2ca072ff7af81928f68d91e95cf9a77790647",
+    "scores-production-reused-procedure.json": "e0b9d0f82e8f48be2a0d7a11b539db002406e6d6564257e6792b02bfc9158aa7"
+  },
+  "decision": "retrieval_gates_failed_no_promotion"
+}

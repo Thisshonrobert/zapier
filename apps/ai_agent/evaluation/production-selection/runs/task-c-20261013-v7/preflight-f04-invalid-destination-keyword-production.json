@@ -1,0 +1,1 @@
+{"caseId":"f04-invalid-destination","arm":"keyword-production","startedAt":1791888995957,"status":200,"countedInputTokens":3054,"outputLimitTokens":2048,"totalLimitTokens":64000,"latencyMs":261.4253000000026,"failure":null,"networkCode":null,"tokenBudgetAccepted":true,"state":"finished"}

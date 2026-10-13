@@ -1,0 +1,36 @@
+{
+  "version": 3,
+  "createdAt": "2026-10-13T07:29:49.649Z",
+  "artifacts": {
+    "benchmark.json": "ec242f0a5ba53f43034f423f5b0a1503c8ac86d2b4bc9775891ad21ff7a933cc",
+    "config.json": "d2580ec30c43da9649facb861c940bf1bb98f6e74836938ba54f748d07b99fad",
+    "decision.json": "1ed0f5a26ad1d4638d716e2636614426238058e711d8096f82d742a297808f7f",
+    "decision.md": "8b7987ef7b38bdce80e735559b76389a7979a1ddc8740fb3b460a44ee4fc5dc0",
+    "followup-driver.mjs": "16cba049418874fcf4796087056d59c776ffd6878fbdf24a542d4e4d3f569380",
+    "followup-report.json": "6eb88d50c8ac3ef1ecdd4525ef2be2d35bf46421b244d16434325649f5e880e2",
+    "freeze.json": "edba49285ff556514a81709fb7392b5ecc39999deeeab1cdada6b64d6533b612",
+    "hypotheses.json": "16a127cd2edd3807f219c600cacb69e7dd1c9490eb3ef0f2422f682a46a07606",
+    "inference-hybrid-followup.json": "ddfc378ee21c517ed4ae1ba213a3f0837aece613eda2f0f1d583a9fbb748b6dd",
+    "inference-hybrid.json": "10678bfeac704e4745be0cebd44ef2adf4130d4d98cd744bb50e67c60f694445",
+    "inference-original-followup.json": "6aac9b4693ca91df0bf27ce4a899ec09e5e41e0887d643c802edaaa815266cf0",
+    "inference-original.json": "e626f1b3a406f3a62b72760394700c399ed8188ae58cc6e9a771366700bb6edd",
+    "interventions-freeze.json": "01170cb6948993c543830fba7747c392457ab6822470b5565fc23bf74aaa1356",
+    "query-variants.json": "467746c2e1074e942ac47c9d62f8d58d982fc193e65d010c7acdbb35775e9770",
+    "resource-monitor.mjs": "8ea29a0266aed73766b2d3abe2ad920a47b0f9295997827faf719a02c8321e65",
+    "scores-hybrid-followup.json": "d6eadf72ef21f36a47705121f5b05aeea90d38a6d9000d44f18257d4d7844c20",
+    "scores-hybrid-followup.json.resources.json": "9ceb8ac4839dfd7cf5f1f630cb83194ec0e08bc2813b17e6f927d499a1d36525",
+    "scores-original-followup.json": "dff02bc6dc300cef257341924fee24ec50603ea08de873fa7fa8c630d4d4f7f8",
+    "scores-original-followup.json.resources.json": "5d4d0623684370432665bd9e88eb6a73269b34de88272e5734b9bb32ab3c45d0"
+  },
+  "status": "no_candidate_passes",
+  "interventions": 2,
+  "externalGenerations": 0,
+  "costUsd": 0,
+  "verification": {
+    "focusedTests": "16 passed",
+    "directTypeCheck": "passed",
+    "rootTypeCheck": "passed",
+    "rootBuild": "passed; cached frontend",
+    "rootLint": "failed; exact 9-error/22-warning saved baseline matched; 12 source files unchanged"
+  }
+}

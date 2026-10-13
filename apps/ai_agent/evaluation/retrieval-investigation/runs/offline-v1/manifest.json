@@ -1,0 +1,19 @@
+{
+  "inputHashes": {
+    "apps/ai_agent/evaluation/agentic/runs/live-dev-20261012-v2/manifest.json": "0ed33aaf24ccd6e3453cfb6701249c85c88925f057d5597c5fc09e24a5417e7a",
+    "apps/ai_agent/evaluation/multi-query/runs/dev-v1/manifest.json": "5f80e108aafdf223b460d5e0602447d1b0305c1e6d760824c4446f81213654f3",
+    "apps/ai_agent/evaluation/agentic/runs/live-dev-20261012-v2/freeze.json": "73a640ef6fa68ff931ca370c39ce413d1535f21f5a686dadf52575ae55f3f410",
+    "apps/ai_agent/evaluation/agentic/runs/live-dev-20261012-v2/report.json": "86c56341d21c96932cc4cc0c457728596815e70f21e63737945ccaa1ba7899c1",
+    "apps/ai_agent/evaluation/multi-query/runs/dev-v1/report.json": "2593aeef579f75a8943c541009e6009a9c7752d1ab390695ef6cbea44a14f28d",
+    "apps/ai_agent/evaluation/phase-11a-baseline-v6/manifest.json": "668cea0b07e59a8fdb8446c619885869ae8d0174182913b8b69a010742b7435f",
+    "apps/ai_agent/evaluation/phase-11a-baseline-v6/cases.json": "4d34b56a6460c918ef4aa64ad02b4d29b7706eeec3b1dfa0e64bef3365c46efb",
+    "apps/ai_agent/evaluation/phase-11a-baseline-v6/contexts.json": "e5025d50fa72a32fa9a17d52ca298bd785beec1a9232cd0c83ed357ceef95d92",
+    "apps/ai_agent/evaluation/intent-dev/benchmark.json": "239c8c5f078744f0e7bb1e1fb99aff78b17849eda8ca5f7533ab49e2b3432691"
+  },
+  "sourceHashes": {
+    "investigate-retrieval.ts": "fedf3ef8025e73dfa2655b60514511aaefb0c2859740e4f472cfbca1bd679b26",
+    "retrieval-investigation.ts": "bc252cf3003fc0ef40ef26bed2524a705f6afd7187fe2450e790e6201da4da46"
+  },
+  "corpusHash": "a1a54a38871c59b13ec3fbc4c63f1c74801728f79e4c2773718948d7848bde97",
+  "reportHash": "11bb860d737b4f03948797ab947acbe1e4119d92068c7d941f31513b2d5db062"
+}

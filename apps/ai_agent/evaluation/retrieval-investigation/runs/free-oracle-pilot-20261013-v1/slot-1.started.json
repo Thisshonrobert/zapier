@@ -1,0 +1,16 @@
+{
+  "caseId": "f03-permission-ambiguous",
+  "variant": "baseline",
+  "attempts": 0,
+  "startedAt": 1791834528897,
+  "promptHash": "f040b2680b55ede42e7ab699bd56f4f7c40cf1a2e2d2c97065a9a60c56a6d22a",
+  "configHash": "c087890dc02b52a11a2c8577faf7b8d3fdd2e18a71a132dd7c65817de5a36d19",
+  "output": null,
+  "usage": null,
+  "latencyMs": 0,
+  "schemaValid": false,
+  "citationMembership": null,
+  "serviceValid": false,
+  "providerError": null,
+  "failure": null
+}

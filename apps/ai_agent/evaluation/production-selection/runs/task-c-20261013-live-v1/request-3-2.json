@@ -1,0 +1,10 @@
+{
+  "slot": 3,
+  "requestNumber": 2,
+  "operation": "generateContent",
+  "startedAt": 1791891644992,
+  "status": 200,
+  "latencyMs": 5936.95199999999,
+  "countedInputTokens": null,
+  "state": "finished"
+}

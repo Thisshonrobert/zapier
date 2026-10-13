@@ -1,0 +1,69 @@
+{
+  "slot": 3,
+  "caseId": "f02-connection-refused",
+  "arm": "keyword-production",
+  "repetition": 1,
+  "startedAt": 1791891644737,
+  "reservation": "64000 tokens; 16 cents",
+  "countedInputTokens": 3086,
+  "output": {
+    "status": "completed",
+    "diagnosis": {
+      "taxonomy_id": "F02",
+      "summary": "Connection refused before request transmission to Telegram, indicating provider or transport connectivity issue before transmission.",
+      "confidence": "high",
+      "evidence_refs": [
+        "fixture:failure:f02-connection-refused"
+      ],
+      "alternate_explanations": [
+        "Provider outage or firewall blocking connection"
+      ],
+      "missing_evidence": [
+        "provider_recovery_time",
+        "canonical_source_identity",
+        "action_metadata",
+        "payload_values",
+        "execution_record",
+        "attempt_history",
+        "execution_ordering",
+        "action_inputs",
+        "input_fingerprint",
+        "handler_registry"
+      ]
+    },
+    "proposal": {
+      "disposition": "engineering_escalation_required",
+      "kind": "escalate",
+      "summary": "Escalate provider or transport connection refusal failure for engineering investigation.",
+      "reasons": [
+        "Connection was refused before request transmission to the provider, which belongs to provider or transport infrastructure.",
+        "Delivery outcome is not_delivered across all attempts."
+      ],
+      "evidence_refs": [
+        "fixture:failure:f02-connection-refused"
+      ],
+      "runbook_citations": [
+        "RB-F01-F02@1.0.0#read-only-investigation"
+      ],
+      "preconditions": [
+        "Confirm provider availability and network routing independently."
+      ]
+    }
+  },
+  "usage": {
+    "input_tokens": 3086,
+    "output_tokens": 241,
+    "total_tokens": 3327
+  },
+  "latencyMs": 6226.220899999986,
+  "schemaValid": true,
+  "serviceAccepted": true,
+  "semanticReview": null,
+  "humanReleaseAcceptance": null,
+  "failure": null,
+  "providerError": null,
+  "requestStatuses": [
+    200,
+    200
+  ]
+}

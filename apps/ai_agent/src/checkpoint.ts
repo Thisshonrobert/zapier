@@ -23,7 +23,7 @@ export function agentPool(databaseUrl: string) {
 
 // Run this controlled migration before starting the service. Request handlers never call setup().
 export async function migrateAgent(pool: Pool, databaseUrl: string) {
-  for (const filename of ["0001_investigations.sql", "0002_investigation_decisions.sql", "0003_investigation_events.sql", "0004_operational_budget.sql", "0005_investigation_trace.sql"]) {
+  for (const filename of ["0001_investigations.sql", "0002_investigation_decisions.sql", "0003_investigation_events.sql", "0004_operational_budget.sql", "0005_investigation_trace.sql", "0006_task_c_evaluation_reservation.sql"]) {
     const migration = await Bun.file(new URL(`../migrations/${filename}`, import.meta.url)).text();
     await pool.query(migration);
   }
@@ -34,3 +34,5 @@ export async function migrateAgent(pool: Pool, databaseUrl: string) {
     await checkpoint.end();
   }
 }
+
+//uses postgresSaver to save the state of the investigation in the database so that if the server crashes, it can resume from the last checkpoint

@@ -1,0 +1,82 @@
+{
+  "generationRequests": 4,
+  "preflightRequests": 4,
+  "statuses": [
+    {
+      "operation": "countTokens",
+      "status": 200
+    },
+    {
+      "operation": "generateContent",
+      "status": 200
+    },
+    {
+      "operation": "countTokens",
+      "status": 200
+    },
+    {
+      "operation": "generateContent",
+      "status": 200
+    },
+    {
+      "operation": "countTokens",
+      "status": 200
+    },
+    {
+      "operation": "generateContent",
+      "status": 503
+    },
+    {
+      "operation": "countTokens",
+      "status": 200
+    },
+    {
+      "operation": "generateContent",
+      "status": 200
+    }
+  ],
+  "generationStartGapsMs": [
+    10217,
+    10050,
+    148812
+  ],
+  "knownUsage": {
+    "input_tokens": 9600,
+    "output_tokens": 1224,
+    "total_tokens": 10824
+  },
+  "unknownUsageGenerations": 1,
+  "costUsd": null,
+  "knownSuccessfulGenerationCostUsd": 0,
+  "failedRequestCostUsd": null,
+  "codeRevision": "b8aca2348fc1954d627a5462950112dbae785519",
+  "dirtyWorkspace": true,
+  "artifactHashes": {
+    "access.json": "f833173544c168eb4d1be20db7fa155cf399e14bd621dfc11b8a37c18eb8b867",
+    "attempt-1.json": "e12c6b066b9dbd6dd9d5e6145fe0cfe33281c84227fad3791a4097159fc04133",
+    "attempt-2.json": "3b2a94dc45585cdd6a2cfc380635c3cf167408256c437802c50a20daa8c2c5b4",
+    "attempt-4.json": "2a8ab7be5b3e82af3f7687758fad5141a6c5f4497e561c3463263d7c816b18b3",
+    "continuation.json": "2519e957b961f1161ad9c1faad085c84e49bd4c862dfc5531aa7a26fae13fc09",
+    "plan.json": "3e767aa9744b275d83f5db21a7c68de1eff6a0b7ce183420ee9177d34a6e4a84",
+    "report-final.json": "b5bfb4f79bd8f9a04df4069e630ee44ce8d905365726aa5d947d0aaea0a512fa",
+    "report.json": "4f23aae0be46f8d297098578771ba7ec4b2eb367ba66175009aff84091d4a0b4",
+    "requests.jsonl": "9c36be423960210794d488d173c7a8f3f51959b87dacc9ee0843e1d6c7f0ff61",
+    "result-1.json": "e7bd14c22dd77dfa09b36c1f1ac6b1ae4d00f0113067c488ae8d7eb3455a2d3a",
+    "result-2.json": "3ce805a136a9ba850264a4dbb52120c4746302b87e940c42b92571a0a6e7cee6",
+    "result-3.json": "c72fcc7bf3a8ff61ad98f0e599cdfe985040ab3fa98d310b23d23f5e37a2046f",
+    "result-4.json": "71daf5037b8da1825cc2c64652e741bf80b3e49e6f5dbeb6d5de9b95755bb907",
+    "started-1.json": "746699a98e9c1c18aafc295549ce92380e386d84393944d4226eb111482c0fb2",
+    "started-2.json": "fe89e875cbec48b80c6fa2c9c3944c6936f4189d74b82b094e19a2aa8ff39a04",
+    "started-3.json": "6d1f82190a7857d8ad071a931ae33b35eb2002a75f16e9864b2c8d922e6562a0",
+    "started-4.json": "7c7d3777920c8b7843eba6a7871e2728f1b73922614054bf01599ff8ac214c4a"
+  },
+  "sourceHashes": {
+    "apps/ai_agent/src/evaluation/causal-diagnosis.ts": "02c49acceda29dc5322f5e6c4b9b4784832d75efa713fa79b351fd93614dfd0b",
+    "apps/ai_agent/src/evaluation/causal-pilot.ts": "97e02651f954fd7f92476b27597abe8430d916a369e96caa18111593a5d48a88",
+    "apps/ai_agent/src/evaluation/oracle-pilot.ts": "89b85a961100b719020beeda125d425b01576d298c206c8a1f91990ddf9b02f3",
+    "apps/ai_agent/src/prompts.ts": "aa4a038a8b2748826933a9deb13aa883546d9d6cb79369a5424402d1c9485a9f",
+    "apps/ai_agent/src/graph.ts": "f3dec93c3dd58037f0b62d79f1fe3f5c7bfb12c79e9f07a3c99cc73d4c632e68",
+    "apps/ai_agent/src/gemini-model.ts": "18a909519c9bd16437e7ca54e125eb8c02430978d44b5501b572243e17a7c257",
+    "apps/ai_agent/tests/causal-diagnosis.test.ts": "0006042ea8894f010bc23ac3779b9c2e8085cacf019d77566cc5cee9df011afc"
+  }
+}

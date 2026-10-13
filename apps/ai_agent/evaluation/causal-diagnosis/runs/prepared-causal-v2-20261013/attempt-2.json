@@ -1,0 +1,67 @@
+{
+  "caseId": "f03-permission-ambiguous",
+  "variant": "candidate",
+  "promptVersion": "experimental-causal-v2",
+  "promptHash": "960e6b603ee2b9fdbc3a0672079d79ebc4dff762fcd81b16ecbdaaefd3e55f29",
+  "retrievalHash": "e7e1fb889302ce358cd04395ec9fd0fc240d44aaf3a8171eca1896badc2b8dff",
+  "settingsHash": "c087890dc02b52a11a2c8577faf7b8d3fdd2e18a71a132dd7c65817de5a36d19",
+  "startedAt": 1791866031286,
+  "output": {
+    "status": "completed",
+    "diagnosis": {
+      "taxonomy_id": "F03",
+      "summary": "Telegram delivery rejected with final error Invalid channel username under controlled fixture conditions",
+      "confidence": "medium",
+      "evidence_refs": [
+        "fixture:failure:f03-permission-ambiguous"
+      ],
+      "alternate_explanations": [
+        "Upstream destination configuration might be misconfigured or invalid"
+      ],
+      "missing_evidence": [
+        "provider_status_code",
+        "bot_permission_state",
+        "destination_validity",
+        "canonical_source_identity",
+        "action_metadata",
+        "payload_values",
+        "execution_record",
+        "attempt_history",
+        "execution_ordering",
+        "action_inputs",
+        "input_fingerprint",
+        "handler_registry"
+      ]
+    },
+    "proposal": {
+      "disposition": "owner_action_required",
+      "kind": "request_manual_fix",
+      "summary": "Review and correct the recipient channel username or destination configuration for the Telegram action",
+      "reasons": [
+        "Controlled fixture indicates Telegram delivery rejection with Invalid channel username",
+        "Destination configuration or recipient parameter requires manual owner correction"
+      ],
+      "evidence_refs": [
+        "fixture:failure:f03-permission-ambiguous"
+      ],
+      "runbook_citations": [
+        "RB-F04-F06@1.0.0#replay-and-approval"
+      ],
+      "preconditions": [
+        "Verify correct recipient channel username format before any subsequent action"
+      ]
+    }
+  },
+  "usage": {
+    "input_tokens": 3511,
+    "output_tokens": 249,
+    "total_tokens": 3760
+  },
+  "latencyMs": 2375.1693000000014,
+  "schemaValid": false,
+  "serviceValid": false,
+  "repairEvidenceIssue": null,
+  "consistencyIssues": null,
+  "failure": null,
+  "providerError": null
+}

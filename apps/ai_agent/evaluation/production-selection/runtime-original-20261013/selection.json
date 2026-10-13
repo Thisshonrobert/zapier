@@ -1,0 +1,29 @@
+{
+  "selectedAt": "2026-10-13T12:43:06.170Z",
+  "method": "minilm-original",
+  "defaultChanged": true,
+  "authority": "Explicit user request to select original MiniLM provisionally, change production retrieval, and enable local frontend diagnosis; user will start services and record the video themselves.",
+  "queryIntervention": "none",
+  "modelRevision": "a09144355adeed5f58c8ed011d209bf8ee5a1fec",
+  "cutoff": 0.001,
+  "historicalAcceptanceGatesPassed": false,
+  "independentProductionIncidentAcceptanceEstablished": false,
+  "productionCorpusSections": 54,
+  "remoteDeploymentPerformed": false,
+  "replayEnabledByThisChange": false,
+  "sourceHashes": {
+    "apps/ai_agent/src/tools/runbook-retriever.ts": "8bf9e5cfed625558b61938e4f0a7868445a6756e9b69910363ea4cc13182c046",
+    "apps/ai_agent/tests/runbook-retriever.test.ts": "c70cfea07fa5781ff78fa9408b90aced8ba14e1376bbaf082a41d0e6c18e5177",
+    "apps/ai_agent/package.json": "54f0cb89567b3c1a5dcfc1e549b7ccad5e861fc7140215efd72b828a8c8c74fe",
+    "bun.lock": "5e43667ac55c17ef5157acec02d846561f8e05a8d393597d844b19e2378067a1"
+  },
+  "verification": {
+    "focusedTests": 24,
+    "failures": 0,
+    "typeCheck": "passed",
+    "build": "passed_cached_frontend",
+    "frozenLockfile": "passed",
+    "scopedWhitespace": "passed",
+    "lint": "failed_in_unchanged_frontend_9_errors_22_warnings"
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "version": 2,
+  "createdAt": "2026-10-13T06:53:41.997Z",
+  "inputHashes": {
+    "apps/ai_agent/src/evaluation/retrieval-selection.ts": "c0b3cafb038ef12d1e62e2462ac63ad2194ba63e59c6460721ab0f9a0d5a8d80",
+    "apps/ai_agent/src/evaluation/retrieval-r2.ts": "ebc8b06ec719bf9ea49d714071fe2207d01603b07e9326aaa8812d3592d42c9d",
+    "apps/ai_agent/src/evaluation/retrieval-r21.ts": "f2972f4f36c58d38655e65e180527258c2e164e98ee0ce2a7bf0718c654156a1",
+    "apps/ai_agent/src/evaluation/retrieval-intent.ts": "7a47fff604cb6564379af395c879fa36c5c785a87a7cbdf70c84b77ae858632f",
+    "apps/ai_agent/src/evaluation/r23-analysis.ts": "6fb8b37789fe76bd2ad3573490f0f013e5864695ca5f5ff4cebb97ba179e35e6",
+    "apps/ai_agent/src/evaluation/r25-analysis.ts": "f98c0316fca3259350398c4dd64766c01db3a3656ac6ce42442e670c6d753d13",
+    "apps/ai_agent/src/evaluation/r21-models.mjs": "b8c6068d12c437dd8d34124bbca0abd148c48f20e187e87e2e9cebf1d98abdaf",
+    "apps/ai_agent/src/evaluation/r23-models.mjs": "7d9c93c2b8d3708a67fbb8fbc5b832124d1fbd2d76e1022133f5198985e41e01",
+    "apps/ai_agent/src/graph.ts": "f3dec93c3dd58037f0b62d79f1fe3f5c7bfb12c79e9f07a3c99cc73d4c632e68",
+    "apps/ai_agent/src/contracts.ts": "2db41bcdde5b4539c8b0d5514e2bf9dd61a3c26e8166bbf867b6f0d0435711eb",
+    "apps/ai_agent/src/tools/search-runbooks.ts": "7c433e3707ecfbca8d6ca6125ea3a2d0a53938a1481111af7783497e0cdd99f2",
+    "apps/ai_agent/src/tools/minilm-process.mjs": "d42eb66221892bc5511525df21a41177146e5b29fae43352b50a30e50e6920d2",
+    "apps/ai_agent/package.json": "b5924d78b0794e03fdd1f6a4a79f168fc0c0c1b79e3c5546021eb61449d04a22",
+    "bun.lock": "c7b3fb09ba8ac2cc28aeb6dda101746dafc09caae1ae9b851ecd75847a353afa",
+    "apps/ai_agent/evaluation/production-selection/development-review-v2.json": "ca0c0e6de060b5f7dc2fe4f5f2ffebd561eca2ef1808a77a70f133cf09226360",
+    "apps/ai_agent/evaluation/production-selection/protocol.json": "3ac97e3a5c4d0fdd7473faebd3bc787581dc7d61396502190467b509bdca4cf7",
+    "apps/ai_agent/evaluation/production-selection/scope-revision-v2.json": "075f70d286f65afc9219039088171fafda1d821dbc9ca3eaf2607180531f3013"
+  },
+  "modelFileHashes": {
+    ".tmp-turbo-user/r2-models/Xenova/all-MiniLM-L6-v2/751bff37182d3f1213fa05d7196b954e230abad9/config.json": "7135149f7cffa1a573466c6e4d8423ed73b62fd2332c575bf738a0d033f70df7",
+    ".tmp-turbo-user/r2-models/Xenova/all-MiniLM-L6-v2/751bff37182d3f1213fa05d7196b954e230abad9/tokenizer.json": "da0e79933b9ed51798a3ae27893d3c5fa4a201126cef75586296df9b4d2c62a0",
+    ".tmp-turbo-user/r2-models/Xenova/all-MiniLM-L6-v2/751bff37182d3f1213fa05d7196b954e230abad9/tokenizer_config.json": "9261e7d79b44c8195c1cada2b453e55b00aeb81e907a6664974b4d7776172ab3",
+    ".tmp-turbo-user/r2-models/Xenova/all-MiniLM-L6-v2/751bff37182d3f1213fa05d7196b954e230abad9/onnx/model_quantized.onnx": "afdb6f1a0e45b715d0bb9b11772f032c399babd23bfc31fed1c170afc848bdb1",
+    ".tmp-turbo-user/r2-models/Xenova/ms-marco-MiniLM-L-6-v2/a09144355adeed5f58c8ed011d209bf8ee5a1fec/config.json": "d827779a72d27ae68cf878a6fc2e954542663fe21ca515d9f4783fc96be2d37e",
+    ".tmp-turbo-user/r2-models/Xenova/ms-marco-MiniLM-L-6-v2/a09144355adeed5f58c8ed011d209bf8ee5a1fec/tokenizer.json": "d241a60d5e8f04cc1b2b3e9ef7a4921b27bf526d9f6050ab90f9267a1f9e5c66",
+    ".tmp-turbo-user/r2-models/Xenova/ms-marco-MiniLM-L-6-v2/a09144355adeed5f58c8ed011d209bf8ee5a1fec/tokenizer_config.json": "0b29c7bfc889e53b36d9dd3e686dd4300f6525110eaa98c76a5dafceb2029f53",
+    ".tmp-turbo-user/r2-models/Xenova/ms-marco-MiniLM-L-6-v2/a09144355adeed5f58c8ed011d209bf8ee5a1fec/onnx/model_quantized.onnx": "e9d8ebf845c413e981c175bfe49a3bfa9b3dcce2a3ba54875ee5df5a58639fbe"
+  },
+  "artifactHashes": {
+    "benchmark.json": "f614ad61c505d276e344008af56bb47ac70b8b5c14a49374830a9ce914798759",
+    "config.json": "d2580ec30c43da9649facb861c940bf1bb98f6e74836938ba54f748d07b99fad",
+    "inference-hybrid.json": "10678bfeac704e4745be0cebd44ef2adf4130d4d98cd744bb50e67c60f694445",
+    "inference-original.json": "e626f1b3a406f3a62b72760394700c399ed8188ae58cc6e9a771366700bb6edd"
+  },
+  "corpusHash": "a84aae31a5518ecaf83b8ecb117f90e42d46e446e9fc919a86a0c530ebc5c796",
+  "reviewHash": "ca0c0e6de060b5f7dc2fe4f5f2ffebd561eca2ef1808a77a70f133cf09226360",
+  "hybridInputHash": "df33093d3130680a7c9ec520f7e7ff60e5f8da3e52b00df6e661eacfa85c1569",
+  "originalInputHash": "2c4c10ca8f3c346121c6cb9cc539d7d18a605b67b41b8c3c27feab911c5dc9e7",
+  "configHash": "6f316a1d9379ad055d60f3605a76648af7734cdf8bcad94ceeb32c49424a188e",
+  "originalConfigHash": "3f5ba2cbe21cdb9970ed2a073cc66a09f91a0214a7b4e8afc0b110231a76cd0c",
+  "hardware": {
+    "cpu": "12th Gen Intel(R) Core(TM) i5-12500H",
+    "cores": 16,
+    "memoryBytes": 16782315520,
+    "platform": "win32",
+    "architecture": "x64",
+    "bun": "1.2.20"
+  },
+  "productionReady": false,
+  "calls": 0,
+  "costUsd": 0
+}

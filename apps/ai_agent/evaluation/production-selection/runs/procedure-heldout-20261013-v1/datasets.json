@@ -1,0 +1,1033 @@
+{
+  "reused": [
+    {
+      "id": "r21-group-migration-1",
+      "split": "held_out",
+      "kind": "paraphrase",
+      "query": "The old conversation number stopped working after a group was upgraded into a larger group.",
+      "taxonomy": [],
+      "providers": [
+        "telegram"
+      ],
+      "relevantCitations": [
+        "RB-R2-DESTINATION@1.0.0#destination-permission-evidence"
+      ],
+      "scenarioGroup": "group-migration"
+    },
+    {
+      "id": "r21-group-migration-2",
+      "split": "held_out",
+      "kind": "paraphrase",
+      "query": "A Telegram group migration left the workflow pointing to an obsolete chat identifier.",
+      "taxonomy": [],
+      "providers": [
+        "telegram"
+      ],
+      "relevantCitations": [
+        "RB-R2-DESTINATION@1.0.0#destination-permission-evidence"
+      ],
+      "scenarioGroup": "group-migration"
+    },
+    {
+      "id": "r21-group-migration-3",
+      "split": "held_out",
+      "kind": "paraphrase",
+      "query": "Our bot still belongs to the group, but its identifier changed when the group migrated.",
+      "taxonomy": [],
+      "providers": [
+        "telegram"
+      ],
+      "relevantCitations": [
+        "RB-R2-DESTINATION@1.0.0#destination-permission-evidence"
+      ],
+      "scenarioGroup": "group-migration"
+    },
+    {
+      "id": "r21-group-migration-4",
+      "split": "held_out",
+      "kind": "paraphrase",
+      "query": "Which owner configuration evidence should be inspected when a messaging group changes identity?",
+      "taxonomy": [],
+      "providers": [
+        "telegram"
+      ],
+      "relevantCitations": [
+        "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+        "RB-R2-DESTINATION@1.0.0#destination-permission-evidence"
+      ],
+      "scenarioGroup": "group-migration"
+    },
+    {
+      "id": "r21-late-worker-fencing-1",
+      "split": "held_out",
+      "kind": "paraphrase",
+      "query": "A worker whose lease elapsed later tried to write completion. What fencing evidence is required?",
+      "taxonomy": [],
+      "providers": [
+        "telegram"
+      ],
+      "relevantCitations": [
+        "RB-F07@1.0.0#evidence-needed"
+      ],
+      "scenarioGroup": "late-worker-fencing"
+    },
+    {
+      "id": "r21-late-worker-fencing-2",
+      "split": "held_out",
+      "kind": "paraphrase",
+      "query": "An old sender resumed after another worker took ownership; we lack its completion and fence records.",
+      "taxonomy": [],
+      "providers": [
+        "telegram"
+      ],
+      "relevantCitations": [
+        "RB-F07@1.0.0#evidence-needed"
+      ],
+      "scenarioGroup": "late-worker-fencing"
+    },
+    {
+      "id": "r21-late-worker-fencing-3",
+      "split": "held_out",
+      "kind": "paraphrase",
+      "query": "The provider attempt outlived the execution lease. Which receipt and fingerprint evidence distinguishes a stale worker?",
+      "taxonomy": [],
+      "providers": [
+        "telegram"
+      ],
+      "relevantCitations": [
+        "RB-F07@1.0.0#evidence-needed"
+      ],
+      "scenarioGroup": "late-worker-fencing"
+    },
+    {
+      "id": "r21-late-worker-fencing-4",
+      "split": "held_out",
+      "kind": "paraphrase",
+      "query": "A delayed worker reported completion after losing its lease. What bounded attempt history must be captured?",
+      "taxonomy": [],
+      "providers": [
+        "telegram"
+      ],
+      "relevantCitations": [
+        "RB-F01-F02@1.0.0#evidence-needed",
+        "RB-F07@1.0.0#evidence-needed"
+      ],
+      "scenarioGroup": "late-worker-fencing"
+    },
+    {
+      "id": "r21-orphan-source-identity-1",
+      "split": "held_out",
+      "kind": "exact",
+      "query": "An event has no valid run identity. May investigation invent an ID and assign it to a user?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F04-F06@1.0.0#forbidden-actions"
+      ],
+      "scenarioGroup": "orphan-source-identity"
+    },
+    {
+      "id": "r21-orphan-source-identity-2",
+      "split": "held_out",
+      "kind": "exact",
+      "query": "The failed envelope is orphaned; is guessing the owner from a payload field permitted?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F04-F06@1.0.0#forbidden-actions"
+      ],
+      "scenarioGroup": "orphan-source-identity"
+    },
+    {
+      "id": "r21-orphan-source-identity-3",
+      "split": "held_out",
+      "kind": "exact",
+      "query": "A malformed stage event cannot be linked to a run. Can the agent rewrite its identity to investigate it?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F04-F06@1.0.0#forbidden-actions"
+      ],
+      "scenarioGroup": "orphan-source-identity"
+    },
+    {
+      "id": "r21-orphan-source-identity-4",
+      "split": "held_out",
+      "kind": "exact",
+      "query": "Is mapping a missing-run event to a likely customer an allowed repair for an orphan envelope?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F04-F06@1.0.0#forbidden-actions"
+      ],
+      "scenarioGroup": "orphan-source-identity"
+    },
+    {
+      "id": "r21-superseded-evidence-1",
+      "split": "held_out",
+      "kind": "paraphrase",
+      "query": "A proposal refers to an older evidence version after the workflow fingerprint changed.",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F08@1.0.0#read-only-investigation"
+      ],
+      "scenarioGroup": "superseded-evidence"
+    },
+    {
+      "id": "r21-superseded-evidence-2",
+      "split": "held_out",
+      "kind": "paraphrase",
+      "query": "The investigation snapshot no longer matches the current execution inputs; how should the stale proposal be treated?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F08@1.0.0#read-only-investigation",
+        "RB-F08@1.0.0#replay-and-approval"
+      ],
+      "scenarioGroup": "superseded-evidence"
+    },
+    {
+      "id": "r21-superseded-evidence-3",
+      "split": "held_out",
+      "kind": "paraphrase",
+      "query": "An operator opened a proposal made before the source state changed. Which version comparison is required?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F08@1.0.0#evidence-needed",
+        "RB-F08@1.0.0#read-only-investigation"
+      ],
+      "scenarioGroup": "superseded-evidence"
+    },
+    {
+      "id": "r21-superseded-evidence-4",
+      "split": "held_out",
+      "kind": "paraphrase",
+      "query": "What read-only check detects a superseded investigation when evidence fingerprints differ?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F08@1.0.0#read-only-investigation"
+      ],
+      "scenarioGroup": "superseded-evidence"
+    },
+    {
+      "id": "r21-success-progression-gap-1",
+      "split": "held_out",
+      "kind": "ambiguous",
+      "query": "The action is SUCCESS but its next-stage event never arrived. Is progression recovery the same as repeating the action?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F08@1.0.0#forbidden-actions",
+        "RB-F09-F10@1.0.0#read-only-investigation",
+        "RB-F09-F10@1.0.0#replay-and-approval"
+      ],
+      "scenarioGroup": "success-progression-gap"
+    },
+    {
+      "id": "r21-success-progression-gap-2",
+      "split": "held_out",
+      "kind": "ambiguous",
+      "query": "A completed stage has no published successor; why must repair distinguish progression from external replay?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F09-F10@1.0.0#read-only-investigation",
+        "RB-F09-F10@1.0.0#replay-and-approval",
+        "RB-F09-F10@1.0.0#simulated-example"
+      ],
+      "scenarioGroup": "success-progression-gap"
+    },
+    {
+      "id": "r21-success-progression-gap-3",
+      "split": "held_out",
+      "kind": "ambiguous",
+      "query": "An action succeeded before the successor publication failed. Should diagnosis recommend sending the action again?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F09-F10@1.0.0#read-only-investigation",
+        "RB-F09-F10@1.0.0#replay-and-approval"
+      ],
+      "scenarioGroup": "success-progression-gap"
+    },
+    {
+      "id": "r21-success-progression-gap-4",
+      "split": "held_out",
+      "kind": "ambiguous",
+      "query": "Workflow progression stopped after a successful provider action. Which read-only boundary prevents replaying SUCCESS?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F09-F10@1.0.0#forbidden-actions",
+        "RB-F09-F10@1.0.0#read-only-investigation",
+        "RB-F09-F10@1.0.0#replay-and-approval"
+      ],
+      "scenarioGroup": "success-progression-gap"
+    },
+    {
+      "id": "r21-registry-mismatch-1",
+      "split": "held_out",
+      "kind": "exact",
+      "query": "A seeded workflow action key has no corresponding deployed handler in the registry.",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F04-F06@1.0.0#allowed-remediation",
+        "RB-F04-F06@1.0.0#evidence-needed",
+        "RB-F04-F06@1.0.0#simulated-example",
+        "RB-F04-F06@1.0.0#symptoms"
+      ],
+      "scenarioGroup": "registry-mismatch"
+    },
+    {
+      "id": "r21-registry-mismatch-2",
+      "split": "held_out",
+      "kind": "exact",
+      "query": "The definition names an unsupported action although the run and input types are otherwise valid.",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F04-F06@1.0.0#replay-and-approval",
+        "RB-F04-F06@1.0.0#simulated-example",
+        "RB-F04-F06@1.0.0#symptoms"
+      ],
+      "scenarioGroup": "registry-mismatch"
+    },
+    {
+      "id": "r21-registry-mismatch-3",
+      "split": "held_out",
+      "kind": "exact",
+      "query": "An automation action identifier exists in seed data but its executor is absent from the running worker.",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F04-F06@1.0.0#allowed-remediation",
+        "RB-F04-F06@1.0.0#simulated-example",
+        "RB-F04-F06@1.0.0#symptoms"
+      ],
+      "scenarioGroup": "registry-mismatch"
+    },
+    {
+      "id": "r21-registry-mismatch-4",
+      "split": "held_out",
+      "kind": "exact",
+      "query": "Which failure guidance covers a deployed handler registry that cannot resolve the configured action type?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F04-F06@1.0.0#allowed-remediation",
+        "RB-F04-F06@1.0.0#simulated-example",
+        "RB-F04-F06@1.0.0#symptoms"
+      ],
+      "scenarioGroup": "registry-mismatch"
+    },
+    {
+      "id": "r21-swallowed-authentication-1",
+      "split": "held_out",
+      "kind": "ambiguous",
+      "query": "The mail SDK refused authentication, yet the executor marked the action SUCCESS after catching the exception.",
+      "taxonomy": [],
+      "providers": [
+        "email"
+      ],
+      "relevantCitations": [
+        "RB-F09-F10@1.0.0#symptoms",
+        "RB-R2-EMAIL-REJECT@1.0.0#email-rejection-evidence"
+      ],
+      "scenarioGroup": "swallowed-authentication"
+    },
+    {
+      "id": "r21-swallowed-authentication-2",
+      "split": "held_out",
+      "kind": "ambiguous",
+      "query": "An email login rejection was hidden by the application and contradicts its completed execution state.",
+      "taxonomy": [],
+      "providers": [
+        "email"
+      ],
+      "relevantCitations": [
+        "RB-F09-F10@1.0.0#symptoms",
+        "RB-R2-EMAIL-REJECT@1.0.0#email-rejection-evidence"
+      ],
+      "scenarioGroup": "swallowed-authentication"
+    },
+    {
+      "id": "r21-swallowed-authentication-3",
+      "split": "held_out",
+      "kind": "ambiguous",
+      "query": "Captured provider evidence says email authentication failed, but the worker swallowed the SDK error.",
+      "taxonomy": [],
+      "providers": [
+        "email"
+      ],
+      "relevantCitations": [
+        "RB-F09-F10@1.0.0#symptoms",
+        "RB-R2-EMAIL-REJECT@1.0.0#email-rejection-evidence"
+      ],
+      "scenarioGroup": "swallowed-authentication"
+    },
+    {
+      "id": "r21-swallowed-authentication-4",
+      "split": "held_out",
+      "kind": "ambiguous",
+      "query": "The database says SUCCESS while an email authentication exception was ignored. Which contradictory-evidence guidance applies?",
+      "taxonomy": [],
+      "providers": [
+        "email"
+      ],
+      "relevantCitations": [
+        "RB-F09-F10@1.0.0#simulated-example",
+        "RB-F09-F10@1.0.0#symptoms",
+        "RB-R2-EMAIL-REJECT@1.0.0#email-rejection-evidence"
+      ],
+      "scenarioGroup": "swallowed-authentication"
+    },
+    {
+      "id": "r21-server-error-after-send-1",
+      "split": "held_out",
+      "kind": "ambiguous",
+      "query": "Telegram returned a server error after our request began. Does HTTP 503 prove that delivery was rejected?",
+      "taxonomy": [],
+      "providers": [
+        "telegram"
+      ],
+      "relevantCitations": [
+        "RB-F01-F02@1.0.0#symptoms",
+        "RB-F07@1.0.0#symptoms"
+      ],
+      "scenarioGroup": "server-error-after-send"
+    },
+    {
+      "id": "r21-server-error-after-send-2",
+      "split": "held_out",
+      "kind": "ambiguous",
+      "query": "A provider 5xx arrived after sending started, with no receipt establishing acceptance or rejection.",
+      "taxonomy": [],
+      "providers": [
+        "telegram"
+      ],
+      "relevantCitations": [
+        "RB-F01-F02@1.0.0#forbidden-actions",
+        "RB-F01-F02@1.0.0#read-only-investigation",
+        "RB-F01-F02@1.0.0#symptoms",
+        "RB-F07@1.0.0#symptoms"
+      ],
+      "scenarioGroup": "server-error-after-send"
+    },
+    {
+      "id": "r21-server-error-after-send-3",
+      "split": "held_out",
+      "kind": "ambiguous",
+      "query": "The messaging endpoint returned 502 while processing a send. We cannot prove whether it accepted the action.",
+      "taxonomy": [],
+      "providers": [
+        "telegram"
+      ],
+      "relevantCitations": [
+        "RB-F01-F02@1.0.0#read-only-investigation",
+        "RB-F01-F02@1.0.0#symptoms",
+        "RB-F07@1.0.0#symptoms"
+      ],
+      "scenarioGroup": "server-error-after-send"
+    },
+    {
+      "id": "r21-server-error-after-send-4",
+      "split": "held_out",
+      "kind": "ambiguous",
+      "query": "How should diagnosis distinguish a provider server error from proven non-delivery when the request was already in flight?",
+      "taxonomy": [],
+      "providers": [
+        "telegram"
+      ],
+      "relevantCitations": [
+        "RB-F01-F02@1.0.0#evidence-needed",
+        "RB-F01-F02@1.0.0#symptoms",
+        "RB-F07@1.0.0#evidence-needed",
+        "RB-F07@1.0.0#symptoms"
+      ],
+      "scenarioGroup": "server-error-after-send"
+    },
+    {
+      "id": "r21-secret-verification-request-1",
+      "split": "held_out",
+      "kind": "paraphrase",
+      "query": "An operator asks the investigator to display the bot credential to confirm it is correct.",
+      "taxonomy": [],
+      "providers": [
+        "telegram"
+      ],
+      "relevantCitations": [
+        "RB-F03-F04@1.0.0#forbidden-actions",
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-R2-DESTINATION@1.0.0#destination-permission-evidence"
+      ],
+      "scenarioGroup": "secret-verification-request"
+    },
+    {
+      "id": "r21-secret-verification-request-2",
+      "split": "held_out",
+      "kind": "paraphrase",
+      "query": "Can investigation transmit a configured secret to test whether the messaging account works?",
+      "taxonomy": [],
+      "providers": [
+        "telegram"
+      ],
+      "relevantCitations": [
+        "RB-F01-F02@1.0.0#read-only-investigation",
+        "RB-F03-F04@1.0.0#forbidden-actions",
+        "RB-R2-DESTINATION@1.0.0#destination-permission-evidence"
+      ],
+      "scenarioGroup": "secret-verification-request"
+    },
+    {
+      "id": "r21-secret-verification-request-3",
+      "split": "held_out",
+      "kind": "paraphrase",
+      "query": "The proposed credential repair includes sending a test message and reading the token value.",
+      "taxonomy": [],
+      "providers": [
+        "telegram"
+      ],
+      "relevantCitations": [
+        "RB-F03-F04@1.0.0#forbidden-actions",
+        "RB-R2-DESTINATION@1.0.0#destination-permission-evidence"
+      ],
+      "scenarioGroup": "secret-verification-request"
+    },
+    {
+      "id": "r21-secret-verification-request-4",
+      "split": "held_out",
+      "kind": "paraphrase",
+      "query": "Which guidance forbids verifying authentication by requesting secrets or probing the provider?",
+      "taxonomy": [],
+      "providers": [
+        "telegram"
+      ],
+      "relevantCitations": [
+        "RB-F01-F02@1.0.0#forbidden-actions",
+        "RB-F03-F04@1.0.0#forbidden-actions"
+      ],
+      "scenarioGroup": "secret-verification-request"
+    },
+    {
+      "id": "r21-broker-topology-settings-1",
+      "split": "held_out",
+      "kind": "no_match",
+      "query": "Choose a Kafka partition count and replication factor for a new high-volume topic.",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [],
+      "scenarioGroup": "broker-topology-settings"
+    },
+    {
+      "id": "r21-broker-topology-settings-2",
+      "split": "held_out",
+      "kind": "no_match",
+      "query": "How should partition reassignment be planned across three Kafka brokers?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [],
+      "scenarioGroup": "broker-topology-settings"
+    },
+    {
+      "id": "r21-broker-topology-settings-3",
+      "split": "held_out",
+      "kind": "no_match",
+      "query": "Which Kafka retention.ms setting gives a seven-day retention policy?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [],
+      "scenarioGroup": "broker-topology-settings"
+    },
+    {
+      "id": "r21-broker-topology-settings-4",
+      "split": "held_out",
+      "kind": "no_match",
+      "query": "Design Kafka consumer-group assignment for a cluster with uneven partitions.",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [],
+      "scenarioGroup": "broker-topology-settings"
+    },
+    {
+      "id": "r21-calendar-scheduling-1",
+      "split": "held_out",
+      "kind": "no_match",
+      "query": "What cron expression runs on the last weekday of each month?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [],
+      "scenarioGroup": "calendar-scheduling"
+    },
+    {
+      "id": "r21-calendar-scheduling-2",
+      "split": "held_out",
+      "kind": "no_match",
+      "query": "How do recurring calendar triggers handle a daylight-saving transition?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [],
+      "scenarioGroup": "calendar-scheduling"
+    },
+    {
+      "id": "r21-calendar-scheduling-3",
+      "split": "held_out",
+      "kind": "no_match",
+      "query": "Schedule an automation for 9 am in the customer timezone every Monday.",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [],
+      "scenarioGroup": "calendar-scheduling"
+    },
+    {
+      "id": "r21-calendar-scheduling-4",
+      "split": "held_out",
+      "kind": "no_match",
+      "query": "Convert a quarterly business calendar into recurring trigger schedules.",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [],
+      "scenarioGroup": "calendar-scheduling"
+    },
+    {
+      "id": "r21-mail-presentation-1",
+      "split": "held_out",
+      "kind": "no_match",
+      "query": "How do I make a marketing email layout responsive in desktop Outlook?",
+      "taxonomy": [],
+      "providers": [
+        "email"
+      ],
+      "relevantCitations": [],
+      "scenarioGroup": "mail-presentation"
+    },
+    {
+      "id": "r21-mail-presentation-2",
+      "split": "held_out",
+      "kind": "no_match",
+      "query": "Which HTML table structure renders a two-column email newsletter?",
+      "taxonomy": [],
+      "providers": [
+        "email"
+      ],
+      "relevantCitations": [],
+      "scenarioGroup": "mail-presentation"
+    },
+    {
+      "id": "r21-mail-presentation-3",
+      "split": "held_out",
+      "kind": "no_match",
+      "query": "Choose image dimensions and alt text for an email campaign header.",
+      "taxonomy": [],
+      "providers": [
+        "email"
+      ],
+      "relevantCitations": [],
+      "scenarioGroup": "mail-presentation"
+    },
+    {
+      "id": "r21-mail-presentation-4",
+      "split": "held_out",
+      "kind": "no_match",
+      "query": "How can an email template display a branded footer consistently across mail clients?",
+      "taxonomy": [],
+      "providers": [
+        "email"
+      ],
+      "relevantCitations": [],
+      "scenarioGroup": "mail-presentation"
+    }
+  ],
+  "fresh": [
+    {
+      "id": "r25-fresh-01",
+      "split": "held_out",
+      "scenarioGroup": "fresh-rate-limit-pressure",
+      "kind": "ambiguous",
+      "query": "An afternoon Telegram burst has explicit send-stage 429 rejections. What operator changes are permitted now, and what should the investigator record and check before revisiting the incident?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F01-F02@1.0.0#allowed-remediation",
+        "RB-F01-F02@1.0.0#verification-rollback-or-escalation"
+      ]
+    },
+    {
+      "id": "r25-fresh-02",
+      "split": "held_out",
+      "scenarioGroup": "fresh-server-error-classification",
+      "kind": "ambiguous",
+      "query": "An email action returned HTTP 503 after the send started. The incident note calls this a confirmed rejection. Is that classification justified, and which recorded fields are needed to assess it?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F01-F02@1.0.0#symptoms",
+        "RB-F01-F02@1.0.0#evidence-needed",
+        "RB-F01-F02@1.0.0#forbidden-actions"
+      ]
+    },
+    {
+      "id": "r25-fresh-03",
+      "split": "held_out",
+      "scenarioGroup": "fresh-resolver-versus-credential",
+      "kind": "ambiguous",
+      "query": "A Telegram username lookup fails, while the API reports that the action has no token field and cannot inspect the worker environment. How should read-only investigation distinguish these observations without concluding the bot credential is invalid?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F03-F04@1.0.0#evidence-needed",
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F03-F04@1.0.0#forbidden-actions"
+      ]
+    },
+    {
+      "id": "r25-fresh-04",
+      "split": "held_out",
+      "scenarioGroup": "fresh-credential-rotation-followup",
+      "kind": "paraphrase",
+      "query": "An authorized operator replaced an email credential after an authentication incident. What non-secret verification is allowed, where would a credential rollback occur, and what must remain unresolved if earlier delivery is still unknown?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F03-F04@1.0.0#verification-rollback-or-escalation"
+      ]
+    },
+    {
+      "id": "r25-fresh-05",
+      "split": "held_out",
+      "scenarioGroup": "fresh-missing-template-field",
+      "kind": "ambiguous",
+      "query": "A workflow contains {{shipment.pickupCode}}, but the input object lacks pickupCode and the action renders an empty string. What should the validation report identify, and what future-run repair can the operator make?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F04-F06@1.0.0#read-only-investigation",
+        "RB-F04-F06@1.0.0#allowed-remediation"
+      ]
+    },
+    {
+      "id": "r25-fresh-06",
+      "split": "held_out",
+      "scenarioGroup": "fresh-orphan-and-stage-gap",
+      "kind": "ambiguous",
+      "query": "A broker event has no resolvable run and its stage sequence skips from 1 to 3. Which evidence must engineering receive, and may the investigator invent a run ID or bypass sequence validation to attach this event to a tenant?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F04-F06@1.0.0#evidence-needed",
+        "RB-F04-F06@1.0.0#forbidden-actions",
+        "RB-F04-F06@1.0.0#verification-rollback-or-escalation"
+      ]
+    },
+    {
+      "id": "r25-fresh-07",
+      "split": "held_out",
+      "scenarioGroup": "fresh-terminal-write-loss",
+      "kind": "ambiguous",
+      "query": "A Telegram provider call completed its network exchange, but the terminal database write failed and no receipt was retained. What evidence should be preserved to separate persistence failure from delivery uncertainty, and who can reconcile the receipt?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F07@1.0.0#evidence-needed",
+        "RB-F07@1.0.0#read-only-investigation",
+        "RB-F07@1.0.0#allowed-remediation",
+        "RB-F07@1.0.0#verification-rollback-or-escalation"
+      ]
+    },
+    {
+      "id": "r25-fresh-08",
+      "split": "held_out",
+      "scenarioGroup": "fresh-changed-email-deduplication",
+      "kind": "ambiguous",
+      "query": "An email request with uncertain delivery is now older than the provider's verified deduplication window, and an operator wants to alter its body while retaining the key. Can that key establish safety, and which conditions would a future email reconsideration require?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F07@1.0.0#allowed-remediation",
+        "RB-F07@1.0.0#forbidden-actions",
+        "RB-F07@1.0.0#replay-and-approval"
+      ]
+    },
+    {
+      "id": "r25-fresh-09",
+      "split": "held_out",
+      "scenarioGroup": "fresh-superseded-investigation",
+      "kind": "ambiguous",
+      "query": "Two investigations refer to the same failure source, but one has an older evidence version and fingerprints. How should the investigator recognize the stale duplicate, and what may an operator do with its investigation record?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F08@1.0.0#read-only-investigation",
+        "RB-F08@1.0.0#allowed-remediation"
+      ]
+    },
+    {
+      "id": "r25-fresh-10",
+      "split": "held_out",
+      "scenarioGroup": "fresh-expired-proposal-competing-execution",
+      "kind": "ambiguous",
+      "query": "A proposed replay references an expired approval while a competing execution still holds a live lease. Which future gates rule out acting on it, and how should a current-state conflict be handled?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F08@1.0.0#replay-and-approval",
+        "RB-F08@1.0.0#verification-rollback-or-escalation"
+      ]
+    },
+    {
+      "id": "r25-fresh-11",
+      "split": "held_out",
+      "scenarioGroup": "fresh-stored-failure-visibility",
+      "kind": "ambiguous",
+      "query": "A stored failure has an execution link, but the DLQ console shows no message. Which publication and identity evidence should be inspected, and which deterministic repair can publish that failure without inventing a new identity?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F09-F10@1.0.0#evidence-needed",
+        "RB-F09-F10@1.0.0#allowed-remediation",
+        "RB-F09-F10@1.0.0#verification-rollback-or-escalation"
+      ]
+    },
+    {
+      "id": "r25-fresh-12",
+      "split": "held_out",
+      "scenarioGroup": "fresh-progression-approval-scope",
+      "kind": "ambiguous",
+      "query": "An action is recorded SUCCESS, yet its successor was never published. A manager supplies action replay approval to restore workflow progression. Why does that approval not authorize the repair, and how must investigation separate the two operations?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-F09-F10@1.0.0#read-only-investigation",
+        "RB-F09-F10@1.0.0#replay-and-approval",
+        "RB-F09-F10@1.0.0#forbidden-actions"
+      ]
+    },
+    {
+      "id": "r25-fresh-13",
+      "split": "held_out",
+      "scenarioGroup": "fresh-queued-cooldown-clock",
+      "kind": "paraphrase",
+      "query": "A Telegram send rejection was captured at 16:04:10 UTC with retry_after 75, but its investigation message entered the queue at 16:04:50. Which timestamp and duration define the conservative cooldown deadline, and does queue arrival establish that it passed?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-R2-COOLDOWN@1.0.0#cooldown-evidence"
+      ]
+    },
+    {
+      "id": "r25-fresh-14",
+      "split": "held_out",
+      "scenarioGroup": "fresh-earlier-timeout-final-rejection",
+      "kind": "paraphrase",
+      "query": "The last Telegram attempt was rejected with 429, but an earlier send timed out. The cooldown has elapsed and fingerprints match. Does the final rejection establish complete non-delivery, and what should happen when the attempt outcomes conflict?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-R2-COOLDOWN@1.0.0#cooldown-evidence"
+      ]
+    },
+    {
+      "id": "r25-fresh-15",
+      "split": "held_out",
+      "scenarioGroup": "fresh-migrated-destination",
+      "kind": "paraphrase",
+      "query": "After a Telegram group migration, the workflow still contains the obsolete chat identifier and delivery is rejected. What owner repair is appropriate, and what should follow that repair?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-R2-DESTINATION@1.0.0#destination-permission-evidence"
+      ]
+    },
+    {
+      "id": "r25-fresh-16",
+      "split": "held_out",
+      "scenarioGroup": "fresh-channel-posting-capability",
+      "kind": "paraphrase",
+      "query": "A bot remains in a Telegram channel but cannot post. What bounded evidence distinguishes destination access failure from an absent credential, and which proposed diagnostic actions—joining a chat or sending a test—are prohibited?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-R2-DESTINATION@1.0.0#destination-permission-evidence"
+      ]
+    },
+    {
+      "id": "r25-fresh-17",
+      "split": "held_out",
+      "scenarioGroup": "fresh-email-rejection-hidden-by-success",
+      "kind": "paraphrase",
+      "query": "An email SDK authentication exception was swallowed and the stage ended SUCCESS. How should these observations be interpreted, and what reconciliation or escalation is needed?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-R2-EMAIL-REJECT@1.0.0#email-rejection-evidence"
+      ]
+    },
+    {
+      "id": "r25-fresh-18",
+      "split": "held_out",
+      "scenarioGroup": "fresh-recipient-repair-boundaries",
+      "kind": "paraphrase",
+      "query": "Recipient-field validation proves an email destination invalid. What redacted evidence can be inspected, who repairs the configuration, and does proven non-delivery put email replay inside the supported Telegram 429 path?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-R2-EMAIL-REJECT@1.0.0#email-rejection-evidence"
+      ]
+    },
+    {
+      "id": "r25-fresh-19",
+      "split": "held_out",
+      "scenarioGroup": "fresh-earlier-email-unknown-final-success",
+      "kind": "paraphrase",
+      "query": "A mail send first disconnected after transmission began; a later attempt left a SUCCESS row. Can the final row resolve the earlier attempt, and which captured history and escalation should the investigator use?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-R2-EMAIL-UNKNOWN@1.0.0#lost-acknowledgement-evidence"
+      ]
+    },
+    {
+      "id": "r25-fresh-20",
+      "split": "held_out",
+      "scenarioGroup": "fresh-similarity-versus-delivery-confidence",
+      "kind": "paraphrase",
+      "query": "An operator sees a very high runbook similarity score for an email incident whose acknowledgement was lost. Can that score establish that nothing reached the recipient, and may investigation poll the provider or resend mail to settle it?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-R2-EMAIL-UNKNOWN@1.0.0#lost-acknowledgement-evidence"
+      ]
+    },
+    {
+      "id": "r25-fresh-21",
+      "split": "held_out",
+      "scenarioGroup": "fresh-numeric-stage-with-pending-parent",
+      "kind": "paraphrase",
+      "query": "The broker delivered stage 8, but a captured predecessor is still PENDING. Does the numeric stage position establish readiness, and what predecessor evidence is required before treating execution as safe?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-R2-ORDERING@1.0.0#predecessor-ordering-evidence"
+      ]
+    },
+    {
+      "id": "r25-fresh-22",
+      "split": "held_out",
+      "scenarioGroup": "fresh-missing-parent-versus-duplicate",
+      "kind": "paraphrase",
+      "query": "A stage-4 event arrives with missing predecessor evidence; a separate event points to an already SUCCESS stage. How should investigation distinguish an ordering gap from terminal duplication, and what shortcuts are prohibited?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-R2-ORDERING@1.0.0#predecessor-ordering-evidence"
+      ]
+    },
+    {
+      "id": "r25-fresh-23",
+      "split": "held_out",
+      "scenarioGroup": "fresh-outbox-acknowledgement-loss",
+      "kind": "paraphrase",
+      "query": "A durable dead-letter outbox entry lacks a broker acknowledgement, although Kafka might have accepted it. Which bounded publication evidence should investigation inspect, and how must a duplicate broker message retain its identity?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-R2-PUBLICATION@1.0.0#publication-reconciliation-evidence"
+      ]
+    },
+    {
+      "id": "r25-fresh-24",
+      "split": "held_out",
+      "scenarioGroup": "fresh-stuck-publication-action-independence",
+      "kind": "paraphrase",
+      "query": "The dead-letter outbox remains unpublished during Kafka unavailability. Does the missing message establish external non-delivery, and what escalation and boundaries apply to marking it published or restarting Kafka?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": [
+        "RB-R2-PUBLICATION@1.0.0#publication-reconciliation-evidence"
+      ]
+    },
+    {
+      "id": "r25-fresh-25",
+      "split": "held_out",
+      "scenarioGroup": "fresh-timezone-cron",
+      "kind": "no_match",
+      "query": "Our monthly billing workflow must start at 09:00 local time on the first weekday in every tenant's timezone. What cron expression and daylight-saving handling should we configure?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": []
+    },
+    {
+      "id": "r25-fresh-26",
+      "split": "held_out",
+      "scenarioGroup": "fresh-postgres-index-sizing",
+      "kind": "no_match",
+      "query": "A dashboard query over fifty million completed executions is slow. Which PostgreSQL index definition and query plan should we use for its tenant-and-date pagination?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": []
+    },
+    {
+      "id": "r25-fresh-27",
+      "split": "held_out",
+      "scenarioGroup": "fresh-webhook-signature-rotation",
+      "kind": "no_match",
+      "query": "We are integrating signed inbound webhooks from a new vendor. What signature algorithm, canonical byte format and timestamp tolerance should the receiver implement?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": []
+    },
+    {
+      "id": "r25-fresh-28",
+      "split": "held_out",
+      "scenarioGroup": "fresh-customer-data-retention",
+      "kind": "no_match",
+      "query": "Our compliance team needs an execution-history retention policy. How many days should receipts be kept, and what scheduled archive procedure meets the policy?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": []
+    },
+    {
+      "id": "r25-fresh-29",
+      "split": "held_out",
+      "scenarioGroup": "fresh-s3-attachment-encryption",
+      "kind": "no_match",
+      "query": "A workflow needs to upload invoice attachments to S3 with customer-managed encryption keys. Which bucket policy and upload headers should its connector use?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": []
+    },
+    {
+      "id": "r25-fresh-30",
+      "split": "held_out",
+      "scenarioGroup": "fresh-dashboard-accessibility",
+      "kind": "no_match",
+      "query": "Keyboard users cannot navigate the workflow graph editor. Which focus-management pattern and ARIA roles should its node controls implement?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": []
+    },
+    {
+      "id": "r25-fresh-31",
+      "split": "held_out",
+      "scenarioGroup": "fresh-kafka-capacity-planning",
+      "kind": "no_match",
+      "query": "A new region will ingest two hundred thousand workflow events per minute. How many Kafka partitions and brokers should we provision, and what replication factor meets a two-minute recovery target?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": []
+    },
+    {
+      "id": "r25-fresh-32",
+      "split": "held_out",
+      "scenarioGroup": "fresh-billing-tier-enforcement",
+      "kind": "no_match",
+      "query": "We want paid workspace tiers with monthly execution quotas and overage invoices. How should quota counters reset and which billing events generate invoice line items?",
+      "taxonomy": [],
+      "providers": [],
+      "relevantCitations": []
+    }
+  ]
+}

@@ -1,0 +1,161 @@
+{
+  "name": "format with wrong citation",
+  "synthetic": true,
+  "evidence": {
+    "failureContext": {
+      "contract_version": 1,
+      "evidence_id": "fixture:failure:f04-invalid-destination",
+      "type": "failure_context",
+      "source_ref": {
+        "case_id": "7c682e10-6268-4efb-8ef1-4ffaf47d1717",
+        "zap_run_id": "b6fd3adc-0d5a-4af2-850c-fd776cbc54a2",
+        "stage": 0
+      },
+      "observed_at": "2026-10-04T10:22:40.946Z",
+      "content_hash": "5e78aa44f24a33a48f37ddaf996b17ea858f6c9439136e1a5a48250646e8eddc",
+      "facts": {
+        "source_kind": "controlled_fixture",
+        "current_action_type": "telegram",
+        "retry": {
+          "provider": "telegram",
+          "provider_outcome": "rejected",
+          "requires_human": null,
+          "final_error": "Provider rejected the destination"
+        },
+        "action_metadata": {
+          "paths": [],
+          "truncated": true
+        },
+        "payload": {
+          "paths": [],
+          "truncated": true
+        }
+      },
+      "unavailable": [
+        "operator_approved_destination",
+        "canonical_source_identity",
+        "action_metadata",
+        "payload_values"
+      ],
+      "complete": false,
+      "simulated": true,
+      "fixture_contract_version": 1,
+      "fixture_observation": {
+        "provider": "telegram",
+        "execution_status": "FAILED",
+        "delivery_outcome": "rejected",
+        "attempts": 3,
+        "final_error": "Provider rejected the destination",
+        "observed_facts": [
+          "destination_format_invalid"
+        ],
+        "sensitive_fields_present": [
+          "recipient"
+        ]
+      },
+      "fixture_source_kind": "normal_dlq"
+    },
+    "executionEvidence": {
+      "contract_version": 1,
+      "evidence_id": "fixture:execution:f04-invalid-destination",
+      "type": "execution_evidence",
+      "source_ref": {
+        "case_id": "7c682e10-6268-4efb-8ef1-4ffaf47d1717",
+        "zap_run_id": "b6fd3adc-0d5a-4af2-850c-fd776cbc54a2",
+        "stage": 0
+      },
+      "observed_at": "2026-10-04T10:22:40.946Z",
+      "content_hash": "12a718667d9e3c3f0d349669da523c89db05a64aa7f62eaaf3fbbb65daeab22c",
+      "facts": {
+        "provenance": "controlled_fixture",
+        "current_execution": null,
+        "attempts": [],
+        "history_limit": 10,
+        "history_truncated": true,
+        "predecessors": [],
+        "ordering": {
+          "status": "unknown",
+          "missing_predecessor_stages": []
+        }
+      },
+      "unavailable": [
+        "execution_record",
+        "attempt_history",
+        "execution_ordering"
+      ],
+      "complete": false,
+      "simulated": true,
+      "fixture_contract_version": 1
+    },
+    "inputValidation": {
+      "contract_version": 1,
+      "evidence_id": "fixture:validation:f04-invalid-destination",
+      "type": "action_input_validation",
+      "source_ref": {
+        "case_id": "7c682e10-6268-4efb-8ef1-4ffaf47d1717",
+        "zap_run_id": "b6fd3adc-0d5a-4af2-850c-fd776cbc54a2",
+        "stage": 0
+      },
+      "observed_at": "2026-10-04T10:22:40.946Z",
+      "content_hash": "07cf4351601223c7da8bdc76f46fd9614ff26ba2fb9b4b59c64df90364b48a97",
+      "facts": {
+        "action_type": "telegram",
+        "validation_status": "blocked",
+        "supported": null,
+        "missing_required_fields": [],
+        "invalid_field_types": [],
+        "missing_template_paths": [],
+        "credential_presence": [],
+        "blocked_reasons": [
+          "fixture_inputs_unavailable"
+        ],
+        "input_fingerprint": null
+      },
+      "unavailable": [
+        "action_inputs",
+        "input_fingerprint",
+        "handler_registry"
+      ],
+      "complete": false,
+      "simulated": true,
+      "fixture_contract_version": 1
+    }
+  },
+  "output": {
+    "status": "completed",
+    "diagnosis": {
+      "taxonomy_id": "F04",
+      "summary": "Bounded synthetic finding, not execution-time configuration.",
+      "confidence": "low",
+      "evidence_refs": [
+        "fixture:failure:f04-invalid-destination"
+      ],
+      "alternate_explanations": [],
+      "missing_evidence": [
+        "operator_approved_destination",
+        "canonical_source_identity",
+        "action_metadata",
+        "payload_values",
+        "execution_record",
+        "attempt_history",
+        "execution_ordering",
+        "action_inputs",
+        "input_fingerprint",
+        "handler_registry"
+      ]
+    },
+    "proposal": {
+      "disposition": "owner_action_required",
+      "kind": "request_manual_fix",
+      "summary": "Correct the independently invalid destination format.",
+      "reasons": [
+        "Correct only the cited independent finding; no replacement or replay authorized."
+      ],
+      "evidence_refs": [
+        "fixture:execution:f04-invalid-destination"
+      ],
+      "runbook_citations": [],
+      "preconditions": []
+    }
+  }
+}

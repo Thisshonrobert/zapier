@@ -1,0 +1,136 @@
+{
+  "status": "prepared_not_executed",
+  "recordedAt": "2026-10-13T04:18:18.783Z",
+  "codeRevision": "b8aca2348fc1954d627a5462950112dbae785519",
+  "workingTree": "dirty; pre-existing untracked experiments, Prisma and Graphify edits excluded",
+  "providerRequests": 0,
+  "generationsIssued": 0,
+  "tokenPreflightsIssued": 0,
+  "planHash": "044726d37cc5190e127227d59b62bf5c120ae519340568b602a139843957f2f6",
+  "sourceHashes": {
+    "apps/ai_agent/src/evaluation/causal-diagnosis.ts": "79aa5140202c024b35b6962a4b961bef955b239000c1d1f44a062e255fd1ba37",
+    "apps/ai_agent/src/evaluation/causal-pilot.ts": "da3fda84e20cb56ac9c6ab77ba05d7855f6572681731419bfaafad9a4bb3dea4",
+    "apps/ai_agent/src/evaluation/oracle-pilot.ts": "a953e536aea2f00d20892e149ac9904fcff22026f3c384bd8dfc53559d03dadf",
+    "apps/ai_agent/tests/causal-consistency.test.ts": "2cd13a92d50719093c3d5b9be3e52b78ec57c9c4d93ed3556007940a244e4ab8",
+    "apps/ai_agent/evaluation/causal-diagnosis/review-v2.ts": "6e44815998fd1654a9b0742d53ac37c669f6c0a9b79f35d561ba6e2f1ed69979",
+    "apps/ai_agent/src/prompts.ts": "aa4a038a8b2748826933a9deb13aa883546d9d6cb79369a5424402d1c9485a9f",
+    "apps/ai_agent/src/contracts.ts": "2db41bcdde5b4539c8b0d5514e2bf9dd61a3c26e8166bbf867b6f0d0435711eb",
+    "apps/ai_agent/src/graph.ts": "f3dec93c3dd58037f0b62d79f1fe3f5c7bfb12c79e9f07a3c99cc73d4c632e68",
+    "apps/ai_agent/src/gemini-model.ts": "18a909519c9bd16437e7ca54e125eb8c02430978d44b5501b572243e17a7c257"
+  },
+  "frozenV1ArtifactHashes": {
+    "access.json": "f833173544c168eb4d1be20db7fa155cf399e14bd621dfc11b8a37c18eb8b867",
+    "attempt-1.json": "e12c6b066b9dbd6dd9d5e6145fe0cfe33281c84227fad3791a4097159fc04133",
+    "attempt-2.json": "3b2a94dc45585cdd6a2cfc380635c3cf167408256c437802c50a20daa8c2c5b4",
+    "attempt-4.json": "2a8ab7be5b3e82af3f7687758fad5141a6c5f4497e561c3463263d7c816b18b3",
+    "continuation.json": "2519e957b961f1161ad9c1faad085c84e49bd4c862dfc5531aa7a26fae13fc09",
+    "measurements.json": "2b97316ebc1703e1737c39df0d113218c6d206b5fa91733f49e30550d765b871",
+    "plan.json": "3e767aa9744b275d83f5db21a7c68de1eff6a0b7ce183420ee9177d34a6e4a84",
+    "report-final.json": "b5bfb4f79bd8f9a04df4069e630ee44ce8d905365726aa5d947d0aaea0a512fa",
+    "report.json": "4f23aae0be46f8d297098578771ba7ec4b2eb367ba66175009aff84091d4a0b4",
+    "report.md": "a836da98c656456232acf6d7787a288c80595f224dfa6f84b874ab777a42cdc0",
+    "requests.jsonl": "9c36be423960210794d488d173c7a8f3f51959b87dacc9ee0843e1d6c7f0ff61",
+    "result-1.json": "e7bd14c22dd77dfa09b36c1f1ac6b1ae4d00f0113067c488ae8d7eb3455a2d3a",
+    "result-2.json": "3ce805a136a9ba850264a4dbb52120c4746302b87e940c42b92571a0a6e7cee6",
+    "result-3.json": "c72fcc7bf3a8ff61ad98f0e599cdfe985040ab3fa98d310b23d23f5e37a2046f",
+    "result-4.json": "71daf5037b8da1825cc2c64652e741bf80b3e49e6f5dbeb6d5de9b95755bb907",
+    "started-1.json": "746699a98e9c1c18aafc295549ce92380e386d84393944d4226eb111482c0fb2",
+    "started-2.json": "fe89e875cbec48b80c6fa2c9c3944c6936f4189d74b82b094e19a2aa8ff39a04",
+    "started-3.json": "6d1f82190a7857d8ad071a931ae33b35eb2002a75f16e9864b2c8d922e6562a0",
+    "started-4.json": "7c7d3777920c8b7843eba6a7871e2728f1b73922614054bf01599ff8ac214c4a"
+  },
+  "pairs": [
+    {
+      "caseId": "f03-permission-ambiguous",
+      "split": "development",
+      "order": [
+        "current",
+        "candidate"
+      ],
+      "evidenceHash": "ee3e4d3b8f9a3edae5ce4f1d5d14e93b2a74c2a3a0eb070ca03e8f7271a6b383",
+      "retrievalHash": "e7e1fb889302ce358cd04395ec9fd0fc240d44aaf3a8171eca1896badc2b8dff",
+      "currentPromptHash": "f040b2680b55ede42e7ab699bd56f4f7c40cf1a2e2d2c97065a9a60c56a6d22a",
+      "candidatePromptHash": "960e6b603ee2b9fdbc3a0672079d79ebc4dff762fcd81b16ecbdaaefd3e55f29",
+      "inputIdentical": true
+    },
+    {
+      "caseId": "f04-invalid-destination",
+      "split": "development",
+      "order": [
+        "candidate",
+        "current"
+      ],
+      "evidenceHash": "a7e365eba7c630525feed79985388b67758ac10d6894a0edf7905f8d1fda2710",
+      "retrievalHash": "f5d3bb516a4deff62106d601ed7bc9c181f2f986520efdecfadc4febbfccd421",
+      "currentPromptHash": "598c979d7fa605d6f1edd32262a4564f81e4c0fd075acd8403f04801f9da32d5",
+      "candidatePromptHash": "b8e2b39f7e4ba1181c2ff950e65cfb7e3dd63936edd304d4d0f84344eafe56f2",
+      "inputIdentical": true
+    },
+    {
+      "caseId": "f07-provider-response-lost",
+      "split": "development",
+      "order": [
+        "current",
+        "candidate"
+      ],
+      "evidenceHash": "9712f415482f08c916bc230537b32819f876c3c72c66d61b0cb3d5913a9c0f54",
+      "retrievalHash": "847e46aa5a1baafa683ace5053f955c989f470e2bbde7f403ef5cdb2efb88392",
+      "currentPromptHash": "fc4d5d0104a2999083954948b95e9b92d83936822b8365ec6934001dffe9242f",
+      "candidatePromptHash": "b88ac8ed2b5e81d3705a5a941cd81b4c0b03c85778026e4a3f99db1653bddc7d",
+      "inputIdentical": true
+    }
+  ],
+  "frozenV1Reevaluation": [
+    {
+      "slot": 1,
+      "caseId": "f03-permission-ambiguous",
+      "variant": "current",
+      "failure": null,
+      "schemaValid": true,
+      "originalServiceValid": true,
+      "consistencyIssues": [],
+      "repairEvidenceIssue": "unsupported_owner_repair",
+      "limitation": "Contract consistency and narrow repair support only; no semantic adjudication."
+    },
+    {
+      "slot": 2,
+      "caseId": "f03-permission-ambiguous",
+      "variant": "candidate",
+      "failure": null,
+      "schemaValid": true,
+      "originalServiceValid": true,
+      "consistencyIssues": [
+        "known_delivery_marked_unknown"
+      ],
+      "repairEvidenceIssue": null,
+      "limitation": "Contract consistency and narrow repair support only; no semantic adjudication."
+    },
+    {
+      "slot": 3,
+      "caseId": "f04-invalid-destination",
+      "variant": "candidate",
+      "failure": "generation_failed",
+      "schemaValid": false,
+      "originalServiceValid": false,
+      "consistencyIssues": null,
+      "repairEvidenceIssue": null,
+      "limitation": "Contract consistency and narrow repair support only; no semantic adjudication."
+    },
+    {
+      "slot": 4,
+      "caseId": "f04-invalid-destination",
+      "variant": "current",
+      "failure": null,
+      "schemaValid": true,
+      "originalServiceValid": true,
+      "consistencyIssues": [],
+      "repairEvidenceIssue": null,
+      "limitation": "Contract consistency and narrow repair support only; no semantic adjudication."
+    }
+  ],
+  "existingV4Failure": {
+    "expected": "4d34b56a6460c918ef4aa64ad02b4d29b7706eeec3b1dfa0e64bef3365c46efb",
+    "actual": "ddb53386f26d3f13efe1a838d1df8655d8bdd51f13b69754457768a29f72ce76",
+    "normalizedLF": "4d34b56a6460c918ef4aa64ad02b4d29b7706eeec3b1dfa0e64bef3365c46efb"
+  }
+}

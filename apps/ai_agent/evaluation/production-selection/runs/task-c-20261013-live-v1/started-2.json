@@ -1,0 +1,19 @@
+{
+  "slot": 2,
+  "caseId": "f01-rate-limit-rejected",
+  "arm": "minilm-procedure-question",
+  "repetition": 1,
+  "startedAt": 1791891579684,
+  "reservation": "64000 tokens; 16 cents",
+  "countedInputTokens": null,
+  "output": null,
+  "usage": null,
+  "latencyMs": null,
+  "schemaValid": null,
+  "serviceAccepted": null,
+  "semanticReview": null,
+  "humanReleaseAcceptance": null,
+  "failure": null,
+  "providerError": null,
+  "requestStatuses": []
+}

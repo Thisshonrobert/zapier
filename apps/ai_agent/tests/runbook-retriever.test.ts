@@ -6,11 +6,25 @@ import { createRunbookRetriever } from "../src/tools/runbook-retriever.ts";
 const index = await loadRunbooks(defaultRunbookDirectory());
 const input = { query: "Telegram rate limit evidence", providers: ["telegram"] };
 
-test("default and rollback use exact keyword output without loading a model", async () => {
-  const retriever = await createRunbookRetriever(index, {});
+test("explicit rollback uses exact keyword output without loading a model", async () => {
+  const retriever = await createRunbookRetriever(index, { RUNBOOK_RETRIEVAL_METHOD: "keyword" });
   expect(await retriever.search(input)).toEqual(searchRunbooks(index, input));
   await retriever.close();
   await expect(createRunbookRetriever(index, { RUNBOOK_RETRIEVAL_METHOD: "typo" })).rejects.toThrow();
+});
+
+test("default uses original MiniLM without rewriting the observed query", async () => {
+  let scored = false;
+  const retriever = await createRunbookRetriever(index, {}, async () => ({
+    score: async (query, passages) => {
+      expect(query).toBe(input.query);
+      scored = true;
+      return passages.map(() => -20);
+    }, close: async () => {},
+  }));
+  expect(await retriever.search(input)).toEqual([]);
+  expect(scored).toBe(true);
+  await retriever.close();
 });
 
 test("MiniLM scores all eligible original passages and preserves citation contracts", async () => {

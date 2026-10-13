@@ -1,0 +1,442 @@
+{
+  "status": "completed; no further generations authorized",
+  "model": "gemini-3.5-flash-lite",
+  "freeTier": {
+    "verifiedAt": 1791834499276,
+    "project": "gen-lang-client-0124525712",
+    "model": "gemini-3.5-flash-lite",
+    "keyHash": "9199498a4a37d5c853dbdaf748562bfe00485eb7fa9a5fc92b96042470a3cd2a",
+    "freeTier": true,
+    "freeGeneration": true,
+    "evidence": "AI Studio API Keys: existing credential matches one of the three masked keys, all belonging to gen-lang-client-0124525712, Free tier. Existing project rate-limit page: Gemini 3.5 Flash Lite 15 RPM, 250K TPM, 500 RPD. Credential not changed.",
+    "pricingSource": "https://ai.google.dev/gemini-api/docs/pricing",
+    "pricingEvidence": "Gemini 3.5 Flash-Lite standard input/output free of charge on Free Tier.",
+    "lastRateLimitRequestAt": null,
+    "recentRateLimitKnown": false
+  },
+  "providerRequests": {
+    "total": 8,
+    "generations": 4,
+    "tokenCounts": 4,
+    "planner": 0,
+    "judge": 0,
+    "repairs": 0,
+    "retries": 0,
+    "failedRequests": 0
+  },
+  "completedGenerations": 4,
+  "failedGenerations": 0,
+  "schemaValid": 4,
+  "serviceAccepted": 3,
+  "serviceRejected": 1,
+  "citationMembershipValid": 4,
+  "serviceRejectionExplanation": "f03 baseline has ungrounded proposal evidence reference fixture:failure:. Offline inspection of graph.ts issueForOutput's first applicable guard identifies ungrounded_evidence_reference. No repair was attempted.",
+  "measuredTokens": {
+    "input": 12422,
+    "output": 1476,
+    "total": 13898,
+    "latencyMs": 10044.9785
+  },
+  "unknownUsageGenerations": 0,
+  "reservations": {
+    "perCallTotalTokenCeiling": 64000,
+    "outputTokenCeiling": 4096,
+    "fourCallCeiling": 256000,
+    "meaning": "Safety limits, not predicted consumption or measured usage"
+  },
+  "generationStartGapsMs": [
+    10012,
+    10013,
+    10006
+  ],
+  "meanGenerationPlusPreflightLatencyMs": 2511.244625,
+  "meanGenerationHttpLatencyMs": 2234.75,
+  "preflightHttpLatencyMs": 773,
+  "spanMs": 32340,
+  "costUsd": 0,
+  "costBasis": "Confirmed existing project/key on Free tier and standard generation listed free; no billing setup, tier/project/model changes or paid features. No billing invoice independently audited.",
+  "rows": [
+    {
+      "caseId": "f03-permission-ambiguous",
+      "variant": "baseline",
+      "attempts": 1,
+      "startedAt": 1791834528897,
+      "promptHash": "f040b2680b55ede42e7ab699bd56f4f7c40cf1a2e2d2c97065a9a60c56a6d22a",
+      "configHash": "c087890dc02b52a11a2c8577faf7b8d3fdd2e18a71a132dd7c65817de5a36d19",
+      "output": {
+        "status": "completed",
+        "diagnosis": {
+          "taxonomy_id": "F03",
+          "summary": "Telegram action rejected due to invalid channel username, requiring destination/input correction.",
+          "confidence": "high",
+          "evidence_refs": [
+            "fixture:failure:f03-permission-ambiguous",
+            "fixture:execution:f03-permission-ambiguous",
+            "fixture:validation:f03-permission-ambiguous"
+          ],
+          "alternate_explanations": [
+            "Destination channel name might be incorrectly configured or malformed in recipient input mapping."
+          ],
+          "missing_evidence": [
+            "provider_status_code",
+            "bot_permission_state",
+            "destination_validity",
+            "canonical_source_identity",
+            "action_metadata",
+            "payload_values",
+            "execution_record",
+            "attempt_history",
+            "execution_ordering",
+            "action_inputs",
+            "input_fingerprint",
+            "handler_registry"
+          ]
+        },
+        "proposal": {
+          "disposition": "owner_action_required",
+          "kind": "request_manual_fix",
+          "summary": "Request manual fix of the recipient channel configuration or input mapping by the owner.",
+          "reasons": [
+            "The provider rejected the request with 'Invalid channel username', which is a customer-controlled configuration or destination issue.",
+            "Invalid destination format supports a bounded owner configuration repair."
+          ],
+          "evidence_refs": [
+            "fixture:failure:",
+            "fixture:validation:f03-permission-ambiguous"
+          ],
+          "runbook_citations": [
+            "RB-F04-F06@1.0.0#replay-and-approval"
+          ],
+          "preconditions": [
+            "Verify destination channel username validity",
+            "Ensure recipient mapping matches correct format"
+          ]
+        }
+      },
+      "usage": {
+        "input_tokens": 3125,
+        "output_tokens": 317,
+        "total_tokens": 3442
+      },
+      "latencyMs": 2294.312,
+      "schemaValid": true,
+      "citationMembership": true,
+      "serviceValid": false,
+      "providerError": null,
+      "failure": "service_validation_or_deadline_failed"
+    },
+    {
+      "caseId": "f03-permission-ambiguous",
+      "variant": "oracle",
+      "attempts": 1,
+      "startedAt": 1791834538894,
+      "promptHash": "c4f17a770cd2670138e337ae044695443af868da7fcd15dd2fbde259887679c8",
+      "configHash": "c087890dc02b52a11a2c8577faf7b8d3fdd2e18a71a132dd7c65817de5a36d19",
+      "output": {
+        "status": "completed",
+        "diagnosis": {
+          "taxonomy_id": "F03",
+          "summary": "Telegram delivery rejected with 'Invalid channel username', pointing to an invalid destination format or incorrect channel configuration.",
+          "confidence": "medium",
+          "evidence_refs": [
+            "fixture:failure:f03-permission-ambiguous",
+            "fixture:validation:f03-permission-ambiguous"
+          ],
+          "alternate_explanations": [
+            "Bot permissions in the target channel might be misconfigured."
+          ],
+          "missing_evidence": [
+            "provider_status_code",
+            "bot_permission_state",
+            "destination_validity",
+            "canonical_source_identity",
+            "action_metadata",
+            "payload_values",
+            "execution_record",
+            "attempt_history",
+            "execution_ordering",
+            "action_inputs",
+            "input_fingerprint",
+            "handler_registry"
+          ]
+        },
+        "proposal": {
+          "disposition": "owner_action_required",
+          "kind": "request_manual_fix",
+          "summary": "Verify and correct the channel username or recipient destination configuration.",
+          "reasons": [
+            "The provider rejected the request due to an invalid channel username.",
+            "Customer-controlled destination configuration requires manual correction."
+          ],
+          "evidence_refs": [
+            "fixture:failure:f03-permission-ambiguous"
+          ],
+          "runbook_citations": [
+            "RB-F03-F04@1.0.0#read-only-investigation"
+          ],
+          "preconditions": [
+            "Ensure the channel username is valid and the bot has proper access."
+          ]
+        }
+      },
+      "usage": {
+        "input_tokens": 3094,
+        "output_tokens": 418,
+        "total_tokens": 3512
+      },
+      "latencyMs": 2586.393400000001,
+      "schemaValid": true,
+      "citationMembership": true,
+      "serviceValid": true,
+      "providerError": null,
+      "failure": null
+    },
+    {
+      "caseId": "f07-provider-response-lost",
+      "variant": "oracle",
+      "attempts": 1,
+      "startedAt": 1791834548908,
+      "promptHash": "b06b51353b4b2ea5ea028043111ab95d208a344467d927b0b1f64d73db94b1a9",
+      "configHash": "c087890dc02b52a11a2c8577faf7b8d3fdd2e18a71a132dd7c65817de5a36d19",
+      "output": {
+        "status": "abstained",
+        "diagnosis": {
+          "taxonomy_id": "F07",
+          "summary": "Provider response was lost after request transmission, leaving delivery status unknown and requiring abstention due to insufficient delivery evidence.",
+          "confidence": "high",
+          "evidence_refs": [
+            "fixture:failure:f07-provider-response-lost",
+            "fixture:execution:f07-provider-response-lost",
+            "fixture:validation:f07-provider-response-lost"
+          ],
+          "alternate_explanations": [
+            "The provider may have successfully processed the request despite the lost response receipt."
+          ],
+          "missing_evidence": [
+            "provider_delivery_receipt",
+            "request_fingerprint",
+            "canonical_source_identity",
+            "action_metadata",
+            "payload_values",
+            "execution_record",
+            "attempt_history",
+            "execution_ordering",
+            "action_inputs",
+            "input_fingerprint",
+            "handler_registry"
+          ]
+        },
+        "proposal": {
+          "disposition": "outcome_unknown",
+          "kind": "escalate",
+          "summary": "Abstain from replay or definitive delivery conclusions due to unknown provider response and missing historical delivery evidence.",
+          "reasons": [
+            "Delivery outcome is explicitly unknown because the provider response was lost after transmission and required evidence is missing."
+          ],
+          "evidence_refs": [
+            "fixture:failure:f07-provider-response-lost",
+            "fixture:execution:f07-provider-response-lost"
+          ],
+          "runbook_citations": [
+            "RB-F07@1.0.0#read-only-investigation",
+            "RB-F07@1.0.0#forbidden-actions"
+          ],
+          "preconditions": [
+            "Confirm independent provider side-effects or logs before attempting any further classification."
+          ]
+        }
+      },
+      "usage": {
+        "input_tokens": 3087,
+        "output_tokens": 317,
+        "total_tokens": 3404
+      },
+      "latencyMs": 2818.1572000000015,
+      "schemaValid": true,
+      "citationMembership": true,
+      "serviceValid": true,
+      "providerError": null,
+      "failure": null
+    },
+    {
+      "caseId": "f07-provider-response-lost",
+      "variant": "baseline",
+      "attempts": 1,
+      "startedAt": 1791834558915,
+      "promptHash": "fc4d5d0104a2999083954948b95e9b92d83936822b8365ec6934001dffe9242f",
+      "configHash": "c087890dc02b52a11a2c8577faf7b8d3fdd2e18a71a132dd7c65817de5a36d19",
+      "output": {
+        "status": "abstained",
+        "diagnosis": {
+          "taxonomy_id": "F07",
+          "summary": "Provider response was lost after request transmission, and delivery outcome remains unknown.",
+          "confidence": "high",
+          "evidence_refs": [
+            "fixture:failure:f07-provider-response-lost",
+            "fixture:execution:f07-provider-response-lost",
+            "fixture:validation:f07-provider-response-lost"
+          ],
+          "alternate_explanations": [
+            "The message may have reached the provider successfully despite the lost response receipt."
+          ],
+          "missing_evidence": [
+            "provider_delivery_receipt",
+            "request_fingerprint",
+            "canonical_source_identity",
+            "action_metadata",
+            "payload_values",
+            "execution_record",
+            "attempt_history",
+            "execution_ordering",
+            "action_inputs",
+            "input_fingerprint",
+            "handler_registry"
+          ]
+        },
+        "proposal": {
+          "disposition": "outcome_unknown",
+          "kind": "escalate",
+          "summary": "Delivery outcome is unknown due to lost provider response, requiring escalation.",
+          "reasons": [
+            "Delivery outcome is unknown and provider response was lost.",
+            "Required evidence items are missing to establish safe replay or definitive delivery."
+          ],
+          "evidence_refs": [
+            "fixture:failure:f07-provider-response-lost"
+          ],
+          "runbook_citations": [
+            "RB-F07@1.0.0#read-only-investigation"
+          ],
+          "preconditions": [
+            "Obtain independent provider evidence or missing delivery receipts before any further action."
+          ]
+        }
+      },
+      "usage": {
+        "input_tokens": 3116,
+        "output_tokens": 424,
+        "total_tokens": 3540
+      },
+      "latencyMs": 2346.115899999997,
+      "schemaValid": true,
+      "citationMembership": true,
+      "serviceValid": true,
+      "providerError": null,
+      "failure": null
+    }
+  ],
+  "agentReview": {
+    "reviewer": "Codex agent; not independent human validation",
+    "method": "Reviewed shuffled saved-output packets before opening the mapping. Variant names hidden; case evidence and passages visible for entailment checks. Contexts/citations and prior experimental knowledge can reveal variants, so this is partial masking, not an independent blinded trial. No judge generation used.",
+    "assessments": [
+      {
+        "label": "pair-1-A",
+        "supportedCausalClaims": "Recorded Telegram rejection and generic resolver error are supported. Invalid destination format or incorrect configuration as the cause is not established: destination validity, bot permissions and provider status are unavailable.",
+        "uncertainty": "Medium confidence and a possible bot-permissions alternate are more cautious than the partner, but the correction proposal still asserts an unproven configuration defect. Listing unavailable evidence does not qualify that causal claim.",
+        "proceduralGuidance": "Checking destination validity and operator-confirmed bot access is useful. Requiring correction rather than investigation is premature.",
+        "citationEntailment": "The cited read-only-investigation section supports input validation and an operator confirming bot membership/permissions. It does not establish that customer configuration is defective or needs correction.",
+        "semanticQuality": "Unsupported causal/remediation claim remains despite relevant guidance."
+      },
+      {
+        "label": "pair-1-B",
+        "supportedCausalClaims": "The final error text and rejection are recorded; claiming a customer-controlled configuration/destination issue requiring correction overinterprets a generic resolver error.",
+        "uncertainty": "High confidence is excessive for the asserted configuration cause; the alternate also stays within configuration and misses permissions uncertainty.",
+        "proceduralGuidance": "Verify destination validity/mapping is a useful investigation step, but manual correction is not supported by observed inputs, which are unavailable.",
+        "citationEntailment": "The cited replay-and-approval section describes restrictions on repeating invalid inputs; it does not prove inputs are invalid in this incident or entail the repair claim. The proposal includes an evidence reference fixture:failure: that does not identify a supplied evidence object.",
+        "semanticQuality": "Unsupported causal/remediation claim, excessive confidence, and invalid evidence reference."
+      },
+      {
+        "label": "pair-2-A",
+        "supportedCausalClaims": "Transmission and lost response are recorded; no delivery or non-delivery claim is made. Possible successful delivery is explicitly an alternate.",
+        "uncertainty": "Appropriate outcome_unknown disposition and abstention. High confidence describes the known ambiguity, not successful or failed delivery.",
+        "proceduralGuidance": "Escalation and seeking independent provider evidence/receipts are useful. Before any further action is slightly broad because authorized read-only investigation remains useful.",
+        "citationEntailment": "The cited read-only-investigation section directly supports treating missing receipts as unknown until independent evidence resolves them.",
+        "semanticQuality": "Supported bounded diagnosis with useful investigation direction."
+      },
+      {
+        "label": "pair-2-B",
+        "supportedCausalClaims": "Unknown delivery after lost response is grounded in observed transmission and missing response. Successful processing remains only a possibility.",
+        "uncertainty": "Appropriate abstention and outcome_unknown; no definitive delivery conclusion.",
+        "proceduralGuidance": "Explicitly abstaining from replay is useful. Independent side-effects/logs are appropriate operator evidence, but requiring them before any further classification is overbroad: F07 is already supported. The partner more directly requests receipts.",
+        "citationEntailment": "Read-only-investigation supports independent evidence; forbidden-actions supports refusing Telegram resend. Neither fabricates runtime receipts or authority.",
+        "semanticQuality": "Supported bounded diagnosis; added prohibition citation, no clear material semantic improvement over partner."
+      }
+    ],
+    "unmasked": [
+      {
+        "label": "pair-1-A",
+        "supportedCausalClaims": "Recorded Telegram rejection and generic resolver error are supported. Invalid destination format or incorrect configuration as the cause is not established: destination validity, bot permissions and provider status are unavailable.",
+        "uncertainty": "Medium confidence and a possible bot-permissions alternate are more cautious than the partner, but the correction proposal still asserts an unproven configuration defect. Listing unavailable evidence does not qualify that causal claim.",
+        "proceduralGuidance": "Checking destination validity and operator-confirmed bot access is useful. Requiring correction rather than investigation is premature.",
+        "citationEntailment": "The cited read-only-investigation section supports input validation and an operator confirming bot membership/permissions. It does not establish that customer configuration is defective or needs correction.",
+        "semanticQuality": "Unsupported causal/remediation claim remains despite relevant guidance.",
+        "slot": 2,
+        "caseId": "f03-permission-ambiguous",
+        "variant": "oracle"
+      },
+      {
+        "label": "pair-1-B",
+        "supportedCausalClaims": "The final error text and rejection are recorded; claiming a customer-controlled configuration/destination issue requiring correction overinterprets a generic resolver error.",
+        "uncertainty": "High confidence is excessive for the asserted configuration cause; the alternate also stays within configuration and misses permissions uncertainty.",
+        "proceduralGuidance": "Verify destination validity/mapping is a useful investigation step, but manual correction is not supported by observed inputs, which are unavailable.",
+        "citationEntailment": "The cited replay-and-approval section describes restrictions on repeating invalid inputs; it does not prove inputs are invalid in this incident or entail the repair claim. The proposal includes an evidence reference fixture:failure: that does not identify a supplied evidence object.",
+        "semanticQuality": "Unsupported causal/remediation claim, excessive confidence, and invalid evidence reference.",
+        "slot": 1,
+        "caseId": "f03-permission-ambiguous",
+        "variant": "baseline"
+      },
+      {
+        "label": "pair-2-A",
+        "supportedCausalClaims": "Transmission and lost response are recorded; no delivery or non-delivery claim is made. Possible successful delivery is explicitly an alternate.",
+        "uncertainty": "Appropriate outcome_unknown disposition and abstention. High confidence describes the known ambiguity, not successful or failed delivery.",
+        "proceduralGuidance": "Escalation and seeking independent provider evidence/receipts are useful. Before any further action is slightly broad because authorized read-only investigation remains useful.",
+        "citationEntailment": "The cited read-only-investigation section directly supports treating missing receipts as unknown until independent evidence resolves them.",
+        "semanticQuality": "Supported bounded diagnosis with useful investigation direction.",
+        "slot": 4,
+        "caseId": "f07-provider-response-lost",
+        "variant": "baseline"
+      },
+      {
+        "label": "pair-2-B",
+        "supportedCausalClaims": "Unknown delivery after lost response is grounded in observed transmission and missing response. Successful processing remains only a possibility.",
+        "uncertainty": "Appropriate abstention and outcome_unknown; no definitive delivery conclusion.",
+        "proceduralGuidance": "Explicitly abstaining from replay is useful. Independent side-effects/logs are appropriate operator evidence, but requiring them before any further classification is overbroad: F07 is already supported. The partner more directly requests receipts.",
+        "citationEntailment": "Read-only-investigation supports independent evidence; forbidden-actions supports refusing Telegram resend. Neither fabricates runtime receipts or authority.",
+        "semanticQuality": "Supported bounded diagnosis; added prohibition citation, no clear material semantic improvement over partner.",
+        "slot": 3,
+        "caseId": "f07-provider-response-lost",
+        "variant": "oracle"
+      }
+    ]
+  },
+  "caseComparisons": [
+    {
+      "caseId": "f03-permission-ambiguous",
+      "baseline": "High-confidence unsupported configuration diagnosis; invalid evidence ref; service rejected.",
+      "oracle": "Medium-confidence configuration diagnosis, adds possible bot-permissions alternate and access check; service accepted but still wrongly implies required destination correction.",
+      "conclusion": "Narrow qualitative uncertainty/procedure improvement, unsupported causal claim persists. Deterministic service acceptance is not semantic validation.",
+      "regression": "No clear new semantic regression; persistent cause/remediation overreach in both."
+    },
+    {
+      "caseId": "f07-provider-response-lost",
+      "baseline": "Correct F07/outcome_unknown/abstention, independent provider evidence or receipts requested; citation supports unknown delivery.",
+      "oracle": "Correct F07/outcome_unknown/abstention; explicitly refuses replay and cites forbidden-actions as well as read-only investigation.",
+      "conclusion": "Comparable useful diagnoses; marginal prohibition/citation detail, no clear material gain.",
+      "regression": "Minor procedural overconstraint: oracle asks for independent logs before further classification, though F07 is already justified. Baseline more directly asks for receipts; baseline also overbroad before any further action."
+    }
+  ],
+  "conclusion": "This pilot offers a weak, mixed qualitative signal that relevant retrieval can improve uncertainty and procedural/citation detail, but does not demonstrate reliable improvement in causal diagnosis. The retrieval-limited ambiguous case remains unsupported even with the reviewed oracle.",
+  "limitation": "Two development cases and one repetition cannot establish reliable improvement or justify production adoption. Review is by the same implementation agent, not independent human validation; partial variant masking cannot remove prior knowledge. Sampling variation and order remain confounders.",
+  "verification": {
+    "focusedTests": "22 pass, 0 fail; 107 assertions",
+    "checkTypes": "passed",
+    "build": "passed; frontend cached; pre-existing cached warnings and ai_agent no-output warning",
+    "lint": "failed: unchanged frontend 9 errors and 22 warnings, matching documented counts. No ai_agent lint task; exact historical diagnostic equality not independently established."
+  },
+  "changedFiles": [
+    "apps/ai_agent/src/evaluation/oracle-pilot.ts",
+    "apps/ai_agent/tests/oracle-pilot.test.ts"
+  ],
+  "preserved": "Frozen inputs/report/corpus hash parity verified offline; no held-out reads, production changes, staging, commits, pushes, branch changes, Graphify changes or new dependencies. Pre-existing generated Prisma/Graphify and experiment edits excluded.",
+  "graphifyRequired": false
+}

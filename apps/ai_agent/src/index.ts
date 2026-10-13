@@ -16,9 +16,7 @@ const serviceSecret = process.env.TRIAGE_SERVICE_SECRET;
 const geminiApiKey = process.env.GEMINI_API_KEY;
 const geminiModel = process.env.GEMINI_MODEL ?? "gemini-2.5-flash";
 const databaseUrl = process.env.AI_AGENT_DATABASE_URL;
-if (investigationEnabled()) operationalLimits();
-if (investigationEnabled() && geminiModel !== "gemini-2.5-flash")
-  throw new Error("Investigation pricing supports only gemini-2.5-flash");
+if (investigationEnabled()) operationalLimits(geminiModel);
 if (investigationEnabled() && (!databaseUrl || !serviceSecret || serviceSecret.length < 32 || !geminiApiKey))
   throw new Error("Investigation requires a dedicated database URL, service secret and model key");
 let langfuse;

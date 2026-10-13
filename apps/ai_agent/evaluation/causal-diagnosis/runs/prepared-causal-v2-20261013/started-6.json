@@ -1,0 +1,18 @@
+{
+  "caseId": "f07-provider-response-lost",
+  "variant": "candidate",
+  "promptVersion": "experimental-causal-v2",
+  "promptHash": "b88ac8ed2b5e81d3705a5a941cd81b4c0b03c85778026e4a3f99db1653bddc7d",
+  "retrievalHash": "847e46aa5a1baafa683ace5053f955c989f470e2bbde7f403ef5cdb2efb88392",
+  "settingsHash": "c087890dc02b52a11a2c8577faf7b8d3fdd2e18a71a132dd7c65817de5a36d19",
+  "startedAt": 1791866071349,
+  "output": null,
+  "usage": null,
+  "latencyMs": 0,
+  "schemaValid": false,
+  "serviceValid": false,
+  "repairEvidenceIssue": null,
+  "consistencyIssues": null,
+  "failure": null,
+  "providerError": null
+}

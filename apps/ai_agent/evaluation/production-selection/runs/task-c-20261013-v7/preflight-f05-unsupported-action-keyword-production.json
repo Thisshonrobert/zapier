@@ -1,0 +1,1 @@
+{"caseId":"f05-unsupported-action","arm":"keyword-production","startedAt":1791889055988,"status":200,"countedInputTokens":3100,"outputLimitTokens":2048,"totalLimitTokens":64000,"latencyMs":275.2872000000207,"failure":null,"networkCode":null,"tokenBudgetAccepted":true,"state":"finished"}

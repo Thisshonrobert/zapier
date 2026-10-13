@@ -1,0 +1,13 @@
+{
+  "recordedAt": "2026-10-13T04:33:21.054Z",
+  "authorization": "User explicitly requested the prepared six-generation comparison using the same confirmed free-tier Gemini model, with no retries or extra calls.",
+  "sourceHashesVerified": true,
+  "planHash": "044726d37cc5190e127227d59b62bf5c120ae519340568b602a139843957f2f6",
+  "confirmationHash": "03c748c36c9de2bd60058d12eeca7c790ad0f25a478cb7c7cc508957f9a6f5ff",
+  "savedConfirmationReused": true,
+  "originalVerifiedAt": 1791834499276,
+  "freeTierReverified": false,
+  "availabilityCheck": "First planned generation only",
+  "maximumGenerations": 6,
+  "maximumTokenPreflights": 6
+}

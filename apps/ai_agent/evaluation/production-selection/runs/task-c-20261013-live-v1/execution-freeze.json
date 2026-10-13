@@ -1,0 +1,52 @@
+{
+  "status": "development_diagnostic_only",
+  "sourceManifestHash": "8da65743300ceb045a8552a553ee36b5f522d00a2069fe56617637512b1970a2",
+  "sourceDirectory": "C:\\Users\\thiss\\Desktop\\dev\\zapier\\apps\\ai_agent\\evaluation\\production-selection\\runs\\task-c-20261013-final-v3",
+  "scheduledSlots": 72,
+  "maxAttemptsIncludingFailures": 72,
+  "noAutomaticRetry": true,
+  "model": "gemini-3.5-flash-lite",
+  "monetaryCeilingUsd": 0,
+  "credentialProjectTier": "user_attested_gen-lang-client-0124525712_Free_2026-10-13",
+  "successorSourceFreeze": {
+    "originalManifestHash": "8da65743300ceb045a8552a553ee36b5f522d00a2069fe56617637512b1970a2",
+    "commentOnlySourceChange": {
+      "name": "apps/ai_agent/src/tools/search-runbooks.ts",
+      "originalHash": "7c433e3707ecfbca8d6ca6125ea3a2d0a53938a1481111af7783497e0cdd99f2",
+      "currentHash": "d304fd2fc0b889d565e5714f3658f2aa81465bbeb106c4638b6da6b886f73fa1",
+      "exactChange": "one added procedural-guidance comment at line 2"
+    },
+    "corpusHash": "a84aae31a5518ecaf83b8ecb117f90e42d46e446e9fc919a86a0c530ebc5c796",
+    "capturesHash": "838279fbcaa2dc9b23e6d48a7864efa5e05550bdbf9c74459c7a86098e596468",
+    "scheduleHash": "c4c41e1bbb888c8bee1f2a5c8d0586fa5d655fe65a523c24cbeb52c8de2343c0",
+    "countedPayloads": "24 immutable successful v7 count records, exact prompt hashes rechecked"
+  },
+  "reservation": {
+    "tokens": 64000,
+    "cents": 16,
+    "rollingHours": 24,
+    "admission": "all production reservations plus all Task C evaluation reservations, globally",
+    "maxTokens": 256000,
+    "maxCents": 100,
+    "maxRequests": 20,
+    "activeProductionInvestigationMustBeZero": true,
+    "sameProductionAdvisoryLock": 812084,
+    "maxNewSlotsThisInvocation": 4,
+    "productionClaimsIncludeEvaluationReservations": true
+  },
+  "provider": {
+    "perAttempt": "serving countTokens then generateContent, at most two HTTP calls",
+    "minimumAttemptStartSpacingMs": 65000,
+    "modelDeadlineMs": 15000,
+    "stopOnProviderFailureOr429": true,
+    "continueAfterValidationRejection": true,
+    "noPaidFallback": true
+  },
+  "acceptance": "schema and service validation are separate from pending semantic and human release review",
+  "controlledSources": {
+    "executor": "5c6b7fbba1e0a946f322042950636645da1b8f83c56843b7eb3715054b2cc5c1",
+    "store": "f062da019ae2b1e9b7d2a1a10fb2ca255cf8046fdd355e576156be73c884850a",
+    "migration": "7b4256ca9d8dd49572b6d4a54ad26b1fb0ce3376d76f9f8e4f1bed2a29d555c1",
+    "redaction": "d3ab5bebee7bcbb2b52a4e6889183b6417274f9124045c8bd6c03a39d78432de"
+  }
+}

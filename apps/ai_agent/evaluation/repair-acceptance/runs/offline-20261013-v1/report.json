@@ -1,0 +1,2488 @@
+{
+  "experiment": "offline-repair-acceptance-v1",
+  "at": "2026-10-13T05:13:55.175Z",
+  "externalModelCalls": 0,
+  "reviewMethod": "Direct agent annotations, variants visible, no benchmark labels; no independent/blinded semantic calibration",
+  "scope": "Reviewer-scoped bounded destination-format fixture findings and deterministic input requirements; all other repair claims not assessed",
+  "counts": {
+    "savedOutputs": {
+      "total": 14,
+      "supportedRepairAccepted": 3,
+      "unsupportedRepairRejected": 5,
+      "legitimateRepairIncorrectlyRejected": 0,
+      "unsupportedRepairIncorrectlyAccepted": 0,
+      "notAssessed": 0,
+      "targetedInvestigationPreserved": 0,
+      "targetedInvestigationRawPreserved": 1,
+      "deliveryConsistencyViolations": 1,
+      "unavailableOutputs": 1
+    },
+    "syntheticControls": {
+      "total": 19,
+      "supportedRepairAccepted": 5,
+      "unsupportedRepairRejected": 5,
+      "legitimateRepairIncorrectlyRejected": 0,
+      "unsupportedRepairIncorrectlyAccepted": 0,
+      "notAssessed": 5,
+      "targetedInvestigationPreserved": 1,
+      "targetedInvestigationRawPreserved": 2,
+      "deliveryConsistencyViolations": 2,
+      "unavailableOutputs": 0
+    }
+  },
+  "sourceHashes": {
+    "apps/ai_agent/evaluation/phase-11a-baseline-v6/contexts.json": "e5025d50fa72a32fa9a17d52ca298bd785beec1a9232cd0c83ed357ceef95d92",
+    "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/plan.json": "3e767aa9744b275d83f5db21a7c68de1eff6a0b7ce183420ee9177d34a6e4a84",
+    "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/result-1.json": "e7bd14c22dd77dfa09b36c1f1ac6b1ae4d00f0113067c488ae8d7eb3455a2d3a",
+    "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/result-2.json": "3ce805a136a9ba850264a4dbb52120c4746302b87e940c42b92571a0a6e7cee6",
+    "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/result-3.json": "c72fcc7bf3a8ff61ad98f0e599cdfe985040ab3fa98d310b23d23f5e37a2046f",
+    "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/result-4.json": "71daf5037b8da1825cc2c64652e741bf80b3e49e6f5dbeb6d5de9b95755bb907",
+    "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/plan.json": "044726d37cc5190e127227d59b62bf5c120ae519340568b602a139843957f2f6",
+    "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/result-1.json": "1cfd3b49cd1d8fccd09b653fccae336969502e7b7d21735b2c970cb92876c95d",
+    "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/result-2.json": "401b7637564381107928a355493a6ebad254f0839702e21ecc71d15728a1cfde",
+    "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/result-3.json": "677cf35948219071a5c6734e35c4c1634e42e7b65cab539825d6c81013bab46d",
+    "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/result-4.json": "9101ed7812c76890b7f8442d7f1aef3a5cedde25d6363d7ae541c17d64b98218",
+    "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/result-5.json": "326c9e7b88d081b02881ea44d4b7e0feb48c3ee5da680926a5f69104d751517d",
+    "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/result-6.json": "e0ea0fb1cc4bfea15b9f98328b8d6e1a45d1bf5dbdbfef93c007207602c103e1",
+    "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/plan.json": "865aad8491a13b9bb64af5c4647561d3c9017308f5f8ac8a459415740ee930e0",
+    "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/result-1.json": "5fd0cb1719894a2f4b2e28b97e7a7f00192a1dff570a0963b748c3d1271fb30d",
+    "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/result-2.json": "ba2cb5b6bc6a5bf16b0e3cc65e00081fb9786742c783df4e7c1000ea5b04a85e",
+    "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/result-3.json": "6da5aa9d297863be13ac354929e0d1e8697b564f5a2221d9d35d0b535dd643ef",
+    "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/result-4.json": "7ee2356b1d48754e9afca6fb4927a380123c7072596f395bdfd8a1d34db3e74b",
+    "apps/ai_agent/src/evaluation/repair-acceptance.ts": "1fc4032697b5fe4aa709857d2f160220ded9d961dcf85699804d1ae4f1a85a9c",
+    "apps/ai_agent/src/evaluation/repair-acceptance-controls.ts": "df723e800f0afb200e7e04e338e83459bf8ceb65c042bdb7b05407f47052d80c",
+    "apps/ai_agent/src/evaluation/repair-acceptance-pilot.ts": "20eff2e777e14356d6b4ea3a2620acb0b426c0290be21246111d55e5eadb4588",
+    "apps/ai_agent/tests/repair-acceptance.test.ts": "e13b2231e211aba1b165998d1da5217d5d848e83e757d3d4b98771294cae5563",
+    "apps/ai_agent/src/evaluation/causal-diagnosis.ts": "5e8612ac79ae8ea68a6c50e296bd666af9136bec92ed71c9775da3b1a2441df4",
+    "apps/ai_agent/src/graph.ts": "f3dec93c3dd58037f0b62d79f1fe3f5c7bfb12c79e9f07a3c99cc73d4c632e68",
+    "apps/ai_agent/src/contracts.ts": "2db41bcdde5b4539c8b0d5514e2bf9dd61a3c26e8166bbf867b6f0d0435711eb",
+    "apps/ai_agent/src/prompts.ts": "aa4a038a8b2748826933a9deb13aa883546d9d6cb79369a5424402d1c9485a9f"
+  },
+  "savedRows": [
+    {
+      "name": "causal-v1-1",
+      "caseId": "f03-permission-ambiguous",
+      "variant": "current",
+      "originalServiceAccepted": true,
+      "originalFailure": null,
+      "review": {
+        "categories": [
+          "destination_format"
+        ],
+        "repair": "unsupported",
+        "legitimateRepair": false,
+        "targetedInvestigation": false,
+        "note": "Correction is asserted from ambiguous resolver wording without an independent defect finding."
+      },
+      "evaluation": {
+        "rawOutput": {
+          "status": "completed",
+          "diagnosis": {
+            "taxonomy_id": "F03",
+            "summary": "Telegram delivery rejected with 'Invalid channel username', indicating an invalid destination format or incorrect channel configuration.",
+            "confidence": "high",
+            "evidence_refs": [
+              "fixture:failure:f03-permission-ambiguous",
+              "fixture:execution:f03-permission-ambiguous",
+              "fixture:validation:f03-permission-ambiguous"
+            ],
+            "alternate_explanations": [
+              "Bot lacks permission to post to the specified channel."
+            ],
+            "missing_evidence": [
+              "provider_status_code",
+              "bot_permission_state",
+              "destination_validity",
+              "canonical_source_identity",
+              "action_metadata",
+              "payload_values",
+              "execution_record",
+              "attempt_history",
+              "execution_ordering",
+              "action_inputs",
+              "input_fingerprint",
+              "handler_registry"
+            ]
+          },
+          "proposal": {
+            "disposition": "owner_action_required",
+            "kind": "request_manual_fix",
+            "summary": "Request manual correction of the invalid destination channel username configuration.",
+            "reasons": [
+              "The provider rejected the delivery attempt due to an invalid channel username.",
+              "Invalid destination format supports a bounded owner configuration repair."
+            ],
+            "evidence_refs": [
+              "fixture:failure:f03-permission-ambiguous",
+              "fixture:validation:f03-permission-ambiguous"
+            ],
+            "runbook_citations": [
+              "RB-F04-F06@1.0.0#replay-and-approval"
+            ],
+            "preconditions": [
+              "Verify and correct the channel username configuration before any further action."
+            ]
+          }
+        },
+        "schemaValid": true,
+        "serviceAcceptance": {
+          "accepted": true,
+          "failure": null
+        },
+        "deliveryConsistency": [],
+        "repairSupport": {
+          "status": "unsupported",
+          "assessments": [
+            {
+              "category": "destination_format",
+              "status": "unsupported",
+              "provenance": null,
+              "reason": "no_cited_independent_finding_for_assessed_category"
+            }
+          ]
+        },
+        "experimentalAcceptance": "rejected",
+        "externalModelCalls": 0
+      }
+    },
+    {
+      "name": "causal-v1-2",
+      "caseId": "f03-permission-ambiguous",
+      "variant": "candidate",
+      "originalServiceAccepted": true,
+      "originalFailure": null,
+      "review": {
+        "categories": [],
+        "repair": "not_applicable",
+        "legitimateRepair": null,
+        "targetedInvestigation": true,
+        "note": "Investigation advice is appropriate, but the known-rejection output wrongly uses outcome_unknown."
+      },
+      "evaluation": {
+        "rawOutput": {
+          "status": "abstained",
+          "diagnosis": {
+            "taxonomy_id": "F03",
+            "summary": "The telegram action failed with a rejected delivery outcome and error 'Invalid channel username', but destination validity, bot permission state, and provider status code are unavailable.",
+            "confidence": "low",
+            "evidence_refs": [
+              "fixture:failure:f03-permission-ambiguous",
+              "fixture:execution:f03-permission-ambiguous",
+              "fixture:validation:f03-permission-ambiguous"
+            ],
+            "alternate_explanations": [
+              "The error may stem from an invalid or nonexistent channel username configuration.",
+              "The error may be caused by insufficient bot permissions or a revoked bot token in the Telegram channel."
+            ],
+            "missing_evidence": [
+              "provider_status_code",
+              "bot_permission_state",
+              "destination_validity",
+              "canonical_source_identity",
+              "action_metadata",
+              "payload_values",
+              "execution_record",
+              "attempt_history",
+              "execution_ordering",
+              "action_inputs",
+              "input_fingerprint",
+              "handler_registry"
+            ]
+          },
+          "proposal": {
+            "disposition": "outcome_unknown",
+            "kind": "escalate",
+            "summary": "Escalate for investigation due to insufficient delivery and permission evidence preventing a definitive configuration or infrastructure fault attribution.",
+            "reasons": [
+              "Critical evidence items including destination validity and bot permission state are unavailable.",
+              "Delivery outcome is known as rejected but the precise failure cause remains ambiguous between destination configuration and permission restrictions."
+            ],
+            "evidence_refs": [
+              "fixture:failure:f03-permission-ambiguous"
+            ],
+            "runbook_citations": [
+              "RB-F01-F02@1.0.0#read-only-investigation"
+            ],
+            "preconditions": [
+              "Obtain non-secret destination-format validation",
+              "Verify provider phase and status evidence",
+              "Confirm operator bot membership and access state"
+            ]
+          }
+        },
+        "schemaValid": true,
+        "serviceAcceptance": {
+          "accepted": true,
+          "failure": null
+        },
+        "deliveryConsistency": [
+          "known_delivery_marked_unknown"
+        ],
+        "repairSupport": {
+          "status": "not_applicable",
+          "assessments": []
+        },
+        "experimentalAcceptance": "rejected",
+        "externalModelCalls": 0
+      }
+    },
+    {
+      "name": "causal-v1-3",
+      "caseId": "f04-invalid-destination",
+      "variant": "candidate",
+      "originalServiceAccepted": false,
+      "originalFailure": "generation_failed",
+      "review": {
+        "categories": [],
+        "repair": "unmeasured",
+        "legitimateRepair": null,
+        "targetedInvestigation": false,
+        "note": "HTTP 503: no model output; no semantic conclusion."
+      },
+      "evaluation": null
+    },
+    {
+      "name": "causal-v1-4",
+      "caseId": "f04-invalid-destination",
+      "variant": "current",
+      "originalServiceAccepted": true,
+      "originalFailure": null,
+      "review": {
+        "categories": [
+          "destination_format"
+        ],
+        "repair": "supported",
+        "legitimateRepair": true,
+        "targetedInvestigation": false,
+        "note": "Correction is justified by the separate fixture format finding, not the error text. No replacement value or replay is proposed."
+      },
+      "evaluation": {
+        "rawOutput": {
+          "status": "completed",
+          "diagnosis": {
+            "taxonomy_id": "F04",
+            "summary": "Provider rejected the destination due to an invalid destination format in the telegram action.",
+            "confidence": "high",
+            "evidence_refs": [
+              "fixture:failure:f04-invalid-destination",
+              "fixture:execution:f04-invalid-destination",
+              "fixture:validation:f04-invalid-destination"
+            ],
+            "alternate_explanations": [
+              "Temporary provider outage affecting destination resolution."
+            ],
+            "missing_evidence": [
+              "operator_approved_destination",
+              "canonical_source_identity",
+              "action_metadata",
+              "payload_values",
+              "execution_record",
+              "attempt_history",
+              "execution_ordering",
+              "action_inputs",
+              "input_fingerprint",
+              "handler_registry"
+            ]
+          },
+          "proposal": {
+            "disposition": "owner_action_required",
+            "kind": "request_manual_fix",
+            "summary": "Review and correct the invalid destination format for the telegram action.",
+            "reasons": [
+              "The provider rejected the destination with an invalid destination format error.",
+              "Customer-controlled destination configuration needs correction."
+            ],
+            "evidence_refs": [
+              "fixture:failure:f04-invalid-destination",
+              "fixture:validation:f04-invalid-destination"
+            ],
+            "runbook_citations": [
+              "RB-F03-F04@1.0.0#read-only-investigation"
+            ],
+            "preconditions": [
+              "Confirm correct destination format and recipient configuration outside the agent."
+            ]
+          }
+        },
+        "schemaValid": true,
+        "serviceAcceptance": {
+          "accepted": true,
+          "failure": null
+        },
+        "deliveryConsistency": [],
+        "repairSupport": {
+          "status": "supported",
+          "assessments": [
+            {
+              "category": "destination_format",
+              "status": "supported",
+              "provenance": "controlled_fixture_only",
+              "reason": "cited_independent_finding_for_assessed_category"
+            }
+          ]
+        },
+        "experimentalAcceptance": "accepted",
+        "externalModelCalls": 0
+      }
+    },
+    {
+      "name": "causal-v2-1",
+      "caseId": "f03-permission-ambiguous",
+      "variant": "current",
+      "originalServiceAccepted": true,
+      "originalFailure": null,
+      "review": {
+        "categories": [
+          "destination_format"
+        ],
+        "repair": "unsupported",
+        "legitimateRepair": false,
+        "targetedInvestigation": false,
+        "note": "Correction is asserted from ambiguous resolver wording without an independent defect finding."
+      },
+      "evaluation": {
+        "rawOutput": {
+          "status": "completed",
+          "diagnosis": {
+            "taxonomy_id": "F03",
+            "summary": "Telegram action rejected with an invalid channel username and inputs blocked due to unavailable fixture configuration.",
+            "confidence": "medium",
+            "evidence_refs": [
+              "fixture:failure:f03-permission-ambiguous",
+              "fixture:execution:f03-permission-ambiguous",
+              "fixture:validation:f03-permission-ambiguous"
+            ],
+            "alternate_explanations": [
+              "The channel username may have been mistyped or does not exist."
+            ],
+            "missing_evidence": [
+              "provider_status_code",
+              "bot_permission_state",
+              "destination_validity",
+              "canonical_source_identity",
+              "action_metadata",
+              "payload_values",
+              "execution_record",
+              "attempt_history",
+              "execution_ordering",
+              "action_inputs",
+              "input_fingerprint",
+              "handler_registry"
+            ]
+          },
+          "proposal": {
+            "disposition": "owner_action_required",
+            "kind": "request_manual_fix",
+            "summary": "Verify and correct the Telegram channel username and configuration inputs before any manual action.",
+            "reasons": [
+              "The provider rejected the request due to an invalid channel username.",
+              "Action inputs and configuration require owner verification."
+            ],
+            "evidence_refs": [
+              "fixture:failure:f03-permission-ambiguous",
+              "fixture:validation:f03-permission-ambiguous"
+            ],
+            "runbook_citations": [
+              "RB-F04-F06@1.0.0#replay-and-approval"
+            ],
+            "preconditions": [
+              "Owner verifies destination configuration and correct channel username."
+            ]
+          }
+        },
+        "schemaValid": true,
+        "serviceAcceptance": {
+          "accepted": true,
+          "failure": null
+        },
+        "deliveryConsistency": [],
+        "repairSupport": {
+          "status": "unsupported",
+          "assessments": [
+            {
+              "category": "destination_format",
+              "status": "unsupported",
+              "provenance": null,
+              "reason": "no_cited_independent_finding_for_assessed_category"
+            }
+          ]
+        },
+        "experimentalAcceptance": "rejected",
+        "externalModelCalls": 0
+      }
+    },
+    {
+      "name": "causal-v2-2",
+      "caseId": "f03-permission-ambiguous",
+      "variant": "candidate",
+      "originalServiceAccepted": true,
+      "originalFailure": null,
+      "review": {
+        "categories": [
+          "destination_format"
+        ],
+        "repair": "unsupported",
+        "legitimateRepair": false,
+        "targetedInvestigation": false,
+        "note": "Correction is asserted from ambiguous resolver wording without an independent defect finding."
+      },
+      "evaluation": {
+        "rawOutput": {
+          "status": "completed",
+          "diagnosis": {
+            "taxonomy_id": "F03",
+            "summary": "Telegram delivery rejected with final error Invalid channel username under controlled fixture conditions",
+            "confidence": "medium",
+            "evidence_refs": [
+              "fixture:failure:f03-permission-ambiguous"
+            ],
+            "alternate_explanations": [
+              "Upstream destination configuration might be misconfigured or invalid"
+            ],
+            "missing_evidence": [
+              "provider_status_code",
+              "bot_permission_state",
+              "destination_validity",
+              "canonical_source_identity",
+              "action_metadata",
+              "payload_values",
+              "execution_record",
+              "attempt_history",
+              "execution_ordering",
+              "action_inputs",
+              "input_fingerprint",
+              "handler_registry"
+            ]
+          },
+          "proposal": {
+            "disposition": "owner_action_required",
+            "kind": "request_manual_fix",
+            "summary": "Review and correct the recipient channel username or destination configuration for the Telegram action",
+            "reasons": [
+              "Controlled fixture indicates Telegram delivery rejection with Invalid channel username",
+              "Destination configuration or recipient parameter requires manual owner correction"
+            ],
+            "evidence_refs": [
+              "fixture:failure:f03-permission-ambiguous"
+            ],
+            "runbook_citations": [
+              "RB-F04-F06@1.0.0#replay-and-approval"
+            ],
+            "preconditions": [
+              "Verify correct recipient channel username format before any subsequent action"
+            ]
+          }
+        },
+        "schemaValid": true,
+        "serviceAcceptance": {
+          "accepted": true,
+          "failure": null
+        },
+        "deliveryConsistency": [],
+        "repairSupport": {
+          "status": "unsupported",
+          "assessments": [
+            {
+              "category": "destination_format",
+              "status": "unsupported",
+              "provenance": null,
+              "reason": "no_cited_independent_finding_for_assessed_category"
+            }
+          ]
+        },
+        "experimentalAcceptance": "rejected",
+        "externalModelCalls": 0
+      }
+    },
+    {
+      "name": "causal-v2-3",
+      "caseId": "f04-invalid-destination",
+      "variant": "candidate",
+      "originalServiceAccepted": true,
+      "originalFailure": null,
+      "review": {
+        "categories": [
+          "destination_format"
+        ],
+        "repair": "supported",
+        "legitimateRepair": true,
+        "targetedInvestigation": false,
+        "note": "Correction is justified by the separate fixture format finding, not the error text. No replacement value or replay is proposed."
+      },
+      "evaluation": {
+        "rawOutput": {
+          "status": "completed",
+          "diagnosis": {
+            "taxonomy_id": "F04",
+            "summary": "Controlled fixture observation indicates an invalid destination format for the telegram provider resulting in a rejected delivery outcome.",
+            "confidence": "high",
+            "evidence_refs": [
+              "fixture:failure:f04-invalid-destination",
+              "fixture:execution:f04-invalid-destination",
+              "fixture:validation:f04-invalid-destination"
+            ],
+            "alternate_explanations": [
+              "The destination format might have been affected by upstream input mapping variations not fully captured in the truncated failure context."
+            ],
+            "missing_evidence": [
+              "operator_approved_destination",
+              "canonical_source_identity",
+              "action_metadata",
+              "payload_values",
+              "execution_record",
+              "attempt_history",
+              "execution_ordering",
+              "action_inputs",
+              "input_fingerprint",
+              "handler_registry"
+            ]
+          },
+          "proposal": {
+            "disposition": "owner_action_required",
+            "kind": "request_manual_fix",
+            "summary": "Request manual verification and correction of the destination format configuration for the telegram action.",
+            "reasons": [
+              "Controlled fixture observation explicitly established a destination_format_invalid issue.",
+              "Provider explicitly rejected the destination."
+            ],
+            "evidence_refs": [
+              "fixture:failure:f04-invalid-destination"
+            ],
+            "runbook_citations": [
+              "RB-F03-F04@1.0.0#read-only-investigation"
+            ],
+            "preconditions": [
+              "Operator must verify destination format and configuration outside the automated investigation workflow."
+            ]
+          }
+        },
+        "schemaValid": true,
+        "serviceAcceptance": {
+          "accepted": true,
+          "failure": null
+        },
+        "deliveryConsistency": [],
+        "repairSupport": {
+          "status": "supported",
+          "assessments": [
+            {
+              "category": "destination_format",
+              "status": "supported",
+              "provenance": "controlled_fixture_only",
+              "reason": "cited_independent_finding_for_assessed_category"
+            }
+          ]
+        },
+        "experimentalAcceptance": "accepted",
+        "externalModelCalls": 0
+      }
+    },
+    {
+      "name": "causal-v2-4",
+      "caseId": "f04-invalid-destination",
+      "variant": "current",
+      "originalServiceAccepted": true,
+      "originalFailure": null,
+      "review": {
+        "categories": [
+          "destination_format"
+        ],
+        "repair": "supported",
+        "legitimateRepair": true,
+        "targetedInvestigation": false,
+        "note": "Correction is justified by the separate fixture format finding, not the error text. No replacement value or replay is proposed."
+      },
+      "evaluation": {
+        "rawOutput": {
+          "status": "completed",
+          "diagnosis": {
+            "taxonomy_id": "F04",
+            "summary": "Provider rejected the destination due to an invalid destination format for the telegram action.",
+            "confidence": "high",
+            "evidence_refs": [
+              "fixture:failure:f04-invalid-destination",
+              "fixture:execution:f04-invalid-destination",
+              "fixture:validation:f04-invalid-destination"
+            ],
+            "alternate_explanations": [
+              "Destination might be missing required bot permissions or chat membership"
+            ],
+            "missing_evidence": [
+              "operator_approved_destination",
+              "canonical_source_identity",
+              "action_metadata",
+              "payload_values",
+              "execution_record",
+              "attempt_history",
+              "execution_ordering",
+              "action_inputs",
+              "input_fingerprint",
+              "handler_registry"
+            ]
+          },
+          "proposal": {
+            "disposition": "owner_action_required",
+            "kind": "request_manual_fix",
+            "summary": "Request operator to review and fix the invalid telegram destination format.",
+            "reasons": [
+              "Provider rejected the destination with an invalid destination format error.",
+              "Customer-controlled destination configuration needs correction."
+            ],
+            "evidence_refs": [
+              "fixture:failure:f04-invalid-destination"
+            ],
+            "runbook_citations": [
+              "RB-F03-F04@1.0.0#read-only-investigation"
+            ],
+            "preconditions": [
+              "Operator must review destination format and configuration."
+            ]
+          }
+        },
+        "schemaValid": true,
+        "serviceAcceptance": {
+          "accepted": true,
+          "failure": null
+        },
+        "deliveryConsistency": [],
+        "repairSupport": {
+          "status": "supported",
+          "assessments": [
+            {
+              "category": "destination_format",
+              "status": "supported",
+              "provenance": "controlled_fixture_only",
+              "reason": "cited_independent_finding_for_assessed_category"
+            }
+          ]
+        },
+        "experimentalAcceptance": "accepted",
+        "externalModelCalls": 0
+      }
+    },
+    {
+      "name": "causal-v2-5",
+      "caseId": "f07-provider-response-lost",
+      "variant": "current",
+      "originalServiceAccepted": true,
+      "originalFailure": null,
+      "review": {
+        "categories": [],
+        "repair": "not_applicable",
+        "legitimateRepair": null,
+        "targetedInvestigation": false,
+        "note": "Outcome reconciliation preserves unknown delivery and proposes no owner correction."
+      },
+      "evaluation": {
+        "rawOutput": {
+          "status": "abstained",
+          "diagnosis": {
+            "taxonomy_id": "F07",
+            "summary": "The provider response was lost after request transmission, resulting in an unknown delivery outcome with insufficient evidence to establish final state or replay safety.",
+            "confidence": "high",
+            "evidence_refs": [
+              "fixture:failure:f07-provider-response-lost",
+              "fixture:execution:f07-provider-response-lost",
+              "fixture:validation:f07-provider-response-lost"
+            ],
+            "alternate_explanations": [
+              "The message may have been successfully received by the provider despite the lost response.",
+              "The request may have failed completely prior to reaching the provider API."
+            ],
+            "missing_evidence": [
+              "provider_delivery_receipt",
+              "request_fingerprint",
+              "canonical_source_identity",
+              "action_metadata",
+              "payload_values",
+              "execution_record",
+              "attempt_history",
+              "execution_ordering",
+              "action_inputs",
+              "input_fingerprint",
+              "handler_registry"
+            ]
+          },
+          "proposal": {
+            "disposition": "outcome_unknown",
+            "kind": "escalate",
+            "summary": "Escalate the incident due to unknown delivery outcome and missing historical evidence preventing safe replay or definitive diagnosis.",
+            "reasons": [
+              "Delivery outcome is explicitly unknown due to a lost provider response.",
+              "Required evidence items such as provider delivery receipt and attempt history are unavailable.",
+              "Runbook guidance dictates that Telegram unknown delivery must be treated as unknown and blocked."
+            ],
+            "evidence_refs": [
+              "fixture:failure:f07-provider-response-lost"
+            ],
+            "runbook_citations": [
+              "RB-F07@1.0.0#read-only-investigation",
+              "RB-F07@1.0.0#replay-and-approval"
+            ],
+            "preconditions": [
+              "Obtain independent provider delivery receipts or logs.",
+              "Verify complete execution and attempt history."
+            ]
+          }
+        },
+        "schemaValid": true,
+        "serviceAcceptance": {
+          "accepted": true,
+          "failure": null
+        },
+        "deliveryConsistency": [],
+        "repairSupport": {
+          "status": "not_applicable",
+          "assessments": []
+        },
+        "experimentalAcceptance": "accepted",
+        "externalModelCalls": 0
+      }
+    },
+    {
+      "name": "causal-v2-6",
+      "caseId": "f07-provider-response-lost",
+      "variant": "candidate",
+      "originalServiceAccepted": true,
+      "originalFailure": null,
+      "review": {
+        "categories": [],
+        "repair": "not_applicable",
+        "legitimateRepair": null,
+        "targetedInvestigation": false,
+        "note": "Outcome reconciliation preserves unknown delivery and proposes no owner correction."
+      },
+      "evaluation": {
+        "rawOutput": {
+          "status": "abstained",
+          "diagnosis": {
+            "taxonomy_id": "F07",
+            "summary": "Provider response was lost after request transmission with unknown delivery outcome.",
+            "confidence": "high",
+            "evidence_refs": [
+              "fixture:failure:f07-provider-response-lost",
+              "fixture:execution:f07-provider-response-lost",
+              "fixture:validation:f07-provider-response-lost"
+            ],
+            "alternate_explanations": [
+              "The provider received the request but timed out before returning a receipt."
+            ],
+            "missing_evidence": [
+              "provider_delivery_receipt",
+              "request_fingerprint",
+              "canonical_source_identity",
+              "action_metadata",
+              "payload_values",
+              "execution_record",
+              "attempt_history",
+              "execution_ordering",
+              "action_inputs",
+              "input_fingerprint",
+              "handler_registry"
+            ]
+          },
+          "proposal": {
+            "disposition": "outcome_unknown",
+            "kind": "escalate",
+            "summary": "Abstaining from resolution due to unknown delivery outcome and missing delivery receipt.",
+            "reasons": [
+              "Delivery outcome is unknown and provider response was lost after request transmission.",
+              "Required delivery route dictates abstention and escalation."
+            ],
+            "evidence_refs": [
+              "fixture:failure:f07-provider-response-lost"
+            ],
+            "runbook_citations": [
+              "RB-F07@1.0.0#read-only-investigation"
+            ],
+            "preconditions": []
+          }
+        },
+        "schemaValid": true,
+        "serviceAcceptance": {
+          "accepted": true,
+          "failure": null
+        },
+        "deliveryConsistency": [],
+        "repairSupport": {
+          "status": "not_applicable",
+          "assessments": []
+        },
+        "experimentalAcceptance": "accepted",
+        "externalModelCalls": 0
+      }
+    },
+    {
+      "name": "oracle-1",
+      "caseId": "f03-permission-ambiguous",
+      "variant": "baseline",
+      "originalServiceAccepted": false,
+      "originalFailure": "service_validation_or_deadline_failed",
+      "review": {
+        "categories": [
+          "destination_format",
+          "input_requirements"
+        ],
+        "repair": "unsupported",
+        "legitimateRepair": false,
+        "targetedInvestigation": false,
+        "note": "Proposes destination or input-mapping correction without either independent finding; the saved evidence reference is also invalid."
+      },
+      "evaluation": {
+        "rawOutput": {
+          "status": "completed",
+          "diagnosis": {
+            "taxonomy_id": "F03",
+            "summary": "Telegram action rejected due to invalid channel username, requiring destination/input correction.",
+            "confidence": "high",
+            "evidence_refs": [
+              "fixture:failure:f03-permission-ambiguous",
+              "fixture:execution:f03-permission-ambiguous",
+              "fixture:validation:f03-permission-ambiguous"
+            ],
+            "alternate_explanations": [
+              "Destination channel name might be incorrectly configured or malformed in recipient input mapping."
+            ],
+            "missing_evidence": [
+              "provider_status_code",
+              "bot_permission_state",
+              "destination_validity",
+              "canonical_source_identity",
+              "action_metadata",
+              "payload_values",
+              "execution_record",
+              "attempt_history",
+              "execution_ordering",
+              "action_inputs",
+              "input_fingerprint",
+              "handler_registry"
+            ]
+          },
+          "proposal": {
+            "disposition": "owner_action_required",
+            "kind": "request_manual_fix",
+            "summary": "Request manual fix of the recipient channel configuration or input mapping by the owner.",
+            "reasons": [
+              "The provider rejected the request with 'Invalid channel username', which is a customer-controlled configuration or destination issue.",
+              "Invalid destination format supports a bounded owner configuration repair."
+            ],
+            "evidence_refs": [
+              "fixture:failure:",
+              "fixture:validation:f03-permission-ambiguous"
+            ],
+            "runbook_citations": [
+              "RB-F04-F06@1.0.0#replay-and-approval"
+            ],
+            "preconditions": [
+              "Verify destination channel username validity",
+              "Ensure recipient mapping matches correct format"
+            ]
+          }
+        },
+        "schemaValid": true,
+        "serviceAcceptance": {
+          "accepted": false,
+          "failure": "invalid_model_output"
+        },
+        "deliveryConsistency": [],
+        "repairSupport": {
+          "status": "unsupported",
+          "assessments": [
+            {
+              "category": "destination_format",
+              "status": "unsupported",
+              "provenance": null,
+              "reason": "no_cited_independent_finding_for_assessed_category"
+            },
+            {
+              "category": "input_requirements",
+              "status": "unsupported",
+              "provenance": null,
+              "reason": "no_cited_independent_finding_for_assessed_category"
+            }
+          ]
+        },
+        "experimentalAcceptance": "rejected",
+        "externalModelCalls": 0
+      }
+    },
+    {
+      "name": "oracle-2",
+      "caseId": "f03-permission-ambiguous",
+      "variant": "oracle",
+      "originalServiceAccepted": true,
+      "originalFailure": null,
+      "review": {
+        "categories": [
+          "destination_format"
+        ],
+        "repair": "unsupported",
+        "legitimateRepair": false,
+        "targetedInvestigation": false,
+        "note": "Correction is asserted from ambiguous resolver wording without an independent defect finding."
+      },
+      "evaluation": {
+        "rawOutput": {
+          "status": "completed",
+          "diagnosis": {
+            "taxonomy_id": "F03",
+            "summary": "Telegram delivery rejected with 'Invalid channel username', pointing to an invalid destination format or incorrect channel configuration.",
+            "confidence": "medium",
+            "evidence_refs": [
+              "fixture:failure:f03-permission-ambiguous",
+              "fixture:validation:f03-permission-ambiguous"
+            ],
+            "alternate_explanations": [
+              "Bot permissions in the target channel might be misconfigured."
+            ],
+            "missing_evidence": [
+              "provider_status_code",
+              "bot_permission_state",
+              "destination_validity",
+              "canonical_source_identity",
+              "action_metadata",
+              "payload_values",
+              "execution_record",
+              "attempt_history",
+              "execution_ordering",
+              "action_inputs",
+              "input_fingerprint",
+              "handler_registry"
+            ]
+          },
+          "proposal": {
+            "disposition": "owner_action_required",
+            "kind": "request_manual_fix",
+            "summary": "Verify and correct the channel username or recipient destination configuration.",
+            "reasons": [
+              "The provider rejected the request due to an invalid channel username.",
+              "Customer-controlled destination configuration requires manual correction."
+            ],
+            "evidence_refs": [
+              "fixture:failure:f03-permission-ambiguous"
+            ],
+            "runbook_citations": [
+              "RB-F03-F04@1.0.0#read-only-investigation"
+            ],
+            "preconditions": [
+              "Ensure the channel username is valid and the bot has proper access."
+            ]
+          }
+        },
+        "schemaValid": true,
+        "serviceAcceptance": {
+          "accepted": true,
+          "failure": null
+        },
+        "deliveryConsistency": [],
+        "repairSupport": {
+          "status": "unsupported",
+          "assessments": [
+            {
+              "category": "destination_format",
+              "status": "unsupported",
+              "provenance": null,
+              "reason": "no_cited_independent_finding_for_assessed_category"
+            }
+          ]
+        },
+        "experimentalAcceptance": "rejected",
+        "externalModelCalls": 0
+      }
+    },
+    {
+      "name": "oracle-3",
+      "caseId": "f07-provider-response-lost",
+      "variant": "oracle",
+      "originalServiceAccepted": true,
+      "originalFailure": null,
+      "review": {
+        "categories": [],
+        "repair": "not_applicable",
+        "legitimateRepair": null,
+        "targetedInvestigation": false,
+        "note": "Outcome reconciliation preserves unknown delivery and proposes no owner correction."
+      },
+      "evaluation": {
+        "rawOutput": {
+          "status": "abstained",
+          "diagnosis": {
+            "taxonomy_id": "F07",
+            "summary": "Provider response was lost after request transmission, leaving delivery status unknown and requiring abstention due to insufficient delivery evidence.",
+            "confidence": "high",
+            "evidence_refs": [
+              "fixture:failure:f07-provider-response-lost",
+              "fixture:execution:f07-provider-response-lost",
+              "fixture:validation:f07-provider-response-lost"
+            ],
+            "alternate_explanations": [
+              "The provider may have successfully processed the request despite the lost response receipt."
+            ],
+            "missing_evidence": [
+              "provider_delivery_receipt",
+              "request_fingerprint",
+              "canonical_source_identity",
+              "action_metadata",
+              "payload_values",
+              "execution_record",
+              "attempt_history",
+              "execution_ordering",
+              "action_inputs",
+              "input_fingerprint",
+              "handler_registry"
+            ]
+          },
+          "proposal": {
+            "disposition": "outcome_unknown",
+            "kind": "escalate",
+            "summary": "Abstain from replay or definitive delivery conclusions due to unknown provider response and missing historical delivery evidence.",
+            "reasons": [
+              "Delivery outcome is explicitly unknown because the provider response was lost after transmission and required evidence is missing."
+            ],
+            "evidence_refs": [
+              "fixture:failure:f07-provider-response-lost",
+              "fixture:execution:f07-provider-response-lost"
+            ],
+            "runbook_citations": [
+              "RB-F07@1.0.0#read-only-investigation",
+              "RB-F07@1.0.0#forbidden-actions"
+            ],
+            "preconditions": [
+              "Confirm independent provider side-effects or logs before attempting any further classification."
+            ]
+          }
+        },
+        "schemaValid": true,
+        "serviceAcceptance": {
+          "accepted": true,
+          "failure": null
+        },
+        "deliveryConsistency": [],
+        "repairSupport": {
+          "status": "not_applicable",
+          "assessments": []
+        },
+        "experimentalAcceptance": "accepted",
+        "externalModelCalls": 0
+      }
+    },
+    {
+      "name": "oracle-4",
+      "caseId": "f07-provider-response-lost",
+      "variant": "baseline",
+      "originalServiceAccepted": true,
+      "originalFailure": null,
+      "review": {
+        "categories": [],
+        "repair": "not_applicable",
+        "legitimateRepair": null,
+        "targetedInvestigation": false,
+        "note": "Outcome reconciliation preserves unknown delivery and proposes no owner correction."
+      },
+      "evaluation": {
+        "rawOutput": {
+          "status": "abstained",
+          "diagnosis": {
+            "taxonomy_id": "F07",
+            "summary": "Provider response was lost after request transmission, and delivery outcome remains unknown.",
+            "confidence": "high",
+            "evidence_refs": [
+              "fixture:failure:f07-provider-response-lost",
+              "fixture:execution:f07-provider-response-lost",
+              "fixture:validation:f07-provider-response-lost"
+            ],
+            "alternate_explanations": [
+              "The message may have reached the provider successfully despite the lost response receipt."
+            ],
+            "missing_evidence": [
+              "provider_delivery_receipt",
+              "request_fingerprint",
+              "canonical_source_identity",
+              "action_metadata",
+              "payload_values",
+              "execution_record",
+              "attempt_history",
+              "execution_ordering",
+              "action_inputs",
+              "input_fingerprint",
+              "handler_registry"
+            ]
+          },
+          "proposal": {
+            "disposition": "outcome_unknown",
+            "kind": "escalate",
+            "summary": "Delivery outcome is unknown due to lost provider response, requiring escalation.",
+            "reasons": [
+              "Delivery outcome is unknown and provider response was lost.",
+              "Required evidence items are missing to establish safe replay or definitive delivery."
+            ],
+            "evidence_refs": [
+              "fixture:failure:f07-provider-response-lost"
+            ],
+            "runbook_citations": [
+              "RB-F07@1.0.0#read-only-investigation"
+            ],
+            "preconditions": [
+              "Obtain independent provider evidence or missing delivery receipts before any further action."
+            ]
+          }
+        },
+        "schemaValid": true,
+        "serviceAcceptance": {
+          "accepted": true,
+          "failure": null
+        },
+        "deliveryConsistency": [],
+        "repairSupport": {
+          "status": "not_applicable",
+          "assessments": []
+        },
+        "experimentalAcceptance": "accepted",
+        "externalModelCalls": 0
+      }
+    }
+  ],
+  "controlRows": [
+    {
+      "name": "ambiguous wording without defect",
+      "review": {
+        "categories": [
+          "destination_format"
+        ],
+        "repair": "unsupported",
+        "legitimateRepair": false,
+        "targetedInvestigation": false,
+        "note": "Direct review of synthetic proposed correction and independent evidence."
+      },
+      "evaluation": {
+        "rawOutput": {
+          "status": "completed",
+          "diagnosis": {
+            "taxonomy_id": "F04",
+            "summary": "Bounded synthetic finding, not execution-time configuration.",
+            "confidence": "low",
+            "evidence_refs": [
+              "fixture:failure:f03-permission-ambiguous"
+            ],
+            "alternate_explanations": [],
+            "missing_evidence": [
+              "provider_status_code",
+              "bot_permission_state",
+              "destination_validity",
+              "canonical_source_identity",
+              "action_metadata",
+              "payload_values",
+              "execution_record",
+              "attempt_history",
+              "execution_ordering",
+              "action_inputs",
+              "input_fingerprint",
+              "handler_registry"
+            ]
+          },
+          "proposal": {
+            "disposition": "owner_action_required",
+            "kind": "request_manual_fix",
+            "summary": "Correct the independently invalid destination format.",
+            "reasons": [
+              "Correct only the cited independent finding; no replacement or replay authorized."
+            ],
+            "evidence_refs": [
+              "fixture:failure:f03-permission-ambiguous"
+            ],
+            "runbook_citations": [],
+            "preconditions": []
+          }
+        },
+        "schemaValid": true,
+        "serviceAcceptance": {
+          "accepted": true,
+          "failure": null
+        },
+        "deliveryConsistency": [],
+        "repairSupport": {
+          "status": "unsupported",
+          "assessments": [
+            {
+              "category": "destination_format",
+              "status": "unsupported",
+              "provenance": null,
+              "reason": "no_cited_independent_finding_for_assessed_category"
+            }
+          ]
+        },
+        "experimentalAcceptance": "rejected",
+        "externalModelCalls": 0
+      }
+    },
+    {
+      "name": "fixture format with carrying citation",
+      "review": {
+        "categories": [
+          "destination_format"
+        ],
+        "repair": "supported",
+        "legitimateRepair": true,
+        "targetedInvestigation": false,
+        "note": "Direct review of synthetic proposed correction and independent evidence."
+      },
+      "evaluation": {
+        "rawOutput": {
+          "status": "completed",
+          "diagnosis": {
+            "taxonomy_id": "F04",
+            "summary": "Bounded synthetic finding, not execution-time configuration.",
+            "confidence": "low",
+            "evidence_refs": [
+              "fixture:failure:f04-invalid-destination"
+            ],
+            "alternate_explanations": [],
+            "missing_evidence": [
+              "operator_approved_destination",
+              "canonical_source_identity",
+              "action_metadata",
+              "payload_values",
+              "execution_record",
+              "attempt_history",
+              "execution_ordering",
+              "action_inputs",
+              "input_fingerprint",
+              "handler_registry"
+            ]
+          },
+          "proposal": {
+            "disposition": "owner_action_required",
+            "kind": "request_manual_fix",
+            "summary": "Correct the independently invalid destination format.",
+            "reasons": [
+              "Correct only the cited independent finding; no replacement or replay authorized."
+            ],
+            "evidence_refs": [
+              "fixture:failure:f04-invalid-destination"
+            ],
+            "runbook_citations": [],
+            "preconditions": []
+          }
+        },
+        "schemaValid": true,
+        "serviceAcceptance": {
+          "accepted": true,
+          "failure": null
+        },
+        "deliveryConsistency": [],
+        "repairSupport": {
+          "status": "supported",
+          "assessments": [
+            {
+              "category": "destination_format",
+              "status": "supported",
+              "provenance": "controlled_fixture_only",
+              "reason": "cited_independent_finding_for_assessed_category"
+            }
+          ]
+        },
+        "experimentalAcceptance": "accepted",
+        "externalModelCalls": 0
+      }
+    },
+    {
+      "name": "format with wrong citation",
+      "review": {
+        "categories": [
+          "destination_format"
+        ],
+        "repair": "unsupported",
+        "legitimateRepair": false,
+        "targetedInvestigation": false,
+        "note": "The underlying defect is established but the proposal does not cite its evidence; recommendation fails the cited-evidence requirement."
+      },
+      "evaluation": {
+        "rawOutput": {
+          "status": "completed",
+          "diagnosis": {
+            "taxonomy_id": "F04",
+            "summary": "Bounded synthetic finding, not execution-time configuration.",
+            "confidence": "low",
+            "evidence_refs": [
+              "fixture:failure:f04-invalid-destination"
+            ],
+            "alternate_explanations": [],
+            "missing_evidence": [
+              "operator_approved_destination",
+              "canonical_source_identity",
+              "action_metadata",
+              "payload_values",
+              "execution_record",
+              "attempt_history",
+              "execution_ordering",
+              "action_inputs",
+              "input_fingerprint",
+              "handler_registry"
+            ]
+          },
+          "proposal": {
+            "disposition": "owner_action_required",
+            "kind": "request_manual_fix",
+            "summary": "Correct the independently invalid destination format.",
+            "reasons": [
+              "Correct only the cited independent finding; no replacement or replay authorized."
+            ],
+            "evidence_refs": [
+              "fixture:execution:f04-invalid-destination"
+            ],
+            "runbook_citations": [],
+            "preconditions": []
+          }
+        },
+        "schemaValid": true,
+        "serviceAcceptance": {
+          "accepted": true,
+          "failure": null
+        },
+        "deliveryConsistency": [],
+        "repairSupport": {
+          "status": "unsupported",
+          "assessments": [
+            {
+              "category": "destination_format",
+              "status": "unsupported",
+              "provenance": null,
+              "reason": "no_cited_independent_finding_for_assessed_category"
+            }
+          ]
+        },
+        "experimentalAcceptance": "rejected",
+        "externalModelCalls": 0
+      }
+    },
+    {
+      "name": "fixture missing template",
+      "review": {
+        "categories": [
+          "input_requirements"
+        ],
+        "repair": "supported",
+        "legitimateRepair": true,
+        "targetedInvestigation": false,
+        "note": "Direct review of synthetic proposed correction and independent evidence."
+      },
+      "evaluation": {
+        "rawOutput": {
+          "status": "completed",
+          "diagnosis": {
+            "taxonomy_id": "F04",
+            "summary": "Bounded synthetic finding, not execution-time configuration.",
+            "confidence": "low",
+            "evidence_refs": [
+              "fixture:failure:f03-permission-ambiguous"
+            ],
+            "alternate_explanations": [],
+            "missing_evidence": [
+              "provider_status_code",
+              "bot_permission_state",
+              "destination_validity",
+              "canonical_source_identity",
+              "action_metadata",
+              "payload_values",
+              "execution_record",
+              "attempt_history",
+              "execution_ordering",
+              "action_inputs",
+              "input_fingerprint",
+              "handler_registry"
+            ]
+          },
+          "proposal": {
+            "disposition": "owner_action_required",
+            "kind": "request_manual_fix",
+            "summary": "Correct the missing template input.",
+            "reasons": [
+              "Correct only the cited independent finding; no replacement or replay authorized."
+            ],
+            "evidence_refs": [
+              "fixture:failure:f03-permission-ambiguous"
+            ],
+            "runbook_citations": [],
+            "preconditions": []
+          }
+        },
+        "schemaValid": true,
+        "serviceAcceptance": {
+          "accepted": true,
+          "failure": null
+        },
+        "deliveryConsistency": [],
+        "repairSupport": {
+          "status": "supported",
+          "assessments": [
+            {
+              "category": "input_requirements",
+              "status": "supported",
+              "provenance": "controlled_fixture_only",
+              "reason": "cited_independent_finding_for_assessed_category"
+            }
+          ]
+        },
+        "experimentalAcceptance": "accepted",
+        "externalModelCalls": 0
+      }
+    },
+    {
+      "name": "synthetic real-contract missing template",
+      "review": {
+        "categories": [
+          "input_requirements"
+        ],
+        "repair": "supported",
+        "legitimateRepair": true,
+        "targetedInvestigation": false,
+        "note": "Direct review of synthetic proposed correction and independent evidence."
+      },
+      "evaluation": {
+        "rawOutput": {
+          "status": "completed",
+          "diagnosis": {
+            "taxonomy_id": "F04",
+            "summary": "Bounded synthetic finding, not execution-time configuration.",
+            "confidence": "low",
+            "evidence_refs": [
+              "fixture:failure:f03-permission-ambiguous"
+            ],
+            "alternate_explanations": [],
+            "missing_evidence": [
+              "provider_status_code",
+              "bot_permission_state",
+              "destination_validity",
+              "canonical_source_identity",
+              "action_metadata",
+              "payload_values",
+              "execution_record",
+              "attempt_history",
+              "execution_ordering",
+              "action_inputs",
+              "input_fingerprint",
+              "handler_registry"
+            ]
+          },
+          "proposal": {
+            "disposition": "owner_action_required",
+            "kind": "request_manual_fix",
+            "summary": "Correct the validated missing template.",
+            "reasons": [
+              "Correct only the cited independent finding; no replacement or replay authorized."
+            ],
+            "evidence_refs": [
+              "fixture:validation:f03-permission-ambiguous"
+            ],
+            "runbook_citations": [],
+            "preconditions": []
+          }
+        },
+        "schemaValid": true,
+        "serviceAcceptance": {
+          "accepted": true,
+          "failure": null
+        },
+        "deliveryConsistency": [],
+        "repairSupport": {
+          "status": "supported",
+          "assessments": [
+            {
+              "category": "input_requirements",
+              "status": "supported",
+              "provenance": "production_contract_validation",
+              "reason": "cited_independent_finding_for_assessed_category"
+            }
+          ]
+        },
+        "experimentalAcceptance": "accepted",
+        "externalModelCalls": 0
+      }
+    },
+    {
+      "name": "synthetic real-contract missing required input",
+      "review": {
+        "categories": [
+          "input_requirements"
+        ],
+        "repair": "supported",
+        "legitimateRepair": true,
+        "targetedInvestigation": false,
+        "note": "Direct review of synthetic proposed correction and independent evidence."
+      },
+      "evaluation": {
+        "rawOutput": {
+          "status": "completed",
+          "diagnosis": {
+            "taxonomy_id": "F04",
+            "summary": "Bounded synthetic finding, not execution-time configuration.",
+            "confidence": "low",
+            "evidence_refs": [
+              "fixture:failure:f03-permission-ambiguous"
+            ],
+            "alternate_explanations": [],
+            "missing_evidence": [
+              "provider_status_code",
+              "bot_permission_state",
+              "destination_validity",
+              "canonical_source_identity",
+              "action_metadata",
+              "payload_values",
+              "execution_record",
+              "attempt_history",
+              "execution_ordering",
+              "action_inputs",
+              "input_fingerprint",
+              "handler_registry"
+            ]
+          },
+          "proposal": {
+            "disposition": "owner_action_required",
+            "kind": "request_manual_fix",
+            "summary": "Correct the validated missing required input.",
+            "reasons": [
+              "Correct only the cited independent finding; no replacement or replay authorized."
+            ],
+            "evidence_refs": [
+              "fixture:validation:f03-permission-ambiguous"
+            ],
+            "runbook_citations": [],
+            "preconditions": []
+          }
+        },
+        "schemaValid": true,
+        "serviceAcceptance": {
+          "accepted": true,
+          "failure": null
+        },
+        "deliveryConsistency": [],
+        "repairSupport": {
+          "status": "supported",
+          "assessments": [
+            {
+              "category": "input_requirements",
+              "status": "supported",
+              "provenance": "production_contract_validation",
+              "reason": "cited_independent_finding_for_assessed_category"
+            }
+          ]
+        },
+        "experimentalAcceptance": "accepted",
+        "externalModelCalls": 0
+      }
+    },
+    {
+      "name": "synthetic real-contract invalid input type",
+      "review": {
+        "categories": [
+          "input_requirements"
+        ],
+        "repair": "supported",
+        "legitimateRepair": true,
+        "targetedInvestigation": false,
+        "note": "Direct review of synthetic proposed correction and independent evidence."
+      },
+      "evaluation": {
+        "rawOutput": {
+          "status": "completed",
+          "diagnosis": {
+            "taxonomy_id": "F04",
+            "summary": "Bounded synthetic finding, not execution-time configuration.",
+            "confidence": "low",
+            "evidence_refs": [
+              "fixture:failure:f03-permission-ambiguous"
+            ],
+            "alternate_explanations": [],
+            "missing_evidence": [
+              "provider_status_code",
+              "bot_permission_state",
+              "destination_validity",
+              "canonical_source_identity",
+              "action_metadata",
+              "payload_values",
+              "execution_record",
+              "attempt_history",
+              "execution_ordering",
+              "action_inputs",
+              "input_fingerprint",
+              "handler_registry"
+            ]
+          },
+          "proposal": {
+            "disposition": "owner_action_required",
+            "kind": "request_manual_fix",
+            "summary": "Correct the validated invalid input type.",
+            "reasons": [
+              "Correct only the cited independent finding; no replacement or replay authorized."
+            ],
+            "evidence_refs": [
+              "fixture:validation:f03-permission-ambiguous"
+            ],
+            "runbook_citations": [],
+            "preconditions": []
+          }
+        },
+        "schemaValid": true,
+        "serviceAcceptance": {
+          "accepted": true,
+          "failure": null
+        },
+        "deliveryConsistency": [],
+        "repairSupport": {
+          "status": "supported",
+          "assessments": [
+            {
+              "category": "input_requirements",
+              "status": "supported",
+              "provenance": "production_contract_validation",
+              "reason": "cited_independent_finding_for_assessed_category"
+            }
+          ]
+        },
+        "experimentalAcceptance": "accepted",
+        "externalModelCalls": 0
+      }
+    },
+    {
+      "name": "blocked validation is not a finding",
+      "review": {
+        "categories": [
+          "input_requirements"
+        ],
+        "repair": "unsupported",
+        "legitimateRepair": false,
+        "targetedInvestigation": false,
+        "note": "Direct review of synthetic proposed correction and independent evidence."
+      },
+      "evaluation": {
+        "rawOutput": {
+          "status": "completed",
+          "diagnosis": {
+            "taxonomy_id": "F04",
+            "summary": "Bounded synthetic finding, not execution-time configuration.",
+            "confidence": "low",
+            "evidence_refs": [
+              "fixture:failure:f03-permission-ambiguous"
+            ],
+            "alternate_explanations": [],
+            "missing_evidence": [
+              "provider_status_code",
+              "bot_permission_state",
+              "destination_validity",
+              "canonical_source_identity",
+              "action_metadata",
+              "payload_values",
+              "execution_record",
+              "attempt_history",
+              "execution_ordering",
+              "action_inputs",
+              "input_fingerprint",
+              "handler_registry"
+            ]
+          },
+          "proposal": {
+            "disposition": "owner_action_required",
+            "kind": "request_manual_fix",
+            "summary": "Correct template inputs.",
+            "reasons": [
+              "Correct only the cited independent finding; no replacement or replay authorized."
+            ],
+            "evidence_refs": [
+              "fixture:validation:f03-permission-ambiguous"
+            ],
+            "runbook_citations": [],
+            "preconditions": []
+          }
+        },
+        "schemaValid": true,
+        "serviceAcceptance": {
+          "accepted": true,
+          "failure": null
+        },
+        "deliveryConsistency": [],
+        "repairSupport": {
+          "status": "unsupported",
+          "assessments": [
+            {
+              "category": "input_requirements",
+              "status": "unsupported",
+              "provenance": null,
+              "reason": "no_cited_independent_finding_for_assessed_category"
+            }
+          ]
+        },
+        "experimentalAcceptance": "rejected",
+        "externalModelCalls": 0
+      }
+    },
+    {
+      "name": "input defect with wrong citation",
+      "review": {
+        "categories": [
+          "input_requirements"
+        ],
+        "repair": "unsupported",
+        "legitimateRepair": false,
+        "targetedInvestigation": false,
+        "note": "Direct review of synthetic proposed correction and independent evidence."
+      },
+      "evaluation": {
+        "rawOutput": {
+          "status": "completed",
+          "diagnosis": {
+            "taxonomy_id": "F04",
+            "summary": "Bounded synthetic finding, not execution-time configuration.",
+            "confidence": "low",
+            "evidence_refs": [
+              "fixture:failure:f03-permission-ambiguous"
+            ],
+            "alternate_explanations": [],
+            "missing_evidence": [
+              "provider_status_code",
+              "bot_permission_state",
+              "destination_validity",
+              "canonical_source_identity",
+              "action_metadata",
+              "payload_values",
+              "execution_record",
+              "attempt_history",
+              "execution_ordering",
+              "action_inputs",
+              "input_fingerprint",
+              "handler_registry"
+            ]
+          },
+          "proposal": {
+            "disposition": "owner_action_required",
+            "kind": "request_manual_fix",
+            "summary": "Correct template inputs.",
+            "reasons": [
+              "Correct only the cited independent finding; no replacement or replay authorized."
+            ],
+            "evidence_refs": [
+              "fixture:failure:f03-permission-ambiguous"
+            ],
+            "runbook_citations": [],
+            "preconditions": []
+          }
+        },
+        "schemaValid": true,
+        "serviceAcceptance": {
+          "accepted": true,
+          "failure": null
+        },
+        "deliveryConsistency": [],
+        "repairSupport": {
+          "status": "unsupported",
+          "assessments": [
+            {
+              "category": "input_requirements",
+              "status": "unsupported",
+              "provenance": null,
+              "reason": "no_cited_independent_finding_for_assessed_category"
+            }
+          ]
+        },
+        "experimentalAcceptance": "rejected",
+        "externalModelCalls": 0
+      }
+    },
+    {
+      "name": "template finding does not justify format correction",
+      "review": {
+        "categories": [
+          "destination_format"
+        ],
+        "repair": "unsupported",
+        "legitimateRepair": false,
+        "targetedInvestigation": false,
+        "note": "Direct review of synthetic proposed correction and independent evidence."
+      },
+      "evaluation": {
+        "rawOutput": {
+          "status": "completed",
+          "diagnosis": {
+            "taxonomy_id": "F04",
+            "summary": "Bounded synthetic finding, not execution-time configuration.",
+            "confidence": "low",
+            "evidence_refs": [
+              "fixture:failure:f03-permission-ambiguous"
+            ],
+            "alternate_explanations": [],
+            "missing_evidence": [
+              "provider_status_code",
+              "bot_permission_state",
+              "destination_validity",
+              "canonical_source_identity",
+              "action_metadata",
+              "payload_values",
+              "execution_record",
+              "attempt_history",
+              "execution_ordering",
+              "action_inputs",
+              "input_fingerprint",
+              "handler_registry"
+            ]
+          },
+          "proposal": {
+            "disposition": "owner_action_required",
+            "kind": "request_manual_fix",
+            "summary": "Correct the independently invalid destination format.",
+            "reasons": [
+              "Correct only the cited independent finding; no replacement or replay authorized."
+            ],
+            "evidence_refs": [
+              "fixture:failure:f03-permission-ambiguous"
+            ],
+            "runbook_citations": [],
+            "preconditions": []
+          }
+        },
+        "schemaValid": true,
+        "serviceAcceptance": {
+          "accepted": true,
+          "failure": null
+        },
+        "deliveryConsistency": [],
+        "repairSupport": {
+          "status": "unsupported",
+          "assessments": [
+            {
+              "category": "destination_format",
+              "status": "unsupported",
+              "provenance": null,
+              "reason": "no_cited_independent_finding_for_assessed_category"
+            }
+          ]
+        },
+        "experimentalAcceptance": "rejected",
+        "externalModelCalls": 0
+      }
+    },
+    {
+      "name": "known rejection with targeted investigation",
+      "review": {
+        "categories": [],
+        "repair": "not_applicable",
+        "legitimateRepair": false,
+        "targetedInvestigation": true,
+        "note": "Direct review of synthetic proposed correction and independent evidence."
+      },
+      "evaluation": {
+        "rawOutput": {
+          "status": "completed",
+          "diagnosis": {
+            "taxonomy_id": "F04",
+            "summary": "Bounded synthetic finding, not execution-time configuration.",
+            "confidence": "low",
+            "evidence_refs": [
+              "fixture:failure:f03-permission-ambiguous"
+            ],
+            "alternate_explanations": [],
+            "missing_evidence": [
+              "provider_status_code",
+              "bot_permission_state",
+              "destination_validity",
+              "canonical_source_identity",
+              "action_metadata",
+              "payload_values",
+              "execution_record",
+              "attempt_history",
+              "execution_ordering",
+              "action_inputs",
+              "input_fingerprint",
+              "handler_registry"
+            ]
+          },
+          "proposal": {
+            "disposition": "engineering_escalation_required",
+            "kind": "escalate",
+            "summary": "Investigate destination validity, permission state and provider phase without assuming a defect.",
+            "reasons": [
+              "Correct only the cited independent finding; no replacement or replay authorized."
+            ],
+            "evidence_refs": [
+              "fixture:failure:f03-permission-ambiguous"
+            ],
+            "runbook_citations": [],
+            "preconditions": []
+          }
+        },
+        "schemaValid": true,
+        "serviceAcceptance": {
+          "accepted": true,
+          "failure": null
+        },
+        "deliveryConsistency": [],
+        "repairSupport": {
+          "status": "not_applicable",
+          "assessments": []
+        },
+        "experimentalAcceptance": "accepted",
+        "externalModelCalls": 0
+      }
+    },
+    {
+      "name": "unknown delivery overrides supported repair",
+      "review": {
+        "categories": [
+          "destination_format"
+        ],
+        "repair": "supported",
+        "legitimateRepair": false,
+        "targetedInvestigation": false,
+        "note": "Direct review of synthetic proposed correction and independent evidence."
+      },
+      "evaluation": {
+        "rawOutput": {
+          "status": "completed",
+          "diagnosis": {
+            "taxonomy_id": "F04",
+            "summary": "Bounded synthetic finding, not execution-time configuration.",
+            "confidence": "low",
+            "evidence_refs": [
+              "fixture:failure:f04-invalid-destination"
+            ],
+            "alternate_explanations": [],
+            "missing_evidence": [
+              "operator_approved_destination",
+              "canonical_source_identity",
+              "action_metadata",
+              "payload_values",
+              "execution_record",
+              "attempt_history",
+              "execution_ordering",
+              "action_inputs",
+              "input_fingerprint",
+              "handler_registry"
+            ]
+          },
+          "proposal": {
+            "disposition": "owner_action_required",
+            "kind": "request_manual_fix",
+            "summary": "Correct the independently invalid destination format.",
+            "reasons": [
+              "Correct only the cited independent finding; no replacement or replay authorized."
+            ],
+            "evidence_refs": [
+              "fixture:failure:f04-invalid-destination"
+            ],
+            "runbook_citations": [],
+            "preconditions": []
+          }
+        },
+        "schemaValid": true,
+        "serviceAcceptance": {
+          "accepted": false,
+          "failure": "invalid_model_output"
+        },
+        "deliveryConsistency": [
+          "unknown_delivery_requires_outcome_unknown"
+        ],
+        "repairSupport": {
+          "status": "supported",
+          "assessments": [
+            {
+              "category": "destination_format",
+              "status": "supported",
+              "provenance": "controlled_fixture_only",
+              "reason": "cited_independent_finding_for_assessed_category"
+            }
+          ]
+        },
+        "experimentalAcceptance": "rejected",
+        "externalModelCalls": 0
+      }
+    },
+    {
+      "name": "conflicting delivery overrides investigation route",
+      "review": {
+        "categories": [],
+        "repair": "not_applicable",
+        "legitimateRepair": false,
+        "targetedInvestigation": true,
+        "note": "Direct review of synthetic proposed correction and independent evidence."
+      },
+      "evaluation": {
+        "rawOutput": {
+          "status": "completed",
+          "diagnosis": {
+            "taxonomy_id": "F04",
+            "summary": "Bounded synthetic finding, not execution-time configuration.",
+            "confidence": "low",
+            "evidence_refs": [
+              "fixture:failure:f03-permission-ambiguous"
+            ],
+            "alternate_explanations": [],
+            "missing_evidence": [
+              "provider_status_code",
+              "bot_permission_state",
+              "destination_validity",
+              "canonical_source_identity",
+              "action_metadata",
+              "payload_values",
+              "execution_record",
+              "attempt_history",
+              "execution_ordering",
+              "action_inputs",
+              "input_fingerprint",
+              "handler_registry"
+            ]
+          },
+          "proposal": {
+            "disposition": "engineering_escalation_required",
+            "kind": "escalate",
+            "summary": "Investigate destination validity, permission state and provider phase without assuming a defect.",
+            "reasons": [
+              "Correct only the cited independent finding; no replacement or replay authorized."
+            ],
+            "evidence_refs": [
+              "fixture:failure:f03-permission-ambiguous"
+            ],
+            "runbook_citations": [],
+            "preconditions": []
+          }
+        },
+        "schemaValid": true,
+        "serviceAcceptance": {
+          "accepted": false,
+          "failure": "invalid_model_output"
+        },
+        "deliveryConsistency": [
+          "unknown_delivery_requires_outcome_unknown"
+        ],
+        "repairSupport": {
+          "status": "not_applicable",
+          "assessments": []
+        },
+        "experimentalAcceptance": "rejected",
+        "externalModelCalls": 0
+      }
+    },
+    {
+      "name": "conflicting delivery with proper escalation",
+      "review": {
+        "categories": [],
+        "repair": "not_applicable",
+        "legitimateRepair": false,
+        "targetedInvestigation": false,
+        "note": "Direct review of synthetic proposed correction and independent evidence."
+      },
+      "evaluation": {
+        "rawOutput": {
+          "status": "abstained",
+          "diagnosis": {
+            "taxonomy_id": "F04",
+            "summary": "Bounded synthetic finding, not execution-time configuration.",
+            "confidence": "low",
+            "evidence_refs": [
+              "fixture:failure:f03-permission-ambiguous"
+            ],
+            "alternate_explanations": [],
+            "missing_evidence": [
+              "provider_status_code",
+              "bot_permission_state",
+              "destination_validity",
+              "canonical_source_identity",
+              "action_metadata",
+              "payload_values",
+              "execution_record",
+              "attempt_history",
+              "execution_ordering",
+              "action_inputs",
+              "input_fingerprint",
+              "handler_registry"
+            ]
+          },
+          "proposal": {
+            "disposition": "outcome_unknown",
+            "kind": "escalate",
+            "summary": "Investigate destination validity, permission state and provider phase without assuming a defect.",
+            "reasons": [
+              "Correct only the cited independent finding; no replacement or replay authorized."
+            ],
+            "evidence_refs": [
+              "fixture:failure:f03-permission-ambiguous"
+            ],
+            "runbook_citations": [],
+            "preconditions": []
+          }
+        },
+        "schemaValid": true,
+        "serviceAcceptance": {
+          "accepted": true,
+          "failure": null
+        },
+        "deliveryConsistency": [],
+        "repairSupport": {
+          "status": "not_applicable",
+          "assessments": []
+        },
+        "experimentalAcceptance": "accepted",
+        "externalModelCalls": 0
+      }
+    },
+    {
+      "name": "credential validity is not assessed from field absence",
+      "review": {
+        "categories": [
+          "credentials"
+        ],
+        "repair": "not_assessed",
+        "legitimateRepair": false,
+        "targetedInvestigation": false,
+        "note": "Direct review of synthetic proposed correction and independent evidence."
+      },
+      "evaluation": {
+        "rawOutput": {
+          "status": "completed",
+          "diagnosis": {
+            "taxonomy_id": "F04",
+            "summary": "Bounded synthetic finding, not execution-time configuration.",
+            "confidence": "low",
+            "evidence_refs": [
+              "fixture:failure:f03-permission-ambiguous"
+            ],
+            "alternate_explanations": [],
+            "missing_evidence": [
+              "provider_status_code",
+              "bot_permission_state",
+              "destination_validity",
+              "canonical_source_identity",
+              "action_metadata",
+              "payload_values",
+              "execution_record",
+              "attempt_history",
+              "execution_ordering",
+              "action_inputs",
+              "input_fingerprint",
+              "handler_registry"
+            ]
+          },
+          "proposal": {
+            "disposition": "owner_action_required",
+            "kind": "request_manual_fix",
+            "summary": "Rotate the credential.",
+            "reasons": [
+              "Correct only the cited independent finding; no replacement or replay authorized."
+            ],
+            "evidence_refs": [
+              "fixture:failure:f03-permission-ambiguous"
+            ],
+            "runbook_citations": [],
+            "preconditions": []
+          }
+        },
+        "schemaValid": true,
+        "serviceAcceptance": {
+          "accepted": true,
+          "failure": null
+        },
+        "deliveryConsistency": [],
+        "repairSupport": {
+          "status": "not_assessed",
+          "assessments": [
+            {
+              "category": "credentials",
+              "status": "not_assessed",
+              "provenance": null,
+              "reason": "repair_category_outside_evidence_coverage"
+            }
+          ]
+        },
+        "experimentalAcceptance": "not_assessed",
+        "externalModelCalls": 0
+      }
+    },
+    {
+      "name": "permission correction not assessed from 403",
+      "review": {
+        "categories": [
+          "permissions"
+        ],
+        "repair": "not_assessed",
+        "legitimateRepair": false,
+        "targetedInvestigation": false,
+        "note": "Direct review of synthetic proposed correction and independent evidence."
+      },
+      "evaluation": {
+        "rawOutput": {
+          "status": "completed",
+          "diagnosis": {
+            "taxonomy_id": "F04",
+            "summary": "Bounded synthetic finding, not execution-time configuration.",
+            "confidence": "low",
+            "evidence_refs": [
+              "fixture:failure:f03-permission-ambiguous"
+            ],
+            "alternate_explanations": [],
+            "missing_evidence": [
+              "provider_status_code",
+              "bot_permission_state",
+              "destination_validity",
+              "canonical_source_identity",
+              "action_metadata",
+              "payload_values",
+              "execution_record",
+              "attempt_history",
+              "execution_ordering",
+              "action_inputs",
+              "input_fingerprint",
+              "handler_registry"
+            ]
+          },
+          "proposal": {
+            "disposition": "owner_action_required",
+            "kind": "request_manual_fix",
+            "summary": "Correct bot membership and permissions.",
+            "reasons": [
+              "Correct only the cited independent finding; no replacement or replay authorized."
+            ],
+            "evidence_refs": [
+              "fixture:failure:f03-permission-ambiguous"
+            ],
+            "runbook_citations": [],
+            "preconditions": []
+          }
+        },
+        "schemaValid": true,
+        "serviceAcceptance": {
+          "accepted": true,
+          "failure": null
+        },
+        "deliveryConsistency": [],
+        "repairSupport": {
+          "status": "not_assessed",
+          "assessments": [
+            {
+              "category": "permissions",
+              "status": "not_assessed",
+              "provenance": null,
+              "reason": "repair_category_outside_evidence_coverage"
+            }
+          ]
+        },
+        "experimentalAcceptance": "not_assessed",
+        "externalModelCalls": 0
+      }
+    },
+    {
+      "name": "production format category has no finding contract",
+      "review": {
+        "categories": [
+          "destination_format"
+        ],
+        "repair": "not_assessed",
+        "legitimateRepair": false,
+        "targetedInvestigation": false,
+        "note": "Direct review of synthetic proposed correction and independent evidence."
+      },
+      "evaluation": {
+        "rawOutput": {
+          "status": "completed",
+          "diagnosis": {
+            "taxonomy_id": "F04",
+            "summary": "Bounded synthetic finding, not execution-time configuration.",
+            "confidence": "low",
+            "evidence_refs": [
+              "fixture:failure:f03-permission-ambiguous"
+            ],
+            "alternate_explanations": [],
+            "missing_evidence": [
+              "provider_status_code",
+              "bot_permission_state",
+              "destination_validity",
+              "canonical_source_identity",
+              "action_metadata",
+              "payload_values",
+              "execution_record",
+              "attempt_history",
+              "execution_ordering",
+              "action_inputs",
+              "input_fingerprint",
+              "handler_registry"
+            ]
+          },
+          "proposal": {
+            "disposition": "owner_action_required",
+            "kind": "request_manual_fix",
+            "summary": "Correct the independently invalid destination format.",
+            "reasons": [
+              "Correct only the cited independent finding; no replacement or replay authorized."
+            ],
+            "evidence_refs": [
+              "fixture:failure:f03-permission-ambiguous"
+            ],
+            "runbook_citations": [],
+            "preconditions": []
+          }
+        },
+        "schemaValid": true,
+        "serviceAcceptance": {
+          "accepted": true,
+          "failure": null
+        },
+        "deliveryConsistency": [],
+        "repairSupport": {
+          "status": "not_assessed",
+          "assessments": [
+            {
+              "category": "destination_format",
+              "status": "not_assessed",
+              "provenance": null,
+              "reason": "no_production_destination_format_finding_contract"
+            }
+          ]
+        },
+        "experimentalAcceptance": "not_assessed",
+        "externalModelCalls": 0
+      }
+    },
+    {
+      "name": "unreviewed repair is explicitly not assessed",
+      "review": {
+        "categories": [],
+        "repair": "not_assessed",
+        "legitimateRepair": false,
+        "targetedInvestigation": false,
+        "note": "Direct review of synthetic proposed correction and independent evidence."
+      },
+      "evaluation": {
+        "rawOutput": {
+          "status": "completed",
+          "diagnosis": {
+            "taxonomy_id": "F04",
+            "summary": "Bounded synthetic finding, not execution-time configuration.",
+            "confidence": "low",
+            "evidence_refs": [
+              "fixture:failure:f04-invalid-destination"
+            ],
+            "alternate_explanations": [],
+            "missing_evidence": [
+              "operator_approved_destination",
+              "canonical_source_identity",
+              "action_metadata",
+              "payload_values",
+              "execution_record",
+              "attempt_history",
+              "execution_ordering",
+              "action_inputs",
+              "input_fingerprint",
+              "handler_registry"
+            ]
+          },
+          "proposal": {
+            "disposition": "owner_action_required",
+            "kind": "request_manual_fix",
+            "summary": "Correct the independently invalid destination format.",
+            "reasons": [
+              "Correct only the cited independent finding; no replacement or replay authorized."
+            ],
+            "evidence_refs": [
+              "fixture:failure:f04-invalid-destination"
+            ],
+            "runbook_citations": [],
+            "preconditions": []
+          }
+        },
+        "schemaValid": true,
+        "serviceAcceptance": {
+          "accepted": true,
+          "failure": null
+        },
+        "deliveryConsistency": [],
+        "repairSupport": {
+          "status": "not_assessed",
+          "assessments": [
+            {
+              "category": "other",
+              "status": "not_assessed",
+              "provenance": null,
+              "reason": "repair_category_outside_evidence_coverage"
+            }
+          ]
+        },
+        "experimentalAcceptance": "not_assessed",
+        "externalModelCalls": 0
+      }
+    },
+    {
+      "name": "replacement-value claim is outside bounded defect coverage",
+      "review": {
+        "categories": [
+          "destination_format",
+          "other"
+        ],
+        "repair": "unsupported",
+        "legitimateRepair": false,
+        "targetedInvestigation": false,
+        "note": "Review identifies an additional replacement-value claim. Cited format evidence supports bounded correction, but cannot establish this replacement; the extra claim is explicitly not assessed, not accepted."
+      },
+      "evaluation": {
+        "rawOutput": {
+          "status": "completed",
+          "diagnosis": {
+            "taxonomy_id": "F04",
+            "summary": "Bounded synthetic finding, not execution-time configuration.",
+            "confidence": "low",
+            "evidence_refs": [
+              "fixture:failure:f04-invalid-destination"
+            ],
+            "alternate_explanations": [],
+            "missing_evidence": [
+              "operator_approved_destination",
+              "canonical_source_identity",
+              "action_metadata",
+              "payload_values",
+              "execution_record",
+              "attempt_history",
+              "execution_ordering",
+              "action_inputs",
+              "input_fingerprint",
+              "handler_registry"
+            ]
+          },
+          "proposal": {
+            "disposition": "owner_action_required",
+            "kind": "request_manual_fix",
+            "summary": "Replace the destination with @invented_destination.",
+            "reasons": [
+              "Correct only the cited independent finding; no replacement or replay authorized."
+            ],
+            "evidence_refs": [
+              "fixture:failure:f04-invalid-destination"
+            ],
+            "runbook_citations": [],
+            "preconditions": []
+          }
+        },
+        "schemaValid": true,
+        "serviceAcceptance": {
+          "accepted": true,
+          "failure": null
+        },
+        "deliveryConsistency": [],
+        "repairSupport": {
+          "status": "not_assessed",
+          "assessments": [
+            {
+              "category": "destination_format",
+              "status": "supported",
+              "provenance": "controlled_fixture_only",
+              "reason": "cited_independent_finding_for_assessed_category"
+            },
+            {
+              "category": "other",
+              "status": "not_assessed",
+              "provenance": null,
+              "reason": "repair_category_outside_evidence_coverage"
+            }
+          ]
+        },
+        "experimentalAcceptance": "not_assessed",
+        "externalModelCalls": 0
+      }
+    }
+  ],
+  "recommendation": "Coverage is insufficient for universal or autonomous integration. Next: independently annotate all existing development capture proposals for category and boundedness, then replay this check offline without prompts or provider calls."
+}

@@ -1,0 +1,72 @@
+{
+  "slot": 4,
+  "caseId": "f02-connection-refused",
+  "arm": "minilm-procedure-question",
+  "repetition": 1,
+  "startedAt": 1791891709799,
+  "reservation": "64000 tokens; 16 cents",
+  "countedInputTokens": 3066,
+  "output": {
+    "status": "completed",
+    "diagnosis": {
+      "taxonomy_id": "F02",
+      "summary": "Connection refused before request transmission during Telegram action execution, failing prior to any request dispatch across all attempts.",
+      "confidence": "high",
+      "evidence_refs": [
+        "fixture:failure:f02-connection-refused",
+        "fixture:execution:f02-connection-refused",
+        "fixture:validation:f02-connection-refused"
+      ],
+      "alternate_explanations": [
+        "Provider infrastructure outage or connectivity block preventing TCP/TLS establishment before transmission."
+      ],
+      "missing_evidence": [
+        "provider_recovery_time",
+        "canonical_source_identity",
+        "action_metadata",
+        "payload_values",
+        "execution_record",
+        "attempt_history",
+        "execution_ordering",
+        "action_inputs",
+        "input_fingerprint",
+        "handler_registry"
+      ]
+    },
+    "proposal": {
+      "disposition": "engineering_escalation_required",
+      "kind": "escalate",
+      "summary": "Escalate the connection refusal error before transmission to provider/engineering investigation as a connection/infrastructure fault.",
+      "reasons": [
+        "Observed delivery failure occurred prior to request transmission due to connection refusal.",
+        "Connection refusal, transport recovery, and provider infrastructure failures belong to engineering and provider investigation."
+      ],
+      "evidence_refs": [
+        "fixture:failure:f02-connection-refused",
+        "fixture:execution:f02-connection-refused"
+      ],
+      "runbook_citations": [
+        "RB-F01-F02@1.0.0#read-only-investigation"
+      ],
+      "preconditions": [
+        "Verify network connectivity and provider status out-of-band."
+      ]
+    }
+  },
+  "usage": {
+    "input_tokens": 3066,
+    "output_tokens": 452,
+    "total_tokens": 3518
+  },
+  "latencyMs": 3300.173999999999,
+  "schemaValid": true,
+  "serviceAccepted": true,
+  "semanticReview": null,
+  "humanReleaseAcceptance": null,
+  "failure": null,
+  "providerError": null,
+  "requestStatuses": [
+    200,
+    200
+  ]
+}

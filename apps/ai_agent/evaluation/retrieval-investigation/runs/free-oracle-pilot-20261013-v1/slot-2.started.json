@@ -1,0 +1,16 @@
+{
+  "caseId": "f03-permission-ambiguous",
+  "variant": "oracle",
+  "attempts": 0,
+  "startedAt": 1791834538894,
+  "promptHash": "c4f17a770cd2670138e337ae044695443af868da7fcd15dd2fbde259887679c8",
+  "configHash": "c087890dc02b52a11a2c8577faf7b8d3fdd2e18a71a132dd7c65817de5a36d19",
+  "output": null,
+  "usage": null,
+  "latencyMs": 0,
+  "schemaValid": false,
+  "citationMembership": null,
+  "serviceValid": false,
+  "providerError": null,
+  "failure": null
+}

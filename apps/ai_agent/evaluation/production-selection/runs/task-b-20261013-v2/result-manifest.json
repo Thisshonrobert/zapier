@@ -1,0 +1,32 @@
+{
+  "version": 2,
+  "createdAt": "2026-10-13T07:00:23.539Z",
+  "artifacts": {
+    "benchmark.json": "f614ad61c505d276e344008af56bb47ac70b8b5c14a49374830a9ce914798759",
+    "config.json": "d2580ec30c43da9649facb861c940bf1bb98f6e74836938ba54f748d07b99fad",
+    "decision.json": "846e8a0f07e839099b5947021cf08b916e90bfbab8894cb904555071c214bb23",
+    "decision.md": "c05b123a28597b1a9f9b2f81844cc2bbe53b2f506c9fec2a83fdc35162e05f97",
+    "failure-ledger.json": "7171b8560985b7df9521c7101fc75c9cc195c1991950bcc808ca0af7e0a2ba80",
+    "freeze.json": "e90aa74da0343b69dc0261b31e46fcbc9712b4fe6b4ae552239e9abc48f7fa4b",
+    "inference-hybrid.json": "10678bfeac704e4745be0cebd44ef2adf4130d4d98cd744bb50e67c60f694445",
+    "inference-original.json": "e626f1b3a406f3a62b72760394700c399ed8188ae58cc6e9a771366700bb6edd",
+    "report.json": "c6d12383f6ad5df844cda36425be1384e0971b01ee5dac308b70f4fd54aecdf2",
+    "resource-monitor.mjs": "8ea29a0266aed73766b2d3abe2ad920a47b0f9295997827faf719a02c8321e65",
+    "scores-hybrid.json": "d74e38e946d87a6ed1b689e8320e6d6733a86584536b4084a51aac8b52a04121",
+    "scores-hybrid.json.resources.json": "e4755dc0520795b75f5f1ceb5677a8d062c24dea3e289caf684fad81f7256fcc",
+    "scores-original.json": "f00abad4799199dc5254fa7a6684b49dddc1ee8f119d339b9ebb81ac60da5886",
+    "scores-original.json.resources.json": "c685919d4cedfad57d007554366d7388e11cecebb9ef3e3794fb899520e5ea54"
+  },
+  "result": "no_candidate_passes",
+  "scheduled": 24,
+  "modelScoreCaptures": 2,
+  "externalGenerations": 0,
+  "runtimeChanged": false,
+  "verification": {
+    "focusedTests": "14 passed",
+    "directTypeCheck": "passed",
+    "rootTypeCheck": "passed",
+    "rootBuild": "passed; frontend cached",
+    "rootLint": "failed: 9 errors, 22 warnings; exact saved baseline diagnostics match; 12 source files unchanged"
+  }
+}

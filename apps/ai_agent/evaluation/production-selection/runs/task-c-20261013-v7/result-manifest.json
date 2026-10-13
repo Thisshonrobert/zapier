@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "status": "prepared_generation_blocked",
+  "artifacts": {
+    "method-freeze.json": "f560553c2a6e74500db6400fc6677fd703e03460c5e22cbddec90446b85f3019",
+    "captures.json": "838279fbcaa2dc9b23e6d48a7864efa5e05550bdbf9c74459c7a86098e596468",
+    "schedule.jsonl": "c2180ed33c001b66eaf3d985a5720bad6bc8dbeec627f079804a90c54e14376c",
+    "review-packet.json": "062d53403afc62e4ae45e8287bb9e42a2dea346ec7a8a87d07e5fa2d10c2a124",
+    "review-arm-key.json": "12d64ee78e467e038c0c6e027cd1e2c2f9197c8eaa6d9a9de218d6796e2d561f",
+    "decision.md": "0f44bf23a3ad496b5ff89b13acd5cfe0db375137909b85af1b41ff85d8b074f9"
+  },
+  "scheduledAttempts": 72,
+  "dispatchedAttempts": 0,
+  "generationCostUsd": 0
+}

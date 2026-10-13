@@ -1,0 +1,76 @@
+{
+  "name": "oracle-3",
+  "caseId": "f07-provider-response-lost",
+  "variant": "oracle",
+  "originalServiceAccepted": true,
+  "originalFailure": null,
+  "review": {
+    "categories": [],
+    "repair": "not_applicable",
+    "legitimateRepair": null,
+    "targetedInvestigation": false,
+    "note": "Outcome reconciliation preserves unknown delivery and proposes no owner correction."
+  },
+  "evaluation": {
+    "rawOutput": {
+      "status": "abstained",
+      "diagnosis": {
+        "taxonomy_id": "F07",
+        "summary": "Provider response was lost after request transmission, leaving delivery status unknown and requiring abstention due to insufficient delivery evidence.",
+        "confidence": "high",
+        "evidence_refs": [
+          "fixture:failure:f07-provider-response-lost",
+          "fixture:execution:f07-provider-response-lost",
+          "fixture:validation:f07-provider-response-lost"
+        ],
+        "alternate_explanations": [
+          "The provider may have successfully processed the request despite the lost response receipt."
+        ],
+        "missing_evidence": [
+          "provider_delivery_receipt",
+          "request_fingerprint",
+          "canonical_source_identity",
+          "action_metadata",
+          "payload_values",
+          "execution_record",
+          "attempt_history",
+          "execution_ordering",
+          "action_inputs",
+          "input_fingerprint",
+          "handler_registry"
+        ]
+      },
+      "proposal": {
+        "disposition": "outcome_unknown",
+        "kind": "escalate",
+        "summary": "Abstain from replay or definitive delivery conclusions due to unknown provider response and missing historical delivery evidence.",
+        "reasons": [
+          "Delivery outcome is explicitly unknown because the provider response was lost after transmission and required evidence is missing."
+        ],
+        "evidence_refs": [
+          "fixture:failure:f07-provider-response-lost",
+          "fixture:execution:f07-provider-response-lost"
+        ],
+        "runbook_citations": [
+          "RB-F07@1.0.0#read-only-investigation",
+          "RB-F07@1.0.0#forbidden-actions"
+        ],
+        "preconditions": [
+          "Confirm independent provider side-effects or logs before attempting any further classification."
+        ]
+      }
+    },
+    "schemaValid": true,
+    "serviceAcceptance": {
+      "accepted": true,
+      "failure": null
+    },
+    "deliveryConsistency": [],
+    "repairSupport": {
+      "status": "not_applicable",
+      "assessments": []
+    },
+    "experimentalAcceptance": "accepted",
+    "externalModelCalls": 0
+  }
+}

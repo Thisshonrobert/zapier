@@ -1,0 +1,1 @@
+{"caseId":"f05-unsupported-action","arm":"minilm-procedure-question","startedAt":1791889085990,"status":200,"countedInputTokens":3093,"outputLimitTokens":2048,"totalLimitTokens":64000,"latencyMs":328.8847999999998,"failure":null,"networkCode":null,"tokenBudgetAccepted":true,"state":"finished"}

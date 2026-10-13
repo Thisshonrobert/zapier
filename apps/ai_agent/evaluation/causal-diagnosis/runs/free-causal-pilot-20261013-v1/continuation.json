@@ -1,0 +1,4 @@
+{
+  "recordedAt": 1791863795255,
+  "reason": "User authorized four sequential generation starts and stop on 429. Only untouched slot 4 continues after slot 3 HTTP 503. No retry, smoke test or replacement generation."
+}

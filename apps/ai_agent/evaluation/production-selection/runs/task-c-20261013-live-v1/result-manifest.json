@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "status": "development_diagnostic_partial_allowance_exhausted",
+  "scheduledAttempts": 72,
+  "dispatchedAttempts": 4,
+  "remainingAttempts": 68,
+  "providerHttpRequests": 8,
+  "usageTokens": {
+    "input": 12364,
+    "output": 1544,
+    "total": 13908
+  },
+  "generationMonetaryCeilingUsd": 0,
+  "schemaAccepted": 4,
+  "serviceAccepted": 4,
+  "agentReviewProvisionalAcceptable": 4,
+  "independentHumanReleaseAcceptance": "pending",
+  "artifacts": {
+    "agent-review.json": "6c25def2caa734b0065352cd092c69026aeba25cd1e21b3eecbd35a880bb9a3c",
+    "blinded-review-packet.json": "1b994c0659cb51cf7df734e723cd4131d07769762e35e6236040e0e820369087",
+    "decision.md": "0046efad9ce370939db0f330d4be0280eac8c2ade6d63b016c8c39e3392e017d",
+    "execution-freeze.json": "555409541696d0ec8b6deabf2767631ddccf01eae77ea877f867e234105c2c8d",
+    "private-review-arm-key.json": "fb3c14dd4755dc98e473ff0b73ce24e74f0ab9b5edcde618de0de6cd06bf3708",
+    "request-1-1.json": "b4b2252291336d6f09193e882c93f7b4f4f5cd1bef8c87cbdef498bd0a357fad",
+    "request-1-2.json": "0cecbab5571d50e50d2114c5db417216b5c4d9c4f50e86adf97a07f84e18a941",
+    "request-2-1.json": "860c959351be4b778b7f396c9073ca38432f1d4db5b1a9f547f7b15ca21c16ec",
+    "request-2-2.json": "87c5e1699b3dd4f7dbd3abd29214d63f8b09ddc95d28c7fd5d11397b9618e42d",
+    "request-3-1.json": "2ffd0d0ea3a608815aab9c29c9ef45e3621fca1afdb0e13cbdb45fe8f4a179ff",
+    "request-3-2.json": "f3afed07e05f2b5f29f49c69127f5d22cc5f73c75bce5c779c37e0a70cc077ed",
+    "request-4-1.json": "ee4bc3229b39afcae47c5d919f5c4493cef32192f6b462c24d4261e9661a478b",
+    "request-4-2.json": "d2aa5de573d8d1d4fe709cd11ebb59377cd39eb60beffe47b2c5bbe360aaffa6",
+    "result-1.json": "0dd96bd70aac2679748c60af9b83463c57194ccfec36c2babd4f9094e65b9a4e",
+    "result-2.json": "6bfbb71d2fbe056ef07145a5b0120cf25dee79882878e66f6bb50f467abf95d1",
+    "result-3.json": "01accebd1f8750ddbce231970cbad2fa6a826df4d44789cb84f7549f7f134a38",
+    "result-4.json": "61eda176ded8337f72aa9842f6a0144aa4f457ad03221fc8b25a9e403e8a990d",
+    "started-1.json": "a3c65c90c2a1a6af8286ca915ecf5047689a4be987aa9c67e5c1f0b70592f46d",
+    "started-2.json": "4fb5b630ce9c3cc670692f361069f8bb7f32e7e2040c68b05d61f1171a332cd0",
+    "started-3.json": "5c5aa34c233a00fa631bd87a1c193f52bd8d4d48b2402881326df41211bfca84",
+    "started-4.json": "c1191a476ff49cec8448f4e67371c2f226d501b69f897cf4644b5dfe055c4d6f"
+  }
+}

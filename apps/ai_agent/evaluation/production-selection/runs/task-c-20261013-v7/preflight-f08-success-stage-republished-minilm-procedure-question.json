@@ -1,0 +1,1 @@
+{"caseId":"f08-success-stage-republished","arm":"minilm-procedure-question","startedAt":1791889206020,"status":200,"countedInputTokens":3056,"outputLimitTokens":2048,"totalLimitTokens":64000,"latencyMs":276.35450000001583,"failure":null,"networkCode":null,"tokenBudgetAccepted":true,"state":"finished"}

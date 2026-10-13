@@ -1,0 +1,30 @@
+[
+  {
+    "packetId": "d4bddefc-a98c-4187-a884-16501a7ba1f3",
+    "slot": 1,
+    "caseId": "f01-rate-limit-rejected",
+    "arm": "keyword-production",
+    "repetition": 1
+  },
+  {
+    "packetId": "1080c280-d1ad-4e4e-b95e-ee6ac29c70ab",
+    "slot": 2,
+    "caseId": "f01-rate-limit-rejected",
+    "arm": "minilm-procedure-question",
+    "repetition": 1
+  },
+  {
+    "packetId": "99943aee-e36c-41d5-a30b-0be231bea1bf",
+    "slot": 3,
+    "caseId": "f02-connection-refused",
+    "arm": "keyword-production",
+    "repetition": 1
+  },
+  {
+    "packetId": "6f2dc89f-0328-4954-974d-b3f13d0bda9d",
+    "slot": 4,
+    "caseId": "f02-connection-refused",
+    "arm": "minilm-procedure-question",
+    "repetition": 1
+  }
+]

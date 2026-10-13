@@ -1,0 +1,239 @@
+{
+  "version": "r25-fresh-label-rationales-v1",
+  "provenance": {
+    "author": "independent Codex scenario author",
+    "independent": true,
+    "synthetic": true,
+    "humanAdjudication": false
+  },
+  "rationales": {
+    "r25-fresh-01": {
+      "primaryRunbookId": "RB-F01-F02",
+      "rationale": "Allowed remediation names reducing sending pressure and recording a conservative deadline; verification identifies retry-delay/timestamp checks without sending and escalation for unproven recovery.",
+      "relevantCitations": [
+        "RB-F01-F02@1.0.0#allowed-remediation",
+        "RB-F01-F02@1.0.0#verification-rollback-or-escalation"
+      ]
+    },
+    "r25-fresh-02": {
+      "primaryRunbookId": "RB-F01-F02",
+      "rationale": "Symptoms distinguishes 5xx/timeout ambiguity from explicit 429 rejection; evidence-needed lists required captured fields; forbidden-actions explicitly rejects treating 5xx as rejection proof.",
+      "relevantCitations": [
+        "RB-F01-F02@1.0.0#symptoms",
+        "RB-F01-F02@1.0.0#evidence-needed",
+        "RB-F01-F02@1.0.0#forbidden-actions"
+      ]
+    },
+    "r25-fresh-03": {
+      "primaryRunbookId": "RB-F03-F04",
+      "rationale": "The evidence section states the API cannot establish fallback validity, investigation separates action-field absence from unknown environment and resolver from send phase, and prohibitions disallow inferring invalid credentials from a generic resolver error.",
+      "relevantCitations": [
+        "RB-F03-F04@1.0.0#evidence-needed",
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F03-F04@1.0.0#forbidden-actions"
+      ]
+    },
+    "r25-fresh-04": {
+      "primaryRunbookId": "RB-F03-F04",
+      "rationale": "This section explicitly allows configuration-presence verification, names the credential manager for rollback, and requires abstention when prior delivery or the environment remains unknown.",
+      "relevantCitations": [
+        "RB-F03-F04@1.0.0#verification-rollback-or-escalation"
+      ]
+    },
+    "r25-fresh-05": {
+      "primaryRunbookId": "RB-F04-F06",
+      "rationale": "Investigation says missing paths render empty and should be reported as paths rather than values; remediation allows producing-data or workflow-definition repair for future runs.",
+      "relevantCitations": [
+        "RB-F04-F06@1.0.0#read-only-investigation",
+        "RB-F04-F06@1.0.0#allowed-remediation"
+      ]
+    },
+    "r25-fresh-06": {
+      "primaryRunbookId": "RB-F04-F06",
+      "rationale": "Evidence-needed lists run/stage identity, predecessor order, provenance, fingerprints and registry/validation context; prohibitions forbid invented IDs, orphan ownership and validation bypass; verification escalates ambiguous order and producer faults.",
+      "relevantCitations": [
+        "RB-F04-F06@1.0.0#evidence-needed",
+        "RB-F04-F06@1.0.0#forbidden-actions",
+        "RB-F04-F06@1.0.0#verification-rollback-or-escalation"
+      ]
+    },
+    "r25-fresh-07": {
+      "primaryRunbookId": "RB-F07",
+      "rationale": "Evidence-needed covers attempt outcomes, provider phase, safe receipts, fingerprints and fencing; investigation distinguishes persistence failure and unknown missing receipts; remediation and verification require operator/manual provider reconciliation and evidence preservation.",
+      "relevantCitations": [
+        "RB-F07@1.0.0#evidence-needed",
+        "RB-F07@1.0.0#read-only-investigation",
+        "RB-F07@1.0.0#allowed-remediation",
+        "RB-F07@1.0.0#verification-rollback-or-escalation"
+      ]
+    },
+    "r25-fresh-08": {
+      "primaryRunbookId": "RB-F07",
+      "rationale": "Remediation requires identical request/key inside a currently verified window; prohibitions reject protection for changed or expired requests; replay section defers email replay and lists guarantees, timing, policy and approval.",
+      "relevantCitations": [
+        "RB-F07@1.0.0#allowed-remediation",
+        "RB-F07@1.0.0#forbidden-actions",
+        "RB-F07@1.0.0#replay-and-approval"
+      ]
+    },
+    "r25-fresh-09": {
+      "primaryRunbookId": "RB-F08",
+      "rationale": "Investigation specifies source-reference deduplication and version/fingerprint comparison without execution changes; remediation allows closing or superseding duplicate investigations.",
+      "relevantCitations": [
+        "RB-F08@1.0.0#read-only-investigation",
+        "RB-F08@1.0.0#allowed-remediation"
+      ]
+    },
+    "r25-fresh-10": {
+      "primaryRunbookId": "RB-F08",
+      "rationale": "Future gates demand unexpired approval and no live execution or competing request; verification requires current state and treats conflicts as a no-op or hard block.",
+      "relevantCitations": [
+        "RB-F08@1.0.0#replay-and-approval",
+        "RB-F08@1.0.0#verification-rollback-or-escalation"
+      ]
+    },
+    "r25-fresh-11": {
+      "primaryRunbookId": "RB-F09-F10",
+      "rationale": "Evidence-needed names linked failure/execution IDs, claim/acknowledgement and dlqPublishedAt; remediation allows the reconciler to publish the existing failure ID; verification checks visibility by shared failure ID.",
+      "relevantCitations": [
+        "RB-F09-F10@1.0.0#evidence-needed",
+        "RB-F09-F10@1.0.0#allowed-remediation",
+        "RB-F09-F10@1.0.0#verification-rollback-or-escalation"
+      ]
+    },
+    "r25-fresh-12": {
+      "primaryRunbookId": "RB-F09-F10",
+      "rationale": "Investigation separates publication, progression and external action repetition while preserving SUCCESS; replay section explicitly says progression recovery is separate and not authorized by action replay approval; prohibitions forbid action replay to repair progression.",
+      "relevantCitations": [
+        "RB-F09-F10@1.0.0#read-only-investigation",
+        "RB-F09-F10@1.0.0#replay-and-approval",
+        "RB-F09-F10@1.0.0#forbidden-actions"
+      ]
+    },
+    "r25-fresh-13": {
+      "primaryRunbookId": "RB-R2-COOLDOWN",
+      "rationale": "The supplement explicitly calculates cooldown from recorded response timestamp plus duration and says queued messages do not prove passage. The synthetic numbers yield 16:05:25 UTC.",
+      "relevantCitations": [
+        "RB-R2-COOLDOWN@1.0.0#cooldown-evidence"
+      ]
+    },
+    "r25-fresh-14": {
+      "primaryRunbookId": "RB-R2-COOLDOWN",
+      "rationale": "This section expressly says an earlier timeout leaves delivery unknown despite a final rejection and requires escalation for contradictory outcomes.",
+      "relevantCitations": [
+        "RB-R2-COOLDOWN@1.0.0#cooldown-evidence"
+      ]
+    },
+    "r25-fresh-15": {
+      "primaryRunbookId": "RB-R2-DESTINATION",
+      "rationale": "The section identifies group migration/obsolete chat identifiers, owner destination repair through normal controls and a new investigation.",
+      "relevantCitations": [
+        "RB-R2-DESTINATION@1.0.0#destination-permission-evidence"
+      ]
+    },
+    "r25-fresh-16": {
+      "primaryRunbookId": "RB-R2-DESTINATION",
+      "rationale": "The supplement calls for captured safe codes and bounded validation to distinguish access from missing credentials, and explicitly prohibits joining chats and test messages.",
+      "relevantCitations": [
+        "RB-R2-DESTINATION@1.0.0#destination-permission-evidence"
+      ]
+    },
+    "r25-fresh-17": {
+      "primaryRunbookId": "RB-R2-EMAIL-REJECT",
+      "rationale": "The section describes swallowed rejection plus SUCCESS as contradictory, requiring provider reconciliation and engineering escalation.",
+      "relevantCitations": [
+        "RB-R2-EMAIL-REJECT@1.0.0#email-rejection-evidence"
+      ]
+    },
+    "r25-fresh-18": {
+      "primaryRunbookId": "RB-R2-EMAIL-REJECT",
+      "rationale": "The supplement permits status/safe code, credential flags and recipient validation without address/key disclosure, requires owner configuration repair, and excludes email replay even with non-delivery evidence.",
+      "relevantCitations": [
+        "RB-R2-EMAIL-REJECT@1.0.0#email-rejection-evidence"
+      ]
+    },
+    "r25-fresh-19": {
+      "primaryRunbookId": "RB-R2-EMAIL-UNKNOWN",
+      "rationale": "The section states final SUCCESS cannot resolve an earlier unknown attempt, requests bounded attempt history/outcomes, and directs abstention and receipt reconciliation.",
+      "relevantCitations": [
+        "RB-R2-EMAIL-UNKNOWN@1.0.0#lost-acknowledgement-evidence"
+      ]
+    },
+    "r25-fresh-20": {
+      "primaryRunbookId": "RB-R2-EMAIL-UNKNOWN",
+      "rationale": "The supplement says lost acknowledgement does not prove non-delivery and expressly prohibits polling, resending and promoting similarity to delivery confidence.",
+      "relevantCitations": [
+        "RB-R2-EMAIL-UNKNOWN@1.0.0#lost-acknowledgement-evidence"
+      ]
+    },
+    "r25-fresh-21": {
+      "primaryRunbookId": "RB-R2-ORDERING",
+      "rationale": "The section says numeric stage position does not establish completion, demands captured predecessor states/gaps and declares pending predecessors unsafe.",
+      "relevantCitations": [
+        "RB-R2-ORDERING@1.0.0#predecessor-ordering-evidence"
+      ]
+    },
+    "r25-fresh-22": {
+      "primaryRunbookId": "RB-R2-ORDERING",
+      "rationale": "The supplement directly distinguishes out-of-order delivery from SUCCESS duplication, requires abstention/escalation for missing predecessors and prohibits resetting terminals, bypassing dependencies or retrying successors to repair gaps.",
+      "relevantCitations": [
+        "RB-R2-ORDERING@1.0.0#predecessor-ordering-evidence"
+      ]
+    },
+    "r25-fresh-23": {
+      "primaryRunbookId": "RB-R2-PUBLICATION",
+      "rationale": "The section covers lost acknowledgement, publication state/last error/reconciliation evidence and stable identity under at-least-once duplicate publication.",
+      "relevantCitations": [
+        "RB-R2-PUBLICATION@1.0.0#publication-reconciliation-evidence"
+      ]
+    },
+    "r25-fresh-24": {
+      "primaryRunbookId": "RB-R2-PUBLICATION",
+      "rationale": "The section explicitly rejects inferring external non-delivery from missing DLQ publication, escalates stuck publication to platform operations and prohibits record marking and Kafka restart.",
+      "relevantCitations": [
+        "RB-R2-PUBLICATION@1.0.0#publication-reconciliation-evidence"
+      ]
+    },
+    "r25-fresh-25": {
+      "primaryRunbookId": null,
+      "rationale": "No section specifies scheduling syntax, calendar rules, tenant timezones or daylight-saving behavior.",
+      "relevantCitations": []
+    },
+    "r25-fresh-26": {
+      "primaryRunbookId": null,
+      "rationale": "The corpus mentions PostgreSQL evidence state but contains no index, query-plan or pagination guidance.",
+      "relevantCitations": []
+    },
+    "r25-fresh-27": {
+      "primaryRunbookId": null,
+      "rationale": "No section defines webhook signature verification, canonicalization or timestamp tolerance.",
+      "relevantCitations": []
+    },
+    "r25-fresh-28": {
+      "primaryRunbookId": null,
+      "rationale": "Evidence preservation does not define retention durations, compliance policy or archive procedures.",
+      "relevantCitations": []
+    },
+    "r25-fresh-29": {
+      "primaryRunbookId": null,
+      "rationale": "No S3 connector, encryption key configuration, bucket policy or upload-header guidance exists.",
+      "relevantCitations": []
+    },
+    "r25-fresh-30": {
+      "primaryRunbookId": null,
+      "rationale": "The corpus has no frontend interaction, accessibility, focus-management or ARIA specifications.",
+      "relevantCitations": []
+    },
+    "r25-fresh-31": {
+      "primaryRunbookId": null,
+      "rationale": "Kafka publication evidence and prohibitions do not supply capacity formulas, provisioning counts, replication factors or recovery-target design.",
+      "relevantCitations": []
+    },
+    "r25-fresh-32": {
+      "primaryRunbookId": null,
+      "rationale": "No subscription billing, quota reset, overage or invoicing semantics are covered.",
+      "relevantCitations": []
+    }
+  }
+}
+

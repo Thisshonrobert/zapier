@@ -1,0 +1,71 @@
+{
+  "caseId": "f03-permission-ambiguous",
+  "variant": "candidate",
+  "promptVersion": "experimental-causal-v1",
+  "promptHash": "28ca599e634e297b762326eb6ac9955b00406c8bb613064bdb3b812c71c522c6",
+  "retrievalHash": "e7e1fb889302ce358cd04395ec9fd0fc240d44aaf3a8171eca1896badc2b8dff",
+  "settingsHash": "c087890dc02b52a11a2c8577faf7b8d3fdd2e18a71a132dd7c65817de5a36d19",
+  "startedAt": 1791863636615,
+  "output": {
+    "status": "abstained",
+    "diagnosis": {
+      "taxonomy_id": "F03",
+      "summary": "The telegram action failed with a rejected delivery outcome and error 'Invalid channel username', but destination validity, bot permission state, and provider status code are unavailable.",
+      "confidence": "low",
+      "evidence_refs": [
+        "fixture:failure:f03-permission-ambiguous",
+        "fixture:execution:f03-permission-ambiguous",
+        "fixture:validation:f03-permission-ambiguous"
+      ],
+      "alternate_explanations": [
+        "The error may stem from an invalid or nonexistent channel username configuration.",
+        "The error may be caused by insufficient bot permissions or a revoked bot token in the Telegram channel."
+      ],
+      "missing_evidence": [
+        "provider_status_code",
+        "bot_permission_state",
+        "destination_validity",
+        "canonical_source_identity",
+        "action_metadata",
+        "payload_values",
+        "execution_record",
+        "attempt_history",
+        "execution_ordering",
+        "action_inputs",
+        "input_fingerprint",
+        "handler_registry"
+      ]
+    },
+    "proposal": {
+      "disposition": "outcome_unknown",
+      "kind": "escalate",
+      "summary": "Escalate for investigation due to insufficient delivery and permission evidence preventing a definitive configuration or infrastructure fault attribution.",
+      "reasons": [
+        "Critical evidence items including destination validity and bot permission state are unavailable.",
+        "Delivery outcome is known as rejected but the precise failure cause remains ambiguous between destination configuration and permission restrictions."
+      ],
+      "evidence_refs": [
+        "fixture:failure:f03-permission-ambiguous"
+      ],
+      "runbook_citations": [
+        "RB-F01-F02@1.0.0#read-only-investigation"
+      ],
+      "preconditions": [
+        "Obtain non-secret destination-format validation",
+        "Verify provider phase and status evidence",
+        "Confirm operator bot membership and access state"
+      ]
+    }
+  },
+  "usage": {
+    "input_tokens": 3421,
+    "output_tokens": 505,
+    "total_tokens": 3926
+  },
+  "latencyMs": 2937.6361000000015,
+  "schemaValid": false,
+  "serviceValid": false,
+  "repairEvidenceIssue": null,
+  "failure": null,
+  "providerError": null
+}

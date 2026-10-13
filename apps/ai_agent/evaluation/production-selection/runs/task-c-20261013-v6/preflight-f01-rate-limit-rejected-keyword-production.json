@@ -1,0 +1,1 @@
+{"caseId":"f01-rate-limit-rejected","arm":"keyword-production","startedAt":1791888648001,"status":null,"countedInputTokens":null,"outputLimitTokens":2048,"totalLimitTokens":64000,"latencyMs":17.408199999999994,"failure":"count_preflight_failed","networkCode":null,"tokenBudgetAccepted":false,"state":"finished"}

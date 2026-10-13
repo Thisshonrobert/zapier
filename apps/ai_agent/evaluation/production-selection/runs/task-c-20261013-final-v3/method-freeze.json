@@ -1,0 +1,174 @@
+{
+  "version": 1,
+  "status": "development_diagnostic_prepared_no_live_dispatch",
+  "taskBDecision": "no_candidate_passes",
+  "releaseEligible": false,
+  "scope": "Two-arm exposed development diagnosis; query-plus-retrieval candidate, not ranking-only attribution",
+  "incidentIds": [
+    "f01-rate-limit-rejected",
+    "f02-connection-refused",
+    "f03-token-missing",
+    "f03-permission-ambiguous",
+    "f04-template-path-missing",
+    "f04-invalid-destination",
+    "f05-unsupported-action",
+    "f07-provider-response-lost",
+    "f08-success-stage-republished",
+    "f10-sdk-error-recorded-success",
+    "nm01-telegram-message-too-long",
+    "nm03-email-invalid-sender-address"
+  ],
+  "repetitionsPerArm": 3,
+  "scheduledAttempts": 72,
+  "retries": 0,
+  "sourceHashes": {
+    "benchmark.json": "ec242f0a5ba53f43034f423f5b0a1503c8ac86d2b4bc9775891ad21ff7a933cc",
+    "config.json": "d2580ec30c43da9649facb861c940bf1bb98f6e74836938ba54f748d07b99fad",
+    "followup-report.json": "6eb88d50c8ac3ef1ecdd4525ef2be2d35bf46421b244d16434325649f5e880e2",
+    "query-variants.json": "467746c2e1074e942ac47c9d62f8d58d982fc193e65d010c7acdbb35775e9770",
+    "freeze.json": "edba49285ff556514a81709fb7392b5ecc39999deeeab1cdada6b64d6533b612",
+    "interventions-freeze.json": "01170cb6948993c543830fba7747c392457ab6822470b5565fc23bf74aaa1356",
+    "apps/ai_agent/src/evaluation/task-c-diagnosis.ts": "924ddf8bd23650746f31de7f28942fb331d397f8d3b9d16bf5209a5081608be4",
+    "apps/ai_agent/src/evaluation/task-c-preflight.ts": "62b85ec4ec4d165df04f68eda79741c58decc34930f804d72f07ff4308e888cc",
+    "apps/ai_agent/src/index.ts": "d243cc28e608a94e91cbb0359568fc78815c29b5c19896e7b0ce7a907666f92a",
+    "apps/ai_agent/src/operational-limits.ts": "8c6a7b6b98c528c7f2b9d8e3baa9f506d33c13e8560523760e3626112929fed8",
+    "apps/ai_agent/src/tools/search-runbooks.ts": "7c433e3707ecfbca8d6ca6125ea3a2d0a53938a1481111af7783497e0cdd99f2",
+    "apps/ai_agent/src/prompts.ts": "aa4a038a8b2748826933a9deb13aa883546d9d6cb79369a5424402d1c9485a9f",
+    "apps/ai_agent/src/graph.ts": "f3dec93c3dd58037f0b62d79f1fe3f5c7bfb12c79e9f07a3c99cc73d4c632e68",
+    "apps/ai_agent/src/gemini-model.ts": "18a909519c9bd16437e7ca54e125eb8c02430978d44b5501b572243e17a7c257"
+  },
+  "corpusHash": "a84aae31a5518ecaf83b8ecb117f90e42d46e446e9fc919a86a0c530ebc5c796",
+  "modelAssetHashes": {
+    ".tmp-turbo-user/r2-models/Xenova/all-MiniLM-L6-v2/751bff37182d3f1213fa05d7196b954e230abad9/config.json": "7135149f7cffa1a573466c6e4d8423ed73b62fd2332c575bf738a0d033f70df7",
+    ".tmp-turbo-user/r2-models/Xenova/all-MiniLM-L6-v2/751bff37182d3f1213fa05d7196b954e230abad9/tokenizer.json": "da0e79933b9ed51798a3ae27893d3c5fa4a201126cef75586296df9b4d2c62a0",
+    ".tmp-turbo-user/r2-models/Xenova/all-MiniLM-L6-v2/751bff37182d3f1213fa05d7196b954e230abad9/tokenizer_config.json": "9261e7d79b44c8195c1cada2b453e55b00aeb81e907a6664974b4d7776172ab3",
+    ".tmp-turbo-user/r2-models/Xenova/all-MiniLM-L6-v2/751bff37182d3f1213fa05d7196b954e230abad9/onnx/model_quantized.onnx": "afdb6f1a0e45b715d0bb9b11772f032c399babd23bfc31fed1c170afc848bdb1",
+    ".tmp-turbo-user/r2-models/Xenova/ms-marco-MiniLM-L-6-v2/a09144355adeed5f58c8ed011d209bf8ee5a1fec/config.json": "d827779a72d27ae68cf878a6fc2e954542663fe21ca515d9f4783fc96be2d37e",
+    ".tmp-turbo-user/r2-models/Xenova/ms-marco-MiniLM-L-6-v2/a09144355adeed5f58c8ed011d209bf8ee5a1fec/tokenizer.json": "d241a60d5e8f04cc1b2b3e9ef7a4921b27bf526d9f6050ab90f9267a1f9e5c66",
+    ".tmp-turbo-user/r2-models/Xenova/ms-marco-MiniLM-L-6-v2/a09144355adeed5f58c8ed011d209bf8ee5a1fec/tokenizer_config.json": "0b29c7bfc889e53b36d9dd3e686dd4300f6525110eaa98c76a5dafceb2029f53",
+    ".tmp-turbo-user/r2-models/Xenova/ms-marco-MiniLM-L-6-v2/a09144355adeed5f58c8ed011d209bf8ee5a1fec/onnx/model_quantized.onnx": "e9d8ebf845c413e981c175bfe49a3bfa9b3dcce2a3ba54875ee5df5a58639fbe"
+  },
+  "retrieval": {
+    "keyword": "unchanged production query and keyword scorer",
+    "candidate": "frozen procedure-question query plus original exhaustive MiniLM",
+    "model": {
+      "id": "Xenova/ms-marco-MiniLM-L-6-v2",
+      "revision": "a09144355adeed5f58c8ed011d209bf8ee5a1fec",
+      "dtype": "q8"
+    },
+    "cutoff": 0.001,
+    "batchSize": 8,
+    "maxLength": 512,
+    "resultLimit": 3,
+    "providerEligibility": "unchanged"
+  },
+  "diagnosis": {
+    "model": "gemini-3.5-flash-lite",
+    "api": "generate-content",
+    "promptVersion": "phase-11a-v3",
+    "promptSourceHash": "aa4a038a8b2748826933a9deb13aa883546d9d6cb79369a5424402d1c9485a9f",
+    "retrievalInputSourceHash": "f3dec93c3dd58037f0b62d79f1fe3f5c7bfb12c79e9f07a3c99cc73d4c632e68",
+    "schemaSourceHash": "18a909519c9bd16437e7ca54e125eb8c02430978d44b5501b572243e17a7c257",
+    "maxOutputTokens": 2048,
+    "maxTotalTokensPreflight": 64000,
+    "maxModelTokensGraph": 8000,
+    "maxPromptCharacters": 16000,
+    "maxRepairAttempts": 0,
+    "modelDeadlineMs": 15000,
+    "investigationDeadlineMs": 60000
+  },
+  "budget": {
+    "monetaryCeilingUsd": 0,
+    "generationAttemptsMaximum": 72,
+    "operationalTokenReservationPerAttempt": 64000,
+    "defaultOwnerDailyTokenAllowance": 256000,
+    "defaultOperatorDailyTokenAllowance": 256000,
+    "defaultDailyAttemptsBeforeOtherReservations": 4,
+    "inputRateUsdPerMillionForConservativeReservation": 0.3,
+    "outputRateUsdPerMillionForConservativeReservation": 2.5,
+    "conservativeCostCentsPerAttempt": 16,
+    "actualCountTokensPreflight": "linked_exact_count_evidence",
+    "noAutomaticPaidFallback": true,
+    "requestPacingMinimumMs": 30000,
+    "requestRateCeilingPerMinute": 2,
+    "stopOnHttp429": true,
+    "generationRequiresKnownDurableRemainingAllowance": true,
+    "durableRemainingAllowance": "unavailable_no_agent_database_url"
+  },
+  "freeTierEvidence": {
+    "modelDocs": "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite",
+    "pricing": "https://ai.google.dev/gemini-api/docs/pricing",
+    "rateLimits": "https://ai.google.dev/gemini-api/docs/rate-limits",
+    "modelFreeStandardGenerationListed": true,
+    "exactCredentialProjectAndCurrentTierVerified": true,
+    "verificationProvenance": "Direct user attestation on 2026-10-13: configured .env key belongs to gen-lang-client-0124525712; AI Studio current tier Free",
+    "projectShownInScreenshot": "gen-lang-client-0124525712",
+    "visibleModelLimit": {
+      "rpm": 15,
+      "tpm": 250000,
+      "rpd": 500
+    },
+    "countTokensPreflightAllowed": true,
+    "generationDispatchAllowed": false
+  },
+  "countedPreflight": {
+    "sourceDirectory": "C:\\Users\\thiss\\Desktop\\dev\\zapier\\apps\\ai_agent\\evaluation\\production-selection\\runs\\task-c-20261013-v7",
+    "sourceCapturesSha256": "838279fbcaa2dc9b23e6d48a7864efa5e05550bdbf9c74459c7a86098e596468",
+    "requests": 24,
+    "minInputTokens": 3054,
+    "maxInputTokens": 3125,
+    "totalInputTokens": 74173,
+    "records": {
+      "preflight-f01-rate-limit-rejected-keyword-production.json": "010ccb913ed223c5b643a254a99a970b72be58cbb0e96b94d195646dcacea346",
+      "preflight-f01-rate-limit-rejected-minilm-procedure-question.json": "844c52cb52e879b794f4ccc122807127cc3d00a76642c371cc7ff89cd17a0d7c",
+      "preflight-f02-connection-refused-keyword-production.json": "440284001ec22f2eebbac0a9ba686523b90d0c2b21067338ac1fd2d2a015d044",
+      "preflight-f02-connection-refused-minilm-procedure-question.json": "6c77a76614442bfb4b76d500f40e7e177e61dea0d278ab6cc586d88bba08e28a",
+      "preflight-f03-permission-ambiguous-keyword-production.json": "b79b549a00e8b524f1ecd55576c976ceba6ba92fc580a3445a8c87c11b424460",
+      "preflight-f03-permission-ambiguous-minilm-procedure-question.json": "c0b85a98122e967a2a349a1d25c42fb03675e3edaf2ead40706ab0510625231a",
+      "preflight-f03-token-missing-keyword-production.json": "528687a7e38eb5007777fcba2ca83b2fa59e51ed2eb43f786a431bea2b773050",
+      "preflight-f03-token-missing-minilm-procedure-question.json": "a03d33c6bf89c40131784c7aeb073cc0f3b5bce401b9e539c87b86e13cf85154",
+      "preflight-f04-invalid-destination-keyword-production.json": "31318ad524e680c9c54127d4b151766082d72859d6b0ecd618e88012af478688",
+      "preflight-f04-invalid-destination-minilm-procedure-question.json": "b881a763dedf6aa0876a78e4e688f9396f0d18544cf25cea03a818bf02efbd3b",
+      "preflight-f04-template-path-missing-keyword-production.json": "d050933820e857de58e1bed4a42c92028e90c775172e01e2495c16225ec4c69e",
+      "preflight-f04-template-path-missing-minilm-procedure-question.json": "0763765057cf3f8ec5e4dc4b2f29c81f7279a5b3ac6a3b6c1c9be9373499e052",
+      "preflight-f05-unsupported-action-keyword-production.json": "8cf6e17e41c01f9c23274561ff1e0fcb6f53f28b524f18d9470ca88666ceabbd",
+      "preflight-f05-unsupported-action-minilm-procedure-question.json": "d4bf2fcd5af359964f0f330782568d481251080e54a4b1abe514e4af2b248a96",
+      "preflight-f07-provider-response-lost-keyword-production.json": "c563bb9211d6ff2bbdcf968de23195b8b54761493aee6424fd6c8cd297e338eb",
+      "preflight-f07-provider-response-lost-minilm-procedure-question.json": "df97820c4a81452745b380897c3e1ec15d5cf5471a618881c4a890cf6104c4bb",
+      "preflight-f08-success-stage-republished-keyword-production.json": "28dbe70f46afad1cdc4d83b704482ab27d1e53c3b0d09d142e6b3fd9d8544a97",
+      "preflight-f08-success-stage-republished-minilm-procedure-question.json": "3c801a5e493757b1aaf849895e574a1d877a38883fbfa1b64d067b28ad139933",
+      "preflight-f10-sdk-error-recorded-success-keyword-production.json": "b17bc08d7d009805b9187fad682b18a193a886df69e00ea189b7e178ae1a08ed",
+      "preflight-f10-sdk-error-recorded-success-minilm-procedure-question.json": "1781493112b49eb5b62c0c2b93f0c1ede47314dbaf848854189991d0bb623e0f",
+      "preflight-nm01-telegram-message-too-long-keyword-production.json": "36111e4ac637982cbe557c400db429e91d89e6ef67a7b8c946e4655631f197ea",
+      "preflight-nm01-telegram-message-too-long-minilm-procedure-question.json": "f3025e74a9918a67b60b279f25b2dd54fc6856205963426212b1c5af2f5ffcc9",
+      "preflight-nm03-email-invalid-sender-address-keyword-production.json": "0895d4b533c9edae5b6aa69cccdd6468ae327c7316cb9c5a1074f21364dbbb15",
+      "preflight-nm03-email-invalid-sender-address-minilm-procedure-question.json": "28f15cff6b95968d220fcd7d5af61eb597992a45f05314056c4670caafdb587d"
+    },
+    "generationRequests": 0
+  },
+  "scenarioCoverage": {
+    "knownRejection": [
+      "f01-rate-limit-rejected",
+      "f03-permission-ambiguous"
+    ],
+    "unknownDelivery": [
+      "f07-provider-response-lost"
+    ],
+    "supportedOwnerCorrection": [
+      "f04-invalid-destination",
+      "f04-template-path-missing"
+    ],
+    "unsupportedOwnerCorrection": [
+      "f03-permission-ambiguous",
+      "f03-token-missing"
+    ],
+    "ambiguousCause": [
+      "f03-permission-ambiguous",
+      "f10-sdk-error-recorded-success"
+    ],
+    "negativeNoDirectProcedure": [
+      "nm01-telegram-message-too-long",
+      "nm03-email-invalid-sender-address"
+    ]
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "caseId": "f04-invalid-destination",
+  "variant": "current",
+  "promptVersion": "phase-11a-v3",
+  "promptHash": "598c979d7fa605d6f1edd32262a4564f81e4c0fd075acd8403f04801f9da32d5",
+  "retrievalHash": "f5d3bb516a4deff62106d601ed7bc9c181f2f986520efdecfadc4febbfccd421",
+  "settingsHash": "c087890dc02b52a11a2c8577faf7b8d3fdd2e18a71a132dd7c65817de5a36d19",
+  "startedAt": 1791866051327,
+  "output": {
+    "status": "completed",
+    "diagnosis": {
+      "taxonomy_id": "F04",
+      "summary": "Provider rejected the destination due to an invalid destination format for the telegram action.",
+      "confidence": "high",
+      "evidence_refs": [
+        "fixture:failure:f04-invalid-destination",
+        "fixture:execution:f04-invalid-destination",
+        "fixture:validation:f04-invalid-destination"
+      ],
+      "alternate_explanations": [
+        "Destination might be missing required bot permissions or chat membership"
+      ],
+      "missing_evidence": [
+        "operator_approved_destination",
+        "canonical_source_identity",
+        "action_metadata",
+        "payload_values",
+        "execution_record",
+        "attempt_history",
+        "execution_ordering",
+        "action_inputs",
+        "input_fingerprint",
+        "handler_registry"
+      ]
+    },
+    "proposal": {
+      "disposition": "owner_action_required",
+      "kind": "request_manual_fix",
+      "summary": "Request operator to review and fix the invalid telegram destination format.",
+      "reasons": [
+        "Provider rejected the destination with an invalid destination format error.",
+        "Customer-controlled destination configuration needs correction."
+      ],
+      "evidence_refs": [
+        "fixture:failure:f04-invalid-destination"
+      ],
+      "runbook_citations": [
+        "RB-F03-F04@1.0.0#read-only-investigation"
+      ],
+      "preconditions": [
+        "Operator must review destination format and configuration."
+      ]
+    }
+  },
+  "usage": {
+    "input_tokens": 3054,
+    "output_tokens": 258,
+    "total_tokens": 3312
+  },
+  "latencyMs": 2811.0694000000003,
+  "schemaValid": true,
+  "serviceValid": true,
+  "repairEvidenceIssue": null,
+  "consistencyIssues": [],
+  "failure": null,
+  "providerError": null
+}

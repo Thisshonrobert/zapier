@@ -1,0 +1,79 @@
+{
+  "name": "causal-v2-5",
+  "caseId": "f07-provider-response-lost",
+  "variant": "current",
+  "originalServiceAccepted": true,
+  "originalFailure": null,
+  "review": {
+    "categories": [],
+    "repair": "not_applicable",
+    "legitimateRepair": null,
+    "targetedInvestigation": false,
+    "note": "Outcome reconciliation preserves unknown delivery and proposes no owner correction."
+  },
+  "evaluation": {
+    "rawOutput": {
+      "status": "abstained",
+      "diagnosis": {
+        "taxonomy_id": "F07",
+        "summary": "The provider response was lost after request transmission, resulting in an unknown delivery outcome with insufficient evidence to establish final state or replay safety.",
+        "confidence": "high",
+        "evidence_refs": [
+          "fixture:failure:f07-provider-response-lost",
+          "fixture:execution:f07-provider-response-lost",
+          "fixture:validation:f07-provider-response-lost"
+        ],
+        "alternate_explanations": [
+          "The message may have been successfully received by the provider despite the lost response.",
+          "The request may have failed completely prior to reaching the provider API."
+        ],
+        "missing_evidence": [
+          "provider_delivery_receipt",
+          "request_fingerprint",
+          "canonical_source_identity",
+          "action_metadata",
+          "payload_values",
+          "execution_record",
+          "attempt_history",
+          "execution_ordering",
+          "action_inputs",
+          "input_fingerprint",
+          "handler_registry"
+        ]
+      },
+      "proposal": {
+        "disposition": "outcome_unknown",
+        "kind": "escalate",
+        "summary": "Escalate the incident due to unknown delivery outcome and missing historical evidence preventing safe replay or definitive diagnosis.",
+        "reasons": [
+          "Delivery outcome is explicitly unknown due to a lost provider response.",
+          "Required evidence items such as provider delivery receipt and attempt history are unavailable.",
+          "Runbook guidance dictates that Telegram unknown delivery must be treated as unknown and blocked."
+        ],
+        "evidence_refs": [
+          "fixture:failure:f07-provider-response-lost"
+        ],
+        "runbook_citations": [
+          "RB-F07@1.0.0#read-only-investigation",
+          "RB-F07@1.0.0#replay-and-approval"
+        ],
+        "preconditions": [
+          "Obtain independent provider delivery receipts or logs.",
+          "Verify complete execution and attempt history."
+        ]
+      }
+    },
+    "schemaValid": true,
+    "serviceAcceptance": {
+      "accepted": true,
+      "failure": null
+    },
+    "deliveryConsistency": [],
+    "repairSupport": {
+      "status": "not_applicable",
+      "assessments": []
+    },
+    "experimentalAcceptance": "accepted",
+    "externalModelCalls": 0
+  }
+}

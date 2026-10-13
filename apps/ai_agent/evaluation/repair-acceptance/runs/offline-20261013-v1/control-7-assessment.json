@@ -1,0 +1,72 @@
+{
+  "name": "synthetic real-contract invalid input type",
+  "review": {
+    "categories": [
+      "input_requirements"
+    ],
+    "repair": "supported",
+    "legitimateRepair": true,
+    "targetedInvestigation": false,
+    "note": "Direct review of synthetic proposed correction and independent evidence."
+  },
+  "evaluation": {
+    "rawOutput": {
+      "status": "completed",
+      "diagnosis": {
+        "taxonomy_id": "F04",
+        "summary": "Bounded synthetic finding, not execution-time configuration.",
+        "confidence": "low",
+        "evidence_refs": [
+          "fixture:failure:f03-permission-ambiguous"
+        ],
+        "alternate_explanations": [],
+        "missing_evidence": [
+          "provider_status_code",
+          "bot_permission_state",
+          "destination_validity",
+          "canonical_source_identity",
+          "action_metadata",
+          "payload_values",
+          "execution_record",
+          "attempt_history",
+          "execution_ordering",
+          "action_inputs",
+          "input_fingerprint",
+          "handler_registry"
+        ]
+      },
+      "proposal": {
+        "disposition": "owner_action_required",
+        "kind": "request_manual_fix",
+        "summary": "Correct the validated invalid input type.",
+        "reasons": [
+          "Correct only the cited independent finding; no replacement or replay authorized."
+        ],
+        "evidence_refs": [
+          "fixture:validation:f03-permission-ambiguous"
+        ],
+        "runbook_citations": [],
+        "preconditions": []
+      }
+    },
+    "schemaValid": true,
+    "serviceAcceptance": {
+      "accepted": true,
+      "failure": null
+    },
+    "deliveryConsistency": [],
+    "repairSupport": {
+      "status": "supported",
+      "assessments": [
+        {
+          "category": "input_requirements",
+          "status": "supported",
+          "provenance": "production_contract_validation",
+          "reason": "cited_independent_finding_for_assessed_category"
+        }
+      ]
+    },
+    "experimentalAcceptance": "accepted",
+    "externalModelCalls": 0
+  }
+}

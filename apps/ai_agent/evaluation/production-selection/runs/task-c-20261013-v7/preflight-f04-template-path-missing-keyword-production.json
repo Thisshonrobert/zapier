@@ -1,0 +1,1 @@
+{"caseId":"f04-template-path-missing","arm":"keyword-production","startedAt":1791888935949,"status":200,"countedInputTokens":3119,"outputLimitTokens":2048,"totalLimitTokens":64000,"latencyMs":203.35149999998976,"failure":null,"networkCode":null,"tokenBudgetAccepted":true,"state":"finished"}

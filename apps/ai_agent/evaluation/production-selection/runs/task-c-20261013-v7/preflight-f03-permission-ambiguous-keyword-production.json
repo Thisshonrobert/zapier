@@ -1,0 +1,1 @@
+{"caseId":"f03-permission-ambiguous","arm":"keyword-production","startedAt":1791888875929,"status":200,"countedInputTokens":3125,"outputLimitTokens":2048,"totalLimitTokens":64000,"latencyMs":323.0087000000058,"failure":null,"networkCode":null,"tokenBudgetAccepted":true,"state":"finished"}

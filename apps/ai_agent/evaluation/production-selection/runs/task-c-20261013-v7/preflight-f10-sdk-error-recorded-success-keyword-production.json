@@ -1,0 +1,1 @@
+{"caseId":"f10-sdk-error-recorded-success","arm":"keyword-production","startedAt":1791889236066,"status":200,"countedInputTokens":3094,"outputLimitTokens":2048,"totalLimitTokens":64000,"latencyMs":245.2994999999646,"failure":null,"networkCode":null,"tokenBudgetAccepted":true,"state":"finished"}

@@ -1,0 +1,66 @@
+{
+  "caseId": "f07-provider-response-lost",
+  "variant": "candidate",
+  "promptVersion": "experimental-causal-v2",
+  "promptHash": "b88ac8ed2b5e81d3705a5a941cd81b4c0b03c85778026e4a3f99db1653bddc7d",
+  "retrievalHash": "847e46aa5a1baafa683ace5053f955c989f470e2bbde7f403ef5cdb2efb88392",
+  "settingsHash": "c087890dc02b52a11a2c8577faf7b8d3fdd2e18a71a132dd7c65817de5a36d19",
+  "startedAt": 1791866071349,
+  "output": {
+    "status": "abstained",
+    "diagnosis": {
+      "taxonomy_id": "F07",
+      "summary": "Provider response was lost after request transmission with unknown delivery outcome.",
+      "confidence": "high",
+      "evidence_refs": [
+        "fixture:failure:f07-provider-response-lost",
+        "fixture:execution:f07-provider-response-lost",
+        "fixture:validation:f07-provider-response-lost"
+      ],
+      "alternate_explanations": [
+        "The provider received the request but timed out before returning a receipt."
+      ],
+      "missing_evidence": [
+        "provider_delivery_receipt",
+        "request_fingerprint",
+        "canonical_source_identity",
+        "action_metadata",
+        "payload_values",
+        "execution_record",
+        "attempt_history",
+        "execution_ordering",
+        "action_inputs",
+        "input_fingerprint",
+        "handler_registry"
+      ]
+    },
+    "proposal": {
+      "disposition": "outcome_unknown",
+      "kind": "escalate",
+      "summary": "Abstaining from resolution due to unknown delivery outcome and missing delivery receipt.",
+      "reasons": [
+        "Delivery outcome is unknown and provider response was lost after request transmission.",
+        "Required delivery route dictates abstention and escalation."
+      ],
+      "evidence_refs": [
+        "fixture:failure:f07-provider-response-lost"
+      ],
+      "runbook_citations": [
+        "RB-F07@1.0.0#read-only-investigation"
+      ],
+      "preconditions": []
+    }
+  },
+  "usage": {
+    "input_tokens": 3502,
+    "output_tokens": 401,
+    "total_tokens": 3903
+  },
+  "latencyMs": 4305.421999999999,
+  "schemaValid": false,
+  "serviceValid": false,
+  "repairEvidenceIssue": null,
+  "consistencyIssues": null,
+  "failure": null,
+  "providerError": null
+}

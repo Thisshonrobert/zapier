@@ -1,0 +1,77 @@
+{
+  "name": "replacement-value claim is outside bounded defect coverage",
+  "review": {
+    "categories": [
+      "destination_format",
+      "other"
+    ],
+    "repair": "unsupported",
+    "legitimateRepair": false,
+    "targetedInvestigation": false,
+    "note": "Review identifies an additional replacement-value claim. Cited format evidence supports bounded correction, but cannot establish this replacement; the extra claim is explicitly not assessed, not accepted."
+  },
+  "evaluation": {
+    "rawOutput": {
+      "status": "completed",
+      "diagnosis": {
+        "taxonomy_id": "F04",
+        "summary": "Bounded synthetic finding, not execution-time configuration.",
+        "confidence": "low",
+        "evidence_refs": [
+          "fixture:failure:f04-invalid-destination"
+        ],
+        "alternate_explanations": [],
+        "missing_evidence": [
+          "operator_approved_destination",
+          "canonical_source_identity",
+          "action_metadata",
+          "payload_values",
+          "execution_record",
+          "attempt_history",
+          "execution_ordering",
+          "action_inputs",
+          "input_fingerprint",
+          "handler_registry"
+        ]
+      },
+      "proposal": {
+        "disposition": "owner_action_required",
+        "kind": "request_manual_fix",
+        "summary": "Replace the destination with @invented_destination.",
+        "reasons": [
+          "Correct only the cited independent finding; no replacement or replay authorized."
+        ],
+        "evidence_refs": [
+          "fixture:failure:f04-invalid-destination"
+        ],
+        "runbook_citations": [],
+        "preconditions": []
+      }
+    },
+    "schemaValid": true,
+    "serviceAcceptance": {
+      "accepted": true,
+      "failure": null
+    },
+    "deliveryConsistency": [],
+    "repairSupport": {
+      "status": "not_assessed",
+      "assessments": [
+        {
+          "category": "destination_format",
+          "status": "supported",
+          "provenance": "controlled_fixture_only",
+          "reason": "cited_independent_finding_for_assessed_category"
+        },
+        {
+          "category": "other",
+          "status": "not_assessed",
+          "provenance": null,
+          "reason": "repair_category_outside_evidence_coverage"
+        }
+      ]
+    },
+    "experimentalAcceptance": "not_assessed",
+    "externalModelCalls": 0
+  }
+}

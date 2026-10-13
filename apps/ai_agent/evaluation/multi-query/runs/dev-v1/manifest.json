@@ -1,0 +1,21 @@
+{
+  "version": "multi-query-metadata-dev-v1",
+  "inputHashes": {
+    "apps/ai_agent/evaluation/phase-11a-baseline-v6/manifest.json": "668cea0b07e59a8fdb8446c619885869ae8d0174182913b8b69a010742b7435f",
+    "apps/ai_agent/evaluation/phase-11a-baseline-v6/cases.json": "4d34b56a6460c918ef4aa64ad02b4d29b7706eeec3b1dfa0e64bef3365c46efb",
+    "apps/ai_agent/evaluation/phase-11a-baseline-v6/contexts.json": "e5025d50fa72a32fa9a17d52ca298bd785beec1a9232cd0c83ed357ceef95d92",
+    "apps/ai_agent/evaluation/intent-dev/benchmark.json": "239c8c5f078744f0e7bb1e1fb99aff78b17849eda8ca5f7533ab49e2b3432691"
+  },
+  "sourceHashes": {
+    "apps/ai_agent/src/evaluation/retrieval-multi-query.ts": "9aa5c3f56de0fbb3ff37a28254ecd5093524585623b9465169d9fbbc312eed3e",
+    "apps/ai_agent/src/evaluation/retrieval-intent.ts": "7a47fff604cb6564379af395c879fa36c5c785a87a7cbdf70c84b77ae858632f",
+    "apps/ai_agent/src/tools/search-runbooks.ts": "7c433e3707ecfbca8d6ca6125ea3a2d0a53938a1481111af7783497e0cdd99f2",
+    "apps/ai_agent/src/graph.ts": "f3dec93c3dd58037f0b62d79f1fe3f5c7bfb12c79e9f07a3c99cc73d4c632e68",
+    "apps/ai_agent/src/prompts.ts": "aa4a038a8b2748826933a9deb13aa883546d9d6cb79369a5424402d1c9485a9f"
+  },
+  "corpusHash": "e873bc95ee7c7b47335d63b0eb87ff83deb7b4f7e43bb59f1f5d3e881c152a40",
+  "artifactHashes": {
+    "report.json": "2593aeef579f75a8943c541009e6009a9c7752d1ab390695ef6cbea44a14f28d",
+    "report.md": "7cefaa7e3fa51f92357c178d3fe3e73ec8c609410637c998c57de11211befc47"
+  }
+}

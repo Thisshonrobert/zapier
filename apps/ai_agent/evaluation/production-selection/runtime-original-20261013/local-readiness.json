@@ -1,0 +1,47 @@
+{
+  "method": "minilm-original",
+  "defaultNativeScorerVerified": true,
+  "modelLoadMs": 567.2737999999999,
+  "retrieval": [
+    {
+      "query": "Telegram recorded a retry_after duration; which response timestamp starts the waiting period?",
+      "returned": [
+        "RB-F01-F02@1.0.0#simulated-example",
+        "RB-F01-F02@1.0.0#verification-rollback-or-escalation",
+        "RB-F01-F02@1.0.0#allowed-remediation"
+      ],
+      "keyword": [
+        "RB-F01-F02@1.0.0#simulated-example",
+        "RB-F01-F02@1.0.0#allowed-remediation",
+        "RB-F01-F02@1.0.0#evidence-needed"
+      ],
+      "latencyMs": 244.42200000000003
+    },
+    {
+      "query": "Which calendar timezone should a weekly appointment use?",
+      "returned": [],
+      "keyword": [
+        "RB-F01-F02@1.0.0#symptoms",
+        "RB-F03-F04@1.0.0#symptoms",
+        "RB-F04-F06@1.0.0#simulated-example"
+      ],
+      "latencyMs": 201.69319999999993
+    }
+  ],
+  "investigationFlagsEnabled": true,
+  "serviceSecretsMatch": true,
+  "operatorConfirmed": true,
+  "permissionChanged": false,
+  "pendingJobs": 0,
+  "requestTokensReserved": 64000,
+  "ownerDailyTokenLimit": 256000,
+  "operatorDailyTokenLimit": 256000,
+  "model": "gemini-3.5-flash-lite",
+  "servicesStarted": false,
+  "modelApiCalls": 0,
+  "replayEnablementChanged": false,
+  "limitations": [
+    "Local configuration readiness and native scoring verified; no live frontend diagnosis was executed.",
+    "User will start the application and record the demo; no external deployment performed."
+  ]
+}

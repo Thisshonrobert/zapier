@@ -1,4 +1,5 @@
 //score based retrtieval of runbook sections based on query terms, taxonomy, and providers
+// provides procedural guidance 
 import { createHash } from "node:crypto";
 import { readFile, stat } from "node:fs/promises";
 import { join } from "node:path";

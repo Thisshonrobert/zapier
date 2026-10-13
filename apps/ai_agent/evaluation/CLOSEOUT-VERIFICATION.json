@@ -1,0 +1,3752 @@
+{
+  "at": "2026-10-13T05:46:30.041Z",
+  "revision": "b8aca2348fc1954d627a5462950112dbae785519",
+  "scope": "Artifact/dependency audit only; no model requests, experiment reruns, credentials, held-out reads, root checks or Git integration.",
+  "checks": [
+    {
+      "owner": "apps/ai_agent/evaluation/multi-query/runs/dev-v1/manifest.json",
+      "path": "apps/ai_agent/evaluation/phase-11a-baseline-v6/manifest.json",
+      "expected": "668cea0b07e59a8fdb8446c619885869ae8d0174182913b8b69a010742b7435f",
+      "actual": "668cea0b07e59a8fdb8446c619885869ae8d0174182913b8b69a010742b7435f",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/multi-query/runs/dev-v1/manifest.json",
+      "path": "apps/ai_agent/evaluation/phase-11a-baseline-v6/cases.json",
+      "expected": "4d34b56a6460c918ef4aa64ad02b4d29b7706eeec3b1dfa0e64bef3365c46efb",
+      "actual": "4d34b56a6460c918ef4aa64ad02b4d29b7706eeec3b1dfa0e64bef3365c46efb",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/multi-query/runs/dev-v1/manifest.json",
+      "path": "apps/ai_agent/evaluation/phase-11a-baseline-v6/contexts.json",
+      "expected": "e5025d50fa72a32fa9a17d52ca298bd785beec1a9232cd0c83ed357ceef95d92",
+      "actual": "e5025d50fa72a32fa9a17d52ca298bd785beec1a9232cd0c83ed357ceef95d92",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/multi-query/runs/dev-v1/manifest.json",
+      "path": "apps/ai_agent/evaluation/intent-dev/benchmark.json",
+      "expected": "239c8c5f078744f0e7bb1e1fb99aff78b17849eda8ca5f7533ab49e2b3432691",
+      "actual": "239c8c5f078744f0e7bb1e1fb99aff78b17849eda8ca5f7533ab49e2b3432691",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/multi-query/runs/dev-v1/manifest.json",
+      "path": "apps/ai_agent/src/evaluation/retrieval-multi-query.ts",
+      "expected": "9aa5c3f56de0fbb3ff37a28254ecd5093524585623b9465169d9fbbc312eed3e",
+      "actual": "9aa5c3f56de0fbb3ff37a28254ecd5093524585623b9465169d9fbbc312eed3e",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/multi-query/runs/dev-v1/manifest.json",
+      "path": "apps/ai_agent/src/evaluation/retrieval-intent.ts",
+      "expected": "7a47fff604cb6564379af395c879fa36c5c785a87a7cbdf70c84b77ae858632f",
+      "actual": "7a47fff604cb6564379af395c879fa36c5c785a87a7cbdf70c84b77ae858632f",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/multi-query/runs/dev-v1/manifest.json",
+      "path": "apps/ai_agent/src/tools/search-runbooks.ts",
+      "expected": "7c433e3707ecfbca8d6ca6125ea3a2d0a53938a1481111af7783497e0cdd99f2",
+      "actual": "7c433e3707ecfbca8d6ca6125ea3a2d0a53938a1481111af7783497e0cdd99f2",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/multi-query/runs/dev-v1/manifest.json",
+      "path": "apps/ai_agent/src/graph.ts",
+      "expected": "f3dec93c3dd58037f0b62d79f1fe3f5c7bfb12c79e9f07a3c99cc73d4c632e68",
+      "actual": "f3dec93c3dd58037f0b62d79f1fe3f5c7bfb12c79e9f07a3c99cc73d4c632e68",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/multi-query/runs/dev-v1/manifest.json",
+      "path": "apps/ai_agent/src/prompts.ts",
+      "expected": "aa4a038a8b2748826933a9deb13aa883546d9d6cb79369a5424402d1c9485a9f",
+      "actual": "aa4a038a8b2748826933a9deb13aa883546d9d6cb79369a5424402d1c9485a9f",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/multi-query/runs/dev-v1/manifest.json",
+      "path": "apps/ai_agent/evaluation/multi-query/runs/dev-v1/report.json",
+      "expected": "2593aeef579f75a8943c541009e6009a9c7752d1ab390695ef6cbea44a14f28d",
+      "actual": "2593aeef579f75a8943c541009e6009a9c7752d1ab390695ef6cbea44a14f28d",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/multi-query/runs/dev-v1/manifest.json",
+      "path": "apps/ai_agent/evaluation/multi-query/runs/dev-v1/report.md",
+      "expected": "7cefaa7e3fa51f92357c178d3fe3e73ec8c609410637c998c57de11211befc47",
+      "actual": "7cefaa7e3fa51f92357c178d3fe3e73ec8c609410637c998c57de11211befc47",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/agentic/runs/stub-dev-v2/manifest.json",
+      "path": "apps/ai_agent/evaluation/phase-11a-baseline-v6/manifest.json",
+      "expected": "668cea0b07e59a8fdb8446c619885869ae8d0174182913b8b69a010742b7435f",
+      "actual": "668cea0b07e59a8fdb8446c619885869ae8d0174182913b8b69a010742b7435f",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/agentic/runs/stub-dev-v2/manifest.json",
+      "path": "apps/ai_agent/evaluation/phase-11a-baseline-v6/cases.json",
+      "expected": "4d34b56a6460c918ef4aa64ad02b4d29b7706eeec3b1dfa0e64bef3365c46efb",
+      "actual": "4d34b56a6460c918ef4aa64ad02b4d29b7706eeec3b1dfa0e64bef3365c46efb",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/agentic/runs/stub-dev-v2/manifest.json",
+      "path": "apps/ai_agent/evaluation/phase-11a-baseline-v6/contexts.json",
+      "expected": "e5025d50fa72a32fa9a17d52ca298bd785beec1a9232cd0c83ed357ceef95d92",
+      "actual": "e5025d50fa72a32fa9a17d52ca298bd785beec1a9232cd0c83ed357ceef95d92",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/agentic/runs/stub-dev-v2/manifest.json",
+      "path": "apps/ai_agent/evaluation/intent-dev/benchmark.json",
+      "expected": "239c8c5f078744f0e7bb1e1fb99aff78b17849eda8ca5f7533ab49e2b3432691",
+      "actual": "239c8c5f078744f0e7bb1e1fb99aff78b17849eda8ca5f7533ab49e2b3432691",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/agentic/runs/stub-dev-v2/manifest.json",
+      "path": "apps/ai_agent/src/evaluation/agentic-experiment.ts",
+      "expected": "259a7b96de0e3ef392ef265fefbc0386bb1449b47e42720dd090cdd4dbff4d14",
+      "actual": "e509f69fa6a475640048b7eeaf4ac28bbb7a441c959fe3203adba6f269cb1d22",
+      "status": "mismatch"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/agentic/runs/stub-dev-v2/manifest.json",
+      "path": "apps/ai_agent/src/evaluation/retrieval-agentic.ts",
+      "expected": "d3ab5bebee7bcbb2b52a4e6889183b6417274f9124045c8bd6c03a39d78432de",
+      "actual": "d3ab5bebee7bcbb2b52a4e6889183b6417274f9124045c8bd6c03a39d78432de",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/agentic/runs/stub-dev-v2/manifest.json",
+      "path": "apps/ai_agent/src/evaluation/checks.ts",
+      "expected": "e1d812ce3c6951b4c6b0e5d26c99fd79466abeeaf6d24319fc6cbf9d599b4178",
+      "actual": "e1d812ce3c6951b4c6b0e5d26c99fd79466abeeaf6d24319fc6cbf9d599b4178",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/agentic/runs/stub-dev-v2/manifest.json",
+      "path": "apps/ai_agent/src/evaluation/experiment.ts",
+      "expected": "79b65da9cbc1317761cdcc38b9a3174d6e5aca4fe76e2a3357241d233f22bb0a",
+      "actual": "79b65da9cbc1317761cdcc38b9a3174d6e5aca4fe76e2a3357241d233f22bb0a",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/agentic/runs/stub-dev-v2/manifest.json",
+      "path": "apps/ai_agent/src/evaluation/fixture-tools.ts",
+      "expected": "c6c01ea849f5aa49f0971927bec3f69c2175eec5269d743bdbc8187ce9b0adf6",
+      "actual": "c6c01ea849f5aa49f0971927bec3f69c2175eec5269d743bdbc8187ce9b0adf6",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/agentic/runs/stub-dev-v2/manifest.json",
+      "path": "apps/ai_agent/src/evaluation/retrieval-intent.ts",
+      "expected": "7a47fff604cb6564379af395c879fa36c5c785a87a7cbdf70c84b77ae858632f",
+      "actual": "7a47fff604cb6564379af395c879fa36c5c785a87a7cbdf70c84b77ae858632f",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/agentic/runs/stub-dev-v2/manifest.json",
+      "path": "apps/ai_agent/src/graph.ts",
+      "expected": "f3dec93c3dd58037f0b62d79f1fe3f5c7bfb12c79e9f07a3c99cc73d4c632e68",
+      "actual": "f3dec93c3dd58037f0b62d79f1fe3f5c7bfb12c79e9f07a3c99cc73d4c632e68",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/agentic/runs/stub-dev-v2/manifest.json",
+      "path": "apps/ai_agent/src/prompts.ts",
+      "expected": "aa4a038a8b2748826933a9deb13aa883546d9d6cb79369a5424402d1c9485a9f",
+      "actual": "aa4a038a8b2748826933a9deb13aa883546d9d6cb79369a5424402d1c9485a9f",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/agentic/runs/stub-dev-v2/manifest.json",
+      "path": "apps/ai_agent/src/contracts.ts",
+      "expected": "2db41bcdde5b4539c8b0d5514e2bf9dd61a3c26e8166bbf867b6f0d0435711eb",
+      "actual": "2db41bcdde5b4539c8b0d5514e2bf9dd61a3c26e8166bbf867b6f0d0435711eb",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/agentic/runs/stub-dev-v2/manifest.json",
+      "path": "apps/ai_agent/src/gemini-model.ts",
+      "expected": "18a909519c9bd16437e7ca54e125eb8c02430978d44b5501b572243e17a7c257",
+      "actual": "18a909519c9bd16437e7ca54e125eb8c02430978d44b5501b572243e17a7c257",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/agentic/runs/stub-dev-v2/manifest.json",
+      "path": "apps/ai_agent/src/tools/search-runbooks.ts",
+      "expected": "7c433e3707ecfbca8d6ca6125ea3a2d0a53938a1481111af7783497e0cdd99f2",
+      "actual": "7c433e3707ecfbca8d6ca6125ea3a2d0a53938a1481111af7783497e0cdd99f2",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/agentic/runs/stub-dev-v2/manifest.json",
+      "path": "apps/ai_agent/evaluation/agentic/runs/stub-dev-v2/report.json",
+      "expected": "dda8f2a3347c975515782474ad34c2c6d3b283d6bf690c367cf37df0104660e0",
+      "actual": "dda8f2a3347c975515782474ad34c2c6d3b283d6bf690c367cf37df0104660e0",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/agentic/runs/stub-dev-v2/manifest.json",
+      "path": "apps/ai_agent/evaluation/agentic/runs/stub-dev-v2/report.md",
+      "expected": "07de9c19260474b5f770962c18b3479081bc7447f629c70b2e95b39b71d276f3",
+      "actual": "07de9c19260474b5f770962c18b3479081bc7447f629c70b2e95b39b71d276f3",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/agentic/runs/stub-dev-v2/manifest.json",
+      "path": "apps/ai_agent/evaluation/agentic/runs/stub-dev-v2/freeze.json",
+      "expected": "700365cf2f595a5a2f0fc88489548043573c676d0f01bc78e9fb2cd4fc5190c4",
+      "actual": "700365cf2f595a5a2f0fc88489548043573c676d0f01bc78e9fb2cd4fc5190c4",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/agentic/runs/live-dev-20261012-v1/manifest.json",
+      "path": "apps/ai_agent/evaluation/phase-11a-baseline-v6/manifest.json",
+      "expected": "668cea0b07e59a8fdb8446c619885869ae8d0174182913b8b69a010742b7435f",
+      "actual": "668cea0b07e59a8fdb8446c619885869ae8d0174182913b8b69a010742b7435f",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/agentic/runs/live-dev-20261012-v1/manifest.json",
+      "path": "apps/ai_agent/evaluation/phase-11a-baseline-v6/cases.json",
+      "expected": "4d34b56a6460c918ef4aa64ad02b4d29b7706eeec3b1dfa0e64bef3365c46efb",
+      "actual": "4d34b56a6460c918ef4aa64ad02b4d29b7706eeec3b1dfa0e64bef3365c46efb",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/agentic/runs/live-dev-20261012-v1/manifest.json",
+      "path": "apps/ai_agent/evaluation/phase-11a-baseline-v6/contexts.json",
+      "expected": "e5025d50fa72a32fa9a17d52ca298bd785beec1a9232cd0c83ed357ceef95d92",
+      "actual": "e5025d50fa72a32fa9a17d52ca298bd785beec1a9232cd0c83ed357ceef95d92",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/agentic/runs/live-dev-20261012-v1/manifest.json",
+      "path": "apps/ai_agent/evaluation/intent-dev/benchmark.json",
+      "expected": "239c8c5f078744f0e7bb1e1fb99aff78b17849eda8ca5f7533ab49e2b3432691",
+      "actual": "239c8c5f078744f0e7bb1e1fb99aff78b17849eda8ca5f7533ab49e2b3432691",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/agentic/runs/live-dev-20261012-v1/manifest.json",
+      "path": "apps/ai_agent/src/evaluation/agentic-experiment.ts",
+      "expected": "259a7b96de0e3ef392ef265fefbc0386bb1449b47e42720dd090cdd4dbff4d14",
+      "actual": "e509f69fa6a475640048b7eeaf4ac28bbb7a441c959fe3203adba6f269cb1d22",
+      "status": "mismatch"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/agentic/runs/live-dev-20261012-v1/manifest.json",
+      "path": "apps/ai_agent/src/evaluation/retrieval-agentic.ts",
+      "expected": "d3ab5bebee7bcbb2b52a4e6889183b6417274f9124045c8bd6c03a39d78432de",
+      "actual": "d3ab5bebee7bcbb2b52a4e6889183b6417274f9124045c8bd6c03a39d78432de",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/agentic/runs/live-dev-20261012-v1/manifest.json",
+      "path": "apps/ai_agent/src/evaluation/checks.ts",
+      "expected": "e1d812ce3c6951b4c6b0e5d26c99fd79466abeeaf6d24319fc6cbf9d599b4178",
+      "actual": "e1d812ce3c6951b4c6b0e5d26c99fd79466abeeaf6d24319fc6cbf9d599b4178",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/agentic/runs/live-dev-20261012-v1/manifest.json",
+      "path": "apps/ai_agent/src/evaluation/experiment.ts",
+      "expected": "79b65da9cbc1317761cdcc38b9a3174d6e5aca4fe76e2a3357241d233f22bb0a",
+      "actual": "79b65da9cbc1317761cdcc38b9a3174d6e5aca4fe76e2a3357241d233f22bb0a",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/agentic/runs/live-dev-20261012-v1/manifest.json",
+      "path": "apps/ai_agent/src/evaluation/fixture-tools.ts",
+      "expected": "c6c01ea849f5aa49f0971927bec3f69c2175eec5269d743bdbc8187ce9b0adf6",
+      "actual": "c6c01ea849f5aa49f0971927bec3f69c2175eec5269d743bdbc8187ce9b0adf6",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/agentic/runs/live-dev-20261012-v1/manifest.json",
+      "path": "apps/ai_agent/src/evaluation/retrieval-intent.ts",
+      "expected": "7a47fff604cb6564379af395c879fa36c5c785a87a7cbdf70c84b77ae858632f",
+      "actual": "7a47fff604cb6564379af395c879fa36c5c785a87a7cbdf70c84b77ae858632f",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/agentic/runs/live-dev-20261012-v1/manifest.json",
+      "path": "apps/ai_agent/src/graph.ts",
+      "expected": "f3dec93c3dd58037f0b62d79f1fe3f5c7bfb12c79e9f07a3c99cc73d4c632e68",
+      "actual": "f3dec93c3dd58037f0b62d79f1fe3f5c7bfb12c79e9f07a3c99cc73d4c632e68",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/agentic/runs/live-dev-20261012-v1/manifest.json",
+      "path": "apps/ai_agent/src/prompts.ts",
+      "expected": "aa4a038a8b2748826933a9deb13aa883546d9d6cb79369a5424402d1c9485a9f",
+      "actual": "aa4a038a8b2748826933a9deb13aa883546d9d6cb79369a5424402d1c9485a9f",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/agentic/runs/live-dev-20261012-v1/manifest.json",
+      "path": "apps/ai_agent/src/contracts.ts",
+      "expected": "2db41bcdde5b4539c8b0d5514e2bf9dd61a3c26e8166bbf867b6f0d0435711eb",
+      "actual": "2db41bcdde5b4539c8b0d5514e2bf9dd61a3c26e8166bbf867b6f0d0435711eb",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/agentic/runs/live-dev-20261012-v1/manifest.json",
+      "path": "apps/ai_agent/src/gemini-model.ts",
+      "expected": "18a909519c9bd16437e7ca54e125eb8c02430978d44b5501b572243e17a7c257",
+      "actual": "18a909519c9bd16437e7ca54e125eb8c02430978d44b5501b572243e17a7c257",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/agentic/runs/live-dev-20261012-v1/manifest.json",
+      "path": "apps/ai_agent/src/tools/search-runbooks.ts",
+      "expected": "7c433e3707ecfbca8d6ca6125ea3a2d0a53938a1481111af7783497e0cdd99f2",
+      "actual": "7c433e3707ecfbca8d6ca6125ea3a2d0a53938a1481111af7783497e0cdd99f2",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/agentic/runs/live-dev-20261012-v1/manifest.json",
+      "path": "apps/ai_agent/evaluation/agentic/runs/live-dev-20261012-v1/report.json",
+      "expected": "f0ec3a61590d35bd0fc0857f1bd5e43f9c2ab1aa22554decdaaa736827d88256",
+      "actual": "f0ec3a61590d35bd0fc0857f1bd5e43f9c2ab1aa22554decdaaa736827d88256",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/agentic/runs/live-dev-20261012-v1/manifest.json",
+      "path": "apps/ai_agent/evaluation/agentic/runs/live-dev-20261012-v1/report.md",
+      "expected": "9ce204045e6af3c3e6cdaebd1385e1ba3b412b308a66c567c650f0eff7687e4e",
+      "actual": "9ce204045e6af3c3e6cdaebd1385e1ba3b412b308a66c567c650f0eff7687e4e",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/agentic/runs/live-dev-20261012-v1/manifest.json",
+      "path": "apps/ai_agent/evaluation/agentic/runs/live-dev-20261012-v1/freeze.json",
+      "expected": "700365cf2f595a5a2f0fc88489548043573c676d0f01bc78e9fb2cd4fc5190c4",
+      "actual": "700365cf2f595a5a2f0fc88489548043573c676d0f01bc78e9fb2cd4fc5190c4",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/agentic/runs/live-dev-20261012-v2/manifest.json",
+      "path": "apps/ai_agent/evaluation/phase-11a-baseline-v6/manifest.json",
+      "expected": "668cea0b07e59a8fdb8446c619885869ae8d0174182913b8b69a010742b7435f",
+      "actual": "668cea0b07e59a8fdb8446c619885869ae8d0174182913b8b69a010742b7435f",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/agentic/runs/live-dev-20261012-v2/manifest.json",
+      "path": "apps/ai_agent/evaluation/phase-11a-baseline-v6/cases.json",
+      "expected": "4d34b56a6460c918ef4aa64ad02b4d29b7706eeec3b1dfa0e64bef3365c46efb",
+      "actual": "4d34b56a6460c918ef4aa64ad02b4d29b7706eeec3b1dfa0e64bef3365c46efb",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/agentic/runs/live-dev-20261012-v2/manifest.json",
+      "path": "apps/ai_agent/evaluation/phase-11a-baseline-v6/contexts.json",
+      "expected": "e5025d50fa72a32fa9a17d52ca298bd785beec1a9232cd0c83ed357ceef95d92",
+      "actual": "e5025d50fa72a32fa9a17d52ca298bd785beec1a9232cd0c83ed357ceef95d92",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/agentic/runs/live-dev-20261012-v2/manifest.json",
+      "path": "apps/ai_agent/evaluation/intent-dev/benchmark.json",
+      "expected": "239c8c5f078744f0e7bb1e1fb99aff78b17849eda8ca5f7533ab49e2b3432691",
+      "actual": "239c8c5f078744f0e7bb1e1fb99aff78b17849eda8ca5f7533ab49e2b3432691",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/agentic/runs/live-dev-20261012-v2/manifest.json",
+      "path": "apps/ai_agent/src/evaluation/agentic-experiment.ts",
+      "expected": "e509f69fa6a475640048b7eeaf4ac28bbb7a441c959fe3203adba6f269cb1d22",
+      "actual": "e509f69fa6a475640048b7eeaf4ac28bbb7a441c959fe3203adba6f269cb1d22",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/agentic/runs/live-dev-20261012-v2/manifest.json",
+      "path": "apps/ai_agent/src/evaluation/retrieval-agentic.ts",
+      "expected": "d3ab5bebee7bcbb2b52a4e6889183b6417274f9124045c8bd6c03a39d78432de",
+      "actual": "d3ab5bebee7bcbb2b52a4e6889183b6417274f9124045c8bd6c03a39d78432de",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/agentic/runs/live-dev-20261012-v2/manifest.json",
+      "path": "apps/ai_agent/src/evaluation/checks.ts",
+      "expected": "e1d812ce3c6951b4c6b0e5d26c99fd79466abeeaf6d24319fc6cbf9d599b4178",
+      "actual": "e1d812ce3c6951b4c6b0e5d26c99fd79466abeeaf6d24319fc6cbf9d599b4178",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/agentic/runs/live-dev-20261012-v2/manifest.json",
+      "path": "apps/ai_agent/src/evaluation/experiment.ts",
+      "expected": "79b65da9cbc1317761cdcc38b9a3174d6e5aca4fe76e2a3357241d233f22bb0a",
+      "actual": "79b65da9cbc1317761cdcc38b9a3174d6e5aca4fe76e2a3357241d233f22bb0a",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/agentic/runs/live-dev-20261012-v2/manifest.json",
+      "path": "apps/ai_agent/src/evaluation/fixture-tools.ts",
+      "expected": "c6c01ea849f5aa49f0971927bec3f69c2175eec5269d743bdbc8187ce9b0adf6",
+      "actual": "c6c01ea849f5aa49f0971927bec3f69c2175eec5269d743bdbc8187ce9b0adf6",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/agentic/runs/live-dev-20261012-v2/manifest.json",
+      "path": "apps/ai_agent/src/evaluation/retrieval-intent.ts",
+      "expected": "7a47fff604cb6564379af395c879fa36c5c785a87a7cbdf70c84b77ae858632f",
+      "actual": "7a47fff604cb6564379af395c879fa36c5c785a87a7cbdf70c84b77ae858632f",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/agentic/runs/live-dev-20261012-v2/manifest.json",
+      "path": "apps/ai_agent/src/graph.ts",
+      "expected": "f3dec93c3dd58037f0b62d79f1fe3f5c7bfb12c79e9f07a3c99cc73d4c632e68",
+      "actual": "f3dec93c3dd58037f0b62d79f1fe3f5c7bfb12c79e9f07a3c99cc73d4c632e68",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/agentic/runs/live-dev-20261012-v2/manifest.json",
+      "path": "apps/ai_agent/src/prompts.ts",
+      "expected": "aa4a038a8b2748826933a9deb13aa883546d9d6cb79369a5424402d1c9485a9f",
+      "actual": "aa4a038a8b2748826933a9deb13aa883546d9d6cb79369a5424402d1c9485a9f",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/agentic/runs/live-dev-20261012-v2/manifest.json",
+      "path": "apps/ai_agent/src/contracts.ts",
+      "expected": "2db41bcdde5b4539c8b0d5514e2bf9dd61a3c26e8166bbf867b6f0d0435711eb",
+      "actual": "2db41bcdde5b4539c8b0d5514e2bf9dd61a3c26e8166bbf867b6f0d0435711eb",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/agentic/runs/live-dev-20261012-v2/manifest.json",
+      "path": "apps/ai_agent/src/gemini-model.ts",
+      "expected": "18a909519c9bd16437e7ca54e125eb8c02430978d44b5501b572243e17a7c257",
+      "actual": "18a909519c9bd16437e7ca54e125eb8c02430978d44b5501b572243e17a7c257",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/agentic/runs/live-dev-20261012-v2/manifest.json",
+      "path": "apps/ai_agent/src/tools/search-runbooks.ts",
+      "expected": "7c433e3707ecfbca8d6ca6125ea3a2d0a53938a1481111af7783497e0cdd99f2",
+      "actual": "7c433e3707ecfbca8d6ca6125ea3a2d0a53938a1481111af7783497e0cdd99f2",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/agentic/runs/live-dev-20261012-v2/manifest.json",
+      "path": "apps/ai_agent/evaluation/agentic/runs/live-dev-20261012-v2/report.json",
+      "expected": "86c56341d21c96932cc4cc0c457728596815e70f21e63737945ccaa1ba7899c1",
+      "actual": "86c56341d21c96932cc4cc0c457728596815e70f21e63737945ccaa1ba7899c1",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/agentic/runs/live-dev-20261012-v2/manifest.json",
+      "path": "apps/ai_agent/evaluation/agentic/runs/live-dev-20261012-v2/report.md",
+      "expected": "d685ac3ef687ca340dcd7e51961f6df95220f0279e448611d627ea2c90a566ae",
+      "actual": "d685ac3ef687ca340dcd7e51961f6df95220f0279e448611d627ea2c90a566ae",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/agentic/runs/live-dev-20261012-v2/manifest.json",
+      "path": "apps/ai_agent/evaluation/agentic/runs/live-dev-20261012-v2/freeze.json",
+      "expected": "73a640ef6fa68ff931ca370c39ce413d1535f21f5a686dadf52575ae55f3f410",
+      "actual": "73a640ef6fa68ff931ca370c39ce413d1535f21f5a686dadf52575ae55f3f410",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/retrieval-investigation/runs/offline-v4/manifest.json",
+      "path": "apps/ai_agent/evaluation/agentic/runs/live-dev-20261012-v2/manifest.json",
+      "expected": "0ed33aaf24ccd6e3453cfb6701249c85c88925f057d5597c5fc09e24a5417e7a",
+      "actual": "0ed33aaf24ccd6e3453cfb6701249c85c88925f057d5597c5fc09e24a5417e7a",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/retrieval-investigation/runs/offline-v4/manifest.json",
+      "path": "apps/ai_agent/evaluation/multi-query/runs/dev-v1/manifest.json",
+      "expected": "5f80e108aafdf223b460d5e0602447d1b0305c1e6d760824c4446f81213654f3",
+      "actual": "5f80e108aafdf223b460d5e0602447d1b0305c1e6d760824c4446f81213654f3",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/retrieval-investigation/runs/offline-v4/manifest.json",
+      "path": "apps/ai_agent/evaluation/agentic/runs/live-dev-20261012-v2/freeze.json",
+      "expected": "73a640ef6fa68ff931ca370c39ce413d1535f21f5a686dadf52575ae55f3f410",
+      "actual": "73a640ef6fa68ff931ca370c39ce413d1535f21f5a686dadf52575ae55f3f410",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/retrieval-investigation/runs/offline-v4/manifest.json",
+      "path": "apps/ai_agent/evaluation/agentic/runs/live-dev-20261012-v2/report.json",
+      "expected": "86c56341d21c96932cc4cc0c457728596815e70f21e63737945ccaa1ba7899c1",
+      "actual": "86c56341d21c96932cc4cc0c457728596815e70f21e63737945ccaa1ba7899c1",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/retrieval-investigation/runs/offline-v4/manifest.json",
+      "path": "apps/ai_agent/evaluation/multi-query/runs/dev-v1/report.json",
+      "expected": "2593aeef579f75a8943c541009e6009a9c7752d1ab390695ef6cbea44a14f28d",
+      "actual": "2593aeef579f75a8943c541009e6009a9c7752d1ab390695ef6cbea44a14f28d",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/retrieval-investigation/runs/offline-v4/manifest.json",
+      "path": "apps/ai_agent/evaluation/phase-11a-baseline-v6/manifest.json",
+      "expected": "668cea0b07e59a8fdb8446c619885869ae8d0174182913b8b69a010742b7435f",
+      "actual": "668cea0b07e59a8fdb8446c619885869ae8d0174182913b8b69a010742b7435f",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/retrieval-investigation/runs/offline-v4/manifest.json",
+      "path": "apps/ai_agent/evaluation/phase-11a-baseline-v6/cases.json",
+      "expected": "4d34b56a6460c918ef4aa64ad02b4d29b7706eeec3b1dfa0e64bef3365c46efb",
+      "actual": "4d34b56a6460c918ef4aa64ad02b4d29b7706eeec3b1dfa0e64bef3365c46efb",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/retrieval-investigation/runs/offline-v4/manifest.json",
+      "path": "apps/ai_agent/evaluation/phase-11a-baseline-v6/contexts.json",
+      "expected": "e5025d50fa72a32fa9a17d52ca298bd785beec1a9232cd0c83ed357ceef95d92",
+      "actual": "e5025d50fa72a32fa9a17d52ca298bd785beec1a9232cd0c83ed357ceef95d92",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/retrieval-investigation/runs/offline-v4/manifest.json",
+      "path": "apps/ai_agent/evaluation/intent-dev/benchmark.json",
+      "expected": "239c8c5f078744f0e7bb1e1fb99aff78b17849eda8ca5f7533ab49e2b3432691",
+      "actual": "239c8c5f078744f0e7bb1e1fb99aff78b17849eda8ca5f7533ab49e2b3432691",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/retrieval-investigation/runs/offline-v4/manifest.json",
+      "path": "apps/ai_agent/src/evaluation/investigate-retrieval.ts",
+      "expected": "a0dcfe0f2bf505a95966d9d33b9bf40e2ae0d59033a74fc711e680abb70ab285",
+      "actual": "a0dcfe0f2bf505a95966d9d33b9bf40e2ae0d59033a74fc711e680abb70ab285",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/retrieval-investigation/runs/offline-v4/manifest.json",
+      "path": "apps/ai_agent/src/evaluation/retrieval-investigation.ts",
+      "expected": "0f3b3e3fbd56932afa869cdcd568537bcaf9a589560c9eac422b329837ac1e40",
+      "actual": "0f3b3e3fbd56932afa869cdcd568537bcaf9a589560c9eac422b329837ac1e40",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/retrieval-investigation/runs/offline-v4/manifest.json",
+      "path": "apps/ai_agent/src/evaluation/oracle-diagnosis.ts",
+      "expected": "8ec8e651e506bb44dc94330dac7d21e3b7e18cfad0476b7bd35dcb539b49af87",
+      "actual": "8ec8e651e506bb44dc94330dac7d21e3b7e18cfad0476b7bd35dcb539b49af87",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/retrieval-investigation/runs/offline-v4/manifest.json",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/offline-v4/report.json",
+      "expected": "386a2e04b5af62c4d0afbde0f07bdbc156fb3091c0502a8a7480084f7e05e28e",
+      "actual": "386a2e04b5af62c4d0afbde0f07bdbc156fb3091c0502a8a7480084f7e05e28e",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/retrieval-investigation/runs/offline-v4/manifest.json",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/offline-v4/report.md",
+      "expected": "77e829161c7d81255f6bba5b55a2775f026d004c1965993a86d77e3bca525b0f",
+      "actual": "77e829161c7d81255f6bba5b55a2775f026d004c1965993a86d77e3bca525b0f",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/manifest.json",
+      "path": "apps/ai_agent/src/evaluation/oracle-pilot.ts",
+      "expected": "89b85a961100b719020beeda125d425b01576d298c206c8a1f91990ddf9b02f3",
+      "actual": "a953e536aea2f00d20892e149ac9904fcff22026f3c384bd8dfc53559d03dadf",
+      "status": "mismatch"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/manifest.json",
+      "path": "apps/ai_agent/tests/oracle-pilot.test.ts",
+      "expected": "d16ff53e7d36f32cdd61ac6b3ba4af11c39e362ef8c4f2cee36a5f0707d1cc30",
+      "actual": "d16ff53e7d36f32cdd61ac6b3ba4af11c39e362ef8c4f2cee36a5f0707d1cc30",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/manifest.json",
+      "path": "apps/ai_agent/src/gemini-model.ts",
+      "expected": "18a909519c9bd16437e7ca54e125eb8c02430978d44b5501b572243e17a7c257",
+      "actual": "18a909519c9bd16437e7ca54e125eb8c02430978d44b5501b572243e17a7c257",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/manifest.json",
+      "path": "apps/ai_agent/src/graph.ts",
+      "expected": "f3dec93c3dd58037f0b62d79f1fe3f5c7bfb12c79e9f07a3c99cc73d4c632e68",
+      "actual": "f3dec93c3dd58037f0b62d79f1fe3f5c7bfb12c79e9f07a3c99cc73d4c632e68",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/manifest.json",
+      "path": "apps/ai_agent/src/prompts.ts",
+      "expected": "aa4a038a8b2748826933a9deb13aa883546d9d6cb79369a5424402d1c9485a9f",
+      "actual": "aa4a038a8b2748826933a9deb13aa883546d9d6cb79369a5424402d1c9485a9f",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/manifest.json",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/attempt-1.json",
+      "expected": "e87e3a5cc308f4a0528275e52c1355b21ec8641961344d5a1735a0985bae2a66",
+      "actual": "e87e3a5cc308f4a0528275e52c1355b21ec8641961344d5a1735a0985bae2a66",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/manifest.json",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/attempt-2.json",
+      "expected": "1cd4cb7cb938e22fbb985a6492f33a169990e38511136a3d4799263cce9a1b49",
+      "actual": "1cd4cb7cb938e22fbb985a6492f33a169990e38511136a3d4799263cce9a1b49",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/manifest.json",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/attempt-3.json",
+      "expected": "bdbfa44e81f2ada892153d5fbc3066eda95b2a164efa4d220fe8a0d1215d15f2",
+      "actual": "bdbfa44e81f2ada892153d5fbc3066eda95b2a164efa4d220fe8a0d1215d15f2",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/manifest.json",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/attempt-4.json",
+      "expected": "eb71d588361eb1e82d389342c5e7dc73a7da3b230249dba3088a1684a3bffc3c",
+      "actual": "eb71d588361eb1e82d389342c5e7dc73a7da3b230249dba3088a1684a3bffc3c",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/manifest.json",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/binding.json",
+      "expected": "62e50a9ee053abb934037a1b197b0956d846da14ef1265718d949829d7d4454c",
+      "actual": "62e50a9ee053abb934037a1b197b0956d846da14ef1265718d949829d7d4454c",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/manifest.json",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/blind-mapping.json",
+      "expected": "6fdea800d31c594f7147f74b34f6d264af2a06b4f1eb4ea4dde6fc6dab64e812",
+      "actual": "6fdea800d31c594f7147f74b34f6d264af2a06b4f1eb4ea4dde6fc6dab64e812",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/manifest.json",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/blind-packets.json",
+      "expected": "39f45ad6282c1174c3ae13553167b09346b42735ce44036c8900ca581daeb0bf",
+      "actual": "39f45ad6282c1174c3ae13553167b09346b42735ce44036c8900ca581daeb0bf",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/manifest.json",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/blind-review.json",
+      "expected": "e8651c8ce5316195158ea77fcd9a21a1ce2d128df6b25d7c80af8af1ddb49f8f",
+      "actual": "e8651c8ce5316195158ea77fcd9a21a1ce2d128df6b25d7c80af8af1ddb49f8f",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/manifest.json",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/free-tier-confirmation.json",
+      "status": "protected-not-read"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/manifest.json",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/plan.json",
+      "expected": "865aad8491a13b9bb64af5c4647561d3c9017308f5f8ac8a459415740ee930e0",
+      "actual": "865aad8491a13b9bb64af5c4647561d3c9017308f5f8ac8a459415740ee930e0",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/manifest.json",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/report.json",
+      "expected": "0bf936b49fa3739593618259c352cea3352801ec5c1862338cba062033191cc5",
+      "actual": "0bf936b49fa3739593618259c352cea3352801ec5c1862338cba062033191cc5",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/manifest.json",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/report.md",
+      "expected": "4b34bcd825a38bd41944fa28f94397c1393972f572e6a7c9b5ce63291086e142",
+      "actual": "4b34bcd825a38bd41944fa28f94397c1393972f572e6a7c9b5ce63291086e142",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/manifest.json",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/requests.jsonl",
+      "expected": "19fffcdc1167d6b62d6abe282d002ebb68f9672ec8857204e74029c728b44334",
+      "actual": "19fffcdc1167d6b62d6abe282d002ebb68f9672ec8857204e74029c728b44334",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/manifest.json",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/result-1.json",
+      "expected": "5fd0cb1719894a2f4b2e28b97e7a7f00192a1dff570a0963b748c3d1271fb30d",
+      "actual": "5fd0cb1719894a2f4b2e28b97e7a7f00192a1dff570a0963b748c3d1271fb30d",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/manifest.json",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/result-2.json",
+      "expected": "ba2cb5b6bc6a5bf16b0e3cc65e00081fb9786742c783df4e7c1000ea5b04a85e",
+      "actual": "ba2cb5b6bc6a5bf16b0e3cc65e00081fb9786742c783df4e7c1000ea5b04a85e",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/manifest.json",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/result-3.json",
+      "expected": "6da5aa9d297863be13ac354929e0d1e8697b564f5a2221d9d35d0b535dd643ef",
+      "actual": "6da5aa9d297863be13ac354929e0d1e8697b564f5a2221d9d35d0b535dd643ef",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/manifest.json",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/result-4.json",
+      "expected": "7ee2356b1d48754e9afca6fb4927a380123c7072596f395bdfd8a1d34db3e74b",
+      "actual": "7ee2356b1d48754e9afca6fb4927a380123c7072596f395bdfd8a1d34db3e74b",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/manifest.json",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/slot-1.started.json",
+      "expected": "79e99a42079e60b3b57b98ccae8afc6bdcdde53c5216b6ac1fe155e22374a1da",
+      "actual": "79e99a42079e60b3b57b98ccae8afc6bdcdde53c5216b6ac1fe155e22374a1da",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/manifest.json",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/slot-2.started.json",
+      "expected": "1b249b4832ed3067e6f574561965b1fa85506d4e4b6d616e7b04dbe2489fbd98",
+      "actual": "1b249b4832ed3067e6f574561965b1fa85506d4e4b6d616e7b04dbe2489fbd98",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/manifest.json",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/slot-3.started.json",
+      "expected": "ad3e2b14d8342018eb02d9d3208ab3ba01267be6923daa299669c9a662687024",
+      "actual": "ad3e2b14d8342018eb02d9d3208ab3ba01267be6923daa299669c9a662687024",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/manifest.json",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/slot-4.started.json",
+      "expected": "2eeba992329eddb5acf76ed7194ef824532e0f8d45fb52c8f1239150f372d6e2",
+      "actual": "2eeba992329eddb5acf76ed7194ef824532e0f8d45fb52c8f1239150f372d6e2",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/measurements.json",
+      "path": "apps/ai_agent/src/evaluation/causal-diagnosis.ts",
+      "expected": "02c49acceda29dc5322f5e6c4b9b4784832d75efa713fa79b351fd93614dfd0b",
+      "actual": "5e8612ac79ae8ea68a6c50e296bd666af9136bec92ed71c9775da3b1a2441df4",
+      "status": "mismatch"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/measurements.json",
+      "path": "apps/ai_agent/src/evaluation/causal-pilot.ts",
+      "expected": "97e02651f954fd7f92476b27597abe8430d916a369e96caa18111593a5d48a88",
+      "actual": "8f79ee535ce1f386479e41423bd131ace81d11a45c41c94b6fbfd9e0df704032",
+      "status": "mismatch"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/measurements.json",
+      "path": "apps/ai_agent/src/evaluation/oracle-pilot.ts",
+      "expected": "89b85a961100b719020beeda125d425b01576d298c206c8a1f91990ddf9b02f3",
+      "actual": "a953e536aea2f00d20892e149ac9904fcff22026f3c384bd8dfc53559d03dadf",
+      "status": "mismatch"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/measurements.json",
+      "path": "apps/ai_agent/src/prompts.ts",
+      "expected": "aa4a038a8b2748826933a9deb13aa883546d9d6cb79369a5424402d1c9485a9f",
+      "actual": "aa4a038a8b2748826933a9deb13aa883546d9d6cb79369a5424402d1c9485a9f",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/measurements.json",
+      "path": "apps/ai_agent/src/graph.ts",
+      "expected": "f3dec93c3dd58037f0b62d79f1fe3f5c7bfb12c79e9f07a3c99cc73d4c632e68",
+      "actual": "f3dec93c3dd58037f0b62d79f1fe3f5c7bfb12c79e9f07a3c99cc73d4c632e68",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/measurements.json",
+      "path": "apps/ai_agent/src/gemini-model.ts",
+      "expected": "18a909519c9bd16437e7ca54e125eb8c02430978d44b5501b572243e17a7c257",
+      "actual": "18a909519c9bd16437e7ca54e125eb8c02430978d44b5501b572243e17a7c257",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/measurements.json",
+      "path": "apps/ai_agent/tests/causal-diagnosis.test.ts",
+      "expected": "0006042ea8894f010bc23ac3779b9c2e8085cacf019d77566cc5cee9df011afc",
+      "actual": "0006042ea8894f010bc23ac3779b9c2e8085cacf019d77566cc5cee9df011afc",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/measurements.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/access.json",
+      "expected": "f833173544c168eb4d1be20db7fa155cf399e14bd621dfc11b8a37c18eb8b867",
+      "actual": "f833173544c168eb4d1be20db7fa155cf399e14bd621dfc11b8a37c18eb8b867",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/measurements.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/attempt-1.json",
+      "expected": "e12c6b066b9dbd6dd9d5e6145fe0cfe33281c84227fad3791a4097159fc04133",
+      "actual": "e12c6b066b9dbd6dd9d5e6145fe0cfe33281c84227fad3791a4097159fc04133",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/measurements.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/attempt-2.json",
+      "expected": "3b2a94dc45585cdd6a2cfc380635c3cf167408256c437802c50a20daa8c2c5b4",
+      "actual": "3b2a94dc45585cdd6a2cfc380635c3cf167408256c437802c50a20daa8c2c5b4",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/measurements.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/attempt-4.json",
+      "expected": "2a8ab7be5b3e82af3f7687758fad5141a6c5f4497e561c3463263d7c816b18b3",
+      "actual": "2a8ab7be5b3e82af3f7687758fad5141a6c5f4497e561c3463263d7c816b18b3",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/measurements.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/continuation.json",
+      "expected": "2519e957b961f1161ad9c1faad085c84e49bd4c862dfc5531aa7a26fae13fc09",
+      "actual": "2519e957b961f1161ad9c1faad085c84e49bd4c862dfc5531aa7a26fae13fc09",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/measurements.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/plan.json",
+      "expected": "3e767aa9744b275d83f5db21a7c68de1eff6a0b7ce183420ee9177d34a6e4a84",
+      "actual": "3e767aa9744b275d83f5db21a7c68de1eff6a0b7ce183420ee9177d34a6e4a84",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/measurements.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/report-final.json",
+      "expected": "b5bfb4f79bd8f9a04df4069e630ee44ce8d905365726aa5d947d0aaea0a512fa",
+      "actual": "b5bfb4f79bd8f9a04df4069e630ee44ce8d905365726aa5d947d0aaea0a512fa",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/measurements.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/report.json",
+      "expected": "4f23aae0be46f8d297098578771ba7ec4b2eb367ba66175009aff84091d4a0b4",
+      "actual": "4f23aae0be46f8d297098578771ba7ec4b2eb367ba66175009aff84091d4a0b4",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/measurements.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/requests.jsonl",
+      "expected": "9c36be423960210794d488d173c7a8f3f51959b87dacc9ee0843e1d6c7f0ff61",
+      "actual": "9c36be423960210794d488d173c7a8f3f51959b87dacc9ee0843e1d6c7f0ff61",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/measurements.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/result-1.json",
+      "expected": "e7bd14c22dd77dfa09b36c1f1ac6b1ae4d00f0113067c488ae8d7eb3455a2d3a",
+      "actual": "e7bd14c22dd77dfa09b36c1f1ac6b1ae4d00f0113067c488ae8d7eb3455a2d3a",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/measurements.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/result-2.json",
+      "expected": "3ce805a136a9ba850264a4dbb52120c4746302b87e940c42b92571a0a6e7cee6",
+      "actual": "3ce805a136a9ba850264a4dbb52120c4746302b87e940c42b92571a0a6e7cee6",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/measurements.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/result-3.json",
+      "expected": "c72fcc7bf3a8ff61ad98f0e599cdfe985040ab3fa98d310b23d23f5e37a2046f",
+      "actual": "c72fcc7bf3a8ff61ad98f0e599cdfe985040ab3fa98d310b23d23f5e37a2046f",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/measurements.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/result-4.json",
+      "expected": "71daf5037b8da1825cc2c64652e741bf80b3e49e6f5dbeb6d5de9b95755bb907",
+      "actual": "71daf5037b8da1825cc2c64652e741bf80b3e49e6f5dbeb6d5de9b95755bb907",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/measurements.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/started-1.json",
+      "expected": "746699a98e9c1c18aafc295549ce92380e386d84393944d4226eb111482c0fb2",
+      "actual": "746699a98e9c1c18aafc295549ce92380e386d84393944d4226eb111482c0fb2",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/measurements.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/started-2.json",
+      "expected": "fe89e875cbec48b80c6fa2c9c3944c6936f4189d74b82b094e19a2aa8ff39a04",
+      "actual": "fe89e875cbec48b80c6fa2c9c3944c6936f4189d74b82b094e19a2aa8ff39a04",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/measurements.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/started-3.json",
+      "expected": "6d1f82190a7857d8ad071a931ae33b35eb2002a75f16e9864b2c8d922e6562a0",
+      "actual": "6d1f82190a7857d8ad071a931ae33b35eb2002a75f16e9864b2c8d922e6562a0",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/measurements.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/started-4.json",
+      "expected": "7c7d3777920c8b7843eba6a7871e2728f1b73922614054bf01599ff8ac214c4a",
+      "actual": "7c7d3777920c8b7843eba6a7871e2728f1b73922614054bf01599ff8ac214c4a",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/offline-review-final-2.json",
+      "path": "apps/ai_agent/src/evaluation/causal-diagnosis.ts",
+      "expected": "5e8612ac79ae8ea68a6c50e296bd666af9136bec92ed71c9775da3b1a2441df4",
+      "actual": "5e8612ac79ae8ea68a6c50e296bd666af9136bec92ed71c9775da3b1a2441df4",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/offline-review-final-2.json",
+      "path": "apps/ai_agent/src/evaluation/causal-pilot.ts",
+      "expected": "8f79ee535ce1f386479e41423bd131ace81d11a45c41c94b6fbfd9e0df704032",
+      "actual": "8f79ee535ce1f386479e41423bd131ace81d11a45c41c94b6fbfd9e0df704032",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/offline-review-final-2.json",
+      "path": "apps/ai_agent/src/evaluation/oracle-pilot.ts",
+      "expected": "a953e536aea2f00d20892e149ac9904fcff22026f3c384bd8dfc53559d03dadf",
+      "actual": "a953e536aea2f00d20892e149ac9904fcff22026f3c384bd8dfc53559d03dadf",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/offline-review-final-2.json",
+      "path": "apps/ai_agent/tests/causal-consistency.test.ts",
+      "expected": "c782003e138e24e4d128242d17ced55cc05413b8583e808957b36528de4ee6a7",
+      "actual": "c782003e138e24e4d128242d17ced55cc05413b8583e808957b36528de4ee6a7",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/offline-review-final-2.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/review-v2.ts",
+      "expected": "387f61ef0159612d5df69eda8c0f070505b7b6cf7edffa997ece6588c0666f3d",
+      "actual": "387f61ef0159612d5df69eda8c0f070505b7b6cf7edffa997ece6588c0666f3d",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/offline-review-final-2.json",
+      "path": "apps/ai_agent/src/prompts.ts",
+      "expected": "aa4a038a8b2748826933a9deb13aa883546d9d6cb79369a5424402d1c9485a9f",
+      "actual": "aa4a038a8b2748826933a9deb13aa883546d9d6cb79369a5424402d1c9485a9f",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/offline-review-final-2.json",
+      "path": "apps/ai_agent/src/contracts.ts",
+      "expected": "2db41bcdde5b4539c8b0d5514e2bf9dd61a3c26e8166bbf867b6f0d0435711eb",
+      "actual": "2db41bcdde5b4539c8b0d5514e2bf9dd61a3c26e8166bbf867b6f0d0435711eb",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/offline-review-final-2.json",
+      "path": "apps/ai_agent/src/graph.ts",
+      "expected": "f3dec93c3dd58037f0b62d79f1fe3f5c7bfb12c79e9f07a3c99cc73d4c632e68",
+      "actual": "f3dec93c3dd58037f0b62d79f1fe3f5c7bfb12c79e9f07a3c99cc73d4c632e68",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/offline-review-final-2.json",
+      "path": "apps/ai_agent/src/gemini-model.ts",
+      "expected": "18a909519c9bd16437e7ca54e125eb8c02430978d44b5501b572243e17a7c257",
+      "actual": "18a909519c9bd16437e7ca54e125eb8c02430978d44b5501b572243e17a7c257",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/offline-review-final-2.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/access.json",
+      "expected": "f833173544c168eb4d1be20db7fa155cf399e14bd621dfc11b8a37c18eb8b867",
+      "actual": "f833173544c168eb4d1be20db7fa155cf399e14bd621dfc11b8a37c18eb8b867",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/offline-review-final-2.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/attempt-1.json",
+      "expected": "e12c6b066b9dbd6dd9d5e6145fe0cfe33281c84227fad3791a4097159fc04133",
+      "actual": "e12c6b066b9dbd6dd9d5e6145fe0cfe33281c84227fad3791a4097159fc04133",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/offline-review-final-2.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/attempt-2.json",
+      "expected": "3b2a94dc45585cdd6a2cfc380635c3cf167408256c437802c50a20daa8c2c5b4",
+      "actual": "3b2a94dc45585cdd6a2cfc380635c3cf167408256c437802c50a20daa8c2c5b4",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/offline-review-final-2.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/attempt-4.json",
+      "expected": "2a8ab7be5b3e82af3f7687758fad5141a6c5f4497e561c3463263d7c816b18b3",
+      "actual": "2a8ab7be5b3e82af3f7687758fad5141a6c5f4497e561c3463263d7c816b18b3",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/offline-review-final-2.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/continuation.json",
+      "expected": "2519e957b961f1161ad9c1faad085c84e49bd4c862dfc5531aa7a26fae13fc09",
+      "actual": "2519e957b961f1161ad9c1faad085c84e49bd4c862dfc5531aa7a26fae13fc09",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/offline-review-final-2.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/measurements.json",
+      "expected": "2b97316ebc1703e1737c39df0d113218c6d206b5fa91733f49e30550d765b871",
+      "actual": "2b97316ebc1703e1737c39df0d113218c6d206b5fa91733f49e30550d765b871",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/offline-review-final-2.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/plan.json",
+      "expected": "3e767aa9744b275d83f5db21a7c68de1eff6a0b7ce183420ee9177d34a6e4a84",
+      "actual": "3e767aa9744b275d83f5db21a7c68de1eff6a0b7ce183420ee9177d34a6e4a84",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/offline-review-final-2.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/report-final.json",
+      "expected": "b5bfb4f79bd8f9a04df4069e630ee44ce8d905365726aa5d947d0aaea0a512fa",
+      "actual": "b5bfb4f79bd8f9a04df4069e630ee44ce8d905365726aa5d947d0aaea0a512fa",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/offline-review-final-2.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/report.json",
+      "expected": "4f23aae0be46f8d297098578771ba7ec4b2eb367ba66175009aff84091d4a0b4",
+      "actual": "4f23aae0be46f8d297098578771ba7ec4b2eb367ba66175009aff84091d4a0b4",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/offline-review-final-2.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/report.md",
+      "expected": "a836da98c656456232acf6d7787a288c80595f224dfa6f84b874ab777a42cdc0",
+      "actual": "a836da98c656456232acf6d7787a288c80595f224dfa6f84b874ab777a42cdc0",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/offline-review-final-2.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/requests.jsonl",
+      "expected": "9c36be423960210794d488d173c7a8f3f51959b87dacc9ee0843e1d6c7f0ff61",
+      "actual": "9c36be423960210794d488d173c7a8f3f51959b87dacc9ee0843e1d6c7f0ff61",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/offline-review-final-2.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/result-1.json",
+      "expected": "e7bd14c22dd77dfa09b36c1f1ac6b1ae4d00f0113067c488ae8d7eb3455a2d3a",
+      "actual": "e7bd14c22dd77dfa09b36c1f1ac6b1ae4d00f0113067c488ae8d7eb3455a2d3a",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/offline-review-final-2.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/result-2.json",
+      "expected": "3ce805a136a9ba850264a4dbb52120c4746302b87e940c42b92571a0a6e7cee6",
+      "actual": "3ce805a136a9ba850264a4dbb52120c4746302b87e940c42b92571a0a6e7cee6",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/offline-review-final-2.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/result-3.json",
+      "expected": "c72fcc7bf3a8ff61ad98f0e599cdfe985040ab3fa98d310b23d23f5e37a2046f",
+      "actual": "c72fcc7bf3a8ff61ad98f0e599cdfe985040ab3fa98d310b23d23f5e37a2046f",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/offline-review-final-2.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/result-4.json",
+      "expected": "71daf5037b8da1825cc2c64652e741bf80b3e49e6f5dbeb6d5de9b95755bb907",
+      "actual": "71daf5037b8da1825cc2c64652e741bf80b3e49e6f5dbeb6d5de9b95755bb907",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/offline-review-final-2.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/started-1.json",
+      "expected": "746699a98e9c1c18aafc295549ce92380e386d84393944d4226eb111482c0fb2",
+      "actual": "746699a98e9c1c18aafc295549ce92380e386d84393944d4226eb111482c0fb2",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/offline-review-final-2.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/started-2.json",
+      "expected": "fe89e875cbec48b80c6fa2c9c3944c6936f4189d74b82b094e19a2aa8ff39a04",
+      "actual": "fe89e875cbec48b80c6fa2c9c3944c6936f4189d74b82b094e19a2aa8ff39a04",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/offline-review-final-2.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/started-3.json",
+      "expected": "6d1f82190a7857d8ad071a931ae33b35eb2002a75f16e9864b2c8d922e6562a0",
+      "actual": "6d1f82190a7857d8ad071a931ae33b35eb2002a75f16e9864b2c8d922e6562a0",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/offline-review-final-2.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/started-4.json",
+      "expected": "7c7d3777920c8b7843eba6a7871e2728f1b73922614054bf01599ff8ac214c4a",
+      "actual": "7c7d3777920c8b7843eba6a7871e2728f1b73922614054bf01599ff8ac214c4a",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/offline-review-final-2.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/plan.json",
+      "expected": "044726d37cc5190e127227d59b62bf5c120ae519340568b602a139843957f2f6",
+      "actual": "044726d37cc5190e127227d59b62bf5c120ae519340568b602a139843957f2f6",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/execution-manifest.json",
+      "path": "apps/ai_agent/src/evaluation/causal-diagnosis.ts",
+      "expected": "5e8612ac79ae8ea68a6c50e296bd666af9136bec92ed71c9775da3b1a2441df4",
+      "actual": "5e8612ac79ae8ea68a6c50e296bd666af9136bec92ed71c9775da3b1a2441df4",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/execution-manifest.json",
+      "path": "apps/ai_agent/src/evaluation/causal-pilot.ts",
+      "expected": "8f79ee535ce1f386479e41423bd131ace81d11a45c41c94b6fbfd9e0df704032",
+      "actual": "8f79ee535ce1f386479e41423bd131ace81d11a45c41c94b6fbfd9e0df704032",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/execution-manifest.json",
+      "path": "apps/ai_agent/src/evaluation/oracle-pilot.ts",
+      "expected": "a953e536aea2f00d20892e149ac9904fcff22026f3c384bd8dfc53559d03dadf",
+      "actual": "a953e536aea2f00d20892e149ac9904fcff22026f3c384bd8dfc53559d03dadf",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/execution-manifest.json",
+      "path": "apps/ai_agent/tests/causal-consistency.test.ts",
+      "expected": "c782003e138e24e4d128242d17ced55cc05413b8583e808957b36528de4ee6a7",
+      "actual": "c782003e138e24e4d128242d17ced55cc05413b8583e808957b36528de4ee6a7",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/execution-manifest.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/review-v2.ts",
+      "expected": "387f61ef0159612d5df69eda8c0f070505b7b6cf7edffa997ece6588c0666f3d",
+      "actual": "387f61ef0159612d5df69eda8c0f070505b7b6cf7edffa997ece6588c0666f3d",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/execution-manifest.json",
+      "path": "apps/ai_agent/src/prompts.ts",
+      "expected": "aa4a038a8b2748826933a9deb13aa883546d9d6cb79369a5424402d1c9485a9f",
+      "actual": "aa4a038a8b2748826933a9deb13aa883546d9d6cb79369a5424402d1c9485a9f",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/execution-manifest.json",
+      "path": "apps/ai_agent/src/contracts.ts",
+      "expected": "2db41bcdde5b4539c8b0d5514e2bf9dd61a3c26e8166bbf867b6f0d0435711eb",
+      "actual": "2db41bcdde5b4539c8b0d5514e2bf9dd61a3c26e8166bbf867b6f0d0435711eb",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/execution-manifest.json",
+      "path": "apps/ai_agent/src/graph.ts",
+      "expected": "f3dec93c3dd58037f0b62d79f1fe3f5c7bfb12c79e9f07a3c99cc73d4c632e68",
+      "actual": "f3dec93c3dd58037f0b62d79f1fe3f5c7bfb12c79e9f07a3c99cc73d4c632e68",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/execution-manifest.json",
+      "path": "apps/ai_agent/src/gemini-model.ts",
+      "expected": "18a909519c9bd16437e7ca54e125eb8c02430978d44b5501b572243e17a7c257",
+      "actual": "18a909519c9bd16437e7ca54e125eb8c02430978d44b5501b572243e17a7c257",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/execution-manifest.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/plan.json",
+      "expected": "044726d37cc5190e127227d59b62bf5c120ae519340568b602a139843957f2f6",
+      "actual": "044726d37cc5190e127227d59b62bf5c120ae519340568b602a139843957f2f6",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/execution-manifest.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/access.json",
+      "expected": "329347d6b4d48018639ce8b547bc132c340ad490120780f5c7d103a677a5f260",
+      "actual": "329347d6b4d48018639ce8b547bc132c340ad490120780f5c7d103a677a5f260",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/execution-manifest.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/execution-authorization.json",
+      "expected": "fac2fdf0a36f799fbfc7c4e29ab518904df97573d984b81b4de7c1607e464a3a",
+      "actual": "fac2fdf0a36f799fbfc7c4e29ab518904df97573d984b81b4de7c1607e464a3a",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/execution-manifest.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/requests.jsonl",
+      "expected": "8036c9c0403dcf033ef4307ce9f176b96792f6d8a2db330ae6bd2d15771d5ece",
+      "actual": "8036c9c0403dcf033ef4307ce9f176b96792f6d8a2db330ae6bd2d15771d5ece",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/execution-manifest.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/report.json",
+      "expected": "bf237c6037370ada16e97fb748bc557e2fcb0f97b837577bafa8c07bafc0be5e",
+      "actual": "bf237c6037370ada16e97fb748bc557e2fcb0f97b837577bafa8c07bafc0be5e",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/execution-manifest.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/started-1.json",
+      "expected": "3ee6a1c87c7f3db43437831a9a4040fdc155b75ace8c8c97d25654e1c286e6b8",
+      "actual": "3ee6a1c87c7f3db43437831a9a4040fdc155b75ace8c8c97d25654e1c286e6b8",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/execution-manifest.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/attempt-1.json",
+      "expected": "04c9a67e94a8676bcb83bc6e3d51f97e59c814af1b6ee244d248888f624ed88f",
+      "actual": "04c9a67e94a8676bcb83bc6e3d51f97e59c814af1b6ee244d248888f624ed88f",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/execution-manifest.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/result-1.json",
+      "expected": "1cfd3b49cd1d8fccd09b653fccae336969502e7b7d21735b2c970cb92876c95d",
+      "actual": "1cfd3b49cd1d8fccd09b653fccae336969502e7b7d21735b2c970cb92876c95d",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/execution-manifest.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/started-2.json",
+      "expected": "eb150adea84ef570b22dec0fd557174d69473ea0189ef11d82d9c9058dc338c4",
+      "actual": "eb150adea84ef570b22dec0fd557174d69473ea0189ef11d82d9c9058dc338c4",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/execution-manifest.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/attempt-2.json",
+      "expected": "063f5b82a81f05ba916b80eabde03b444135ac4962480ad256b1702ef4392a7e",
+      "actual": "063f5b82a81f05ba916b80eabde03b444135ac4962480ad256b1702ef4392a7e",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/execution-manifest.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/result-2.json",
+      "expected": "401b7637564381107928a355493a6ebad254f0839702e21ecc71d15728a1cfde",
+      "actual": "401b7637564381107928a355493a6ebad254f0839702e21ecc71d15728a1cfde",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/execution-manifest.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/started-3.json",
+      "expected": "ae413507a1b2e31cae94bbb4cc60e77c78ae5fc17c946729b7e9537d2227b599",
+      "actual": "ae413507a1b2e31cae94bbb4cc60e77c78ae5fc17c946729b7e9537d2227b599",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/execution-manifest.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/attempt-3.json",
+      "expected": "83386c327ce8d2870e4d65191e05430217853540cd722968da75189f9eb6b503",
+      "actual": "83386c327ce8d2870e4d65191e05430217853540cd722968da75189f9eb6b503",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/execution-manifest.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/result-3.json",
+      "expected": "677cf35948219071a5c6734e35c4c1634e42e7b65cab539825d6c81013bab46d",
+      "actual": "677cf35948219071a5c6734e35c4c1634e42e7b65cab539825d6c81013bab46d",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/execution-manifest.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/started-4.json",
+      "expected": "3f5753f25a09d8c9835231be54850fcc42784ac85555fb9a8b4308f89ad889eb",
+      "actual": "3f5753f25a09d8c9835231be54850fcc42784ac85555fb9a8b4308f89ad889eb",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/execution-manifest.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/attempt-4.json",
+      "expected": "59e2ea469b90eed225e49acb672d98d471d5051723871c6b37e218c257f0e587",
+      "actual": "59e2ea469b90eed225e49acb672d98d471d5051723871c6b37e218c257f0e587",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/execution-manifest.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/result-4.json",
+      "expected": "9101ed7812c76890b7f8442d7f1aef3a5cedde25d6363d7ae541c17d64b98218",
+      "actual": "9101ed7812c76890b7f8442d7f1aef3a5cedde25d6363d7ae541c17d64b98218",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/execution-manifest.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/started-5.json",
+      "expected": "02cbf0026b5cc960a67953a07699c7ede7dbcbed541ac1a9a52efb6b2c2434b7",
+      "actual": "02cbf0026b5cc960a67953a07699c7ede7dbcbed541ac1a9a52efb6b2c2434b7",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/execution-manifest.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/attempt-5.json",
+      "expected": "b194b3947377abfa0359850124be68f87922481c903e2e4f912cd8da9a608e61",
+      "actual": "b194b3947377abfa0359850124be68f87922481c903e2e4f912cd8da9a608e61",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/execution-manifest.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/result-5.json",
+      "expected": "326c9e7b88d081b02881ea44d4b7e0feb48c3ee5da680926a5f69104d751517d",
+      "actual": "326c9e7b88d081b02881ea44d4b7e0feb48c3ee5da680926a5f69104d751517d",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/execution-manifest.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/started-6.json",
+      "expected": "2fa655645660afeaa656c68a013d0943849e9f224a7160674c60170efb7fbc72",
+      "actual": "2fa655645660afeaa656c68a013d0943849e9f224a7160674c60170efb7fbc72",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/execution-manifest.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/attempt-6.json",
+      "expected": "f17a6868e671b5452bcea19b8f9524b5e6d044e566735397a5681db3cb72d348",
+      "actual": "f17a6868e671b5452bcea19b8f9524b5e6d044e566735397a5681db3cb72d348",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/execution-manifest.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/result-6.json",
+      "expected": "e0ea0fb1cc4bfea15b9f98328b8d6e1a45d1bf5dbdbfef93c007207602c103e1",
+      "actual": "e0ea0fb1cc4bfea15b9f98328b8d6e1a45d1bf5dbdbfef93c007207602c103e1",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/execution-manifest.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/plan.json",
+      "expected": "044726d37cc5190e127227d59b62bf5c120ae519340568b602a139843957f2f6",
+      "actual": "044726d37cc5190e127227d59b62bf5c120ae519340568b602a139843957f2f6",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/build.log",
+      "expected": "a42b02f9e8483455b38933240fa9779d9dc2e78e8faef43fe08234d624b2ffad",
+      "actual": "d0e942f5f4a51a87cc3bee05e4b98b91bccc8438d36ef020c18f199716729766",
+      "status": "LF-normalized-match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/causal-v1-1-assessment.json",
+      "expected": "8435d53d321412e01013b2c48f01c673e86a681ee57c5da3374dc019bec7edda",
+      "actual": "8435d53d321412e01013b2c48f01c673e86a681ee57c5da3374dc019bec7edda",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/causal-v1-1-raw.json",
+      "expected": "e7bd14c22dd77dfa09b36c1f1ac6b1ae4d00f0113067c488ae8d7eb3455a2d3a",
+      "actual": "e7bd14c22dd77dfa09b36c1f1ac6b1ae4d00f0113067c488ae8d7eb3455a2d3a",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/causal-v1-2-assessment.json",
+      "expected": "168ec28e0d5833c17a453fdafa546afdb2f85e9f67cd027b4e7318b3fc32cfe0",
+      "actual": "168ec28e0d5833c17a453fdafa546afdb2f85e9f67cd027b4e7318b3fc32cfe0",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/causal-v1-2-raw.json",
+      "expected": "3ce805a136a9ba850264a4dbb52120c4746302b87e940c42b92571a0a6e7cee6",
+      "actual": "3ce805a136a9ba850264a4dbb52120c4746302b87e940c42b92571a0a6e7cee6",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/causal-v1-3-assessment.json",
+      "expected": "3e9394ee738c3325470a2cb249f1e3c4f86fdac04ae77dbb0cb69ad02f181731",
+      "actual": "3e9394ee738c3325470a2cb249f1e3c4f86fdac04ae77dbb0cb69ad02f181731",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/causal-v1-3-raw.json",
+      "expected": "c72fcc7bf3a8ff61ad98f0e599cdfe985040ab3fa98d310b23d23f5e37a2046f",
+      "actual": "c72fcc7bf3a8ff61ad98f0e599cdfe985040ab3fa98d310b23d23f5e37a2046f",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/causal-v1-4-assessment.json",
+      "expected": "3a56885dfe44a540d7ea5fdc3f40da5470ece3f3476e9302d3fc254598584f5e",
+      "actual": "3a56885dfe44a540d7ea5fdc3f40da5470ece3f3476e9302d3fc254598584f5e",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/causal-v1-4-raw.json",
+      "expected": "71daf5037b8da1825cc2c64652e741bf80b3e49e6f5dbeb6d5de9b95755bb907",
+      "actual": "71daf5037b8da1825cc2c64652e741bf80b3e49e6f5dbeb6d5de9b95755bb907",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/causal-v2-1-assessment.json",
+      "expected": "205e3c0ee2605fd195589af51fdb71f91d273d4268275470e0b725c4282f94b6",
+      "actual": "205e3c0ee2605fd195589af51fdb71f91d273d4268275470e0b725c4282f94b6",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/causal-v2-1-raw.json",
+      "expected": "1cfd3b49cd1d8fccd09b653fccae336969502e7b7d21735b2c970cb92876c95d",
+      "actual": "1cfd3b49cd1d8fccd09b653fccae336969502e7b7d21735b2c970cb92876c95d",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/causal-v2-2-assessment.json",
+      "expected": "c9215541626fdc3316fb2291fc84ac1a108229d8180714ae8b7e8c1003c69be9",
+      "actual": "c9215541626fdc3316fb2291fc84ac1a108229d8180714ae8b7e8c1003c69be9",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/causal-v2-2-raw.json",
+      "expected": "401b7637564381107928a355493a6ebad254f0839702e21ecc71d15728a1cfde",
+      "actual": "401b7637564381107928a355493a6ebad254f0839702e21ecc71d15728a1cfde",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/causal-v2-3-assessment.json",
+      "expected": "0d5eec289fd17be2ce85276b3fa6794c1e02c0e4a2fcdec919335e62f8c6aaa9",
+      "actual": "0d5eec289fd17be2ce85276b3fa6794c1e02c0e4a2fcdec919335e62f8c6aaa9",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/causal-v2-3-raw.json",
+      "expected": "677cf35948219071a5c6734e35c4c1634e42e7b65cab539825d6c81013bab46d",
+      "actual": "677cf35948219071a5c6734e35c4c1634e42e7b65cab539825d6c81013bab46d",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/causal-v2-4-assessment.json",
+      "expected": "beb5729970b5460b6921883b43d938f1c524e4d981f25fa07195bc492ac21f94",
+      "actual": "beb5729970b5460b6921883b43d938f1c524e4d981f25fa07195bc492ac21f94",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/causal-v2-4-raw.json",
+      "expected": "9101ed7812c76890b7f8442d7f1aef3a5cedde25d6363d7ae541c17d64b98218",
+      "actual": "9101ed7812c76890b7f8442d7f1aef3a5cedde25d6363d7ae541c17d64b98218",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/causal-v2-5-assessment.json",
+      "expected": "9ceccbf107e4acf114dcd99e06ac6c979e90d0f461b7daf81fa1fa77f49f881c",
+      "actual": "9ceccbf107e4acf114dcd99e06ac6c979e90d0f461b7daf81fa1fa77f49f881c",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/causal-v2-5-raw.json",
+      "expected": "326c9e7b88d081b02881ea44d4b7e0feb48c3ee5da680926a5f69104d751517d",
+      "actual": "326c9e7b88d081b02881ea44d4b7e0feb48c3ee5da680926a5f69104d751517d",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/causal-v2-6-assessment.json",
+      "expected": "8d82930cc7de76520537edf8d4203c5c370cf5c8e9fcddcceed2b3e649e12e45",
+      "actual": "8d82930cc7de76520537edf8d4203c5c370cf5c8e9fcddcceed2b3e649e12e45",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/causal-v2-6-raw.json",
+      "expected": "e0ea0fb1cc4bfea15b9f98328b8d6e1a45d1bf5dbdbfef93c007207602c103e1",
+      "actual": "e0ea0fb1cc4bfea15b9f98328b8d6e1a45d1bf5dbdbfef93c007207602c103e1",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/check-types.log",
+      "expected": "589bb9636ae27a3a775cb7f8523e6ff2a3c30632e923d7a4974e6f9b70cdd3af",
+      "actual": "374607e0344430f992bcecc0a4ea4636c6c19bb54c3e925904b3bfcd363086e7",
+      "status": "LF-normalized-match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-1-assessment.json",
+      "expected": "b7f6fbbd081e04025a810ce2d0e60a7aa21c73ed1fb2d46c9d7742ef33b0215d",
+      "actual": "b7f6fbbd081e04025a810ce2d0e60a7aa21c73ed1fb2d46c9d7742ef33b0215d",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-1-raw.json",
+      "expected": "d39d2faaa9c2cc8484a90f700c37c091ab8f5b95a3022510476570442ba502c0",
+      "actual": "d39d2faaa9c2cc8484a90f700c37c091ab8f5b95a3022510476570442ba502c0",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-10-assessment.json",
+      "expected": "669f2aeb9d7a43c8b1279df359a94897c7e977b13c3a2a83095366f22717aae3",
+      "actual": "669f2aeb9d7a43c8b1279df359a94897c7e977b13c3a2a83095366f22717aae3",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-10-raw.json",
+      "expected": "cdf8c96cc9669e674f92223de47f3483a6d9d48fe70c930469476727f822f2da",
+      "actual": "cdf8c96cc9669e674f92223de47f3483a6d9d48fe70c930469476727f822f2da",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-11-assessment.json",
+      "expected": "9e55952feae78a507f55399a450cf763f63d65872a9b046ae55e27026b3aa38f",
+      "actual": "9e55952feae78a507f55399a450cf763f63d65872a9b046ae55e27026b3aa38f",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-11-raw.json",
+      "expected": "3c590106a95c673ed11fde382df8cd699ecc42d312803d5cd6eb64c5e162b756",
+      "actual": "3c590106a95c673ed11fde382df8cd699ecc42d312803d5cd6eb64c5e162b756",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-12-assessment.json",
+      "expected": "58232e2f160f919f9880428a840d410de6299692b01b8bbf7e195f0132f266fd",
+      "actual": "58232e2f160f919f9880428a840d410de6299692b01b8bbf7e195f0132f266fd",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-12-raw.json",
+      "expected": "4bb9fc36048e823b6146e5b34ea18fa4b8b47ae8379cd89eb9d2bcf7f27cc0cd",
+      "actual": "4bb9fc36048e823b6146e5b34ea18fa4b8b47ae8379cd89eb9d2bcf7f27cc0cd",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-13-assessment.json",
+      "expected": "9b9a2ec78e84ae150732d997f0351f5813db2fef5e96b321b5872450d33a7436",
+      "actual": "9b9a2ec78e84ae150732d997f0351f5813db2fef5e96b321b5872450d33a7436",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-13-raw.json",
+      "expected": "a90a21dfe859b53a2c17f2aa78bf59b4f1f739aaa5581f7eb6fa4b05a4b1af09",
+      "actual": "a90a21dfe859b53a2c17f2aa78bf59b4f1f739aaa5581f7eb6fa4b05a4b1af09",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-14-assessment.json",
+      "expected": "e1ee7ff0ae557d07c3dc00f61844c6d0b9277a1b38bd4a8ee55986634f703b49",
+      "actual": "e1ee7ff0ae557d07c3dc00f61844c6d0b9277a1b38bd4a8ee55986634f703b49",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-14-raw.json",
+      "expected": "7bd949afcd3ed4f5392b05c545a7be05e4fce6deaf74e3093e0059c79404c66e",
+      "actual": "7bd949afcd3ed4f5392b05c545a7be05e4fce6deaf74e3093e0059c79404c66e",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-15-assessment.json",
+      "expected": "e24bbb18b38e6ad398e5be1bdb82c2eececf6bf2b44fe200298d7fe6b14efd60",
+      "actual": "e24bbb18b38e6ad398e5be1bdb82c2eececf6bf2b44fe200298d7fe6b14efd60",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-15-raw.json",
+      "expected": "1146f1ea93300479fb89010f0fbf25a225348533bb42173481308b8fa35ef986",
+      "actual": "1146f1ea93300479fb89010f0fbf25a225348533bb42173481308b8fa35ef986",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-16-assessment.json",
+      "expected": "fca082f04d49192f0dbd83026de53cab95c6d4f6714f2687aa157caae9de759e",
+      "actual": "fca082f04d49192f0dbd83026de53cab95c6d4f6714f2687aa157caae9de759e",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-16-raw.json",
+      "expected": "872103b878b4786aeece2ae5505f5d2cdc0bf2eeabe2f0a891d5e6f6712f493d",
+      "actual": "872103b878b4786aeece2ae5505f5d2cdc0bf2eeabe2f0a891d5e6f6712f493d",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-17-assessment.json",
+      "expected": "2f0b878c274c12e4645ce5ccf7bcd7b311855e971a8a170113cf862765b38b4e",
+      "actual": "2f0b878c274c12e4645ce5ccf7bcd7b311855e971a8a170113cf862765b38b4e",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-17-raw.json",
+      "expected": "3313dfe6433f5633ea9bac2024edb29e03b1200554c4b2abc0d48b67ea603a1e",
+      "actual": "3313dfe6433f5633ea9bac2024edb29e03b1200554c4b2abc0d48b67ea603a1e",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-18-assessment.json",
+      "expected": "43e5dc8e6bfd413067b4446b1daf57ee49c138d1b9a5255f68ad4606c468d109",
+      "actual": "43e5dc8e6bfd413067b4446b1daf57ee49c138d1b9a5255f68ad4606c468d109",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-18-raw.json",
+      "expected": "05343d1a465d46361e58eac3cf9092507479b9493b1afef6dd943987fed69472",
+      "actual": "05343d1a465d46361e58eac3cf9092507479b9493b1afef6dd943987fed69472",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-19-assessment.json",
+      "expected": "0e6aaa0835f8bfdd1d4d34920aa22fe1e2139d2d8374695ca8ee1b024900209c",
+      "actual": "0e6aaa0835f8bfdd1d4d34920aa22fe1e2139d2d8374695ca8ee1b024900209c",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-19-raw.json",
+      "expected": "62d10f2d9710b0fb38045d1d3ab8f60305c0e3921b3d3d7d923c1b9ecdefc7a6",
+      "actual": "62d10f2d9710b0fb38045d1d3ab8f60305c0e3921b3d3d7d923c1b9ecdefc7a6",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-2-assessment.json",
+      "expected": "089e0fed948c99ccfae0898f3d189a28e730afb0292d61e1f1f52cd0fbf7a368",
+      "actual": "089e0fed948c99ccfae0898f3d189a28e730afb0292d61e1f1f52cd0fbf7a368",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-2-raw.json",
+      "expected": "9d1c06db3e69a4e001e23fd5d6da00305a1af43a3c202a90357583344a4221f2",
+      "actual": "9d1c06db3e69a4e001e23fd5d6da00305a1af43a3c202a90357583344a4221f2",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-3-assessment.json",
+      "expected": "eb3b5c9263ef23a3f645cb982c5fa83387b0a7e980be2ba92231a0b8d5cdd10c",
+      "actual": "eb3b5c9263ef23a3f645cb982c5fa83387b0a7e980be2ba92231a0b8d5cdd10c",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-3-raw.json",
+      "expected": "1cd7fb44b5fab2be86dd5969aabda87d83547d15a2650062f3511c1a64e9cf97",
+      "actual": "1cd7fb44b5fab2be86dd5969aabda87d83547d15a2650062f3511c1a64e9cf97",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-4-assessment.json",
+      "expected": "154b13123f0f5610f0e085cec139bb5fe27f8cf59387a8c801e8d29a1a51ef7e",
+      "actual": "154b13123f0f5610f0e085cec139bb5fe27f8cf59387a8c801e8d29a1a51ef7e",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-4-raw.json",
+      "expected": "88596c0df45c85375be5e127cb267d25629f69d9a19c19d0f79db168985ff50d",
+      "actual": "88596c0df45c85375be5e127cb267d25629f69d9a19c19d0f79db168985ff50d",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-5-assessment.json",
+      "expected": "fc58865bc5097461b596945e521c0ea76b4ee47466d1d40ca73aece783b33a3c",
+      "actual": "fc58865bc5097461b596945e521c0ea76b4ee47466d1d40ca73aece783b33a3c",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-5-raw.json",
+      "expected": "ae22464975c83127671a0132cca1b5c19a0fd20528e5ebae5fb7909cbb2ad7ab",
+      "actual": "ae22464975c83127671a0132cca1b5c19a0fd20528e5ebae5fb7909cbb2ad7ab",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-6-assessment.json",
+      "expected": "d57b6cbdd9a31191d263e4b750a8b92a850100df8dea1b268082ef1e9f9edd32",
+      "actual": "d57b6cbdd9a31191d263e4b750a8b92a850100df8dea1b268082ef1e9f9edd32",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-6-raw.json",
+      "expected": "bc564fbf27144db242835a52af9127cf4f00f230b81cca552c07ab6ba15d3289",
+      "actual": "bc564fbf27144db242835a52af9127cf4f00f230b81cca552c07ab6ba15d3289",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-7-assessment.json",
+      "expected": "c3a1a3511de3810161048af5d4a995b4b7c113c44309a6b05dda24593237ffa0",
+      "actual": "c3a1a3511de3810161048af5d4a995b4b7c113c44309a6b05dda24593237ffa0",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-7-raw.json",
+      "expected": "acac4bd6ac4e87c7f1da3705fdbdb03dc1d289a680f7eda26f63b35e1b94f6a0",
+      "actual": "acac4bd6ac4e87c7f1da3705fdbdb03dc1d289a680f7eda26f63b35e1b94f6a0",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-8-assessment.json",
+      "expected": "cb5f28584afe875d3e913f2d39583dec27a924280b3dbb4a9bc49d61d0891cdb",
+      "actual": "cb5f28584afe875d3e913f2d39583dec27a924280b3dbb4a9bc49d61d0891cdb",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-8-raw.json",
+      "expected": "9baf4559cbd49fa74201bca7de6bbd098c4838a142e148d3b533871088543166",
+      "actual": "9baf4559cbd49fa74201bca7de6bbd098c4838a142e148d3b533871088543166",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-9-assessment.json",
+      "expected": "f7d3c761e07c1e323ec0dfafa6165e8410d2d3158794c98fa296dcbc07dae165",
+      "actual": "f7d3c761e07c1e323ec0dfafa6165e8410d2d3158794c98fa296dcbc07dae165",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-9-raw.json",
+      "expected": "657d5460ce39ecee1927bccb294076ae1317bb63ab0832be02d2652723ecad48",
+      "actual": "657d5460ce39ecee1927bccb294076ae1317bb63ab0832be02d2652723ecad48",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/focused.log",
+      "expected": "2bf74937ced1106e1e73bf5bbea2f016eea4937ac0072963009ee3777ed3be63",
+      "actual": "2d46861a31b562db95932d1476d9333b38530dc22fdcb04275d697146df42679",
+      "status": "LF-normalized-match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/lint.log",
+      "expected": "fa46834919e7d7d2935c8fdacfa50a90ea702f8d5d600dc32893755bf5a03eaa",
+      "actual": "8ab2a1b0ed8d83f2398448c9d8ab3786cf3446ceb718646bf569584d7d2a47cf",
+      "status": "LF-normalized-match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/oracle-1-assessment.json",
+      "expected": "65234b445b8f2511b2529e0d038e2b149ef4086628deae8b5196d39a00964de0",
+      "actual": "65234b445b8f2511b2529e0d038e2b149ef4086628deae8b5196d39a00964de0",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/oracle-1-raw.json",
+      "expected": "5fd0cb1719894a2f4b2e28b97e7a7f00192a1dff570a0963b748c3d1271fb30d",
+      "actual": "5fd0cb1719894a2f4b2e28b97e7a7f00192a1dff570a0963b748c3d1271fb30d",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/oracle-2-assessment.json",
+      "expected": "d0ef290bd826914efbf0da7f0735660471c990294790235bf8953291522ab5e9",
+      "actual": "d0ef290bd826914efbf0da7f0735660471c990294790235bf8953291522ab5e9",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/oracle-2-raw.json",
+      "expected": "ba2cb5b6bc6a5bf16b0e3cc65e00081fb9786742c783df4e7c1000ea5b04a85e",
+      "actual": "ba2cb5b6bc6a5bf16b0e3cc65e00081fb9786742c783df4e7c1000ea5b04a85e",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/oracle-3-assessment.json",
+      "expected": "269648be3378d670afb868560a9a380828b0b6c818149fc69fc43c57a15b747a",
+      "actual": "269648be3378d670afb868560a9a380828b0b6c818149fc69fc43c57a15b747a",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/oracle-3-raw.json",
+      "expected": "6da5aa9d297863be13ac354929e0d1e8697b564f5a2221d9d35d0b535dd643ef",
+      "actual": "6da5aa9d297863be13ac354929e0d1e8697b564f5a2221d9d35d0b535dd643ef",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/oracle-4-assessment.json",
+      "expected": "cd2b1bfd45d7411ff8f00518cd653e085e52f533cf6137c77ba3127df6e62f64",
+      "actual": "cd2b1bfd45d7411ff8f00518cd653e085e52f533cf6137c77ba3127df6e62f64",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/oracle-4-raw.json",
+      "expected": "7ee2356b1d48754e9afca6fb4927a380123c7072596f395bdfd8a1d34db3e74b",
+      "actual": "7ee2356b1d48754e9afca6fb4927a380123c7072596f395bdfd8a1d34db3e74b",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/report.json",
+      "expected": "34f9ad99d5be70908996241a2351d93406988afdbcd51c72533e551be1ffd65a",
+      "actual": "34f9ad99d5be70908996241a2351d93406988afdbcd51c72533e551be1ffd65a",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/report.md",
+      "expected": "90cee7e1141bc9e86bbd77980117e12f552e515ce3ccff8fde268de671b90709",
+      "actual": "90cee7e1141bc9e86bbd77980117e12f552e515ce3ccff8fde268de671b90709",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/started.json",
+      "expected": "2dcc8624a4978257f2aa0a7a062d1f942fb2ab6ec71f803ac34b334f69f596e7",
+      "actual": "2dcc8624a4978257f2aa0a7a062d1f942fb2ab6ec71f803ac34b334f69f596e7",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verify-preservation.ts",
+      "expected": "c09e6f7997bef3aa2123482b9fa81337bd9d76a5f73e5958a33740fb703ea24b",
+      "actual": "c09e6f7997bef3aa2123482b9fa81337bd9d76a5f73e5958a33740fb703ea24b",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/report.json",
+      "path": "apps/ai_agent/evaluation/phase-11a-baseline-v6/contexts.json",
+      "expected": "e5025d50fa72a32fa9a17d52ca298bd785beec1a9232cd0c83ed357ceef95d92",
+      "actual": "e5025d50fa72a32fa9a17d52ca298bd785beec1a9232cd0c83ed357ceef95d92",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/report.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/plan.json",
+      "expected": "3e767aa9744b275d83f5db21a7c68de1eff6a0b7ce183420ee9177d34a6e4a84",
+      "actual": "3e767aa9744b275d83f5db21a7c68de1eff6a0b7ce183420ee9177d34a6e4a84",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/report.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/result-1.json",
+      "expected": "e7bd14c22dd77dfa09b36c1f1ac6b1ae4d00f0113067c488ae8d7eb3455a2d3a",
+      "actual": "e7bd14c22dd77dfa09b36c1f1ac6b1ae4d00f0113067c488ae8d7eb3455a2d3a",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/report.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/result-2.json",
+      "expected": "3ce805a136a9ba850264a4dbb52120c4746302b87e940c42b92571a0a6e7cee6",
+      "actual": "3ce805a136a9ba850264a4dbb52120c4746302b87e940c42b92571a0a6e7cee6",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/report.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/result-3.json",
+      "expected": "c72fcc7bf3a8ff61ad98f0e599cdfe985040ab3fa98d310b23d23f5e37a2046f",
+      "actual": "c72fcc7bf3a8ff61ad98f0e599cdfe985040ab3fa98d310b23d23f5e37a2046f",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/report.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/result-4.json",
+      "expected": "71daf5037b8da1825cc2c64652e741bf80b3e49e6f5dbeb6d5de9b95755bb907",
+      "actual": "71daf5037b8da1825cc2c64652e741bf80b3e49e6f5dbeb6d5de9b95755bb907",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/report.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/plan.json",
+      "expected": "044726d37cc5190e127227d59b62bf5c120ae519340568b602a139843957f2f6",
+      "actual": "044726d37cc5190e127227d59b62bf5c120ae519340568b602a139843957f2f6",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/report.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/result-1.json",
+      "expected": "1cfd3b49cd1d8fccd09b653fccae336969502e7b7d21735b2c970cb92876c95d",
+      "actual": "1cfd3b49cd1d8fccd09b653fccae336969502e7b7d21735b2c970cb92876c95d",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/report.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/result-2.json",
+      "expected": "401b7637564381107928a355493a6ebad254f0839702e21ecc71d15728a1cfde",
+      "actual": "401b7637564381107928a355493a6ebad254f0839702e21ecc71d15728a1cfde",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/report.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/result-3.json",
+      "expected": "677cf35948219071a5c6734e35c4c1634e42e7b65cab539825d6c81013bab46d",
+      "actual": "677cf35948219071a5c6734e35c4c1634e42e7b65cab539825d6c81013bab46d",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/report.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/result-4.json",
+      "expected": "9101ed7812c76890b7f8442d7f1aef3a5cedde25d6363d7ae541c17d64b98218",
+      "actual": "9101ed7812c76890b7f8442d7f1aef3a5cedde25d6363d7ae541c17d64b98218",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/report.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/result-5.json",
+      "expected": "326c9e7b88d081b02881ea44d4b7e0feb48c3ee5da680926a5f69104d751517d",
+      "actual": "326c9e7b88d081b02881ea44d4b7e0feb48c3ee5da680926a5f69104d751517d",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/report.json",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/result-6.json",
+      "expected": "e0ea0fb1cc4bfea15b9f98328b8d6e1a45d1bf5dbdbfef93c007207602c103e1",
+      "actual": "e0ea0fb1cc4bfea15b9f98328b8d6e1a45d1bf5dbdbfef93c007207602c103e1",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/report.json",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/plan.json",
+      "expected": "865aad8491a13b9bb64af5c4647561d3c9017308f5f8ac8a459415740ee930e0",
+      "actual": "865aad8491a13b9bb64af5c4647561d3c9017308f5f8ac8a459415740ee930e0",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/report.json",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/result-1.json",
+      "expected": "5fd0cb1719894a2f4b2e28b97e7a7f00192a1dff570a0963b748c3d1271fb30d",
+      "actual": "5fd0cb1719894a2f4b2e28b97e7a7f00192a1dff570a0963b748c3d1271fb30d",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/report.json",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/result-2.json",
+      "expected": "ba2cb5b6bc6a5bf16b0e3cc65e00081fb9786742c783df4e7c1000ea5b04a85e",
+      "actual": "ba2cb5b6bc6a5bf16b0e3cc65e00081fb9786742c783df4e7c1000ea5b04a85e",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/report.json",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/result-3.json",
+      "expected": "6da5aa9d297863be13ac354929e0d1e8697b564f5a2221d9d35d0b535dd643ef",
+      "actual": "6da5aa9d297863be13ac354929e0d1e8697b564f5a2221d9d35d0b535dd643ef",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/report.json",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/result-4.json",
+      "expected": "7ee2356b1d48754e9afca6fb4927a380123c7072596f395bdfd8a1d34db3e74b",
+      "actual": "7ee2356b1d48754e9afca6fb4927a380123c7072596f395bdfd8a1d34db3e74b",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/report.json",
+      "path": "apps/ai_agent/src/evaluation/repair-acceptance.ts",
+      "expected": "1fc4032697b5fe4aa709857d2f160220ded9d961dcf85699804d1ae4f1a85a9c",
+      "actual": "1fc4032697b5fe4aa709857d2f160220ded9d961dcf85699804d1ae4f1a85a9c",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/report.json",
+      "path": "apps/ai_agent/src/evaluation/repair-acceptance-controls.ts",
+      "expected": "df723e800f0afb200e7e04e338e83459bf8ceb65c042bdb7b05407f47052d80c",
+      "actual": "df723e800f0afb200e7e04e338e83459bf8ceb65c042bdb7b05407f47052d80c",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/report.json",
+      "path": "apps/ai_agent/src/evaluation/repair-acceptance-pilot.ts",
+      "expected": "20eff2e777e14356d6b4ea3a2620acb0b426c0290be21246111d55e5eadb4588",
+      "actual": "20eff2e777e14356d6b4ea3a2620acb0b426c0290be21246111d55e5eadb4588",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/report.json",
+      "path": "apps/ai_agent/tests/repair-acceptance.test.ts",
+      "expected": "e13b2231e211aba1b165998d1da5217d5d848e83e757d3d4b98771294cae5563",
+      "actual": "e13b2231e211aba1b165998d1da5217d5d848e83e757d3d4b98771294cae5563",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/report.json",
+      "path": "apps/ai_agent/src/evaluation/causal-diagnosis.ts",
+      "expected": "5e8612ac79ae8ea68a6c50e296bd666af9136bec92ed71c9775da3b1a2441df4",
+      "actual": "5e8612ac79ae8ea68a6c50e296bd666af9136bec92ed71c9775da3b1a2441df4",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/report.json",
+      "path": "apps/ai_agent/src/graph.ts",
+      "expected": "f3dec93c3dd58037f0b62d79f1fe3f5c7bfb12c79e9f07a3c99cc73d4c632e68",
+      "actual": "f3dec93c3dd58037f0b62d79f1fe3f5c7bfb12c79e9f07a3c99cc73d4c632e68",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/report.json",
+      "path": "apps/ai_agent/src/contracts.ts",
+      "expected": "2db41bcdde5b4539c8b0d5514e2bf9dd61a3c26e8166bbf867b6f0d0435711eb",
+      "actual": "2db41bcdde5b4539c8b0d5514e2bf9dd61a3c26e8166bbf867b6f0d0435711eb",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/report.json",
+      "path": "apps/ai_agent/src/prompts.ts",
+      "expected": "aa4a038a8b2748826933a9deb13aa883546d9d6cb79369a5424402d1c9485a9f",
+      "actual": "aa4a038a8b2748826933a9deb13aa883546d9d6cb79369a5424402d1c9485a9f",
+      "status": "match"
+    },
+    {
+      "owner": "apps/ai_agent/evaluation/phase-11a-baseline-v4/manifest.json",
+      "path": "apps/ai_agent/evaluation/phase-11a-baseline-v4/cases.json",
+      "expected": "4d34b56a6460c918ef4aa64ad02b4d29b7706eeec3b1dfa0e64bef3365c46efb",
+      "actual": "ddb53386f26d3f13efe1a838d1df8655d8bdd51f13b69754457768a29f72ce76",
+      "status": "LF-normalized-match"
+    }
+  ],
+  "summary": {
+    "match": 280,
+    "mismatch": 6,
+    "protected-not-read": 1,
+    "LF-normalized-match": 5
+  },
+  "imports": [
+    {
+      "from": "apps/ai_agent/evaluation/causal-diagnosis/review-v2.ts",
+      "import": "../../src/contracts.ts",
+      "path": "apps/ai_agent/src/contracts.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/evaluation/causal-diagnosis/review-v2.ts",
+      "import": "../../src/evaluation/causal-diagnosis.ts",
+      "path": "apps/ai_agent/src/evaluation/causal-diagnosis.ts",
+      "status": "included"
+    },
+    {
+      "from": "apps/ai_agent/evaluation/causal-diagnosis/review-v2.ts",
+      "import": "../../src/evaluation/causal-pilot.ts",
+      "path": "apps/ai_agent/src/evaluation/causal-pilot.ts",
+      "status": "included"
+    },
+    {
+      "from": "apps/ai_agent/evaluation/causal-diagnosis/review-v2.ts",
+      "import": "../../src/evaluation/oracle-pilot.ts",
+      "path": "apps/ai_agent/src/evaluation/oracle-pilot.ts",
+      "status": "included"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/agentic-experiment.ts",
+      "import": "../contracts.ts",
+      "path": "apps/ai_agent/src/contracts.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/agentic-experiment.ts",
+      "import": "../graph.ts",
+      "path": "apps/ai_agent/src/graph.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/agentic-experiment.ts",
+      "import": "../gemini-model.ts",
+      "path": "apps/ai_agent/src/gemini-model.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/agentic-experiment.ts",
+      "import": "../prompts.ts",
+      "path": "apps/ai_agent/src/prompts.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/agentic-experiment.ts",
+      "import": "../tools/search-runbooks.ts",
+      "path": "apps/ai_agent/src/tools/search-runbooks.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/agentic-experiment.ts",
+      "import": "./checks.ts",
+      "path": "apps/ai_agent/src/evaluation/checks.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/agentic-experiment.ts",
+      "import": "./fixture-tools.ts",
+      "path": "apps/ai_agent/src/evaluation/fixture-tools.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/agentic-experiment.ts",
+      "import": "./experiment.ts",
+      "path": "apps/ai_agent/src/evaluation/experiment.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/agentic-experiment.ts",
+      "import": "./retrieval-intent.ts",
+      "path": "apps/ai_agent/src/evaluation/retrieval-intent.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/agentic-experiment.ts",
+      "import": "./retrieval-agentic.ts",
+      "path": "apps/ai_agent/src/evaluation/retrieval-agentic.ts",
+      "status": "included"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/causal-diagnosis.ts",
+      "import": "../prompts.ts",
+      "path": "apps/ai_agent/src/prompts.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/causal-diagnosis.ts",
+      "import": "../contracts.ts",
+      "path": "apps/ai_agent/src/contracts.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/causal-diagnosis.ts",
+      "import": "../tools/search-runbooks.ts",
+      "path": "apps/ai_agent/src/tools/search-runbooks.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/causal-pilot.ts",
+      "import": "../contracts.ts",
+      "path": "apps/ai_agent/src/contracts.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/causal-pilot.ts",
+      "import": "../graph.ts",
+      "path": "apps/ai_agent/src/graph.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/causal-pilot.ts",
+      "import": "../prompts.ts",
+      "path": "apps/ai_agent/src/prompts.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/causal-pilot.ts",
+      "import": "../gemini-model.ts",
+      "path": "apps/ai_agent/src/gemini-model.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/causal-pilot.ts",
+      "import": "../tools/search-runbooks.ts",
+      "path": "apps/ai_agent/src/tools/search-runbooks.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/causal-pilot.ts",
+      "import": "./checks.ts",
+      "path": "apps/ai_agent/src/evaluation/checks.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/causal-pilot.ts",
+      "import": "./oracle-pilot.ts",
+      "path": "apps/ai_agent/src/evaluation/oracle-pilot.ts",
+      "status": "included"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/causal-pilot.ts",
+      "import": "./retrieval-agentic.ts",
+      "path": "apps/ai_agent/src/evaluation/retrieval-agentic.ts",
+      "status": "included"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/causal-pilot.ts",
+      "import": "./causal-diagnosis.ts",
+      "path": "apps/ai_agent/src/evaluation/causal-diagnosis.ts",
+      "status": "included"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/investigate-retrieval.ts",
+      "import": "../contracts.ts",
+      "path": "apps/ai_agent/src/contracts.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/investigate-retrieval.ts",
+      "import": "../graph.ts",
+      "path": "apps/ai_agent/src/graph.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/investigate-retrieval.ts",
+      "import": "../prompts.ts",
+      "path": "apps/ai_agent/src/prompts.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/investigate-retrieval.ts",
+      "import": "../tools/search-runbooks.ts",
+      "path": "apps/ai_agent/src/tools/search-runbooks.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/investigate-retrieval.ts",
+      "import": "./checks.ts",
+      "path": "apps/ai_agent/src/evaluation/checks.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/investigate-retrieval.ts",
+      "import": "./retrieval-intent.ts",
+      "path": "apps/ai_agent/src/evaluation/retrieval-intent.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/investigate-retrieval.ts",
+      "import": "./retrieval-multi-query.ts",
+      "path": "apps/ai_agent/src/evaluation/retrieval-multi-query.ts",
+      "status": "included"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/investigate-retrieval.ts",
+      "import": "./retrieval-agentic.ts",
+      "path": "apps/ai_agent/src/evaluation/retrieval-agentic.ts",
+      "status": "included"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/investigate-retrieval.ts",
+      "import": "./retrieval-investigation.ts",
+      "path": "apps/ai_agent/src/evaluation/retrieval-investigation.ts",
+      "status": "included"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/investigate-retrieval.ts",
+      "import": "./oracle-diagnosis.ts",
+      "path": "apps/ai_agent/src/evaluation/oracle-diagnosis.ts",
+      "status": "included"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/investigate-retrieval.ts",
+      "import": "./agentic-experiment.ts",
+      "path": "apps/ai_agent/src/evaluation/agentic-experiment.ts",
+      "status": "included"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/oracle-diagnosis.ts",
+      "import": "../contracts.ts",
+      "path": "apps/ai_agent/src/contracts.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/oracle-diagnosis.ts",
+      "import": "../graph.ts",
+      "path": "apps/ai_agent/src/graph.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/oracle-diagnosis.ts",
+      "import": "../tools/search-runbooks.ts",
+      "path": "apps/ai_agent/src/tools/search-runbooks.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/oracle-diagnosis.ts",
+      "import": "./checks.ts",
+      "path": "apps/ai_agent/src/evaluation/checks.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/oracle-diagnosis.ts",
+      "import": "./retrieval-investigation.ts",
+      "path": "apps/ai_agent/src/evaluation/retrieval-investigation.ts",
+      "status": "included"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/oracle-diagnosis.ts",
+      "import": "./retrieval-agentic.ts",
+      "path": "apps/ai_agent/src/evaluation/retrieval-agentic.ts",
+      "status": "included"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/oracle-pilot.ts",
+      "import": "../contracts.ts",
+      "path": "apps/ai_agent/src/contracts.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/oracle-pilot.ts",
+      "import": "../graph.ts",
+      "path": "apps/ai_agent/src/graph.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/oracle-pilot.ts",
+      "import": "../prompts.ts",
+      "path": "apps/ai_agent/src/prompts.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/oracle-pilot.ts",
+      "import": "../gemini-model.ts",
+      "path": "apps/ai_agent/src/gemini-model.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/oracle-pilot.ts",
+      "import": "../tools/search-runbooks.ts",
+      "path": "apps/ai_agent/src/tools/search-runbooks.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/oracle-pilot.ts",
+      "import": "./checks.ts",
+      "path": "apps/ai_agent/src/evaluation/checks.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/oracle-pilot.ts",
+      "import": "./retrieval-investigation.ts",
+      "path": "apps/ai_agent/src/evaluation/retrieval-investigation.ts",
+      "status": "included"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/oracle-pilot.ts",
+      "import": "./retrieval-agentic.ts",
+      "path": "apps/ai_agent/src/evaluation/retrieval-agentic.ts",
+      "status": "included"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/repair-acceptance-controls.ts",
+      "import": "../contracts.ts",
+      "path": "apps/ai_agent/src/contracts.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/repair-acceptance-controls.ts",
+      "import": "./checks.ts",
+      "path": "apps/ai_agent/src/evaluation/checks.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/repair-acceptance-controls.ts",
+      "import": "./repair-acceptance.ts",
+      "path": "apps/ai_agent/src/evaluation/repair-acceptance.ts",
+      "status": "included"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/repair-acceptance-pilot.ts",
+      "import": "./checks.ts",
+      "path": "apps/ai_agent/src/evaluation/checks.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/repair-acceptance-pilot.ts",
+      "import": "./repair-acceptance.ts",
+      "path": "apps/ai_agent/src/evaluation/repair-acceptance.ts",
+      "status": "included"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/repair-acceptance-pilot.ts",
+      "import": "./repair-acceptance-controls.ts",
+      "path": "apps/ai_agent/src/evaluation/repair-acceptance-controls.ts",
+      "status": "included"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/repair-acceptance.ts",
+      "import": "../contracts.ts",
+      "path": "apps/ai_agent/src/contracts.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/repair-acceptance.ts",
+      "import": "../graph.ts",
+      "path": "apps/ai_agent/src/graph.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/repair-acceptance.ts",
+      "import": "../tools/search-runbooks.ts",
+      "path": "apps/ai_agent/src/tools/search-runbooks.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/repair-acceptance.ts",
+      "import": "./causal-diagnosis.ts",
+      "path": "apps/ai_agent/src/evaluation/causal-diagnosis.ts",
+      "status": "included"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/retrieval-agentic.ts",
+      "import": "../contracts.ts",
+      "path": "apps/ai_agent/src/contracts.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/retrieval-agentic.ts",
+      "import": "../contracts.ts",
+      "path": "apps/ai_agent/src/contracts.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/retrieval-agentic.ts",
+      "import": "../graph.ts",
+      "path": "apps/ai_agent/src/graph.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/retrieval-agentic.ts",
+      "import": "../tools/search-runbooks.ts",
+      "path": "apps/ai_agent/src/tools/search-runbooks.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/retrieval-investigation.ts",
+      "import": "../tools/search-runbooks.ts",
+      "path": "apps/ai_agent/src/tools/search-runbooks.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/retrieval-investigation.ts",
+      "import": "../tools/search-runbooks.ts",
+      "path": "apps/ai_agent/src/tools/search-runbooks.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/retrieval-investigation.ts",
+      "import": "./retrieval-intent.ts",
+      "path": "apps/ai_agent/src/evaluation/retrieval-intent.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/retrieval-multi-query.ts",
+      "import": "../tools/search-runbooks.ts",
+      "path": "apps/ai_agent/src/tools/search-runbooks.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/retrieval-multi-query.ts",
+      "import": "./retrieval-intent.ts",
+      "path": "apps/ai_agent/src/evaluation/retrieval-intent.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/retrieval-multi-query.ts",
+      "import": "../graph.ts",
+      "path": "apps/ai_agent/src/graph.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/retrieval-multi-query.ts",
+      "import": "../prompts.ts",
+      "path": "apps/ai_agent/src/prompts.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/src/evaluation/retrieval-multi-query.ts",
+      "import": "./checks.ts",
+      "path": "apps/ai_agent/src/evaluation/checks.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/tests/agentic-experiment.test.ts",
+      "import": "../src/evaluation/agentic-experiment.ts",
+      "path": "apps/ai_agent/src/evaluation/agentic-experiment.ts",
+      "status": "included"
+    },
+    {
+      "from": "apps/ai_agent/tests/agentic-experiment.test.ts",
+      "import": "../src/tools/search-runbooks.ts",
+      "path": "apps/ai_agent/src/tools/search-runbooks.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/tests/agentic-experiment.test.ts",
+      "import": "../src/evaluation/fixture-tools.ts",
+      "path": "apps/ai_agent/src/evaluation/fixture-tools.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/tests/agentic-experiment.test.ts",
+      "import": "../src/evaluation/checks.ts",
+      "path": "apps/ai_agent/src/evaluation/checks.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/tests/agentic-experiment.test.ts",
+      "import": "../src/gemini-model.ts",
+      "path": "apps/ai_agent/src/gemini-model.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/tests/causal-consistency.test.ts",
+      "import": "../src/evaluation/checks.ts",
+      "path": "apps/ai_agent/src/evaluation/checks.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/tests/causal-consistency.test.ts",
+      "import": "../src/contracts.ts",
+      "path": "apps/ai_agent/src/contracts.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/tests/causal-consistency.test.ts",
+      "import": "../src/evaluation/causal-diagnosis.ts",
+      "path": "apps/ai_agent/src/evaluation/causal-diagnosis.ts",
+      "status": "included"
+    },
+    {
+      "from": "apps/ai_agent/tests/causal-consistency.test.ts",
+      "import": "../src/evaluation/causal-pilot.ts",
+      "path": "apps/ai_agent/src/evaluation/causal-pilot.ts",
+      "status": "included"
+    },
+    {
+      "from": "apps/ai_agent/tests/causal-consistency.test.ts",
+      "import": "../src/evaluation/oracle-pilot.ts",
+      "path": "apps/ai_agent/src/evaluation/oracle-pilot.ts",
+      "status": "included"
+    },
+    {
+      "from": "apps/ai_agent/tests/causal-consistency.test.ts",
+      "import": "../src/graph.ts",
+      "path": "apps/ai_agent/src/graph.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/tests/causal-diagnosis.test.ts",
+      "import": "../src/prompts.ts",
+      "path": "apps/ai_agent/src/prompts.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/tests/causal-diagnosis.test.ts",
+      "import": "../src/evaluation/causal-diagnosis.ts",
+      "path": "apps/ai_agent/src/evaluation/causal-diagnosis.ts",
+      "status": "included"
+    },
+    {
+      "from": "apps/ai_agent/tests/causal-diagnosis.test.ts",
+      "import": "../src/evaluation/checks.ts",
+      "path": "apps/ai_agent/src/evaluation/checks.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/tests/causal-diagnosis.test.ts",
+      "import": "../src/contracts.ts",
+      "path": "apps/ai_agent/src/contracts.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/tests/causal-diagnosis.test.ts",
+      "import": "../src/evaluation/causal-pilot.ts",
+      "path": "apps/ai_agent/src/evaluation/causal-pilot.ts",
+      "status": "included"
+    },
+    {
+      "from": "apps/ai_agent/tests/causal-diagnosis.test.ts",
+      "import": "../src/evaluation/agentic-experiment.ts",
+      "path": "apps/ai_agent/src/evaluation/agentic-experiment.ts",
+      "status": "included"
+    },
+    {
+      "from": "apps/ai_agent/tests/causal-diagnosis.test.ts",
+      "import": "../src/evaluation/oracle-pilot.ts",
+      "path": "apps/ai_agent/src/evaluation/oracle-pilot.ts",
+      "status": "included"
+    },
+    {
+      "from": "apps/ai_agent/tests/oracle-pilot.test.ts",
+      "import": "../src/evaluation/oracle-pilot.ts",
+      "path": "apps/ai_agent/src/evaluation/oracle-pilot.ts",
+      "status": "included"
+    },
+    {
+      "from": "apps/ai_agent/tests/oracle-pilot.test.ts",
+      "import": "../src/evaluation/agentic-experiment.ts",
+      "path": "apps/ai_agent/src/evaluation/agentic-experiment.ts",
+      "status": "included"
+    },
+    {
+      "from": "apps/ai_agent/tests/oracle-pilot.test.ts",
+      "import": "../src/gemini-model.ts",
+      "path": "apps/ai_agent/src/gemini-model.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/tests/oracle-pilot.test.ts",
+      "import": "../src/gemini-model.ts",
+      "path": "apps/ai_agent/src/gemini-model.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/tests/repair-acceptance.test.ts",
+      "import": "../src/evaluation/checks.ts",
+      "path": "apps/ai_agent/src/evaluation/checks.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/tests/repair-acceptance.test.ts",
+      "import": "../src/evaluation/repair-acceptance.ts",
+      "path": "apps/ai_agent/src/evaluation/repair-acceptance.ts",
+      "status": "included"
+    },
+    {
+      "from": "apps/ai_agent/tests/repair-acceptance.test.ts",
+      "import": "../src/evaluation/repair-acceptance-controls.ts",
+      "path": "apps/ai_agent/src/evaluation/repair-acceptance-controls.ts",
+      "status": "included"
+    },
+    {
+      "from": "apps/ai_agent/tests/retrieval-agentic.test.ts",
+      "import": "../src/evaluation/fixture-tools.ts",
+      "path": "apps/ai_agent/src/evaluation/fixture-tools.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/tests/retrieval-agentic.test.ts",
+      "import": "../src/evaluation/retrieval-agentic.ts",
+      "path": "apps/ai_agent/src/evaluation/retrieval-agentic.ts",
+      "status": "included"
+    },
+    {
+      "from": "apps/ai_agent/tests/retrieval-agentic.test.ts",
+      "import": "../src/tools/search-runbooks.ts",
+      "path": "apps/ai_agent/src/tools/search-runbooks.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/tests/retrieval-agentic.test.ts",
+      "import": "../src/contracts.ts",
+      "path": "apps/ai_agent/src/contracts.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/tests/retrieval-investigation.test.ts",
+      "import": "../src/tools/search-runbooks.ts",
+      "path": "apps/ai_agent/src/tools/search-runbooks.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/tests/retrieval-investigation.test.ts",
+      "import": "../src/evaluation/retrieval-multi-query.ts",
+      "path": "apps/ai_agent/src/evaluation/retrieval-multi-query.ts",
+      "status": "included"
+    },
+    {
+      "from": "apps/ai_agent/tests/retrieval-investigation.test.ts",
+      "import": "../src/evaluation/retrieval-investigation.ts",
+      "path": "apps/ai_agent/src/evaluation/retrieval-investigation.ts",
+      "status": "included"
+    },
+    {
+      "from": "apps/ai_agent/tests/retrieval-investigation.test.ts",
+      "import": "../src/tools/search-runbooks.ts",
+      "path": "apps/ai_agent/src/tools/search-runbooks.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/tests/retrieval-investigation.test.ts",
+      "import": "../src/evaluation/oracle-diagnosis.ts",
+      "path": "apps/ai_agent/src/evaluation/oracle-diagnosis.ts",
+      "status": "included"
+    },
+    {
+      "from": "apps/ai_agent/tests/retrieval-investigation.test.ts",
+      "import": "../src/evaluation/agentic-experiment.ts",
+      "path": "apps/ai_agent/src/evaluation/agentic-experiment.ts",
+      "status": "included"
+    },
+    {
+      "from": "apps/ai_agent/tests/retrieval-investigation.test.ts",
+      "import": "../src/evaluation/checks.ts",
+      "path": "apps/ai_agent/src/evaluation/checks.ts",
+      "status": "tracked-prerequisite"
+    },
+    {
+      "from": "apps/ai_agent/tests/retrieval-investigation.test.ts",
+      "import": "../src/evaluation/investigate-retrieval.ts",
+      "path": "apps/ai_agent/src/evaluation/investigate-retrieval.ts",
+      "status": "included"
+    },
+    {
+      "from": "apps/ai_agent/tests/retrieval-multi-query.test.ts",
+      "import": "../src/evaluation/retrieval-multi-query.ts",
+      "path": "apps/ai_agent/src/evaluation/retrieval-multi-query.ts",
+      "status": "included"
+    },
+    {
+      "from": "apps/ai_agent/tests/retrieval-multi-query.test.ts",
+      "import": "../src/tools/search-runbooks.ts",
+      "path": "apps/ai_agent/src/tools/search-runbooks.ts",
+      "status": "tracked-prerequisite"
+    }
+  ],
+  "sourceEvidence": {
+    "apps/ai_agent/src/evaluation/retrieval-multi-query.ts": "9aa5c3f56de0fbb3ff37a28254ecd5093524585623b9465169d9fbbc312eed3e",
+    "apps/ai_agent/src/evaluation/retrieval-intent.ts": "7a47fff604cb6564379af395c879fa36c5c785a87a7cbdf70c84b77ae858632f",
+    "apps/ai_agent/src/tools/search-runbooks.ts": "7c433e3707ecfbca8d6ca6125ea3a2d0a53938a1481111af7783497e0cdd99f2",
+    "apps/ai_agent/src/graph.ts": "f3dec93c3dd58037f0b62d79f1fe3f5c7bfb12c79e9f07a3c99cc73d4c632e68",
+    "apps/ai_agent/src/prompts.ts": "aa4a038a8b2748826933a9deb13aa883546d9d6cb79369a5424402d1c9485a9f",
+    "apps/ai_agent/src/evaluation/agentic-experiment.ts": "e509f69fa6a475640048b7eeaf4ac28bbb7a441c959fe3203adba6f269cb1d22",
+    "apps/ai_agent/src/evaluation/retrieval-agentic.ts": "d3ab5bebee7bcbb2b52a4e6889183b6417274f9124045c8bd6c03a39d78432de",
+    "apps/ai_agent/src/evaluation/checks.ts": "e1d812ce3c6951b4c6b0e5d26c99fd79466abeeaf6d24319fc6cbf9d599b4178",
+    "apps/ai_agent/src/evaluation/experiment.ts": "79b65da9cbc1317761cdcc38b9a3174d6e5aca4fe76e2a3357241d233f22bb0a",
+    "apps/ai_agent/src/evaluation/fixture-tools.ts": "c6c01ea849f5aa49f0971927bec3f69c2175eec5269d743bdbc8187ce9b0adf6",
+    "apps/ai_agent/src/contracts.ts": "2db41bcdde5b4539c8b0d5514e2bf9dd61a3c26e8166bbf867b6f0d0435711eb",
+    "apps/ai_agent/src/gemini-model.ts": "18a909519c9bd16437e7ca54e125eb8c02430978d44b5501b572243e17a7c257",
+    "apps/ai_agent/src/evaluation/investigate-retrieval.ts": "a0dcfe0f2bf505a95966d9d33b9bf40e2ae0d59033a74fc711e680abb70ab285",
+    "apps/ai_agent/src/evaluation/retrieval-investigation.ts": "0f3b3e3fbd56932afa869cdcd568537bcaf9a589560c9eac422b329837ac1e40",
+    "apps/ai_agent/src/evaluation/oracle-diagnosis.ts": "8ec8e651e506bb44dc94330dac7d21e3b7e18cfad0476b7bd35dcb539b49af87",
+    "apps/ai_agent/src/evaluation/oracle-pilot.ts": "a953e536aea2f00d20892e149ac9904fcff22026f3c384bd8dfc53559d03dadf",
+    "apps/ai_agent/tests/oracle-pilot.test.ts": "d16ff53e7d36f32cdd61ac6b3ba4af11c39e362ef8c4f2cee36a5f0707d1cc30",
+    "apps/ai_agent/src/evaluation/causal-diagnosis.ts": "5e8612ac79ae8ea68a6c50e296bd666af9136bec92ed71c9775da3b1a2441df4",
+    "apps/ai_agent/src/evaluation/causal-pilot.ts": "8f79ee535ce1f386479e41423bd131ace81d11a45c41c94b6fbfd9e0df704032",
+    "apps/ai_agent/tests/causal-diagnosis.test.ts": "0006042ea8894f010bc23ac3779b9c2e8085cacf019d77566cc5cee9df011afc",
+    "apps/ai_agent/tests/causal-consistency.test.ts": "c782003e138e24e4d128242d17ced55cc05413b8583e808957b36528de4ee6a7",
+    "apps/ai_agent/src/evaluation/repair-acceptance.ts": "1fc4032697b5fe4aa709857d2f160220ded9d961dcf85699804d1ae4f1a85a9c",
+    "apps/ai_agent/src/evaluation/repair-acceptance-controls.ts": "df723e800f0afb200e7e04e338e83459bf8ceb65c042bdb7b05407f47052d80c",
+    "apps/ai_agent/src/evaluation/repair-acceptance-pilot.ts": "20eff2e777e14356d6b4ea3a2620acb0b426c0290be21246111d55e5eadb4588",
+    "apps/ai_agent/tests/repair-acceptance.test.ts": "e13b2231e211aba1b165998d1da5217d5d848e83e757d3d4b98771294cae5563"
+  },
+  "existingVerificationRecords": [
+    "apps/ai_agent/evaluation/R2-ARCHIVE-SCOPE.json",
+    "apps/ai_agent/evaluation/retrieval-integration/runs/dev-v2/verification.json",
+    "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/verification.json"
+  ],
+  "verificationPolicy": "Historical test/type/build/lint results are not newly executed. Byte hashes checked now; historic source differences are disclosed, not silently certified.",
+  "uncommittedInventory": [
+    {
+      "status": " M",
+      "path": "graphify-out/.vocab.txt"
+    },
+    {
+      "status": " M",
+      "path": "graphify-out/cache/last_query_stamp"
+    },
+    {
+      "status": " D",
+      "path": "graphify-out/cache/semantic/pa567fc138e3a/42b6bf915e3861637d640aedc363be01f9372def65db989bfc60112b2f241977.json"
+    },
+    {
+      "status": " M",
+      "path": "packages/db/generated/prisma/browser.ts"
+    },
+    {
+      "status": " M",
+      "path": "packages/db/generated/prisma/client.ts"
+    },
+    {
+      "status": " M",
+      "path": "packages/db/generated/prisma/commonInputTypes.ts"
+    },
+    {
+      "status": " M",
+      "path": "packages/db/generated/prisma/internal/class.ts"
+    },
+    {
+      "status": " M",
+      "path": "packages/db/generated/prisma/internal/prismaNamespace.ts"
+    },
+    {
+      "status": " M",
+      "path": "packages/db/generated/prisma/internal/prismaNamespaceBrowser.ts"
+    },
+    {
+      "status": " M",
+      "path": "packages/db/generated/prisma/models.ts"
+    },
+    {
+      "status": " M",
+      "path": "packages/db/generated/prisma/models/User.ts"
+    },
+    {
+      "status": " M",
+      "path": "packages/db/generated/prisma/models/Zap.ts"
+    },
+    {
+      "status": " M",
+      "path": "packages/db/generated/prisma/models/ZapRun.ts"
+    },
+    {
+      "status": " M",
+      "path": "packages/db/generated/prisma/models/ZapRunExecution.ts"
+    },
+    {
+      "status": " M",
+      "path": "packages/db/generated/prisma/models/ZapRunRetry.ts"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/agentic/HANDOFF.md"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/agentic/LIVE-RESULTS.md"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/agentic/README.md"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/agentic/runs/live-dev-20261012-v1/freeze.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/agentic/runs/live-dev-20261012-v1/manifest.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/agentic/runs/live-dev-20261012-v1/report.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/agentic/runs/live-dev-20261012-v1/report.md"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/agentic/runs/live-dev-20261012-v2/freeze.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/agentic/runs/live-dev-20261012-v2/manifest.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/agentic/runs/live-dev-20261012-v2/report.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/agentic/runs/live-dev-20261012-v2/report.md"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/agentic/runs/stub-dev-v2/freeze.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/agentic/runs/stub-dev-v2/manifest.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/agentic/runs/stub-dev-v2/report.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/agentic/runs/stub-dev-v2/report.md"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/README.md"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/review-v2.ts"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/access.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/attempt-1.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/attempt-2.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/attempt-4.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/continuation.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/measurements.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/plan.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/report-final.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/report.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/report.md"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/requests.jsonl"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/result-1.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/result-2.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/result-3.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/result-4.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/started-1.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/started-2.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/started-3.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/free-causal-pilot-20261013-v1/started-4.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/access.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/attempt-1.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/attempt-2.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/attempt-3.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/attempt-4.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/attempt-5.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/attempt-6.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/build.log"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/check-types.log"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/execution-authorization.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/execution-manifest.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/lint.log"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/offline-review-final-2.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/offline-review-final.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/offline-review.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/plan.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/report-live.md"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/report.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/report.md"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/requests.jsonl"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/result-1.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/result-2.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/result-3.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/result-4.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/result-5.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/result-6.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/started-1.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/started-2.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/started-3.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/started-4.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/started-5.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/started-6.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/summarize-live.ts"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/verification.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/causal-diagnosis/runs/prepared-causal-v2-20261013/verify-prepared.ts"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/multi-query/README.md"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/multi-query/runs/dev-v1/manifest.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/multi-query/runs/dev-v1/report.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/multi-query/runs/dev-v1/report.md"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/r25/fresh-label-rationales-v1.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/r25/fresh-scenarios-author-v1.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/r25/fresh-scenarios-v1.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/r25/runs/fresh-v1/dataset.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/r25/runs/fresh-v1/freeze.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/r25/runs/fresh-v1/inference-inputs.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/r25/runs/fresh-v1/report.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/r25/runs/fresh-v1/scores.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/build.log"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/causal-v1-1-assessment.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/causal-v1-1-raw.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/causal-v1-2-assessment.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/causal-v1-2-raw.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/causal-v1-3-assessment.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/causal-v1-3-raw.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/causal-v1-4-assessment.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/causal-v1-4-raw.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/causal-v2-1-assessment.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/causal-v2-1-raw.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/causal-v2-2-assessment.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/causal-v2-2-raw.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/causal-v2-3-assessment.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/causal-v2-3-raw.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/causal-v2-4-assessment.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/causal-v2-4-raw.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/causal-v2-5-assessment.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/causal-v2-5-raw.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/causal-v2-6-assessment.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/causal-v2-6-raw.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/check-types.log"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-1-assessment.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-1-raw.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-10-assessment.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-10-raw.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-11-assessment.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-11-raw.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-12-assessment.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-12-raw.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-13-assessment.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-13-raw.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-14-assessment.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-14-raw.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-15-assessment.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-15-raw.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-16-assessment.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-16-raw.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-17-assessment.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-17-raw.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-18-assessment.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-18-raw.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-19-assessment.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-19-raw.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-2-assessment.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-2-raw.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-3-assessment.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-3-raw.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-4-assessment.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-4-raw.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-5-assessment.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-5-raw.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-6-assessment.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-6-raw.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-7-assessment.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-7-raw.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-8-assessment.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-8-raw.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-9-assessment.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/control-9-raw.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/focused.log"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/lint.log"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/oracle-1-assessment.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/oracle-1-raw.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/oracle-2-assessment.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/oracle-2-raw.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/oracle-3-assessment.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/oracle-3-raw.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/oracle-4-assessment.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/oracle-4-raw.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/report.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/report.md"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/started.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verification.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/repair-acceptance/runs/offline-20261013-v1/verify-preservation.ts"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/HANDOFF.md"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/README.md"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/attempt-1.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/attempt-2.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/attempt-3.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/attempt-4.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/binding.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/blind-mapping.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/blind-packets.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/blind-review.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/free-tier-confirmation.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/manifest.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/plan.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/report.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/report.md"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/requests.jsonl"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/result-1.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/result-2.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/result-3.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/result-4.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/slot-1.started.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/slot-2.started.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/slot-3.started.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/free-oracle-pilot-20261013-v1/slot-4.started.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/offline-v1/manifest.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/offline-v1/report.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/offline-v2/manifest.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/offline-v2/report.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/offline-v3/manifest.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/offline-v3/report.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/offline-v3/report.md"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/offline-v4/manifest.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/offline-v4/report.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/retrieval-investigation/runs/offline-v4/report.md"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/semantic-judge/calibration/2026-10-05T07-52-56.040Z-1e4f259f-1670-47af-91d6-ddd2cc1fa561/judge-live-replayed.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/semantic-judge/calibration/2026-10-05T07-52-56.040Z-1e4f259f-1670-47af-91d6-ddd2cc1fa561/judge-live-replayed.md"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/evaluation/semantic-judge/calibration/2026-10-05T07-52-56.040Z-1e4f259f-1670-47af-91d6-ddd2cc1fa561/judge-live-replayed.votes.json"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/src/evaluation/agentic-experiment.ts"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/src/evaluation/causal-diagnosis.ts"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/src/evaluation/causal-pilot.ts"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/src/evaluation/investigate-retrieval.ts"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/src/evaluation/oracle-diagnosis.ts"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/src/evaluation/oracle-pilot.ts"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/src/evaluation/repair-acceptance-controls.ts"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/src/evaluation/repair-acceptance-pilot.ts"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/src/evaluation/repair-acceptance.ts"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/src/evaluation/retrieval-agentic.ts"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/src/evaluation/retrieval-investigation.ts"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/src/evaluation/retrieval-multi-query.ts"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/tests/agentic-experiment.test.ts"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/tests/causal-consistency.test.ts"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/tests/causal-diagnosis.test.ts"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/tests/oracle-pilot.test.ts"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/tests/repair-acceptance.test.ts"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/tests/retrieval-agentic.test.ts"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/tests/retrieval-investigation.test.ts"
+    },
+    {
+      "status": "??",
+      "path": "apps/ai_agent/tests/retrieval-multi-query.test.ts"
+    },
+    {
+      "status": "??",
+      "path": "graphify-out/2026-09-30/.graphify_analysis.json"
+    },
+    {
+      "status": "??",
+      "path": "graphify-out/2026-09-30/.graphify_labels.json"
+    },
+    {
+      "status": "??",
+      "path": "graphify-out/2026-09-30/GRAPH_REPORT.md"
+    },
+    {
+      "status": "??",
+      "path": "graphify-out/2026-09-30/cost.json"
+    },
+    {
+      "status": "??",
+      "path": "graphify-out/2026-09-30/graph.json"
+    },
+    {
+      "status": "??",
+      "path": "graphify-out/2026-09-30/manifest.json"
+    },
+    {
+      "status": "??",
+      "path": "graphify-out/memory/query_20260923_064129_82e4530f_start_phase_3c_durable_dlq_publication_and_reconci.md"
+    },
+    {
+      "status": "??",
+      "path": "graphify-out/memory/query_20260927_180846_f1f93e82_oh_but_my_idea_for_this_prj_dlq_system_was_like_in.md"
+    },
+    {
+      "status": "??",
+      "path": "packages/db/generated/prisma/models/ReplayExecution.ts"
+    },
+    {
+      "status": "??",
+      "path": "packages/db/generated/prisma/models/ReplayExecutionAttempt.ts"
+    },
+    {
+      "status": "??",
+      "path": "packages/db/generated/prisma/models/ReplayFailure.ts"
+    },
+    {
+      "status": "??",
+      "path": "packages/db/generated/prisma/models/ReplayRequest.ts"
+    },
+    {
+      "status": "??",
+      "path": "packages/db/generated/prisma/models/TriageAccessAudit.ts"
+    },
+    {
+      "status": "??",
+      "path": "packages/db/generated/prisma/models/TriageApproval.ts"
+    },
+    {
+      "status": "??",
+      "path": "packages/db/generated/prisma/models/TriageDecisionNotification.ts"
+    },
+    {
+      "status": "??",
+      "path": "packages/db/generated/prisma/models/TriageProposal.ts"
+    },
+    {
+      "status": "??",
+      "path": "rtk/history.db"
+    }
+  ]
+}

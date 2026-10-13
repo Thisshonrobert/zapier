@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "frozenAt": "2026-10-13",
+  "authority": "User requested checking and starting the production selection plan; explicitly authorized Task A in the current checkout.",
+  "plan": "docs/superpowers/plans/2026-10-13-rag-production-selection.md",
+  "scope": "Production-path development screening followed by independent release acceptance; runtime adoption and local frontend validation are conditional on passing the gates. Task A preparation only in this bundle.",
+  "servingModel": "gemini-2.5-flash",
+  "corpus": "Six current production runbooks; preserve provider eligibility, current/stale rules, citation hashes and top-three bound.",
+  "developmentProvenance": "Exposed phase-11a-baseline-v6 sanitized synthetic development incidents, using graph.retrievalInput unchanged; not independent release evidence.",
+  "acceptanceProvenance": "New independently authored and reviewed disjoint incident families, commissioned after method/configuration freeze; historical fresh R2.5 inputs are excluded.",
+  "gates": {
+    "developmentMacroRecallAt3": 0.8,
+    "acceptanceMacroRecallAt3": 0.9,
+    "directPrecision": "No reduction versus paired keyword; supporting usefulness reported separately.",
+    "noMatchAbstention": 0.9,
+    "eligibleFalseAbstentionMaximum": 0.05,
+    "semanticDiagnosisAcceptance": 0.8,
+    "observedCriticalSafetyViolationsMaximum": 0,
+    "validCompletedScheduledRuns": 0.95,
+    "warmRetrievalP95MsMaximum": 3000,
+    "retrievalTimeoutMs": 5000,
+    "investigationDeadlineMs": 60000
+  },
+  "accounting": {
+    "alternatives": "Each answer set is independently sufficient, with at most three indispensable sections; score best eligible alternative section recall, and report complete sufficient-answer coverage separately.",
+    "eligibility": "If no sufficient answer set is fully eligible, exclude from eligible answerable recall; retain in all-incident coverage and report access exclusions. Missing corpus guidance is separately annotated.",
+    "noMatch": "Only adjudicated genuine no-match cases; unavailable output is never successful abstention.",
+    "failure": "Missing/failed positive outputs remain scheduled with zero recall, unavailable negatives remain in abstention denominator, and failures are separated from false abstention.",
+    "uncertainty": "Report absolute case counts, macro section numerator/denominator, sufficient-answer fraction, paired scenario regressions and uncertainty; no small-sample reliability certification."
+  },
+  "labelReview": {
+    "status": "pending_human_adjudication",
+    "rubric": "Review every corpus section blind to method scores; distinguish direct answer, supporting guidance and irrelevant text. Record rationale, eligible sufficient alternatives, no-guidance/provider exclusions, missing runtime facts and disputed labels.",
+    "freezeRequirement": "Do not run the selection matrix until development labels and corpus are adjudicated and re-frozen. Existing direct questions may be a separate diagnostic cohort, never pooled with incidents."
+  },
+  "failureStages": ["no_suitable_corpus_guidance", "provider_ineligible", "query_lost_observation", "candidate_omission", "wrong_rank", "cutoff_rejection", "correct_retrieval_incorrect_diagnosis"],
+  "budgets": {
+    "developmentInterventionsMaximum": 2,
+    "optionalRetrievalGenerationsMaximum": 36,
+    "developmentDiagnosisAttemptsMaximum": 72,
+    "independentDiagnosisAttemptsMaximum": 80,
+    "optionalPilotsMaximum": 1,
+    "liveCallsAuthorizedForTaskA": 0,
+    "taskACostUsdMaximum": 0,
+    "liveMonetaryCeilingUsd": null,
+    "livePreflight": "Record verified pricing, serving payload/output token estimates and an explicit monetary ceiling within operational allowance before live calls; no paid fallback or billing changes."
+  },
+  "runtimeChange": "None until independently accepted method; rollback remains keyword plus restart.",
+  "graphifyRequiredForTaskA": false
+}

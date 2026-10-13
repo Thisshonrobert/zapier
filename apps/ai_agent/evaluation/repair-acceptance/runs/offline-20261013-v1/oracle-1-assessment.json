@@ -1,0 +1,94 @@
+{
+  "name": "oracle-1",
+  "caseId": "f03-permission-ambiguous",
+  "variant": "baseline",
+  "originalServiceAccepted": false,
+  "originalFailure": "service_validation_or_deadline_failed",
+  "review": {
+    "categories": [
+      "destination_format",
+      "input_requirements"
+    ],
+    "repair": "unsupported",
+    "legitimateRepair": false,
+    "targetedInvestigation": false,
+    "note": "Proposes destination or input-mapping correction without either independent finding; the saved evidence reference is also invalid."
+  },
+  "evaluation": {
+    "rawOutput": {
+      "status": "completed",
+      "diagnosis": {
+        "taxonomy_id": "F03",
+        "summary": "Telegram action rejected due to invalid channel username, requiring destination/input correction.",
+        "confidence": "high",
+        "evidence_refs": [
+          "fixture:failure:f03-permission-ambiguous",
+          "fixture:execution:f03-permission-ambiguous",
+          "fixture:validation:f03-permission-ambiguous"
+        ],
+        "alternate_explanations": [
+          "Destination channel name might be incorrectly configured or malformed in recipient input mapping."
+        ],
+        "missing_evidence": [
+          "provider_status_code",
+          "bot_permission_state",
+          "destination_validity",
+          "canonical_source_identity",
+          "action_metadata",
+          "payload_values",
+          "execution_record",
+          "attempt_history",
+          "execution_ordering",
+          "action_inputs",
+          "input_fingerprint",
+          "handler_registry"
+        ]
+      },
+      "proposal": {
+        "disposition": "owner_action_required",
+        "kind": "request_manual_fix",
+        "summary": "Request manual fix of the recipient channel configuration or input mapping by the owner.",
+        "reasons": [
+          "The provider rejected the request with 'Invalid channel username', which is a customer-controlled configuration or destination issue.",
+          "Invalid destination format supports a bounded owner configuration repair."
+        ],
+        "evidence_refs": [
+          "fixture:failure:",
+          "fixture:validation:f03-permission-ambiguous"
+        ],
+        "runbook_citations": [
+          "RB-F04-F06@1.0.0#replay-and-approval"
+        ],
+        "preconditions": [
+          "Verify destination channel username validity",
+          "Ensure recipient mapping matches correct format"
+        ]
+      }
+    },
+    "schemaValid": true,
+    "serviceAcceptance": {
+      "accepted": false,
+      "failure": "invalid_model_output"
+    },
+    "deliveryConsistency": [],
+    "repairSupport": {
+      "status": "unsupported",
+      "assessments": [
+        {
+          "category": "destination_format",
+          "status": "unsupported",
+          "provenance": null,
+          "reason": "no_cited_independent_finding_for_assessed_category"
+        },
+        {
+          "category": "input_requirements",
+          "status": "unsupported",
+          "provenance": null,
+          "reason": "no_cited_independent_finding_for_assessed_category"
+        }
+      ]
+    },
+    "experimentalAcceptance": "rejected",
+    "externalModelCalls": 0
+  }
+}

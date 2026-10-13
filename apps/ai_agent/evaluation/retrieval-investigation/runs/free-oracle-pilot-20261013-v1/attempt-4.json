@@ -1,0 +1,66 @@
+{
+  "caseId": "f07-provider-response-lost",
+  "variant": "baseline",
+  "attempts": 1,
+  "startedAt": 1791834558915,
+  "promptHash": "fc4d5d0104a2999083954948b95e9b92d83936822b8365ec6934001dffe9242f",
+  "configHash": "c087890dc02b52a11a2c8577faf7b8d3fdd2e18a71a132dd7c65817de5a36d19",
+  "output": {
+    "status": "abstained",
+    "diagnosis": {
+      "taxonomy_id": "F07",
+      "summary": "Provider response was lost after request transmission, and delivery outcome remains unknown.",
+      "confidence": "high",
+      "evidence_refs": [
+        "fixture:failure:f07-provider-response-lost",
+        "fixture:execution:f07-provider-response-lost",
+        "fixture:validation:f07-provider-response-lost"
+      ],
+      "alternate_explanations": [
+        "The message may have reached the provider successfully despite the lost response receipt."
+      ],
+      "missing_evidence": [
+        "provider_delivery_receipt",
+        "request_fingerprint",
+        "canonical_source_identity",
+        "action_metadata",
+        "payload_values",
+        "execution_record",
+        "attempt_history",
+        "execution_ordering",
+        "action_inputs",
+        "input_fingerprint",
+        "handler_registry"
+      ]
+    },
+    "proposal": {
+      "disposition": "outcome_unknown",
+      "kind": "escalate",
+      "summary": "Delivery outcome is unknown due to lost provider response, requiring escalation.",
+      "reasons": [
+        "Delivery outcome is unknown and provider response was lost.",
+        "Required evidence items are missing to establish safe replay or definitive delivery."
+      ],
+      "evidence_refs": [
+        "fixture:failure:f07-provider-response-lost"
+      ],
+      "runbook_citations": [
+        "RB-F07@1.0.0#read-only-investigation"
+      ],
+      "preconditions": [
+        "Obtain independent provider evidence or missing delivery receipts before any further action."
+      ]
+    }
+  },
+  "usage": {
+    "input_tokens": 3116,
+    "output_tokens": 424,
+    "total_tokens": 3540
+  },
+  "latencyMs": 2346.115899999997,
+  "schemaValid": true,
+  "citationMembership": true,
+  "serviceValid": false,
+  "providerError": null,
+  "failure": null
+}

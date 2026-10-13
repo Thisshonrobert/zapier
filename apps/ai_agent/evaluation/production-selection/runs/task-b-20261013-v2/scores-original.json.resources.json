@@ -1,0 +1,15 @@
+{
+  "code": 0,
+  "elapsedMs": 5622.7390000000005,
+  "peakRssKiB": 257712,
+  "finalMemory": {
+    "rss": 172732416,
+    "heapTotal": 57942016,
+    "heapUsed": 21152072,
+    "external": 37853101,
+    "arrayBuffers": 23421134
+  },
+  "node": "v24.20.0",
+  "platform": "win32",
+  "architecture": "x64"
+}

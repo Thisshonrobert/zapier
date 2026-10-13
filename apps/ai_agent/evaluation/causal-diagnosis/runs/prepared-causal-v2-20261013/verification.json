@@ -1,0 +1,26 @@
+{
+  "externalCalls": 0,
+  "focusedFinal": {
+    "command": "rtk proxy bun test apps/ai_agent/tests/causal-consistency.test.ts apps/ai_agent/tests/causal-diagnosis.test.ts apps/ai_agent/tests/oracle-pilot.test.ts",
+    "exitCode": 0,
+    "passed": 26,
+    "failed": 0
+  },
+  "broaderRegression": {
+    "command": "rtk proxy bun test apps/ai_agent/tests/causal-consistency.test.ts apps/ai_agent/tests/causal-diagnosis.test.ts apps/ai_agent/tests/prompts.test.ts apps/ai_agent/tests/oracle-pilot.test.ts apps/ai_agent/tests/diagnosis-graph.test.ts apps/ai_agent/tests/advisory-regression.test.ts",
+    "exitCode": 1,
+    "passed": 52,
+    "skipped": 1,
+    "failed": 1,
+    "failure": "Existing frozen V4 cases.json CRLF hash mismatch; LF normalization matches manifest; frozen artifact unchanged",
+    "skip": "PostgreSQL interrupt survives connection restart and duplicate decision delivery"
+  },
+  "checkTypes": { "command": "rtk proxy bun run check-types", "exitCode": 0, "aiAgentExecuted": true },
+  "build": { "command": "rtk proxy bun run build", "exitCode": 0, "aiAgentExecuted": true, "frontendCached": true, "existingWarningsReplayed": true },
+  "lint": { "command": "bun run lint", "scriptExitCode": 1, "errors": 9, "warnings": 22, "diagnosticSource": "lint.log", "sourceFiles": "Unchanged frontend files; no ai_agent lint task" },
+  "limitations": [
+    "Offline behavior of evaluator and runner is tested; candidate v2 model behavior remains unmeasured",
+    "No semantic correctness or production-readiness claim",
+    "No Git integration or Graphify regeneration"
+  ]
+}

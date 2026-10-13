@@ -1,0 +1,4 @@
+{
+  "extends": "../../apps/ai_agent/tsconfig.json",
+  "include": ["./*.ts"]
+}

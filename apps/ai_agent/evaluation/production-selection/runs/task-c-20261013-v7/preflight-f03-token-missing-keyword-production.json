@@ -1,0 +1,1 @@
+{"caseId":"f03-token-missing","arm":"keyword-production","startedAt":1791888815904,"status":200,"countedInputTokens":3081,"outputLimitTokens":2048,"totalLimitTokens":64000,"latencyMs":285.8140999999887,"failure":null,"networkCode":null,"tokenBudgetAccepted":true,"state":"finished"}

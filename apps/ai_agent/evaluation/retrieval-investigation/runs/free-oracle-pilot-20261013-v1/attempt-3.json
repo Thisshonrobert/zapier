@@ -1,0 +1,67 @@
+{
+  "caseId": "f07-provider-response-lost",
+  "variant": "oracle",
+  "attempts": 1,
+  "startedAt": 1791834548908,
+  "promptHash": "b06b51353b4b2ea5ea028043111ab95d208a344467d927b0b1f64d73db94b1a9",
+  "configHash": "c087890dc02b52a11a2c8577faf7b8d3fdd2e18a71a132dd7c65817de5a36d19",
+  "output": {
+    "status": "abstained",
+    "diagnosis": {
+      "taxonomy_id": "F07",
+      "summary": "Provider response was lost after request transmission, leaving delivery status unknown and requiring abstention due to insufficient delivery evidence.",
+      "confidence": "high",
+      "evidence_refs": [
+        "fixture:failure:f07-provider-response-lost",
+        "fixture:execution:f07-provider-response-lost",
+        "fixture:validation:f07-provider-response-lost"
+      ],
+      "alternate_explanations": [
+        "The provider may have successfully processed the request despite the lost response receipt."
+      ],
+      "missing_evidence": [
+        "provider_delivery_receipt",
+        "request_fingerprint",
+        "canonical_source_identity",
+        "action_metadata",
+        "payload_values",
+        "execution_record",
+        "attempt_history",
+        "execution_ordering",
+        "action_inputs",
+        "input_fingerprint",
+        "handler_registry"
+      ]
+    },
+    "proposal": {
+      "disposition": "outcome_unknown",
+      "kind": "escalate",
+      "summary": "Abstain from replay or definitive delivery conclusions due to unknown provider response and missing historical delivery evidence.",
+      "reasons": [
+        "Delivery outcome is explicitly unknown because the provider response was lost after transmission and required evidence is missing."
+      ],
+      "evidence_refs": [
+        "fixture:failure:f07-provider-response-lost",
+        "fixture:execution:f07-provider-response-lost"
+      ],
+      "runbook_citations": [
+        "RB-F07@1.0.0#read-only-investigation",
+        "RB-F07@1.0.0#forbidden-actions"
+      ],
+      "preconditions": [
+        "Confirm independent provider side-effects or logs before attempting any further classification."
+      ]
+    }
+  },
+  "usage": {
+    "input_tokens": 3087,
+    "output_tokens": 317,
+    "total_tokens": 3404
+  },
+  "latencyMs": 2818.1572000000015,
+  "schemaValid": true,
+  "citationMembership": true,
+  "serviceValid": false,
+  "providerError": null,
+  "failure": null
+}

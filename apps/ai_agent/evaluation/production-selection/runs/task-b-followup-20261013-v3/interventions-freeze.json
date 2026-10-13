@@ -1,0 +1,20 @@
+{
+  "variants": [
+    "production",
+    "normalized-observations",
+    "procedure-question"
+  ],
+  "preparedAt": "2026-10-13T07:22:00.092Z",
+  "artifactHashes": {
+    "hypotheses.json": "16a127cd2edd3807f219c600cacb69e7dd1c9490eb3ef0f2422f682a46a07606",
+    "query-variants.json": "467746c2e1074e942ac47c9d62f8d58d982fc193e65d010c7acdbb35775e9770",
+    "inference-hybrid-followup.json": "ddfc378ee21c517ed4ae1ba213a3f0837aece613eda2f0f1d583a9fbb748b6dd",
+    "inference-original-followup.json": "6aac9b4693ca91df0bf27ce4a899ec09e5e41e0887d643c802edaaa815266cf0",
+    "followup-driver.mjs": "16cba049418874fcf4796087056d59c776ffd6878fbdf24a542d4e4d3f569380",
+    "resource-monitor.mjs": "8ea29a0266aed73766b2d3abe2ad920a47b0f9295997827faf719a02c8321e65"
+  },
+  "hybridInputHash": "d33d3314a846e6a4af3612dfe0871186cef38d531a7017c398a3ba240d9a53bc",
+  "originalInputHash": "f94763cfacfb34ae45fe8cddc432b5f7b6fb1b13cc711acce44ed9df90507000",
+  "configHash": "6f316a1d9379ad055d60f3605a76648af7734cdf8bcad94ceeb32c49424a188e",
+  "originalConfigHash": "3f5ba2cbe21cdb9970ed2a073cc66a09f91a0214a7b4e8afc0b110231a76cd0c"
+}

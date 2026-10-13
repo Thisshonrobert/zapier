@@ -1,0 +1,72 @@
+{
+  "slot": 1,
+  "caseId": "f01-rate-limit-rejected",
+  "arm": "keyword-production",
+  "repetition": 1,
+  "startedAt": 1791891514679,
+  "reservation": "64000 tokens; 16 cents",
+  "countedInputTokens": 3114,
+  "output": {
+    "status": "completed",
+    "diagnosis": {
+      "taxonomy_id": "F01",
+      "summary": "Telegram sendMessage returned 429 with retry_after 30, indicating a provider rate limit rejection.",
+      "confidence": "high",
+      "evidence_refs": [
+        "fixture:failure:f01-rate-limit-rejected",
+        "fixture:execution:f01-rate-limit-rejected",
+        "fixture:validation:f01-rate-limit-rejected"
+      ],
+      "alternate_explanations": [
+        "Temporary network congestion triggering provider throttling.",
+        "Upstream burst limit exceeded."
+      ],
+      "missing_evidence": [
+        "provider_request_ids",
+        "canonical_source_identity",
+        "action_metadata",
+        "payload_values",
+        "execution_record",
+        "attempt_history",
+        "execution_ordering",
+        "action_inputs",
+        "input_fingerprint",
+        "handler_registry"
+      ]
+    },
+    "proposal": {
+      "disposition": "engineering_escalation_required",
+      "kind": "escalate",
+      "summary": "Escalate provider rate limit rejection for engineering review and provider rate-limiting handling analysis.",
+      "reasons": [
+        "Telegram provider rate limits and rate-limit responses belong to engineering/provider investigation.",
+        "All retry attempts were rejected by the provider."
+      ],
+      "evidence_refs": [
+        "fixture:failure:f01-rate-limit-rejected"
+      ],
+      "runbook_citations": [
+        "RB-F01-F02@1.0.0#replay-and-approval"
+      ],
+      "preconditions": [
+        "Review provider logs and rate-limit thresholds."
+      ]
+    }
+  },
+  "usage": {
+    "input_tokens": 3114,
+    "output_tokens": 431,
+    "total_tokens": 3545
+  },
+  "latencyMs": 3289.8237,
+  "schemaValid": true,
+  "serviceAccepted": true,
+  "semanticReview": null,
+  "humanReleaseAcceptance": null,
+  "failure": null,
+  "providerError": null,
+  "requestStatuses": [
+    200,
+    200
+  ]
+}

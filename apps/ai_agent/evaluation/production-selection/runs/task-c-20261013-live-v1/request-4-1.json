@@ -1,0 +1,10 @@
+{
+  "slot": 4,
+  "requestNumber": 1,
+  "operation": "countTokens",
+  "startedAt": 1791891709856,
+  "status": 200,
+  "latencyMs": 174.27939999999944,
+  "countedInputTokens": 3066,
+  "state": "finished"
+}

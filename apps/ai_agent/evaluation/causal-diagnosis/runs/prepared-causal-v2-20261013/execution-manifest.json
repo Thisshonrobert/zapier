@@ -1,0 +1,110 @@
+{
+  "status": "complete_semantic_gate_failed",
+  "recordedAt": "2026-10-13T04:36:04.952Z",
+  "model": "gemini-3.5-flash-lite",
+  "planHash": "044726d37cc5190e127227d59b62bf5c120ae519340568b602a139843957f2f6",
+  "codeRevision": "b8aca2348fc1954d627a5462950112dbae785519",
+  "sourceHashes": {
+    "apps/ai_agent/src/evaluation/causal-diagnosis.ts": "5e8612ac79ae8ea68a6c50e296bd666af9136bec92ed71c9775da3b1a2441df4",
+    "apps/ai_agent/src/evaluation/causal-pilot.ts": "8f79ee535ce1f386479e41423bd131ace81d11a45c41c94b6fbfd9e0df704032",
+    "apps/ai_agent/src/evaluation/oracle-pilot.ts": "a953e536aea2f00d20892e149ac9904fcff22026f3c384bd8dfc53559d03dadf",
+    "apps/ai_agent/tests/causal-consistency.test.ts": "c782003e138e24e4d128242d17ced55cc05413b8583e808957b36528de4ee6a7",
+    "apps/ai_agent/evaluation/causal-diagnosis/review-v2.ts": "387f61ef0159612d5df69eda8c0f070505b7b6cf7edffa997ece6588c0666f3d",
+    "apps/ai_agent/src/prompts.ts": "aa4a038a8b2748826933a9deb13aa883546d9d6cb79369a5424402d1c9485a9f",
+    "apps/ai_agent/src/contracts.ts": "2db41bcdde5b4539c8b0d5514e2bf9dd61a3c26e8166bbf867b6f0d0435711eb",
+    "apps/ai_agent/src/graph.ts": "f3dec93c3dd58037f0b62d79f1fe3f5c7bfb12c79e9f07a3c99cc73d4c632e68",
+    "apps/ai_agent/src/gemini-model.ts": "18a909519c9bd16437e7ca54e125eb8c02430978d44b5501b572243e17a7c257"
+  },
+  "frozenV1Unchanged": true,
+  "artifactHashes": {
+    "plan.json": "044726d37cc5190e127227d59b62bf5c120ae519340568b602a139843957f2f6",
+    "access.json": "329347d6b4d48018639ce8b547bc132c340ad490120780f5c7d103a677a5f260",
+    "execution-authorization.json": "fac2fdf0a36f799fbfc7c4e29ab518904df97573d984b81b4de7c1607e464a3a",
+    "requests.jsonl": "8036c9c0403dcf033ef4307ce9f176b96792f6d8a2db330ae6bd2d15771d5ece",
+    "report.json": "bf237c6037370ada16e97fb748bc557e2fcb0f97b837577bafa8c07bafc0be5e",
+    "started-1.json": "3ee6a1c87c7f3db43437831a9a4040fdc155b75ace8c8c97d25654e1c286e6b8",
+    "attempt-1.json": "04c9a67e94a8676bcb83bc6e3d51f97e59c814af1b6ee244d248888f624ed88f",
+    "result-1.json": "1cfd3b49cd1d8fccd09b653fccae336969502e7b7d21735b2c970cb92876c95d",
+    "started-2.json": "eb150adea84ef570b22dec0fd557174d69473ea0189ef11d82d9c9058dc338c4",
+    "attempt-2.json": "063f5b82a81f05ba916b80eabde03b444135ac4962480ad256b1702ef4392a7e",
+    "result-2.json": "401b7637564381107928a355493a6ebad254f0839702e21ecc71d15728a1cfde",
+    "started-3.json": "ae413507a1b2e31cae94bbb4cc60e77c78ae5fc17c946729b7e9537d2227b599",
+    "attempt-3.json": "83386c327ce8d2870e4d65191e05430217853540cd722968da75189f9eb6b503",
+    "result-3.json": "677cf35948219071a5c6734e35c4c1634e42e7b65cab539825d6c81013bab46d",
+    "started-4.json": "3f5753f25a09d8c9835231be54850fcc42784ac85555fb9a8b4308f89ad889eb",
+    "attempt-4.json": "59e2ea469b90eed225e49acb672d98d471d5051723871c6b37e218c257f0e587",
+    "result-4.json": "9101ed7812c76890b7f8442d7f1aef3a5cedde25d6363d7ae541c17d64b98218",
+    "started-5.json": "02cbf0026b5cc960a67953a07699c7ede7dbcbed541ac1a9a52efb6b2c2434b7",
+    "attempt-5.json": "b194b3947377abfa0359850124be68f87922481c903e2e4f912cd8da9a608e61",
+    "result-5.json": "326c9e7b88d081b02881ea44d4b7e0feb48c3ee5da680926a5f69104d751517d",
+    "started-6.json": "2fa655645660afeaa656c68a013d0943849e9f224a7160674c60170efb7fbc72",
+    "attempt-6.json": "f17a6868e671b5452bcea19b8f9524b5e6d044e566735397a5681db3cb72d348",
+    "result-6.json": "e0ea0fb1cc4bfea15b9f98328b8d6e1a45d1bf5dbdbfef93c007207602c103e1"
+  },
+  "generationRequests": 6,
+  "tokenPreflights": 6,
+  "totalProviderRequests": 12,
+  "providerFailures": 0,
+  "allHttpStatuses": [
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200
+  ],
+  "generationStartGapsMs": [
+    12389,
+    10240,
+    10012,
+    10004,
+    10009
+  ],
+  "providerElapsedMs": 56866,
+  "usage": {
+    "inputTokens": 19748,
+    "outputTokens": 2136,
+    "totalTokens": 21884
+  },
+  "cost": {
+    "estimatedGenerationUsd": 0,
+    "billedUsd": null,
+    "basis": "User-authorized reuse of the same previously confirmed free-tier key/project/model; billing not independently reverified"
+  },
+  "allPairsIdenticalExceptInstructions": true,
+  "initialOutputsPreserved": true,
+  "candidateReview": [
+    {
+      "caseId": "f03-permission-ambiguous",
+      "slot": 2,
+      "meetsRequirement": false,
+      "delivery": "Preserves known rejection",
+      "correction": "Unsupported destination correction: no independent defect finding",
+      "decision": "Address unsupported repair before any retrieval experiment"
+    },
+    {
+      "caseId": "f04-invalid-destination",
+      "slot": 3,
+      "meetsRequirement": true,
+      "correction": "Bounded correction cites fixture:failure:f04-invalid-destination and explicitly attributes defect to destination_format_invalid observation",
+      "replay": "No replay proposal or replacement value invented"
+    },
+    {
+      "caseId": "f07-provider-response-lost",
+      "slot": 6,
+      "meetsRequirement": true,
+      "delivery": "abstained + outcome_unknown + escalate",
+      "replay": "No replay proposal or inferred non-delivery"
+    }
+  ],
+  "semanticReview": "Direct agent review with variant names visible; one sample each, not blinded or statistical validation",
+  "candidateFrozenForRetrieval": false,
+  "retrievalExperimentsStarted": false,
+  "recommendation": "Resolve error-to-defect conflation in the ambiguous case before changing retrieval. Existing local reranker remains the first bounded retrieval candidate after the diagnosis gate passes; HyDE/PageIndex require demonstrated vocabulary/navigation gaps."
+}

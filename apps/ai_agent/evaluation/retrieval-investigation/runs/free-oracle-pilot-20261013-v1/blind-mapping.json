@@ -1,0 +1,26 @@
+[
+  {
+    "label": "pair-1-A",
+    "slot": 2,
+    "caseId": "f03-permission-ambiguous",
+    "variant": "oracle"
+  },
+  {
+    "label": "pair-1-B",
+    "slot": 1,
+    "caseId": "f03-permission-ambiguous",
+    "variant": "baseline"
+  },
+  {
+    "label": "pair-2-A",
+    "slot": 4,
+    "caseId": "f07-provider-response-lost",
+    "variant": "baseline"
+  },
+  {
+    "label": "pair-2-B",
+    "slot": 3,
+    "caseId": "f07-provider-response-lost",
+    "variant": "oracle"
+  }
+]

@@ -1,0 +1,150 @@
+{
+  "name": "input defect with wrong citation",
+  "synthetic": true,
+  "evidence": {
+    "failureContext": {
+      "contract_version": 1,
+      "evidence_id": "fixture:failure:f03-permission-ambiguous",
+      "type": "failure_context",
+      "source_ref": {
+        "case_id": "39c1491a-39b2-4022-8eb3-709d0019aa60",
+        "zap_run_id": "ad2d342a-9112-4e94-8873-62e33186668b",
+        "stage": 0
+      },
+      "observed_at": "2026-10-04T10:22:40.946Z",
+      "content_hash": "c84eeef7f7226f589e0413e7552ddfb2c7005b9d4831293e59bd3673ade905c8",
+      "facts": {
+        "source_kind": "retry_row",
+        "current_action_type": "telegram",
+        "retry": {
+          "provider": "telegram",
+          "provider_outcome": "rejected",
+          "requires_human": true,
+          "final_error": "Invalid channel username"
+        },
+        "action_metadata": {
+          "paths": [],
+          "truncated": true
+        },
+        "payload": {
+          "paths": [],
+          "truncated": true
+        }
+      },
+      "unavailable": [
+        "provider_status_code",
+        "bot_permission_state",
+        "destination_validity",
+        "canonical_source_identity",
+        "action_metadata",
+        "payload_values"
+      ],
+      "complete": false,
+      "simulated": false
+    },
+    "executionEvidence": {
+      "contract_version": 1,
+      "evidence_id": "fixture:execution:f03-permission-ambiguous",
+      "type": "execution_evidence",
+      "source_ref": {
+        "case_id": "39c1491a-39b2-4022-8eb3-709d0019aa60",
+        "zap_run_id": "ad2d342a-9112-4e94-8873-62e33186668b",
+        "stage": 0
+      },
+      "observed_at": "2026-10-04T10:22:40.946Z",
+      "content_hash": "dc0cbb188c2ef99f533be513c471ef334c7493d62c0f619761f4d3c1d8343d5d",
+      "facts": {
+        "provenance": "captured",
+        "current_execution": null,
+        "attempts": [],
+        "history_limit": 10,
+        "history_truncated": true,
+        "predecessors": [],
+        "ordering": {
+          "status": "unknown",
+          "missing_predecessor_stages": []
+        }
+      },
+      "unavailable": [
+        "execution_record",
+        "attempt_history",
+        "execution_ordering"
+      ],
+      "complete": false,
+      "simulated": false
+    },
+    "inputValidation": {
+      "contract_version": 1,
+      "evidence_id": "fixture:validation:f03-permission-ambiguous",
+      "type": "action_input_validation",
+      "source_ref": {
+        "case_id": "39c1491a-39b2-4022-8eb3-709d0019aa60",
+        "zap_run_id": "ad2d342a-9112-4e94-8873-62e33186668b",
+        "stage": 0
+      },
+      "observed_at": "2026-10-04T10:22:40.946Z",
+      "content_hash": "0e00345605e1682c273e664bb35cd43c79bfe61ec275f723f9e8dd92165a3705",
+      "facts": {
+        "action_type": "telegram",
+        "validation_status": "invalid",
+        "supported": true,
+        "missing_required_fields": [],
+        "invalid_field_types": [],
+        "missing_template_paths": [
+          "customer.channel"
+        ],
+        "credential_presence": [],
+        "blocked_reasons": [
+          "fixture_inputs_unavailable"
+        ],
+        "input_fingerprint": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "unavailable": [
+        "action_inputs",
+        "input_fingerprint",
+        "handler_registry"
+      ],
+      "complete": false,
+      "simulated": false
+    }
+  },
+  "output": {
+    "status": "completed",
+    "diagnosis": {
+      "taxonomy_id": "F04",
+      "summary": "Bounded synthetic finding, not execution-time configuration.",
+      "confidence": "low",
+      "evidence_refs": [
+        "fixture:failure:f03-permission-ambiguous"
+      ],
+      "alternate_explanations": [],
+      "missing_evidence": [
+        "provider_status_code",
+        "bot_permission_state",
+        "destination_validity",
+        "canonical_source_identity",
+        "action_metadata",
+        "payload_values",
+        "execution_record",
+        "attempt_history",
+        "execution_ordering",
+        "action_inputs",
+        "input_fingerprint",
+        "handler_registry"
+      ]
+    },
+    "proposal": {
+      "disposition": "owner_action_required",
+      "kind": "request_manual_fix",
+      "summary": "Correct template inputs.",
+      "reasons": [
+        "Correct only the cited independent finding; no replacement or replay authorized."
+      ],
+      "evidence_refs": [
+        "fixture:failure:f03-permission-ambiguous"
+      ],
+      "runbook_citations": [],
+      "preconditions": []
+    }
+  }
+}

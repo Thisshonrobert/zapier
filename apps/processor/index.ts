@@ -1,10 +1,10 @@
 import { prisma } from "../../packages/db/prisma/db";
 import { Kafka } from "kafkajs";
 
- const TOPIC_NAME = 'zap-events'
+ const TOPIC_NAME = process.env.KAFKA_EVENTS_TOPIC ?? 'zap-events'
 const kafka = new Kafka({
     clientId: 'outbox-processor',
-    brokers: ['localhost:9092']
+    brokers: process.env.KAFKA_BROKERS?.split(',') ?? ['localhost:9092']
   })
   
 async function main() {

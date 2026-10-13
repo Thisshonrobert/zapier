@@ -1,0 +1,1 @@
+{"caseId":"f07-provider-response-lost","arm":"minilm-procedure-question","startedAt":1791889146005,"status":200,"countedInputTokens":3106,"outputLimitTokens":2048,"totalLimitTokens":64000,"latencyMs":194.79950000002282,"failure":null,"networkCode":null,"tokenBudgetAccepted":true,"state":"finished"}

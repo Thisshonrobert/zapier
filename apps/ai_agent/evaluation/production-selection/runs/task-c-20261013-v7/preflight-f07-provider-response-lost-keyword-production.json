@@ -1,0 +1,1 @@
+{"caseId":"f07-provider-response-lost","arm":"keyword-production","startedAt":1791889115998,"status":200,"countedInputTokens":3116,"outputLimitTokens":2048,"totalLimitTokens":64000,"latencyMs":215.41829999996116,"failure":null,"networkCode":null,"tokenBudgetAccepted":true,"state":"finished"}

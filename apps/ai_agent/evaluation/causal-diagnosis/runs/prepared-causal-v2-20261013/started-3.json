@@ -1,0 +1,18 @@
+{
+  "caseId": "f04-invalid-destination",
+  "variant": "candidate",
+  "promptVersion": "experimental-causal-v2",
+  "promptHash": "b8e2b39f7e4ba1181c2ff950e65cfb7e3dd63936edd304d4d0f84344eafe56f2",
+  "retrievalHash": "f5d3bb516a4deff62106d601ed7bc9c181f2f986520efdecfadc4febbfccd421",
+  "settingsHash": "c087890dc02b52a11a2c8577faf7b8d3fdd2e18a71a132dd7c65817de5a36d19",
+  "startedAt": 1791866041305,
+  "output": null,
+  "usage": null,
+  "latencyMs": 0,
+  "schemaValid": false,
+  "serviceValid": false,
+  "repairEvidenceIssue": null,
+  "consistencyIssues": null,
+  "failure": null,
+  "providerError": null
+}

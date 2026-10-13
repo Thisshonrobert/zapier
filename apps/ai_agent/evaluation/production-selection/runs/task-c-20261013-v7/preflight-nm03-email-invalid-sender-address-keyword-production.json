@@ -1,0 +1,1 @@
+{"caseId":"nm03-email-invalid-sender-address","arm":"keyword-production","startedAt":1791889356106,"status":200,"countedInputTokens":3105,"outputLimitTokens":2048,"totalLimitTokens":64000,"latencyMs":161.7640000000829,"failure":null,"networkCode":null,"tokenBudgetAccepted":true,"state":"finished"}

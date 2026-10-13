@@ -1,0 +1,17 @@
+{
+  "caseId": "f03-permission-ambiguous",
+  "variant": "candidate",
+  "promptVersion": "experimental-causal-v1",
+  "promptHash": "28ca599e634e297b762326eb6ac9955b00406c8bb613064bdb3b812c71c522c6",
+  "retrievalHash": "e7e1fb889302ce358cd04395ec9fd0fc240d44aaf3a8171eca1896badc2b8dff",
+  "settingsHash": "c087890dc02b52a11a2c8577faf7b8d3fdd2e18a71a132dd7c65817de5a36d19",
+  "startedAt": 1791863636615,
+  "output": null,
+  "usage": null,
+  "latencyMs": 0,
+  "schemaValid": false,
+  "serviceValid": false,
+  "repairEvidenceIssue": null,
+  "failure": null,
+  "providerError": null
+}

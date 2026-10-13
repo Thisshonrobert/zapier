@@ -6,9 +6,9 @@ import { executeStage, parseZapEvent, requireLoadedAction, type ZapEvent } from 
 import { createReplayStore, executeReplayStage } from "./replay.ts";
 import { settleMessage } from "./message-resolution.ts";
 
-const TOPIC_NAME = "zap-events";
-const kafka = new Kafka({ clientId: "worker", brokers: ["localhost:9092"] });
-const consumer = kafka.consumer({ groupId: "zap-group" });
+const TOPIC_NAME = process.env.KAFKA_EVENTS_TOPIC ?? "zap-events";
+const kafka = new Kafka({ clientId: "worker", brokers: process.env.KAFKA_BROKERS?.split(",") ?? ["localhost:9092"] });
+const consumer = kafka.consumer({ groupId: process.env.KAFKA_WORKER_GROUP ?? "zap-group" });
 const store = createExecutionStore(prisma as unknown as ExecutionDb,
   { handlerVersion: process.env.WORKER_HANDLER_VERSION });
 const replayStore = createReplayStore(prisma);

@@ -1,3 +1,4 @@
+//boundary for what the model is allowed to return 
 import { z } from "zod";
 
 // ============================================================================

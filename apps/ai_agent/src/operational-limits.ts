@@ -16,13 +16,15 @@ function positiveMoney(name: string) {
   return value;
 }
 
-export function operationalLimits() {
+export function operationalLimits(model = process.env.GEMINI_MODEL ?? "gemini-2.5-flash") {
   const tokensPerAttempt = 64000;
   const enabled = investigationEnabled();
+  if (enabled && model !== "gemini-2.5-flash" && model !== "gemini-3.5-flash-lite")
+    throw new Error("Unsupported investigation model");
   const inputRate = enabled ? positiveMoney("INVESTIGATION_INPUT_USD_PER_MILLION_TOKENS") : 0;
   const outputRate = enabled ? positiveMoney("INVESTIGATION_OUTPUT_USD_PER_MILLION_TOKENS") : 0;
   if (enabled && (inputRate < 0.30 || outputRate < 2.50))
-    throw new Error("Investigation rates must cover gemini-2.5-flash standard pricing");
+    throw new Error("Investigation rates must cover configured model standard pricing");
   return {
     ownerRequestsPerDay: bounded("INVESTIGATION_OWNER_REQUESTS_PER_DAY", 20, 1000),
     operatorRequestsPerDay: bounded("INVESTIGATION_OPERATOR_REQUESTS_PER_DAY", 20, 1000),

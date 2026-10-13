@@ -1,0 +1,78 @@
+{
+  "frozenAt": "2026-10-13T12:21:46.595Z",
+  "config": {
+    "model": {
+      "id": "Xenova/ms-marco-MiniLM-L-6-v2",
+      "revision": "a09144355adeed5f58c8ed011d209bf8ee5a1fec",
+      "dtype": "q8"
+    },
+    "cutoff": 0.001,
+    "maxLength": 512,
+    "batchSize": 8,
+    "candidateBound": 60
+  },
+  "authority": "User explicitly requested procedure-question testing on held-out cases and integration conditional on winning; accepted 75% recall earlier. This authorizes historical held-out access for this fixed comparison, not tuning against its labels.",
+  "scope": "One fixed procedure prefix, unchanged .001 cutoff; paired original MiniLM and unchanged keyword; separate 60-section diagnostic and 54-section production-corpus cohorts. No live diagnosis calls.",
+  "gates": {
+    "recallAt3": 0.75,
+    "noMatchAbstention": 0.9,
+    "falseAbstentionMaximum": 0.05,
+    "labelledPrecision": "At least paired keyword",
+    "warmScoringP95MaximumMs": 3000
+  },
+  "integration": "Conditional on retrieval gates and remaining production-path/diagnosis acceptance; this historical human-question benchmark alone cannot establish independent incident-path release acceptance.",
+  "limitations": [
+    "Historical fresh scenarios were independent when authored, but their aggregate results have already been exposed.",
+    "Both cohorts use human search questions rather than incident-derived production queries.",
+    "Labels remain frozen; incomplete gold lists limit precision interpretation; no human adjudication."
+  ],
+  "sourceHashes": {
+    "apps/ai_agent/evaluation/r25/runs/exhaustive-v2/dataset-audited.json": "01f7446d3b4e9d9da8c10474a735aa8b747a92e82ffcb59f9ee77439fc4c3d04",
+    "apps/ai_agent/evaluation/r25/runs/exhaustive-v2/inference-inputs.json": "7ae6e67b373b7b317bd50a15305cca3cfdadd3d0ef6eb47fda043165ce2a2828",
+    "apps/ai_agent/evaluation/r25/runs/exhaustive-v2/scores.json": "1f26fcac04f734950a9e146c7d828bf93047cf87c55cf83f59e9a960e1dd6007",
+    "apps/ai_agent/evaluation/r25/runs/fresh-v1/dataset.json": "95f7727c727f291c2ed34a0a6547d67077cf6743998ff2323b367e67bc12f3e8",
+    "apps/ai_agent/evaluation/r25/runs/fresh-v1/inference-inputs.json": "604c69f9263a05e6624c290c7164b09727c2c728c025000ea6c0ac4868218e06",
+    "apps/ai_agent/evaluation/r25/runs/fresh-v1/scores.json": "f4be37fb57b347b04a61019417d8ed21d71160922e403ae3bba4214754f6bac9",
+    "apps/ai_agent/src/evaluation/procedure-heldout.ts": "ff66163ce7267794fb99fdc5c36cf3dab40759a6bf4c2c80689612a6c11c6276",
+    "apps/ai_agent/src/evaluation/r25-models.mjs": "d694d00cea16bccce93f13bfcab573b0ccd14ebf1e557df988a70ab2300b2865",
+    "apps/ai_agent/src/evaluation/retrieval-selection.ts": "3aeb4fea33d8271276f095a990bc34a9ad15a44d37a0e4cc00c042e9dc0a0ea1",
+    "apps/ai_agent/src/evaluation/retrieval-r21.ts": "f2972f4f36c58d38655e65e180527258c2e164e98ee0ce2a7bf0718c654156a1",
+    "apps/ai_agent/src/evaluation/r24-analysis.ts": "464b379ac2d457152d8e9fd6ede00778dbd992ed47d6f61bd47ce78e2d6b8917",
+    "apps/ai_agent/src/evaluation/r23-analysis.ts": "6fb8b37789fe76bd2ad3573490f0f013e5864695ca5f5ff4cebb97ba179e35e6",
+    "apps/ai_agent/src/evaluation/r25-analysis.ts": "f98c0316fca3259350398c4dd64766c01db3a3656ac6ce42442e670c6d753d13",
+    "apps/ai_agent/src/evaluation/retrieval-r2.ts": "ebc8b06ec719bf9ea49d714071fe2207d01603b07e9326aaa8812d3592d42c9d",
+    "apps/ai_agent/src/tools/search-runbooks.ts": "d304fd2fc0b889d565e5714f3658f2aa81465bbeb106c4638b6da6b886f73fa1",
+    "docs/AI/runbooks/credentials-and-destinations.md": "be7fbf07f9155ce556dc40ebdf6bc8fc774716a1aaa121f5441d3d5a1a3573ee",
+    "docs/AI/runbooks/evidence-gaps.md": "34f7b9901669d86905f20f57cb2a0067f0698bc9e0163029f9f416c6f03eae7a",
+    "docs/AI/runbooks/replay-and-stale-cases.md": "d22d6c6a93730b9f698f040c94b07a509be5d91a8282f2b1d2b97ff716fd495d",
+    "docs/AI/runbooks/template-and-registry-validation.md": "711333b1730e0c9c507fa160e602dca786f365acac7de0d4838c37c76e1618c1",
+    "docs/AI/runbooks/transient-provider-failure.md": "63bc02540deb9f1505f772a850f899e1a2be8c077a259ada209cead44aef44d0",
+    "docs/AI/runbooks/uncertain-delivery.md": "4e125af06ed9668317ce26868947fe700b215ee36755bf7d534cc531c1824b1a",
+    "apps/ai_agent/evaluation/r2/runbooks/dlq-publication.md": "672cc7f64eb16595c61906c61aed7a2d8e562283535e74e49160bd4878c188d6",
+    "apps/ai_agent/evaluation/r2/runbooks/email-rejection.md": "e58fd3eac9d5169decdae8b4a3bb7c582ad4e34ccf0df38edd5891435e5fcdb1",
+    "apps/ai_agent/evaluation/r2/runbooks/email-uncertain.md": "2d4217410af20e4a785df6254f7154efbac302ca86e1e42c36d7b792f13c1602",
+    "apps/ai_agent/evaluation/r2/runbooks/ordering-gap.md": "f2a308b314cc666d4bc565a73cae2148994d32898cb9ce39b7a653dfde88639b",
+    "apps/ai_agent/evaluation/r2/runbooks/telegram-cooldown.md": "204efa8bfd9c4aeb7d42278fd91fae0407270ce2ede302ff8a9acbfeec2263bf",
+    "apps/ai_agent/evaluation/r2/runbooks/telegram-destination.md": "150e56a7d62bce10bb84526e624e39c2a01336549526f45b8fac9ec8f0000c10"
+  },
+  "modelAssets": {
+    ".tmp-turbo-user/r2-models/Xenova/ms-marco-MiniLM-L-6-v2/a09144355adeed5f58c8ed011d209bf8ee5a1fec/config.json": "d827779a72d27ae68cf878a6fc2e954542663fe21ca515d9f4783fc96be2d37e",
+    ".tmp-turbo-user/r2-models/Xenova/ms-marco-MiniLM-L-6-v2/a09144355adeed5f58c8ed011d209bf8ee5a1fec/tokenizer.json": "d241a60d5e8f04cc1b2b3e9ef7a4921b27bf526d9f6050ab90f9267a1f9e5c66",
+    ".tmp-turbo-user/r2-models/Xenova/ms-marco-MiniLM-L-6-v2/a09144355adeed5f58c8ed011d209bf8ee5a1fec/tokenizer_config.json": "0b29c7bfc889e53b36d9dd3e686dd4300f6525110eaa98c76a5dafceb2029f53",
+    ".tmp-turbo-user/r2-models/Xenova/ms-marco-MiniLM-L-6-v2/a09144355adeed5f58c8ed011d209bf8ee5a1fec/onnx/model_quantized.onnx": "e9d8ebf845c413e981c175bfe49a3bfa9b3dcce2a3ba54875ee5df5a58639fbe"
+  },
+  "artifactHashes": {
+    "corpus-historical.json": "4ac4f29d9901cd30e33c411b55bc783f5521864be329040989ca0049972f4112",
+    "inputs-historical-reused-original.json": "9aa3acfb33b38e9192aa5be815a37cf010988fcfa9268abb75c81c351b37a04b",
+    "inputs-historical-reused-procedure.json": "1c9844167618c6287b757b519a8dfbac434b1c3b043ca7051dbf1c46bc3f0b31",
+    "inputs-historical-fresh-original.json": "a89531a5001efe86d16b956b8b3e7991babade22d0bec37f7db836758a5a6acf",
+    "inputs-historical-fresh-procedure.json": "269ff3cfc1cddd387e1514172d876adda0b2f4ad831fcec98adf532d8619f62e",
+    "corpus-production.json": "a84aae31a5518ecaf83b8ecb117f90e42d46e446e9fc919a86a0c530ebc5c796",
+    "inputs-production-reused-original.json": "005768e78c7fe8c06d9dbba52fc02db4025744f292fff873b28d1625e09c1641",
+    "inputs-production-reused-procedure.json": "e12d651db16fe14f55fb43335bd6c491135cdd9072daa15fe38ad7f7a4b0443e",
+    "inputs-production-fresh-original.json": "3643d87bc9d96deea565fe71bff011f810db44803e377cb42a6760cc6d0f0128",
+    "inputs-production-fresh-procedure.json": "b60cb8871cae2278fea9045fecc3228fcad2eb94b1be6645881baefaaa72e3e3",
+    "datasets.json": "a1fc29ccf2b118bf55ccca6acb6c634de816172aaf18c1157454083c87c369b9"
+  },
+  "startingGitStatus": " M apps/ai_agent/src/checkpoint.ts\n M apps/ai_agent/src/contracts.ts\n M apps/ai_agent/src/index.ts\n M apps/ai_agent/src/investigation-store.ts\n M apps/ai_agent/src/operational-limits.ts\n M apps/ai_agent/src/tools/search-runbooks.ts\n M graphify-out/.vocab.txt\n M graphify-out/cache/last_query_stamp\n D graphify-out/cache/semantic/pa567fc138e3a/42b6bf915e3861637d640aedc363be01f9372def65db989bfc60112b2f241977.json\n M packages/db/generated/prisma/browser.ts\n M packages/db/generated/prisma/client.ts\n M packages/db/generated/prisma/commonInputTypes.ts\n M packages/db/generated/prisma/internal/class.ts\n M packages/db/generated/prisma/internal/prismaNamespace.ts\n M packages/db/generated/prisma/internal/prismaNamespaceBrowser.ts\n M packages/db/generated/prisma/models.ts\n M packages/db/generated/prisma/models/User.ts\n M packages/db/generated/prisma/models/Zap.ts\n M packages/db/generated/prisma/models/ZapRun.ts\n M packages/db/generated/prisma/models/ZapRunExecution.ts\n M packages/db/generated/prisma/models/ZapRunRetry.ts\n?? apps/ai_agent/evaluation/CLOSEOUT-HANDOFF.md\n?? apps/ai_agent/evaluation/CLOSEOUT-SCOPE.json\n?? apps/ai_agent/evaluation/CLOSEOUT-VERIFICATION.json\n?? apps/ai_agent/evaluation/RAG-DIAGNOSIS-CLOSEOUT.md\n?? apps/ai_agent/evaluation/agentic/\n?? apps/ai_agent/evaluation/causal-diagnosis/\n?? apps/ai_agent/evaluation/multi-query/\n?? apps/ai_agent/evaluation/production-selection/\n?? apps/ai_agent/evaluation/r25/fresh-label-rationales-v1.json\n?? apps/ai_agent/evaluation/r25/fresh-scenarios-author-v1.json\n?? apps/ai_agent/evaluation/r25/fresh-scenarios-v1.json\n?? apps/ai_agent/evaluation/r25/runs/fresh-v1/\n?? apps/ai_agent/evaluation/repair-acceptance/\n?? apps/ai_agent/evaluation/retrieval-investigation/\n?? apps/ai_agent/evaluation/semantic-judge/calibration/2026-10-05T07-52-56.040Z-1e4f259f-1670-47af-91d6-ddd2cc1fa561/judge-live-replayed.json\n?? apps/ai_agent/evaluation/semantic-judge/calibration/2026-10-05T07-52-56.040Z-1e4f259f-1670-47af-91d6-ddd2cc1fa561/judge-live-replayed.md\n?? apps/ai_agent/evaluation/semantic-judge/calibration/2026-10-05T07-52-56.040Z-1e4f259f-1670-47af-91d6-ddd2cc1fa561/judge-live-replayed.votes.json\n?? apps/ai_agent/migrations/0006_task_c_evaluation_reservation.sql\n?? apps/ai_agent/src/evaluation/agentic-experiment.ts\n?? apps/ai_agent/src/evaluation/causal-diagnosis.ts\n?? apps/ai_agent/src/evaluation/causal-pilot.ts\n?? apps/ai_agent/src/evaluation/investigate-retrieval.ts\n?? apps/ai_agent/src/evaluation/oracle-diagnosis.ts\n?? apps/ai_agent/src/evaluation/oracle-pilot.ts\n?? apps/ai_agent/src/evaluation/procedure-heldout.ts\n?? apps/ai_agent/src/evaluation/repair-acceptance-controls.ts\n?? apps/ai_agent/src/evaluation/repair-acceptance-pilot.ts\n?? apps/ai_agent/src/evaluation/repair-acceptance.ts\n?? apps/ai_agent/src/evaluation/retrieval-agentic.ts\n?? apps/ai_agent/src/evaluation/retrieval-investigation.ts\n?? apps/ai_agent/src/evaluation/retrieval-multi-query.ts\n?? apps/ai_agent/src/evaluation/retrieval-selection.ts\n?? apps/ai_agent/src/evaluation/task-c-diagnosis.ts\n?? apps/ai_agent/src/evaluation/task-c-execute.ts\n?? apps/ai_agent/src/evaluation/task-c-preflight.ts\n?? apps/ai_agent/tests/agentic-experiment.test.ts\n?? apps/ai_agent/tests/causal-consistency.test.ts\n?? apps/ai_agent/tests/causal-diagnosis.test.ts\n?? apps/ai_agent/tests/investigation-model-policy.test.ts\n?? apps/ai_agent/tests/oracle-pilot.test.ts\n?? apps/ai_agent/tests/procedure-heldout.test.ts\n?? apps/ai_agent/tests/repair-acceptance.test.ts\n?? apps/ai_agent/tests/retrieval-agentic.test.ts\n?? apps/ai_agent/tests/retrieval-investigation.test.ts\n?? apps/ai_agent/tests/retrieval-multi-query.test.ts\n?? apps/ai_agent/tests/retrieval-selection.test.ts\n?? apps/ai_agent/tests/task-c-budget.integration.test.ts\n?? apps/ai_agent/tests/task-c-diagnosis.test.ts\n?? apps/ai_agent/tests/task-c-execute.test.ts\n?? apps/ai_agent/tests/task-c-preflight.test.ts\n?? docs/superpowers/plans/2026-10-13-rag-production-selection.md\n?? graphify-out/2026-09-30/\n?? graphify-out/memory/query_20260923_064129_82e4530f_start_phase_3c_durable_dlq_publication_and_reconci.md\n?? graphify-out/memory/query_20260927_180846_f1f93e82_oh_but_my_idea_for_this_prj_dlq_system_was_like_in.md\n?? packages/db/generated/prisma/models/ReplayExecution.ts\n?? packages/db/generated/prisma/models/ReplayExecutionAttempt.ts\n?? packages/db/generated/prisma/models/ReplayFailure.ts\n?? packages/db/generated/prisma/models/ReplayRequest.ts\n?? packages/db/generated/prisma/models/TriageAccessAudit.ts\n?? packages/db/generated/prisma/models/TriageApproval.ts\n?? packages/db/generated/prisma/models/TriageDecisionNotification.ts\n?? packages/db/generated/prisma/models/TriageProposal.ts\n?? rtk/\n"
+}

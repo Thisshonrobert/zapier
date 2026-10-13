@@ -1,0 +1,67 @@
+{
+  "caseId": "f04-invalid-destination",
+  "variant": "candidate",
+  "promptVersion": "experimental-causal-v2",
+  "promptHash": "b8e2b39f7e4ba1181c2ff950e65cfb7e3dd63936edd304d4d0f84344eafe56f2",
+  "retrievalHash": "f5d3bb516a4deff62106d601ed7bc9c181f2f986520efdecfadc4febbfccd421",
+  "settingsHash": "c087890dc02b52a11a2c8577faf7b8d3fdd2e18a71a132dd7c65817de5a36d19",
+  "startedAt": 1791866041305,
+  "output": {
+    "status": "completed",
+    "diagnosis": {
+      "taxonomy_id": "F04",
+      "summary": "Controlled fixture observation indicates an invalid destination format for the telegram provider resulting in a rejected delivery outcome.",
+      "confidence": "high",
+      "evidence_refs": [
+        "fixture:failure:f04-invalid-destination",
+        "fixture:execution:f04-invalid-destination",
+        "fixture:validation:f04-invalid-destination"
+      ],
+      "alternate_explanations": [
+        "The destination format might have been affected by upstream input mapping variations not fully captured in the truncated failure context."
+      ],
+      "missing_evidence": [
+        "operator_approved_destination",
+        "canonical_source_identity",
+        "action_metadata",
+        "payload_values",
+        "execution_record",
+        "attempt_history",
+        "execution_ordering",
+        "action_inputs",
+        "input_fingerprint",
+        "handler_registry"
+      ]
+    },
+    "proposal": {
+      "disposition": "owner_action_required",
+      "kind": "request_manual_fix",
+      "summary": "Request manual verification and correction of the destination format configuration for the telegram action.",
+      "reasons": [
+        "Controlled fixture observation explicitly established a destination_format_invalid issue.",
+        "Provider explicitly rejected the destination."
+      ],
+      "evidence_refs": [
+        "fixture:failure:f04-invalid-destination"
+      ],
+      "runbook_citations": [
+        "RB-F03-F04@1.0.0#read-only-investigation"
+      ],
+      "preconditions": [
+        "Operator must verify destination format and configuration outside the automated investigation workflow."
+      ]
+    }
+  },
+  "usage": {
+    "input_tokens": 3440,
+    "output_tokens": 424,
+    "total_tokens": 3864
+  },
+  "latencyMs": 3551.4725,
+  "schemaValid": true,
+  "serviceValid": true,
+  "repairEvidenceIssue": null,
+  "consistencyIssues": [],
+  "failure": null,
+  "providerError": null
+}

@@ -1,0 +1,16 @@
+{"phase":"start","requestId":1,"operation":"countTokens","at":1791834528932}
+{"phase":"finish","requestId":1,"operation":"countTokens","at":1791834529181,"status":200,"retryAfterMs":0,"latencyMs":249}
+{"phase":"start","requestId":2,"operation":"generateContent","at":1791834529182}
+{"phase":"finish","requestId":2,"operation":"generateContent","at":1791834531216,"status":200,"retryAfterMs":0,"latencyMs":2034}
+{"phase":"start","requestId":3,"operation":"countTokens","at":1791834538927}
+{"phase":"finish","requestId":3,"operation":"countTokens","at":1791834539152,"status":200,"retryAfterMs":0,"latencyMs":225}
+{"phase":"start","requestId":4,"operation":"generateContent","at":1791834539194}
+{"phase":"finish","requestId":4,"operation":"generateContent","at":1791834541510,"status":200,"retryAfterMs":0,"latencyMs":2316}
+{"phase":"start","requestId":5,"operation":"countTokens","at":1791834548927}
+{"phase":"finish","requestId":5,"operation":"countTokens","at":1791834549079,"status":200,"retryAfterMs":0,"latencyMs":152}
+{"phase":"start","requestId":6,"operation":"generateContent","at":1791834549207}
+{"phase":"finish","requestId":6,"operation":"generateContent","at":1791834551737,"status":200,"retryAfterMs":0,"latencyMs":2530}
+{"phase":"start","requestId":7,"operation":"countTokens","at":1791834558929}
+{"phase":"finish","requestId":7,"operation":"countTokens","at":1791834559076,"status":200,"retryAfterMs":0,"latencyMs":147}
+{"phase":"start","requestId":8,"operation":"generateContent","at":1791834559213}
+{"phase":"finish","requestId":8,"operation":"generateContent","at":1791834561272,"status":200,"retryAfterMs":0,"latencyMs":2059}

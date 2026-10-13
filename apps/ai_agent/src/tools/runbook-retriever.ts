@@ -61,7 +61,7 @@ export async function createRunbookRetriever(
   environment: Record<string, string | undefined> = process.env,
   scorerFactory: (environment: Record<string, string | undefined>) => Promise<Scorer> = loadScorer,
 ): Promise<RunbookRetriever> {
-  const method = environment.RUNBOOK_RETRIEVAL_METHOD ?? "keyword";
+  const method = environment.RUNBOOK_RETRIEVAL_METHOD ?? "minilm-original";
   if (method === "keyword") return {
     search: async input => searchRunbooks(index, input), close: async () => {},
   };

@@ -1,0 +1,71 @@
+{
+  "slot": 2,
+  "caseId": "f01-rate-limit-rejected",
+  "arm": "minilm-procedure-question",
+  "repetition": 1,
+  "startedAt": 1791891579684,
+  "reservation": "64000 tokens; 16 cents",
+  "countedInputTokens": 3098,
+  "output": {
+    "status": "completed",
+    "diagnosis": {
+      "taxonomy_id": "F01",
+      "summary": "Telegram sendMessage returned 429 with retry_after 30 indicating provider rate limit rejection.",
+      "confidence": "high",
+      "evidence_refs": [
+        "fixture:failure:f01-rate-limit-rejected",
+        "fixture:execution:f01-rate-limit-rejected",
+        "fixture:validation:f01-rate-limit-rejected"
+      ],
+      "alternate_explanations": [
+        "Transient network transport degradation mimicking rate limiting."
+      ],
+      "missing_evidence": [
+        "provider_request_ids",
+        "canonical_source_identity",
+        "action_metadata",
+        "payload_values",
+        "execution_record",
+        "attempt_history",
+        "execution_ordering",
+        "action_inputs",
+        "input_fingerprint",
+        "handler_registry"
+      ]
+    },
+    "proposal": {
+      "disposition": "engineering_escalation_required",
+      "kind": "escalate",
+      "summary": "Provider rate limit rejection encountered on Telegram with a retry-after interval; routing to engineering investigation.",
+      "reasons": [
+        "Telegram sendMessage returned 429 rate limit error.",
+        "Provider rate limits belong to provider and infrastructure investigation."
+      ],
+      "evidence_refs": [
+        "fixture:failure:f01-rate-limit-rejected"
+      ],
+      "runbook_citations": [
+        "RB-F01-F02@1.0.0#allowed-remediation"
+      ],
+      "preconditions": [
+        "Verify provider rate limits have elapsed before any future operations."
+      ]
+    }
+  },
+  "usage": {
+    "input_tokens": 3098,
+    "output_tokens": 420,
+    "total_tokens": 3518
+  },
+  "latencyMs": 2742.319300000003,
+  "schemaValid": true,
+  "serviceAccepted": true,
+  "semanticReview": null,
+  "humanReleaseAcceptance": null,
+  "failure": null,
+  "providerError": null,
+  "requestStatuses": [
+    200,
+    200
+  ]
+}

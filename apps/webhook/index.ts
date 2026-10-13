@@ -86,8 +86,8 @@ app.post("/hooks/catch/test/:userId/:tempZapId", async (req, res) => {
     message: "test webhook recieved",
   });
 });
-app.listen(3003, () => {
-  console.log("Hooks server is running on localhost:3003");
+app.listen(Number(process.env.PORT ?? 3003), () => {
+  console.log(`Hooks server is running on localhost:${process.env.PORT ?? 3003}`);
 })
 
 

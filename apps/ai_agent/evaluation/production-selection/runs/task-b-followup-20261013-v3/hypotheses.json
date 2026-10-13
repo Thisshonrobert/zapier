@@ -1,0 +1,40 @@
+{
+  "authority": "User chose Resolve Task B failures first; external model ceiling $0. Retain all gates, corpus, models, labels and provider restrictions.",
+  "purpose": "Two bounded query interventions after a score-blind annotation sufficiency audit. No production adoption or independent release claims.",
+  "interventions": [
+    {
+      "name": "normalized-observations",
+      "factor": "Replace underscore separators with spaces",
+      "hypothesis": "Typed observation codes are readable tokens but the cross-encoder was trained on prose; delimiter normalization can improve procedural ranking without changing observed facts or eligibility."
+    },
+    {
+      "name": "procedure-question",
+      "factor": "Explicit fixed retrieval task added to the unchanged observed query",
+      "hypothesis": "The serving query describes symptoms and bookkeeping, but omits the user's direct-procedure task; incident queries rank supporting replay guidance above direct procedures. This tests the new incident/direct-procedure scope, unlike prior intent prefixes added to already explicit human questions. No causal or repair claim is added."
+    }
+  ],
+  "success": "Same 80% development macro recall, 90% negative abstention, <=5% false abstention, no direct-precision loss versus unchanged production keyword, reliability/latency gates. Failure means reject; no third intervention or optional pilot.",
+  "fixed": {
+    "originalCutoff": 0.001,
+    "semanticThreshold": 0.2,
+    "batchSize": 8,
+    "maxLength": 512,
+    "calibratedHybridGrid": [
+      0,
+      0.00001,
+      0.0001,
+      0.001,
+      0.01,
+      0.05,
+      0.1,
+      0.3,
+      0.5,
+      0.7,
+      0.9
+    ]
+  },
+  "noGeneration": true,
+  "externalCostCeilingUsd": 0,
+  "reviewPath": "apps/ai_agent/evaluation/production-selection/development-review-v3.json",
+  "reviewHash": "0c7fba48fc0dc1ec86c23bd93d5d04f6c9ef131a4542ca953ca6a32878b7c585"
+}

@@ -1,0 +1,38 @@
+{
+  "reviewer": "Codex agent; not independent human validation",
+  "method": "Reviewed shuffled saved-output packets before opening the mapping. Variant names hidden; case evidence and passages visible for entailment checks. Contexts/citations and prior experimental knowledge can reveal variants, so this is partial masking, not an independent blinded trial. No judge generation used.",
+  "assessments": [
+    {
+      "label": "pair-1-A",
+      "supportedCausalClaims": "Recorded Telegram rejection and generic resolver error are supported. Invalid destination format or incorrect configuration as the cause is not established: destination validity, bot permissions and provider status are unavailable.",
+      "uncertainty": "Medium confidence and a possible bot-permissions alternate are more cautious than the partner, but the correction proposal still asserts an unproven configuration defect. Listing unavailable evidence does not qualify that causal claim.",
+      "proceduralGuidance": "Checking destination validity and operator-confirmed bot access is useful. Requiring correction rather than investigation is premature.",
+      "citationEntailment": "The cited read-only-investigation section supports input validation and an operator confirming bot membership/permissions. It does not establish that customer configuration is defective or needs correction.",
+      "semanticQuality": "Unsupported causal/remediation claim remains despite relevant guidance."
+    },
+    {
+      "label": "pair-1-B",
+      "supportedCausalClaims": "The final error text and rejection are recorded; claiming a customer-controlled configuration/destination issue requiring correction overinterprets a generic resolver error.",
+      "uncertainty": "High confidence is excessive for the asserted configuration cause; the alternate also stays within configuration and misses permissions uncertainty.",
+      "proceduralGuidance": "Verify destination validity/mapping is a useful investigation step, but manual correction is not supported by observed inputs, which are unavailable.",
+      "citationEntailment": "The cited replay-and-approval section describes restrictions on repeating invalid inputs; it does not prove inputs are invalid in this incident or entail the repair claim. The proposal includes an evidence reference fixture:failure: that does not identify a supplied evidence object.",
+      "semanticQuality": "Unsupported causal/remediation claim, excessive confidence, and invalid evidence reference."
+    },
+    {
+      "label": "pair-2-A",
+      "supportedCausalClaims": "Transmission and lost response are recorded; no delivery or non-delivery claim is made. Possible successful delivery is explicitly an alternate.",
+      "uncertainty": "Appropriate outcome_unknown disposition and abstention. High confidence describes the known ambiguity, not successful or failed delivery.",
+      "proceduralGuidance": "Escalation and seeking independent provider evidence/receipts are useful. Before any further action is slightly broad because authorized read-only investigation remains useful.",
+      "citationEntailment": "The cited read-only-investigation section directly supports treating missing receipts as unknown until independent evidence resolves them.",
+      "semanticQuality": "Supported bounded diagnosis with useful investigation direction."
+    },
+    {
+      "label": "pair-2-B",
+      "supportedCausalClaims": "Unknown delivery after lost response is grounded in observed transmission and missing response. Successful processing remains only a possibility.",
+      "uncertainty": "Appropriate abstention and outcome_unknown; no definitive delivery conclusion.",
+      "proceduralGuidance": "Explicitly abstaining from replay is useful. Independent side-effects/logs are appropriate operator evidence, but requiring them before any further classification is overbroad: F07 is already supported. The partner more directly requests receipts.",
+      "citationEntailment": "Read-only-investigation supports independent evidence; forbidden-actions supports refusing Telegram resend. Neither fabricates runtime receipts or authority.",
+      "semanticQuality": "Supported bounded diagnosis; added prohibition citation, no clear material semantic improvement over partner."
+    }
+  ]
+}
