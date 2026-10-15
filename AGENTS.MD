@@ -86,37 +86,24 @@ Do not duplicate their instructions in this file.
 
 This project uses a multi-tool pipeline to balance reasoning, context limits, and execution speed.
 
-### 1. Architecture & Master Plan: Astra (ChatGPT)
+### 1. Architecture & Master Plan:
 - Responsible for drafting and expanding `docs/ai-dlq-master-plan.md`.
 - Outputs are mutable; implementation realities update the plan.
 
-### 2. Implementation: Codex (GPT-6 Sol / Terra)
+### 2. Implementation
 - Implements the requested master-plan scope, verifies it, and reports changed files, results, and limitations. Learning is handled separately in ChatGPT using GitHub/Notion; do not require teaching sessions, learner checkpoints, lessons, or interview explanations unless explicitly requested.
-- **Sol (Flagship):** Production implementation, complex architecture, DB transactions, security, and difficult debugging.
-- **Terra (Balanced):** Straightforward implementation, tests, and medium-complexity tasks.
+Production implementation, complex architecture, DB transactions, security, and difficult debugging.
+ Straightforward implementation, tests, and medium-complexity tasks.
 - **Rule:** Implementation agents MUST STOP and report if they find a conflict with the master plan. Do not silently redesign.
 
-### 3. Documentation & Ops: Antigravity (Gemini)
+### 3. Documentation 
 - Responsible for `docs/` updates, `Graphify` milestone updates.
 - Handles routine documentation after completed phases and Graphify under the milestone policy above. Codex provides a concise handoff; explicitly scoped feature artifacts such as runbooks and evaluation fixtures remain implementation work.
 - Prevents wasting expensive implementation tokens on repository maintenance.
 
-### Manual Git and Antigravity Handoff
+### Manual Git and Handoff
 
-**Explicit automatic workflow (user-selected):** For phases with a `scripts/phases/<phase>.json` manifest using `manualPullRequest: true`, the implementation agent runs `scripts/finish-phase.mjs Start <phase>` after preparing the exact file scope. Luna low generates scoped documentation; the script verifies, stages exact phase files and selected learning comments, commits and pushes. The user creates and merges the phase PR. A Codex heartbeat then runs `Resume`, verifies the exact pushed head was merged, switches to main and pulls, regenerates Graphify in a clean worktree based on merged main, commits only the named outputs and pushes directly to main. Notify the user on completion or a blocker. The user creates the next branch. These explicitly invoked operations are authorized exceptions to the manual defaults below; no extra staging handoff, Graphify PR or automatic next branch is required. Preserve unrelated edits and never force push. Known lint baselines may be accepted only when the exact diagnostics match and their source files are unchanged; report this accurately.
-
-- The user performs staging, committing, pushing, merging, branch switching and pulling manually unless they explicitly request one of those actions.
-- Default to two commits for a major phase, not separate implementation, learning-comment and documentation commits:
-  1. **Phase bundle:** implementation, tests, approved learning comments and milestone documentation.
-  2. **Graphify:** regenerated Graphify artifacts after the phase bundle is merged and available on the updated default branch.
-- Before the phase-bundle handoff, inspect all uncommitted diffs and report exact paths under these headings: `Phase implementation`, `Learning comments`, `Documentation`, and `Excluded or uncertain`. Do not rely on the user remembering where comments were added.
-- A file containing both implementation and learning comments is listed once under `Phase implementation`, with the learning comments noted. Comment-only files may be listed under `Learning comments`. Do not silently include unrelated changes.
-- Provide an exact `git add -- <path>...` command and suggested commit subject for the user to run. Never recommend `git add .`, broad globs, or staging an entire dirty directory.
-- After the first handoff, stop. The user stages, commits, pushes and merges the phase bundle, then switches to the default branch, pulls the merged result and explicitly confirms that this step is complete.
-- State `Graphify required: yes` or `Graphify required: no` using the milestone policy in `docs/graphify.md`. Small edits and comment-only changes do not require a Graphify refresh.
-- When Graphify is required, run it only after the user's confirmation and only from a clean, up-to-date default branch or a clean worktree based on it. Stop if unrelated working-tree changes could enter the graph.
-- After regeneration, report only the exact newly generated Graphify paths, provide an exact staging command and suggest a separate Graphify commit subject. Then stop so the user can perform the second commit, push and merge manually.
-- Never stage pre-existing Graphify cache, query-memory or unrelated generated changes unless they were produced by the confirmed milestone refresh and are explicitly listed.
+Manual Git and handoff instructions are maintained in [`docs/manualgit_handoff.md`](docs/manualgit_handoff.md).
 
 
 ## Token Efficiency & Memory (claude-mem)
@@ -147,5 +134,5 @@ When introducing a new subsystem, pattern, or dependency:
 
 1. Work incrementally in discrete phases.
 2. Test and verify the current phase before proceeding to the next.
-3. Follow the two-commit manual workflow above; the user performs all Git integration actions.
+3. Follow the [manual Git and handoff guidance](docs/manualgit_handoff.md).
 4. which model and effort should be used for next phase.
