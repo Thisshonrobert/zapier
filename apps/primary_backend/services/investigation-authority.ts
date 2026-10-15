@@ -32,9 +32,14 @@ const allowedDecisions = (proposal: ProposalRow): Decision[] => {
 
 export class InvestigationDecisionDenied extends Error {}
 
+import { CaseWorkflowService } from "./case-workflow.ts";
+
 export class InvestigationAuthority {
-  constructor(private readonly db: TransactionDb,
-    private readonly revalidate: (tx: SqlClient, proposal: ProposalRow) => Promise<{ status: string; reasons?: string[] }>) {}
+  constructor(
+    private readonly db: TransactionDb,
+    private readonly revalidate: (tx: SqlClient, proposal: ProposalRow) => Promise<{ status: string; reasons?: string[] }>,
+    private readonly workflow?: CaseWorkflowService,
+  ) {}
 
   async snapshot(input: { investigationId: string; caseId: string; subjectOwnerId: number; actorId: number }, now = new Date()) {
     return this.db.$transaction(async (tx) => {
@@ -164,6 +169,64 @@ export class InvestigationAuthority {
         VALUES (${input.decisionId}, ${input.investigationId}, ${proposal.caseId},
           ${proposal.subjectOwnerId}, ${input.decision})
       `);
+
+      if (this.workflow) {
+        if (input.decision === "mark_owner_action_required") {
+          await this.workflow.transition({
+            caseId: proposal.caseId,
+            subjectOwnerId: proposal.subjectOwnerId,
+            actorId: input.actorId,
+            action: "request_owner_repair",
+            toQueue: "owner",
+            toStatus: "awaiting_owner",
+            activeInvestigationId: input.investigationId,
+            activeProposalId: proposal.id,
+            idempotencyKey: input.decisionId,
+            notes: "Operator requested owner repair",
+          }, tx);
+        } else if (input.decision === "escalate_to_engineering") {
+          await this.workflow.transition({
+            caseId: proposal.caseId,
+            subjectOwnerId: proposal.subjectOwnerId,
+            actorId: input.actorId,
+            action: "escalate",
+            toQueue: "engineering",
+            toStatus: "escalated",
+            activeInvestigationId: input.investigationId,
+            activeProposalId: proposal.id,
+            idempotencyKey: input.decisionId,
+            notes: "Operator escalated to engineering",
+          }, tx);
+        } else if (input.decision === "resolve_without_replay") {
+          await this.workflow.transition({
+            caseId: proposal.caseId,
+            subjectOwnerId: proposal.subjectOwnerId,
+            actorId: input.actorId,
+            action: "resolve",
+            toQueue: "resolved",
+            toStatus: "resolved",
+            activeInvestigationId: input.investigationId,
+            activeProposalId: proposal.id,
+            idempotencyKey: input.decisionId,
+            resolutionReason: "Resolved without replay by operator",
+            notes: "Operator resolved without replay",
+          }, tx);
+        } else if (input.decision === "approve" || input.decision === "reject") {
+          await this.workflow.transition({
+            caseId: proposal.caseId,
+            subjectOwnerId: proposal.subjectOwnerId,
+            actorId: input.actorId,
+            action: "decision_handoff",
+            toQueue: input.decision === "approve" ? "support" : "resolved",
+            toStatus: input.decision === "approve" ? "needing_support" : "resolved",
+            activeInvestigationId: input.investigationId,
+            activeProposalId: proposal.id,
+            idempotencyKey: input.decisionId,
+            notes: `Operator decision: ${input.decision}`,
+          }, tx);
+        }
+      }
+
       return { id: input.decisionId, decision: input.decision, approvedBy: input.actorId };
     });
   }

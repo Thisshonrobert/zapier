@@ -2,10 +2,10 @@ import { createConnection, createServer } from "node:net";
 
 export const labPorts = { frontend: 3200, backend: 3201, webhook: 3202, agent: 3204, control: 3205 } as const;
 export const seedAccounts = [
-  { key: "support", email: "triage-demo@example.invalid", name: "Local demo operator", role: "support", isSupportOperator: true },
-  { key: "engineer", email: "thisshonrobert0205@gmail.com", name: "Lab engineer", role: "engineer", isSupportOperator: false },
+  { key: "support", email: "triage-demo@example.invalid", name: "Local demo operator", role: "support", isSupportOperator: true, isEngineer: false },
+  { key: "engineer", email: "thisshonrobert0205@gmail.com", name: "Lab engineer", role: "engineer", isSupportOperator: false, isEngineer: true },
   ...[1, 2, 3].map(n => ({ key: `owner-${n}`, email: `triage-lab-owner-${n}@example.invalid`,
-    name: `Lab owner ${n}`, role: "owner", isSupportOperator: false })),
+    name: `Lab owner ${n}`, role: "owner", isSupportOperator: false, isEngineer: false })),
 ] as const;
 
 export function assertLabDatabase(value: string, environment: string | undefined = process.env.NODE_ENV) {

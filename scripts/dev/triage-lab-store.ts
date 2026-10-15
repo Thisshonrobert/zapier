@@ -106,18 +106,19 @@ export async function seedLab(client: PoolClient, marker: LabMarker, passwordHas
     for (const account of seedAccounts) {
       const key = `account:${account.key}`;
       const owned = await client.query("SELECT resource_id FROM triage_lab.seed WHERE key = $1", [key]);
-      const existing = await client.query('SELECT id, email, "isSupportOperator" FROM "User" WHERE email = $1', [account.email]);
+      const existing = await client.query('SELECT id, email, "isSupportOperator", "isEngineer" FROM "User" WHERE email = $1', [account.email]);
       let id: number;
       if (owned.rows.length) {
         if (!existing.rows.length || String(existing.rows[0].id) !== owned.rows[0].resource_id ||
-          existing.rows[0].isSupportOperator !== account.isSupportOperator)
+          existing.rows[0].isSupportOperator !== account.isSupportOperator ||
+          existing.rows[0].isEngineer !== account.isEngineer)
           throw new Error(`Lab account ownership/permission changed: ${account.key}`);
         id = existing.rows[0].id;
       } else {
         if (existing.rows.length) throw new Error(`Refusing unowned account: ${account.key}`);
         const inserted = await client.query(
-          'INSERT INTO "User" (name,email,password,"isSupportOperator") VALUES ($1,$2,$3,$4) RETURNING id',
-          [account.name, account.email, passwordHash, account.isSupportOperator]);
+          'INSERT INTO "User" (name,email,password,"isSupportOperator","isEngineer") VALUES ($1,$2,$3,$4,$5) RETURNING id',
+          [account.name, account.email, passwordHash, account.isSupportOperator, account.isEngineer]);
         id = inserted.rows[0].id;
         await client.query("INSERT INTO triage_lab.seed (key,resource_id,desired_role) VALUES ($1,$2,$3)",
           [key, String(id), account.role]);

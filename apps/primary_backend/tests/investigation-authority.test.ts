@@ -129,4 +129,25 @@ describe("Phase 8 approval authority", () => {
     expect(database.committed).toBe(false);
     expect(database.writes.some((sql) => sql.includes('INSERT INTO "TriageDecisionNotification"'))).toBe(false);
   });
+
+  test("atomically transitions workflow when decide commits decision", async () => {
+    const database = db();
+    const transitions: any[] = [];
+    const fakeWorkflow: any = {
+      transition: async (arg: any, tx: any) => {
+        transitions.push({ arg, inTx: Boolean(tx) });
+      },
+    };
+    const auth = new InvestigationAuthority(
+      database as any,
+      async () => ({ status: "requires_approval" as const }),
+      fakeWorkflow,
+    );
+    const result = await auth.decide(input, new Date("2029-01-01T00:00:00Z"));
+    expect(result).toMatchObject({ id: input.decisionId, decision: "approve" });
+    expect(transitions).toHaveLength(1);
+    expect(transitions[0].inTx).toBe(true);
+    expect(transitions[0].arg.action).toBe("decision_handoff");
+    expect(transitions[0].arg.toQueue).toBe("support");
+  });
 });

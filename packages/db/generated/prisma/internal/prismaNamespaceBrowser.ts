@@ -50,6 +50,16 @@ export const AnyNull = runtime.objectEnumValues.instances.AnyNull
 
 export const ModelName = {
   User: 'User',
+  TriageAccessAudit: 'TriageAccessAudit',
+  TriageProposal: 'TriageProposal',
+  TriageApproval: 'TriageApproval',
+  ReplayRequest: 'ReplayRequest',
+  ReplayExecution: 'ReplayExecution',
+  ReplayExecutionAttempt: 'ReplayExecutionAttempt',
+  ReplayFailure: 'ReplayFailure',
+  TriageDecisionNotification: 'TriageDecisionNotification',
+  TriageCaseWorkflow: 'TriageCaseWorkflow',
+  TriageCaseWorkflowEvent: 'TriageCaseWorkflowEvent',
   Zap: 'Zap',
   Trigger: 'Trigger',
   Action: 'Action',
@@ -83,10 +93,196 @@ export const UserScalarFieldEnum = {
   id: 'id',
   name: 'name',
   email: 'email',
+  isSupportOperator: 'isSupportOperator',
+  isEngineer: 'isEngineer',
   password: 'password'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const TriageAccessAuditScalarFieldEnum = {
+  id: 'id',
+  actorId: 'actorId',
+  subjectOwnerId: 'subjectOwnerId',
+  caseId: 'caseId',
+  action: 'action',
+  outcome: 'outcome',
+  createdAt: 'createdAt'
+} as const
+
+export type TriageAccessAuditScalarFieldEnum = (typeof TriageAccessAuditScalarFieldEnum)[keyof typeof TriageAccessAuditScalarFieldEnum]
+
+
+export const TriageProposalScalarFieldEnum = {
+  id: 'id',
+  investigationId: 'investigationId',
+  caseId: 'caseId',
+  subjectOwnerId: 'subjectOwnerId',
+  version: 'version',
+  disposition: 'disposition',
+  status: 'status',
+  proposal: 'proposal',
+  policy: 'policy',
+  evidenceHash: 'evidenceHash',
+  configurationHash: 'configurationHash',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt'
+} as const
+
+export type TriageProposalScalarFieldEnum = (typeof TriageProposalScalarFieldEnum)[keyof typeof TriageProposalScalarFieldEnum]
+
+
+export const TriageApprovalScalarFieldEnum = {
+  id: 'id',
+  proposalId: 'proposalId',
+  caseId: 'caseId',
+  subjectOwnerId: 'subjectOwnerId',
+  approvedBy: 'approvedBy',
+  decision: 'decision',
+  proposalVersion: 'proposalVersion',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt'
+} as const
+
+export type TriageApprovalScalarFieldEnum = (typeof TriageApprovalScalarFieldEnum)[keyof typeof TriageApprovalScalarFieldEnum]
+
+
+export const ReplayRequestScalarFieldEnum = {
+  id: 'id',
+  approvalId: 'approvalId',
+  proposalVersion: 'proposalVersion',
+  caseId: 'caseId',
+  subjectOwnerId: 'subjectOwnerId',
+  approvedBy: 'approvedBy',
+  requestedBy: 'requestedBy',
+  zapRunId: 'zapRunId',
+  stage: 'stage',
+  originalExecutionId: 'originalExecutionId',
+  generation: 'generation',
+  actionFingerprint: 'actionFingerprint',
+  requestFingerprint: 'requestFingerprint',
+  handlerVersion: 'handlerVersion',
+  evidenceHash: 'evidenceHash',
+  notBefore: 'notBefore',
+  expiresAt: 'expiresAt',
+  auditId: 'auditId',
+  originalExecution: 'originalExecution',
+  createdAt: 'createdAt'
+} as const
+
+export type ReplayRequestScalarFieldEnum = (typeof ReplayRequestScalarFieldEnum)[keyof typeof ReplayRequestScalarFieldEnum]
+
+
+export const ReplayExecutionScalarFieldEnum = {
+  requestId: 'requestId',
+  status: 'status',
+  claimToken: 'claimToken',
+  leaseUntil: 'leaseUntil',
+  completedAt: 'completedAt',
+  dispatchToken: 'dispatchToken',
+  dispatchLeaseUntil: 'dispatchLeaseUntil',
+  dispatchAttempts: 'dispatchAttempts',
+  nextDispatchAt: 'nextDispatchAt',
+  publishedAt: 'publishedAt',
+  nextStage: 'nextStage'
+} as const
+
+export type ReplayExecutionScalarFieldEnum = (typeof ReplayExecutionScalarFieldEnum)[keyof typeof ReplayExecutionScalarFieldEnum]
+
+
+export const ReplayExecutionAttemptScalarFieldEnum = {
+  id: 'id',
+  requestId: 'requestId',
+  attemptNumber: 'attemptNumber',
+  status: 'status',
+  provider: 'provider',
+  phase: 'phase',
+  safeCode: 'safeCode',
+  providerStatus: 'providerStatus',
+  retryAfterSeconds: 'retryAfterSeconds',
+  safeReceiptId: 'safeReceiptId',
+  actionFingerprint: 'actionFingerprint',
+  requestFingerprint: 'requestFingerprint',
+  startedAt: 'startedAt',
+  completedAt: 'completedAt'
+} as const
+
+export type ReplayExecutionAttemptScalarFieldEnum = (typeof ReplayExecutionAttemptScalarFieldEnum)[keyof typeof ReplayExecutionAttemptScalarFieldEnum]
+
+
+export const ReplayFailureScalarFieldEnum = {
+  id: 'id',
+  requestId: 'requestId',
+  providerOutcome: 'providerOutcome',
+  provider: 'provider',
+  phase: 'phase',
+  safeCode: 'safeCode',
+  providerStatus: 'providerStatus',
+  retryAfterSeconds: 'retryAfterSeconds',
+  safeReceiptId: 'safeReceiptId',
+  actionFingerprint: 'actionFingerprint',
+  requestFingerprint: 'requestFingerprint',
+  createdAt: 'createdAt'
+} as const
+
+export type ReplayFailureScalarFieldEnum = (typeof ReplayFailureScalarFieldEnum)[keyof typeof ReplayFailureScalarFieldEnum]
+
+
+export const TriageDecisionNotificationScalarFieldEnum = {
+  decisionId: 'decisionId',
+  investigationId: 'investigationId',
+  caseId: 'caseId',
+  subjectOwnerId: 'subjectOwnerId',
+  decision: 'decision',
+  createdAt: 'createdAt',
+  deliveredAt: 'deliveredAt',
+  nextAttemptAt: 'nextAttemptAt'
+} as const
+
+export type TriageDecisionNotificationScalarFieldEnum = (typeof TriageDecisionNotificationScalarFieldEnum)[keyof typeof TriageDecisionNotificationScalarFieldEnum]
+
+
+export const TriageCaseWorkflowScalarFieldEnum = {
+  id: 'id',
+  caseId: 'caseId',
+  subjectOwnerId: 'subjectOwnerId',
+  queue: 'queue',
+  status: 'status',
+  assignedEngineerId: 'assignedEngineerId',
+  activeInvestigationId: 'activeInvestigationId',
+  activeProposalId: 'activeProposalId',
+  version: 'version',
+  customerInstructions: 'customerInstructions',
+  repairNote: 'repairNote',
+  escalationReason: 'escalationReason',
+  findings: 'findings',
+  resolutionReason: 'resolutionReason',
+  resolvedAt: 'resolvedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TriageCaseWorkflowScalarFieldEnum = (typeof TriageCaseWorkflowScalarFieldEnum)[keyof typeof TriageCaseWorkflowScalarFieldEnum]
+
+
+export const TriageCaseWorkflowEventScalarFieldEnum = {
+  id: 'id',
+  workflowId: 'workflowId',
+  caseId: 'caseId',
+  subjectOwnerId: 'subjectOwnerId',
+  actorId: 'actorId',
+  action: 'action',
+  fromQueue: 'fromQueue',
+  toQueue: 'toQueue',
+  fromStatus: 'fromStatus',
+  toStatus: 'toStatus',
+  notes: 'notes',
+  metadata: 'metadata',
+  createdAt: 'createdAt'
+} as const
+
+export type TriageCaseWorkflowEventScalarFieldEnum = (typeof TriageCaseWorkflowEventScalarFieldEnum)[keyof typeof TriageCaseWorkflowEventScalarFieldEnum]
 
 
 export const ZapScalarFieldEnum = {
@@ -205,6 +401,7 @@ export const ZapRunExecutionScalarFieldEnum = {
   completedAt: 'completedAt',
   claimToken: 'claimToken',
   providerOutcome: 'providerOutcome',
+  handlerVersion: 'handlerVersion',
   actionFingerprint: 'actionFingerprint',
   requestFingerprint: 'requestFingerprint',
   requiresHuman: 'requiresHuman'
@@ -246,6 +443,14 @@ export const JsonNullValueInput = {
 } as const
 
 export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
+
+
+export const NullableJsonNullValueInput = {
+  DbNull: DbNull,
+  JsonNull: JsonNull
+} as const
+
+export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
 
 
 export const QueryMode = {

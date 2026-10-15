@@ -141,3 +141,5 @@ export function verifyServiceScope(
   if (!scope.operations.includes(input.operation)) throw new Error("scope operation not allowed");
   return scope;
 }
+
+export * from "./workflow.ts";

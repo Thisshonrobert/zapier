@@ -130,6 +130,7 @@ async function provision(client: pg.PoolClient, state: LocalState, config: Retur
   } finally { await broker.disconnect(); }
   await writeFile(resolve(output, "accounts.json"), JSON.stringify({ accounts: seedAccounts.map(account => ({
     email: account.email, password: state.password, desiredRole: account.role, isSupportOperator: account.isSupportOperator,
+    isEngineer: account.isEngineer,
   })), frontend: `http://localhost:${labPorts.frontend}`, mode: "pipeline-simulated" }, null, 2), { mode: 0o600 });
 }
 

@@ -9,6 +9,16 @@
  * 🟢 You can import this file directly.
  */
 export type * from './models/User.ts'
+export type * from './models/TriageAccessAudit.ts'
+export type * from './models/TriageProposal.ts'
+export type * from './models/TriageApproval.ts'
+export type * from './models/ReplayRequest.ts'
+export type * from './models/ReplayExecution.ts'
+export type * from './models/ReplayExecutionAttempt.ts'
+export type * from './models/ReplayFailure.ts'
+export type * from './models/TriageDecisionNotification.ts'
+export type * from './models/TriageCaseWorkflow.ts'
+export type * from './models/TriageCaseWorkflowEvent.ts'
 export type * from './models/Zap.ts'
 export type * from './models/Trigger.ts'
 export type * from './models/Action.ts'

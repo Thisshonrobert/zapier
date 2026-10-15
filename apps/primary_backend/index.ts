@@ -12,6 +12,8 @@ import { InvestigationProposals, evaluateSnapshotPolicy } from './services/inves
 import { revalidateProposalPolicy } from './services/replay-policy-facts';
 import { InvestigationNotifications } from './services/investigation-notifications';
 import { ReplayService } from './services/replay';
+import { CaseWorkflowService } from './services/case-workflow';
+import { TriageEngineeringService } from './services/triage-engineering';
 import { TriageAgentClient } from './services/triage-agent';
 import { createServiceScope } from '../../packages/triage-contracts';
 import { randomUUID } from 'node:crypto';
@@ -21,6 +23,8 @@ const app = express();
 const PORT = process.env.PORT || 3002;
 const agent = new TriageAgentClient(process.env.AI_AGENT_URL ?? 'http://127.0.0.1:3004');
 const serviceSecret = process.env.TRIAGE_SERVICE_SECRET ?? '';
+const workflow = new CaseWorkflowService(prisma as unknown as import('./services/case-workflow').TransactionDb);
+const engineering = new TriageEngineeringService(prisma as unknown as import('./services/case-workflow').TransactionDb, workflow);
 const notifications = new InvestigationNotifications(prisma, async (pending) => {
     const correlationId = randomUUID();
     const scope = createServiceScope({ secret: serviceSecret, ownerId: pending.subjectOwnerId,
@@ -47,9 +51,11 @@ app.use("/api/v1/triage",createTriageRouter({
     evidence: new TriageEvidenceService(prisma as unknown as TriageEvidenceDb),
     operator: new TriageOperatorService(prisma),
     proposals: new InvestigationProposals(prisma, evaluateSnapshotPolicy),
-    authority: new InvestigationAuthority(prisma, revalidateProposalPolicy),
+    authority: new InvestigationAuthority(prisma, revalidateProposalPolicy, workflow),
     replay: new ReplayService(prisma),
     notifications,
+    workflow,
+    engineering,
 }))
 
 let draining = false;

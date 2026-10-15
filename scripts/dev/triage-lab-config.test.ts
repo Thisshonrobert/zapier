@@ -29,9 +29,10 @@ test("lab refuses remote or malformed Kafka brokers", () => {
 test("three owners and engineer identity have no support permission", () => {
   expect(seedAccounts.filter(a => a.role === "owner")).toHaveLength(3);
   expect(seedAccounts.find(a => a.role === "engineer")).toMatchObject({
-    email: "thisshonrobert0205@gmail.com", isSupportOperator: false,
+    email: "thisshonrobert0205@gmail.com", isSupportOperator: false, isEngineer: true,
   });
   expect(seedAccounts.filter(a => a.isSupportOperator).map(a => a.email)).toEqual(["triage-demo@example.invalid"]);
+  expect(seedAccounts.filter(a => a.isEngineer).map(a => a.email)).toEqual(["thisshonrobert0205@gmail.com"]);
 });
 
 test("occupied unrelated ports are refused and their listener is left intact", async () => {

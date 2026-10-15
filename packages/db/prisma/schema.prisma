@@ -14,6 +14,7 @@ model User {
   name     String
   email    String  @unique
   isSupportOperator Boolean @default(false)
+  isEngineer Boolean @default(false)
   // Null for accounts that sign in through Clerk (Google) — they never set one.
   password String?
   zap      Zap[]
@@ -173,6 +174,51 @@ model TriageDecisionNotification {
   @@index([deliveredAt, nextAttemptAt])
 }
 
+model TriageCaseWorkflow {
+  id                    String   @id @default(uuid())
+  caseId                String   @unique
+  case                  ZapRunRetry @relation(fields: [caseId], references: [id])
+  subjectOwnerId        Int
+  queue                 String   @default("support")
+  status                String   @default("needing_support")
+  assignedEngineerId    Int?
+  activeInvestigationId String?
+  activeProposalId      String?
+  version               Int      @default(1)
+  customerInstructions  Json?
+  repairNote            String?
+  escalationReason      String?
+  findings              String?
+  resolutionReason      String?
+  resolvedAt            DateTime?
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+  events                TriageCaseWorkflowEvent[]
+
+  @@index([queue, status])
+  @@index([subjectOwnerId])
+}
+
+model TriageCaseWorkflowEvent {
+  id             String   @id @default(uuid())
+  workflowId     String
+  workflow       TriageCaseWorkflow @relation(fields: [workflowId], references: [id])
+  caseId         String
+  subjectOwnerId Int
+  actorId        Int
+  action         String
+  fromQueue      String
+  toQueue        String
+  fromStatus     String
+  toStatus       String
+  notes          String?
+  metadata       Json?
+  createdAt      DateTime @default(now())
+
+  @@index([caseId, createdAt])
+  @@index([actorId, createdAt])
+}
+
 model Zap {
   id      String   @id @default(uuid())
   name    String?  @default("Untitled Zap")
@@ -271,6 +317,7 @@ model ZapRunRetry {
   dlqNextAttemptAt   DateTime?
   dlqPublishAttempts Int              @default(0)
   replayRequest      ReplayRequest?
+  workflow           TriageCaseWorkflow?
 
   @@index([zapRunId])
   @@index([dlqPublishedAt, dlqNextAttemptAt])
