@@ -90,10 +90,11 @@ This project uses a multi-tool pipeline to balance reasoning, context limits, an
 - Outputs are mutable; implementation realities update the plan.
 
 ### 2. Implementation
-- Implements the requested master-plan scope, verifies it, and reports changed files, results, and limitations. Learning is handled separately in ChatGPT using GitHub/Notion; do not require teaching sessions, learner checkpoints, lessons, or interview explanations unless explicitly requested.
-gemini flash medium effort : Production implementation, complex architecture, DB transactions, security, and difficult debugging.
-hemini flash low: Straightforward implementation, tests, and medium-complexity tasks.
-- **Rule:** Implementation agents MUST STOP and report if they find a conflict with the master plan. Do not silently redesign.
+- **Scope:** Implement the approved master-plan scope. Read relevant files, test changes, inspect the diff, and report results and limitations. Teaching is handled in ChatGPT unless requested.
+- **Default:** DeepSeek Flash, low/high effort for routine implementation, tests, and fixes.
+- **Complex tasks:** Flash at max effort; use DeepSeek Pro only for difficult architecture, transactions, security, or debugging.
+- **Rule:** Stop and report any master-plan conflict. Never redesign silently.
+- **Handoff:** Report changed files, verification results, limitations, and next steps concisely.
 
 ### 3. Documentation 
 - Responsible for `docs/` updates, `Graphify` milestone updates.

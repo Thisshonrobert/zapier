@@ -1,12 +1,15 @@
 "use client";
 
-import { use } from "react";
+import { use, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import { AppShell } from "@/mycomponents/app/AppShell";
 import { LoaderOne } from "@/components/ui/loader";
 import { ZapFlow, ZapMonogram, stepsOf } from "@/mycomponents/app/AppFlow";
 import { useZap } from "@/hooks/useZaps";
+import { ActionEditor } from "./ActionEditor";
+
+const repairCasePattern = /(?:^|[#&])repair-case=([0-9a-f-]{36})/i;
 
 export default function ZapDetailPage({
   params,
@@ -16,6 +19,15 @@ export default function ZapDetailPage({
   const { id } = use(params);
   const { loading, zap } = useZap(id);
   const router = useRouter();
+  const [repairCaseId, setRepairCaseId] = useState<string | undefined>(undefined);
+
+  // The repair context arrives in the hash so this page stays prerenderable.
+  useEffect(() => {
+    const read = () => setRepairCaseId(repairCasePattern.exec(window.location.hash)?.[1]);
+    read();
+    window.addEventListener("hashchange", read);
+    return () => window.removeEventListener("hashchange", read);
+  }, []);
 
   if (loading) {
     return (
@@ -59,9 +71,14 @@ export default function ZapDetailPage({
               {zap.name}
             </h1>
             <p className="text-sm text-zinc-500">
-              Published {new Date(zap.time).toLocaleDateString()} · read only
+              Published {new Date(zap.time).toLocaleDateString()}
+              {repairCaseId ? " · repair in progress" : " · read only"}
             </p>
           </div>
+        </div>
+
+        <div className="mb-8">
+          <ActionEditor zapId={zap.id} caseId={repairCaseId} />
         </div>
 
         <section className="mb-8 rounded-xl border border-zinc-200 bg-white p-6">

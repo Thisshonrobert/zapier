@@ -14,6 +14,7 @@ import { InvestigationNotifications } from './services/investigation-notificatio
 import { ReplayService } from './services/replay';
 import { CaseWorkflowService } from './services/case-workflow';
 import { TriageEngineeringService } from './services/triage-engineering';
+import { TriageOwnerService } from './services/triage-owner';
 import { TriageAgentClient } from './services/triage-agent';
 import { createServiceScope } from '../../packages/triage-contracts';
 import { randomUUID } from 'node:crypto';
@@ -56,6 +57,7 @@ app.use("/api/v1/triage",createTriageRouter({
     notifications,
     workflow,
     engineering,
+    owner: new TriageOwnerService(prisma as unknown as import('./services/triage-owner').TriageOwnerDb),
 }))
 
 let draining = false;

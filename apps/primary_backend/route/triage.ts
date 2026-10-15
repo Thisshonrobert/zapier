@@ -20,7 +20,14 @@ import { HistorySchema, type CommandCenter } from "../../../packages/triage-cont
 import { CaseWorkflowService, WorkflowConcurrencyConflict, projectWorkflow, projectEvent } from "../services/case-workflow.ts";
 import { TriageEngineeringService, TriageEngineeringDenied, TriageEngineeringCaseNotFound } from "../services/triage-engineering.ts";
 import {
+  TriageOwnerActionStale,
+  TriageOwnerCaseNotFound,
+  TriageOwnerRepairNotAllowed,
+  TriageOwnerService,
+} from "../services/triage-owner.ts";
+import {
   CustomerInstructionsSchema,
+  OwnerActionRepairInputSchema,
   OwnerRepairAcknowledgementInputSchema,
   OperatorRequestRepairInputSchema,
   OperatorEscalateInputSchema,
@@ -41,6 +48,7 @@ type TriageRouterOptions = {
   serviceSecret?: string;
   workflow?: CaseWorkflowService;
   engineering?: TriageEngineeringService;
+  owner?: TriageOwnerService;
 };
 
 const bearer = (header: string | undefined) =>
@@ -65,6 +73,22 @@ export function createTriageRouter(options: TriageRouterOptions) {
   const notifications = options.notifications;
   const workflow = options.workflow;
   const engineering = options.engineering;
+  const owner = options.owner;
+  const ownerError = (response: Response, error: unknown) => {
+    // Cross-owner and unknown ids are indistinguishable on purpose: no denial oracle.
+    if (error instanceof TriageOwnerCaseNotFound) response.status(404).json({ detail: "Case not found" });
+    else if (error instanceof TriageOwnerActionStale) response.status(409).json({ detail: "Action changed since it was loaded" });
+    else if (error instanceof TriageOwnerRepairNotAllowed) response.status(409).json({ detail: error.message });
+    else response.status(503).json({ detail: "Owner repair service unavailable" });
+  };
+  const ownerCaseId = (request: Request, response: Response): string | undefined => {
+    const caseId = request.params.caseId;
+    if (typeof caseId !== "string" || !uuid.safeParse(caseId).success) {
+      response.status(404).json({ detail: "Case not found" });
+      return undefined;
+    }
+    return caseId;
+  };
   const engineeringError = (response: Response, error: unknown) => {
     if (error instanceof TriageEngineeringDenied) response.status(403).json({ detail: "Engineering permission required" });
     else if (error instanceof TriageEngineeringCaseNotFound) response.status(404).json({ detail: "Case not found in engineering queue" });
@@ -489,6 +513,47 @@ export function createTriageRouter(options: TriageRouterOptions) {
     }
   });
 
+  // --- Owner Failure and Repair Routes ---
+  router.get("/cases/failures", authMiddleware, async (request, response) => {
+    try {
+      if (!owner) { response.status(503).json({ detail: "Owner repair service unavailable" }); return; }
+      const limit = Number(request.query.limit ?? 50);
+      response.json({ failures: await owner.listFailures(request.id, Number.isInteger(limit) ? limit : 50) });
+    } catch (error) {
+      ownerError(response, error);
+    }
+  });
+
+  router.get("/cases/:caseId/repair", authMiddleware, async (request, response) => {
+    try {
+      if (!owner) { response.status(503).json({ detail: "Owner repair service unavailable" }); return; }
+      const caseId = ownerCaseId(request, response);
+      if (!caseId) return;
+      response.json(await owner.getRepairCase(request.id, caseId));
+    } catch (error) {
+      ownerError(response, error);
+    }
+  });
+
+  router.post("/cases/:caseId/actions/:actionId/repair", authMiddleware, async (request, response) => {
+    try {
+      if (!owner) { response.status(503).json({ detail: "Owner repair service unavailable" }); return; }
+      const caseId = ownerCaseId(request, response);
+      if (!caseId) return;
+      const actionId = request.params.actionId;
+      if (typeof actionId !== "string" || !uuid.safeParse(actionId).success) {
+        response.status(404).json({ detail: "Case not found" }); return;
+      }
+      const parsed = OwnerActionRepairInputSchema.safeParse(request.body);
+      if (!parsed.success) {
+        response.status(422).json({ detail: "Invalid repair payload" }); return;
+      }
+      response.json(await owner.saveActionRepair(request.id, caseId, actionId, parsed.data));
+    } catch (error) {
+      ownerError(response, error);
+    }
+  });
+
   // --- Operator Workflow Routes ---
   router.get("/operator/cases/:caseId/workflow", authMiddleware, async (request, response) => {
     try {
@@ -740,7 +805,8 @@ export function createTriageRouter(options: TriageRouterOptions) {
         response.status(422).json({ detail: "Invalid repair acknowledgement payload" }); return;
       }
       const current = await workflow.getWorkflow(caseId);
-      if (current && current.queue !== "owner" && current.status !== "awaiting_owner") {
+      // Fail closed: a missing or non-owner workflow must never accept a repair completion.
+      if (!current || current.queue !== "owner" || current.status !== "awaiting_owner") {
         response.status(409).json({ detail: "Case is not awaiting owner repair" }); return;
       }
       const result = await workflow.transition({

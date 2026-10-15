@@ -6,6 +6,7 @@ import {
   Blocks,
   History,
   Home,
+  LifeBuoy,
   Plus,
   ShieldCheck,
 } from "lucide-react";
@@ -14,6 +15,7 @@ const NAV = [
   { label: "Home", href: "/dashboard", icon: Home },
   { label: "App connections", href: "/connections", icon: Blocks },
   { label: "Zap history", href: "/history", icon: History },
+  { label: "Your failures", href: "/failures", icon: LifeBuoy },
   { label: "Support triage", href: "/triage", icon: ShieldCheck },
 ] as const;
 
