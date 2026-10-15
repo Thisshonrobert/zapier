@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { jwtDecode } from "jwt-decode";
-import { Check, Copy, MoreHorizontal } from "lucide-react";
+import { Check, Copy } from "lucide-react";
 import { IconFolderCode } from "@tabler/icons-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -24,7 +24,6 @@ import {
 } from "@/components/ui/table";
 import { HOOKS_URL } from "@/config";
 import type { Zap } from "@/types/zap";
-import { MvpAction } from "./app/MvpDialog";
 import { ZapFlow, ZapMonogram, stepsOf } from "./app/AppFlow";
 
 type JwtPayload = {
@@ -149,11 +148,6 @@ export const ZapTable = ({ zaps }: { zaps: Zap[] }) => {
                         <span className="h-2 w-2 rounded-full bg-green-500" />
                         Live
                       </span>
-                      <MvpAction title="Run test">
-                        <span className="cursor-pointer rounded-md border border-zinc-300 px-2.5 py-1 text-xs font-medium text-zinc-700 hover:border-zinc-400">
-                          Run test
-                        </span>
-                      </MvpAction>
                     </div>
                   </TableCell>
                   <TableCell className="text-sm text-zinc-600">
@@ -172,9 +166,6 @@ export const ZapTable = ({ zaps }: { zaps: Zap[] }) => {
                       >
                         Go
                       </button>
-                      <MvpAction className="inline-block" title="Zap options">
-                        <MoreHorizontal className="h-4 w-4 cursor-pointer text-zinc-500 hover:text-zinc-800" />
-                      </MvpAction>
                     </div>
                   </TableCell>
                 </TableRow>
@@ -188,11 +179,6 @@ export const ZapTable = ({ zaps }: { zaps: Zap[] }) => {
         <span>
           1–{zaps.length} of {zaps.length}
         </span>
-        <MvpAction title="Page size">
-          <span className="cursor-pointer rounded-lg border border-zinc-300 bg-white px-3 py-1.5">
-            25 per page
-          </span>
-        </MvpAction>
       </div>
     </>
   );

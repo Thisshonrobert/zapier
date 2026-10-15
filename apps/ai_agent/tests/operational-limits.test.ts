@@ -6,12 +6,24 @@ import { createInvestigationRouter } from "../src/investigation-http.ts";
 
 const names = ["INVESTIGATION_ENABLED", "INVESTIGATION_INPUT_USD_PER_MILLION_TOKENS",
   "INVESTIGATION_OUTPUT_USD_PER_MILLION_TOKENS", "INVESTIGATION_OWNER_SPEND_CENTS_PER_DAY",
-  "INVESTIGATION_OPERATOR_SPEND_CENTS_PER_DAY"] as const;
+  "INVESTIGATION_OPERATOR_SPEND_CENTS_PER_DAY", "INVESTIGATION_MODEL_TIMEOUT_MS"] as const;
 const original = Object.fromEntries(names.map(name => [name, process.env[name]]));
 afterEach(() => { for (const name of names) {
   const value = original[name];
   if (value === undefined) delete process.env[name]; else process.env[name] = value;
 } });
+
+test("model deadline keeps the production default and bounds the slower local demo", () => {
+  process.env.INVESTIGATION_ENABLED = "false";
+  delete process.env.INVESTIGATION_MODEL_TIMEOUT_MS;
+  expect(operationalLimits().modelTimeoutMs).toBe(15000);
+  process.env.INVESTIGATION_MODEL_TIMEOUT_MS = "45000";
+  expect(operationalLimits().modelTimeoutMs).toBe(45000);
+  for (const value of ["0", "45001", "NaN", "1.5"]) {
+    process.env.INVESTIGATION_MODEL_TIMEOUT_MS = value;
+    expect(() => operationalLimits()).toThrow("INVESTIGATION_MODEL_TIMEOUT_MS");
+  }
+});
 
 test("paid investigations fail closed without pricing and reserve a conservative cost", () => {
   process.env.INVESTIGATION_ENABLED = "true";

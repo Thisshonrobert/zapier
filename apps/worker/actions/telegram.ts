@@ -3,6 +3,7 @@ import {
   ActionExecutionError,
   type ActionHandler,
   type ActionResult,
+  type ActionContext,
 } from "../types";
 
 export type FetchTransport = (
@@ -202,7 +203,8 @@ export async function sendTelegram(
 }
 
 /** Telegram Action Handler. */
-export const telegramAction: ActionHandler = {
+export function createTelegramAction(transportFor: (ctx: ActionContext) => FetchTransport = () => defaultFetch): ActionHandler {
+  return {
   type: "telegram",
   execute: async (metadata, ctx) => {
     console.log("telegram post action", {
@@ -214,11 +216,13 @@ export const telegramAction: ActionHandler = {
       parse(metadata?.botToken as string, ctx.zapRunMetadata).trim() ||
       process.env.TELEGRAM_BOT_TOKEN ||
       "");
+    if (!botToken.trim()) throw resolutionError("telegram_credentials_missing");
+    const transport = transportFor(ctx);
     const channelUserName = ctx.telegramInputs?.destination ?? parse(
       metadata?.channelUserName as string,
       ctx.zapRunMetadata,
     ).trim();
-    const chatId = await resolveChatId(channelUserName, botToken, defaultFetch, ctx.signal);
+    const chatId = await resolveChatId(channelUserName, botToken, transport, ctx.signal);
     const message = ctx.telegramInputs?.message ?? parse(
       metadata?.message as string,
       ctx.zapRunMetadata,
@@ -226,6 +230,9 @@ export const telegramAction: ActionHandler = {
 
     // Aborting during resolution must never start a subsequent send.
     ctx.signal?.throwIfAborted();
-    return sendTelegram(chatId, message, botToken, defaultFetch, ctx.signal);
+    return sendTelegram(chatId, message, botToken, transport, ctx.signal);
   },
-};
+  };
+}
+
+export const telegramAction = createTelegramAction();

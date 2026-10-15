@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Bell, Calendar, Folder, LayoutGrid, RefreshCw, Search, Zap } from "lucide-react";
+import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { LoaderOne } from "@/components/ui/loader";
 import {
@@ -13,17 +13,9 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { AppShell } from "@/mycomponents/app/AppShell";
-import { MvpAction } from "@/mycomponents/app/MvpDialog";
 import { ZapFlow, stepsOf } from "@/mycomponents/app/AppFlow";
 import { useZapRuns } from "@/hooks/useZaps";
 import type { ZapRun } from "@/types/zap";
-
-const FILTER_CHIPS = [
-  { label: "Date range", icon: Calendar },
-  { label: "Zap workflows", icon: Zap },
-  { label: "Apps", icon: LayoutGrid },
-  { label: "Folders", icon: Folder },
-] as const;
 
 const STATUS_STYLES: Record<ZapRun["status"], string> = {
   success: "bg-green-50 text-green-700 ring-green-200",
@@ -76,23 +68,12 @@ export default function HistoryPage() {
           <h1 className="text-3xl font-bold tracking-tight text-zinc-900">
             Zap history
           </h1>
-          <MvpAction title="Notification settings">
-            <span className="flex cursor-pointer items-center gap-2 rounded-lg border border-zinc-300 bg-white px-4 py-2 text-sm font-medium text-zinc-700 hover:border-zinc-400">
-              <Bell className="h-4 w-4" />
-              Notification settings
-            </span>
-          </MvpAction>
         </div>
 
         <div className="mb-6 flex items-center gap-6 border-b border-zinc-200">
           <span className="-mb-px border-b-2 border-[#FF4F00] pb-3 text-sm font-semibold text-zinc-900">
             Zap runs
           </span>
-          <MvpAction title="Task usage">
-            <span className="-mb-px cursor-pointer border-b-2 border-transparent pb-3 text-sm font-medium text-zinc-600 hover:text-zinc-900">
-              Task usage
-            </span>
-          </MvpAction>
         </div>
 
         <div className="relative mb-4">
@@ -103,17 +84,6 @@ export default function HistoryPage() {
             placeholder="Search Zap runs"
             className="bg-white pl-9"
           />
-        </div>
-
-        <div className="mb-4 flex flex-wrap items-center gap-3">
-          {FILTER_CHIPS.map(({ label, icon: Icon }) => (
-            <MvpAction key={label} title={label}>
-              <span className="flex cursor-pointer items-center gap-2 rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-700 hover:border-zinc-400">
-                <Icon className="h-4 w-4 text-zinc-500" />
-                {label}
-              </span>
-            </MvpAction>
-          ))}
         </div>
 
         <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
@@ -131,19 +101,8 @@ export default function HistoryPage() {
                 {s === "all" ? "All statuses" : s}
               </button>
             ))}
-            <MvpAction title="Refresh">
-              <RefreshCw className="ml-1 h-4 w-4 cursor-pointer text-zinc-500 hover:text-zinc-800" />
-            </MvpAction>
           </div>
 
-          <MvpAction title="Autoreplay">
-            <span className="flex cursor-pointer items-center gap-2 text-sm text-zinc-700">
-              Autoreplay
-              <span className="flex h-5 w-9 items-center rounded-full bg-zinc-300 p-0.5">
-                <span className="h-4 w-4 rounded-full bg-white" />
-              </span>
-            </span>
-          </MvpAction>
         </div>
 
         {loading ? (
@@ -183,7 +142,6 @@ export default function HistoryPage() {
                   <TableHead className="font-semibold text-zinc-700">Status</TableHead>
                   <TableHead className="font-semibold text-zinc-700">Data in</TableHead>
                   <TableHead className="font-semibold text-zinc-700">Run ID</TableHead>
-                  <TableHead className="text-right font-semibold text-zinc-700">Details</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -203,13 +161,6 @@ export default function HistoryPage() {
                     </TableCell>
                     <TableCell className="font-mono text-xs text-zinc-500">
                       {run.id.slice(0, 8)}
-                    </TableCell>
-                    <TableCell className="text-right">
-                      <MvpAction className="inline-block" title="Run details">
-                        <span className="cursor-pointer text-sm font-medium text-[#6c52ff] hover:underline">
-                          View details
-                        </span>
-                      </MvpAction>
                     </TableCell>
                   </TableRow>
                 ))}

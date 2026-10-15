@@ -1,6 +1,6 @@
 import { Kafka } from "kafkajs";
 import { prisma } from "../../packages/db/prisma/db";
-import { getActionHandler } from "./actions";
+import { getActionHandler as productionHandler } from "./actions";
 import { createExecutionStore, createFingerprints, type ExecutionDb } from "./execution-store.ts";
 import { executeStage, parseZapEvent, requireLoadedAction, type ZapEvent } from "./orchestration.ts";
 import { createReplayStore, executeReplayStage } from "./replay.ts";
@@ -12,6 +12,7 @@ const consumer = kafka.consumer({ groupId: process.env.KAFKA_WORKER_GROUP ?? "za
 const store = createExecutionStore(prisma as unknown as ExecutionDb,
   { handlerVersion: process.env.WORKER_HANDLER_VERSION });
 const replayStore = createReplayStore(prisma);
+let getActionHandler = productionHandler;
 
 async function loadStageExecution({ zapRunId, stage }: ZapEvent) {
   const zapDetails = await prisma.zapRun.findFirst({
@@ -59,6 +60,11 @@ async function processMessage(
 }
 
 async function main() {
+  if (process.env.TRIAGE_LAB === "true") {
+    const { createLabRegistry } = await import("../../scripts/dev/triage-lab-transports.ts");
+    const lab = await createLabRegistry();
+    getActionHandler = type => lab.registry[type];
+  }
   await consumer.connect();
   await consumer.subscribe({ topic: TOPIC_NAME, fromBeginning: true });
   const producer = kafka.producer();
@@ -71,4 +77,4 @@ async function main() {
   });
 }
 
-if (import.meta.main) main().catch(console.error);
+if (import.meta.main) main().catch(error => { console.error(error); process.exit(1); });

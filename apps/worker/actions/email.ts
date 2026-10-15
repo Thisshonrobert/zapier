@@ -9,6 +9,7 @@ import {
   ActionExecutionError,
   type ActionHandler,
   type ActionResult,
+  type ActionContext,
 } from "../types";
 
 const resend = new Resend(process.env.RESEND_API_KEY || "re_dummy_key");
@@ -135,7 +136,8 @@ export async function sendEmail(
  * Email Action Handler.
  * Parses metadata template variables and dispatches the email with an idempotency key.
  */
-export const emailAction: ActionHandler = {
+export function createEmailAction(transportFor: (ctx: ActionContext) => EmailTransport = () => resendTransport): ActionHandler {
+  return {
   type: "email",
   execute: async (metadata, ctx) => {
     const to = parse(metadata?.to as string, ctx.zapRunMetadata).trim();
@@ -143,6 +145,9 @@ export const emailAction: ActionHandler = {
     const from = parse(metadata?.from as string, ctx.zapRunMetadata).trim();
     const subject = parse(metadata?.subject as string, ctx.zapRunMetadata).trim();
 
-    return sendEmail(to, body, from, subject, ctx.idempotencyKey);
+    return sendEmail(to, body, from, subject, ctx.idempotencyKey, transportFor(ctx));
   },
-};
+  };
+}
+
+export const emailAction = createEmailAction();

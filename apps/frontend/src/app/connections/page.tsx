@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { MoreHorizontal, Plus, Search, SlidersHorizontal, Zap } from "lucide-react";
+import { Search, Zap } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
 import { LoaderOne } from "@/components/ui/loader";
@@ -14,7 +14,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { AppShell } from "@/mycomponents/app/AppShell";
-import { MvpAction } from "@/mycomponents/app/MvpDialog";
 import { useZaps } from "@/hooks/useZaps";
 import type { Zap as ZapType } from "@/types/zap";
 
@@ -89,20 +88,9 @@ export default function ConnectionsPage() {
           <h1 className="text-3xl font-bold tracking-tight text-zinc-900">
             Connections
           </h1>
-          <MvpAction title="Create connection">
-            <span className="flex cursor-pointer items-center gap-2 rounded-lg bg-[#6c52ff] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#5b41ee]">
-              <Plus className="h-4 w-4" strokeWidth={2.5} />
-              Create connection
-            </span>
-          </MvpAction>
         </div>
 
         <div className="mb-4 flex flex-wrap items-center gap-3">
-          <MvpAction title="View by">
-            <span className="flex cursor-pointer items-center gap-2 rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-700">
-              <span className="text-zinc-500">View by:</span> Connections
-            </span>
-          </MvpAction>
 
           <div className="relative min-w-[240px] flex-1">
             <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-zinc-400" />
@@ -114,12 +102,6 @@ export default function ConnectionsPage() {
             />
           </div>
 
-          <MvpAction title="Filters">
-            <span className="flex cursor-pointer items-center gap-2 rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm font-medium text-zinc-700 hover:border-zinc-400">
-              <SlidersHorizontal className="h-4 w-4" />
-              Filters
-            </span>
-          </MvpAction>
         </div>
 
         {loading ? (
@@ -147,7 +129,6 @@ export default function ConnectionsPage() {
                     <TableHead className="font-semibold text-zinc-700">Zap workflows</TableHead>
                     <TableHead className="font-semibold text-zinc-700">Last modified</TableHead>
                     <TableHead className="font-semibold text-zinc-700">People with access</TableHead>
-                    <TableHead />
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -175,11 +156,6 @@ export default function ConnectionsPage() {
                             <span className="h-2 w-2 rounded-full bg-green-500" />
                             Connected
                           </span>
-                          <MvpAction title="Test connection">
-                            <span className="cursor-pointer rounded-md border border-zinc-300 px-2.5 py-1 text-xs font-medium text-zinc-700 hover:border-zinc-400">
-                              Test connection
-                            </span>
-                          </MvpAction>
                         </div>
                       </TableCell>
                       <TableCell>
@@ -196,11 +172,6 @@ export default function ConnectionsPage() {
                           <AvatarFallback className="text-[10px]">Me</AvatarFallback>
                         </Avatar>
                       </TableCell>
-                      <TableCell className="text-right">
-                        <MvpAction className="inline-block" title="Connection options">
-                          <MoreHorizontal className="h-4 w-4 cursor-pointer text-zinc-500" />
-                        </MvpAction>
-                      </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -211,11 +182,6 @@ export default function ConnectionsPage() {
               <span>
                 1–{filtered.length} of {filtered.length}
               </span>
-              <MvpAction title="Page size">
-                <span className="cursor-pointer rounded-lg border border-zinc-300 bg-white px-3 py-1.5">
-                  25 per page
-                </span>
-              </MvpAction>
             </div>
           </>
         )}

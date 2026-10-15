@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "lib": ["ESNext", "DOM"],
+    "module": "Preserve",
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "types": ["bun"]
+  },
+  "include": ["triage-lab*.ts", "../../apps/worker/index.ts", "../../apps/webhook/index.ts", "../../apps/webhook/app.ts", "../../apps/webhook/tests/ingestion.test.ts"]
+}

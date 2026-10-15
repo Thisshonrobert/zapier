@@ -12,6 +12,22 @@ const prompt: DiagnosisPrompt = {
   input: JSON.stringify({ evidence: "bounded" }),
 };
 
+test("bounded Flash diagnosis disables thinking in the exact counted and generated request", async () => {
+  const bodies: Array<{ generationConfig?: unknown; generateContentRequest?: { generationConfig: unknown } }> = [];
+  const adapter = new GeminiDiagnosisModel({ apiKey: "offline-key", model: "gemini-2.5-flash",
+    api: "generate-content", disableThinking: true, maxOutputTokens: 2048, maxTotalTokens: 64000,
+    fetch: async (url, init) => {
+      bodies.push(JSON.parse(String(init?.body)));
+      return String(url).endsWith(":countTokens") ? Response.json({ totalTokens: 30 }) : Response.json({
+        candidates: [{ finishReason: "STOP", content: { parts: [{ text: JSON.stringify(modelOutput) }] } }],
+        usageMetadata: { promptTokenCount: 30, candidatesTokenCount: 20, totalTokenCount: 50 },
+      });
+    } });
+  await adapter.generate(prompt, new AbortController().signal);
+  expect(bodies[1]!.generationConfig).toMatchObject({ maxOutputTokens: 2048, thinkingConfig: { thinkingBudget: 0 } });
+  expect(bodies[0]!.generateContentRequest!.generationConfig).toEqual(bodies[1]!.generationConfig);
+});
+
 const modelOutput = {
   status: "abstained",
   diagnosis: {
@@ -175,6 +191,7 @@ test("generate-content rejects incomplete responses with measured usage and does
     expect((error as ModelProviderError).details.category).toBe(
       "invalid_response",
     );
+    expect((error as ModelProviderError).message).toContain("MAX_TOKENS");
   }
   let calls = 0;
   const missing = new GeminiDiagnosisModel({

@@ -1,7 +1,7 @@
 import { test, expect } from "bun:test";
 import { renderToStaticMarkup } from "react-dom/server";
 
-test("timeline and evaluation failures are independently accessible and never imply replay readiness", async () => {
+test("case timeline remains visible without the offline evaluation baseline", async () => {
   const subject = await import("./CommandCenter.tsx").catch(() => null);
   expect(subject).not.toBeNull();
   const Panel = subject!.CommandCenterPanel;
@@ -11,8 +11,17 @@ test("timeline and evaluation failures are independently accessible and never im
     evaluation: { data: null, unavailable: true }, trace: null,
   } }} />);
   expect(html).toContain("History is partial");
-  expect(html).toContain("Evaluation unavailable");
+  expect(html).not.toContain("Evaluation unavailable");
+  expect(html).not.toContain("Offline evaluation baseline");
   expect(html).toContain("dateTime=");
   expect(html).toContain("No trace was recorded");
   expect(html).not.toContain("Replay ready");
+});
+
+test("loading and error states describe only the investigation timeline", async () => {
+  const { CommandCenterPanel } = await import("./CommandCenter.tsx");
+  const loading = renderToStaticMarkup(<CommandCenterPanel state={{ kind: "loading" }} />);
+  const failed = renderToStaticMarkup(<CommandCenterPanel state={{ kind: "error" }} />);
+  expect(loading).not.toContain("evaluation");
+  expect(failed).not.toContain("evaluation");
 });

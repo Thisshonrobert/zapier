@@ -411,5 +411,6 @@ This is a work-in-progress project. When contributing:
 4. Test locally before submitting changes
 
 
-
-
+testing ai dlq user with demo cases and pipeline cases
+$env:TRIAGE_DEMO_FRONTEND_PORT = "3005"
+rtk proxy bun --env-file=apps/primary_backend/.env --env-file=apps/ai_agent/.env run scripts/demo/triage-demo.ts serve

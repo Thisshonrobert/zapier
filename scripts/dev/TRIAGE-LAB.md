@@ -1,0 +1,40 @@
+# Persistent local triage lab (16A–16B)
+
+The lab runs the authenticated webhook, PostgreSQL outbox processor, Kafka worker and durable DLQ publisher. Both providers are simulated at the production handlers' transport boundaries. No failure rows are fabricated. Investigations, paid model calls and replay stay disabled in 16B.
+
+Prerequisites: local PostgreSQL/Kafka on the allowlisted addresses, existing dependencies, Bun and Node with TypeScript support. Root commands use `apps/primary_backend/.env` for local database connection credentials; the ordinary database name is replaced with `triage_lab`. Explicit overrides are `TRIAGE_LAB_DATABASE_URL` and `TRIAGE_LAB_KAFKA_BROKERS`; they must remain local. Seeding refuses ordinary/unmarked databases or unowned topics. Credentials are written only to ignored `.tmp-turbo-user/triage-lab/accounts.json`.
+
+```powershell
+rtk proxy bun run lab:seed
+# Keep this foreground supervisor running in its own terminal:
+rtk proxy bun run lab:start
+# In another terminal:
+rtk proxy bun run lab:run --scenario all
+rtk proxy bun run lab:run --scenario telegram-rate-limit --batch example-rate-limit
+rtk proxy bun run lab:verify --batch example-rate-limit
+rtk proxy bun run lab:status
+rtk proxy bun run lab:stop
+```
+
+`run` prints its batch identifier before triggering scenarios. Reuse the same `--batch` and scenario selection after an interrupted command: existing correlated runs are reused. If a crash leaves ingestion ambiguous with no matching run, the command refuses to resend; allow the in-flight webhook to settle and retry reconciliation, or use a new batch. `--timeout-ms` accepts 1000–300000 (default 90000). A mismatch, missing event, unpublished failure or deadline returns nonzero. Machine-readable successful reports live at `.tmp-turbo-user/triage-lab/batch-<id>.json`.
+
+`seed` reuses five accounts and 39 Zaps (six 16A placeholders plus 33 owner/scenario definitions). It preserves repairs and history. Running a changed/repaired scenario refuses to overwrite it. Use the existing explicitly guarded full `lab:reset --yes` only if you want to discard the entire marked lab database/topics. Selective cleanup is not exposed: immutable authority rows must not be bypassed.
+
+The matrix includes Telegram 429, 403, destination resolution rejection, transport uncertainty and missing credentials; email 422, transport uncertainty, missing subject and missing template; a two-provider successful control and an email-success/Telegram-failure sequence. Each scenario runs for three ordinary owners. The full batch expects 33 runs, 39 executions, 30 published failures and 36 simulated provider operations. Missing Telegram credentials are `not_attempted / resolve_destination / telegram_credentials_missing`; missing email subject is a real send-boundary rejection from the simulated Resend response, rather than a fabricated validation-phase failure.
+
+Verification checks owner/run/step/attempt linkage, exact safe codes/status/retry delay, input fingerprints, single provider operations, ordered predecessor success, empty outbox, durable DLQ broker-ACK stamps and matching Kafka failure events. Kafka stage publications may repeat under at-least-once delivery; provider attempts must remain single. Duplicate DLQ matches are reported as mismatches. SQL timestamp reads use Prisma's UTC interpretation, independent of the host timezone.
+
+The authenticated supervisor reports owned child liveness. `lab:run`/`lab:verify` prove data-plane readiness. Stopping retains all definitions, batches and history. Stop can authenticate and shut down an older 16A supervisor; start/run require the 16B identity. Never adopt an unrelated process, PID, occupied port, database or topic.
+
+```powershell
+rtk proxy bun run lab:test
+rtk proxy bun run lab:check-types
+# With the owned pipeline stopped (avoids racing the temporary ingestion fixture):
+$env:TRIAGE_LAB_INTEGRATION = 'true'
+rtk proxy bun --env-file=apps/primary_backend/.env test scripts/dev/triage-lab.integration.test.ts
+# With the owned 16B pipeline running:
+$env:TRIAGE_LAB_PIPELINE_INTEGRATION = 'true'
+rtk proxy bun --env-file=apps/primary_backend/.env test scripts/dev/triage-lab-pipeline.integration.test.ts
+```
+
+The pipeline integration test retains its new batch for inspection and verifies unchanged SQL snapshots after same-batch reconciliation and consumed duplicate Kafka deliveries. It does not establish live provider semantics, production replay readiness, broker outage recovery, paid diagnosis or the later role-specific UI journeys.

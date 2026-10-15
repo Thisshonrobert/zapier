@@ -43,8 +43,10 @@ const diagnosis =
           api: "generate-content",
           maxOutputTokens: 2048,
           maxTotalTokens: 64000,
+          disableThinking: geminiModel === "gemini-2.5-flash",
         }),
         diagnosisOptions: {
+          modelTimeoutMs: operationalLimits(geminiModel).modelTimeoutMs,
           ...(langfuse ? { observability: langfuse } : {}),
           modelName: geminiModel,
           maxPromptCharacters: 16000,

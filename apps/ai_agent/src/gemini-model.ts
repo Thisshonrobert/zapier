@@ -254,6 +254,7 @@ type GeminiDiagnosisModelOptions = {
   endpoint?: string;
   maxOutputTokens?: number;
   maxTotalTokens?: number;
+  disableThinking?: boolean;
   fetch?: FetchLike;
 };
 
@@ -276,6 +277,8 @@ export class GeminiDiagnosisModel implements IntegratedDiagnosisModel {
     this.fetch = options.fetch ?? globalThis.fetch;
     this.maxOutputTokens = options.maxOutputTokens ?? 4_096;
     this.maxTotalTokens = options.maxTotalTokens;
+    if (options.disableThinking && (options.api !== "generate-content" || options.model !== "gemini-2.5-flash"))
+      throw new RangeError("disableThinking requires gemini-2.5-flash generate-content");
     if (
       !Number.isInteger(this.maxOutputTokens) ||
       this.maxOutputTokens < 1 ||
@@ -298,6 +301,7 @@ export class GeminiDiagnosisModel implements IntegratedDiagnosisModel {
           systemInstruction: { parts: [{ text: `${prompt.instructions}\nReturn JSON matching this exact schema:\n${JSON.stringify(GEMINI_DIAGNOSIS_SCHEMA)}` }] },
           contents: [{ role: "user", parts: [{ text: prompt.input }] }],
           generationConfig: { maxOutputTokens: this.maxOutputTokens,
+            ...(this.options.disableThinking ? { thinkingConfig: { thinkingBudget: 0 } } : {}),
             responseMimeType: "application/json", responseJsonSchema: GEMINI_DIAGNOSIS_SCHEMA },
         }
       : {
@@ -414,6 +418,17 @@ export class GeminiDiagnosisModel implements IntegratedDiagnosisModel {
             total_tokens: metadata.totalTokenCount,
           }
         : null;
+      if (!responseData.success) {
+        const diagnostic = z.object({ candidates: z.array(z.object({
+          finishReason: z.enum(["MAX_TOKENS", "SAFETY", "RECITATION", "OTHER"]),
+        })).length(1) }).safeParse(payload);
+        const reason = diagnostic.success ? diagnostic.data.candidates[0]!.finishReason : "INVALID_RESPONSE";
+        const measuredUsage = ModelUsageSchema.safeParse(usage && {
+          input_tokens: usage.total_input_tokens, output_tokens: usage.total_output_tokens, total_tokens: usage.total_tokens,
+        });
+        throw new ModelProviderError(`Gemini generateContent response incomplete: ${reason}`,
+          undefined, measuredUsage.success ? measuredUsage.data : null, { category: "invalid_response", http_status: null });
+      }
       // Normalize the explicit protocol into the shared parser; never retain thought text.
       payload = responseData.success
         ? {

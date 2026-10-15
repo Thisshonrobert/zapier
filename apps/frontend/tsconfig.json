@@ -29,7 +29,9 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
-    "**/*.mts"
+    "**/*.mts",
+    ".next/triage-lab/types/**/*.ts",
+    ".next/triage-lab/dev/types/**/*.ts"
   ],
   "exclude": ["node_modules"]
 }

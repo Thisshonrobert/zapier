@@ -22,16 +22,16 @@ export default function Signup() {
         <div className="flex pt-8 max-w-4xl">
           <div className="flex-1 pt-20 px-4">
             <div className="font-semibold text-3xl  pb-4">
-              Join millions worldwide who automate their work using Zapier.
+              Automate your work with Zappy.
             </div>
             <div className="pb-6 pt-4">
               <CheckFeature label={"Easy setup, no coding required"} />
             </div>
             <div className="pb-6 pt-4">
-              <CheckFeature label={"Free forever for core features"} />
+              <CheckFeature label={"Build workflows with webhook triggers"} />
             </div>
             <div className="pb-6 pt-4">
-              <CheckFeature label={"14-day trial of premium features & apps"} />
+              <CheckFeature label={"Track your workflow runs"} />
             </div>
           </div>
 

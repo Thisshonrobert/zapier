@@ -1,6 +1,6 @@
 import type { ActionHandler } from "../types";
-import { emailAction } from "./email";
-import { telegramAction } from "./telegram";
+import { emailAction, createEmailAction } from "./email";
+import { telegramAction, createTelegramAction } from "./telegram";
 
 /**
  * Action Registry: Central registry mapping action type IDs to their handlers.
@@ -17,4 +17,11 @@ export const actionRegistry: Record<string, ActionHandler> = {
  */
 export function getActionHandler(type: string): ActionHandler | undefined {
   return actionRegistry[type];
+}
+
+export function createActionRegistry(input: {
+  email: Parameters<typeof createEmailAction>[0];
+  telegram: Parameters<typeof createTelegramAction>[0];
+}): Record<string, ActionHandler> {
+  return { email: createEmailAction(input.email), telegram: createTelegramAction(input.telegram) };
 }

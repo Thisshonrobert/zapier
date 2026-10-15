@@ -1,5 +1,5 @@
 "use client";
-import React, { use, useState, useEffect } from "react";
+import Link from "next/link";
 import { LinkButton } from "./buttons/LinkButton";
 import { usePathname, useRouter } from "next/navigation";
 import { PrimaryButton } from "./buttons/PrimaryButton";
@@ -7,15 +7,8 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuGroup,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuPortal,
-  DropdownMenuSeparator,
   DropdownMenuShortcut,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button";
@@ -42,10 +35,9 @@ const Appbar = () => {
   return (
     <div className="flex border-b justify-between p-4">
       <div className="flex  flex-col justify-center ">
-       <img src="/Zapier-logo.png" alt="Zapier Logo" className="w-30 h-8" />
+        <Link href="/" className="text-3xl font-bold tracking-tight text-zinc-900">Zappy</Link>
       </div>
       <div className="flex gap-4  items-center text-gray-700">
-        <LinkButton onClick={() => {}}>Contact Sales</LinkButton>
          {isAuthenticatedRoute ? 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>

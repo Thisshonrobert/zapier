@@ -1,11 +1,10 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { Bot, FileInput, MessageSquare, Plug, Zap as ZapIcon } from "lucide-react";
+import { Zap as ZapIcon } from "lucide-react";
 import { LoaderOne } from "@/components/ui/loader";
 import { ZapTable } from "@/mycomponents/ZapTable";
 import { AppShell } from "@/mycomponents/app/AppShell";
-import { MvpAction } from "@/mycomponents/app/MvpDialog";
 import { useZaps } from "@/hooks/useZaps";
 
 export type { Zap } from "@/types/zap";
@@ -18,15 +17,6 @@ const SCRATCH_CARDS = [
     tint: "bg-orange-100 text-[#FF4F00]",
     href: "/zap/create",
   },
-  { label: "Agent", description: "AI teammates", icon: Bot, tint: "bg-red-100 text-red-600" },
-  {
-    label: "Chatbot",
-    description: "AI-powered chatbot",
-    icon: MessageSquare,
-    tint: "bg-purple-100 text-purple-600",
-  },
-  { label: "MCP", description: "AI tool integrations", icon: Plug, tint: "bg-pink-100 text-pink-600" },
-  { label: "Form", description: "Automation-ready forms", icon: FileInput, tint: "bg-amber-100 text-amber-600" },
 ] as const;
 
 export default function DashboardPage() {
@@ -46,7 +36,7 @@ export default function DashboardPage() {
         <h2 className="mb-3 text-lg font-semibold text-zinc-900">
           Start from scratch
         </h2>
-        <div className="mb-12 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+        <div className="mb-12 grid max-w-sm grid-cols-1 gap-3">
           {SCRATCH_CARDS.map((card) => {
             const Icon = card.icon;
             const body = (
@@ -65,7 +55,7 @@ export default function DashboardPage() {
               </div>
             );
 
-            return "href" in card && card.href ? (
+            return (
               <button
                 key={card.label}
                 className="text-left"
@@ -73,10 +63,6 @@ export default function DashboardPage() {
               >
                 {body}
               </button>
-            ) : (
-              <MvpAction key={card.label} className="cursor-pointer" title={card.label}>
-                {body}
-              </MvpAction>
             );
           })}
         </div>

@@ -5,16 +5,18 @@ import pg from "pg";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { Kafka, logLevel } from "kafkajs";
-import { PrismaClient } from "../../packages/db/generated/prisma/client.ts";
+import { PrismaClient, Prisma } from "../../packages/db/generated/prisma/client.ts";
 import { createFingerprints } from "../../apps/worker/execution-store.ts";
+import { buildReplayPolicyFacts, loadCurrentPolicyState } from "../../apps/primary_backend/services/replay-policy-facts.ts";
 import { agentPool, migrateAgent } from "../../apps/ai_agent/src/checkpoint.ts";
-import { scenarios, assertDemoDatabase } from "./scenarios.ts";
+import { scenarios, assertDemoDatabase, demoFrontendPort } from "./scenarios.ts";
 
 const mode = Bun.argv[2];
 if (mode !== "verify" && mode !== "serve") throw new Error("Usage: triage-demo.ts verify|serve");
 const backendPort = mode === "verify" ? 3101 : 3001;
 const webhookPort = mode === "verify" ? 3102 : 3002;
 const agentPort = mode === "verify" ? 3104 : 3004;
+const frontendPort = demoFrontendPort(process.env.TRIAGE_DEMO_FRONTEND_PORT);
 const root = resolve(import.meta.dir, "../..");
 const suffix = randomBytes(6).toString("hex");
 const database = `triage_demo_${suffix}`;
@@ -34,12 +36,14 @@ const env = { ...process.env, DATABASE_URL: url.toString(), AI_AGENT_DATABASE_UR
   JWT_SECRET: randomBytes(32).toString("hex"), ZAP_SECRET: randomBytes(32).toString("hex"),
   TRIAGE_SERVICE_SECRET: randomBytes(32).toString("hex"),
   PRIMARY_BACKEND_URL: `http://127.0.0.1:${backendPort}`, AI_AGENT_URL: `http://127.0.0.1:${agentPort}`,
-  TRIAGE_ALLOWED_ORIGINS: "http://localhost:3000", INVESTIGATION_ENABLED: mode === "serve" ? "true" : "false",
-  REPLAY_ENABLED: "false", REPLAY_RELEASE_READY: "false",
+  TRIAGE_ALLOWED_ORIGINS: `http://localhost:${frontendPort}`, INVESTIGATION_ENABLED: mode === "serve" ? "true" : "false",
+  INVESTIGATION_MODEL_TIMEOUT_MS: "45000",
+  REPLAY_INTENT_ENABLED: "true", REPLAY_ENABLED: "true", REPLAY_RELEASE_READY: "true",
+  WORKER_HANDLER_VERSION: process.env.WORKER_HANDLER_VERSION || "triage-demo-worker-v1",
   KAFKA_BROKERS: process.env.KAFKA_BROKERS ?? "127.0.0.1:9092",
   KAFKA_EVENTS_TOPIC: `triage-demo-events-${suffix}`, KAFKA_DLQ_TOPIC: `triage-demo-dlq-${suffix}`,
   KAFKA_WORKER_GROUP: `triage-demo-worker-${suffix}`,
-  // Five cases need more than the normal four-attempt token allowance. This applies only to this disposable stack.
+  // Six cases need more than the normal four-attempt token allowance. This applies only to this disposable stack.
   INVESTIGATION_OWNER_TOKEN_BUDGET_PER_DAY: "640000", INVESTIGATION_OPERATOR_TOKEN_BUDGET_PER_DAY: "640000",
   INVESTIGATION_OWNER_SPEND_CENTS_PER_DAY: "160", INVESTIGATION_OPERATOR_SPEND_CENTS_PER_DAY: "160",
 };
@@ -72,7 +76,7 @@ async function until(check: () => Promise<boolean>, label: string, timeout = 600
 }
 try {
   // Refuse to replace any already-running stack.
-  for (const port of [backendPort, webhookPort, agentPort, ...(mode === "serve" ? [3000] : [])]) {
+  for (const port of [backendPort, webhookPort, agentPort, ...(mode === "serve" ? [frontendPort] : [])]) {
     const { createConnection } = await import("node:net");
     const busy = await new Promise<boolean>(resolvePort => {
       const socket = createConnection({ host: "127.0.0.1", port });
@@ -105,7 +109,8 @@ try {
       actionTypeId: "telegram", actionMetadata: scenario.metadata, zapRunMetadata: { demo: true, source: "seeded", scenario: scenario.key } });
     const now = new Date();
     const execution = await db.zapRunExecution.create({ data: { zapRunId: run.id, stage: 0, status: "FAILED",
-      providerOutcome: scenario.outcome, completedAt: now, requiresHuman: true, ...fingerprints } });
+      providerOutcome: scenario.outcome, completedAt: now, requiresHuman: true,
+      handlerVersion: env.WORKER_HANDLER_VERSION, ...fingerprints } });
     await db.zapRunExecutionAttempt.create({ data: { executionId: execution.id, attemptNumber: 1,
       status: scenario.outcome.toUpperCase(), provider: "telegram", phase: scenario.phase, safeCode: scenario.code,
       providerStatus: "status" in scenario ? scenario.status : null, retryAfterSeconds: "retryAfter" in scenario ? scenario.retryAfter : null,
@@ -154,21 +159,88 @@ try {
     }, `Webhook → outbox → worker → DLQ: ${entry.key}`);
   }
   const listed = await (await fetch(`${backend}/cases`, { headers: auth })).json() as { cases: Array<{ case_id: string }> };
-  if (listed.cases.length !== 5 || cases.some(c => !listed.cases.some(row => row.case_id === c.caseId)))
-    throw new Error("Operator case listing did not return exactly the five demo cases");
+  if (listed.cases.length !== 6 || cases.some(c => !listed.cases.some(row => row.case_id === c.caseId)))
+    throw new Error("Operator case listing did not return exactly the six demo cases");
   for (const entry of cases) {
     const response = await fetch(`${backend}/cases/${entry.caseId}/failure-context`, { headers: auth });
     if (!response.ok) throw new Error(`Agent → backend evidence read failed for ${entry.key}: ${response.status}`);
   }
-  const manifest = { mode, simulatedProviders: true, replayEnabled: false, cases, dlqObserved: dlqIds.size,
-    verified: ["three seeded cases", "two webhook/outbox/Kafka/worker failures", "two broker-observed DLQ messages",
-      "operator lists all five cases", "all five agent-to-backend evidence reads"], paidDiagnosisCalls: 0 };
+  // Seed approval + replay request + replay execution for the replay-approved case so it
+  // shows a completed replay in the UI without needing a live investigation first.
+  const replayCase = cases.find(c => c.key === "replay-approved")!;
+  const replayScenario = scenarios.find(s => s.key === "replay-approved")!;
+  const fingerprints = createFingerprints({
+    zapRunId: replayCase.runId!, stage: 0,
+    actionId: (await db!.action.findFirstOrThrow({ where: { zapId: replayCase.zapId, sortingOrder: 0 } })).id,
+    actionTypeId: "telegram", actionMetadata: replayScenario.metadata,
+    zapRunMetadata: { demo: true, source: "seeded", scenario: replayCase.key },
+  });
+  const proposalId = randomUUID(), approvalId = randomUUID(), requestId = randomUUID();
+  const expiresAt = new Date(Date.now() + 8 * 60 * 60 * 1000); // 8 h
+  const execution = await db!.zapRunExecution.findFirstOrThrow({ where: { zapRunId: replayCase.runId! } });
+  // notBefore is retryAfter=1 second after the attempt completed – already in the past.
+  const notBefore = new Date(execution.completedAt!.getTime() + 1000);
+  // Seed a synthetic diagnosis using evidence from this disposable database. The worker
+  // still revalidates the evidence hashes, configuration and approval before sending.
+  const { current, config } = await loadCurrentPolicyState(db!, operator.id,
+    replayCase.caseId!, env.WORKER_HANDLER_VERSION);
+  const policy = { facts: buildReplayPolicyFacts({ disposition: "replay_candidate",
+    kind: "wait_then_replay", taxonomyId: "F01", saved: current, current, config }),
+    sourceHashes: { failure: current.failureContext.content_hash,
+      execution: current.executionEvidence.content_hash, validation: current.inputValidation.content_hash } };
+  const proposal = { disposition: "replay_candidate", kind: "wait_then_replay",
+    summary: "[SEEDED DEMO] Retry captured Telegram 429 after cooldown",
+    reasons: ["Captured rejection"], evidence_refs: Object.values(current).map(value => value.evidence_id),
+    runbook_citations: [], preconditions: [], not_before: notBefore.toISOString() };
+  const investigationId = randomUUID();
+  await db!.$executeRaw(Prisma.sql`INSERT INTO "TriageProposal" (id, "investigationId", "caseId", "subjectOwnerId",
+    disposition, status, "expiresAt", version, proposal, policy, "evidenceHash")
+    VALUES (${proposalId}, ${investigationId}, ${replayCase.caseId!}, ${operator.id},
+      'replay_candidate', 'requires_approval', ${expiresAt}, 1, ${JSON.stringify(proposal)}::jsonb,
+      ${JSON.stringify(policy)}::jsonb, '')`);
+  await db!.$executeRaw(Prisma.sql`INSERT INTO "TriageApproval" (id, "proposalId", "caseId", "subjectOwnerId",
+    "approvedBy", decision, "proposalVersion", "expiresAt")
+    VALUES (${approvalId}, ${proposalId}, ${replayCase.caseId!}, ${operator.id},
+      ${operator.id}, 'approve', 1, ${expiresAt})`);
+  await db!.$executeRaw(Prisma.sql`INSERT INTO "TriageAccessAudit" (id, "actorId", "subjectOwnerId", "caseId", action, outcome)
+    VALUES (${approvalId}, ${operator.id}, ${operator.id}, ${replayCase.caseId!}, 'investigation_decision', 'allowed')`);
+  const handlerVersion = env.WORKER_HANDLER_VERSION;
+  await db!.$executeRaw(Prisma.sql`INSERT INTO "ReplayRequest"
+    (id, "approvalId", "proposalVersion", "caseId", "subjectOwnerId", "approvedBy", "requestedBy",
+      "zapRunId", stage, "originalExecutionId", generation, "actionFingerprint", "requestFingerprint",
+      "handlerVersion", "evidenceHash", "notBefore", "expiresAt", "auditId", "originalExecution")
+    VALUES (${requestId}, ${approvalId}, 1, ${replayCase.caseId!}, ${operator.id}, ${operator.id}, ${operator.id},
+      ${replayCase.runId!}, 0, ${execution.id}, 1, ${fingerprints.actionFingerprint}, ${fingerprints.requestFingerprint},
+      ${handlerVersion}, '', ${notBefore}, ${expiresAt}, ${approvalId},
+      ${JSON.stringify({ id: execution.id, status: "FAILED" })}::jsonb)`);
+  await db!.$executeRaw(Prisma.sql`INSERT INTO "ReplayExecution" ("requestId") VALUES (${requestId})`);
+  // Publish the replay event to Kafka so the running worker picks it up and executes it.
+  const replayProducer = kafka.producer();
+  await replayProducer.connect();
+  await replayProducer.send({ topic: env.KAFKA_EVENTS_TOPIC,
+    messages: [{ key: replayCase.runId!, value: JSON.stringify({ zapRunId: replayCase.runId!,
+      stage: 0, replayRequestId: requestId }) }] });
+  await replayProducer.disconnect();
+  // Wait for the worker to claim and complete the replay execution (stub returns 200 → SUCCESS).
+  await until(async () => {
+    const [row] = await db!.$queryRaw<{ status: string }[]>(
+      Prisma.sql`SELECT status FROM "ReplayExecution" WHERE "requestId" = ${requestId}`);
+    return ["SUCCESS", "FAILED", "UNKNOWN"].includes(row?.status ?? "");
+  }, "Replay execution: replay-approved");
+  const [replayResult] = await db!.$queryRaw<{ status: string }[]>(
+    Prisma.sql`SELECT status FROM "ReplayExecution" WHERE "requestId" = ${requestId}`);
+  if (replayResult?.status !== "SUCCESS") throw new Error(`Demo replay did not succeed: ${replayResult?.status}; inspect ${output}`);
+  const manifest = { mode, simulatedProviders: true, replayEnabled: true, cases, dlqObserved: dlqIds.size,
+    replayCase: { key: replayCase.key, caseId: replayCase.caseId, requestId, status: replayResult?.status },
+    verified: ["three seeded cases", "one seeded replay-approved case", "two webhook/outbox/Kafka/worker failures",
+      "two broker-observed DLQ messages", "operator lists all six cases", "all six agent-to-backend evidence reads",
+      "replay execution completed"] };
   await writeFile(resolve(output, "manifest.json"), JSON.stringify(manifest, null, 2) + "\n");
-  console.log(`Five demo cases ready. Manifest and service logs: ${output}`);
+  console.log(`Six demo cases ready (replay: ${replayResult?.status ?? "unknown"}). Manifest and service logs: ${output}`);
   console.table(cases.map(({ key, source, caseId }) => ({ key, source, caseId })));
   if (mode === "serve") {
-    start("frontend", ["run", "dev"], 3000, resolve(root, "apps/frontend"));
-    console.log("Open http://localhost:3000/login — triage-demo@example.invalid / TriageDemo-LocalOnly-2026!");
+    start("frontend", ["run", "dev"], frontendPort, resolve(root, "apps/frontend"));
+    console.log(`Open http://localhost:${frontendPort}/login — triage-demo@example.invalid / TriageDemo-LocalOnly-2026!`);
     console.log("Then open /triage without old case/investigation query parameters. Click Investigate to use the configured model.");
     console.log("Keep this terminal running. Ctrl+C removes only this disposable database and its Kafka topics.");
     await new Promise<void>(resolveStop => {

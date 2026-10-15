@@ -1,86 +1,34 @@
 "use client";
 
-import { Dialog, DialogTrigger, DialogTitle, DialogDescription, DialogContent, DialogHeader } from "@/components/ui/dialog";
 import { PrimaryButton } from "./buttons/PrimaryButton";
-import { SecondaryButton } from "./buttons/SecondaryButton";
 import { FeatureComponent } from "./FeatureComponent";
 import { useRouter } from "next/navigation";
 
-// import {  useClerk } from "@clerk/nextjs";
-
 const Hero = () => {
   const router = useRouter();
-  // const { openSignIn } = useClerk();
 
   return (
     <div>
-      <div className="flex justify-center ">
-        <div className="text-5xl font-semibold text-center pt-8 max-w-xl ">
-          Automate as fast as you can type
-        </div>
+      <div className="flex justify-center">
+        <h1 className="max-w-xl pt-8 text-center text-5xl font-semibold">
+          Put your workflows to work
+        </h1>
       </div>
       <div className="flex justify-center pt-2">
-        <div className="text-xl  font-normal text-center pt-8 max-w-2xl">
-          AI gives you automation superpowers, and Zapier puts them to work.
-          Pairing AI and Zapier helps you turn ideas in to workflows and bots
-          that work for you.
-        </div>
+        <p className="max-w-2xl pt-8 text-center text-xl font-normal">
+          Zappy connects webhook triggers to automated actions. Build a workflow,
+          copy its webhook URL, and track each run from your dashboard.
+        </p>
       </div>
       <div className="flex justify-center pt-4">
-        <div className="flex ">
-          <PrimaryButton
-            onClick={() => {
-              router.push("/signup");
-            }}
-            size="big"
-          >
-            Get Started Free
-          </PrimaryButton>
-          {/* <div className="pl-4 ">
-            <SecondaryButton
-              onClick={() =>{
-                openSignIn({
-                  redirectUrl: "/dashboard", // where to go after login
-                })
-              }
-            }
-              size="big"
-            >
-              Start With Gmail
-            </SecondaryButton>
-          </div> */}
-          <div className="pl-4 ">
-          <Dialog>
-          <DialogTrigger asChild>
-            <SecondaryButton onClick={() => {}} size="big">
-              Start With GMail
-            </SecondaryButton>
-            </DialogTrigger>
-            <DialogContent>
-        <DialogHeader>
-          <DialogTitle>NOTE</DialogTitle>
-          <DialogDescription>
-            this is a MVP, this feature will be added soon...
-          </DialogDescription>
-        </DialogHeader>
-      </DialogContent>
-            </Dialog>
-          </div>
-        </div>
+        <PrimaryButton onClick={() => router.push("/signup")} size="big">
+          Get Started
+        </PrimaryButton>
       </div>
-      <div className="flex justify-center pt-5">
-        <FeatureComponent
-          title={"Free Forever"}
-          subtitle={"for core features"}
-        ></FeatureComponent>
-        <FeatureComponent
-          title={"More apps"}
-          subtitle={"than any other platform"}
-        ></FeatureComponent>
-        <FeatureComponent
-          title={"Cutting-edge"}
-          subtitle={"AI features"}
-        ></FeatureComponent>
+      <div className="flex flex-wrap justify-center pt-5">
+        <FeatureComponent title="Webhook triggers" subtitle="Start workflows from events" />
+        <FeatureComponent title="Multi-step workflows" subtitle="Connect your actions" />
+        <FeatureComponent title="Run history" subtitle="Track workflow activity" />
       </div>
     </div>
   );

@@ -1,95 +1,13 @@
-import  express  from "express";
-import { prisma } from "../../packages/db/prisma/db";
+import { prisma } from '../../packages/db/prisma/db';
+import { createWebhookApp } from './app.ts';
 
-const app = express();
+const app = createWebhookApp(prisma, process.env.ZAP_SECRET);
+const port = Number(process.env.PORT ?? 3003);
+const server = app.listen(port, () => console.log('Hooks server is running on localhost:' + port));
 
-app.use(express.json());
-
-app.post("/hooks/catch/:userId/:zapId", async (req, res) => {
-  const userId = req.params.userId;
-  const zapId = req.params.zapId;
-  const body = req.body;
-
-  console.log("Webhook received:", { userId, zapId });
-
-  const secretHeader = req.headers["x-zap-secret"];
-  const expectedSecret = process.env.ZAP_SECRET;
-
-  if (!secretHeader || secretHeader !== expectedSecret) {
-    return Response.json({ error: "Unauthorized" }, { status: 401 });
-  }
-
-
-  const user =  await prisma.user.findUnique({
-    where: {
-      id: parseInt(userId),
-    }
-  });
-  if (!user) {
-    return res.status(404).json({ message: "User not found" });
-  }
-  const zap = await prisma.zap.findUnique({
-    where: {
-      id: zapId,
-    }
-  });
-  if (!zap) {
-    return res.status(404).json({ message: "Zap not found" });
-  }
-
-  await prisma.$transaction(async tx => {
-    console.log("Reached here 2");
-
-    const run = await tx.zapRun.create({
-      data: {
-        zapId: zapId,
-        metadata: body,
-      },
-    });
-    console.log("Reached here 3");
-
-    await tx.zapRunOutbox.create({
-      data: {
-        zapRunId: run.id,
-      },
-    });
-  });
-  res.json({
-    message: "webhook recieved",
-  });
-});
-
-//test trigger buffer
-app.post("/hooks/catch/test/:userId/:tempZapId", async (req, res) => {
-  const userId = parseInt(req.params.userId);
-  const tempZapId = req.params.tempZapId;
-  const body = req.body;
-
-  const existing = await prisma.testTriggerBuffer.findFirst({
-    where: { tempZapId: tempZapId },
-  });
-
-  if (existing) {
-    await prisma.testTriggerBuffer.update({
-      where: { id: existing.id },
-      data: { payload: body },
-    });
-  } else {
-    await prisma.testTriggerBuffer.create({
-      data: { tempZapId, userId, payload: body },
-    });
-  }
-
-  console.log("test Webhook received:", { userId, tempZapId, payload:req.body });
-
-  res.json({
-    message: "test webhook recieved",
-  });
-});
-app.listen(Number(process.env.PORT ?? 3003), () => {
-  console.log(`Hooks server is running on localhost:${process.env.PORT ?? 3003}`);
-})
-
-
-
- 
+async function shutdown() {
+  await new Promise<void>((resolve, reject) => server.close(error => error ? reject(error) : resolve()));
+  await prisma.$disconnect();
+}
+process.once('SIGINT', () => { void shutdown().catch(() => { process.exitCode = 1; }); });
+process.once('SIGTERM', () => { void shutdown().catch(() => { process.exitCode = 1; }); });
