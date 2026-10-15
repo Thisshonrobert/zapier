@@ -17,6 +17,17 @@ import { InvestigationNotifications } from "../services/investigation-notificati
 import { ReplayDenied, ReplayService } from "../services/replay.ts";
 import { readEvaluationSummary, traceLink } from "../services/triage-command-center.ts";
 import { HistorySchema, type CommandCenter } from "../../../packages/triage-contracts/command-center.ts";
+import { CaseWorkflowService, WorkflowConcurrencyConflict, projectWorkflow, projectEvent } from "../services/case-workflow.ts";
+import { TriageEngineeringService, TriageEngineeringDenied, TriageEngineeringCaseNotFound } from "../services/triage-engineering.ts";
+import {
+  CustomerInstructionsSchema,
+  OwnerRepairAcknowledgementInputSchema,
+  OperatorRequestRepairInputSchema,
+  OperatorEscalateInputSchema,
+  OperatorResolveInputSchema,
+  EngineerFindingsInputSchema,
+  EngineerResolveInputSchema,
+} from "../../../packages/triage-contracts/index.ts";
 import type { EvidenceOperation, ServiceScope } from "../../../packages/triage-contracts/index.ts";
 
 type TriageRouterOptions = {
@@ -28,6 +39,8 @@ type TriageRouterOptions = {
   notifications?: InvestigationNotifications;
   replay?: ReplayService;
   serviceSecret?: string;
+  workflow?: CaseWorkflowService;
+  engineering?: TriageEngineeringService;
 };
 
 const bearer = (header: string | undefined) =>
@@ -50,6 +63,13 @@ export function createTriageRouter(options: TriageRouterOptions) {
   const proposals = options.proposals;
   const authority = options.authority;
   const notifications = options.notifications;
+  const workflow = options.workflow;
+  const engineering = options.engineering;
+  const engineeringError = (response: Response, error: unknown) => {
+    if (error instanceof TriageEngineeringDenied) response.status(403).json({ detail: "Engineering permission required" });
+    else if (error instanceof TriageEngineeringCaseNotFound) response.status(404).json({ detail: "Case not found in engineering queue" });
+    else response.status(503).json({ detail: "Engineering service unavailable" });
+  };
   const decisionError = (response: Response, error: unknown) => {
     if (error instanceof InvestigationDecisionDenied)
       response.status(error.message.includes("permission") ? 403 : 409).json({ detail: error.message });
@@ -89,6 +109,7 @@ export function createTriageRouter(options: TriageRouterOptions) {
   const operatorError = (response: Response, error: unknown) => {
     if (error instanceof TriageOperatorDenied) response.status(403).json({ detail: "Support operator permission required" });
     else if (error instanceof TriageCaseNotFound || error instanceof TriageOperatorCaseNotFound) response.status(404).json({ detail: "Case not found" });
+    else if (error instanceof WorkflowConcurrencyConflict) response.status(409).json({ detail: error.message });
     else response.status(503).json({ detail: "Operator access unavailable" });
   };
   const operatorCase = async (request: Request, action: "read_case" | EvidenceOperation | "diagnose") => {
@@ -465,6 +486,318 @@ export function createTriageRouter(options: TriageRouterOptions) {
     } catch (error) {
       if (error instanceof TriageCaseNotFound) response.status(404).json({ detail: "Case not found" });
       else response.status(503).json({ detail: "Evidence store unavailable" });
+    }
+  });
+
+  // --- Operator Workflow Routes ---
+  router.get("/operator/cases/:caseId/workflow", authMiddleware, async (request, response) => {
+    try {
+      if (!workflow) { response.status(503).json({ detail: "Workflow service unavailable" }); return; }
+      const selected = await operatorCase(request, "read_case");
+      const result = await workflow.getWorkflowWithEvents(selected.case_id);
+      if (!result) {
+        response.status(404).json({ detail: "Workflow not found" });
+        return;
+      }
+      response.json({
+        workflow: projectWorkflow(result.workflow, selected.zap_run_id, selected.stage),
+        events: result.events.map(projectEvent),
+      });
+    } catch (error) {
+      operatorError(response, error);
+    }
+  });
+
+  router.post("/operator/cases/:caseId/workflow/request-repair", authMiddleware, async (request, response) => {
+    try {
+      if (!workflow) { response.status(503).json({ detail: "Workflow service unavailable" }); return; }
+      const parsed = OperatorRequestRepairInputSchema.safeParse(request.body);
+      const idempotencyKey = request.headers["idempotency-key"];
+      if (!parsed.success || (idempotencyKey && !uuid.safeParse(idempotencyKey).success)) {
+        response.status(422).json({ detail: "Invalid request repair payload" }); return;
+      }
+      const selected = await operatorCase(request, "diagnose");
+      const result = await workflow.transition({
+        caseId: selected.case_id,
+        subjectOwnerId: selected.subject_owner_id,
+        actorId: request.id,
+        action: "request_owner_repair",
+        toQueue: "owner",
+        toStatus: "awaiting_owner",
+        customerInstructions: parsed.data.customerInstructions,
+        notes: parsed.data.notes,
+        idempotencyKey: typeof idempotencyKey === "string" ? idempotencyKey : undefined,
+        auditAction: "operator_route_case",
+      });
+      response.json({
+        workflow: projectWorkflow(result.workflow, selected.zap_run_id, selected.stage),
+        event: projectEvent(result.event),
+      });
+    } catch (error) {
+      operatorError(response, error);
+    }
+  });
+
+  router.post("/operator/cases/:caseId/workflow/escalate", authMiddleware, async (request, response) => {
+    try {
+      if (!workflow) { response.status(503).json({ detail: "Workflow service unavailable" }); return; }
+      const parsed = OperatorEscalateInputSchema.safeParse(request.body);
+      const idempotencyKey = request.headers["idempotency-key"];
+      if (!parsed.success || (idempotencyKey && !uuid.safeParse(idempotencyKey).success)) {
+        response.status(422).json({ detail: "Invalid escalate payload" }); return;
+      }
+      const selected = await operatorCase(request, "diagnose");
+      const result = await workflow.transition({
+        caseId: selected.case_id,
+        subjectOwnerId: selected.subject_owner_id,
+        actorId: request.id,
+        action: "escalate",
+        toQueue: "engineering",
+        toStatus: "escalated",
+        escalationReason: parsed.data.escalationReason,
+        assignedEngineerId: parsed.data.assignedEngineerId,
+        notes: parsed.data.notes,
+        idempotencyKey: typeof idempotencyKey === "string" ? idempotencyKey : undefined,
+        auditAction: "operator_route_case",
+      });
+      response.json({
+        workflow: projectWorkflow(result.workflow, selected.zap_run_id, selected.stage),
+        event: projectEvent(result.event),
+      });
+    } catch (error) {
+      operatorError(response, error);
+    }
+  });
+
+  router.post("/operator/cases/:caseId/workflow/resolve", authMiddleware, async (request, response) => {
+    try {
+      if (!workflow) { response.status(503).json({ detail: "Workflow service unavailable" }); return; }
+      const parsed = OperatorResolveInputSchema.safeParse(request.body);
+      const idempotencyKey = request.headers["idempotency-key"];
+      if (!parsed.success || (idempotencyKey && !uuid.safeParse(idempotencyKey).success)) {
+        response.status(422).json({ detail: "Invalid resolve payload" }); return;
+      }
+      const selected = await operatorCase(request, "diagnose");
+      const result = await workflow.transition({
+        caseId: selected.case_id,
+        subjectOwnerId: selected.subject_owner_id,
+        actorId: request.id,
+        action: "resolve",
+        toQueue: "resolved",
+        toStatus: "resolved",
+        resolutionReason: parsed.data.resolutionReason,
+        notes: parsed.data.notes,
+        idempotencyKey: typeof idempotencyKey === "string" ? idempotencyKey : undefined,
+        auditAction: "operator_route_case",
+      });
+      response.json({
+        workflow: projectWorkflow(result.workflow, selected.zap_run_id, selected.stage),
+        event: projectEvent(result.event),
+      });
+    } catch (error) {
+      operatorError(response, error);
+    }
+  });
+
+  // --- Engineering Routes ---
+  router.get("/engineering/cases", authMiddleware, async (request, response) => {
+    try {
+      if (!engineering) { response.status(503).json({ detail: "Engineering service unavailable" }); return; }
+      const limit = Number(request.query.limit ?? 50);
+      response.json({ cases: await engineering.listCases(request.id, limit) });
+    } catch (error) {
+      engineeringError(response, error);
+    }
+  });
+
+  router.get("/engineering/cases/:caseId", authMiddleware, async (request, response) => {
+    try {
+      if (!engineering) { response.status(503).json({ detail: "Engineering service unavailable" }); return; }
+      const caseId = request.params.caseId;
+      if (!caseId || typeof caseId !== "string" || !uuid.safeParse(caseId).success) {
+        response.status(404).json({ detail: "Case not found" }); return;
+      }
+      const item = await engineering.resolveCase(request.id, caseId, "engineering_read_case");
+      response.json(item);
+    } catch (error) {
+      engineeringError(response, error);
+    }
+  });
+
+  router.get("/engineering/cases/:caseId/failure-context", authMiddleware, async (request, response) => {
+    try {
+      if (!engineering) { response.status(503).json({ detail: "Engineering service unavailable" }); return; }
+      const caseId = request.params.caseId;
+      if (!caseId || typeof caseId !== "string" || !uuid.safeParse(caseId).success) {
+        response.status(404).json({ detail: "Case not found" }); return;
+      }
+      const item = await engineering.resolveCase(request.id, caseId, "failure_context");
+      const correlationId = randomUUID();
+      const scope = createServiceScope({
+        secret,
+        ownerId: item.subject_owner_id,
+        caseId: item.case_id,
+        investigationId: randomUUID(),
+        correlationId,
+        operations: ["failure_context"],
+      });
+      response.setHeader("x-correlation-id", correlationId);
+      response.json(await agent.read("/private/v1/tools/failure-context", scope, correlationId));
+    } catch (error) {
+      engineeringError(response, error);
+    }
+  });
+
+  router.get("/engineering/cases/:caseId/execution-evidence", authMiddleware, async (request, response) => {
+    try {
+      if (!engineering) { response.status(503).json({ detail: "Engineering service unavailable" }); return; }
+      const caseId = request.params.caseId;
+      if (!caseId || typeof caseId !== "string" || !uuid.safeParse(caseId).success) {
+        response.status(404).json({ detail: "Case not found" }); return;
+      }
+      const item = await engineering.resolveCase(request.id, caseId, "execution_evidence");
+      const correlationId = randomUUID();
+      const scope = createServiceScope({
+        secret,
+        ownerId: item.subject_owner_id,
+        caseId: item.case_id,
+        investigationId: randomUUID(),
+        correlationId,
+        operations: ["execution_evidence"],
+      });
+      const limit = Math.min(Math.max(Number(request.query.historyLimit ?? 10) || 10, 1), 50);
+      response.setHeader("x-correlation-id", correlationId);
+      response.json(await agent.read(`/private/v1/tools/execution-evidence?historyLimit=${limit}`, scope, correlationId));
+    } catch (error) {
+      engineeringError(response, error);
+    }
+  });
+
+  router.post("/engineering/cases/:caseId/findings", authMiddleware, async (request, response) => {
+    try {
+      if (!engineering) { response.status(503).json({ detail: "Engineering service unavailable" }); return; }
+      const caseId = request.params.caseId;
+      const parsed = EngineerFindingsInputSchema.safeParse(request.body);
+      const idempotencyKey = request.headers["idempotency-key"];
+      if (!caseId || typeof caseId !== "string" || !uuid.safeParse(caseId).success ||
+          !parsed.success || (idempotencyKey && !uuid.safeParse(idempotencyKey).success)) {
+        response.status(422).json({ detail: "Invalid findings payload" }); return;
+      }
+      const result = await engineering.returnFindings({
+        actorId: request.id,
+        caseId,
+        findings: parsed.data.findings,
+        notes: parsed.data.notes,
+        idempotencyKey: typeof idempotencyKey === "string" ? idempotencyKey : undefined,
+      });
+      response.json({
+        workflow: projectWorkflow(result.workflow),
+        event: projectEvent(result.event),
+      });
+    } catch (error) {
+      engineeringError(response, error);
+    }
+  });
+
+  router.post("/engineering/cases/:caseId/resolve", authMiddleware, async (request, response) => {
+    try {
+      if (!engineering) { response.status(503).json({ detail: "Engineering service unavailable" }); return; }
+      const caseId = request.params.caseId;
+      const parsed = EngineerResolveInputSchema.safeParse(request.body);
+      const idempotencyKey = request.headers["idempotency-key"];
+      if (!caseId || typeof caseId !== "string" || !uuid.safeParse(caseId).success ||
+          !parsed.success || (idempotencyKey && !uuid.safeParse(idempotencyKey).success)) {
+        response.status(422).json({ detail: "Invalid resolve payload" }); return;
+      }
+      const result = await engineering.resolve({
+        actorId: request.id,
+        caseId,
+        resolutionReason: parsed.data.resolutionReason,
+        notes: parsed.data.notes,
+        idempotencyKey: typeof idempotencyKey === "string" ? idempotencyKey : undefined,
+      });
+      response.json({
+        workflow: projectWorkflow(result.workflow),
+        event: projectEvent(result.event),
+      });
+    } catch (error) {
+      engineeringError(response, error);
+    }
+  });
+
+  // --- Owner Routes ---
+  router.post("/cases/:caseId/repair-acknowledgement", authMiddleware, async (request, response) => {
+    try {
+      if (!workflow) { response.status(503).json({ detail: "Workflow service unavailable" }); return; }
+      const caseId = request.params.caseId;
+      if (!caseId || typeof caseId !== "string" || !uuid.safeParse(caseId).success) {
+        response.status(404).json({ detail: "Case not found" }); return;
+      }
+      await evidence.assertOwnedCase(request.id, caseId);
+      const parsed = OwnerRepairAcknowledgementInputSchema.safeParse(request.body);
+      const idempotencyKey = request.headers["idempotency-key"];
+      if (!parsed.success || (idempotencyKey && !uuid.safeParse(idempotencyKey).success)) {
+        response.status(422).json({ detail: "Invalid repair acknowledgement payload" }); return;
+      }
+      const current = await workflow.getWorkflow(caseId);
+      if (current && current.queue !== "owner" && current.status !== "awaiting_owner") {
+        response.status(409).json({ detail: "Case is not awaiting owner repair" }); return;
+      }
+      const result = await workflow.transition({
+        caseId,
+        subjectOwnerId: request.id,
+        actorId: request.id,
+        action: "submit_repair",
+        toQueue: "support",
+        toStatus: "repair_submitted",
+        repairNote: parsed.data.repairNote,
+        idempotencyKey: typeof idempotencyKey === "string" ? idempotencyKey : undefined,
+        auditAction: "owner_repair_acknowledgement",
+      });
+      response.json({
+        workflow: projectWorkflow(result.workflow),
+        event: projectEvent(result.event),
+      });
+    } catch (error) {
+      if (error instanceof TriageCaseNotFound) response.status(404).json({ detail: "Case not found" });
+      else response.status(503).json({ detail: "Workflow service unavailable" });
+    }
+  });
+
+  router.get("/cases/:caseId/workflow", authMiddleware, async (request, response) => {
+    try {
+      if (!workflow) { response.status(503).json({ detail: "Workflow service unavailable" }); return; }
+      const caseId = request.params.caseId;
+      if (!caseId || typeof caseId !== "string" || !uuid.safeParse(caseId).success) {
+        response.status(404).json({ detail: "Case not found" }); return;
+      }
+      await evidence.assertOwnedCase(request.id, caseId);
+      const wf = await workflow.getWorkflow(caseId);
+      if (!wf) {
+        response.json({
+          workflow: {
+            caseId,
+            queue: "support",
+            status: "needing_support",
+            customerInstructions: null,
+            repairNote: null,
+          },
+        });
+        return;
+      }
+      response.json({
+        workflow: {
+          caseId: wf.caseId,
+          queue: wf.queue,
+          status: wf.status,
+          customerInstructions: wf.customerInstructions,
+          repairNote: wf.repairNote,
+          updatedAt: wf.updatedAt.toISOString(),
+        },
+      });
+    } catch (error) {
+      if (error instanceof TriageCaseNotFound) response.status(404).json({ detail: "Case not found" });
+      else response.status(503).json({ detail: "Workflow service unavailable" });
     }
   });
 

@@ -23,6 +23,56 @@ export * from './enums.ts';
  */
 export type User = Prisma.UserModel
 /**
+ * Model TriageAccessAudit
+ * 
+ */
+export type TriageAccessAudit = Prisma.TriageAccessAuditModel
+/**
+ * Model TriageProposal
+ * 
+ */
+export type TriageProposal = Prisma.TriageProposalModel
+/**
+ * Model TriageApproval
+ * 
+ */
+export type TriageApproval = Prisma.TriageApprovalModel
+/**
+ * Model ReplayRequest
+ * 
+ */
+export type ReplayRequest = Prisma.ReplayRequestModel
+/**
+ * Model ReplayExecution
+ * 
+ */
+export type ReplayExecution = Prisma.ReplayExecutionModel
+/**
+ * Model ReplayExecutionAttempt
+ * 
+ */
+export type ReplayExecutionAttempt = Prisma.ReplayExecutionAttemptModel
+/**
+ * Model ReplayFailure
+ * 
+ */
+export type ReplayFailure = Prisma.ReplayFailureModel
+/**
+ * Model TriageDecisionNotification
+ * 
+ */
+export type TriageDecisionNotification = Prisma.TriageDecisionNotificationModel
+/**
+ * Model TriageCaseWorkflow
+ * 
+ */
+export type TriageCaseWorkflow = Prisma.TriageCaseWorkflowModel
+/**
+ * Model TriageCaseWorkflowEvent
+ * 
+ */
+export type TriageCaseWorkflowEvent = Prisma.TriageCaseWorkflowEventModel
+/**
  * Model Zap
  * 
  */

@@ -391,6 +391,16 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   User: 'User',
+  TriageAccessAudit: 'TriageAccessAudit',
+  TriageProposal: 'TriageProposal',
+  TriageApproval: 'TriageApproval',
+  ReplayRequest: 'ReplayRequest',
+  ReplayExecution: 'ReplayExecution',
+  ReplayExecutionAttempt: 'ReplayExecutionAttempt',
+  ReplayFailure: 'ReplayFailure',
+  TriageDecisionNotification: 'TriageDecisionNotification',
+  TriageCaseWorkflow: 'TriageCaseWorkflow',
+  TriageCaseWorkflowEvent: 'TriageCaseWorkflowEvent',
   Zap: 'Zap',
   Trigger: 'Trigger',
   Action: 'Action',
@@ -417,7 +427,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "zap" | "trigger" | "action" | "availableAction" | "availableTriggerType" | "zapRun" | "zapRunOutbox" | "testTriggerBuffer" | "zapRunRetry" | "zapRunExecution" | "zapRunExecutionAttempt"
+    modelProps: "user" | "triageAccessAudit" | "triageProposal" | "triageApproval" | "replayRequest" | "replayExecution" | "replayExecutionAttempt" | "replayFailure" | "triageDecisionNotification" | "triageCaseWorkflow" | "triageCaseWorkflowEvent" | "zap" | "trigger" | "action" | "availableAction" | "availableTriggerType" | "zapRun" | "zapRunOutbox" | "testTriggerBuffer" | "zapRunRetry" | "zapRunExecution" | "zapRunExecutionAttempt"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -492,6 +502,746 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.UserCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.UserCountAggregateOutputType> | number
+        }
+      }
+    }
+    TriageAccessAudit: {
+      payload: Prisma.$TriageAccessAuditPayload<ExtArgs>
+      fields: Prisma.TriageAccessAuditFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TriageAccessAuditFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageAccessAuditPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TriageAccessAuditFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageAccessAuditPayload>
+        }
+        findFirst: {
+          args: Prisma.TriageAccessAuditFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageAccessAuditPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TriageAccessAuditFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageAccessAuditPayload>
+        }
+        findMany: {
+          args: Prisma.TriageAccessAuditFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageAccessAuditPayload>[]
+        }
+        create: {
+          args: Prisma.TriageAccessAuditCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageAccessAuditPayload>
+        }
+        createMany: {
+          args: Prisma.TriageAccessAuditCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.TriageAccessAuditCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageAccessAuditPayload>[]
+        }
+        delete: {
+          args: Prisma.TriageAccessAuditDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageAccessAuditPayload>
+        }
+        update: {
+          args: Prisma.TriageAccessAuditUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageAccessAuditPayload>
+        }
+        deleteMany: {
+          args: Prisma.TriageAccessAuditDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TriageAccessAuditUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.TriageAccessAuditUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageAccessAuditPayload>[]
+        }
+        upsert: {
+          args: Prisma.TriageAccessAuditUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageAccessAuditPayload>
+        }
+        aggregate: {
+          args: Prisma.TriageAccessAuditAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTriageAccessAudit>
+        }
+        groupBy: {
+          args: Prisma.TriageAccessAuditGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TriageAccessAuditGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TriageAccessAuditCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TriageAccessAuditCountAggregateOutputType> | number
+        }
+      }
+    }
+    TriageProposal: {
+      payload: Prisma.$TriageProposalPayload<ExtArgs>
+      fields: Prisma.TriageProposalFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TriageProposalFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageProposalPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TriageProposalFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageProposalPayload>
+        }
+        findFirst: {
+          args: Prisma.TriageProposalFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageProposalPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TriageProposalFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageProposalPayload>
+        }
+        findMany: {
+          args: Prisma.TriageProposalFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageProposalPayload>[]
+        }
+        create: {
+          args: Prisma.TriageProposalCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageProposalPayload>
+        }
+        createMany: {
+          args: Prisma.TriageProposalCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.TriageProposalCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageProposalPayload>[]
+        }
+        delete: {
+          args: Prisma.TriageProposalDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageProposalPayload>
+        }
+        update: {
+          args: Prisma.TriageProposalUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageProposalPayload>
+        }
+        deleteMany: {
+          args: Prisma.TriageProposalDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TriageProposalUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.TriageProposalUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageProposalPayload>[]
+        }
+        upsert: {
+          args: Prisma.TriageProposalUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageProposalPayload>
+        }
+        aggregate: {
+          args: Prisma.TriageProposalAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTriageProposal>
+        }
+        groupBy: {
+          args: Prisma.TriageProposalGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TriageProposalGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TriageProposalCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TriageProposalCountAggregateOutputType> | number
+        }
+      }
+    }
+    TriageApproval: {
+      payload: Prisma.$TriageApprovalPayload<ExtArgs>
+      fields: Prisma.TriageApprovalFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TriageApprovalFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageApprovalPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TriageApprovalFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageApprovalPayload>
+        }
+        findFirst: {
+          args: Prisma.TriageApprovalFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageApprovalPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TriageApprovalFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageApprovalPayload>
+        }
+        findMany: {
+          args: Prisma.TriageApprovalFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageApprovalPayload>[]
+        }
+        create: {
+          args: Prisma.TriageApprovalCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageApprovalPayload>
+        }
+        createMany: {
+          args: Prisma.TriageApprovalCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.TriageApprovalCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageApprovalPayload>[]
+        }
+        delete: {
+          args: Prisma.TriageApprovalDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageApprovalPayload>
+        }
+        update: {
+          args: Prisma.TriageApprovalUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageApprovalPayload>
+        }
+        deleteMany: {
+          args: Prisma.TriageApprovalDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TriageApprovalUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.TriageApprovalUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageApprovalPayload>[]
+        }
+        upsert: {
+          args: Prisma.TriageApprovalUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageApprovalPayload>
+        }
+        aggregate: {
+          args: Prisma.TriageApprovalAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTriageApproval>
+        }
+        groupBy: {
+          args: Prisma.TriageApprovalGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TriageApprovalGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TriageApprovalCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TriageApprovalCountAggregateOutputType> | number
+        }
+      }
+    }
+    ReplayRequest: {
+      payload: Prisma.$ReplayRequestPayload<ExtArgs>
+      fields: Prisma.ReplayRequestFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ReplayRequestFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReplayRequestPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ReplayRequestFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReplayRequestPayload>
+        }
+        findFirst: {
+          args: Prisma.ReplayRequestFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReplayRequestPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ReplayRequestFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReplayRequestPayload>
+        }
+        findMany: {
+          args: Prisma.ReplayRequestFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReplayRequestPayload>[]
+        }
+        create: {
+          args: Prisma.ReplayRequestCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReplayRequestPayload>
+        }
+        createMany: {
+          args: Prisma.ReplayRequestCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ReplayRequestCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReplayRequestPayload>[]
+        }
+        delete: {
+          args: Prisma.ReplayRequestDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReplayRequestPayload>
+        }
+        update: {
+          args: Prisma.ReplayRequestUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReplayRequestPayload>
+        }
+        deleteMany: {
+          args: Prisma.ReplayRequestDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ReplayRequestUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ReplayRequestUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReplayRequestPayload>[]
+        }
+        upsert: {
+          args: Prisma.ReplayRequestUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReplayRequestPayload>
+        }
+        aggregate: {
+          args: Prisma.ReplayRequestAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateReplayRequest>
+        }
+        groupBy: {
+          args: Prisma.ReplayRequestGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ReplayRequestGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ReplayRequestCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ReplayRequestCountAggregateOutputType> | number
+        }
+      }
+    }
+    ReplayExecution: {
+      payload: Prisma.$ReplayExecutionPayload<ExtArgs>
+      fields: Prisma.ReplayExecutionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ReplayExecutionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReplayExecutionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ReplayExecutionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReplayExecutionPayload>
+        }
+        findFirst: {
+          args: Prisma.ReplayExecutionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReplayExecutionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ReplayExecutionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReplayExecutionPayload>
+        }
+        findMany: {
+          args: Prisma.ReplayExecutionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReplayExecutionPayload>[]
+        }
+        create: {
+          args: Prisma.ReplayExecutionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReplayExecutionPayload>
+        }
+        createMany: {
+          args: Prisma.ReplayExecutionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ReplayExecutionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReplayExecutionPayload>[]
+        }
+        delete: {
+          args: Prisma.ReplayExecutionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReplayExecutionPayload>
+        }
+        update: {
+          args: Prisma.ReplayExecutionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReplayExecutionPayload>
+        }
+        deleteMany: {
+          args: Prisma.ReplayExecutionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ReplayExecutionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ReplayExecutionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReplayExecutionPayload>[]
+        }
+        upsert: {
+          args: Prisma.ReplayExecutionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReplayExecutionPayload>
+        }
+        aggregate: {
+          args: Prisma.ReplayExecutionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateReplayExecution>
+        }
+        groupBy: {
+          args: Prisma.ReplayExecutionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ReplayExecutionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ReplayExecutionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ReplayExecutionCountAggregateOutputType> | number
+        }
+      }
+    }
+    ReplayExecutionAttempt: {
+      payload: Prisma.$ReplayExecutionAttemptPayload<ExtArgs>
+      fields: Prisma.ReplayExecutionAttemptFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ReplayExecutionAttemptFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReplayExecutionAttemptPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ReplayExecutionAttemptFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReplayExecutionAttemptPayload>
+        }
+        findFirst: {
+          args: Prisma.ReplayExecutionAttemptFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReplayExecutionAttemptPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ReplayExecutionAttemptFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReplayExecutionAttemptPayload>
+        }
+        findMany: {
+          args: Prisma.ReplayExecutionAttemptFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReplayExecutionAttemptPayload>[]
+        }
+        create: {
+          args: Prisma.ReplayExecutionAttemptCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReplayExecutionAttemptPayload>
+        }
+        createMany: {
+          args: Prisma.ReplayExecutionAttemptCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ReplayExecutionAttemptCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReplayExecutionAttemptPayload>[]
+        }
+        delete: {
+          args: Prisma.ReplayExecutionAttemptDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReplayExecutionAttemptPayload>
+        }
+        update: {
+          args: Prisma.ReplayExecutionAttemptUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReplayExecutionAttemptPayload>
+        }
+        deleteMany: {
+          args: Prisma.ReplayExecutionAttemptDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ReplayExecutionAttemptUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ReplayExecutionAttemptUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReplayExecutionAttemptPayload>[]
+        }
+        upsert: {
+          args: Prisma.ReplayExecutionAttemptUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReplayExecutionAttemptPayload>
+        }
+        aggregate: {
+          args: Prisma.ReplayExecutionAttemptAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateReplayExecutionAttempt>
+        }
+        groupBy: {
+          args: Prisma.ReplayExecutionAttemptGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ReplayExecutionAttemptGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ReplayExecutionAttemptCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ReplayExecutionAttemptCountAggregateOutputType> | number
+        }
+      }
+    }
+    ReplayFailure: {
+      payload: Prisma.$ReplayFailurePayload<ExtArgs>
+      fields: Prisma.ReplayFailureFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ReplayFailureFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReplayFailurePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ReplayFailureFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReplayFailurePayload>
+        }
+        findFirst: {
+          args: Prisma.ReplayFailureFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReplayFailurePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ReplayFailureFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReplayFailurePayload>
+        }
+        findMany: {
+          args: Prisma.ReplayFailureFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReplayFailurePayload>[]
+        }
+        create: {
+          args: Prisma.ReplayFailureCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReplayFailurePayload>
+        }
+        createMany: {
+          args: Prisma.ReplayFailureCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ReplayFailureCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReplayFailurePayload>[]
+        }
+        delete: {
+          args: Prisma.ReplayFailureDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReplayFailurePayload>
+        }
+        update: {
+          args: Prisma.ReplayFailureUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReplayFailurePayload>
+        }
+        deleteMany: {
+          args: Prisma.ReplayFailureDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ReplayFailureUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ReplayFailureUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReplayFailurePayload>[]
+        }
+        upsert: {
+          args: Prisma.ReplayFailureUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReplayFailurePayload>
+        }
+        aggregate: {
+          args: Prisma.ReplayFailureAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateReplayFailure>
+        }
+        groupBy: {
+          args: Prisma.ReplayFailureGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ReplayFailureGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ReplayFailureCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ReplayFailureCountAggregateOutputType> | number
+        }
+      }
+    }
+    TriageDecisionNotification: {
+      payload: Prisma.$TriageDecisionNotificationPayload<ExtArgs>
+      fields: Prisma.TriageDecisionNotificationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TriageDecisionNotificationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageDecisionNotificationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TriageDecisionNotificationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageDecisionNotificationPayload>
+        }
+        findFirst: {
+          args: Prisma.TriageDecisionNotificationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageDecisionNotificationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TriageDecisionNotificationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageDecisionNotificationPayload>
+        }
+        findMany: {
+          args: Prisma.TriageDecisionNotificationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageDecisionNotificationPayload>[]
+        }
+        create: {
+          args: Prisma.TriageDecisionNotificationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageDecisionNotificationPayload>
+        }
+        createMany: {
+          args: Prisma.TriageDecisionNotificationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.TriageDecisionNotificationCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageDecisionNotificationPayload>[]
+        }
+        delete: {
+          args: Prisma.TriageDecisionNotificationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageDecisionNotificationPayload>
+        }
+        update: {
+          args: Prisma.TriageDecisionNotificationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageDecisionNotificationPayload>
+        }
+        deleteMany: {
+          args: Prisma.TriageDecisionNotificationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TriageDecisionNotificationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.TriageDecisionNotificationUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageDecisionNotificationPayload>[]
+        }
+        upsert: {
+          args: Prisma.TriageDecisionNotificationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageDecisionNotificationPayload>
+        }
+        aggregate: {
+          args: Prisma.TriageDecisionNotificationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTriageDecisionNotification>
+        }
+        groupBy: {
+          args: Prisma.TriageDecisionNotificationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TriageDecisionNotificationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TriageDecisionNotificationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TriageDecisionNotificationCountAggregateOutputType> | number
+        }
+      }
+    }
+    TriageCaseWorkflow: {
+      payload: Prisma.$TriageCaseWorkflowPayload<ExtArgs>
+      fields: Prisma.TriageCaseWorkflowFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TriageCaseWorkflowFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageCaseWorkflowPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TriageCaseWorkflowFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageCaseWorkflowPayload>
+        }
+        findFirst: {
+          args: Prisma.TriageCaseWorkflowFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageCaseWorkflowPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TriageCaseWorkflowFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageCaseWorkflowPayload>
+        }
+        findMany: {
+          args: Prisma.TriageCaseWorkflowFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageCaseWorkflowPayload>[]
+        }
+        create: {
+          args: Prisma.TriageCaseWorkflowCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageCaseWorkflowPayload>
+        }
+        createMany: {
+          args: Prisma.TriageCaseWorkflowCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.TriageCaseWorkflowCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageCaseWorkflowPayload>[]
+        }
+        delete: {
+          args: Prisma.TriageCaseWorkflowDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageCaseWorkflowPayload>
+        }
+        update: {
+          args: Prisma.TriageCaseWorkflowUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageCaseWorkflowPayload>
+        }
+        deleteMany: {
+          args: Prisma.TriageCaseWorkflowDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TriageCaseWorkflowUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.TriageCaseWorkflowUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageCaseWorkflowPayload>[]
+        }
+        upsert: {
+          args: Prisma.TriageCaseWorkflowUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageCaseWorkflowPayload>
+        }
+        aggregate: {
+          args: Prisma.TriageCaseWorkflowAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTriageCaseWorkflow>
+        }
+        groupBy: {
+          args: Prisma.TriageCaseWorkflowGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TriageCaseWorkflowGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TriageCaseWorkflowCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TriageCaseWorkflowCountAggregateOutputType> | number
+        }
+      }
+    }
+    TriageCaseWorkflowEvent: {
+      payload: Prisma.$TriageCaseWorkflowEventPayload<ExtArgs>
+      fields: Prisma.TriageCaseWorkflowEventFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TriageCaseWorkflowEventFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageCaseWorkflowEventPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TriageCaseWorkflowEventFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageCaseWorkflowEventPayload>
+        }
+        findFirst: {
+          args: Prisma.TriageCaseWorkflowEventFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageCaseWorkflowEventPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TriageCaseWorkflowEventFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageCaseWorkflowEventPayload>
+        }
+        findMany: {
+          args: Prisma.TriageCaseWorkflowEventFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageCaseWorkflowEventPayload>[]
+        }
+        create: {
+          args: Prisma.TriageCaseWorkflowEventCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageCaseWorkflowEventPayload>
+        }
+        createMany: {
+          args: Prisma.TriageCaseWorkflowEventCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.TriageCaseWorkflowEventCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageCaseWorkflowEventPayload>[]
+        }
+        delete: {
+          args: Prisma.TriageCaseWorkflowEventDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageCaseWorkflowEventPayload>
+        }
+        update: {
+          args: Prisma.TriageCaseWorkflowEventUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageCaseWorkflowEventPayload>
+        }
+        deleteMany: {
+          args: Prisma.TriageCaseWorkflowEventDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TriageCaseWorkflowEventUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.TriageCaseWorkflowEventUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageCaseWorkflowEventPayload>[]
+        }
+        upsert: {
+          args: Prisma.TriageCaseWorkflowEventUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TriageCaseWorkflowEventPayload>
+        }
+        aggregate: {
+          args: Prisma.TriageCaseWorkflowEventAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTriageCaseWorkflowEvent>
+        }
+        groupBy: {
+          args: Prisma.TriageCaseWorkflowEventGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TriageCaseWorkflowEventGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TriageCaseWorkflowEventCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TriageCaseWorkflowEventCountAggregateOutputType> | number
         }
       }
     }
@@ -1352,10 +2102,196 @@ export const UserScalarFieldEnum = {
   id: 'id',
   name: 'name',
   email: 'email',
+  isSupportOperator: 'isSupportOperator',
+  isEngineer: 'isEngineer',
   password: 'password'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const TriageAccessAuditScalarFieldEnum = {
+  id: 'id',
+  actorId: 'actorId',
+  subjectOwnerId: 'subjectOwnerId',
+  caseId: 'caseId',
+  action: 'action',
+  outcome: 'outcome',
+  createdAt: 'createdAt'
+} as const
+
+export type TriageAccessAuditScalarFieldEnum = (typeof TriageAccessAuditScalarFieldEnum)[keyof typeof TriageAccessAuditScalarFieldEnum]
+
+
+export const TriageProposalScalarFieldEnum = {
+  id: 'id',
+  investigationId: 'investigationId',
+  caseId: 'caseId',
+  subjectOwnerId: 'subjectOwnerId',
+  version: 'version',
+  disposition: 'disposition',
+  status: 'status',
+  proposal: 'proposal',
+  policy: 'policy',
+  evidenceHash: 'evidenceHash',
+  configurationHash: 'configurationHash',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt'
+} as const
+
+export type TriageProposalScalarFieldEnum = (typeof TriageProposalScalarFieldEnum)[keyof typeof TriageProposalScalarFieldEnum]
+
+
+export const TriageApprovalScalarFieldEnum = {
+  id: 'id',
+  proposalId: 'proposalId',
+  caseId: 'caseId',
+  subjectOwnerId: 'subjectOwnerId',
+  approvedBy: 'approvedBy',
+  decision: 'decision',
+  proposalVersion: 'proposalVersion',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt'
+} as const
+
+export type TriageApprovalScalarFieldEnum = (typeof TriageApprovalScalarFieldEnum)[keyof typeof TriageApprovalScalarFieldEnum]
+
+
+export const ReplayRequestScalarFieldEnum = {
+  id: 'id',
+  approvalId: 'approvalId',
+  proposalVersion: 'proposalVersion',
+  caseId: 'caseId',
+  subjectOwnerId: 'subjectOwnerId',
+  approvedBy: 'approvedBy',
+  requestedBy: 'requestedBy',
+  zapRunId: 'zapRunId',
+  stage: 'stage',
+  originalExecutionId: 'originalExecutionId',
+  generation: 'generation',
+  actionFingerprint: 'actionFingerprint',
+  requestFingerprint: 'requestFingerprint',
+  handlerVersion: 'handlerVersion',
+  evidenceHash: 'evidenceHash',
+  notBefore: 'notBefore',
+  expiresAt: 'expiresAt',
+  auditId: 'auditId',
+  originalExecution: 'originalExecution',
+  createdAt: 'createdAt'
+} as const
+
+export type ReplayRequestScalarFieldEnum = (typeof ReplayRequestScalarFieldEnum)[keyof typeof ReplayRequestScalarFieldEnum]
+
+
+export const ReplayExecutionScalarFieldEnum = {
+  requestId: 'requestId',
+  status: 'status',
+  claimToken: 'claimToken',
+  leaseUntil: 'leaseUntil',
+  completedAt: 'completedAt',
+  dispatchToken: 'dispatchToken',
+  dispatchLeaseUntil: 'dispatchLeaseUntil',
+  dispatchAttempts: 'dispatchAttempts',
+  nextDispatchAt: 'nextDispatchAt',
+  publishedAt: 'publishedAt',
+  nextStage: 'nextStage'
+} as const
+
+export type ReplayExecutionScalarFieldEnum = (typeof ReplayExecutionScalarFieldEnum)[keyof typeof ReplayExecutionScalarFieldEnum]
+
+
+export const ReplayExecutionAttemptScalarFieldEnum = {
+  id: 'id',
+  requestId: 'requestId',
+  attemptNumber: 'attemptNumber',
+  status: 'status',
+  provider: 'provider',
+  phase: 'phase',
+  safeCode: 'safeCode',
+  providerStatus: 'providerStatus',
+  retryAfterSeconds: 'retryAfterSeconds',
+  safeReceiptId: 'safeReceiptId',
+  actionFingerprint: 'actionFingerprint',
+  requestFingerprint: 'requestFingerprint',
+  startedAt: 'startedAt',
+  completedAt: 'completedAt'
+} as const
+
+export type ReplayExecutionAttemptScalarFieldEnum = (typeof ReplayExecutionAttemptScalarFieldEnum)[keyof typeof ReplayExecutionAttemptScalarFieldEnum]
+
+
+export const ReplayFailureScalarFieldEnum = {
+  id: 'id',
+  requestId: 'requestId',
+  providerOutcome: 'providerOutcome',
+  provider: 'provider',
+  phase: 'phase',
+  safeCode: 'safeCode',
+  providerStatus: 'providerStatus',
+  retryAfterSeconds: 'retryAfterSeconds',
+  safeReceiptId: 'safeReceiptId',
+  actionFingerprint: 'actionFingerprint',
+  requestFingerprint: 'requestFingerprint',
+  createdAt: 'createdAt'
+} as const
+
+export type ReplayFailureScalarFieldEnum = (typeof ReplayFailureScalarFieldEnum)[keyof typeof ReplayFailureScalarFieldEnum]
+
+
+export const TriageDecisionNotificationScalarFieldEnum = {
+  decisionId: 'decisionId',
+  investigationId: 'investigationId',
+  caseId: 'caseId',
+  subjectOwnerId: 'subjectOwnerId',
+  decision: 'decision',
+  createdAt: 'createdAt',
+  deliveredAt: 'deliveredAt',
+  nextAttemptAt: 'nextAttemptAt'
+} as const
+
+export type TriageDecisionNotificationScalarFieldEnum = (typeof TriageDecisionNotificationScalarFieldEnum)[keyof typeof TriageDecisionNotificationScalarFieldEnum]
+
+
+export const TriageCaseWorkflowScalarFieldEnum = {
+  id: 'id',
+  caseId: 'caseId',
+  subjectOwnerId: 'subjectOwnerId',
+  queue: 'queue',
+  status: 'status',
+  assignedEngineerId: 'assignedEngineerId',
+  activeInvestigationId: 'activeInvestigationId',
+  activeProposalId: 'activeProposalId',
+  version: 'version',
+  customerInstructions: 'customerInstructions',
+  repairNote: 'repairNote',
+  escalationReason: 'escalationReason',
+  findings: 'findings',
+  resolutionReason: 'resolutionReason',
+  resolvedAt: 'resolvedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TriageCaseWorkflowScalarFieldEnum = (typeof TriageCaseWorkflowScalarFieldEnum)[keyof typeof TriageCaseWorkflowScalarFieldEnum]
+
+
+export const TriageCaseWorkflowEventScalarFieldEnum = {
+  id: 'id',
+  workflowId: 'workflowId',
+  caseId: 'caseId',
+  subjectOwnerId: 'subjectOwnerId',
+  actorId: 'actorId',
+  action: 'action',
+  fromQueue: 'fromQueue',
+  toQueue: 'toQueue',
+  fromStatus: 'fromStatus',
+  toStatus: 'toStatus',
+  notes: 'notes',
+  metadata: 'metadata',
+  createdAt: 'createdAt'
+} as const
+
+export type TriageCaseWorkflowEventScalarFieldEnum = (typeof TriageCaseWorkflowEventScalarFieldEnum)[keyof typeof TriageCaseWorkflowEventScalarFieldEnum]
 
 
 export const ZapScalarFieldEnum = {
@@ -1474,6 +2410,7 @@ export const ZapRunExecutionScalarFieldEnum = {
   completedAt: 'completedAt',
   claimToken: 'claimToken',
   providerOutcome: 'providerOutcome',
+  handlerVersion: 'handlerVersion',
   actionFingerprint: 'actionFingerprint',
   requestFingerprint: 'requestFingerprint',
   requiresHuman: 'requiresHuman'
@@ -1515,6 +2452,14 @@ export const JsonNullValueInput = {
 } as const
 
 export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
+
+
+export const NullableJsonNullValueInput = {
+  DbNull: DbNull,
+  JsonNull: JsonNull
+} as const
+
+export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
 
 
 export const QueryMode = {
@@ -1577,6 +2522,13 @@ export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaMod
 
 
 /**
+ * Reference to a field of type 'Boolean'
+ */
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+/**
  * Reference to a field of type 'DateTime'
  */
 export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
@@ -1601,13 +2553,6 @@ export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'J
  * Reference to a field of type 'QueryMode'
  */
 export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
-    
-
-
-/**
- * Reference to a field of type 'Boolean'
- */
-export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -1712,6 +2657,16 @@ export interface PrismaClientOptions {
 }
 export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
+  triageAccessAudit?: Prisma.TriageAccessAuditOmit
+  triageProposal?: Prisma.TriageProposalOmit
+  triageApproval?: Prisma.TriageApprovalOmit
+  replayRequest?: Prisma.ReplayRequestOmit
+  replayExecution?: Prisma.ReplayExecutionOmit
+  replayExecutionAttempt?: Prisma.ReplayExecutionAttemptOmit
+  replayFailure?: Prisma.ReplayFailureOmit
+  triageDecisionNotification?: Prisma.TriageDecisionNotificationOmit
+  triageCaseWorkflow?: Prisma.TriageCaseWorkflowOmit
+  triageCaseWorkflowEvent?: Prisma.TriageCaseWorkflowEventOmit
   zap?: Prisma.ZapOmit
   trigger?: Prisma.TriggerOmit
   action?: Prisma.ActionOmit

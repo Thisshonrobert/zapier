@@ -74,9 +74,8 @@ Update Graphify only after a major architectural change or major implementation 
 The following project workflow skills are preferred:
 
 - `/superpowers` — planning, execution, testing, and review.
-- `/teach` — use only when explicitly requested for learning-oriented explanations.
 - `/ponytail` — clean and maintainable implementation practices.
-
+- `/frontend-design` and `/Impeccable` -for no ai slop frontend
 Use these skills when relevant.
 
 Do not duplicate their instructions in this file.
@@ -92,8 +91,8 @@ This project uses a multi-tool pipeline to balance reasoning, context limits, an
 
 ### 2. Implementation
 - Implements the requested master-plan scope, verifies it, and reports changed files, results, and limitations. Learning is handled separately in ChatGPT using GitHub/Notion; do not require teaching sessions, learner checkpoints, lessons, or interview explanations unless explicitly requested.
-Production implementation, complex architecture, DB transactions, security, and difficult debugging.
- Straightforward implementation, tests, and medium-complexity tasks.
+gemini flash medium effort : Production implementation, complex architecture, DB transactions, security, and difficult debugging.
+hemini flash low: Straightforward implementation, tests, and medium-complexity tasks.
 - **Rule:** Implementation agents MUST STOP and report if they find a conflict with the master plan. Do not silently redesign.
 
 ### 3. Documentation 
@@ -114,17 +113,7 @@ Manual Git and handoff instructions are maintained in [`docs/manualgit_handoff.m
 
 ### Token Budget Guardrails
 
-- Default to one agent for ordered work that edits shared files. Use parallel agents only for genuinely independent tasks.
-- An approved design or implementation plan is executable authority. Do not create another plan or architecture review unless implementation exposes a concrete conflict or ambiguity.
-- Per phase, default to at most two subagent dispatches : one implementer and one final reviewer. Skip per-task reviewers unless the user explicitly requests them or the risk justifies the added cost.
-- Use Sol at medium reasoning for architecture, transactions, security, and difficult implementation. Use Terra for bounded mechanical work. Use high reasoning only when explicitly requested or medium reasoning reports a blocker.
-- Spawn agents with no inherited conversation history and point them to narrow file-based briefs. Agents must return a short status and write detailed reports to an ignored workspace file.
-- Never redispatch interrupted work blindly. First inspect the previous agent status, report, Git diff, and uncommitted files; continue partial work instead of restarting it.
-- Keep only one implementation agent active at a time. Do not start duplicate reviewers, planners, or documentation agents for the same phase.
-- Do not paste large diagnostics, diffs, generated files, or audit JSON into chat. Save them to files and summarize only decisions, failures, and verification results.
-- Prefer one focused verification pass after implementation. Re-run only checks affected by a fix, then run the required repository verification once before completion.
-- If planning or coordination consumes substantial usage before production work starts, stop delegation, report the burn, and switch to direct single-agent execution.
-- After completing the requested task, run focused verification, summarize changed files and results, then stop; do not begin unrequested follow-up work.
+Follow the detailed [token budget guardrails](docs/token-budget-guardrails.md).
 
 ---
 
@@ -134,5 +123,4 @@ When introducing a new subsystem, pattern, or dependency:
 
 1. Work incrementally in discrete phases.
 2. Test and verify the current phase before proceeding to the next.
-3. Follow the [manual Git and handoff guidance](docs/manualgit_handoff.md).
-4. which model and effort should be used for next phase.
+3. Follow the [manual Git and handoff guidance](docs/manualgit_handoff.md) and give analaysed prompt for next phase where it mentions only the needed file to read before starting the phase to optimise token spent.
