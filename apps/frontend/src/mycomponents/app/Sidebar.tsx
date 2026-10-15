@@ -9,19 +9,29 @@ import {
   LifeBuoy,
   Plus,
   ShieldCheck,
+  Wrench,
+  type LucideIcon,
 } from "lucide-react";
 
+import { useViewerCapabilities } from "@/hooks/useViewerCapabilities";
+import { visibleNavigation, type NavigationItem } from "@/types/engineering";
+
+/** `role` marks a link only a privileged account may use. The backend still authorizes
+ * every request; hiding the link only avoids advertising a workspace the viewer cannot open. */
 const NAV = [
   { label: "Home", href: "/dashboard", icon: Home },
   { label: "App connections", href: "/connections", icon: Blocks },
   { label: "Zap history", href: "/history", icon: History },
   { label: "Your failures", href: "/failures", icon: LifeBuoy },
-  { label: "Support triage", href: "/triage", icon: ShieldCheck },
-] as const;
+  { label: "Support triage", href: "/triage", icon: ShieldCheck, role: "isSupportOperator" },
+  { label: "Engineering", href: "/engineering", icon: Wrench, role: "isEngineer" },
+] as const satisfies readonly (NavigationItem & { icon: LucideIcon })[];
 
 export function Sidebar() {
   const pathname = usePathname();
   const router = useRouter();
+  const capabilities = useViewerCapabilities();
+  const items = visibleNavigation(NAV, capabilities);
 
   return (
     <aside className="hidden md:flex w-[248px] shrink-0 flex-col justify-between border-r border-zinc-200 bg-white px-3 py-4">
@@ -35,7 +45,7 @@ export function Sidebar() {
         </button>
 
         <nav className="flex flex-col gap-0.5">
-          {NAV.map((item) => {
+          {items.map((item) => {
             const Icon = item.icon;
             const active = pathname === item.href;
             const content = (
