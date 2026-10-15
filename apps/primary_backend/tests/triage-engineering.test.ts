@@ -76,6 +76,28 @@ function createMockEngineeringDb(options: { isEngineer?: boolean; queue?: string
         }] as T;
       }
 
+      // Phase 16E history read: the case's append-only handoff trail.
+      if (sql.includes('FROM "TriageCaseWorkflowEvent"') && sql.includes('"caseId" =')) {
+        return [
+          {
+            id: "ev-escalate",
+            workflowId: "wf-1",
+            caseId,
+            subjectOwnerId: 9,
+            actorId: 4,
+            action: "escalate",
+            fromQueue: "support",
+            toQueue: "engineering",
+            fromStatus: "needing_support",
+            toStatus: "escalated",
+            notes: "Handing to engineering after two failed reruns",
+            // Unbounded JSON written by another surface: the history projection drops it.
+            metadata: { botToken: "123456:super-secret-token" },
+            createdAt: new Date("2026-10-15T00:00:00Z"),
+          },
+        ] as T;
+      }
+
       if (sql.includes('"TriageCaseWorkflowEvent"') && sql.includes("WHERE id =")) {
         const id = String(values[0]);
         const found = events.find((e) => e.id === id);
@@ -285,8 +307,38 @@ describe("TriageEngineeringService", () => {
     assert.equal(audits.filter((a) => a.outcome === "denied").length, 2);
   });
 
-  test("revocation takes effect on the next write and is audited", async () => {
+  test("reads the authorized case with its append-only handoff history", async () => {
+    const { engineering, audits } = createMockEngineeringDb({ isEngineer: true, queue: "engineering" });
+
+    const history = await engineering.readHistory(42, caseId);
+    assert.equal(history.case.case_id, caseId);
+    assert.equal(history.case.workflow.queue, "engineering");
+    assert.equal(history.events.length, 1);
+    assert.equal(history.events[0]?.action, "escalate");
+    assert.equal(history.events[0]?.toQueue, "engineering");
+    assert.equal(history.events[0]?.notes, "Handing to engineering after two failed reruns");
+
+    // Event metadata is unbounded JSON from another surface and is never forwarded.
+    assert.equal(history.events[0]?.metadata, null);
+    assert.ok(!JSON.stringify(history).includes("super-secret-token"));
+
+    assert.ok(audits.some((a) => JSON.stringify(a).includes("engineering_read_case")));
+  });
+
+  test("history is denied for an unrouted case and for a revoked engineer", async () => {
+    const unrouted = createMockEngineeringDb({ isEngineer: true, queue: "support" });
+    await assert.rejects(async () => { await unrouted.engineering.readHistory(42, caseId); },
+      (err: any) => err instanceof TriageEngineeringCaseNotFound);
+
     const audits: any[] = [];
+    const revoked = createEngineeringService({ permitted: { isEngineer: false }, audits });
+    await assert.rejects(async () => { await revoked.readHistory(42, caseId); },
+      (err: any) => err instanceof TriageEngineeringDenied);
+    assert.equal(audits.length, 1);
+    assert.equal(audits[0].outcome, "denied");
+  });
+
+  test("revocation takes effect on the next write and is audited", async () => {    const audits: any[] = [];
     const engineering = createEngineeringService({ permitted: { isEngineer: false }, audits });
 
     await assert.rejects(async () => { await engineering.returnFindings({ actorId: 42, caseId, findings: "findings" }); },

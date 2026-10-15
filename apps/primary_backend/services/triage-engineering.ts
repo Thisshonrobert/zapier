@@ -1,7 +1,7 @@
 import { randomUUID } from "node:crypto";
 import { Prisma } from "../../../packages/db/generated/prisma/client.ts";
 import { CaseWorkflowService, type SqlClient, type TransactionDb } from "./case-workflow.ts";
-import type { CustomerInstructions } from "../../../packages/triage-contracts/workflow.ts";
+import type { CustomerInstructions, WorkflowQueue, WorkflowStatus } from "../../../packages/triage-contracts/workflow.ts";
 
 export class TriageEngineeringDenied extends Error {}
 export class TriageEngineeringCaseNotFound extends Error {}
@@ -150,6 +150,36 @@ export class TriageEngineeringService {
 
     await this.audit(actorId, action, "allowed", caseId, row.subjectOwnerId);
     return projectEngineeringCase(row);
+  }
+
+  /**
+   * The authorized case plus its append-only workflow handoff trail. Reuses
+   * `resolveCase`, so the queue binding, the permission check and the access audit
+   * are the same ones that already guard a single case read; only events for that
+   * case are returned, and event `metadata` is dropped rather than forwarded.
+   */
+  async readHistory(actorId: number, caseId: string) {
+    const selected = await this.resolveCase(actorId, caseId, "engineering_read_case");
+    const result = await this.workflow.getWorkflowWithEvents(selected.case_id);
+    if (!result) throw new TriageEngineeringCaseNotFound(caseId);
+    return {
+      case: selected,
+      events: result.events.map((event) => ({
+        id: event.id,
+        workflowId: event.workflowId,
+        caseId: event.caseId,
+        subjectOwnerId: event.subjectOwnerId,
+        actorId: event.actorId,
+        action: event.action,
+        fromQueue: event.fromQueue as WorkflowQueue,
+        toQueue: event.toQueue as WorkflowQueue,
+        fromStatus: event.fromStatus as WorkflowStatus,
+        toStatus: event.toStatus as WorkflowStatus,
+        notes: event.notes,
+        metadata: null,
+        createdAt: event.createdAt.toISOString(),
+      })),
+    };
   }
 
   async returnFindings(input: {

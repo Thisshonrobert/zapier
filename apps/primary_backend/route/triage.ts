@@ -19,6 +19,7 @@ import { readEvaluationSummary, traceLink } from "../services/triage-command-cen
 import { HistorySchema, type CommandCenter } from "../../../packages/triage-contracts/command-center.ts";
 import { CaseWorkflowService, WorkflowConcurrencyConflict, projectWorkflow, projectEvent } from "../services/case-workflow.ts";
 import { TriageEngineeringService, TriageEngineeringDenied, TriageEngineeringCaseNotFound } from "../services/triage-engineering.ts";
+import { TriageViewerService } from "../services/triage-viewer.ts";
 import {
   TriageOwnerActionStale,
   TriageOwnerCaseNotFound,
@@ -49,6 +50,7 @@ type TriageRouterOptions = {
   workflow?: CaseWorkflowService;
   engineering?: TriageEngineeringService;
   owner?: TriageOwnerService;
+  viewer?: TriageViewerService;
 };
 
 const bearer = (header: string | undefined) =>
@@ -74,6 +76,7 @@ export function createTriageRouter(options: TriageRouterOptions) {
   const workflow = options.workflow;
   const engineering = options.engineering;
   const owner = options.owner;
+  const viewer = options.viewer;
   const ownerError = (response: Response, error: unknown) => {
     // Cross-owner and unknown ids are indistinguishable on purpose: no denial oracle.
     if (error instanceof TriageOwnerCaseNotFound) response.status(404).json({ detail: "Case not found" });
@@ -192,6 +195,18 @@ export function createTriageRouter(options: TriageRouterOptions) {
   router.get("/cases", authMiddleware, async (request, response) => {
     const limit = Number(request.query.limit ?? 50);
     response.json({ cases: await evidence.listCases(request.id, Number.isInteger(limit) ? limit : 50) });
+  });
+
+  // --- Viewer Capabilities Route ---
+  // Only the caller's own two role booleans; used for role-aware navigation and
+  // workspace gating. Authorization for every privileged route stays server-side.
+  router.get("/viewer", authMiddleware, async (request, response) => {
+    if (!viewer) { response.status(503).json({ detail: "Viewer capability service unavailable" }); return; }
+    try {
+      response.json({ capabilities: await viewer.readCapabilities(request.id) });
+    } catch {
+      response.status(503).json({ detail: "Viewer capability service unavailable" });
+    }
   });
 
   router.get("/operator/cases", authMiddleware, async (request, response) => {
@@ -684,6 +699,22 @@ export function createTriageRouter(options: TriageRouterOptions) {
       }
       const item = await engineering.resolveCase(request.id, caseId, "engineering_read_case");
       response.json(item);
+    } catch (error) {
+      engineeringError(response, error);
+    }
+  });
+
+  // Authorized case plus its append-only handoff history. The case read, the queue
+  // binding and the access audit all come from the same engineering permission check.
+  router.get("/engineering/cases/:caseId/history", authMiddleware, async (request, response) => {
+    try {
+      if (!engineering) { response.status(503).json({ detail: "Engineering service unavailable" }); return; }
+      const caseId = request.params.caseId;
+      if (!caseId || typeof caseId !== "string" || !uuid.safeParse(caseId).success) {
+        response.status(404).json({ detail: "Case not found" }); return;
+      }
+      const item = await engineering.readHistory(request.id, caseId);
+      response.json({ case: item.case, events: item.events });
     } catch (error) {
       engineeringError(response, error);
     }

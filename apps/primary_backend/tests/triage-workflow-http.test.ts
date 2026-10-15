@@ -32,6 +32,7 @@ function startTestServer(options: {
   workflowService?: InstanceType<typeof CaseWorkflowService>;
   engineeringService?: InstanceType<typeof TriageEngineeringService>;
   operatorService?: InstanceType<typeof TriageOperatorService>;
+  viewerService?: { readCapabilities: (actorId: number) => Promise<{ isSupportOperator: boolean; isEngineer: boolean }> };
 } = {}) {
   const app = express();
   app.use(express.json());
@@ -223,6 +224,28 @@ function startTestServer(options: {
         idempotencyKey: input.idempotencyKey,
       });
     },
+    readHistory: async (actorId: number, cId: string) => {
+      if (!isEngineer) throw new TriageEngineeringDenied("Engineering permission required");
+      if (currentQueue !== "engineering" || cId !== caseId) throw new TriageEngineeringCaseNotFound(cId);
+      return {
+        case: await fakeEngineering.resolveCase(actorId, cId),
+        events: [{
+          id: "ev-1",
+          workflowId: "wf-1",
+          caseId,
+          subjectOwnerId: 9,
+          actorId: 4,
+          action: "escalate",
+          fromQueue: "support",
+          toQueue: "engineering",
+          fromStatus: "needing_support",
+          toStatus: "escalated",
+          notes: "Handing to engineering",
+          metadata: null,
+          createdAt: "2026-10-15T00:00:00.000Z",
+        }],
+      };
+    },
     resolve: async (input: any) => {
       if (!isEngineer) throw new TriageEngineeringDenied("Engineering permission required");
       return fakeWorkflow.transition({
@@ -244,6 +267,9 @@ function startTestServer(options: {
     operator: fakeOperator,
     workflow: fakeWorkflow,
     engineering: fakeEngineering,
+    viewer: (options.viewerService ?? {
+      readCapabilities: async () => ({ isSupportOperator: isOperator, isEngineer }),
+    }) as never,
   }));
 
   const server = createServer(app);
@@ -493,8 +519,75 @@ describe("Phase 16C Workflow & Roles HTTP API", () => {
     expect(body.detail).toBe("Case is not awaiting owner repair");
   });
 
-  test("operator routing reports an optimistic-locking conflict as 409", async () => {
-    const { WorkflowConcurrencyConflict } = await import("../services/case-workflow.ts");
+  test("viewer capabilities report only the caller's own roles", async () => {
+    const ownerServer = await startTestServer({ isOwner: true });
+    const ownerRes = await fetch(`${ownerServer.origin}/api/v1/triage/viewer`, {
+      headers: { Authorization: `Bearer ${token(9)}` },
+    });
+    expect(ownerRes.status).toBe(200);
+    expect(await ownerRes.json()).toEqual({ capabilities: { isSupportOperator: false, isEngineer: false } });
+
+    const engineerServer = await startTestServer({ isEngineer: true });
+    const engineerRes = await fetch(`${engineerServer.origin}/api/v1/triage/viewer`, {
+      headers: { Authorization: `Bearer ${token(42)}` },
+    });
+    expect(engineerRes.status).toBe(200);
+    expect(await engineerRes.json()).toEqual({ capabilities: { isSupportOperator: false, isEngineer: true } });
+
+    // The route reports the authenticated account, never a client-supplied role.
+    const operatorServer = await startTestServer({ isOperator: true });
+    const operatorRes = await fetch(`${operatorServer.origin}/api/v1/triage/viewer?isEngineer=true`, {
+      headers: { Authorization: `Bearer ${token(4)}` },
+    });
+    expect(await operatorRes.json()).toEqual({ capabilities: { isSupportOperator: true, isEngineer: false } });
+  });
+
+  test("viewer capabilities require an authenticated token", async () => {
+    const { origin } = await startTestServer({ isOwner: true });
+    const anonymous = await fetch(`${origin}/api/v1/triage/viewer`);
+    expect(anonymous.status).toBe(401);
+    const invalid = await fetch(`${origin}/api/v1/triage/viewer`, {
+      headers: { Authorization: "Bearer not-a-jwt" },
+    });
+    expect(invalid.status).toBe(401);
+  });
+
+  test("engineer reads an authorized case with its handoff history", async () => {
+    const { origin } = await startTestServer({ isEngineer: true, queue: "engineering", status: "escalated" });
+    const engToken = token(42);
+
+    const historyRes = await fetch(`${origin}/api/v1/triage/engineering/cases/${caseId}/history`, {
+      headers: { Authorization: `Bearer ${engToken}` },
+    });
+    expect(historyRes.status).toBe(200);
+    const body = (await historyRes.json()) as any;
+    expect(body.case.case_id).toBe(caseId);
+    expect(body.case.workflow.queue).toBe("engineering");
+    expect(body.events).toHaveLength(1);
+    expect(body.events[0].action).toBe("escalate");
+    expect(body.events[0].toQueue).toBe("engineering");
+  });
+
+  test("engineering history is denied to non-engineers and for unrouted cases", async () => {
+    const denied = await startTestServer({ isEngineer: false, isOwner: true, queue: "engineering" });
+    const deniedRes = await fetch(`${denied.origin}/api/v1/triage/engineering/cases/${caseId}/history`, {
+      headers: { Authorization: `Bearer ${token(9)}` },
+    });
+    expect(deniedRes.status).toBe(403);
+
+    const unrouted = await startTestServer({ isEngineer: true, queue: "support" });
+    const unroutedRes = await fetch(`${unrouted.origin}/api/v1/triage/engineering/cases/${caseId}/history`, {
+      headers: { Authorization: `Bearer ${token(42)}` },
+    });
+    expect(unroutedRes.status).toBe(404);
+
+    const badId = await fetch(`${unrouted.origin}/api/v1/triage/engineering/cases/not-a-uuid/history`, {
+      headers: { Authorization: `Bearer ${token(42)}` },
+    });
+    expect(badId.status).toBe(404);
+  });
+
+  test("operator routing reports an optimistic-locking conflict as 409", async () => {    const { WorkflowConcurrencyConflict } = await import("../services/case-workflow.ts");
     let calls = 0;
     const conflictingWorkflow: any = {
       getWorkflow: async (cId: string) => ({ caseId: cId, queue: "support", status: "needing_support" }),
