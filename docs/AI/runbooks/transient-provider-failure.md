@@ -1,13 +1,13 @@
 ---
 id: RB-F01-F02
-version: 1.0.0
+version: 1.1.0
 simulated: true
 status: current
 owner: AI operations
-reviewed: 2026-09-24
+reviewed: 2026-10-17
 taxonomy: F01, F02
 providers: telegram, email, generic
-code_version: phase-4 evidence contracts and phase-3c worker
+code_version: phase-16f interactive replay with operator approval
 ---
 # Transient provider failure
 
@@ -33,7 +33,11 @@ Do not restart infrastructure, call a provider, expose credentials, rewrite a pa
 
 ## Replay and approval
 
-Phase 5 is read-only. Replay is unavailable. The future initial replay case is limited to complete evidence for one Telegram send-stage 429 rejection, unchanged inputs, passed ordering and safety gates, and owner approval. Unknown outcomes remain blocked.
+Interactive replay exists and requires an explicit **operator** decision; this runbook never grants it. The current initial replay case is limited to complete evidence for one Telegram send-stage 429 rejection, unchanged inputs, valid ordering and safety gates, an unexpired approval, and at most one replay. The operator reviews the application-computed eligibility, approves the case, and then issues a separate explicit replay request; approval alone is not publication and publication alone is not delivery. Unknown outcomes, changed inputs or handlers, a live or completed replay, expired authority and revoked permission all deny.
+
+## Historical snapshots and missing evidence
+
+Historical raw provider payload snapshots may be unavailable, and a missing version cannot prove the execution-time definition. Captured attempt fingerprints and a current comparison of configuration, handler version and validated inputs still support the policy decision above. Report an unavailable snapshot as missing evidence instead of reconstructing it, and never fill a gap with a plausible guess.
 
 ## Verification, rollback, or escalation
 
@@ -45,4 +49,4 @@ Fabricated example: a Telegram send returns HTTP 429 with `retry_after: 30`. Thi
 
 ## Sources
 
-See the [failure taxonomy](../failure-taxonomy.md), [master plan](../../ai-dlq-master-plan.md), and current [Telegram handler](../../../apps/worker/actions/telegram.ts). Code and deterministic policy take precedence over this simulated runbook.
+See the [failure taxonomy](../failure-taxonomy.md), [master plan](../../ai-dlq-master-plan.md), current [Telegram handler](../../../apps/worker/actions/telegram.ts), and the [replay request service](../../../apps/primary_backend/services/replay.ts). Code and deterministic policy take precedence over this simulated runbook.

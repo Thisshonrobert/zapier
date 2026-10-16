@@ -1,4 +1,4 @@
-import type { SavedInvestigation } from "../types/triage";
+import type { ReplayCapabilities, SavedInvestigation } from "../types/triage";
 
 type FetchLike = (
   input: RequestInfo | URL,
@@ -38,6 +38,43 @@ export async function requestTriage<T>({
     throw error;
   }
   return payload as T;
+}
+
+export async function readReplayCapabilities(options: {
+  baseUrl: string; token: string; signal: AbortSignal; fetchImpl?: FetchLike;
+}): Promise<ReplayCapabilities> {
+  const payload = await requestTriage<{ capabilities: ReplayCapabilities }>({
+    baseUrl: options.baseUrl, token: options.token, path: "/replay/capabilities",
+    init: { method: "GET" }, signal: options.signal, fetchImpl: options.fetchImpl,
+  });
+  return payload.capabilities;
+}
+
+export type ReplayOperatorAction = "dry-run" | "requests";
+
+/**
+ * Operator replay actions. Each call carries its own idempotency identity for the request
+ * action, so a repeated submit recovers the same durable intent instead of creating a
+ * second one, and the backend rechecks authorization, policy and the release profile.
+ */
+export async function submitReplayAction(options: {
+  baseUrl: string; token: string; caseId: string; action: ReplayOperatorAction;
+  approvalId: string; proposalVersion: number; idempotencyKey?: string;
+  signal: AbortSignal; fetchImpl?: FetchLike;
+}) {
+  const headers: Record<string, string> = { "content-type": "application/json" };
+  if (options.action === "requests") {
+    if (!options.idempotencyKey) throw new Error("A replay request requires an idempotency key");
+    headers["idempotency-key"] = options.idempotencyKey;
+  }
+  return requestTriage<{ id: string; status?: string; reasons?: string[]; notBefore?: string | null }>({
+    baseUrl: `${options.baseUrl}/cases/${encodeURIComponent(options.caseId)}/replay`,
+    token: options.token,
+    path: `/${options.action}`,
+    init: { method: "POST", headers,
+      body: JSON.stringify({ approvalId: options.approvalId, proposalVersion: options.proposalVersion }) },
+    signal: options.signal, fetchImpl: options.fetchImpl,
+  });
 }
 
 export async function pollInvestigation({ signal, read, onSnapshot, attempts = 30, intervalMs = 2_000 }: {

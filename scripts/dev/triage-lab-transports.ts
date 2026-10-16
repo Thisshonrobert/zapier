@@ -8,16 +8,35 @@ import { parse } from "../../apps/worker/parse.ts";
 import { assertLabDatabase, assertLabBrokers, labResources, type LabMarker } from "./triage-lab-config.ts";
 import { checkOwnership } from "./triage-lab-store.ts";
 import { fakeTelegramToken, fakeEmailKey, selectScenarios, type LabScenario } from "./triage-lab-scenarios.ts";
+import { assertLabReplayRuntime } from "./triage-lab-replay.ts";
 
 export function assertLabWorkerEnvironment(env: Record<string, string | undefined>) {
   assertLabDatabase(env.DATABASE_URL ?? "", env.NODE_ENV);
   assertLabBrokers(env.KAFKA_BROKERS ?? "");
   const resources = labResources(env.TRIAGE_LAB_ID ?? "");
+  // The production replay switches stay off in the ordinary lab. A replay-enabled lab is a
+  // separate, verified profile that this guard still requires to be marked and bound.
+  const replayOff = env.REPLAY_ENABLED === "false" && env.REPLAY_RELEASE_READY === "false";
+  const replayProfiled = env.REPLAY_ENABLED === "true" && env.REPLAY_RELEASE_READY === "true" &&
+    env.TRIAGE_LAB_REPLAY_PROFILE !== undefined;
   if (env.TRIAGE_LAB !== "true" || !/^[a-f0-9]{64}$/.test(env.TRIAGE_LAB_RESOURCE_FINGERPRINT ?? "") ||
     env.KAFKA_EVENTS_TOPIC !== resources.eventsTopic || env.KAFKA_DLQ_TOPIC !== resources.dlqTopic ||
     env.KAFKA_WORKER_GROUP !== resources.workerGroup || env.TELEGRAM_BOT_TOKEN !== "" || env.RESEND_API_KEY !== fakeEmailKey ||
-    env.REPLAY_ENABLED !== "false" || env.REPLAY_RELEASE_READY !== "false") throw new Error("Lab worker environment refused");
+    !(replayOff || replayProfiled)) throw new Error("Lab worker environment refused");
   return { version: 1, database: "triage_lab", labId: env.TRIAGE_LAB_ID!, resourceFingerprint: env.TRIAGE_LAB_RESOURCE_FINGERPRINT!, ...resources } satisfies LabMarker;
+}
+
+/**
+ * The lab deliberately runs the production dispatcher and worker replay path. It may only
+ * turn the replay switches on through the verified lab release profile, after the ordinary
+ * worker guard has already refused every unmarked environment and the ownership marker
+ * proves these are the lab's own resources.
+ */
+export function assertLabReplayWorkerEnvironment(env: Record<string, string | undefined>) {
+  if (env.REPLAY_ENABLED !== "true" || env.REPLAY_RELEASE_READY !== "true" ||
+    env.TRIAGE_LAB_REPLAY_PROFILE === undefined)
+    throw new Error("Lab replay worker environment refused");
+  return assertLabReplayRuntime(env);
 }
 
 export function simulatedTransports(scenario: LabScenario, stage: number, replay: boolean,

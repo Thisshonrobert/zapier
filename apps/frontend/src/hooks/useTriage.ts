@@ -3,9 +3,10 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { BACKEND_URL } from "@/config";
-import { requestTriage } from "@/lib/triage-client";
+import { readReplayCapabilities, requestTriage, submitReplayAction } from "@/lib/triage-client";
 import { useInvestigationStream } from "./useInvestigationStream";
 import type {
+  ReplayCapabilities,
   TriageCase,
   SavedInvestigation,
   TriageDecision,
@@ -42,6 +43,27 @@ const errorState = (error: unknown): TriageDisplayState => {
   };
 };
 
+// A fresh dry run is required between approval and dispatch. The permit lives in session
+// storage per approval, so a reload cannot turn an unvalidated approval into a request.
+const reviewKey = (approvalId: string) => `triage:replay-reviewed:${approvalId}`;
+
+export const markReplayReviewed = (approvalId: string) => {
+  try { window.sessionStorage.setItem(reviewKey(approvalId), "1"); } catch { /* private mode */ }
+};
+
+export const hasReplayReview = (approvalId: string) => {
+  try { return window.sessionStorage.getItem(reviewKey(approvalId)) === "1"; } catch { return false; }
+};
+
+export const clearReplayReview = (approvalId: string) => {
+  try { window.sessionStorage.removeItem(reviewKey(approvalId)); } catch { /* private mode */ }
+};
+
+const replayStateText = (value: { status?: string; reasons?: string[]; notBefore?: string | null }) =>
+  value.status === "requires_approval"
+    ? `Dry run confirmed eligibility after ${value.notBefore ?? "the recorded cooldown"}.`
+    : `Dry run blocked: ${(value.reasons ?? ["unknown"]).join(", ")}.`;
+
 export function useTriage() {
   const watchSaved = useInvestigationStream(operatorBaseUrl);
   const [casesState, setCasesState] = useState<TriageDisplayState>({
@@ -52,7 +74,9 @@ export function useTriage() {
   });
   const [selectedCase, setSelectedCase] = useState<TriageCase | null>(null);
   const [saved, setSaved] = useState<SavedInvestigation | null>(null);
+  const [capabilities, setCapabilities] = useState<ReplayCapabilities | null>(null);
   const [pendingDecision, setPendingDecision] = useState(false);
+  const [replayAction, setReplayAction] = useState<{ kind: "dry-run" | "request"; pending: boolean; message: string } | null>(null);
   const [polling, setPolling] = useState(false);
   const diagnosisController = useRef<AbortController | null>(null);
   const busy = useRef(false);
@@ -124,6 +148,19 @@ export function useTriage() {
 
   useEffect(() => () => diagnosisController.current?.abort(), []);
 
+  // Server-reported capability: the console states what the deployment permits instead of
+  // printing a fixed disabled paragraph. A failed read is reported as unavailable, not as
+  // an implicit denial or an implicit grant.
+  useEffect(() => {
+    const controller = new AbortController();
+    const token = window.localStorage.getItem("token");
+    if (!token) return () => controller.abort();
+    readReplayCapabilities({ baseUrl: `${BACKEND_URL}/api/v1/triage`, token, signal: controller.signal })
+      .then(setCapabilities)
+      .catch(() => setCapabilities(null));
+    return () => controller.abort();
+  }, []);
+
   const selectCase = useCallback((caseItem: TriageCase) => {
     selectionGeneration.current++;
     diagnosisController.current?.abort();
@@ -184,6 +221,54 @@ export function useTriage() {
       void readSaved(selectedCase.case_id, investigationId.current);
   }, [selectedCase, readSaved]);
 
+  // Explicit operator actions: a fresh dry run against the committed approval and then the
+  // request itself. Neither action approves anything and neither publishes to Kafka
+  // directly; the backend records the intent and its dispatcher publishes it.
+  const replayStep = useCallback(async (kind: "dry-run" | "request") => {
+    const authority = saved?.authority;
+    if (!selectedCase || !saved || !authority?.decision || busy.current) return;
+    if (Date.parse(authority.expiresAt) <= Date.now()) {
+      setReplayAction({ kind, pending: false, message: "Proposal expired. Start a new investigation." }); return;
+    }
+    if (kind === "request" && !hasReplayReview(authority.decision.id)) {
+      setReplayAction({ kind, pending: false, message: "Run the dry run review before requesting replay." }); return;
+    }
+    busy.current = true;
+    setReplayAction({ kind, pending: true, message: kind === "dry-run" ? "Running dry run review…" : "Requesting replay…" });
+    const controller = new AbortController();
+    diagnosisController.current = controller;
+    const token = window.localStorage.getItem("token");
+    try {
+      if (!token) throw Object.assign(new Error("Sign in again to continue."), { status: 401 });
+      const idempotencyKey = kind === "request"
+        ? (window.sessionStorage.getItem(`triage:replay-request:${authority.decision.id}`) ?? crypto.randomUUID())
+        : undefined;
+      if (idempotencyKey) window.sessionStorage.setItem(`triage:replay-request:${authority.decision.id}`, idempotencyKey);
+      const result = await submitReplayAction({ baseUrl: operatorBaseUrl, token, caseId: selectedCase.case_id,
+        action: kind, approvalId: authority.decision.id, proposalVersion: authority.version,
+        idempotencyKey, signal: controller.signal });
+      if (controller.signal.aborted) return;
+      if (kind === "dry-run") {
+        markReplayReviewed(authority.decision.id);
+        setReplayAction({ kind, pending: false, message: replayStateText(result) });
+      } else {
+        clearReplayReview(authority.decision.id);
+        window.sessionStorage.removeItem(`triage:replay-request:${authority.decision.id}`);
+        setReplayAction({ kind, pending: false, message: `Replay request recorded: ${result.id}. Publication and execution are reported separately below.` });
+      }
+      busy.current = false;
+      void readSaved(selectedCase.case_id, saved.id);
+    } catch (error) {
+      if (controller.signal.aborted) return;
+      setReplayAction({ kind, pending: false, message: error instanceof Error ? error.message : "Replay action unavailable." });
+    } finally {
+      if (diagnosisController.current === controller && !controller.signal.aborted) busy.current = false;
+    }
+  }, [selectedCase, saved, readSaved]);
+
+  const dryRunReplay = useCallback(() => replayStep("dry-run"), [replayStep]);
+  const requestReplay = useCallback(() => replayStep("request"), [replayStep]);
+
   const decide = useCallback(async (decision: TriageDecision) => {
     const proposal = saved?.authority;
     if (!selectedCase || !saved || !proposal || busy.current || proposal.decision ||
@@ -221,5 +306,6 @@ export function useTriage() {
   }, [selectedCase, saved, readSaved]);
 
   return { casesState, diagnosisState, selectedCase, selectCase, diagnose,
-    saved, pendingDecision, polling, decide, refresh };
+    saved, pendingDecision, polling, decide, refresh, capabilities, replayAction,
+    dryRunReplay, requestReplay };
 }

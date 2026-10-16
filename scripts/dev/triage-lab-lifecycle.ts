@@ -43,7 +43,7 @@ export async function readSupervisor(marker: LabMarker, token: string, allowLife
 
 export async function runSupervisor(input: {
   marker: LabMarker; token: string; root: string; output: string; env: Record<string, string | undefined>;
-  verifyOwnership: () => Promise<void>;
+  verifyOwnership: () => Promise<void>; replayEnabled?: boolean;
 }) {
   await assertPortsFree(Object.values(labPorts));
   const children: Bun.Subprocess[] = [];
@@ -67,7 +67,8 @@ export async function runSupervisor(input: {
       try { await input.verifyOwnership(); } catch { databaseAvailable = false; }
       return Response.json({ marker: input.marker, mode: "pipeline-simulated", services,
         ready: ready && !shuttingDown && children.every(child => child.exitCode === null), databaseAvailable,
-        executionEnabled: true, providerMode: "simulated", investigationEnabled: false, replayEnabled: false });
+        executionEnabled: true, providerMode: "simulated", investigationEnabled: false,
+        replayEnabled: input.replayEnabled === true });
     },
   });
 
@@ -125,7 +126,7 @@ export async function runSupervisor(input: {
       await Bun.sleep(250);
     }
     if (!ready) throw new Error(`Lab startup failed; inspect logs in ${input.output}`);
-    console.log(`Lab services started: http://localhost:${labPorts.frontend}. Providers are simulated; investigation and replay remain off. Use lab:run to verify data-plane readiness.`);
+    console.log(`Lab services started: http://localhost:${labPorts.frontend}. Providers are simulated; investigation stays off and replay is ${input.replayEnabled ? "enabled through the verified lab replay profile" : "disabled"}. Use lab:run to verify data-plane readiness.`);
     await finished;
     await shuttingDown;
   } finally {

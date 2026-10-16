@@ -12,6 +12,7 @@ import { InvestigationProposals, evaluateSnapshotPolicy } from './services/inves
 import { revalidateProposalPolicy } from './services/replay-policy-facts';
 import { InvestigationNotifications } from './services/investigation-notifications';
 import { ReplayService } from './services/replay';
+import { replayCapabilities } from './services/replay-release';
 import { CaseWorkflowService } from './services/case-workflow';
 import { TriageEngineeringService } from './services/triage-engineering';
 import { TriageOwnerService } from './services/triage-owner';
@@ -60,6 +61,7 @@ app.use("/api/v1/triage",createTriageRouter({
     engineering,
     owner: new TriageOwnerService(prisma as unknown as import('./services/triage-owner').TriageOwnerDb),
     viewer: new TriageViewerService(prisma as unknown as import('./services/triage-viewer').ViewerCapabilitiesDb),
+    replayCapability: () => replayCapabilities(),
 }))
 
 let draining = false;

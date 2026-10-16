@@ -1,6 +1,6 @@
-# Persistent local triage lab (16A–16B)
+# Persistent local triage lab (16A–16F)
 
-The lab runs the authenticated webhook, PostgreSQL outbox processor, Kafka worker and durable DLQ publisher. Both providers are simulated at the production handlers' transport boundaries. No failure rows are fabricated. Investigations, paid model calls and replay stay disabled in 16B.
+The lab runs the authenticated webhook, PostgreSQL outbox processor, Kafka worker and durable DLQ publisher. Both providers are simulated at the production handlers' transport boundaries. No failure rows are fabricated. Investigations and paid model calls stay disabled.
 
 Prerequisites: local PostgreSQL/Kafka on the allowlisted addresses, existing dependencies, Bun and Node with TypeScript support. Root commands use `apps/primary_backend/.env` for local database connection credentials; the ordinary database name is replaced with `triage_lab`. Explicit overrides are `TRIAGE_LAB_DATABASE_URL` and `TRIAGE_LAB_KAFKA_BROKERS`; they must remain local. Seeding refuses ordinary/unmarked databases or unowned topics. Credentials are written only to ignored `.tmp-turbo-user/triage-lab/accounts.json`.
 
@@ -16,6 +16,24 @@ rtk proxy bun run lab:status
 rtk proxy bun run lab:stop
 ```
 
+## Interactive replay (16F)
+
+Replay runs the real dispatcher and worker path against a captured eligible Telegram 429 case, but only inside a verified replay profile. `REPLAY_RELEASE_READY=true` alone changes nothing: the profile must also be a marked lab whose published ownership fingerprint matches the database and brokers it is actually configured with, and the processor re-confirms the durable ownership marker before it dispatches. An ordinary `lab:start` keeps `REPLAY_ENABLED=false`.
+
+```powershell
+# Start the owner with the verified replay profile enabled:
+rtk proxy bun run lab:start:replay
+# Produce captured failures first, then replay one of them:
+rtk proxy bun run lab:run --scenario telegram-rate-limit --batch replay-example
+rtk proxy bun run lab:replay --run-id <run id from that batch> [--timeout-ms 90000]
+# or target a known case:
+rtk proxy bun run lab:replay --case-id <case id>
+```
+
+`lab:replay` builds the advisory F01 diagnosis from the case's live evidence, submits it through the real proposal/policy service, waits out the recorded cooldown, records an operator approval, runs a dry run review, records one explicit request and then verifies the durable ledger: publication, execution, the recorded provider outcome, exactly one simulated replay provider operation and an unchanged original execution. It also repeats the request identity, forces an extra dispatch pass, attempts a second replay (which must be denied), and prints the cross-investigation request history. The report is written to `.tmp-turbo-user/triage-lab/replay-<case>.json`.
+
+The advisory diagnosis in this journey is the documented bounded F01 shape because the lab runs no paid model. Eligibility, approval, request, publication and execution all run the production application code path against real captured evidence; no failure row is fabricated and no provider is contacted.
+
 `run` prints its batch identifier before triggering scenarios. Reuse the same `--batch` and scenario selection after an interrupted command: existing correlated runs are reused. If a crash leaves ingestion ambiguous with no matching run, the command refuses to resend; allow the in-flight webhook to settle and retry reconciliation, or use a new batch. `--timeout-ms` accepts 1000–300000 (default 90000). A mismatch, missing event, unpublished failure or deadline returns nonzero. Machine-readable successful reports live at `.tmp-turbo-user/triage-lab/batch-<id>.json`.
 
 `seed` reuses five accounts and 39 Zaps (six 16A placeholders plus 33 owner/scenario definitions). It preserves repairs and history. Running a changed/repaired scenario refuses to overwrite it. Use the existing explicitly guarded full `lab:reset --yes` only if you want to discard the entire marked lab database/topics. Selective cleanup is not exposed: immutable authority rows must not be bypassed.
@@ -29,6 +47,8 @@ The authenticated supervisor reports owned child liveness. `lab:run`/`lab:verify
 ```powershell
 rtk proxy bun run lab:test
 rtk proxy bun run lab:check-types
+# Replay evidence checks (no database needed):
+rtk proxy bun test apps/primary_backend/tests/replay-release.test.ts apps/primary_backend/tests/triage-replay-http.test.ts
 # With the owned pipeline stopped (avoids racing the temporary ingestion fixture):
 $env:TRIAGE_LAB_INTEGRATION = 'true'
 rtk proxy bun --env-file=apps/primary_backend/.env test scripts/dev/triage-lab.integration.test.ts

@@ -11,7 +11,8 @@ import { CaseBrowser, CommandCenterPanel } from "./CommandCenter";
 
 export default function TriagePage() {
   const { casesState, diagnosisState, selectedCase, selectCase, diagnose,
-    saved, pendingDecision, polling, decide, refresh } =
+    saved, pendingDecision, polling, decide, refresh, capabilities, replayAction,
+    dryRunReplay, requestReplay } =
     useTriage();
   const commandCenter = useCommandCenter(selectedCase?.case_id, casesState.kind === "blocked" ? null : saved);
 
@@ -28,7 +29,7 @@ export default function TriagePage() {
             </h1>
             <p className="mt-2 max-w-2xl text-sm text-zinc-600">
               Review saved investigations, record support decisions, and observe
-              replay outcomes. Live replay remains disabled.
+              replay outcomes. Replay availability is reported by the server.
             </p>
           </div>
         </div>
@@ -61,7 +62,9 @@ export default function TriagePage() {
               </p>
             ) : null}
             <TriageResults state={diagnosisState} onSelectCase={selectCase} />
-            {saved ? <SavedInvestigationControls saved={saved} pending={pendingDecision} onDecision={decide} /> : null}
+            {saved ? <SavedInvestigationControls saved={saved} pending={pendingDecision} onDecision={decide}
+              capabilities={capabilities} replayAction={replayAction}
+              onDryRun={dryRunReplay} onRequestReplay={requestReplay} /> : null}
             {commandCenter ? <CommandCenterPanel state={commandCenter} /> : null}
             {selectedCase ? <div className="mt-3 flex items-center gap-3 text-xs text-zinc-500">
               <Button variant="outline" disabled={pendingDecision || casesState.kind === "blocked"} onClick={refresh}>Refresh saved status</Button>

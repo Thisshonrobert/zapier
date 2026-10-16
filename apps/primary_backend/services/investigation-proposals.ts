@@ -10,7 +10,7 @@ import { buildReplayPolicyFacts, loadCurrentPolicyState, parsePolicyEvidence } f
 type Database = { $transaction<T>(fn: (tx: SqlClient) => Promise<T>): Promise<T> };
 type Submission = { investigationId: string; caseId: string; subjectOwnerId: number;
   actorId: number; result: unknown; evidence: unknown };
-type PolicyRecord = { result: ReplayPolicyResult; facts: ReplayPolicyFacts;
+type PolicyRecord = { result: ReplayPolicyResult; facts: ReplayPolicyFacts; candidateGrounded: boolean;
   sourceHashes: { failure: string; execution: string; validation: string } };
 
 const hash = (value: unknown) => createHash("sha256").update(JSON.stringify(value)).digest("hex");
@@ -23,7 +23,18 @@ export async function evaluateSnapshotPolicy(tx: SqlClient, input: Submission): 
   const facts = buildReplayPolicyFacts({ disposition: diagnosis.proposal.disposition,
     kind: diagnosis.proposal.kind, taxonomyId: diagnosis.diagnosis.taxonomy_id,
     saved, current, config });
-  return { result: evaluateReplayPolicy(facts), facts, sourceHashes: {
+  const result = evaluateReplayPolicy(facts);
+  // The AI may propose candidacy, but only the deterministic policy decides eligibility.
+  // A `replay_candidate` whose facts do not support it is recorded as an ungrounded
+  // candidate, so diagnosis confidence alone can never produce an Approve action.
+  const proposedCandidate = diagnosis.proposal.disposition === "replay_candidate" &&
+    diagnosis.proposal.kind === "wait_then_replay";
+  const candidateGrounded = proposedCandidate &&
+    (result.status === "requires_approval" ||
+      (result.reasons.length === 1 && result.reasons[0] === "cooldown_pending"));
+  if (proposedCandidate && !candidateGrounded && !result.reasons.includes("ungrounded_candidate"))
+    result.reasons = [...result.reasons, "ungrounded_candidate"];
+  return { result, facts, candidateGrounded, sourceHashes: {
     failure: saved.failureContext.content_hash,
     execution: saved.executionEvidence.content_hash,
     validation: saved.inputValidation.content_hash,

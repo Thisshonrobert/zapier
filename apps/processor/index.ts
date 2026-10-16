@@ -11,6 +11,15 @@ async function main() {
     const producer = kafka.producer()
     await producer.connect();
 
+    // The verified lab replay profile runs the production dispatcher on the processor's own
+    // producer and marked topic. Without that profile this branch is never taken, so the
+    // ordinary lab and every production deployment keep the closed release gate. The
+    // processor verifies the marked database itself before dispatch starts.
+    if (process.env.TRIAGE_LAB_REPLAY_PROFILE) {
+        const { startVerifiedLabReplayDispatch } = await import("../../scripts/dev/triage-lab-replay.ts");
+        await startVerifiedLabReplayDispatch(prisma as never, { send: message => producer.send(message) });
+        console.log("processor: lab replay dispatch enabled");
+    }
     while(1){
         const pendingRows = await prisma.zapRunOutbox.findMany({
             where:{},
