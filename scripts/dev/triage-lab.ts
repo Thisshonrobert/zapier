@@ -4,12 +4,13 @@ import { resolve } from "node:path";
 import pg from "pg";
 import bcrypt from "bcrypt";
 import { Kafka, logLevel } from "kafkajs";
-import { assertLabDatabase, assertLabBrokers, assertLabMarker, assertPortsFree, labPorts, labResources,
-  seedAccounts, type LabMarker } from "./triage-lab-config.ts";
+import { assertLabDatabase, assertLabBrokers, assertLabMarker, assertPortsFree, labPorts, labResourceFingerprint,
+  labResources, seedAccounts, type LabMarker } from "./triage-lab-config.ts";
 import { checkOwnership, initializeOwnership, migrateLabAgent, seedLab, seedLabScenarios, labSqlTypes } from "./triage-lab-store.ts";
 import { readSupervisor, runSupervisor } from "./triage-lab-lifecycle.ts";
 import { parsePipelineFlags, runLabBatch } from "./triage-lab-pipeline.ts";
 import { verifyLabBatch } from "./triage-lab-verify.ts";
+import { LAB_REPLAY_PROFILE } from "../../apps/primary_backend/services/replay-release.ts";
 import { fakeEmailKey } from "./triage-lab-scenarios.ts";
 
 const root = resolve(import.meta.dir, "../..");
@@ -25,9 +26,10 @@ function configuration() {
   assertLabDatabase(url.toString());
   url.searchParams.delete("schema");
   const brokers = assertLabBrokers(process.env.TRIAGE_LAB_KAFKA_BROKERS ?? "127.0.0.1:9092");
-  const fingerprint = createHash("sha256").update(JSON.stringify({
-    host: url.hostname, port: url.port || "5432", user: url.username, database: "triage_lab", brokers,
-  })).digest("hex");
+  // The shared fingerprint helper keeps the published ownership manifest and the application
+  // release gate byte-identical; deriving it twice is how they drift apart.
+  const fingerprint = labResourceFingerprint({ databaseUrl: url.toString(), brokers: brokers.join(",") });
+  if (!fingerprint) throw new Error("Lab requires the dedicated local database and brokers to fingerprint");
   return { url, brokers, fingerprint };
 }
 
@@ -134,8 +136,28 @@ async function provision(client: pg.PoolClient, state: LocalState, config: Retur
   })), frontend: `http://localhost:${labPorts.frontend}`, mode: "pipeline-simulated" }, null, 2), { mode: 0o600 });
 }
 
-export async function main(args = Bun.argv.slice(2)) {
-  const [command, ...flags] = args;
+const uuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+
+/** `replay` drives one seeded captured case; the case or its run identifies the target. */
+export function parseReplayFlags(flags: string[]) {
+  const values = new Map<string, string>();
+  for (let n = 0; n < flags.length; n += 2) {
+    const key = flags[n]!, value = flags[n + 1];
+    if (!["--case-id", "--run-id", "--timeout-ms"].includes(key) || !value || values.has(key))
+      throw new Error("Invalid lab replay flags");
+    values.set(key, value);
+  }
+  const caseId = values.get("--case-id"), runId = values.get("--run-id");
+  for (const [name, value] of [["--case-id", caseId], ["--run-id", runId]] as const)
+    if (value !== undefined && !uuid.test(value)) throw new Error(`Invalid ${name}`);
+  if (!caseId && !runId) throw new Error("Replay requires --run-id <captured run> or --case-id <case>");
+  const timeout = Number(values.get("--timeout-ms") ?? 90000);
+  if (!Number.isInteger(timeout) || timeout < 1000 || timeout > 300000)
+    throw new Error("Lab timeout must be 1000..300000 milliseconds");
+  return { caseId, runId, timeout };
+}
+
+export async function main(args = Bun.argv.slice(2)) {  const [command, ...flags] = args;
   if (command === "run" || command === "verify") {
     const options = parsePipelineFlags(command, flags);
     await withLab(false, async ({ client, state, config }) => {
@@ -145,14 +167,35 @@ export async function main(args = Bun.argv.slice(2)) {
         if (!identity?.ready || !identity.databaseAvailable) throw new Error("Start the healthy Phase 16B lab before running scenarios");
         batch = await runLabBatch({ client, marker: state.marker, zapSecret: state.zapSecret, ...options });
       }
-      const report = await verifyLabBatch(client, state.marker, config.brokers, batch!, options.timeout);
+      // Report the replay state from the running supervisor rather than a constant, so the
+      // batch report cannot claim replay is off while a verified profile is active.
+      const supervisor = await readSupervisor(state.marker, state.controlToken) as { replayEnabled?: boolean } | null;
+      const report = await verifyLabBatch(client, state.marker, config.brokers, batch!, options.timeout,
+        supervisor?.replayEnabled === true);
       await writeFile(resolve(output, `batch-${batch}.json`), JSON.stringify(report, null, 2));
     });
     return;
   }
+  if (command === "replay") {
+    const options = parseReplayFlags(flags);
+    await withLab(false, async ({ client, state, config }) => {
+      const identity = await readSupervisor(state.marker, state.controlToken) as { ready?: boolean; replayEnabled?: boolean } | null;
+      if (!identity?.ready) throw new Error("Start the replay-enabled lab before running the replay journey");
+      if (!identity.replayEnabled) throw new Error("The running lab has no verified replay profile; restart it with lab:start --replay");
+      const { openLabDatabase, runLabReplay } = await import("./triage-lab-replay.ts");
+      const db = await openLabDatabase(config.url.toString());
+      try {
+        const report = await runLabReplay(client, db, state.marker, { ...options, databaseUrl: config.url.toString() });
+        await writeFile(resolve(output, `replay-${options.runId ?? options.caseId ?? "case"}.json`), JSON.stringify(report, null, 2));
+      } finally { await db.$disconnect(); }
+    });
+    return;
+  }
   if (!["seed", "start", "stop", "status", "reset"].includes(command ?? "") ||
-    flags.some(flag => command !== "reset" || flag !== "--yes") || flags.length > 1)
-    throw new Error("Usage: triage-lab.ts seed|start|stop|status|reset --yes|run --scenario <name|all> [--batch <id>]|verify --batch <id>");
+    flags.some(flag => command === "reset" ? flag !== "--yes" : flag !== "--replay")) {
+    throw new Error("Usage: triage-lab.ts seed|start [--replay]|stop|status|reset --yes|run --scenario <name|all> [--batch <id>]|verify --batch <id>|replay --run-id <id> [--case-id <id>] [--timeout-ms <ms>]");
+  }
+  const replayProfile = command === "start" && flags.includes("--replay");
   if (command === "reset" && !flags.includes("--yes")) throw new Error("Reset requires explicit --yes");
   // Stopping owned handles must remain possible during a database outage. This path
   // only authenticates the supervisor; it never touches database or broker resources.
@@ -162,7 +205,9 @@ export async function main(args = Bun.argv.slice(2)) {
     const identity = await readSupervisor(state.marker, state.controlToken, command === "stop");
     if (command === "status") {
       console.log(JSON.stringify({ running: Boolean(identity), identity, labId: state.marker.labId, mode: "pipeline-simulated",
-        executionEnabled: Boolean(identity), providerMode: "simulated", replayEnabled: false, ports: labPorts, credentials: resolve(output, "accounts.json") }, null, 2));
+        executionEnabled: Boolean(identity), providerMode: "simulated",
+        replayEnabled: Boolean((identity as { replayEnabled?: boolean } | null)?.replayEnabled),
+        ports: labPorts, credentials: resolve(output, "accounts.json") }, null, 2));
       return;
     }
     if (!identity) { console.log("Lab is already stopped; data retained"); return; }
@@ -200,6 +245,7 @@ export async function main(args = Bun.argv.slice(2)) {
       query_timeout: 2000, statement_timeout: 2000, max: 2 });
     try {
       await runSupervisor({ marker: state.marker, token: state.controlToken, root, output,
+        replayEnabled: replayProfile,
         verifyOwnership: async () => {
           const client = await verifyPool.connect();
           try { await checkOwnership(client, state.marker); } finally { client.release(); }
@@ -212,11 +258,16 @@ export async function main(args = Bun.argv.slice(2)) {
           PRIMARY_BACKEND_URL: `http://127.0.0.1:${labPorts.backend}`, AI_AGENT_URL: `http://127.0.0.1:${labPorts.agent}`,
           NEXT_PUBLIC_BACKEND_URL: `http://localhost:${labPorts.backend}`, NEXT_PUBLIC_HOOKS_URL: `http://localhost:${labPorts.webhook}`,
           TRIAGE_ALLOWED_ORIGINS: `http://localhost:${labPorts.frontend}`,
-          INVESTIGATION_ENABLED: "false", REPLAY_INTENT_ENABLED: "false", REPLAY_ENABLED: "false", REPLAY_RELEASE_READY: "false",
+          INVESTIGATION_ENABLED: "false",
           GEMINI_API_KEY: "", GOOGLE_API_KEY: "", LANGFUSE_PUBLIC_KEY: "", LANGFUSE_SECRET_KEY: "", TELEGRAM_BOT_TOKEN: "", RESEND_API_KEY: fakeEmailKey,
           WORKER_HANDLER_VERSION: "triage-lab-v1",
           KAFKA_BROKERS: config.brokers.join(","), KAFKA_EVENTS_TOPIC: state.marker.eventsTopic,
-          KAFKA_DLQ_TOPIC: state.marker.dlqTopic, KAFKA_WORKER_GROUP: state.marker.workerGroup },
+          KAFKA_DLQ_TOPIC: state.marker.dlqTopic, KAFKA_WORKER_GROUP: state.marker.workerGroup,
+          // The replay profile is only meaningful inside the marked lab; every service still
+          // re-derives the release gate from the ownership fingerprint before dispatching.
+          ...(replayProfile ? { TRIAGE_LAB_REPLAY_PROFILE: LAB_REPLAY_PROFILE, REPLAY_INTENT_ENABLED: "true",
+            REPLAY_ENABLED: "true", REPLAY_RELEASE_READY: "true" }
+            : { REPLAY_INTENT_ENABLED: "false", REPLAY_ENABLED: "false", REPLAY_RELEASE_READY: "false" }) },
       });
     } finally { await verifyPool.end(); }
     return;
@@ -268,6 +319,7 @@ if (import.meta.main) {
     // No URLs, environment dumps or credential-bearing database errors in terminal output.
     const message = error instanceof Error ? error.message : "Unknown failure";
     console.error(`Lab command failed: ${message.replace(/postgres(?:ql)?:\/\/\S+/g, "[database URL]")}`);
+    if (process.env.TRIAGE_LAB_DEBUG === "1" && error instanceof Error) console.error(error.stack);
     process.exitCode = 1;
   }
 }

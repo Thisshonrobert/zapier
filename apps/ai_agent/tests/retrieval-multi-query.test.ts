@@ -131,7 +131,7 @@ test("development comparison records denominators, abstention and mismatches wit
       query: "What evidence should I collect for Telegram 429?",
       providers: ["telegram"],
       taxonomy: [],
-      relevantCitations: ["RB-F01-F02@1.0.0#evidence-needed"],
+      relevantCitations: ["RB-F01-F02@1.1.0#evidence-needed"],
       support: {},
     },
     {

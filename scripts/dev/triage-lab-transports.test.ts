@@ -1,8 +1,10 @@
 import { expect, test } from "bun:test";
 import { createActionRegistry } from "../../apps/worker/actions/index.ts";
 import { normalizeFailure } from "../../apps/worker/execution-store.ts";
+import { labResourceFingerprint, labResources } from "../../packages/triage-contracts/lab-profile.ts";
+import { LAB_REPLAY_PROFILE } from "../../apps/primary_backend/services/replay-release.ts";
 import { labScenarios, fakeTelegramToken } from "./triage-lab-scenarios.ts";
-import { simulatedTransports, assertLabWorkerEnvironment } from "./triage-lab-transports.ts";
+import { simulatedTransports, assertLabWorkerEnvironment, assertLabReplayWorkerEnvironment } from "./triage-lab-transports.ts";
 
 const wants = [
   ["telegram-rate-limit", "rejected", "telegram_http_429", "send", 429, 2],
@@ -73,4 +75,38 @@ test("lab worker refuses production, ordinary database, topics or real credentia
     { KAFKA_EVENTS_TOPIC: "zap-events" }, { TELEGRAM_BOT_TOKEN: "real" }, { RESEND_API_KEY: "real" }, { REPLAY_ENABLED: "true" }]) {
     expect(() => assertLabWorkerEnvironment({ ...env, ...patch })).toThrow();
   }
+});
+
+test("replay-enabled lab worker only starts through the verified replay profile", () => {
+  const labId = "a".repeat(32);
+  const resources = labResources(labId);
+  const base = { TRIAGE_LAB: "true", NODE_ENV: "development", TRIAGE_LAB_ID: labId,
+    DATABASE_URL: "postgresql://user:pass@localhost:5432/triage_lab", KAFKA_BROKERS: "localhost:9092",
+    KAFKA_EVENTS_TOPIC: resources.eventsTopic, KAFKA_DLQ_TOPIC: resources.dlqTopic,
+    KAFKA_WORKER_GROUP: resources.workerGroup, TELEGRAM_BOT_TOKEN: "", RESEND_API_KEY: "re_triage_lab_fake",
+    REPLAY_ENABLED: "true", REPLAY_RELEASE_READY: "true" };
+  const fingerprint = labResourceFingerprint({ databaseUrl: base.DATABASE_URL, brokers: base.KAFKA_BROKERS })!;
+  const profiled = { ...base, TRIAGE_LAB_RESOURCE_FINGERPRINT: fingerprint,
+    TRIAGE_LAB_REPLAY_PROFILE: LAB_REPLAY_PROFILE };
+  expect(() => assertLabWorkerEnvironment(profiled)).not.toThrow();
+  expect(() => assertLabReplayWorkerEnvironment(profiled)).not.toThrow();
+  // The ordinary guard only checks that the marked environment is present; the profile is
+  // what proves the binding, which is why the replay path goes through the profile guard.
+  for (const patch of [{ TRIAGE_LAB: "false" }, { KAFKA_EVENTS_TOPIC: "zap-events" },
+    { TRIAGE_LAB_RESOURCE_FINGERPRINT: "" }]) {
+    expect(() => assertLabWorkerEnvironment({ ...profiled, ...patch })).toThrow();
+  }
+  // The replay profile proves the binding as well, so it refuses every mismatch including
+  // a broker or topic that no longer belongs to the published ownership fingerprint.
+  for (const patch of [{ TRIAGE_LAB_REPLAY_PROFILE: "triage-lab-v2" },
+    { TRIAGE_LAB_RESOURCE_FINGERPRINT: "c".repeat(64) },
+    { KAFKA_BROKERS: "127.0.0.1:9093" },
+    { KAFKA_EVENTS_TOPIC: "zap-events" },
+    { DATABASE_URL: "postgresql://user:pass@localhost:5432/mydatabase" },
+    { REPLAY_RELEASE_READY: "false" }]) {
+    expect(() => assertLabReplayWorkerEnvironment({ ...profiled, ...patch })).toThrow();
+  }
+  const { TRIAGE_LAB_REPLAY_PROFILE: _omitted, ...withoutProfile } = profiled;
+  expect(() => assertLabReplayWorkerEnvironment(withoutProfile))
+    .toThrow("Lab replay worker environment refused");
 });

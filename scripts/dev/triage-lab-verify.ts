@@ -129,7 +129,8 @@ export async function readBrokerSnapshot(brokers: string[], marker: LabMarker, t
   }
 }
 
-export async function verifyLabBatch(client: PoolClient, marker: LabMarker, brokers: string[], batchId: string, timeout: number) {
+export async function verifyLabBatch(client: PoolClient, marker: LabMarker, brokers: string[], batchId: string, timeout: number,
+  replayEnabled = false) {
   await checkOwnership(client, marker);
   const batch = (await client.query("SELECT scenarios FROM triage_lab.batch WHERE id=$1", [batchId])).rows[0];
   if (!batch) throw new Error("Unknown lab batch");
@@ -167,7 +168,7 @@ export async function verifyLabBatch(client: PoolClient, marker: LabMarker, brok
   for (const input of inputs!) if (!verifyRunEvidence({ ...input, events })) throw new Error(`Batch ${batchId} lacks matching broker evidence for ${input.journal.owner_key}/${input.scenario.key}`);
   const report = { batchId, providerMode: "simulated", verifiedRuns: journals.length, owners: ownerKeys.length,
     failures: inputs!.reduce((n, i) => n + i.failures.length, 0), executions: inputs!.reduce((n, i) => n + i.executions.length, 0),
-    providerOperations: inputs!.reduce((n, i) => n + i.operations.length, 0), replayEnabled: false };
+    providerOperations: inputs!.reduce((n, i) => n + i.operations.length, 0), replayEnabled };
   console.log(JSON.stringify(report, null, 2));
   return report;
 }

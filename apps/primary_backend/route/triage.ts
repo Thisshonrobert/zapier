@@ -15,6 +15,7 @@ import { InvestigationAuthority, InvestigationDecisionDenied } from "../services
 import { InvestigationProposals } from "../services/investigation-proposals.ts";
 import { InvestigationNotifications } from "../services/investigation-notifications.ts";
 import { ReplayDenied, ReplayService } from "../services/replay.ts";
+import { replayCapabilities } from "../services/replay-release.ts";
 import { readEvaluationSummary, traceLink } from "../services/triage-command-center.ts";
 import { HistorySchema, type CommandCenter } from "../../../packages/triage-contracts/command-center.ts";
 import { CaseWorkflowService, WorkflowConcurrencyConflict, projectWorkflow, projectEvent } from "../services/case-workflow.ts";
@@ -36,7 +37,7 @@ import {
   EngineerFindingsInputSchema,
   EngineerResolveInputSchema,
 } from "../../../packages/triage-contracts/index.ts";
-import type { EvidenceOperation, ServiceScope } from "../../../packages/triage-contracts/index.ts";
+import type { EvidenceOperation, ReplayCapabilities, ServiceScope } from "../../../packages/triage-contracts/index.ts";
 
 type TriageRouterOptions = {
   evidence: TriageEvidenceService;
@@ -51,6 +52,7 @@ type TriageRouterOptions = {
   engineering?: TriageEngineeringService;
   owner?: TriageOwnerService;
   viewer?: TriageViewerService;
+  replayCapability?: () => ReplayCapabilities;
 };
 
 const bearer = (header: string | undefined) =>
@@ -77,6 +79,7 @@ export function createTriageRouter(options: TriageRouterOptions) {
   const engineering = options.engineering;
   const owner = options.owner;
   const viewer = options.viewer;
+  const replayCapability = options.replayCapability ?? (() => replayCapabilities());
   const ownerError = (response: Response, error: unknown) => {
     // Cross-owner and unknown ids are indistinguishable on purpose: no denial oracle.
     if (error instanceof TriageOwnerCaseNotFound) response.status(404).json({ detail: "Case not found" });
@@ -102,6 +105,16 @@ export function createTriageRouter(options: TriageRouterOptions) {
       response.status(error.message.includes("permission") ? 403 : 409).json({ detail: error.message });
     else response.status(503).json({ detail: "Decision snapshot unavailable" });
   };
+  // --- Replay Capability Route ---
+  // Server-reported capability for investigation, replay-intent recording and replay
+  // execution, with release readiness and bounded reasons. It replaces the client's fixed
+  // "replay disabled" copy; it grants nothing, and every privileged call still rechecks
+  // authorization, policy and the release profile server-side.
+  router.get("/replay/capabilities", authMiddleware, async (_request, response) => {
+    response.setHeader("cache-control", "no-store");
+    response.json({ capabilities: replayCapability() });
+  });
+
   for (const operation of ["dry-run", "requests"] as const) {
     router.post(`/operator/cases/:caseId/replay/${operation}`, authMiddleware, async (request, response) => {
       if (operation === "requests" && !replayIntentEnabled()) {

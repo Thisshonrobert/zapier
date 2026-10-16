@@ -1,14 +1,14 @@
 import { randomUUID } from "node:crypto";
 import { Prisma } from "../../../packages/db/generated/prisma/client.ts";
+import { liveReplayEnabled as labOrReleaseEnabled } from "./replay-release.ts";
 import type { SqlClient } from "./investigation-authority.ts";
 
-// Phase 9C must prove recovery and provider rejection semantics before changing this gate.
-// The constant remains false for all production deployments. The disposable local demo
-// may set REPLAY_RELEASE_READY=true in its isolated env to exercise the full replay path.
-export const REPLAY_RELEASE_READY = false;
-export const liveReplayEnabled = () =>
-  (REPLAY_RELEASE_READY || process.env.REPLAY_RELEASE_READY === "true") &&
-  process.env.REPLAY_ENABLED === "true";
+// Phase 9C must prove recovery and provider rejection semantics before changing the
+// production release constant, which remains false in `replay-release.ts`. Only a marked
+// lab whose ownership fingerprint matches its actual database/broker resources can enable
+// dispatch, so REPLAY_RELEASE_READY=true alone still fails closed.
+export { REPLAY_RELEASE_READY, liveReplayEnabled } from "./replay-release.ts";
+const liveReplayEnabled = labOrReleaseEnabled;
 
 type Sink = { send(message: { key: string; value: string }): Promise<void> };
 type DispatchRow = { requestId: string; zapRunId: string; stage: number; dispatchAttempts: number };

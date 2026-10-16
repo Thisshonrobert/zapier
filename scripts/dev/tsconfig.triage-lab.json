@@ -11,5 +11,5 @@
     "noEmit": true,
     "types": ["bun"]
   },
-  "include": ["triage-lab*.ts", "../../apps/worker/index.ts", "../../apps/webhook/index.ts", "../../apps/webhook/app.ts", "../../apps/webhook/tests/ingestion.test.ts"]
+  "include": ["triage-lab*.ts", "../../apps/worker/index.ts", "../../apps/processor/index.ts", "../../apps/webhook/index.ts", "../../apps/webhook/app.ts", "../../apps/webhook/tests/ingestion.test.ts"]
 }

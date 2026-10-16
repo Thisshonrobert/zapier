@@ -1,5 +1,7 @@
 //"Is this person authorized to make the decision?
 import { Prisma } from "../../../packages/db/generated/prisma/client.ts";
+import { buildReplayEligibility } from "./replay-eligibility.ts";
+import { readReplayHistory } from "./replay-history.ts";
 
 export type SqlClient = {
   $queryRaw<T>(query: unknown): Promise<T>;
@@ -37,7 +39,8 @@ import { CaseWorkflowService } from "./case-workflow.ts";
 export class InvestigationAuthority {
   constructor(
     private readonly db: TransactionDb,
-    private readonly revalidate: (tx: SqlClient, proposal: ProposalRow) => Promise<{ status: string; reasons?: string[] }>,
+    private readonly revalidate: (tx: SqlClient, proposal: ProposalRow) =>
+      Promise<{ status: string; reasons?: string[]; notBefore?: string | null }>,
     private readonly workflow?: CaseWorkflowService,
   ) {}
 
@@ -61,24 +64,30 @@ export class InvestigationAuthority {
       const [decision] = await tx.$queryRaw<DecisionRow[]>(Prisma.sql`
         SELECT id, decision, "approvedBy" FROM "TriageApproval" WHERE "proposalId" = ${proposal.id}
       `);
-      const [replay] = await tx.$queryRaw<{ id: string; status: string | null; publishedAt: Date | null; completedAt: Date | null }[]>(Prisma.sql`
-        SELECT request.id, execution.status, execution."publishedAt", execution."completedAt"
-        FROM "ReplayRequest" request LEFT JOIN "ReplayExecution" execution ON execution."requestId" = request.id
-        WHERE request."approvalId" = ${decision?.id ?? ""} AND request."caseId" = ${input.caseId}
-          AND request."subjectOwnerId" = ${input.subjectOwnerId} LIMIT 1
-      `);
+      // Cross-investigation history: a fresh investigation must not conceal a completed
+      // replay or make a second one look available.
+      const replayHistory = await readReplayHistory(tx, input.caseId);
+      const replay = replayHistory.find((item) => item.approvalId === decision?.id) ?? null;
       const expired = proposal.expiresAt <= now;
       const policy = decision || expired ? null : await this.revalidate(tx, proposal);
       const reasons = expired ? ["proposal_expired"] : policy?.reasons ?? [];
       let choices = !decision && !expired ? allowedDecisions(proposal) : [];
       if (policy?.status !== "requires_approval") choices = choices.filter((choice) => choice !== "approve");
+      // Application-computed eligibility, kept separate from the AI's advisory disposition,
+      // from the committed approval decision and from request publication/execution. The
+      // stored policy is the durable evaluation; it is only overridden when this read has a
+      // newer answer for the same proposal (a committed decision or an expired proposal).
+      const evaluated = proposal.policy as Record<string, unknown>;
+      const eligibility = buildReplayEligibility(policy
+        ? { ...evaluated, status: policy.status, reasons, notBefore: policy.notBefore }
+        : expired ? { ...evaluated, status: "blocked", reasons, notBefore: null } : evaluated);
       return { id: proposal.id, version: proposal.version, status: proposal.status,
-        expiresAt: proposal.expiresAt, reasons, allowedDecisions: choices, decision: decision ?? null,
-        replay: replay ? { id: replay.id,
-          publication: replay.publishedAt ? "published" : "queued",
-          execution: ["SUCCESS", "FAILED", "UNKNOWN", "RUNNING"].includes(replay.status ?? "")
-            ? replay.status : "PENDING",
-          completedAt: replay.completedAt } : null,
+        expiresAt: proposal.expiresAt, reasons, eligibility,
+        allowedDecisions: choices, decision: decision ? { id: decision.id, decision: decision.decision,
+          approvedBy: decision.approvedBy } : null,
+        replay: replay ? { id: replay.requestId, publication: replay.publication,
+          execution: replay.execution, completedAt: replay.completedAt } : null,
+        replayHistory,
         replayEnabled: false as const };
     });
   }

@@ -9,6 +9,8 @@
     "check-types": "turbo run check-types",
     "lab:seed": "bun --env-file=apps/primary_backend/.env run scripts/dev/triage-lab.ts seed",
     "lab:start": "bun --env-file=apps/primary_backend/.env run scripts/dev/triage-lab.ts start",
+    "lab:start:replay": "bun --env-file=apps/primary_backend/.env run scripts/dev/triage-lab.ts start --replay",
+    "lab:replay": "bun --env-file=apps/primary_backend/.env run scripts/dev/triage-lab.ts replay",
     "lab:stop": "bun --env-file=apps/primary_backend/.env run scripts/dev/triage-lab.ts stop",
     "lab:status": "bun --env-file=apps/primary_backend/.env run scripts/dev/triage-lab.ts status",
     "lab:run": "bun --env-file=apps/primary_backend/.env run scripts/dev/triage-lab.ts run",
