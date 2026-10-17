@@ -72,6 +72,19 @@ export async function startVerifiedLabReplayDispatch(db: LabDatabase, sink: Sink
 const sleep = (ms: number) => Bun.sleep(ms);
 
 /**
+ * The lab's handler identity belongs to the batch's own executions. The replay CLI is a
+ * separate process from the worker, so without this the policy would compare the recorded
+ * handler against an unset variable and refuse an otherwise eligible case with
+ * `changed_handler`. Read it from the evidence and apply it before any policy runs.
+ */
+export function assertLabHandlerVersion(recorded: unknown) {
+  const version = typeof recorded === "string" && recorded.length > 0 ? recorded : null;
+  if (!version) throw new Error("Lab case has no recorded handler version");
+  process.env.WORKER_HANDLER_VERSION = version;
+  return version;
+}
+
+/**
  * Drives the real interactive replay journey against the running lab: a captured eligible
  * Telegram 429 case, the application policy computing eligibility from the case's live
  * evidence, an operator approval, an explicit request, dispatcher publication and a worker
@@ -109,6 +122,11 @@ export async function runLabReplay(client: pg.PoolClient, db: LabDatabase, marke
     FROM "ZapRunRetry" retry JOIN "ZapRun" run ON run.id = retry."zapRunId"
     JOIN "Zap" zap ON zap.id = run."zapId" WHERE retry.id = $1`, [caseId])).rows;
   if (!retry) throw new Error("Unknown lab case");
+  // Confirm the case was produced by the handler identity this lab deploys, before the
+  // policy compares it against the recorded one.
+  const [executedBy] = (await client.query('SELECT "handlerVersion" FROM "ZapRunExecution" WHERE id = $1',
+    [retry.executionId])).rows;
+  assertLabHandlerVersion(executedBy?.handlerVersion);
   const [owner] = (await client.query(`SELECT id FROM "User" WHERE "isSupportOperator" = true ORDER BY id LIMIT 1`)).rows;
   if (!owner) throw new Error("Seed the lab support account before running replay");
   const actorId = Number(owner.id);

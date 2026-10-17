@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test";
 
-import { verifyReplayEvidence, type ReplayEvidence } from "./triage-lab-replay.ts";
+import { verifyReplayEvidence, assertLabHandlerVersion, type ReplayEvidence } from "./triage-lab-replay.ts";
 import { parseReplayFlags } from "./triage-lab.ts";
 
 const evidence: ReplayEvidence = { caseId: "f0100000-0000-4000-8000-000000000001",
@@ -42,5 +42,22 @@ describe("Phase 16F lab replay evidence", () => {
     expect(() => parseReplayFlags(["--case-id", "not-a-uuid"])).toThrow("Invalid --case-id");
     expect(() => parseReplayFlags(["--outcome", "accepted"])).toThrow("Invalid lab replay flags");
     expect(() => parseReplayFlags(["--run-id", evidence.runId, "--timeout-ms", "10"])).toThrow("1000..300000");
+  });
+
+  test("the replay CLI adopts the handler identity the case was executed by", () => {
+    const previous = process.env.WORKER_HANDLER_VERSION;
+    try {
+      delete process.env.WORKER_HANDLER_VERSION;
+      assertLabHandlerVersion("triage-lab-v1");
+      // Without this the policy compares the recorded handler against an unset variable
+      // and refuses an eligible case with a manufactured `changed_handler`.
+      const adopted = process.env.WORKER_HANDLER_VERSION as unknown as string | undefined;
+      expect(adopted).toBe("triage-lab-v1");
+      expect(() => assertLabHandlerVersion(null)).toThrow("no recorded handler version");
+      expect(() => assertLabHandlerVersion("")).toThrow("no recorded handler version");
+    } finally {
+      if (previous === undefined) delete process.env.WORKER_HANDLER_VERSION;
+      else process.env.WORKER_HANDLER_VERSION = previous;
+    }
   });
 });

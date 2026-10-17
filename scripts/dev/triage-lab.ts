@@ -10,6 +10,7 @@ import { checkOwnership, initializeOwnership, migrateLabAgent, seedLab, seedLabS
 import { readSupervisor, runSupervisor } from "./triage-lab-lifecycle.ts";
 import { parsePipelineFlags, runLabBatch } from "./triage-lab-pipeline.ts";
 import { verifyLabBatch } from "./triage-lab-verify.ts";
+import { parseSmokeFlags, runLabSmoke } from "./triage-lab-smoke.ts";
 import { LAB_REPLAY_PROFILE } from "../../apps/primary_backend/services/replay-release.ts";
 import { fakeEmailKey } from "./triage-lab-scenarios.ts";
 
@@ -191,9 +192,19 @@ export async function main(args = Bun.argv.slice(2)) {  const [command, ...flags
     });
     return;
   }
+  if (command === "smoke") {
+    // The smoke command reads a batch that already exists; it never triggers scenarios,
+    // so a retry cannot silently create new runs or a second replay.
+    const options = parseSmokeFlags(flags);
+    await withLab(false, async ({ client, state, config }) => {
+      await runLabSmoke(client as unknown as Parameters<typeof runLabSmoke>[0], state.marker,
+        { state, databaseUrl: config.url.toString(), options });
+    });
+    return;
+  }
   if (!["seed", "start", "stop", "status", "reset"].includes(command ?? "") ||
     flags.some(flag => command === "reset" ? flag !== "--yes" : flag !== "--replay")) {
-    throw new Error("Usage: triage-lab.ts seed|start [--replay]|stop|status|reset --yes|run --scenario <name|all> [--batch <id>]|verify --batch <id>|replay --run-id <id> [--case-id <id>] [--timeout-ms <ms>]");
+    throw new Error("Usage: triage-lab.ts seed|start [--replay]|stop|status|reset --yes|run --scenario <name|all> [--batch <id>]|verify --batch <id>|replay --run-id <id> [--case-id <id>] [--timeout-ms <ms>]|smoke [--batch <id>] [--timeout-ms <ms>] [--require-replay]");
   }
   const replayProfile = command === "start" && flags.includes("--replay");
   if (command === "reset" && !flags.includes("--yes")) throw new Error("Reset requires explicit --yes");

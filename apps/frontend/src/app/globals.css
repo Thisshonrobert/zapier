@@ -149,3 +149,65 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+/* Browser surfaces belong to the product too: text selection, the caret, and the scrollbars
+   of the dense support panes are themed from the same neutral + orange palette instead of
+   shipping each browser's own default. */
+::selection {
+  background-color: color-mix(in oklab, #ff4f00 22%, transparent);
+  color: #18181b;
+}
+
+:focus-visible {
+  outline: 2px solid #ff4f00;
+  outline-offset: 2px;
+}
+
+input,
+textarea,
+select {
+  caret-color: #ff4f00;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #d4d4d8 transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #d4d4d8;
+  border: 3px solid transparent;
+  border-radius: 9999px;
+  background-clip: content-box;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #a1a1aa;
+}
+
+/* Ages, counts and attempt numbers must not jitter as they change. */
+time {
+  font-variant-numeric: tabular-nums;
+}
+
+/* One authored transition exists in this surface — the evidence drawer — and it goes away,
+   along with every other animation, when the reader has asked for reduced motion. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

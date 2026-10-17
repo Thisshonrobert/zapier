@@ -1,10 +1,18 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AlertTriangle, ArrowLeftRight, CheckCircle2, History } from "lucide-react";
+import { AlertTriangle, CheckCircle2, History, X } from "lucide-react";
 
-import { LoaderOne } from "@/components/ui/loader";
-import { Field, Section, btnPrimary, btnSecondary } from "@/mycomponents/app/FormKit";
+import { CaseFile, Fact, Section, type CaseIdentity } from "@/mycomponents/support/CaseFile";
+import { EvidenceRoom } from "@/mycomponents/support/EvidenceRoom";
+import { PaneNotice } from "@/mycomponents/support/Shell";
+import { StatusMark } from "@/mycomponents/support/Marks";
+import { Field, btnPrimary, btnSecondary } from "@/mycomponents/app/FormKit";
+import { useSupportEvidence } from "@/hooks/useSupportEvidence";
+import { useNarrowViewport } from "@/hooks/useNarrowViewport";
+import { useEvidenceDrawer } from "@/hooks/useEvidenceDrawer";
+import { humanizeCode, providerOutcomeLabel, sourceLabel, workflowMark } from "@/lib/support-copy";
+import { EVIDENCE_SCOPES } from "@/lib/support-evidence";
 import { EngineeringError, readEngineeringCaseHistory, resolveEngineeringCase, returnFindings } from "@/lib/engineering-client";
 import {
   handoffCopy,
@@ -43,6 +51,11 @@ function idempotencyKey() {
   return globalThis.crypto.randomUUID();
 }
 
+/**
+ * The engineering case file. It reuses the shared composition and the shared evidence room,
+ * and it renders whatever the engineering service says — including the case where the queue
+ * position has already moved on. No replay control exists in this workspace, by contract.
+ */
 export function EngineeringWorkspace({
   caseId,
   capabilities,
@@ -61,6 +74,12 @@ export function EngineeringWorkspace({
   const [pending, setPending] = useState(false);
   const [notice, setNotice] = useState<Notice | null>(null);
   const [reloadKey, setReloadKey] = useState(0);
+  const [evidenceOpen, setEvidenceOpen] = useState(false);
+  const narrow = useNarrowViewport();
+  const { panelRef, triggerRef } = useEvidenceDrawer(evidenceOpen, narrow ? () => setEvidenceOpen(false) : undefined);
+  const evidence = useSupportEvidence(caseId, true, {
+    scope: EVIDENCE_SCOPES.engineering,
+  });
 
   useEffect(() => {
     let active = true;
@@ -145,24 +164,45 @@ export function EngineeringWorkspace({
     }
   }
 
+  const evidenceRoom = (
+    <EvidenceRoom
+      caseId={caseId}
+      state={evidence.state}
+      onReload={evidence.reload}
+      onClose={evidenceOpen ? () => setEvidenceOpen(false) : undefined}
+      saved={null}
+      diagnosis={null}
+    />
+  );
+
   if (state.kind === "loading") {
     return (
-      <div className="grid place-items-center rounded-xl border border-zinc-200 bg-white py-20">
-        <LoaderOne />
+      <div className="grid min-h-[320px] place-items-center">
+        <p role="status" className="text-xs text-zinc-500">
+          Loading this escalation…
+        </p>
       </div>
     );
   }
 
   if (state.kind === "error") {
     return (
-      <div className="space-y-3">
-        <div role="alert" className="flex items-start gap-3 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900">
-          <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" />
-          <p>{state.message}</p>
-        </div>
-        <button className={btnSecondary} onClick={() => setReloadKey((key) => key + 1)}>
-          Retry
-        </button>
+      <div className="p-4">
+        <PaneNotice
+          tone="alert"
+          icon={AlertTriangle}
+          title="This escalation could not be loaded"
+          detail={state.message}
+          action={
+            <button
+              type="button"
+              className={btnSecondary}
+              onClick={() => setReloadKey((key) => key + 1)}
+            >
+              Retry
+            </button>
+          }
+        />
       </div>
     );
   }
@@ -171,185 +211,248 @@ export function EngineeringWorkspace({
   const handoff = handoffCopy(history);
   const inQueue = history.case.workflow.queue === "engineering";
   const allowed = Boolean(capabilities?.isEngineer && inQueue);
+  const mark = workflowMark(history.case.workflow.status, history.case.workflow.queue);
+  const identity: CaseIdentity = {
+    caseId: history.case.case_id,
+    title: history.case.safe_code ?? "Unclassified failure",
+    subtitle: `${history.case.stage === 0 ? "Trigger" : `Action ${history.case.stage}`} · routed to engineering`,
+    status: mark.label,
+    tone: mark.tone,
+    observedAt: history.case.observed_at,
+    ownerLabel: `Owner ${history.case.subject_owner_id}`,
+    safeCode: history.case.safe_code,
+    providerOutcome: history.case.provider_outcome,
+    source: history.case.source,
+    stage: history.case.stage,
+    zapRunId: history.case.zap_run_id,
+  };
 
   return (
-    <div className="space-y-5">
-      <section className="rounded-xl border border-zinc-200 bg-white p-5">
-        <div className="flex items-start justify-between gap-4">
-          <div className="min-w-0">
-            <h2 className="truncate text-lg font-semibold tracking-tight text-zinc-900">
-              {history.case.safe_code ?? "Unclassified failure"}
-            </h2>
-            <p className="mt-0.5 text-sm text-zinc-500">
-              {history.case.stage === 0 ? "Trigger" : `Action ${history.case.stage}`} · observed{" "}
-              {new Date(history.case.observed_at).toLocaleString()}
-            </p>
-          </div>
-          <span className="shrink-0 rounded-full bg-zinc-100 px-2.5 py-1 text-xs font-medium text-zinc-700 ring-1 ring-zinc-200">
-            {queueLabels[history.case.workflow.queue]}
-          </span>
-        </div>
-
-        <dl className="mt-4 grid gap-x-6 gap-y-2 text-xs sm:grid-cols-2">
-          <div className="flex justify-between gap-3 border-b border-zinc-100 pb-1">
-            <dt className="text-zinc-500">Provider outcome</dt>
-            <dd className="font-medium text-zinc-800">{history.case.provider_outcome ?? "not recorded"}</dd>
-          </div>
-          <div className="flex justify-between gap-3 border-b border-zinc-100 pb-1">
-            <dt className="text-zinc-500">Evidence source</dt>
-            <dd className="font-medium text-zinc-800">
-              {history.case.source === "reconciled_execution" ? "Reconciled execution" : "Failure row"}
-            </dd>
-          </div>
-          <div className="flex justify-between gap-3 border-b border-zinc-100 pb-1">
-            <dt className="text-zinc-500">Subject owner</dt>
-            <dd className="font-mono text-zinc-700">{history.case.subject_owner_id}</dd>
-          </div>
-          <div className="flex justify-between gap-3 border-b border-zinc-100 pb-1">
-            <dt className="text-zinc-500">Assigned engineer</dt>
-            <dd className="font-mono text-zinc-700">
-              {history.case.workflow.assignedEngineerId ?? "unassigned"}
-            </dd>
-          </div>
-          <div className="flex justify-between gap-3 border-b border-zinc-100 pb-1 sm:col-span-2">
-            <dt className="text-zinc-500">Case</dt>
-            <dd className="truncate font-mono text-zinc-700" title={history.case.case_id}>
-              {history.case.case_id}
-            </dd>
-          </div>
-        </dl>
-
-        <p className="mt-4 rounded-lg bg-zinc-50 p-3 text-xs text-zinc-600">{handoff.message}</p>
-      </section>
-
-      <Section title="Why support escalated this" description="The reason the support operator recorded.">
-        <p className="text-sm text-zinc-800">
-          {history.case.workflow.escalationReason ?? "No escalation reason was recorded."}
-        </p>
-      </Section>
-
-      {history.case.workflow.customerInstructions ? (
-        <Section title="Customer-safe instructions already published" description="What the owner was asked to do.">
-          <p className="text-sm text-zinc-800">{history.case.workflow.customerInstructions.instructions}</p>
-        </Section>
-      ) : null}
-
-      <section className="rounded-xl border border-zinc-200 bg-white p-5">
-        <div className="mb-3 flex items-center gap-2">
-          <History className="h-4 w-4 text-[#FF4F00]" />
-          <h3 className="text-sm font-semibold text-zinc-900">Handoff history</h3>
-        </div>
-        {history.events.length === 0 ? (
-          <p className="text-sm text-zinc-600">No workflow events are recorded for this case.</p>
-        ) : (
-          <ol className="space-y-3">
-            {history.events.map((event) => (
-              <li key={event.id} className="border-l-2 border-zinc-200 pl-3">
-                <p className="text-sm font-medium text-zinc-900">
-                  {workflowActionLabels[event.action] ?? event.action}
-                </p>
-                <p className="text-xs text-zinc-500">
-                  {queueLabels[event.fromQueue]} → {queueLabels[event.toQueue]} · actor {event.actorId} ·{" "}
-                  {new Date(event.createdAt).toLocaleString()}
-                </p>
-                {event.notes ? <p className="mt-1 text-xs text-zinc-700">{event.notes}</p> : null}
-              </li>
-            ))}
-          </ol>
-        )}
-        {history.case.workflow.findings ? (
-          <div className="mt-4 rounded-lg bg-emerald-50 p-3 text-sm text-emerald-900">
-            <span className="font-medium">Recorded findings: </span>
-            {history.case.workflow.findings}
-          </div>
-        ) : null}
-      </section>
-
-      {allowed ? (
-        <section className="rounded-xl border border-zinc-200 bg-white p-5">
-          <div className="mb-3 flex items-center gap-2">
-            <ArrowLeftRight className="h-4 w-4 text-[#FF4F00]" />
-            <h3 className="text-sm font-semibold text-zinc-900">Return findings to support</h3>
-          </div>
-          <p className="mb-4 text-xs text-zinc-500">
-            Responsibility moves back to the support queue. Replay approval and dispatch stay with
-            support operators; this workspace cannot request or execute a replay.
-          </p>
-
-          {notice ? (
-            <div
-              role={notice.tone === "error" ? "alert" : "status"}
-              className={`mb-4 flex items-start gap-2 rounded-lg border p-3 text-sm ${
-                notice.tone === "ok"
-                  ? "border-emerald-200 bg-emerald-50 text-emerald-800"
-                  : "border-red-200 bg-red-50 text-red-800"
-              }`}
-            >
-              {notice.tone === "ok" ? <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0" /> : null}
-              {notice.message}
+    <div className="flex min-h-0 flex-1 flex-col xl:flex-row">
+      <div className="min-h-0 min-w-0 flex-1 overflow-y-auto overscroll-contain" data-case-file="">
+        <CaseFile
+          identity={identity}
+          aside={
+            <div className="flex flex-wrap items-center gap-2">
+              <StatusMark label={queueLabels[history.case.workflow.queue]} tone={mark.tone} />
+              <span className="text-[11px] text-zinc-600">{handoff.message}</span>
+              {narrow ? (
+                <button
+                  ref={triggerRef}
+                  type="button"
+                  onClick={() => setEvidenceOpen(true)}
+                  className="rounded-md border border-zinc-300 px-2 py-1 text-xs font-medium text-zinc-700 transition hover:bg-zinc-50"
+                >
+                  Evidence
+                </button>
+              ) : null}
             </div>
-          ) : null}
-
-          <div className="space-y-4">
-            <Field label="Findings" hint={`Required · up to ${FINDINGS_MAX} characters`}>
-              <textarea
-                rows={4}
-                className={textareaClass}
-                value={findings}
-                onChange={(event) => setFindings(event.target.value)}
-                placeholder="What did you find, and what should support do next?"
-              />
-            </Field>
-            <Field label="Internal note" hint={`Optional · up to ${NOTES_MAX} characters`}>
-              <textarea
-                rows={2}
-                className={textareaClass}
-                value={notes}
-                onChange={(event) => setNotes(event.target.value)}
-              />
-            </Field>
-            <button
-              className={btnPrimary}
-              disabled={!canSubmitFindings(findings, pending)}
-              onClick={() => void submitFindings(history)}
-            >
-              {pending ? "Working…" : "Return findings to support"}
-            </button>
-          </div>
-
-          <div className="mt-6 border-t border-zinc-100 pt-4">
-            <h4 className="text-sm font-semibold text-zinc-900">Resolve with an explanation</h4>
-            <p className="mt-0.5 text-xs text-zinc-500">
-              Use this only when engineering work closed the case without returning it to support.
-            </p>
-            <div className="mt-3 space-y-3">
-              <Field label="Resolution reason" hint={`Required · up to ${REASON_MAX} characters`}>
-                <textarea
-                  rows={3}
-                  className={textareaClass}
-                  value={reason}
-                  onChange={(event) => setReason(event.target.value)}
+          }
+          context={
+            <Section title="Routed details" description="What the support operator recorded when escalating." id="routed">
+              <dl>
+                <Fact label="Provider outcome" value={providerOutcomeLabel(history.case.provider_outcome)} />
+                <Fact label="Evidence source" value={sourceLabel(history.case.source)} />
+                <Fact
+                  label="Assigned engineer"
+                  value={history.case.workflow.assignedEngineerId ? String(history.case.workflow.assignedEngineerId) : "unassigned"}
+                  mono
                 />
-              </Field>
-              <button
-                className={btnSecondary}
-                disabled={!canSubmitResolution(reason, pending)}
-                onClick={() => void submitResolution(history)}
+                <Fact label="Workflow version" value={`v${history.case.workflow.version}`} />
+                <Fact label="Last updated" value={new Date(history.case.workflow.updatedAt).toLocaleString()} />
+              </dl>
+            </Section>
+          }
+          activity={
+            <>
+              <Section
+                title="Why support escalated this"
+                description="The reason the support operator recorded."
+                id="escalation-reason"
               >
-                Resolve case
-              </button>
-            </div>
+                <p className="text-sm text-zinc-800">
+                  {history.case.workflow.escalationReason ?? "No escalation reason was recorded."}
+                </p>
+              </Section>
+
+              {history.case.workflow.customerInstructions ? (
+                <Section
+                  title="Customer-safe instructions already published"
+                  description="What the owner was asked to do. This text was reviewed by a person."
+                  id="published-instructions"
+                >
+                  <p className="text-sm text-zinc-800">{history.case.workflow.customerInstructions.instructions}</p>
+                  {history.case.workflow.customerInstructions.missingFields.length ? (
+                    <p className="mt-2 text-xs text-zinc-600">
+                      Missing fields:{" "}
+                      <span className="font-medium text-zinc-800">
+                        {history.case.workflow.customerInstructions.missingFields.join(", ")}
+                      </span>
+                    </p>
+                  ) : null}
+                </Section>
+              ) : null}
+
+              <Section
+                title="Handoff history"
+                description="Every workflow event recorded for this case."
+                id="handoff-history"
+              >
+                {history.events.length === 0 ? (
+                  <p className="text-xs text-zinc-500">No workflow events are recorded for this case.</p>
+                ) : (
+                  <ol className="space-y-3">
+                    {history.events.map((event) => (
+                      <li key={event.id} className="border-l-2 border-zinc-200 pl-3">
+                        <p className="text-xs font-medium text-zinc-900">
+                          {workflowActionLabels[event.action] ?? humanizeCode(event.action)}
+                        </p>
+                        <p className="text-[11px] text-zinc-500">
+                          {queueLabels[event.fromQueue]} → {queueLabels[event.toQueue]} · actor {event.actorId} ·{" "}
+                          {new Date(event.createdAt).toLocaleString()}
+                        </p>
+                        {event.notes ? <p className="mt-1 text-[11px] text-zinc-700">{event.notes}</p> : null}
+                      </li>
+                    ))}
+                  </ol>
+                )}
+                {history.case.workflow.findings ? (
+                  <p className="mt-3 rounded-md bg-zinc-50 p-2.5 text-xs text-zinc-700">
+                    <span className="font-medium">Recorded findings: </span>
+                    {history.case.workflow.findings}
+                  </p>
+                ) : null}
+              </Section>
+            </>
+          }
+          work={
+            allowed ? (
+              <Section
+                title="Return findings to support"
+                description="Responsibility moves back to the support queue. Replay approval and dispatch stay with support operators; this workspace cannot request or execute a replay."
+                id="return-findings"
+              >
+                {notice ? (
+                  <div
+                    role={notice.tone === "error" ? "alert" : "status"}
+                    className={`mb-3 flex items-start gap-2 rounded-lg border p-3 text-xs ${
+                      notice.tone === "ok"
+                        ? "border-emerald-200 bg-emerald-50 text-emerald-800"
+                        : "border-red-200 bg-red-50 text-red-800"
+                    }`}
+                  >
+                    {notice.tone === "ok" ? <CheckCircle2 aria-hidden className="mt-0.5 h-3.5 w-3.5 shrink-0" /> : null}
+                    {notice.message}
+                  </div>
+                ) : null}
+
+                <div className="space-y-3">
+                  <Field label="Findings" hint={`Required · up to ${FINDINGS_MAX} characters`}>
+                    <textarea
+                      rows={4}
+                      className={textareaClass}
+                      value={findings}
+                      onChange={(event) => setFindings(event.target.value)}
+                      placeholder="What did you find, and what should support do next?"
+                    />
+                  </Field>
+                  <Field label="Internal note" hint={`Optional · up to ${NOTES_MAX} characters`}>
+                    <textarea
+                      rows={2}
+                      className={textareaClass}
+                      value={notes}
+                      onChange={(event) => setNotes(event.target.value)}
+                    />
+                  </Field>
+                  <div className="flex flex-wrap items-center gap-3">
+                    <button
+                      className={btnPrimary}
+                      disabled={!canSubmitFindings(findings, pending)}
+                      onClick={() => void submitFindings(history)}
+                    >
+                      {pending ? "Working…" : "Return findings to support"}
+                    </button>
+                    <span className="text-[11px] text-zinc-500">
+                      {findings.trim().length}/{FINDINGS_MAX}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="mt-5 border-t border-zinc-100 pt-4">
+                  <h4 className="flex items-center gap-2 text-[13px] font-semibold text-zinc-900">
+                    <History aria-hidden className="h-3.5 w-3.5 text-zinc-400" />
+                    Resolve with an explanation
+                  </h4>
+                  <p className="mt-0.5 text-xs text-zinc-500">
+                    Use this only when engineering work closed the case without returning it to support.
+                  </p>
+                  <div className="mt-3 space-y-3">
+                    <Field label="Resolution reason" hint={`Required · up to ${REASON_MAX} characters`}>
+                      <textarea
+                        rows={3}
+                        className={textareaClass}
+                        value={reason}
+                        onChange={(event) => setReason(event.target.value)}
+                      />
+                    </Field>
+                    <button
+                      className={btnSecondary}
+                      disabled={!canSubmitResolution(reason, pending)}
+                      onClick={() => void submitResolution(history)}
+                    >
+                      Resolve case
+                    </button>
+                  </div>
+                </div>
+              </Section>
+            ) : (
+              <Section
+                title="No engineering action available"
+                description="This workspace states the queue position honestly rather than offering a control that would be rejected."
+                id="no-action"
+              >
+                <p className="text-xs text-zinc-600">
+                  {inQueue
+                    ? "Your engineering access was revoked or is not active, so this case is read-only for you."
+                    : "This case is no longer routed to engineering, so responsibility sits elsewhere."}
+                </p>
+              </Section>
+            )
+          }
+        />
+      </div>
+
+      <div className="hidden min-h-0 flex-col border-zinc-200 xl:flex xl:w-[400px] xl:shrink-0 xl:border-l">
+        {evidenceRoom}
+      </div>
+
+      {evidenceOpen && narrow ? (
+        <div className="fixed inset-0 z-40 flex flex-col justify-end xl:hidden" role="dialog" aria-modal="true" aria-label="Case evidence">
+          <button
+            type="button"
+            aria-label="Close evidence"
+            tabIndex={-1}
+            aria-hidden="true"
+            onClick={() => setEvidenceOpen(false)}
+            className="absolute inset-0 bg-zinc-900/30"
+          />
+          <div
+            ref={panelRef}
+            tabIndex={-1}
+            className="relative flex h-[82dvh] flex-col overflow-hidden rounded-t-xl border-t border-zinc-200 bg-white shadow-[0_-8px_30px_rgba(0,0,0,0.12)] outline-none"
+          >
+            <button
+              type="button"
+              onClick={() => setEvidenceOpen(false)}
+              className="absolute top-2 right-2 z-10 rounded-md bg-white/90 p-1.5 text-zinc-500 transition hover:bg-zinc-100 hover:text-zinc-900"
+            >
+              <X aria-hidden className="h-4 w-4" />
+              <span className="sr-only">Close evidence</span>
+            </button>
+            {evidenceRoom}
           </div>
-        </section>
-      ) : (
-        <Section title="No engineering action available">
-          <p className="text-sm text-zinc-600">
-            {inQueue
-              ? "Your engineering access was revoked or is not active, so this case is read-only for you."
-              : "This case is no longer routed to engineering, so responsibility sits elsewhere."}
-          </p>
-        </Section>
-      )}
+        </div>
+      ) : null}
     </div>
   );
 }

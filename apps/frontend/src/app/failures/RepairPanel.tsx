@@ -18,7 +18,7 @@ import {
   type OwnerRepairCase,
   type OwnerRepairDraft,
 } from "@/types/owner";
-import { StatusChip } from "./OwnerFailureList";
+import { StatusChip } from "./OwnerStatusChip";
 
 const inputClass =
   "w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 transition placeholder:text-zinc-400 focus:border-[#FF4F00] focus:outline-none focus:ring-2 focus:ring-[#FF4F00]/20";

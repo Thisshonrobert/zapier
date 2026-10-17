@@ -4,14 +4,24 @@ import { useCallback, useEffect, useState } from "react";
 import { Wrench } from "lucide-react";
 
 import { AppShell } from "@/mycomponents/app/AppShell";
+import { ThreePane } from "@/mycomponents/support/Shell";
+import { TicketIndex, type IndexState } from "@/mycomponents/support/TicketIndex";
 import { useViewerCapabilities } from "@/hooks/useViewerCapabilities";
 import { listEngineeringCases } from "@/lib/engineering-client";
-import { EngineeringCaseList, type EngineeringListState } from "./EngineeringCaseList";
+import { initialSelection } from "@/lib/support-selection";
+import { providerOutcomeLabel, stageLabel, workflowMark } from "@/lib/support-copy";
+import type { EngineeringCase } from "@/types/engineering";
+import type { SupportTicket } from "@/types/support";
 import { EngineeringWorkspace } from "./EngineeringWorkspace";
 
+/**
+ * `/engineering`: the escalation queue. The index carries only cases support actually routed,
+ * and the case file offers only the two engineering actions. Replay stays with support, so this
+ * surface has no replay control anywhere in it.
+ */
 export default function EngineeringPage() {
   const capabilities = useViewerCapabilities();
-  const [state, setState] = useState<EngineeringListState>({ kind: "loading" });
+  const [state, setState] = useState<IndexState<EngineeringCase>>({ kind: "loading", label: "Loading the queue…" });
   const [selectedCaseId, setSelectedCaseId] = useState<string | null>(null);
   const [reloadKey, setReloadKey] = useState(0);
   const [notice, setNotice] = useState<string | null>(null);
@@ -21,27 +31,31 @@ export default function EngineeringPage() {
     listEngineeringCases()
       .then((cases) => {
         if (!active) return;
-        setState({ kind: "ready", cases });
+        setState(cases.length === 0
+          ? {
+              kind: "empty",
+              title: "Nothing routed to engineering",
+              detail: "Escalations appear here as soon as a support operator routes a case to engineering.",
+            }
+          : { kind: "ready", rows: cases });
         setSelectedCaseId((current) =>
-          current && cases.some((item) => item.case_id === current)
-            ? current
-            : (cases[0]?.case_id ?? null),
-        );
+          initialSelection(cases.map((item) => ({ caseId: item.case_id })), current));
       })
       .catch((error: unknown) => {
         if (!active) return;
         const status = (error as { status?: number }).status;
-        if (status === 403) {
-          setState({
-            kind: "denied",
-            message: "This workspace needs an engineering role. Ask an administrator to grant access.",
-          });
-          return;
-        }
-        setState({
-          kind: "error",
-          message: error instanceof Error ? error.message : "Could not load the engineering queue.",
-        });
+        setState(status === 403
+          ? {
+              kind: "error",
+              tone: "muted",
+              title: "Engineering access is required",
+              detail: "This workspace needs an engineering role. Ask an administrator to grant access.",
+            }
+          : {
+              kind: "error",
+              title: "The engineering queue could not load",
+              detail: error instanceof Error ? error.message : "The engineering service is unavailable.",
+            });
       });
     return () => {
       active = false;
@@ -54,72 +68,98 @@ export default function EngineeringPage() {
   // re-read the queue and drop the stale selection.
   const onRouted = useCallback(() => {
     setNotice("Findings recorded. The queue was refreshed so only open escalations remain.");
+    setSelectedCaseId(null);
     reload();
   }, [reload]);
 
+  const toTicket = (item: EngineeringCase): SupportTicket => {
+    const mark = workflowMark(item.workflow.status, item.workflow.queue);
+    return {
+      caseId: item.case_id,
+      summary: `${stageLabel(item.stage)} · ${item.safe_code ?? providerOutcomeLabel(item.provider_outcome)}`,
+      status: mark.label,
+      tone: mark.tone,
+      observedAt: item.observed_at,
+      ownerLabel: `Owner ${item.subject_owner_id}`,
+      safeCode: item.safe_code,
+    };
+  };
+
   return (
     <AppShell>
-      <div className="mx-auto w-full max-w-6xl px-6 py-10">
-        <header className="mb-8">
-          <div className="flex items-center gap-2 text-sm font-medium text-[#FF4F00]">
-            <Wrench className="h-4 w-4" /> Engineering
-          </div>
-          <h1 className="mt-2 text-3xl font-bold tracking-tight text-zinc-900">
-            Escalated cases
-          </h1>
-          <p className="mt-2 max-w-2xl text-sm text-zinc-600">
-            Cases a support operator explicitly routed to engineering, with their handoff
-            history. You can record findings and return a case to support; replay stays with
-            support operators.
-          </p>
-        </header>
-
-        {notice ? (
-          <p role="status" className="mb-4 rounded-lg border border-emerald-200 bg-emerald-50 p-3 text-sm text-emerald-800">
-            {notice}
-          </p>
-        ) : null}
-
-        <div className="grid gap-6 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
-          <section>
-            <div className="mb-3 flex items-center justify-between gap-3">
-              <h2 className="text-sm font-semibold text-zinc-900">Engineering queue</h2>
+      <ThreePane
+        index={
+          <TicketIndex
+            title="Engineering queue"
+            count={state.kind === "ready" ? String(state.rows.length) : undefined}
+            state={state}
+            toTicket={toTicket}
+            onSelect={(item) => {
+              setNotice(null);
+              setSelectedCaseId(item.case_id);
+            }}
+            selectedCaseId={selectedCaseId}
+            collapsedOnNarrow
+            actions={
               <button
+                type="button"
                 onClick={reload}
                 className="text-xs font-medium text-zinc-500 transition hover:text-zinc-800"
               >
                 Refresh
               </button>
-            </div>
-            <EngineeringCaseList
-              state={state}
-              selectedCaseId={selectedCaseId ?? undefined}
-              onSelect={setSelectedCaseId}
-            />
-          </section>
-
-          <section>
+            }
+          />
+        }
+        main={
+          <div className={selectedCaseId && state.kind === "ready" ? "flex min-h-0 flex-1 flex-col" : "hidden lg:block"}>
             {selectedCaseId && state.kind === "ready" ? (
-              <EngineeringWorkspace
-                key={selectedCaseId}
-                caseId={selectedCaseId}
-                capabilities={capabilities}
-                onRouted={onRouted}
-                onUnauthorized={() => {
-                  setSelectedCaseId(null);
-                  reload();
-                }}
-              />
+              <>
+                {notice ? (
+                  <p
+                    role="status"
+                    className="border-b border-emerald-200 bg-emerald-50 px-4 py-2 text-xs text-emerald-800"
+                  >
+                    {notice}
+                  </p>
+                ) : null}
+                <EngineeringWorkspace
+                  key={selectedCaseId}
+                  caseId={selectedCaseId}
+                  capabilities={capabilities}
+                  onRouted={onRouted}
+                  onUnauthorized={() => {
+                    setSelectedCaseId(null);
+                    reload();
+                  }}
+                />
+              </>
             ) : (
-              <div className="grid place-items-center rounded-xl border border-dashed border-zinc-200 bg-white py-20 px-6 text-center text-sm text-zinc-500">
-                {state.kind === "denied"
-                  ? "Engineering access is required to inspect escalated cases."
-                  : "Select an escalated case to inspect it."}
+              <div className="flex h-full min-h-[320px] flex-col items-center justify-center gap-1 px-6 text-center">
+                <Wrench aria-hidden className="h-5 w-5 text-zinc-300" />
+                <p className="text-sm font-medium text-zinc-700">Select an escalated case</p>
+                <p className="max-w-sm text-xs text-zinc-500">
+                  You will see the escalation reason, the evidence support authorized for you, and the handoff history.
+                  Replay stays with support operators.
+                </p>
               </div>
             )}
-          </section>
-        </div>
-      </div>
+          </div>
+        }
+        aside={
+          <div className="border-t border-zinc-200 p-4 text-xs text-zinc-600 lg:border-t-0">
+            <h2 className="text-[13px] font-semibold text-zinc-900">What this workspace can and cannot do</h2>
+            <ul className="mt-2 space-y-2">
+              <li>You can record findings and return the case to support, or resolve it with an explanation.</li>
+              <li>The evidence room reads the captured failure and the attempt ledger. Input validation is not authorized for this role.</li>
+              <li>
+                Replay approval, request and dispatch are support-operator surfaces. No control here publishes a replay or
+                changes an owner&apos;s Zap.
+              </li>
+            </ul>
+          </div>
+        }
+      />
     </AppShell>
   );
 }

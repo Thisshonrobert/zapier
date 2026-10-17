@@ -6,7 +6,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { InvestigationAuthority, type SqlClient } from "../../../primary_backend/services/investigation-authority.ts";
 import { TriageOperatorDenied } from "../../../primary_backend/services/triage-operator.ts";
 import { requestTriage, pollInvestigation } from "./triage-client";
-import { SavedInvestigationControls } from "../app/triage/TriageResults";
+import { ReplayLedger } from "../mycomponents/support/ReplayLedger";
 import type { SavedInvestigation } from "../types/triage";
 
 process.env.JWT_SECRET ??= "phase-10a-http-test-secret";
@@ -93,7 +93,7 @@ test("HTTP client -> typed decision -> saved read -> UI retains approval without
   expect(f.writes.some(sql => sql.includes('INSERT INTO "ReplayRequest"'))).toBe(false);
   const read = await f.request<SavedInvestigation>();
   expect(read.authority?.decision).toMatchObject({ id: decisionId, decision: "approve", approvedBy: 4 });
-  const html = renderToStaticMarkup(<SavedInvestigationControls saved={read} pending={false} onDecision={() => {}} />);
+  const html = renderToStaticMarkup(<ReplayLedger saved={read} pending={false} onDecision={() => {}} />);
   expect(html).toContain("No replay request exists");
   expect(html).not.toContain(">Approve</button>");
   await expect(f.decide("reject")).rejects.toThrow("already decided");
@@ -145,7 +145,7 @@ test.each(["SUCCESS", "FAILED", "UNKNOWN"])("observes queued/publication/RUNNING
   await pollInvestigation({ signal: new AbortController().signal, read: async () => {
     reads++; return f.request<SavedInvestigation>();
   }, onSnapshot: snapshot => {
-    const html = renderToStaticMarkup(<SavedInvestigationControls saved={snapshot} pending={false} onDecision={() => {}} />);
+    const html = renderToStaticMarkup(<ReplayLedger saved={snapshot} pending={false} onDecision={() => {}} />);
     expect(html).toContain(`Execution: ${status}`);
     expect(html).toContain("Publication: published");
     if (status === "UNKNOWN") expect(html).toContain("No resend");

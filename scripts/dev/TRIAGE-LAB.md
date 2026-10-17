@@ -44,6 +44,23 @@ Verification checks owner/run/step/attempt linkage, exact safe codes/status/retr
 
 The authenticated supervisor reports owned child liveness. `lab:run`/`lab:verify` prove data-plane readiness. Stopping retains all definitions, batches and history. Stop can authenticate and shut down an older 16A supervisor; start/run require the 16B identity. Never adopt an unrelated process, PID, occupied port, database or topic.
 
+## Cross-role acceptance smoke (16H)
+
+`lab:smoke` walks the Section 9 acceptance journey against the live lab in one command. It reads a batch that already exists and never triggers scenarios itself, so a retry cannot create new runs or a second replay. It is read-only apart from one owner-repair routing and one engineering escalation/return, which are the handoffs the journey has to prove. The runbook is [docs/AI/runbooks/support-lab-acceptance-journey.md](../../docs/AI/runbooks/support-lab-acceptance-journey.md).
+
+```powershell
+rtk proxy bun run lab:run --scenario all --batch smoke-<date>
+rtk proxy bun run lab:smoke --batch smoke-<date>
+# With the verified replay profile active, step 5 is reported and the journey is run separately:
+rtk proxy bun run lab:smoke --batch smoke-<date> --require-replay
+rtk proxy bun run lab:replay --case-id <case id printed by the smoke run>
+# Stop before running lab:test; the lifecycle test reserves the lab ports and refuses an occupied one.
+rtk proxy bun run lab:stop
+rtk proxy bun run lab:test
+```
+
+Steps verified by the command: the owner/provider matrix with durable DLQ failures; owner isolation and the privileged-queue denial; support routing across every owner's cases with a durable re-read; the engineering escalation, findings return and customer-safe owner projection; the replay eligibility and denial facts the batch itself carries (missing credentials, unknown delivery, missing required input), the lab/ordinary-database/host guards and the ownership marker. Step 5 is not duplicated: the replay journey keeps its own ledger assertions in `lab:replay`, and the smoke run prints the exact eligible Telegram 429 case id to use. A lab without a verified replay profile reports step 5 as skipped, and `--require-replay` turns that into a failure.
+
 ```powershell
 rtk proxy bun run lab:test
 rtk proxy bun run lab:check-types
@@ -57,4 +74,16 @@ $env:TRIAGE_LAB_PIPELINE_INTEGRATION = 'true'
 rtk proxy bun --env-file=apps/primary_backend/.env test scripts/dev/triage-lab-pipeline.integration.test.ts
 ```
 
-The pipeline integration test retains its new batch for inspection and verifies unchanged SQL snapshots after same-batch reconciliation and consumed duplicate Kafka deliveries. It does not establish live provider semantics, production replay readiness, broker outage recovery, paid diagnosis or the later role-specific UI journeys.
+The pipeline integration test retains its new batch for inspection and verifies unchanged SQL snapshots after same-batch reconciliation and consumed duplicate Kafka deliveries. It does not establish live provider semantics, production replay readiness, broker outage recovery, paid diagnosis or the browser-level role journeys.
+
+## 16H cross-role coverage outside the lab
+
+The lab proves the pipeline; the mounted router proves the three role surfaces. Both are needed, and neither replaces the other.
+
+```powershell
+# Real PostgreSQL, real HTTP router, real role rows; no lab and no supervisor needed.
+$env:TRIAGE_CROSS_ROLE_INTEGRATION = 'true'
+rtk proxy bun --env-file=apps/primary_backend/.env test apps/primary_backend/tests/triage-cross-role.integration.test.ts
+```
+
+That suite walks one case through owner -> support -> owner -> support -> engineering -> support -> owner on real rows: the owner's own-case list and the missing-field repair, the foreign-id 404 and the privileged-queue 403, the operator routing and its durable event trail, the engineer escalation/findings return, the owner's customer-safe projection, the access audit and role revocation.

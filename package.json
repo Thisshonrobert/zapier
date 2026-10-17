@@ -15,8 +15,9 @@
     "lab:status": "bun --env-file=apps/primary_backend/.env run scripts/dev/triage-lab.ts status",
     "lab:run": "bun --env-file=apps/primary_backend/.env run scripts/dev/triage-lab.ts run",
     "lab:verify": "bun --env-file=apps/primary_backend/.env run scripts/dev/triage-lab.ts verify",
+    "lab:smoke": "bun --env-file=apps/primary_backend/.env run scripts/dev/triage-lab.ts smoke",
     "lab:reset": "bun --env-file=apps/primary_backend/.env run scripts/dev/triage-lab.ts reset",
-    "lab:test": "bun test apps/webhook/tests/ingestion.test.ts scripts/dev/triage-lab-*.test.ts",
+    "lab:test": "bun test apps/webhook/tests/ingestion.test.ts scripts/dev/triage-lab-*.test.ts scripts/dev/triage-lab.integration.test.ts",
     "lab:check-types": "tsc --project scripts/dev/tsconfig.triage-lab.json",
     "test:replay-recovery": "prisma generate --schema packages/db/prisma/schema.prisma && node --experimental-transform-types --import ./apps/primary_backend/tests/node-typescript-register.mjs --test apps/primary_backend/tests/replay-recovery.integration.test.ts",
     "postinstall": "node patches/kafkajs-bun-fix.js"
