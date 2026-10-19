@@ -1,15 +1,3 @@
-test username:thisshon
-email:thisshonorobert0205@gmail.com
-pass: abc@123
-
-
-TODO: 
-
-1. Now when user signup , routes to singin then to dashboard -> ADD EMAIL verification in signup route 
-
-
----
-
 ## Project overview
 This monorepo is a ground-up clone of Zapier with a Bun + Turbo build. It currently contains:
 
@@ -18,7 +6,7 @@ This monorepo is a ground-up clone of Zapier with a Bun + Turbo build. It curren
 - `apps/webhook`: Express service receiving external webhooks and enqueueing Zap executions.
 - `apps/processor`: Outbox processor that drains `ZapRunOutbox` rows into Kafka `zap-events`.
 - `apps/worker`: Kafka consumer that replays each Zap action step-by-step.
-- `apps/ai_agent`: Fixture-driven LangGraph.js triage preview service; read-only and local-only in Phase 1.
+- `apps/ai_agent`: LangGraph.js DLQ triage investigator with bounded evidence tools, durable investigations, and simulated runbook retrieval.
 - `packages/db`: Prisma schema, generated client, and migrations targeting PostgreSQL.
 
 ## High-level flow
@@ -32,7 +20,8 @@ This monorepo is a ground-up clone of Zapier with a Bun + Turbo build. It curren
 - **Worker outputs**: The scaffolding logs “email action” / “telegram post action”, but no actual integrations send messages yet. A metadata parser/formatter is still TODO and will be added as coding continues.
 - **Frontend builder**: Trigger/action creation screens are present. After a user adds both, we still need the config parsing UI plus a “Test step” experience to validate payloads before saving.
 - **Validation**: No holistic error/state management around Kafka failures or partially completed runs yet.
-- **Docs**: This README is intentionally WIP so AI helpers understand what remains; it will be rewritten once the project stabilizes.
+- **AI triage retrieval**: The current code default is a provisionally selected local MiniLM cross-encoder over eligible runbook sections. It is not a vector database or hybrid retriever, and the selection is not independent quality acceptance or a verified remote production deployment. See [current state](docs/current-state.md), [architecture decisions](docs/decisions.md#adr-011-small-simulated-runbook-corpus-with-simple-retrieval), and the [retrieval evaluation record](apps/ai_agent/evaluation/production-selection/README.md).
+- **Docs**: Documentation describes current behavior and marks provisional selections, evaluation gaps, and unverified deployment requirements.
 
 ## Running the stack locally
 Prerequisites:
@@ -50,7 +39,7 @@ Services (run each in its own terminal):
 - Webhook ingress: `cd apps/webhook && bun install && bun run index.ts`
 - Outbox processor: `cd apps/processor && bun install && bun run index.ts`
 - Worker: `cd apps/worker && bun install && bun run index.ts`
-- AI triage preview: `bun run --cwd apps/ai_agent dev` (local synthetic fixtures only, port `3004`)
+- AI triage service: `bun run --cwd apps/ai_agent dev` (port `3004`; investigation mode requires the configuration described in [current state](docs/current-state.md) and [operations](docs/AI/phase14a-operations.md))
 
 All services share the Prisma client via `packages/db`. Use `turbo run dev --filter=<app>` if you prefer orchestrating via Turbo.
 

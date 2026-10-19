@@ -95,10 +95,10 @@ This document records the foundational architectural decisions established in th
 
 ## ADR 011: Small simulated runbook corpus with simple retrieval
 
-- **Status**: Proposed.
+- **Status**: Updated 19 October 2026. MiniLM was explicitly selected provisionally as the current code default; this is not an evaluation winner, quality certification, or verified remote deployment.
 - **Context**: There are no real production runbooks, and existing architecture docs are not an incident history.
-- **Decision**: Six labelled simulated Markdown runbooks cover the taxonomy; reuse links to existing docs. Heading-based sections, metadata filters and deterministic lexical retrieval return a few cited excerpts. Distinguish procedural knowledge from observed incident evidence.
-- **Alternatives / consequences**: No whole-repo ingestion, embeddings, vector database or GraphRAG initially. Evaluate against a no-retrieval baseline. Add semantic retrieval only when held-out retrieval failures justify it. Retrieved text cannot override application policy.
+- **Decision**: Six labelled simulated Markdown runbooks cover the taxonomy; reuse links to existing docs. The current code default (`minilm-original`) metadata-filters eligible sections and uses the pinned `Xenova/ms-marco-MiniLM-L-6-v2` cross-encoder to score each query/section pair, returning up to three cited excerpts. This is exhaustive cross-encoder scoring, not vector-embedding retrieval or hybrid search. `RUNBOOK_RETRIEVAL_METHOD=keyword` selects deterministic lexical overlap as the baseline/rollback.
+- **Alternatives / consequences**: Retrieval evaluation found no candidate passing all acceptance gates, and there is no independent production-incident quality acceptance. The user selected MiniLM provisionally for the code default despite mixed cohort results; this decision does not assert it is the measured winner. No whole-repo ingestion, embedding index, vector database, BM25 path, HyDE, PageIndex or GraphRAG is in the serving path. Retrieved text remains untrusted procedural guidance and cannot override application policy.
 - **Plan**: [Runbook design](ai-dlq-master-plan.md#4-failure-taxonomy-and-the-minimum-rag-corpus).
 
 ## ADR 012: Durable approval with independent deterministic safety

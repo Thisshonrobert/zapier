@@ -1,6 +1,8 @@
 # RAG and diagnosis investigation closeout — 13 October 2026
 
-Decision: keep production retrieval and diagnosis behavior unchanged. Preserve the existing opt-in MiniLM implementation without enabling it. Causal prompt v1/v2 and repair acceptance remain experimental. Keeping the baseline is a conservative integration decision, not certification of quality or readiness. This record supersedes earlier reports' proposed next experiments; it does not rewrite their frozen evidence.
+At this closeout's decision time, production retrieval and diagnosis behavior were unchanged, and MiniLM remained opt-in. Causal prompt v1/v2 and repair acceptance remained experimental. Keeping the baseline was a conservative integration decision, not certification of quality or readiness. This is a historical snapshot; it does not rewrite the frozen evidence below.
+
+**Subsequent runtime decision:** the user separately selected `minilm-original` provisionally as the current code default and authorized a local demo. See the [runtime selection record](production-selection/runtime-original-20261013/README.md). That choice did not pass the historical evaluation gates or verify remote production deployment; it supersedes only the closeout's statement that MiniLM remained opt-in.
 
 No independent annotation exercise, reranker comparison, prompt v3, HyDE, PageIndex or live generation is part of this closeout. No external calls, spending, dependencies, production changes or Git integration were performed.
 
