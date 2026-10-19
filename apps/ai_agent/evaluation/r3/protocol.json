@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "status": "frozen_before_measurement",
+  "createdAt": "2026-10-19",
+  "corpus": {
+    "path": "apps/ai_agent/evaluation/r3/corpus-v1.json",
+    "runbooks": 6,
+    "sections": 55
+  },
+  "development": { "cases": 24, "answerable": 16, "noMatch": 8 },
+  "holdout": { "cases": 40, "answerable": 30, "noMatch": 10, "status": "not_authored" },
+  "gates": {
+    "developmentSufficientGuidanceHitAt3": 0.8,
+    "releaseSufficientGuidanceHitAt3": 0.9,
+    "releaseMacroSectionRecallAt3": 0.9,
+    "noMatchAbstention": 0.9,
+    "falseAbstentionMax": 0.05,
+    "diagnosisAcceptance": 0.8,
+    "reliability": 0.95,
+    "p95LatencyMs": 3000
+  },
+  "excluded": [
+    "apps/ai_agent/evaluation/r25/runs/fresh-v1",
+    "apps/ai_agent/evaluation/r25/runs/exhaustive-v2",
+    "any future holdout until configuration freeze"
+  ]
+}
