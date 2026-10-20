@@ -39,6 +39,7 @@ import type {
   RunbookMatch,
   RunbookSearchInput,
 } from "./tools/search-runbooks.ts";
+import { sanitizedQueryText } from "./tools/retrieval-profile.ts";
 
 // ============================================================================
 // Custom Domain Errors
@@ -390,23 +391,6 @@ function assertSameCanonicalSource(
       );
     }
   }
-}
-
-// Error text is untrusted search data. Remove credential/PII-shaped values before
-// truncation; keep only bounded observations, never expected evaluation labels.
-function sanitizedQueryText(value: string): string {
-  return value
-    .replace(/https?:\/\/\S+/gi, " ")
-    .replace(/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/gi, " ")
-    .replace(/\bBearer\s+[A-Za-z0-9._~+/-]+={0,2}/gi, " ")
-    .replace(/\b\d{6,12}:[A-Za-z0-9_-]{20,}\b/g, " ")
-    .replace(
-      /\b(?:[a-z_]*token|[a-z_]*key|password|secret|authorization)\s*[:=]\s*(?:"[^"]*"|'[^']*'|[^\s,;]+)/gi,
-      " ",
-    )
-    .replace(/\b[A-Za-z0-9_-]{32,}\b/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
 }
 
 export function retrievalInput(

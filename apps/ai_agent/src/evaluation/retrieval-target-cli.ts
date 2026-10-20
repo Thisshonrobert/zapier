@@ -8,12 +8,15 @@ import { fileURLToPath } from "node:url";
 import { parseArgs } from "node:util";
 
 import { defaultRunbookDirectory } from "../paths.ts";
+import type { DiagnosisEvidence } from "../contracts.ts";
 import {
   eligibleRunbookSections,
   loadRunbooks,
   scoredRunbookSections,
   type RunbookIndex,
 } from "../tools/search-runbooks.ts";
+import { buildStructuredRetrievalInput } from "../tools/retrieval-profile.ts";
+import { rankRouteOnly } from "../tools/structured-ranking.ts";
 import { hash } from "./retrieval-r21.ts";
 import {
   canonicalSections,
@@ -133,6 +136,344 @@ export async function prepareBaseline(outDir: string): Promise<void> {
   );
   console.log(`${queries.length} queries`);
   console.log(inputHash);
+}
+
+// ---- structured profile arms (R3.2) ---------------------------------------
+
+const reviewPath = join(
+  repoRoot,
+  "apps/ai_agent/evaluation/production-selection/development-review-v3.json",
+);
+
+type ReviewEvidenceCase = {
+  id: string;
+  kind: "answerable" | "no_match";
+  evidence: DiagnosisEvidence;
+};
+
+type ProfileScores = {
+  inputHash: string;
+  records: Record<
+    string,
+    { original: { logits: Record<string, number>; rerankMs: number } }
+  >;
+};
+
+async function loadProfileContext() {
+  const index = await loadRuntimeIndex();
+  const cases = await loadTargetCases(join(r3Dir, "development-cases-v1.json"));
+  const frozen = await loadFrozenCorpus(join(r3Dir, "corpus-v1.json"));
+  const labels = await loadTargetLabels(
+    join(r3Dir, "development-labels-v1.json"),
+  );
+  const review = JSON.parse(await readFile(reviewPath, "utf8")) as {
+    cases: ReviewEvidenceCase[];
+  };
+  const evidenceById = new Map(
+    review.cases.map((item) => [item.id, item.evidence]),
+  );
+  for (const item of cases)
+    if (!evidenceById.has(item.id))
+      throw new Error(`Missing observed evidence for ${item.id}`);
+  return { index, cases, frozen, labels, evidenceById };
+}
+
+function routedCitations(
+  index: RunbookIndex,
+  input: ReturnType<typeof buildStructuredRetrievalInput>,
+) {
+  const eligible = eligibleRunbookSections(index, input);
+  const hints = input.route?.confident
+    ? new Set(input.route.hints.map((hint) => hint.toLowerCase()))
+    : null;
+  const routed = hints
+    ? eligible.filter((section) =>
+        section.taxonomy.some((taxonomy) => hints.has(taxonomy.toLowerCase())),
+      )
+    : eligible;
+  const routedSet = new Set(routed.map((section) => section.citation));
+  return {
+    eligible,
+    routed,
+    routeExcluded: eligible
+      .filter((section) => !routedSet.has(section.citation))
+      .map((section) => section.citation),
+  };
+}
+
+export async function prepareProfile(outDir: string): Promise<void> {
+  const { index, cases, frozen, labels, evidenceById } =
+    await loadProfileContext();
+  const r23 = JSON.parse(await readFile(r23ConfigPath, "utf8")) as {
+    models: { reranker: unknown };
+  };
+  const config = {
+    models: { reranker: r23.models.reranker },
+    variants: ["original"],
+    batchSize: 8,
+    maxLength: 512,
+  };
+  const profiles = new Map(
+    cases.map((item) => [
+      item.id,
+      buildStructuredRetrievalInput(evidenceById.get(item.id)!),
+    ]),
+  );
+  const queries = cases.map((item) => {
+    const profile = profiles.get(item.id)!;
+    const eligible = [...eligibleRunbookSections(index, profile)].sort(
+      (left, right) => left.citation.localeCompare(right.citation),
+    );
+    const passages: Record<string, string> = {};
+    for (const section of eligible)
+      passages[section.citation] = `${section.heading}\n${section.content}`;
+    return {
+      id: item.id,
+      query: profile.query,
+      candidates: eligible.map((section) => section.citation),
+      passages: { original: passages },
+    };
+  });
+  const payload = { config, queries };
+  const inputHash = hash(payload);
+  await mkdir(outDir, { recursive: true });
+  await writeFile(
+    join(outDir, "inference-original.json"),
+    JSON.stringify({ inputHash, ...payload }, null, 2) + "\n",
+    { flag: "wx" },
+  );
+
+  const routeRows = cases.map((item) => {
+    const profile = profiles.get(item.id)!;
+    const { eligible, routed, routeExcluded } = routedCitations(index, profile);
+    const eligibleCitations = new Set(
+      eligible.map((section) => section.citation),
+    );
+    const accepted = [
+      ...new Set(item.requiredFacets.flatMap((facet) => facet.accepted)),
+    ];
+    const eligibleAccepted = accepted.filter((citation) =>
+      eligibleCitations.has(citation),
+    );
+    const unroutedAccepted = eligibleAccepted.filter((citation) =>
+      routeExcluded.includes(citation),
+    );
+    return {
+      id: item.id,
+      kind: item.kind,
+      hints: profile.route?.hints ?? [],
+      confident: profile.route?.confident ?? false,
+      reasons: profile.route?.reasons ?? [],
+      requestedFacets: profile.requestedFacets ?? [],
+      anchors: profile.anchors ?? [],
+      eligible: eligible.length,
+      routed: routed.length,
+      routeExcluded,
+      accepted: eligibleAccepted.length,
+      accessExcluded: accepted.length - eligibleAccepted.length,
+      covered: eligibleAccepted.length - unroutedAccepted.length,
+      unroutedAccepted,
+    };
+  });
+  const answerable = routeRows.filter((row) => row.kind === "answerable");
+  const accepted = answerable.reduce((total, row) => total + row.accepted, 0);
+  const covered = answerable.reduce((total, row) => total + row.covered, 0);
+  const routeCoverage = accepted ? covered / accepted : 1;
+  const routeAudit = {
+    version: "r3.2-v1",
+    corpusHash: frozen.corpusHash,
+    labelHash: targetLabelHash(labels),
+    inputHash,
+    routeCoverage,
+    accepted,
+    covered,
+    cases: routeRows,
+  };
+  await writeFile(
+    join(outDir, "route-audit.json"),
+    JSON.stringify(routeAudit, null, 2) + "\n",
+    { flag: "wx" },
+  );
+  const manifest = {
+    generatedAt: new Date().toISOString(),
+    profileVersion: "r3.2-v1",
+    corpusHash: frozen.corpusHash,
+    protocolHash: await sha256File(join(r3Dir, "protocol.json")),
+    labelHash: targetLabelHash(labels),
+    inputHash,
+    cases: cases.length,
+    routeCoverage,
+    selectedArm: routeCoverage === 1 ? "profile-route" : "profile-global",
+    candidates: queries.map((query) => ({
+      id: query.id,
+      candidates: query.candidates.length,
+    })),
+  };
+  await writeFile(
+    join(outDir, "manifest.json"),
+    JSON.stringify(manifest, null, 2) + "\n",
+    { flag: "wx" },
+  );
+  console.log(`${queries.length} queries`);
+  console.log(inputHash);
+  console.log(`routeCoverage=${routeCoverage}`);
+}
+
+export async function reportProfile(
+  globalDir: string,
+  routeDir: string,
+): Promise<void> {
+  const { index, cases, frozen, labels, evidenceById } =
+    await loadProfileContext();
+  const inference = JSON.parse(
+    await readFile(join(globalDir, "inference-original.json"), "utf8"),
+  ) as { inputHash: string };
+  const scores = JSON.parse(
+    await readFile(join(globalDir, "scores-original.json"), "utf8"),
+  ) as ProfileScores;
+  const routeAudit = JSON.parse(
+    await readFile(join(globalDir, "route-audit.json"), "utf8"),
+  ) as {
+    routeCoverage: number;
+    accepted: number;
+    covered: number;
+    cases: Array<{ id: string; routeExcluded: string[] }>;
+  };
+  if (scores.inputHash !== inference.inputHash)
+    throw new Error("Scores do not belong to this inference input");
+
+  const globalOutputs: TargetOutput[] = [];
+  const routeOutputs: TargetOutput[] = [];
+  const routeExcludedById = new Map<string, string[]>();
+  cases.forEach((item) => {
+    const profile = buildStructuredRetrievalInput(evidenceById.get(item.id)!);
+    const record = scores.records[item.id]?.original;
+    if (!record) throw new Error(`Missing scores for ${item.id}`);
+    const candidates = Object.keys(record.logits).sort();
+    const globalResult = rankRouteOnly(
+      index,
+      { ...profile, route: undefined },
+      record.logits,
+    );
+    const routeResult = rankRouteOnly(index, profile, record.logits);
+    const routedCandidates = candidates.filter(
+      (citation) => !routeResult.routeExcluded.includes(citation),
+    );
+    globalOutputs.push({
+      id: item.id,
+      returned: globalResult.matches.map((match) => match.citation),
+      latencyMs: record.rerankMs,
+      candidates,
+      routeExcluded: [],
+    });
+    routeOutputs.push({
+      id: item.id,
+      returned: routeResult.matches.map((match) => match.citation),
+      latencyMs: record.rerankMs,
+      candidates: routedCandidates,
+      routeExcluded: routeResult.routeExcluded,
+    });
+    routeExcludedById.set(item.id, routeResult.routeExcluded);
+  });
+
+  const globalScored = scoreTarget(index, cases, globalOutputs);
+  const routeScored = scoreTarget(index, cases, routeOutputs);
+  const withArmDetail = (
+    scored: ReturnType<typeof scoreTarget>,
+    outputs: TargetOutput[],
+  ) => ({
+    ...scored,
+    rows: scored.rows.map((row) => {
+      const output = outputs.find((item) => item.id === row.id)!;
+      const item = cases.find((candidate) => candidate.id === row.id)!;
+      return {
+        ...row,
+        requiredFacets: item.requiredFacets.map((facet) => facet.facet),
+        routeExcluded: routeExcludedById.get(row.id) ?? [],
+        latencyMs: "latencyMs" in output ? output.latencyMs : 0,
+      };
+    }),
+  });
+  const routeCoverageOk =
+    routeAudit.routeCoverage === 1 &&
+    routeScored.rows
+      .filter((row) => row.eligibleAnswerable)
+      .every((row) => row.routeCoverage === 1);
+  const routeGate = {
+    threshold: 1,
+    routeCoverage: routeAudit.routeCoverage,
+    accepted: routeAudit.accepted,
+    covered: routeAudit.covered,
+    status: routeCoverageOk ? "enabled" : "disabled",
+    selectedArm: routeCoverageOk ? "profile-route" : "profile-global",
+  };
+  const base = {
+    generatedAt: new Date().toISOString(),
+    profileVersion: "r3.2-v1",
+    corpusHash: frozen.corpusHash,
+    labelHash: targetLabelHash(labels),
+    protocolHash: await sha256File(join(r3Dir, "protocol.json")),
+    inputHash: inference.inputHash,
+    scoresHash: await sha256File(join(globalDir, "scores-original.json")),
+    routeGate,
+    routeAudit: routeAudit.cases,
+    notes: {
+      sharedLogits:
+        "both arms consume the same scores-original.json; only the route candidate set changes",
+      noCutoff:
+        "the structured arms rank by sigmoid score without the minilm-original .001 floor",
+    },
+  };
+  const report = {
+    ...base,
+    arms: {
+      "profile-global": withArmDetail(globalScored, globalOutputs),
+      "profile-route": withArmDetail(routeScored, routeOutputs),
+    },
+  };
+  await writeFile(
+    join(globalDir, "report.json"),
+    JSON.stringify(report, null, 2) + "\n",
+    { flag: "wx" },
+  );
+  await mkdir(routeDir, { recursive: true });
+  await writeFile(
+    join(routeDir, "manifest.json"),
+    JSON.stringify(
+      {
+        generatedAt: base.generatedAt,
+        profileVersion: base.profileVersion,
+        corpusHash: base.corpusHash,
+        labelHash: base.labelHash,
+        protocolHash: base.protocolHash,
+        inputHash: base.inputHash,
+        scoresHash: base.scoresHash,
+        routeGate,
+      },
+      null,
+      2,
+    ) + "\n",
+    { flag: "wx" },
+  );
+  await writeFile(
+    join(routeDir, "report.json"),
+    JSON.stringify(
+      { ...base, arm: "profile-route", armReport: report.arms["profile-route"] },
+      null,
+      2,
+    ) + "\n",
+    { flag: "wx" },
+  );
+  for (const [arm, value] of Object.entries(report.arms)) {
+    console.log(
+      `${arm}: hit@3=${value.metrics.sufficientGuidanceHitAt3} ` +
+        `recall=${value.metrics.macroSectionRecallAt3} ` +
+        `precision=${value.metrics.directPrecisionAt3} ` +
+        `routeCoverage=${value.metrics.routeCoverage} ` +
+        `abstention=${value.noMatchAbstention.rate}`,
+    );
+  }
+  console.log(`routeGate=${routeGate.status} (${routeGate.selectedArm})`);
 }
 
 // ---- reporting -------------------------------------------------------------
@@ -358,6 +699,9 @@ async function main() {
       "freeze-corpus": { type: "string" },
       "prepare-benchmark": { type: "boolean" },
       "prepare-baseline": { type: "string" },
+      "prepare-profile": { type: "string" },
+      "report-profile": { type: "string" },
+      "route-run": { type: "string" },
       report: { type: "string" },
     },
     strict: true,
@@ -373,9 +717,19 @@ async function main() {
   if (values["prepare-benchmark"]) return prepareBenchmark();
   if (values["prepare-baseline"])
     return prepareBaseline(resolve(values["prepare-baseline"]));
+  if (values["prepare-profile"])
+    return prepareProfile(resolve(values["prepare-profile"]));
+  if (values["report-profile"])
+    return reportProfile(
+      resolve(values["report-profile"]),
+      resolve(
+        values["route-run"] ??
+          join(r3Dir, "runs", "profile-route-20261019-v1"),
+      ),
+    );
   if (values.report) return reportTargetRun(resolve(values.report));
   throw new Error(
-    "Usage: --freeze-corpus <path> | --prepare-benchmark | --prepare-baseline <dir> | --report <dir>",
+    "Usage: --freeze-corpus <path> | --prepare-benchmark | --prepare-baseline <dir> | --prepare-profile <dir> | --report-profile <dir> [--route-run <dir>] | --report <dir>",
   );
 }
 

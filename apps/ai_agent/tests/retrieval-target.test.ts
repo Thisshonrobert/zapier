@@ -12,6 +12,7 @@ import {
   type TargetOutput,
 } from "../src/evaluation/retrieval-target.ts";
 import { loadRunbooks, type RunbookIndex } from "../src/tools/search-runbooks.ts";
+import { rankRouteOnly } from "../src/tools/structured-ranking.ts";
 
 const r3 = join(import.meta.dir, "../evaluation/r3");
 
@@ -124,6 +125,72 @@ describe("sufficient-guidance metric", () => {
     ];
     const outputs: TargetOutput[] = [{ id: "dup", returned: [], latencyMs: 1 }];
     expect(() => scoreTarget(index, cases, outputs)).toThrow("Duplicate facet");
+  });
+});
+
+describe("route-only ranking arm", () => {
+  const routeIndex: RunbookIndex = [
+    section("f01-a"),
+    section("f01-b"),
+    { ...section("f02-a"), taxonomy: ["F02"] },
+    { ...section("f02-b"), taxonomy: ["F02"] },
+  ];
+  const allZeroLogits = (sections: RunbookIndex) =>
+    Object.fromEntries(sections.map((item) => [item.citation, 0]));
+
+  test("route-only ranking removes non-routed sections without changing scores", () => {
+    const input = {
+      query: "429 rate limit",
+      route: {
+        hints: ["F01"],
+        confident: true,
+        reasons: ["provider_status:429"],
+      },
+      limit: 3 as const,
+    };
+    const result = rankRouteOnly(routeIndex, input, allZeroLogits(routeIndex));
+
+    expect(result.matches).toHaveLength(2);
+    expect(
+      result.matches.every((match) => match.taxonomy.includes("F01")),
+    ).toBe(true);
+    expect(result.routeExcluded.sort()).toEqual([
+      "RB-A@1.0.0#f02-a",
+      "RB-A@1.0.0#f02-b",
+    ]);
+  });
+
+  test("ranks the global set when the route is not confident", () => {
+    const result = rankRouteOnly(
+      routeIndex,
+      { query: "observed failure", limit: 3 },
+      allZeroLogits(routeIndex),
+    );
+
+    expect(result.matches).toHaveLength(3);
+    expect(result.routeExcluded).toEqual([]);
+    expect(result.matches.every((match) => match.canChangePolicy === false)).toBe(
+      true,
+    );
+  });
+
+  test("fails closed when a routed section has no finite score", () => {
+    const logits = allZeroLogits(routeIndex);
+    delete logits["RB-A@1.0.0#f01-a"];
+    expect(() =>
+      rankRouteOnly(
+        routeIndex,
+        {
+          query: "429",
+          route: {
+            hints: ["F01"],
+            confident: true,
+            reasons: ["provider_status:429"],
+          },
+        },
+        logits,
+      ),
+    ).toThrow("Invalid MiniLM scores");
   });
 });
 
