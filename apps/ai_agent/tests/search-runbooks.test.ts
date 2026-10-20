@@ -4,6 +4,7 @@ import { join } from "node:path";
 import { tmpdir } from "node:os";
 
 import {
+  eligibleRunbookSections,
   loadRunbooks,
   searchRunbooks,
   type RunbookIndex,
@@ -138,6 +139,28 @@ describe("Phase 5 runbook retrieval", () => {
         query: "quantum orchard photosynthesis",
       }),
     ).toEqual([]);
+  });
+
+  test("exposes the same eligibility boundary used by keyword search", async () => {
+    const index = await loadRunbooks(repositoryRunbooks);
+    const input = {
+      query: "HTTP 429",
+      providers: ["telegram"],
+      taxonomy: ["F01"],
+    } as const;
+    const eligible = eligibleRunbookSections(index, input);
+
+    expect(eligible.length).toBeGreaterThan(0);
+    expect(eligible.every((section) => section.taxonomy.includes("F01"))).toBe(
+      true,
+    );
+    expect(
+      eligible.every(
+        (section) =>
+          section.providers.includes("telegram") ||
+          section.providers.includes("generic"),
+      ),
+    ).toBe(true);
   });
 
   test("rejects unbounded queries and result limits", async () => {

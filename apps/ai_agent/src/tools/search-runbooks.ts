@@ -234,10 +234,14 @@ function intersects(left: Set<string>, right: readonly string[]): boolean {
   return left.size === 0 || right.some((value) => left.has(value.toLowerCase()));
 }
 
-export function searchRunbooks(
-  index: RunbookIndex,
-  input: RunbookSearchInput,
-): RunbookMatch[] {
+type ValidatedSearchInput = {
+  query: string;
+  limit: number;
+  taxonomy: Set<string>;
+  providers: Set<string>;
+};
+
+function validatedSearchInput(input: RunbookSearchInput): ValidatedSearchInput {
   const query = input.query.trim();
   if (!query || query.length > maximumQueryLength) {
     throw new RangeError(`Runbook query must contain 1-${maximumQueryLength} characters`);
@@ -246,17 +250,54 @@ export function searchRunbooks(
   if (!Number.isInteger(limit) || limit < 1 || limit > 3) {
     throw new RangeError("Runbook result limit must be between 1 and 3");
   }
+  return {
+    query,
+    limit,
+    taxonomy: normalizedFilters(input.taxonomy, "Taxonomy"),
+    providers: normalizedFilters(input.providers, "Provider"),
+  };
+}
 
+// Access eligibility only: current status, taxonomy, and provider filters.
+// It deliberately does not score, route, cover facets, or apply any cutoff.
+export function eligibleRunbookSections(
+  index: RunbookIndex,
+  input: RunbookSearchInput,
+): RunbookIndex {
+  const { taxonomy, providers } = validatedSearchInput(input);
+  return index.filter(
+    (section) =>
+      section.status === "current" &&
+      intersects(taxonomy, section.taxonomy) &&
+      (section.providers.includes("generic") || intersects(providers, section.providers)),
+  );
+}
+
+export function toRunbookMatch(section: RunbookIndex[number], score: number): RunbookMatch {
+  return {
+    runbookId: section.id,
+    version: section.version,
+    citation: section.citation,
+    heading: section.heading,
+    content: section.content,
+    contentHash: section.contentHash,
+    taxonomy: section.taxonomy,
+    providers: section.providers,
+    simulated: true,
+    authority: "untrusted_procedural_guidance",
+    canChangePolicy: false,
+    score,
+  };
+}
+
+export function scoredRunbookSections(
+  index: RunbookIndex,
+  input: RunbookSearchInput,
+): Array<{ section: RunbookIndex[number]; score: number }> {
+  const { query } = validatedSearchInput(input);
   const queryTerms = terms(query);
-  const taxonomy = normalizedFilters(input.taxonomy, "Taxonomy");
-  const providers = normalizedFilters(input.providers, "Provider");
 
-  return index
-    .filter(
-      (section) =>
-        intersects(taxonomy, section.taxonomy) &&
-        (section.providers.includes("generic") || intersects(providers, section.providers)),
-    )
+  return eligibleRunbookSections(index, input)
     .map((section) => {
       let score = 0;
       for (const term of queryTerms) {
@@ -272,20 +313,15 @@ export function searchRunbooks(
       if (left.score !== right.score) return right.score - left.score;
       if (left.section.citation === right.section.citation) return 0;
       return left.section.citation < right.section.citation ? -1 : 1;
-    })
+    });
+}
+
+export function searchRunbooks(
+  index: RunbookIndex,
+  input: RunbookSearchInput,
+): RunbookMatch[] {
+  const { limit } = validatedSearchInput(input);
+  return scoredRunbookSections(index, input)
     .slice(0, limit)
-    .map(({ section, score }) => ({
-      runbookId: section.id,
-      version: section.version,
-      citation: section.citation,
-      heading: section.heading,
-      content: section.content,
-      contentHash: section.contentHash,
-      taxonomy: section.taxonomy,
-      providers: section.providers,
-      simulated: true,
-      authority: "untrusted_procedural_guidance",
-      canChangePolicy: false,
-      score,
-    }));
+    .map(({ section, score }) => toRunbookMatch(section, score));
 }
