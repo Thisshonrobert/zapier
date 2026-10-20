@@ -1,0 +1,57 @@
+{
+  "version": 1,
+  "status": "frozen_before_run",
+  "frozenAt": "2026-10-20T07:17:28.845Z",
+  "config": {
+    "path": "apps/ai_agent/evaluation/r3/selected-retrieval-config.json",
+    "hash": "ab30434a3f018d6bd5234a06de89c6ca8869d0aa38773c0f1d0592e9ff05ec68"
+  },
+  "corpus": {
+    "path": "apps/ai_agent/evaluation/r3/corpus-v1.json",
+    "hash": "45e85c3585607ebfd0e1ebd1f2b068e2fab7c889b1bdd3af3a565f20afcbd440"
+  },
+  "protocol": {
+    "path": "apps/ai_agent/evaluation/r3/protocol.json",
+    "hash": "e6a491cc5d2423485c61ff5d5e8634e07bc9886bb76041b68238f5322290c3ed"
+  },
+  "holdout": {
+    "cases": {
+      "path": "apps/ai_agent/evaluation/r3/holdout/cases-v1.json",
+      "hash": "7fa54e7afa174b9d4bb256c6b8f4de81d6e312681e8accb0209d1c4b2026839c",
+      "count": 40,
+      "answerable": 30,
+      "noMatch": 10,
+      "perCategory": {
+        "F01": 3,
+        "F02": 3,
+        "F03": 3,
+        "F04": 3,
+        "F05": 3,
+        "F06": 3,
+        "F07": 3,
+        "F08": 3,
+        "F09": 3,
+        "F10": 3,
+        "NM": 10
+      }
+    },
+    "labels": {
+      "path": "apps/ai_agent/evaluation/r3/holdout/labels-v1.json",
+      "hash": "2ed46c5561b75a0953e5ddf1ece9bdeafab60fb4b97ce14446dae978e40cc39b"
+    },
+    "evidence": {
+      "path": "apps/ai_agent/evaluation/r3/holdout/evidence-v1.json",
+      "hash": "55994aa6f0f49f28bb194f039473445c9e03ecafbdbc0654301027fce50716d2"
+    },
+    "review": {
+      "path": "apps/ai_agent/evaluation/r3/holdout/review-final-v1.json",
+      "hash": "1e433af93b83fd0702e9b22eb0ea80773012f9c7a0d667d0ed97a583460a595f",
+      "verdict": "accepted"
+    },
+    "authoring": {
+      "path": "apps/ai_agent/evaluation/r3/holdout/authoring-attestation-v1.json",
+      "hash": "7e472fc0297d03a5050c2952a1caa7d645b47c5baff6d4cd03095a57048aa20b"
+    }
+  },
+  "freezeRule": "Written before the single acceptance run. Any change to the config, corpus, protocol, cases, labels, evidence, or review invalidates the run."
+}

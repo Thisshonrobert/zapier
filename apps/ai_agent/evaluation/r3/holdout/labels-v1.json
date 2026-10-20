@@ -1,0 +1,1209 @@
+{
+  "version": 1,
+  "cases": [
+    {
+      "id": "f01-digest-broadcast-chat-flood",
+      "requiredFacets": [
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F01-F02@1.1.0#allowed-remediation"
+          ],
+          "rationale": "A single send-stage 429 is an explicit rejection, so the transient-failure runbook directly answers remediation (record the conservative cooldown), whether replay is available (operator-gated, unchanged inputs, one replay), and verification without sending. Directly answers the remediation facet."
+        },
+        {
+          "facet": "replay",
+          "accepted": [
+            "RB-F01-F02@1.1.0#replay-and-approval"
+          ],
+          "rationale": "A single send-stage 429 is an explicit rejection, so the transient-failure runbook directly answers remediation (record the conservative cooldown), whether replay is available (operator-gated, unchanged inputs, one replay), and verification without sending. Directly answers the replay facet."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "A single send-stage 429 is an explicit rejection, so the transient-failure runbook directly answers remediation (record the conservative cooldown), whether replay is available (operator-gated, unchanged inputs, one replay), and verification without sending. Directly answers the verification facet."
+        }
+      ],
+      "supporting": [
+        "RB-F01-F02@1.1.0#symptoms",
+        "RB-F01-F02@1.1.0#evidence-needed",
+        "RB-F01-F02@1.1.0#forbidden-actions"
+      ],
+      "missingRuntimeFacts": [
+        "whether any earlier attempt might have been accepted",
+        "the recorded cooldown deadline timestamp"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f01-group-slow-mode-reminder",
+      "requiredFacets": [
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F01-F02@1.1.0#allowed-remediation"
+          ],
+          "rationale": "The captured 429 is an explicit per-chat rejection at the send stage, which is exactly the one-replay case named in the runbook replay section. The transient runbook directly supports recording the conservative cooldown and verifying the recorded delay without contacting the provider, while replay remains conditional: complete evidence, unchanged inputs, valid ordering and safety gates, an unexpired operator approval, and at most one replay. Directly answers the remediation facet."
+        },
+        {
+          "facet": "replay",
+          "accepted": [
+            "RB-F01-F02@1.1.0#replay-and-approval"
+          ],
+          "rationale": "The captured 429 is an explicit per-chat rejection at the send stage, which is exactly the one-replay case named in the runbook replay section. The transient runbook directly supports recording the conservative cooldown and verifying the recorded delay without contacting the provider, while replay remains conditional: complete evidence, unchanged inputs, valid ordering and safety gates, an unexpired operator approval, and at most one replay. Directly answers the replay facet."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "The captured 429 is an explicit per-chat rejection at the send stage, which is exactly the one-replay case named in the runbook replay section. The transient runbook directly supports recording the conservative cooldown and verifying the recorded delay without contacting the provider, while replay remains conditional: complete evidence, unchanged inputs, valid ordering and safety gates, an unexpired operator approval, and at most one replay. Directly answers the verification facet."
+        }
+      ],
+      "supporting": [
+        "RB-F01-F02@1.1.0#symptoms",
+        "RB-F01-F02@1.1.0#evidence-needed",
+        "RB-F01-F02@1.1.0#forbidden-actions"
+      ],
+      "missingRuntimeFacts": [
+        "the group slow-mode interval configured when the send was attempted",
+        "whether other queued sends target the same chat"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f01-channel-resolution-throttled",
+      "requiredFacets": [
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F01-F02@1.1.0#allowed-remediation"
+          ],
+          "rationale": "The failure is a bounded 429 rejection during destination resolution, so the transient runbook applies to pausing and verification. It does not support send-stage replay because no message send was attempted; the replay section is supporting context explaining that limit. Directly answers the remediation facet."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "The failure is a bounded 429 rejection during destination resolution, so the transient runbook applies to pausing and verification. It does not support send-stage replay because no message send was attempted; the replay section is supporting context explaining that limit. Directly answers the verification facet."
+        }
+      ],
+      "supporting": [
+        "RB-F01-F02@1.1.0#symptoms",
+        "RB-F01-F02@1.1.0#evidence-needed",
+        "RB-F01-F02@1.1.0#read-only-investigation",
+        "RB-F01-F02@1.1.0#replay-and-approval"
+      ],
+      "missingRuntimeFacts": [
+        "the scope of the provider rate limit for getChat resolution",
+        "whether the handle resolves through a different authorized bot"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f02-telegram-connection-reset-preconnect",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F01-F02@1.1.0#read-only-investigation"
+          ],
+          "rationale": "The connection reset occurs before any request bytes are written, so delivery is provably not attempted. The transient-failure runbook directly covers pre-send transport failure, operator-side connectivity restoration, and verification without probing the provider. Directly answers the investigation facet."
+        },
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F01-F02@1.1.0#allowed-remediation"
+          ],
+          "rationale": "The connection reset occurs before any request bytes are written, so delivery is provably not attempted. The transient-failure runbook directly covers pre-send transport failure, operator-side connectivity restoration, and verification without probing the provider. Directly answers the remediation facet."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "The connection reset occurs before any request bytes are written, so delivery is provably not attempted. The transient-failure runbook directly covers pre-send transport failure, operator-side connectivity restoration, and verification without probing the provider. Directly answers the verification facet."
+        }
+      ],
+      "supporting": [
+        "RB-F01-F02@1.1.0#symptoms",
+        "RB-F01-F02@1.1.0#evidence-needed",
+        "RB-F01-F02@1.1.0#forbidden-actions"
+      ],
+      "missingRuntimeFacts": [
+        "whether any attempt reached the provider",
+        "the egress proxy state at failure time"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f02-email-connect-timeout-presend",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F01-F02@1.1.0#read-only-investigation"
+          ],
+          "rationale": "A TCP connect timeout before the body is written proves the request was never transmitted. The transient-failure runbook directly covers pre-send transport failure, connectivity remediation, and abstention when recovery is unproven. Directly answers the investigation facet."
+        },
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F01-F02@1.1.0#allowed-remediation"
+          ],
+          "rationale": "A TCP connect timeout before the body is written proves the request was never transmitted. The transient-failure runbook directly covers pre-send transport failure, connectivity remediation, and abstention when recovery is unproven. Directly answers the remediation facet."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "A TCP connect timeout before the body is written proves the request was never transmitted. The transient-failure runbook directly covers pre-send transport failure, connectivity remediation, and abstention when recovery is unproven. Directly answers the verification facet."
+        }
+      ],
+      "supporting": [
+        "RB-F01-F02@1.1.0#symptoms",
+        "RB-F01-F02@1.1.0#evidence-needed",
+        "RB-F01-F02@1.1.0#forbidden-actions"
+      ],
+      "missingRuntimeFacts": [
+        "whether any connection to the provider endpoint was established",
+        "provider endpoint health at failure time"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f02-telegram-dns-failure-preconnect",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F01-F02@1.1.0#read-only-investigation"
+          ],
+          "rationale": "DNS failure before a connection proves the request was never transmitted. The runbook directly covers pre-send transport failure, operator restoration of connectivity, and verification without probing the provider. Directly answers the investigation facet."
+        },
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F01-F02@1.1.0#allowed-remediation"
+          ],
+          "rationale": "DNS failure before a connection proves the request was never transmitted. The runbook directly covers pre-send transport failure, operator restoration of connectivity, and verification without probing the provider. Directly answers the remediation facet."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "DNS failure before a connection proves the request was never transmitted. The runbook directly covers pre-send transport failure, operator restoration of connectivity, and verification without probing the provider. Directly answers the verification facet."
+        }
+      ],
+      "supporting": [
+        "RB-F01-F02@1.1.0#symptoms",
+        "RB-F01-F02@1.1.0#evidence-needed",
+        "RB-F01-F02@1.1.0#forbidden-actions",
+        "RB-F01-F02@1.1.0#replay-and-approval"
+      ],
+      "missingRuntimeFacts": [
+        "worker-side resolver configuration at failure time",
+        "whether any prior attempt reached the provider"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f03-revoked-bot-token-send-401",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F03-F04@1.0.0#read-only-investigation"
+          ],
+          "rationale": "A 401 at send with a token field present is a credential rejection. The credentials runbook directly answers validation without exposing the value, operator rotation, and verification from operator-provided evidence rather than a test send. Directly answers the investigation facet."
+        },
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F03-F04@1.0.0#allowed-remediation"
+          ],
+          "rationale": "A 401 at send with a token field present is a credential rejection. The credentials runbook directly answers validation without exposing the value, operator rotation, and verification from operator-provided evidence rather than a test send. Directly answers the remediation facet."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F03-F04@1.0.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "A 401 at send with a token field present is a credential rejection. The credentials runbook directly answers validation without exposing the value, operator rotation, and verification from operator-provided evidence rather than a test send. Directly answers the verification facet."
+        }
+      ],
+      "supporting": [
+        "RB-F03-F04@1.0.0#symptoms",
+        "RB-F03-F04@1.0.0#evidence-needed",
+        "RB-F03-F04@1.0.0#forbidden-actions",
+        "RB-F03-F04@1.0.0#replay-and-approval"
+      ],
+      "missingRuntimeFacts": [
+        "operator confirmation that the configured token was revoked",
+        "whether an environment fallback token would be used"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f03-bot-removed-from-private-channel",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F03-F04@1.0.0#read-only-investigation"
+          ],
+          "rationale": "Resolution succeeded and the send was rejected for membership, so the runbook's permission branch directly applies: confirm permissions outside the agent, have an operator repair membership, and verify only non-secret permission evidence. Directly answers the investigation facet."
+        },
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F03-F04@1.0.0#allowed-remediation"
+          ],
+          "rationale": "Resolution succeeded and the send was rejected for membership, so the runbook's permission branch directly applies: confirm permissions outside the agent, have an operator repair membership, and verify only non-secret permission evidence. Directly answers the remediation facet."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F03-F04@1.0.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "Resolution succeeded and the send was rejected for membership, so the runbook's permission branch directly applies: confirm permissions outside the agent, have an operator repair membership, and verify only non-secret permission evidence. Directly answers the verification facet."
+        }
+      ],
+      "supporting": [
+        "RB-F03-F04@1.0.0#symptoms",
+        "RB-F03-F04@1.0.0#evidence-needed",
+        "RB-F03-F04@1.0.0#forbidden-actions",
+        "RB-F03-F04@1.0.0#replay-and-approval"
+      ],
+      "missingRuntimeFacts": [
+        "operator confirmation of bot membership and posting rights in the channel",
+        "when the bot lost access to the destination"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f03-email-api-key-rejected",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F03-F04@1.0.0#read-only-investigation"
+          ],
+          "rationale": "A 401 with an API key field present is a credential rejection. The credentials runbook directly covers validating presence without exposing the value, operator rotation, and verification from operator-provided evidence rather than a test send. Directly answers the investigation facet."
+        },
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F03-F04@1.0.0#allowed-remediation"
+          ],
+          "rationale": "A 401 with an API key field present is a credential rejection. The credentials runbook directly covers validating presence without exposing the value, operator rotation, and verification from operator-provided evidence rather than a test send. Directly answers the remediation facet."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F03-F04@1.0.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "A 401 with an API key field present is a credential rejection. The credentials runbook directly covers validating presence without exposing the value, operator rotation, and verification from operator-provided evidence rather than a test send. Directly answers the verification facet."
+        }
+      ],
+      "supporting": [
+        "RB-F03-F04@1.0.0#symptoms",
+        "RB-F03-F04@1.0.0#evidence-needed",
+        "RB-F03-F04@1.0.0#forbidden-actions",
+        "RB-F03-F04@1.0.0#replay-and-approval"
+      ],
+      "missingRuntimeFacts": [
+        "operator confirmation that the API key was revoked or rotated",
+        "whether an environment fallback key exists"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f04-email-numeric-recipient-field",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F04-F06@1.0.0#read-only-investigation"
+          ],
+          "rationale": "The failure is a deterministic field-type rejection before any provider call. The validation runbook directly answers reporting the type finding, repairing the producing data or definition for future runs, and re-validating without executing the action. Directly answers the investigation facet."
+        },
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F04-F06@1.0.0#allowed-remediation"
+          ],
+          "rationale": "The failure is a deterministic field-type rejection before any provider call. The validation runbook directly answers reporting the type finding, repairing the producing data or definition for future runs, and re-validating without executing the action. Directly answers the remediation facet."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "The failure is a deterministic field-type rejection before any provider call. The validation runbook directly answers reporting the type finding, repairing the producing data or definition for future runs, and re-validating without executing the action. Directly answers the verification facet."
+        }
+      ],
+      "supporting": [
+        "RB-F04-F06@1.0.0#symptoms",
+        "RB-F04-F06@1.0.0#evidence-needed",
+        "RB-F04-F06@1.0.0#forbidden-actions",
+        "RB-F04-F06@1.0.0#replay-and-approval"
+      ],
+      "missingRuntimeFacts": [
+        "the producing system that wrote a numeric recipient",
+        "the execution-time action definition for the recipient field"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f04-email-missing-subject-template",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F04-F06@1.0.0#read-only-investigation"
+          ],
+          "rationale": "Structured validation exposes a missing subject template path before any provider call. The validation runbook directly requires reporting the missing path rather than the rendered value, repairing the producing data or definition, and re-validating without executing the action. Directly answers the investigation facet."
+        },
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F04-F06@1.0.0#allowed-remediation"
+          ],
+          "rationale": "Structured validation exposes a missing subject template path before any provider call. The validation runbook directly requires reporting the missing path rather than the rendered value, repairing the producing data or definition, and re-validating without executing the action. Directly answers the remediation facet."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "Structured validation exposes a missing subject template path before any provider call. The validation runbook directly requires reporting the missing path rather than the rendered value, repairing the producing data or definition, and re-validating without executing the action. Directly answers the verification facet."
+        }
+      ],
+      "supporting": [
+        "RB-F04-F06@1.0.0#symptoms",
+        "RB-F04-F06@1.0.0#evidence-needed",
+        "RB-F04-F06@1.0.0#forbidden-actions",
+        "RB-F04-F06@1.0.0#replay-and-approval"
+      ],
+      "missingRuntimeFacts": [
+        "the execution-time subject template definition",
+        "whether the trigger payload ever contained invoice.number"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f04-telegram-null-ticket-summary",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F04-F06@1.0.0#read-only-investigation"
+          ],
+          "rationale": "The reference exists but resolves to an empty value, so the validation runbook directly applies: report the empty required input rather than a rendered guess, repair the producing data or definition, and avoid repeating invalid input. Directly answers the investigation facet."
+        },
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F04-F06@1.0.0#allowed-remediation"
+          ],
+          "rationale": "The reference exists but resolves to an empty value, so the validation runbook directly applies: report the empty required input rather than a rendered guess, repair the producing data or definition, and avoid repeating invalid input. Directly answers the remediation facet."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "The reference exists but resolves to an empty value, so the validation runbook directly applies: report the empty required input rather than a rendered guess, repair the producing data or definition, and avoid repeating invalid input. Directly answers the verification facet."
+        }
+      ],
+      "supporting": [
+        "RB-F04-F06@1.0.0#symptoms",
+        "RB-F04-F06@1.0.0#evidence-needed",
+        "RB-F04-F06@1.0.0#forbidden-actions",
+        "RB-F04-F06@1.0.0#replay-and-approval"
+      ],
+      "missingRuntimeFacts": [
+        "whether ticket.summary was null or absent in the trigger payload",
+        "the execution-time template definition for the message field"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f05-unregistered-discord-webhook",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F04-F06@1.0.0#read-only-investigation"
+          ],
+          "rationale": "The observed type is absent from the deployed registry and no provider call occurred. The validation runbook directly identifies the coverage gap, states that unsupported handlers stay blocked, and limits remediation to engineering registry/deployment alignment without inventing a handler. Directly answers the investigation facet."
+        },
+        {
+          "facet": "replay",
+          "accepted": [
+            "RB-F04-F06@1.0.0#replay-and-approval"
+          ],
+          "rationale": "The observed type is absent from the deployed registry and no provider call occurred. The validation runbook directly identifies the coverage gap, states that unsupported handlers stay blocked, and limits remediation to engineering registry/deployment alignment without inventing a handler. Directly answers the replay facet."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "The observed type is absent from the deployed registry and no provider call occurred. The validation runbook directly identifies the coverage gap, states that unsupported handlers stay blocked, and limits remediation to engineering registry/deployment alignment without inventing a handler. Directly answers the verification facet."
+        }
+      ],
+      "supporting": [
+        "RB-F04-F06@1.0.0#symptoms",
+        "RB-F04-F06@1.0.0#evidence-needed",
+        "RB-F04-F06@1.0.0#forbidden-actions",
+        "RB-F04-F06@1.0.0#allowed-remediation"
+      ],
+      "missingRuntimeFacts": [
+        "the deployed handler mapping for discord_webhook",
+        "whether the workflow definition changed after the failure"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f05-telegram-v2-seed-mismatch",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F04-F06@1.0.0#read-only-investigation"
+          ],
+          "rationale": "A telegram handler exists but the seeded action id does not match it, which is the registry-alignment variant of an unsupported handler. The runbook directly allows engineering alignment and blocks replay until deployment and inputs are verified. Directly answers the investigation facet."
+        },
+        {
+          "facet": "replay",
+          "accepted": [
+            "RB-F04-F06@1.0.0#replay-and-approval"
+          ],
+          "rationale": "A telegram handler exists but the seeded action id does not match it, which is the registry-alignment variant of an unsupported handler. The runbook directly allows engineering alignment and blocks replay until deployment and inputs are verified. Directly answers the replay facet."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "A telegram handler exists but the seeded action id does not match it, which is the registry-alignment variant of an unsupported handler. The runbook directly allows engineering alignment and blocks replay until deployment and inputs are verified. Directly answers the verification facet."
+        }
+      ],
+      "supporting": [
+        "RB-F04-F06@1.0.0#symptoms",
+        "RB-F04-F06@1.0.0#evidence-needed",
+        "RB-F04-F06@1.0.0#forbidden-actions",
+        "RB-F04-F06@1.0.0#allowed-remediation"
+      ],
+      "missingRuntimeFacts": [
+        "which seeded action ids the deployment exposes",
+        "the deployed registry version at failure time"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f05-teams-card-legacy-run",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F04-F06@1.0.0#read-only-investigation"
+          ],
+          "rationale": "This is a legacy unsupported type with no provider attempt. The runbook directly says to compare the type with the deployed registry and that the handler remains blocked; it does not authorize generating a Teams handler or replaying the stage. Directly answers the investigation facet."
+        },
+        {
+          "facet": "replay",
+          "accepted": [
+            "RB-F04-F06@1.0.0#replay-and-approval"
+          ],
+          "rationale": "This is a legacy unsupported type with no provider attempt. The runbook directly says to compare the type with the deployed registry and that the handler remains blocked; it does not authorize generating a Teams handler or replaying the stage. Directly answers the replay facet."
+        }
+      ],
+      "supporting": [
+        "RB-F04-F06@1.0.0#symptoms",
+        "RB-F04-F06@1.0.0#evidence-needed",
+        "RB-F04-F06@1.0.0#forbidden-actions",
+        "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+        "RB-F04-F06@1.0.0#allowed-remediation"
+      ],
+      "missingRuntimeFacts": [
+        "whether teams_message ever had a deployed handler",
+        "the current workflow definition versus the historical one"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f06-duplicate-stage-order",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F04-F06@1.0.0#read-only-investigation"
+          ],
+          "rationale": "The duplicate sortingOrder is an invalid stage sequence exposed by deterministic validation. The runbook directly requires inspecting contiguous stage ordering, forbids bypassing stage validation, and escalates ambiguous ordering instead of replaying. Directly answers the investigation facet."
+        },
+        {
+          "facet": "forbidden",
+          "accepted": [
+            "RB-F04-F06@1.0.0#forbidden-actions"
+          ],
+          "rationale": "The duplicate sortingOrder is an invalid stage sequence exposed by deterministic validation. The runbook directly requires inspecting contiguous stage ordering, forbids bypassing stage validation, and escalates ambiguous ordering instead of replaying. Directly answers the forbidden facet."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "The duplicate sortingOrder is an invalid stage sequence exposed by deterministic validation. The runbook directly requires inspecting contiguous stage ordering, forbids bypassing stage validation, and escalates ambiguous ordering instead of replaying. Directly answers the verification facet."
+        }
+      ],
+      "supporting": [
+        "RB-F04-F06@1.0.0#symptoms",
+        "RB-F04-F06@1.0.0#evidence-needed",
+        "RB-F04-F06@1.0.0#replay-and-approval",
+        "RB-F04-F06@1.0.0#allowed-remediation"
+      ],
+      "missingRuntimeFacts": [
+        "the duplicated action rows and their ids",
+        "whether the workflow definition was edited after the failure"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f06-stage-order-gap",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F04-F06@1.0.0#read-only-investigation"
+          ],
+          "rationale": "The stage sequence is non-contiguous, which the runbook directly covers as invalid ordering. It requires inspecting contiguous ordering, forbids bypassing stage validation, and escalates ambiguous ordering instead of replaying. Directly answers the investigation facet."
+        },
+        {
+          "facet": "forbidden",
+          "accepted": [
+            "RB-F04-F06@1.0.0#forbidden-actions"
+          ],
+          "rationale": "The stage sequence is non-contiguous, which the runbook directly covers as invalid ordering. It requires inspecting contiguous ordering, forbids bypassing stage validation, and escalates ambiguous ordering instead of replaying. Directly answers the forbidden facet."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "The stage sequence is non-contiguous, which the runbook directly covers as invalid ordering. It requires inspecting contiguous ordering, forbids bypassing stage validation, and escalates ambiguous ordering instead of replaying. Directly answers the verification facet."
+        }
+      ],
+      "supporting": [
+        "RB-F04-F06@1.0.0#symptoms",
+        "RB-F04-F06@1.0.0#evidence-needed",
+        "RB-F04-F06@1.0.0#replay-and-approval",
+        "RB-F04-F06@1.0.0#allowed-remediation"
+      ],
+      "missingRuntimeFacts": [
+        "the original action rows that produced the gap",
+        "whether the definition was edited after the failure"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f06-negative-stage-index",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F04-F06@1.0.0#read-only-investigation"
+          ],
+          "rationale": "A negative stage is an invalid stage identity that fails validation before execution. The runbook directly forbids inventing missing identity or bypassing stage validation and routes the producer schema fault to engineering. Directly answers the investigation facet."
+        },
+        {
+          "facet": "forbidden",
+          "accepted": [
+            "RB-F04-F06@1.0.0#forbidden-actions"
+          ],
+          "rationale": "A negative stage is an invalid stage identity that fails validation before execution. The runbook directly forbids inventing missing identity or bypassing stage validation and routes the producer schema fault to engineering. Directly answers the forbidden facet."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "A negative stage is an invalid stage identity that fails validation before execution. The runbook directly forbids inventing missing identity or bypassing stage validation and routes the producer schema fault to engineering. Directly answers the verification facet."
+        }
+      ],
+      "supporting": [
+        "RB-F04-F06@1.0.0#symptoms",
+        "RB-F04-F06@1.0.0#evidence-needed",
+        "RB-F04-F06@1.0.0#replay-and-approval",
+        "RB-F04-F06@1.0.0#allowed-remediation"
+      ],
+      "missingRuntimeFacts": [
+        "the producer that emitted a negative stage",
+        "the intended valid stage identity"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f07-oom-after-send-dispatch",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F07@1.0.0#read-only-investigation"
+          ],
+          "rationale": "The provider call was dispatched and the worker died before capturing the response, so delivery is unknown. The uncertain-delivery runbook directly requires reconstructing the boundary, manual reconciliation, and forbidding a resend or lease reclamation for another provider call. Directly answers the investigation facet."
+        },
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F07@1.0.0#allowed-remediation"
+          ],
+          "rationale": "The provider call was dispatched and the worker died before capturing the response, so delivery is unknown. The uncertain-delivery runbook directly requires reconstructing the boundary, manual reconciliation, and forbidding a resend or lease reclamation for another provider call. Directly answers the remediation facet."
+        },
+        {
+          "facet": "forbidden",
+          "accepted": [
+            "RB-F07@1.0.0#forbidden-actions"
+          ],
+          "rationale": "The provider call was dispatched and the worker died before capturing the response, so delivery is unknown. The uncertain-delivery runbook directly requires reconstructing the boundary, manual reconciliation, and forbidding a resend or lease reclamation for another provider call. Directly answers the forbidden facet."
+        }
+      ],
+      "supporting": [
+        "RB-F07@1.0.0#symptoms",
+        "RB-F07@1.0.0#evidence-needed",
+        "RB-F07@1.0.0#replay-and-approval"
+      ],
+      "missingRuntimeFacts": [
+        "provider-side delivery confirmation for the dispatched request",
+        "the request fingerprint and first-send timestamp"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f07-stale-worker-overwrote-unknown",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F07@1.0.0#read-only-investigation"
+          ],
+          "rationale": "An expired pending execution is quarantined as unknown, and a late FAILED write does not establish non-delivery. The runbook directly requires separating action failure from persistence failure and preserving the unknown state until provider evidence resolves it. Directly answers the investigation facet."
+        },
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F07@1.0.0#allowed-remediation"
+          ],
+          "rationale": "An expired pending execution is quarantined as unknown, and a late FAILED write does not establish non-delivery. The runbook directly requires separating action failure from persistence failure and preserving the unknown state until provider evidence resolves it. Directly answers the remediation facet."
+        },
+        {
+          "facet": "forbidden",
+          "accepted": [
+            "RB-F07@1.0.0#forbidden-actions"
+          ],
+          "rationale": "An expired pending execution is quarantined as unknown, and a late FAILED write does not establish non-delivery. The runbook directly requires separating action failure from persistence failure and preserving the unknown state until provider evidence resolves it. Directly answers the forbidden facet."
+        }
+      ],
+      "supporting": [
+        "RB-F07@1.0.0#symptoms",
+        "RB-F07@1.0.0#evidence-needed",
+        "RB-F07@1.0.0#verification-rollback-or-escalation"
+      ],
+      "missingRuntimeFacts": [
+        "which worker owned the claim at send time",
+        "whether the provider accepted the original request",
+        "fencing-token evidence for the late FAILED write"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f07-email-dedup-window-expired",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F07@1.0.0#read-only-investigation"
+          ],
+          "rationale": "The provider call completed but the terminal write was lost, and the idempotency window is no longer verified. The runbook directly treats this as unknown delivery and allows email reconsideration only inside a currently verified deduplication window with the identical request and key. Directly answers the investigation facet."
+        },
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F07@1.0.0#allowed-remediation"
+          ],
+          "rationale": "The provider call completed but the terminal write was lost, and the idempotency window is no longer verified. The runbook directly treats this as unknown delivery and allows email reconsideration only inside a currently verified deduplication window with the identical request and key. Directly answers the remediation facet."
+        },
+        {
+          "facet": "forbidden",
+          "accepted": [
+            "RB-F07@1.0.0#forbidden-actions"
+          ],
+          "rationale": "The provider call completed but the terminal write was lost, and the idempotency window is no longer verified. The runbook directly treats this as unknown delivery and allows email reconsideration only inside a currently verified deduplication window with the identical request and key. Directly answers the forbidden facet."
+        }
+      ],
+      "supporting": [
+        "RB-F07@1.0.0#symptoms",
+        "RB-F07@1.0.0#evidence-needed",
+        "RB-F07@1.0.0#replay-and-approval"
+      ],
+      "missingRuntimeFacts": [
+        "whether the provider accepted the message",
+        "the verified provider deduplication window at request time"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f08-duplicate-redelivery-after-rebalance",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F08@1.0.0#read-only-investigation"
+          ],
+          "rationale": "Two deliveries share a failureId and fingerprint, which the replay/stale runbook directly classifies as duplicate delivery rather than a new failure. It requires deduplication, forbids republishing the raw event or creating a new run, and verifies state before any future decision. Directly answers the investigation facet."
+        },
+        {
+          "facet": "forbidden",
+          "accepted": [
+            "RB-F08@1.0.0#forbidden-actions"
+          ],
+          "rationale": "Two deliveries share a failureId and fingerprint, which the replay/stale runbook directly classifies as duplicate delivery rather than a new failure. It requires deduplication, forbids republishing the raw event or creating a new run, and verifies state before any future decision. Directly answers the forbidden facet."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F08@1.0.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "Two deliveries share a failureId and fingerprint, which the replay/stale runbook directly classifies as duplicate delivery rather than a new failure. It requires deduplication, forbids republishing the raw event or creating a new run, and verifies state before any future decision. Directly answers the verification facet."
+        }
+      ],
+      "supporting": [
+        "RB-F08@1.0.0#symptoms",
+        "RB-F08@1.0.0#evidence-needed",
+        "RB-F08@1.0.0#allowed-remediation",
+        "RB-F08@1.0.0#replay-and-approval"
+      ],
+      "missingRuntimeFacts": [
+        "the canonical source offset for the first delivery",
+        "whether any approval or replay request already exists for this failure"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f08-expired-replay-approval",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F08@1.0.0#read-only-investigation"
+          ],
+          "rationale": "The proposal is stale because its approval expired, which the runbook directly covers. It requires marking the investigation stale without changing execution state, forbids reusing an expired approval, and verifies current state before any future decision. Directly answers the investigation facet."
+        },
+        {
+          "facet": "forbidden",
+          "accepted": [
+            "RB-F08@1.0.0#forbidden-actions"
+          ],
+          "rationale": "The proposal is stale because its approval expired, which the runbook directly covers. It requires marking the investigation stale without changing execution state, forbids reusing an expired approval, and verifies current state before any future decision. Directly answers the forbidden facet."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F08@1.0.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "The proposal is stale because its approval expired, which the runbook directly covers. It requires marking the investigation stale without changing execution state, forbids reusing an expired approval, and verifies current state before any future decision. Directly answers the verification facet."
+        }
+      ],
+      "supporting": [
+        "RB-F08@1.0.0#symptoms",
+        "RB-F08@1.0.0#evidence-needed",
+        "RB-F08@1.0.0#allowed-remediation",
+        "RB-F08@1.0.0#replay-and-approval"
+      ],
+      "missingRuntimeFacts": [
+        "the approval issuance and expiry timestamps",
+        "whether the evidence fingerprints changed since approval"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f08-reset-success-after-successor-published",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F08@1.0.0#read-only-investigation"
+          ],
+          "rationale": "The requested stage is already SUCCESS and its successor started. The replay/stale runbook directly forbids resetting SUCCESS or republishing a raw event regardless of approval language, and requires confirming current state as a no-op/hard block. Directly answers the investigation facet."
+        },
+        {
+          "facet": "forbidden",
+          "accepted": [
+            "RB-F08@1.0.0#forbidden-actions"
+          ],
+          "rationale": "The requested stage is already SUCCESS and its successor started. The replay/stale runbook directly forbids resetting SUCCESS or republishing a raw event regardless of approval language, and requires confirming current state as a no-op/hard block. Directly answers the forbidden facet."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F08@1.0.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "The requested stage is already SUCCESS and its successor started. The replay/stale runbook directly forbids resetting SUCCESS or republishing a raw event regardless of approval language, and requires confirming current state as a no-op/hard block. Directly answers the verification facet."
+        }
+      ],
+      "supporting": [
+        "RB-F08@1.0.0#symptoms",
+        "RB-F08@1.0.0#evidence-needed",
+        "RB-F08@1.0.0#allowed-remediation",
+        "RB-F08@1.0.0#replay-and-approval"
+      ],
+      "missingRuntimeFacts": [
+        "the provider receipt that established the original success",
+        "whether any competing replay request exists"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f09-unacknowledged-failure-publication",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F09-F10@1.0.0#read-only-investigation"
+          ],
+          "rationale": "The durable failure row exists but publication was never acknowledged. The evidence-gaps runbook directly distinguishes failure-publication repair from action replay, allows the reconciler to publish by the existing failureId, and requires verifying visibility by that shared ID. Directly answers the investigation facet."
+        },
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F09-F10@1.0.0#allowed-remediation"
+          ],
+          "rationale": "The durable failure row exists but publication was never acknowledged. The evidence-gaps runbook directly distinguishes failure-publication repair from action replay, allows the reconciler to publish by the existing failureId, and requires verifying visibility by that shared ID. Directly answers the remediation facet."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F09-F10@1.0.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "The durable failure row exists but publication was never acknowledged. The evidence-gaps runbook directly distinguishes failure-publication repair from action replay, allows the reconciler to publish by the existing failureId, and requires verifying visibility by that shared ID. Directly answers the verification facet."
+        }
+      ],
+      "supporting": [
+        "RB-F09-F10@1.0.0#symptoms",
+        "RB-F09-F10@1.0.0#evidence-needed",
+        "RB-F09-F10@1.0.0#forbidden-actions",
+        "RB-F09-F10@1.0.0#replay-and-approval"
+      ],
+      "missingRuntimeFacts": [
+        "the broker acknowledgement for the publication attempt",
+        "the current publication claim owner and expiry"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f09-successor-publication-never-started",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F09-F10@1.0.0#read-only-investigation"
+          ],
+          "rationale": "This is a progression failure after a recorded SUCCESS, not an action failure. The evidence-gaps runbook directly says to separate stage-progression recovery from repeating the external action and to preserve SUCCESS unless independent evidence justifies a separate repair. Directly answers the investigation facet."
+        },
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F09-F10@1.0.0#allowed-remediation"
+          ],
+          "rationale": "This is a progression failure after a recorded SUCCESS, not an action failure. The evidence-gaps runbook directly says to separate stage-progression recovery from repeating the external action and to preserve SUCCESS unless independent evidence justifies a separate repair. Directly answers the remediation facet."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F09-F10@1.0.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "This is a progression failure after a recorded SUCCESS, not an action failure. The evidence-gaps runbook directly says to separate stage-progression recovery from repeating the external action and to preserve SUCCESS unless independent evidence justifies a separate repair. Directly answers the verification facet."
+        }
+      ],
+      "supporting": [
+        "RB-F09-F10@1.0.0#symptoms",
+        "RB-F09-F10@1.0.0#evidence-needed",
+        "RB-F09-F10@1.0.0#forbidden-actions",
+        "RB-F09-F10@1.0.0#replay-and-approval"
+      ],
+      "missingRuntimeFacts": [
+        "the stage 2 definition and expected publication record",
+        "the broker acknowledgement for the missing successor publication"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f09-legacy-run-missing-retry-link",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F09-F10@1.0.0#read-only-investigation"
+          ],
+          "rationale": "The execution survives without its linked failure row or DLQ publication. The runbook directly requires reporting source completeness, treating missing evidence as a hard block, and escalating rather than fabricating an error or replaying the action. Directly answers the investigation facet."
+        },
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F09-F10@1.0.0#allowed-remediation"
+          ],
+          "rationale": "The execution survives without its linked failure row or DLQ publication. The runbook directly requires reporting source completeness, treating missing evidence as a hard block, and escalating rather than fabricating an error or replaying the action. Directly answers the remediation facet."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F09-F10@1.0.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "The execution survives without its linked failure row or DLQ publication. The runbook directly requires reporting source completeness, treating missing evidence as a hard block, and escalating rather than fabricating an error or replaying the action. Directly answers the verification facet."
+        }
+      ],
+      "supporting": [
+        "RB-F09-F10@1.0.0#symptoms",
+        "RB-F09-F10@1.0.0#evidence-needed",
+        "RB-F09-F10@1.0.0#forbidden-actions",
+        "RB-F09-F10@1.0.0#replay-and-approval"
+      ],
+      "missingRuntimeFacts": [
+        "the original failure envelope and its failureId",
+        "the provider outcome for the single attempt",
+        "the missing DLQ publication record"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f10-async-bounce-event-hidden",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F09-F10@1.0.0#read-only-investigation"
+          ],
+          "rationale": "The historical email stage recorded SUCCESS, but a later provider bounce notice reported mailbox full and was never linked to the stage, so delivery is unproven. RB-F09-F10 does not classify asynchronous bounces directly; its general historical-email uncertainty and forbidden-actions guidance applies, so the notice must be preserved, the stage must not be reinterpreted as a failure without evidence, and the case must be escalated rather than replayed. Directly answers the investigation facet."
+        },
+        {
+          "facet": "forbidden",
+          "accepted": [
+            "RB-F09-F10@1.0.0#forbidden-actions"
+          ],
+          "rationale": "The historical email stage recorded SUCCESS, but a later provider bounce notice reported mailbox full and was never linked to the stage, so delivery is unproven. RB-F09-F10 does not classify asynchronous bounces directly; its general historical-email uncertainty and forbidden-actions guidance applies, so the notice must be preserved, the stage must not be reinterpreted as a failure without evidence, and the case must be escalated rather than replayed. Directly answers the forbidden facet."
+        }
+      ],
+      "supporting": [
+        "RB-F09-F10@1.0.0#symptoms",
+        "RB-F09-F10@1.0.0#evidence-needed",
+        "RB-F09-F10@1.0.0#replay-and-approval",
+        "RB-F09-F10@1.0.0#verification-rollback-or-escalation"
+      ],
+      "missingRuntimeFacts": [
+        "the raw bounce notice and its provider event id",
+        "whether the bounce refers to this send or another message to the same recipient",
+        "the captured SDK result for the historical send"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f10-invalid-attachment-hidden",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F09-F10@1.0.0#read-only-investigation"
+          ],
+          "rationale": "A stubbed reproduction shows the handler resolved an invalid-attachment error object as success, with no historical receipt. The runbook directly instructs preserving historical SUCCESS, documenting uncertain delivery, and escalating the hidden SDK outcome without replay. Directly answers the investigation facet."
+        },
+        {
+          "facet": "forbidden",
+          "accepted": [
+            "RB-F09-F10@1.0.0#forbidden-actions"
+          ],
+          "rationale": "A stubbed reproduction shows the handler resolved an invalid-attachment error object as success, with no historical receipt. The runbook directly instructs preserving historical SUCCESS, documenting uncertain delivery, and escalating the hidden SDK outcome without replay. Directly answers the forbidden facet."
+        }
+      ],
+      "supporting": [
+        "RB-F09-F10@1.0.0#symptoms",
+        "RB-F09-F10@1.0.0#evidence-needed",
+        "RB-F09-F10@1.0.0#replay-and-approval",
+        "RB-F09-F10@1.0.0#verification-rollback-or-escalation"
+      ],
+      "missingRuntimeFacts": [
+        "the actual captured SDK result for the historical send",
+        "whether the attachment was transmitted or rejected",
+        "the execution-time attachment definition"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f10-empty-sdk-result-recorded-success",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F09-F10@1.0.0#read-only-investigation"
+          ],
+          "rationale": "The historical SDK result carried a structured provider error with code invalid_recipient, but the handler discarded the error value and recorded SUCCESS, so delivery is unproven. The runbook directly covers this historical email integrity gap: preserve the recorded SUCCESS, report the missing receipt, forbid reinterpreting SUCCESS or replaying from an error substring, and escalate the hidden SDK outcome to engineering. Directly answers the investigation facet."
+        },
+        {
+          "facet": "forbidden",
+          "accepted": [
+            "RB-F09-F10@1.0.0#forbidden-actions"
+          ],
+          "rationale": "The historical SDK result carried a structured provider error with code invalid_recipient, but the handler discarded the error value and recorded SUCCESS, so delivery is unproven. The runbook directly covers this historical email integrity gap: preserve the recorded SUCCESS, report the missing receipt, forbid reinterpreting SUCCESS or replaying from an error substring, and escalate the hidden SDK outcome to engineering. Directly answers the forbidden facet."
+        }
+      ],
+      "supporting": [
+        "RB-F09-F10@1.0.0#symptoms",
+        "RB-F09-F10@1.0.0#evidence-needed",
+        "RB-F09-F10@1.0.0#replay-and-approval",
+        "RB-F09-F10@1.0.0#verification-rollback-or-escalation"
+      ],
+      "missingRuntimeFacts": [
+        "the captured SDK error object and its invalid_recipient code provenance",
+        "whether any provider receipt exists for the historical request",
+        "the execution-time SDK response handling that discarded the error"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "nm-worker-local-queue-capacity",
+      "requiredFacets": [],
+      "supporting": [
+        "RB-F07@1.0.0#evidence-needed",
+        "RB-F09-F10@1.0.0#read-only-investigation"
+      ],
+      "missingRuntimeFacts": [
+        "the worker concurrency limit at failure time",
+        "whether queued work was dropped or deferred"
+      ],
+      "noMatchRationale": "No direct procedure exists for local queue-capacity admission failure. It is not a provider failure, credential issue, destination problem, template fault, stage-ordering fault, delivery uncertainty, duplicate, or DLQ evidence gap."
+    },
+    {
+      "id": "nm-telegram-markup-entity-parse",
+      "requiredFacets": [],
+      "supporting": [
+        "RB-F01-F02@1.1.0#evidence-needed",
+        "RB-F01-F02@1.1.0#forbidden-actions"
+      ],
+      "missingRuntimeFacts": [
+        "which markup parser mode was active at send time",
+        "the rendered markup that produced the entity error"
+      ],
+      "noMatchRationale": "No direct procedure exists for malformed provider markup entities. This is not a missing template path, wrong field type, credential, destination, ordering, delivery, duplicate, or evidence-gap case."
+    },
+    {
+      "id": "nm-telegram-inline-button-url",
+      "requiredFacets": [],
+      "supporting": [
+        "RB-F01-F02@1.1.0#evidence-needed",
+        "RB-F01-F02@1.1.0#forbidden-actions"
+      ],
+      "missingRuntimeFacts": [
+        "the exact keyboard URL value at send time",
+        "the provider URL scheme requirements for inline buttons"
+      ],
+      "noMatchRationale": "No direct procedure exists for rejected inline keyboard URLs. This is neither a missing template input, invalid destination, nor a credential, ordering, delivery, duplicate, or evidence-gap failure."
+    },
+    {
+      "id": "nm-telegram-stale-file-reference",
+      "requiredFacets": [],
+      "supporting": [
+        "RB-F01-F02@1.1.0#evidence-needed",
+        "RB-F01-F02@1.1.0#forbidden-actions"
+      ],
+      "missingRuntimeFacts": [
+        "when the stored file reference was created",
+        "the intended replacement media source"
+      ],
+      "noMatchRationale": "No direct procedure exists for an expired provider file reference. It is not a missing template path, invalid destination, credential, ordering, delivery, duplicate, or evidence-gap case."
+    },
+    {
+      "id": "nm-email-payload-too-large",
+      "requiredFacets": [],
+      "supporting": [
+        "RB-F01-F02@1.1.0#evidence-needed",
+        "RB-F01-F02@1.1.0#forbidden-actions"
+      ],
+      "missingRuntimeFacts": [
+        "the provider size limit for the intended message",
+        "the encoded size of the rendered body and attachments"
+      ],
+      "noMatchRationale": "No direct procedure exists for an oversized email payload. F04 covers missing inputs and invalid destinations, not a fully resolved payload that exceeds the provider's size limit."
+    },
+    {
+      "id": "nm-email-attachment-encoding",
+      "requiredFacets": [],
+      "supporting": [
+        "RB-F01-F02@1.1.0#evidence-needed",
+        "RB-F01-F02@1.1.0#forbidden-actions"
+      ],
+      "missingRuntimeFacts": [
+        "the attachment encoder used at send time",
+        "the original attachment bytes and content type"
+      ],
+      "noMatchRationale": "No direct procedure exists for malformed attachment encoding. The runbooks do not address media encoding or content-type validation."
+    },
+    {
+      "id": "nm-email-subject-header-newline",
+      "requiredFacets": [],
+      "supporting": [
+        "RB-F01-F02@1.1.0#evidence-needed",
+        "RB-F01-F02@1.1.0#forbidden-actions"
+      ],
+      "missingRuntimeFacts": [
+        "the rendered subject value at send time",
+        "the provider header-safety rules applied to the subject"
+      ],
+      "noMatchRationale": "No direct procedure exists for a subject header that fails provider safety validation. This is not a missing input, wrong type, destination, credential, ordering, delivery, duplicate, or evidence-gap failure."
+    },
+    {
+      "id": "nm-email-recipient-count-cap",
+      "requiredFacets": [],
+      "supporting": [
+        "RB-F01-F02@1.1.0#evidence-needed",
+        "RB-F01-F02@1.1.0#forbidden-actions"
+      ],
+      "missingRuntimeFacts": [
+        "the provider recipient cap for this message class",
+        "the intended recipient segmentation"
+      ],
+      "noMatchRationale": "No direct procedure exists for a per-message recipient cap. It is not an invalid destination, credential, template, ordering, delivery, duplicate, or evidence-gap case."
+    },
+    {
+      "id": "nm-worker-disk-full-staging",
+      "requiredFacets": [],
+      "supporting": [
+        "RB-F07@1.0.0#evidence-needed",
+        "RB-F09-F10@1.0.0#read-only-investigation"
+      ],
+      "missingRuntimeFacts": [
+        "the worker volume capacity and cleanup policy",
+        "whether a partial staging file was left behind"
+      ],
+      "noMatchRationale": "No direct procedure exists for worker storage exhaustion. The runbooks do not cover host disk capacity or local staging failures."
+    },
+    {
+      "id": "nm-worker-oom-payload-serialization",
+      "requiredFacets": [],
+      "supporting": [
+        "RB-F07@1.0.0#evidence-needed",
+        "RB-F09-F10@1.0.0#read-only-investigation"
+      ],
+      "missingRuntimeFacts": [
+        "the worker memory limit at failure time",
+        "the serialized payload size and growth path"
+      ],
+      "noMatchRationale": "No direct procedure exists for worker out-of-memory termination during payload serialization. The runbooks do not address process memory limits or host capacity."
+    }
+  ]
+}

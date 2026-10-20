@@ -1,0 +1,14 @@
+{
+  "author": "independent-author-v1",
+  "accessAttestation": "I read only the allowed runbook/taxonomy files and did not access evaluation material.",
+  "revision": "v3-final-review-correction",
+  "correctionsApplied": [
+    "f01-group-slow-mode-reminder: added the replay facet",
+    "f05 and f06: added the runbook allowed-remediation section to supporting",
+    "f10: added verification-rollback-or-escalation to supporting",
+    "f10-empty-sdk-result-recorded-success: replaced the empty-result mechanism with a discarded structured SDK error",
+    "f10-async-bounce-event-hidden: replaced the near-duplicate with a discarded asynchronous bounce notice and removed the stale SDK fact"
+  ],
+  "reviewer": "independent-reviewer-v1",
+  "reviewRecord": "review-final-v1.json"
+}

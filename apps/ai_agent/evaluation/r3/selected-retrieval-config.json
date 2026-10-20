@@ -1,0 +1,68 @@
+{
+  "version": 1,
+  "phase": "R3.5",
+  "status": "frozen_before_holdout",
+  "createdAt": "2026-10-20T06:40:00.000Z",
+  "retrievalMethod": "structured-minilm",
+  "routeEnabled": true,
+  "support": {
+    "minAnchorHits": 1
+  },
+  "versions": {
+    "profile": "r3.2-v1",
+    "packing": "r3.3-v1",
+    "support": "r3.4-v1"
+  },
+  "arms": {
+    "candidate": "profile-route-facets-support",
+    "route": "profile-route",
+    "packing": "profile-route-facets",
+    "baseline": "keyword"
+  },
+  "corpusHash": "45e85c3585607ebfd0e1ebd1f2b068e2fab7c889b1bdd3af3a565f20afcbd440",
+  "labelHash": "a30fd42160326bd6daa02238be50ad0c0cccab23d5ef5372fcae99e7fd49c752",
+  "protocolHash": "e6a491cc5d2423485c61ff5d5e8634e07bc9886bb76041b68238f5322290c3ed",
+  "development": {
+    "run": "apps/ai_agent/evaluation/r3/runs/profile-route-facets-support-20261019-v1",
+    "cases": 24,
+    "answerable": 16,
+    "noMatch": 8,
+    "inputHash": "325c380a92039193f788338c3e243ac2d5584f74a1ee54929d09d5e4730ce881",
+    "scoresHash": "1f34ca45d2a1f3b38953e97128d533b744b76f9efa8f6580f0035b279064ce9c"
+  },
+  "model": {
+    "id": "Xenova/ms-marco-MiniLM-L-6-v2",
+    "revision": "a09144355adeed5f58c8ed011d209bf8ee5a1fec",
+    "quantization": "q8",
+    "maxLength": 512,
+    "batchSize": 8,
+    "device": "cpu"
+  },
+  "prompt": {
+    "id": "diagnosis",
+    "version": "phase-11a-v3",
+    "sourceHash": "aa4a038a8b2748826933a9deb13aa883546d9d6cb79369a5424402d1c9485a9f"
+  },
+  "selectionOrder": [
+    "no-match abstention >= 90%",
+    "false abstention <= 5%",
+    "highest sufficient-guidance hit@3",
+    "highest macro section recall@3",
+    "lower p95 latency"
+  ],
+  "releaseGate": {
+    "sufficientGuidanceHitAt3": 0.9,
+    "macroSectionRecallAt3": 0.9,
+    "noMatchAbstention": 0.9,
+    "falseAbstentionMax": 0.05,
+    "directPrecisionNotBelow": "frozen baseline",
+    "reliability": 0.95,
+    "p95LatencyMs": 3000,
+    "safetyViolationsMax": 0
+  },
+  "notes": {
+    "freezeRule": "This file was written before the holdout cases or labels existed. Any post-hoc edit invalidates the acceptance run.",
+    "selection": "minAnchorHits 1 and 2 tied on every development criterion; minAnchorHits 1 is the predeclared Task 12 default.",
+    "runtimeDefault": "The runtime default is unchanged at minilm-original until R3.7 integration."
+  }
+}

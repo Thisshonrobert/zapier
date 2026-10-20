@@ -1,0 +1,227 @@
+{
+  "reviewer": "independent-reviewer-v1",
+  "reviewOf": "v2",
+  "accessAttestation": "Read only: my earlier review (r3-holdout-review-v1.json); the v2 author spec (r3-holdout-author-v2.json); the v2 holdout files cases-v1.json, labels-v1.json, and evidence-v1.json under r3-holdout-built-v2; the v1 holdout files cases-v1.json, labels-v1.json, and evidence-v1.json under r3-holdout-built for a structural diff; every file under docs/AI/runbooks/; docs/AI/failure-taxonomy.md; and apps/ai_agent/evaluation/r3/corpus-v1.json. I did not read apps/ai_agent/evaluation/r3/runs/**, development-cases-v1.json, development-labels-v1.json, audit.json (including the audit.json present in the v2 directory), any scores/rankings/reports, or retrieval code. I did not run retrieval, scoring, or the evaluation CLI. I did not edit any holdout file; I only wrote this requested review JSON. Findings are based on the frozen case/label/evidence text, the runbooks, the taxonomy, and the corpus section metadata.",
+  "verdict": "revisions_required",
+  "correctionsConfirmed": [
+    "f01-group-slow-mode-reminder: the required replay facet was added with RB-F01-F02@1.1.0#replay-and-approval, the factually wrong 'no replay-eligible send was proven here' rationale was replaced with the runbook's conditional one-replay rule, and replay was removed from supporting. Verification remains a required facet. Confirmed in cases-v1 and labels-v1; the evidence record is unchanged.",
+    "f05-unregistered-discord-webhook and f05-telegram-v2-seed-mismatch: RB-F04-F06@1.0.0#allowed-remediation was added to supporting, so the rationales that rely on engineering registry/deployment alignment now have a labeled citation.",
+    "f05-teams-card-legacy-run, f06-duplicate-stage-order, f06-stage-order-gap, and f06-negative-stage-index: RB-F04-F06@1.0.0#allowed-remediation was added to supporting for the global F05/F06 consistency issue. No other label content changed.",
+    "All three F10 cases: RB-F09-F10@1.0.0#verification-rollback-or-escalation was added to supporting, so each F10 rationale's escalation claim now has a labeled citation.",
+    "f10-unverified-sender-domain-hidden was re-based away from the near-duplicate unverified-sender incident to an async bounce scenario; finalError, query, observedFacts, missingRuntimeFacts, and evidence were updated, and shared observed facts with f10-invalid-attachment-hidden drop from 6/7 to 3/6. The direction is correct, but the re-base left a stale SDK fact (see remainingIssues).",
+    "f10-empty-sdk-result-recorded-success now contains a structured provider error with code invalid_recipient and sdk_error_value_discarded while SUCCESS was recorded; query, observedFacts, missingRuntimeFacts, and evidence were updated to match. It now satisfies the F10 structured-error requirement instead of being an empty-result case.",
+    "Scope: exactly 10 cases changed, all within the requested corrections or the explicitly raised global F05/F06 consistency issue: f01-group, f05-unregistered, f05-telegram-v2, f05-teams, f06-duplicate, f06-gap, f06-negative, and the three F10 cases. The other 30 cases and all other label/evidence records are structurally identical (deep diff, not textual serialization).",
+    "Counts and category assignments still hold in the built v2 files: 40 cases, 30 answerable, 10 no_match, and exactly 3 cases for each of F01-F10 (with 10 NM). All 40 IDs are unique, all 40 evidence records are present, case and label facet/supporting/missingFacts fields agree for all 40 cases, every required facet has at least one accepted citation and a rationale, and every cited section ID exists in corpus-v1.",
+    "No new label/citation/rationale defect was introduced outside the F10 rebuild: the f01-group replay citation directly matches the runbook's stated one-replay case, the new allowed-remediation supporting citations exist and directly support engineering alignment/producing-data repair, and the new F10 verification supporting citation directly covers escalating irrecoverable evidence loss and hidden SDK outcomes."
+  ],
+  "remainingIssues": [
+    "[BLOCKING] f10-unverified-sender-domain-hidden is not a clean third F10 mechanism. Its author-spec observedFacts, its evidence fixture_observation.observed_facts, and its built input.query still assert sdk_error_value_discarded, which is the SDK-error-as-success mechanism used by f10-invalid-attachment-hidden and f10-empty-sdk-result-recorded-success, not an async-bounce fact. The scenarioFamily/finalError describe a later provider bounce event, so the ground truth currently mixes two mechanisms. Remove sdk_error_value_discarded from the author spec, the evidence observed facts, and the query (and regenerate the derived query), recompute the failureContext content hash and any dependent fixture hashes, and keep the case as a pure async-bounce/event-linkage gap. Alternatively, if the SDK-error mechanism is intended, re-base the case to a genuinely different evidence state and remove the bounce framing. As written, the three F10 cases still share the same core sdk_error_value_discarded fact and do not satisfy the 'three distinct, honest mechanisms' requirement.",
+    "[BLOCKING, wording] The f10-unverified rationale says 'The runbook directly classifies historical email success combined with discarded provider evidence as unknown delivery.' RB-F09-F10 is framed around a hidden or not-thrown email SDK result (symptoms, evidence needed, and verification all speak of SDK outcomes), not an async bounce event. Reword the rationale to the runbook's general historical-email-uncertainty and hard-block guidance (read-only investigation plus replay-and-approval), or add explicit coverage for bounce/event-linkage failures. Also reconcile final_error's assertion that the bounce 'reported mailbox full' with unavailable[]'s 'the captured provider bounce event and its mailbox-full diagnostic': state that only a retained summary/log is known while the raw event and diagnostic are unavailable, or drop the diagnostic from final_error and the query.",
+    "[Required labeling consistency] Two F10 IDs no longer describe their corrected scenarios: f10-unverified-sender-domain-hidden is now an async bounce case, and f10-empty-sdk-result-recorded-success is now a structured-SDK-error case. Rename both IDs (and update the id/evidence_id fields in labels and evidence) or explicitly document them as legacy aliases before freeze. This is a consistency/reporting issue rather than a scoring issue, but a frozen holdout should not ship case IDs that contradict their content.",
+    "[Pre-existing, confirm before freeze] Provider-scope eligibility remains unresolved and unchanged from v1: 62 citation-instances use case providers that do not intersect the cited section's declared providers under strict matching - f06-* (worker/kafka vs RB-F04-F06 telegram/email/generic), f08-* (kafka/telegram/email vs RB-F08 generic), f09-successor (worker vs RB-F09-F10 email/kafka/generic), f09-legacy (telegram vs the same), and nm-worker-* (worker vs RB-F07 telegram/email and RB-F09-F10). This is not introduced by v2, but the harness access rule (action-type/taxonomy match, generic wildcard, or strict provider intersection) must be documented before freeze. If strict provider intersection is the rule, these accepted citations are not eligible and the case providers or runbook metadata must be broadened; that would affect requirement 4 for those cases.",
+    "[Pre-existing, non-blocking] f05-teams-card-legacy-run still requires only investigation and replay while its F05 siblings also require verification (verification is supporting); f02-telegram-dns-failure-preconnect alone lists replay-and-approval as supporting; f04-telegram-null-ticket-summary's rationale does not mention the required verification facet; and f01-digest-broadcast-chat-flood's 'whether any earlier attempt might have been accepted' is vacuous with a single captured attempt. None of these were introduced by v2 and none invalidate the cases.",
+    "[Residual, non-blocking] f10-invalid-attachment-hidden and f10-empty-sdk-result-recorded-success both exercise the F10 SDK-error-normalization gap; they differ by evidence provenance (historical result unavailable with a stubbed invalid-attachment reproduction versus a captured structured invalid_recipient error) and their fact sets share only 3 items, so I accept them as distinct evidence states. If the freeze standard is mechanism-level rather than evidence-state distinctness, one of them should be re-based."
+  ],
+  "caseVerdicts": [
+    {
+      "id": "f01-digest-broadcast-chat-flood",
+      "verdict": "accept",
+      "reason": "Unchanged and internally consistent: single send-stage 429 with explicit rejection; remediation, replay, and verification are required and directly cited; complete=false makes replay conditional. The 'earlier attempt' missing fact is vacuous but pre-existing."
+    },
+    {
+      "id": "f01-group-slow-mode-reminder",
+      "verdict": "accept",
+      "reason": "Corrected: replay is now a required facet citing RB-F01-F02@1.1.0#replay-and-approval; the Telegram send-stage 429 single-attempt fixture matches the runbook's one-replay case; the rationale states conditional eligibility and no longer falsely says no replay-eligible send was proven; verification remains required."
+    },
+    {
+      "id": "f01-channel-resolution-throttled",
+      "verdict": "accept",
+      "reason": "Resolution-stage 429 correctly excludes send-stage replay; replay is supporting context explaining that limit; remediation and verification are directly cited."
+    },
+    {
+      "id": "f02-telegram-connection-reset-preconnect",
+      "verdict": "accept",
+      "reason": "Pre-send connection reset with not_attempted outcome; investigation, remediation, and verification are directly cited; no replay facet is required."
+    },
+    {
+      "id": "f02-email-connect-timeout-presend",
+      "verdict": "accept",
+      "reason": "Connect timeout before request write proves non-transmission; F02 guidance directly applies; no replay facet is required."
+    },
+    {
+      "id": "f02-telegram-dns-failure-preconnect",
+      "verdict": "accept",
+      "reason": "Pre-connect DNS failure; direct F02 citations; replay-and-approval appears only in supporting, which is harmless and pre-existing."
+    },
+    {
+      "id": "f03-revoked-bot-token-send-401",
+      "verdict": "accept",
+      "reason": "401 credential rejection at send; RB-F03-F04 investigation, remediation, and verification directly apply; telegram is a declared provider."
+    },
+    {
+      "id": "f03-bot-removed-from-private-channel",
+      "verdict": "accept",
+      "reason": "403 membership rejection after successful resolution; the runbook's permission branch directly applies."
+    },
+    {
+      "id": "f03-email-api-key-rejected",
+      "verdict": "accept",
+      "reason": "Email API key 401; RB-F03-F04 declares email, so the citation is eligible; the taxonomy heading is narrower but the case is sound by elimination."
+    },
+    {
+      "id": "f04-email-numeric-recipient-field",
+      "verdict": "accept",
+      "reason": "Deterministic field-type rejection before any provider call; the validation runbook directly supplies investigation, remediation, and verification."
+    },
+    {
+      "id": "f04-email-missing-subject-template",
+      "verdict": "accept",
+      "reason": "Missing template path is the runbook's literal case; direct citations and a matching rationale."
+    },
+    {
+      "id": "f04-telegram-null-ticket-summary",
+      "verdict": "accept",
+      "reason": "A null value resolving to an empty required input; the validation guidance directly applies. The rationale does not mention verification, but the required facet is present and this is pre-existing."
+    },
+    {
+      "id": "f05-unregistered-discord-webhook",
+      "verdict": "accept",
+      "reason": "Coverage-gap action type with no provider call; allowed-remediation is now labeled in supporting, so the rationale's registry/deployment-limit claim has a citation basis."
+    },
+    {
+      "id": "f05-telegram-v2-seed-mismatch",
+      "verdict": "accept",
+      "reason": "Registry/seed mismatch; allowed-remediation is now labeled in supporting; replay remains blocked until deployment and inputs are verified."
+    },
+    {
+      "id": "f05-teams-card-legacy-run",
+      "verdict": "accept",
+      "reason": "Legacy unsupported type with no provider call; allowed-remediation is now labeled. Only investigation and replay are required while verification is supporting; that under-tests verification but is pre-existing, not a v2 regression."
+    },
+    {
+      "id": "f06-duplicate-stage-order",
+      "verdict": "accept",
+      "reason": "Duplicate sortingOrder is an invalid stage sequence; investigation, forbidden, and verification are directly cited; allowed-remediation is now labeled in supporting."
+    },
+    {
+      "id": "f06-stage-order-gap",
+      "verdict": "accept",
+      "reason": "Non-contiguous sorting order; the stage-validation guidance directly supplies the required facets; allowed-remediation is now labeled."
+    },
+    {
+      "id": "f06-negative-stage-index",
+      "verdict": "accept",
+      "reason": "Negative stage identity fails validation before execution; forbidden, investigation, and verification directly apply; allowed-remediation is now labeled."
+    },
+    {
+      "id": "f07-oom-after-send-dispatch",
+      "verdict": "accept",
+      "reason": "Send dispatched and the response lost; F07 investigation, remediation, and forbidden actions directly apply; delivery remains unknown."
+    },
+    {
+      "id": "f07-stale-worker-overwrote-unknown",
+      "verdict": "accept",
+      "reason": "Late FAILED write after quarantine does not prove non-delivery; the F07 separation-of-failure guidance directly applies."
+    },
+    {
+      "id": "f07-email-dedup-window-expired",
+      "verdict": "accept",
+      "reason": "Lost terminal write with an expired deduplication window; F07 remediation directly denies reconsideration outside a verified window."
+    },
+    {
+      "id": "f08-duplicate-redelivery-after-rebalance",
+      "verdict": "accept",
+      "reason": "Same failureId and fingerprint classify this as duplicate delivery; F08 dedup, forbidden, and verification directly apply. The generic-provider scope issue is pre-existing."
+    },
+    {
+      "id": "f08-expired-replay-approval",
+      "verdict": "accept",
+      "reason": "Expired approval makes the proposal stale; F08 stale-proposal rules directly apply. The generic-provider scope issue is pre-existing."
+    },
+    {
+      "id": "f08-reset-success-after-successor-published",
+      "verdict": "accept",
+      "reason": "Requested reset of an already-SUCCESS stage is forbidden; F08 guidance directly applies. The generic-provider scope issue is pre-existing."
+    },
+    {
+      "id": "f09-unacknowledged-failure-publication",
+      "verdict": "accept",
+      "reason": "Durable failure row without a broker acknowledgement; F09 publication repair, reconciliation by failureId, and verification are directly cited."
+    },
+    {
+      "id": "f09-successor-publication-never-started",
+      "verdict": "accept",
+      "reason": "SUCCESS with a missing successor publication; F09 separates progression recovery from action replay and directly supports the required facets. The worker provider-scope issue is pre-existing."
+    },
+    {
+      "id": "f09-legacy-run-missing-retry-link",
+      "verdict": "accept",
+      "reason": "Missing failureId and DLQ record; F09 missing-evidence and hard-block guidance directly applies. The telegram provider-scope issue is pre-existing."
+    },
+    {
+      "id": "f10-unverified-sender-domain-hidden",
+      "verdict": "revise",
+      "reason": "The re-base to an async bounce is directionally right, but the case is still a hybrid: its observedFacts, evidence, and query include sdk_error_value_discarded (the SDK-error mechanism used by the other two F10 cases), and the ID still says unverified-sender-domain. The final_error also asserts the bounce 'reported mailbox full' while unavailable[] declares that diagnostic unavailable. Remove the stale SDK fact, reconcile the mailbox-full claim, recompute the content hash, and rename or document the legacy ID; otherwise this is not a distinct, honest third F10 mechanism."
+    },
+    {
+      "id": "f10-invalid-attachment-hidden",
+      "verdict": "accept",
+      "reason": "Clean F10 stub-reproduction case: historical SUCCESS with no receipt, and a stubbed reproduction shows an invalid-attachment error object resolved as success. Investigation and forbidden facets are directly cited; verification is now labeled in supporting; its evidence state is distinct from the other two F10 cases."
+    },
+    {
+      "id": "f10-empty-sdk-result-recorded-success",
+      "verdict": "accept",
+      "reason": "Now honestly encodes the F10 integrity requirement: a structured invalid_recipient error was present and discarded while SUCCESS was recorded, with no receipt. Query, facts, evidence, missingRuntimeFacts, and rationale agree; verification is labeled in supporting. The ID is now historical (it still says empty result) and should be renamed or documented, but the content is sound."
+    },
+    {
+      "id": "nm-worker-local-queue-capacity",
+      "verdict": "accept",
+      "reason": "Genuinely outside all runbook procedures; the noMatchRationale is adequate and the supporting citations are context only. The worker provider-scope issue is pre-existing."
+    },
+    {
+      "id": "nm-telegram-markup-entity-parse",
+      "verdict": "accept",
+      "reason": "Provider markup parsing is outside the runbook procedures; the noMatchRationale correctly distinguishes it from template and validation failures."
+    },
+    {
+      "id": "nm-telegram-inline-button-url",
+      "verdict": "accept",
+      "reason": "Inline keyboard URL validation is a provider content constraint not covered by the runbooks; the noMatchRationale is adequate."
+    },
+    {
+      "id": "nm-telegram-stale-file-reference",
+      "verdict": "accept",
+      "reason": "An expired provider file reference is not covered by the runbooks; the noMatchRationale is adequate."
+    },
+    {
+      "id": "nm-email-payload-too-large",
+      "verdict": "accept",
+      "reason": "A fully resolved payload exceeding the provider size limit is outside the runbook procedures; the noMatchRationale is adequate."
+    },
+    {
+      "id": "nm-email-attachment-encoding",
+      "verdict": "accept",
+      "reason": "Malformed attachment encoding is outside the credential, destination, template, ordering, delivery, duplicate, and evidence-gap procedures; the noMatchRationale is adequate."
+    },
+    {
+      "id": "nm-email-subject-header-newline",
+      "verdict": "accept",
+      "reason": "Header-safety rejection is a provider content rule not covered by the runbooks; the noMatchRationale is adequate."
+    },
+    {
+      "id": "nm-email-recipient-count-cap",
+      "verdict": "accept",
+      "reason": "The per-message recipient cap is a provider throughput constraint; the recipients are individually well formed, so the destination procedure does not apply. The noMatchRationale is adequate."
+    },
+    {
+      "id": "nm-worker-disk-full-staging",
+      "verdict": "accept",
+      "reason": "Host disk exhaustion before any provider call is outside the runbook procedures; the noMatchRationale is adequate. The worker provider-scope issue is pre-existing."
+    },
+    {
+      "id": "nm-worker-oom-payload-serialization",
+      "verdict": "accept",
+      "reason": "Worker OOM during payload serialization is outside the runbook procedures; the noMatchRationale is adequate. The worker provider-scope issue is pre-existing."
+    }
+  ]
+}

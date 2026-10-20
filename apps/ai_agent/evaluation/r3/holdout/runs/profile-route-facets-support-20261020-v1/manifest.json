@@ -1,0 +1,220 @@
+{
+  "phase": "R3.5",
+  "generatedAt": "2026-10-20T07:17:55.408Z",
+  "selectedConfig": {
+    "path": "apps/ai_agent/evaluation/r3/selected-retrieval-config.json",
+    "hash": "ab30434a3f018d6bd5234a06de89c6ca8869d0aa38773c0f1d0592e9ff05ec68"
+  },
+  "freeze": {
+    "path": "apps/ai_agent/evaluation/r3/holdout/freeze-v1.json",
+    "hash": "824a25f7630b6483d5e17fe3623e381dd18035182b8b4f61c86938875972f5f4"
+  },
+  "corpusHash": "45e85c3585607ebfd0e1ebd1f2b068e2fab7c889b1bdd3af3a565f20afcbd440",
+  "protocolHash": "e6a491cc5d2423485c61ff5d5e8634e07bc9886bb76041b68238f5322290c3ed",
+  "holdout": {
+    "cases": 40,
+    "answerable": 30,
+    "noMatch": 10,
+    "perCategory": {
+      "F01": 3,
+      "F02": 3,
+      "F03": 3,
+      "F04": 3,
+      "F05": 3,
+      "F06": 3,
+      "F07": 3,
+      "F08": 3,
+      "F09": 3,
+      "F10": 3,
+      "NM": 10
+    },
+    "casesHash": "7fa54e7afa174b9d4bb256c6b8f4de81d6e312681e8accb0209d1c4b2026839c",
+    "labelsHash": "2ed46c5561b75a0953e5ddf1ece9bdeafab60fb4b97ce14446dae978e40cc39b",
+    "evidenceHash": "55994aa6f0f49f28bb194f039473445c9e03ecafbdbc0654301027fce50716d2"
+  },
+  "model": {
+    "id": "Xenova/ms-marco-MiniLM-L-6-v2",
+    "revision": "a09144355adeed5f58c8ed011d209bf8ee5a1fec",
+    "quantization": "q8",
+    "maxLength": 512,
+    "batchSize": 8,
+    "device": "cpu"
+  },
+  "prompt": {
+    "id": "diagnosis",
+    "version": "phase-11a-v3",
+    "sourceHash": "aa4a038a8b2748826933a9deb13aa883546d9d6cb79369a5424402d1c9485a9f"
+  },
+  "arms": {
+    "candidate": "profile-route-facets-support",
+    "route": "profile-route",
+    "packing": "profile-route-facets",
+    "baseline": "keyword"
+  },
+  "support": {
+    "minAnchorHits": 1
+  },
+  "inputHash": "a6a990feb34c4e856fd9bfcb17454cde37e9a9475800e7565b6e6be072298162",
+  "candidates": [
+    {
+      "id": "f01-digest-broadcast-chat-flood",
+      "candidates": 55
+    },
+    {
+      "id": "f01-group-slow-mode-reminder",
+      "candidates": 55
+    },
+    {
+      "id": "f01-channel-resolution-throttled",
+      "candidates": 55
+    },
+    {
+      "id": "f02-telegram-connection-reset-preconnect",
+      "candidates": 55
+    },
+    {
+      "id": "f02-email-connect-timeout-presend",
+      "candidates": 55
+    },
+    {
+      "id": "f02-telegram-dns-failure-preconnect",
+      "candidates": 55
+    },
+    {
+      "id": "f03-revoked-bot-token-send-401",
+      "candidates": 55
+    },
+    {
+      "id": "f03-bot-removed-from-private-channel",
+      "candidates": 55
+    },
+    {
+      "id": "f03-email-api-key-rejected",
+      "candidates": 55
+    },
+    {
+      "id": "f04-email-numeric-recipient-field",
+      "candidates": 55
+    },
+    {
+      "id": "f04-email-missing-subject-template",
+      "candidates": 55
+    },
+    {
+      "id": "f04-telegram-null-ticket-summary",
+      "candidates": 55
+    },
+    {
+      "id": "f05-unregistered-discord-webhook",
+      "candidates": 37
+    },
+    {
+      "id": "f05-telegram-v2-seed-mismatch",
+      "candidates": 37
+    },
+    {
+      "id": "f05-teams-card-legacy-run",
+      "candidates": 37
+    },
+    {
+      "id": "f06-duplicate-stage-order",
+      "candidates": 37
+    },
+    {
+      "id": "f06-stage-order-gap",
+      "candidates": 37
+    },
+    {
+      "id": "f06-negative-stage-index",
+      "candidates": 37
+    },
+    {
+      "id": "f07-oom-after-send-dispatch",
+      "candidates": 55
+    },
+    {
+      "id": "f07-stale-worker-overwrote-unknown",
+      "candidates": 55
+    },
+    {
+      "id": "f07-email-dedup-window-expired",
+      "candidates": 55
+    },
+    {
+      "id": "f08-duplicate-redelivery-after-rebalance",
+      "candidates": 37
+    },
+    {
+      "id": "f08-expired-replay-approval",
+      "candidates": 55
+    },
+    {
+      "id": "f08-reset-success-after-successor-published",
+      "candidates": 55
+    },
+    {
+      "id": "f09-unacknowledged-failure-publication",
+      "candidates": 37
+    },
+    {
+      "id": "f09-successor-publication-never-started",
+      "candidates": 37
+    },
+    {
+      "id": "f09-legacy-run-missing-retry-link",
+      "candidates": 55
+    },
+    {
+      "id": "f10-async-bounce-event-hidden",
+      "candidates": 55
+    },
+    {
+      "id": "f10-invalid-attachment-hidden",
+      "candidates": 55
+    },
+    {
+      "id": "f10-empty-sdk-result-recorded-success",
+      "candidates": 55
+    },
+    {
+      "id": "nm-worker-local-queue-capacity",
+      "candidates": 37
+    },
+    {
+      "id": "nm-telegram-markup-entity-parse",
+      "candidates": 55
+    },
+    {
+      "id": "nm-telegram-inline-button-url",
+      "candidates": 55
+    },
+    {
+      "id": "nm-telegram-stale-file-reference",
+      "candidates": 55
+    },
+    {
+      "id": "nm-email-payload-too-large",
+      "candidates": 55
+    },
+    {
+      "id": "nm-email-attachment-encoding",
+      "candidates": 55
+    },
+    {
+      "id": "nm-email-subject-header-newline",
+      "candidates": 55
+    },
+    {
+      "id": "nm-email-recipient-count-cap",
+      "candidates": 55
+    },
+    {
+      "id": "nm-worker-disk-full-staging",
+      "candidates": 37
+    },
+    {
+      "id": "nm-worker-oom-payload-serialization",
+      "candidates": 37
+    }
+  ]
+}

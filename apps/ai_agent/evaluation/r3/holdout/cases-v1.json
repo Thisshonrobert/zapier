@@ -1,0 +1,1441 @@
+[
+  {
+    "id": "f01-digest-broadcast-chat-flood",
+    "split": "holdout",
+    "kind": "answerable",
+    "input": {
+      "query": "Telegram sendMessage rejected with HTTP 429 for the digest chat telegram telegram send rejected 429 47 rate limited FAILED rejected valid valid provider status:429 explicit rejection retry after seconds:47 send stage single provider attempt no acceptance evidence",
+      "providers": [
+        "telegram"
+      ],
+      "limit": 3
+    },
+    "requiredFacets": [
+      {
+        "facet": "remediation",
+        "accepted": [
+          "RB-F01-F02@1.1.0#allowed-remediation"
+        ]
+      },
+      {
+        "facet": "replay",
+        "accepted": [
+          "RB-F01-F02@1.1.0#replay-and-approval"
+        ]
+      },
+      {
+        "facet": "verification",
+        "accepted": [
+          "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+        ]
+      }
+    ],
+    "supporting": [
+      "RB-F01-F02@1.1.0#symptoms",
+      "RB-F01-F02@1.1.0#evidence-needed",
+      "RB-F01-F02@1.1.0#forbidden-actions"
+    ],
+    "missingRuntimeFacts": [
+      "whether any earlier attempt might have been accepted",
+      "the recorded cooldown deadline timestamp"
+    ]
+  },
+  {
+    "id": "f01-group-slow-mode-reminder",
+    "split": "holdout",
+    "kind": "answerable",
+    "input": {
+      "query": "Telegram sendMessage returned HTTP 429 while the group slow-mode interval was active telegram telegram send rejected 429 90 flood control FAILED rejected valid valid provider status:429 explicit rejection retry after seconds:90 send stage slow mode active single provider attempt",
+      "providers": [
+        "telegram"
+      ],
+      "limit": 3
+    },
+    "requiredFacets": [
+      {
+        "facet": "remediation",
+        "accepted": [
+          "RB-F01-F02@1.1.0#allowed-remediation"
+        ]
+      },
+      {
+        "facet": "replay",
+        "accepted": [
+          "RB-F01-F02@1.1.0#replay-and-approval"
+        ]
+      },
+      {
+        "facet": "verification",
+        "accepted": [
+          "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+        ]
+      }
+    ],
+    "supporting": [
+      "RB-F01-F02@1.1.0#symptoms",
+      "RB-F01-F02@1.1.0#evidence-needed",
+      "RB-F01-F02@1.1.0#forbidden-actions"
+    ],
+    "missingRuntimeFacts": [
+      "the group slow-mode interval configured when the send was attempted",
+      "whether other queued sends target the same chat"
+    ]
+  },
+  {
+    "id": "f01-channel-resolution-throttled",
+    "split": "holdout",
+    "kind": "answerable",
+    "input": {
+      "query": "Telegram getChat returned HTTP 429 while resolving a public channel handle telegram telegram resolve rejected 429 12 resolution rate limited FAILED not delivered valid valid provider status:429 explicit rejection retry after seconds:12 resolution stage no send attempted",
+      "providers": [
+        "telegram"
+      ],
+      "limit": 3
+    },
+    "requiredFacets": [
+      {
+        "facet": "remediation",
+        "accepted": [
+          "RB-F01-F02@1.1.0#allowed-remediation"
+        ]
+      },
+      {
+        "facet": "verification",
+        "accepted": [
+          "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+        ]
+      }
+    ],
+    "supporting": [
+      "RB-F01-F02@1.1.0#symptoms",
+      "RB-F01-F02@1.1.0#evidence-needed",
+      "RB-F01-F02@1.1.0#read-only-investigation",
+      "RB-F01-F02@1.1.0#replay-and-approval"
+    ],
+    "missingRuntimeFacts": [
+      "the scope of the provider rate limit for getChat resolution",
+      "whether the handle resolves through a different authorized bot"
+    ]
+  },
+  {
+    "id": "f02-telegram-connection-reset-preconnect",
+    "split": "holdout",
+    "kind": "answerable",
+    "input": {
+      "query": "Telegram send failed before request transmission: connection reset by the egress proxy telegram telegram send not attempted connection reset FAILED not delivered valid valid transport failure connection reset request not transmitted pre send failure three provider attempts",
+      "providers": [
+        "telegram"
+      ],
+      "limit": 3
+    },
+    "requiredFacets": [
+      {
+        "facet": "investigation",
+        "accepted": [
+          "RB-F01-F02@1.1.0#read-only-investigation"
+        ]
+      },
+      {
+        "facet": "remediation",
+        "accepted": [
+          "RB-F01-F02@1.1.0#allowed-remediation"
+        ]
+      },
+      {
+        "facet": "verification",
+        "accepted": [
+          "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+        ]
+      }
+    ],
+    "supporting": [
+      "RB-F01-F02@1.1.0#symptoms",
+      "RB-F01-F02@1.1.0#evidence-needed",
+      "RB-F01-F02@1.1.0#forbidden-actions"
+    ],
+    "missingRuntimeFacts": [
+      "whether any attempt reached the provider",
+      "the egress proxy state at failure time"
+    ]
+  },
+  {
+    "id": "f02-email-connect-timeout-presend",
+    "split": "holdout",
+    "kind": "answerable",
+    "input": {
+      "query": "email provider TCP connect timed out before the request body was written email email send not attempted connect timeout FAILED not delivered valid valid transport failure connect timeout request not transmitted pre send failure two provider attempts",
+      "providers": [
+        "email"
+      ],
+      "limit": 3
+    },
+    "requiredFacets": [
+      {
+        "facet": "investigation",
+        "accepted": [
+          "RB-F01-F02@1.1.0#read-only-investigation"
+        ]
+      },
+      {
+        "facet": "remediation",
+        "accepted": [
+          "RB-F01-F02@1.1.0#allowed-remediation"
+        ]
+      },
+      {
+        "facet": "verification",
+        "accepted": [
+          "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+        ]
+      }
+    ],
+    "supporting": [
+      "RB-F01-F02@1.1.0#symptoms",
+      "RB-F01-F02@1.1.0#evidence-needed",
+      "RB-F01-F02@1.1.0#forbidden-actions"
+    ],
+    "missingRuntimeFacts": [
+      "whether any connection to the provider endpoint was established",
+      "provider endpoint health at failure time"
+    ]
+  },
+  {
+    "id": "f02-telegram-dns-failure-preconnect",
+    "split": "holdout",
+    "kind": "answerable",
+    "input": {
+      "query": "Telegram send failed before connecting: DNS lookup returned EAI_AGAIN telegram telegram send not attempted dns resolution failed FAILED not delivered valid valid dns resolution failed no connection established request not transmitted four provider attempts send stage",
+      "providers": [
+        "telegram"
+      ],
+      "limit": 3
+    },
+    "requiredFacets": [
+      {
+        "facet": "investigation",
+        "accepted": [
+          "RB-F01-F02@1.1.0#read-only-investigation"
+        ]
+      },
+      {
+        "facet": "remediation",
+        "accepted": [
+          "RB-F01-F02@1.1.0#allowed-remediation"
+        ]
+      },
+      {
+        "facet": "verification",
+        "accepted": [
+          "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+        ]
+      }
+    ],
+    "supporting": [
+      "RB-F01-F02@1.1.0#symptoms",
+      "RB-F01-F02@1.1.0#evidence-needed",
+      "RB-F01-F02@1.1.0#forbidden-actions",
+      "RB-F01-F02@1.1.0#replay-and-approval"
+    ],
+    "missingRuntimeFacts": [
+      "worker-side resolver configuration at failure time",
+      "whether any prior attempt reached the provider"
+    ]
+  },
+  {
+    "id": "f03-revoked-bot-token-send-401",
+    "split": "holdout",
+    "kind": "answerable",
+    "input": {
+      "query": "Telegram sendMessage returned HTTP 401 Unauthorized for the configured bot telegram telegram send rejected 401 unauthorized FAILED rejected valid valid provider status:401 explicit rejection send stage configured token present no delivery",
+      "providers": [
+        "telegram"
+      ],
+      "limit": 3
+    },
+    "requiredFacets": [
+      {
+        "facet": "investigation",
+        "accepted": [
+          "RB-F03-F04@1.0.0#read-only-investigation"
+        ]
+      },
+      {
+        "facet": "remediation",
+        "accepted": [
+          "RB-F03-F04@1.0.0#allowed-remediation"
+        ]
+      },
+      {
+        "facet": "verification",
+        "accepted": [
+          "RB-F03-F04@1.0.0#verification-rollback-or-escalation"
+        ]
+      }
+    ],
+    "supporting": [
+      "RB-F03-F04@1.0.0#symptoms",
+      "RB-F03-F04@1.0.0#evidence-needed",
+      "RB-F03-F04@1.0.0#forbidden-actions",
+      "RB-F03-F04@1.0.0#replay-and-approval"
+    ],
+    "missingRuntimeFacts": [
+      "operator confirmation that the configured token was revoked",
+      "whether an environment fallback token would be used"
+    ]
+  },
+  {
+    "id": "f03-bot-removed-from-private-channel",
+    "split": "holdout",
+    "kind": "answerable",
+    "input": {
+      "query": "Telegram sendMessage returned HTTP 403: bot is not a member of the target channel telegram telegram send rejected 403 chat membership denied FAILED rejected valid valid provider status:403 permission denied credential or permission rejection explicit rejection send stage channel membership denied destination resolved successfully",
+      "providers": [
+        "telegram"
+      ],
+      "limit": 3
+    },
+    "requiredFacets": [
+      {
+        "facet": "investigation",
+        "accepted": [
+          "RB-F03-F04@1.0.0#read-only-investigation"
+        ]
+      },
+      {
+        "facet": "remediation",
+        "accepted": [
+          "RB-F03-F04@1.0.0#allowed-remediation"
+        ]
+      },
+      {
+        "facet": "verification",
+        "accepted": [
+          "RB-F03-F04@1.0.0#verification-rollback-or-escalation"
+        ]
+      }
+    ],
+    "supporting": [
+      "RB-F03-F04@1.0.0#symptoms",
+      "RB-F03-F04@1.0.0#evidence-needed",
+      "RB-F03-F04@1.0.0#forbidden-actions",
+      "RB-F03-F04@1.0.0#replay-and-approval"
+    ],
+    "missingRuntimeFacts": [
+      "operator confirmation of bot membership and posting rights in the channel",
+      "when the bot lost access to the destination"
+    ]
+  },
+  {
+    "id": "f03-email-api-key-rejected",
+    "split": "holdout",
+    "kind": "answerable",
+    "input": {
+      "query": "email provider returned HTTP 401 Unauthorized for the configured API key email email send rejected 401 invalid api key FAILED rejected valid valid provider status:401 credential rejected explicit rejection send stage configured api key present no delivery",
+      "providers": [
+        "email"
+      ],
+      "limit": 3
+    },
+    "requiredFacets": [
+      {
+        "facet": "investigation",
+        "accepted": [
+          "RB-F03-F04@1.0.0#read-only-investigation"
+        ]
+      },
+      {
+        "facet": "remediation",
+        "accepted": [
+          "RB-F03-F04@1.0.0#allowed-remediation"
+        ]
+      },
+      {
+        "facet": "verification",
+        "accepted": [
+          "RB-F03-F04@1.0.0#verification-rollback-or-escalation"
+        ]
+      }
+    ],
+    "supporting": [
+      "RB-F03-F04@1.0.0#symptoms",
+      "RB-F03-F04@1.0.0#evidence-needed",
+      "RB-F03-F04@1.0.0#forbidden-actions",
+      "RB-F03-F04@1.0.0#replay-and-approval"
+    ],
+    "missingRuntimeFacts": [
+      "operator confirmation that the API key was revoked or rotated",
+      "whether an environment fallback key exists"
+    ]
+  },
+  {
+    "id": "f04-email-numeric-recipient-field",
+    "split": "holdout",
+    "kind": "answerable",
+    "input": {
+      "query": "email input validation rejected field to: expected string, received number email email validate not attempted invalid field type FAILED not applicable valid invalid to invalid field type to field is number no provider attempt validation failed before send",
+      "providers": [
+        "email"
+      ],
+      "limit": 3
+    },
+    "requiredFacets": [
+      {
+        "facet": "investigation",
+        "accepted": [
+          "RB-F04-F06@1.0.0#read-only-investigation"
+        ]
+      },
+      {
+        "facet": "remediation",
+        "accepted": [
+          "RB-F04-F06@1.0.0#allowed-remediation"
+        ]
+      },
+      {
+        "facet": "verification",
+        "accepted": [
+          "RB-F04-F06@1.0.0#verification-rollback-or-escalation"
+        ]
+      }
+    ],
+    "supporting": [
+      "RB-F04-F06@1.0.0#symptoms",
+      "RB-F04-F06@1.0.0#evidence-needed",
+      "RB-F04-F06@1.0.0#forbidden-actions",
+      "RB-F04-F06@1.0.0#replay-and-approval"
+    ],
+    "missingRuntimeFacts": [
+      "the producing system that wrote a numeric recipient",
+      "the execution-time action definition for the recipient field"
+    ]
+  },
+  {
+    "id": "f04-email-missing-subject-template",
+    "split": "holdout",
+    "kind": "answerable",
+    "input": {
+      "query": "email input validation reported a missing template path for the subject field email email validate not attempted missing template path FAILED not applicable valid invalid subject invoice.number missing template path subject template unresolved validation failed before send no provider attempt",
+      "providers": [
+        "email"
+      ],
+      "limit": 3
+    },
+    "requiredFacets": [
+      {
+        "facet": "investigation",
+        "accepted": [
+          "RB-F04-F06@1.0.0#read-only-investigation"
+        ]
+      },
+      {
+        "facet": "remediation",
+        "accepted": [
+          "RB-F04-F06@1.0.0#allowed-remediation"
+        ]
+      },
+      {
+        "facet": "verification",
+        "accepted": [
+          "RB-F04-F06@1.0.0#verification-rollback-or-escalation"
+        ]
+      }
+    ],
+    "supporting": [
+      "RB-F04-F06@1.0.0#symptoms",
+      "RB-F04-F06@1.0.0#evidence-needed",
+      "RB-F04-F06@1.0.0#forbidden-actions",
+      "RB-F04-F06@1.0.0#replay-and-approval"
+    ],
+    "missingRuntimeFacts": [
+      "the execution-time subject template definition",
+      "whether the trigger payload ever contained invoice.number"
+    ]
+  },
+  {
+    "id": "f04-telegram-null-ticket-summary",
+    "split": "holdout",
+    "kind": "answerable",
+    "input": {
+      "query": "Telegram sendMessage returned HTTP 400 because the resolved message text was empty telegram telegram send rejected 400 empty message FAILED rejected valid invalid message null trigger value template resolved empty provider status:400 send stage empty message rejected",
+      "providers": [
+        "telegram"
+      ],
+      "limit": 3
+    },
+    "requiredFacets": [
+      {
+        "facet": "investigation",
+        "accepted": [
+          "RB-F04-F06@1.0.0#read-only-investigation"
+        ]
+      },
+      {
+        "facet": "remediation",
+        "accepted": [
+          "RB-F04-F06@1.0.0#allowed-remediation"
+        ]
+      },
+      {
+        "facet": "verification",
+        "accepted": [
+          "RB-F04-F06@1.0.0#verification-rollback-or-escalation"
+        ]
+      }
+    ],
+    "supporting": [
+      "RB-F04-F06@1.0.0#symptoms",
+      "RB-F04-F06@1.0.0#evidence-needed",
+      "RB-F04-F06@1.0.0#forbidden-actions",
+      "RB-F04-F06@1.0.0#replay-and-approval"
+    ],
+    "missingRuntimeFacts": [
+      "whether ticket.summary was null or absent in the trigger payload",
+      "the execution-time template definition for the message field"
+    ]
+  },
+  {
+    "id": "f05-unregistered-discord-webhook",
+    "split": "holdout",
+    "kind": "answerable",
+    "input": {
+      "query": "orchestration failed: no handler registered for action type discord_webhook discord webhook generic validate not attempted unsupported action type FAILED not applicable valid valid unsupported action type attempt marked not attempted no provider call coverage gap",
+      "providers": [
+        "generic"
+      ],
+      "limit": 3
+    },
+    "requiredFacets": [
+      {
+        "facet": "investigation",
+        "accepted": [
+          "RB-F04-F06@1.0.0#read-only-investigation"
+        ]
+      },
+      {
+        "facet": "replay",
+        "accepted": [
+          "RB-F04-F06@1.0.0#replay-and-approval"
+        ]
+      },
+      {
+        "facet": "verification",
+        "accepted": [
+          "RB-F04-F06@1.0.0#verification-rollback-or-escalation"
+        ]
+      }
+    ],
+    "supporting": [
+      "RB-F04-F06@1.0.0#symptoms",
+      "RB-F04-F06@1.0.0#evidence-needed",
+      "RB-F04-F06@1.0.0#forbidden-actions",
+      "RB-F04-F06@1.0.0#allowed-remediation"
+    ],
+    "missingRuntimeFacts": [
+      "the deployed handler mapping for discord_webhook",
+      "whether the workflow definition changed after the failure"
+    ]
+  },
+  {
+    "id": "f05-telegram-v2-seed-mismatch",
+    "split": "holdout",
+    "kind": "answerable",
+    "input": {
+      "query": "no handler registered for action type telegram_v2 despite an existing telegram handler telegram v2 generic validate not attempted unsupported action type FAILED not applicable valid valid unsupported action type seeded action id mismatch attempt marked not attempted no provider call coverage gap",
+      "providers": [
+        "generic"
+      ],
+      "limit": 3
+    },
+    "requiredFacets": [
+      {
+        "facet": "investigation",
+        "accepted": [
+          "RB-F04-F06@1.0.0#read-only-investigation"
+        ]
+      },
+      {
+        "facet": "replay",
+        "accepted": [
+          "RB-F04-F06@1.0.0#replay-and-approval"
+        ]
+      },
+      {
+        "facet": "verification",
+        "accepted": [
+          "RB-F04-F06@1.0.0#verification-rollback-or-escalation"
+        ]
+      }
+    ],
+    "supporting": [
+      "RB-F04-F06@1.0.0#symptoms",
+      "RB-F04-F06@1.0.0#evidence-needed",
+      "RB-F04-F06@1.0.0#forbidden-actions",
+      "RB-F04-F06@1.0.0#allowed-remediation"
+    ],
+    "missingRuntimeFacts": [
+      "which seeded action ids the deployment exposes",
+      "the deployed registry version at failure time"
+    ]
+  },
+  {
+    "id": "f05-teams-card-legacy-run",
+    "split": "holdout",
+    "kind": "answerable",
+    "input": {
+      "query": "legacy stage failed: action type teams_message is not present in the worker registry teams message generic validate not attempted unsupported action type FAILED not applicable valid valid unsupported action type legacy workflow definition no provider call attempt marked not attempted coverage gap",
+      "providers": [
+        "generic"
+      ],
+      "limit": 3
+    },
+    "requiredFacets": [
+      {
+        "facet": "investigation",
+        "accepted": [
+          "RB-F04-F06@1.0.0#read-only-investigation"
+        ]
+      },
+      {
+        "facet": "replay",
+        "accepted": [
+          "RB-F04-F06@1.0.0#replay-and-approval"
+        ]
+      }
+    ],
+    "supporting": [
+      "RB-F04-F06@1.0.0#symptoms",
+      "RB-F04-F06@1.0.0#evidence-needed",
+      "RB-F04-F06@1.0.0#forbidden-actions",
+      "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+      "RB-F04-F06@1.0.0#allowed-remediation"
+    ],
+    "missingRuntimeFacts": [
+      "whether teams_message ever had a deployed handler",
+      "the current workflow definition versus the historical one"
+    ]
+  },
+  {
+    "id": "f06-duplicate-stage-order",
+    "split": "holdout",
+    "kind": "answerable",
+    "input": {
+      "query": "stage validation rejected duplicate sortingOrder 3 for the same zap run email worker validate not attempted duplicate stage order FAILED not applicable invalid blocked invalid stage sequence duplicate sorting order stage identity conflict no provider call",
+      "providers": [
+        "worker"
+      ],
+      "limit": 3
+    },
+    "requiredFacets": [
+      {
+        "facet": "investigation",
+        "accepted": [
+          "RB-F04-F06@1.0.0#read-only-investigation"
+        ]
+      },
+      {
+        "facet": "forbidden",
+        "accepted": [
+          "RB-F04-F06@1.0.0#forbidden-actions"
+        ]
+      },
+      {
+        "facet": "verification",
+        "accepted": [
+          "RB-F04-F06@1.0.0#verification-rollback-or-escalation"
+        ]
+      }
+    ],
+    "supporting": [
+      "RB-F04-F06@1.0.0#symptoms",
+      "RB-F04-F06@1.0.0#evidence-needed",
+      "RB-F04-F06@1.0.0#replay-and-approval",
+      "RB-F04-F06@1.0.0#allowed-remediation"
+    ],
+    "missingRuntimeFacts": [
+      "the duplicated action rows and their ids",
+      "whether the workflow definition was edited after the failure"
+    ]
+  },
+  {
+    "id": "f06-stage-order-gap",
+    "split": "holdout",
+    "kind": "answerable",
+    "input": {
+      "query": "stage lookup failed: sortingOrder 2 is missing between stages 1 and 3 email worker validate not attempted invalid stage sequence FAILED not applicable invalid blocked invalid stage sequence sorting order gap missing stage 2 non contiguous ordering no provider call",
+      "providers": [
+        "worker"
+      ],
+      "limit": 3
+    },
+    "requiredFacets": [
+      {
+        "facet": "investigation",
+        "accepted": [
+          "RB-F04-F06@1.0.0#read-only-investigation"
+        ]
+      },
+      {
+        "facet": "forbidden",
+        "accepted": [
+          "RB-F04-F06@1.0.0#forbidden-actions"
+        ]
+      },
+      {
+        "facet": "verification",
+        "accepted": [
+          "RB-F04-F06@1.0.0#verification-rollback-or-escalation"
+        ]
+      }
+    ],
+    "supporting": [
+      "RB-F04-F06@1.0.0#symptoms",
+      "RB-F04-F06@1.0.0#evidence-needed",
+      "RB-F04-F06@1.0.0#replay-and-approval",
+      "RB-F04-F06@1.0.0#allowed-remediation"
+    ],
+    "missingRuntimeFacts": [
+      "the original action rows that produced the gap",
+      "whether the definition was edited after the failure"
+    ]
+  },
+  {
+    "id": "f06-negative-stage-index",
+    "split": "holdout",
+    "kind": "answerable",
+    "input": {
+      "query": "stage validation rejected stage -1: stage must be a non-negative integer email kafka validate not attempted invalid stage identity FAILED not applicable invalid blocked invalid stage sequence negative stage index stage identity rejected no provider call",
+      "providers": [
+        "kafka"
+      ],
+      "limit": 3
+    },
+    "requiredFacets": [
+      {
+        "facet": "investigation",
+        "accepted": [
+          "RB-F04-F06@1.0.0#read-only-investigation"
+        ]
+      },
+      {
+        "facet": "forbidden",
+        "accepted": [
+          "RB-F04-F06@1.0.0#forbidden-actions"
+        ]
+      },
+      {
+        "facet": "verification",
+        "accepted": [
+          "RB-F04-F06@1.0.0#verification-rollback-or-escalation"
+        ]
+      }
+    ],
+    "supporting": [
+      "RB-F04-F06@1.0.0#symptoms",
+      "RB-F04-F06@1.0.0#evidence-needed",
+      "RB-F04-F06@1.0.0#replay-and-approval",
+      "RB-F04-F06@1.0.0#allowed-remediation"
+    ],
+    "missingRuntimeFacts": [
+      "the producer that emitted a negative stage",
+      "the intended valid stage identity"
+    ]
+  },
+  {
+    "id": "f07-oom-after-send-dispatch",
+    "split": "holdout",
+    "kind": "answerable",
+    "input": {
+      "query": "worker terminated while awaiting the Telegram response; execution remained pending until lease expiry telegram telegram send unknown UNKNOWN unknown valid valid send transmitted response not captured process terminated lease expired quarantined unknown",
+      "providers": [
+        "telegram"
+      ],
+      "limit": 3
+    },
+    "requiredFacets": [
+      {
+        "facet": "investigation",
+        "accepted": [
+          "RB-F07@1.0.0#read-only-investigation"
+        ]
+      },
+      {
+        "facet": "remediation",
+        "accepted": [
+          "RB-F07@1.0.0#allowed-remediation"
+        ]
+      },
+      {
+        "facet": "forbidden",
+        "accepted": [
+          "RB-F07@1.0.0#forbidden-actions"
+        ]
+      }
+    ],
+    "supporting": [
+      "RB-F07@1.0.0#symptoms",
+      "RB-F07@1.0.0#evidence-needed",
+      "RB-F07@1.0.0#replay-and-approval"
+    ],
+    "missingRuntimeFacts": [
+      "provider-side delivery confirmation for the dispatched request",
+      "the request fingerprint and first-send timestamp"
+    ]
+  },
+  {
+    "id": "f07-stale-worker-overwrote-unknown",
+    "split": "holdout",
+    "kind": "answerable",
+    "input": {
+      "query": "expired pending execution was quarantined as UNKNOWN, then a stale worker wrote FAILED after lease reclamation telegram telegram send unknown FAILED unknown valid valid lease expired quarantine unknown stale worker completion fencing conflict delivery unproven",
+      "providers": [
+        "telegram"
+      ],
+      "limit": 3
+    },
+    "requiredFacets": [
+      {
+        "facet": "investigation",
+        "accepted": [
+          "RB-F07@1.0.0#read-only-investigation"
+        ]
+      },
+      {
+        "facet": "remediation",
+        "accepted": [
+          "RB-F07@1.0.0#allowed-remediation"
+        ]
+      },
+      {
+        "facet": "forbidden",
+        "accepted": [
+          "RB-F07@1.0.0#forbidden-actions"
+        ]
+      }
+    ],
+    "supporting": [
+      "RB-F07@1.0.0#symptoms",
+      "RB-F07@1.0.0#evidence-needed",
+      "RB-F07@1.0.0#verification-rollback-or-escalation"
+    ],
+    "missingRuntimeFacts": [
+      "which worker owned the claim at send time",
+      "whether the provider accepted the original request",
+      "fencing-token evidence for the late FAILED write"
+    ]
+  },
+  {
+    "id": "f07-email-dedup-window-expired",
+    "split": "holdout",
+    "kind": "answerable",
+    "input": {
+      "query": "email provider response was not persisted and the idempotency window has since expired email email persist unknown UNKNOWN unknown valid valid provider call completed terminal persistence failed idempotency key present dedup window expired no safe receipt",
+      "providers": [
+        "email"
+      ],
+      "limit": 3
+    },
+    "requiredFacets": [
+      {
+        "facet": "investigation",
+        "accepted": [
+          "RB-F07@1.0.0#read-only-investigation"
+        ]
+      },
+      {
+        "facet": "remediation",
+        "accepted": [
+          "RB-F07@1.0.0#allowed-remediation"
+        ]
+      },
+      {
+        "facet": "forbidden",
+        "accepted": [
+          "RB-F07@1.0.0#forbidden-actions"
+        ]
+      }
+    ],
+    "supporting": [
+      "RB-F07@1.0.0#symptoms",
+      "RB-F07@1.0.0#evidence-needed",
+      "RB-F07@1.0.0#replay-and-approval"
+    ],
+    "missingRuntimeFacts": [
+      "whether the provider accepted the message",
+      "the verified provider deduplication window at request time"
+    ]
+  },
+  {
+    "id": "f08-duplicate-redelivery-after-rebalance",
+    "split": "holdout",
+    "kind": "answerable",
+    "input": {
+      "query": "the same failureId was delivered twice after a consumer rebalance for one rejected Telegram send telegram kafka publish accepted FAILED rejected valid valid duplicate source reference identical fingerprint same failure id delivery duplication terminal failed stage",
+      "providers": [
+        "kafka"
+      ],
+      "limit": 3
+    },
+    "requiredFacets": [
+      {
+        "facet": "investigation",
+        "accepted": [
+          "RB-F08@1.0.0#read-only-investigation"
+        ]
+      },
+      {
+        "facet": "forbidden",
+        "accepted": [
+          "RB-F08@1.0.0#forbidden-actions"
+        ]
+      },
+      {
+        "facet": "verification",
+        "accepted": [
+          "RB-F08@1.0.0#verification-rollback-or-escalation"
+        ]
+      }
+    ],
+    "supporting": [
+      "RB-F08@1.0.0#symptoms",
+      "RB-F08@1.0.0#evidence-needed",
+      "RB-F08@1.0.0#allowed-remediation",
+      "RB-F08@1.0.0#replay-and-approval"
+    ],
+    "missingRuntimeFacts": [
+      "the canonical source offset for the first delivery",
+      "whether any approval or replay request already exists for this failure"
+    ]
+  },
+  {
+    "id": "f08-expired-replay-approval",
+    "split": "holdout",
+    "kind": "answerable",
+    "input": {
+      "query": "cached approval for a failed Telegram stage expired six days ago telegram telegram send rejected 400 provider rejected FAILED rejected valid valid approval expired terminal failed stage stale proposal no replay ledger",
+      "providers": [
+        "telegram"
+      ],
+      "limit": 3
+    },
+    "requiredFacets": [
+      {
+        "facet": "investigation",
+        "accepted": [
+          "RB-F08@1.0.0#read-only-investigation"
+        ]
+      },
+      {
+        "facet": "forbidden",
+        "accepted": [
+          "RB-F08@1.0.0#forbidden-actions"
+        ]
+      },
+      {
+        "facet": "verification",
+        "accepted": [
+          "RB-F08@1.0.0#verification-rollback-or-escalation"
+        ]
+      }
+    ],
+    "supporting": [
+      "RB-F08@1.0.0#symptoms",
+      "RB-F08@1.0.0#evidence-needed",
+      "RB-F08@1.0.0#allowed-remediation",
+      "RB-F08@1.0.0#replay-and-approval"
+    ],
+    "missingRuntimeFacts": [
+      "the approval issuance and expiry timestamps",
+      "whether the evidence fingerprints changed since approval"
+    ]
+  },
+  {
+    "id": "f08-reset-success-after-successor-published",
+    "split": "holdout",
+    "kind": "answerable",
+    "input": {
+      "query": "redelivered event requested a reset of stage 2, already SUCCESS with stage 3 started email email send accepted SUCCESS accepted valid valid stage status success successor stage started reset requested duplicate delivery no shared sink id",
+      "providers": [
+        "email"
+      ],
+      "limit": 3
+    },
+    "requiredFacets": [
+      {
+        "facet": "investigation",
+        "accepted": [
+          "RB-F08@1.0.0#read-only-investigation"
+        ]
+      },
+      {
+        "facet": "forbidden",
+        "accepted": [
+          "RB-F08@1.0.0#forbidden-actions"
+        ]
+      },
+      {
+        "facet": "verification",
+        "accepted": [
+          "RB-F08@1.0.0#verification-rollback-or-escalation"
+        ]
+      }
+    ],
+    "supporting": [
+      "RB-F08@1.0.0#symptoms",
+      "RB-F08@1.0.0#evidence-needed",
+      "RB-F08@1.0.0#allowed-remediation",
+      "RB-F08@1.0.0#replay-and-approval"
+    ],
+    "missingRuntimeFacts": [
+      "the provider receipt that established the original success",
+      "whether any competing replay request exists"
+    ]
+  },
+  {
+    "id": "f09-unacknowledged-failure-publication",
+    "split": "holdout",
+    "kind": "answerable",
+    "input": {
+      "query": "stored failure has no publication acknowledgement and dlqPublishedAt is null telegram kafka publish unknown FAILED rejected valid valid failure row committed publication claim stuck broker ack missing dlq published at null linked failure id present",
+      "providers": [
+        "kafka"
+      ],
+      "limit": 3
+    },
+    "requiredFacets": [
+      {
+        "facet": "investigation",
+        "accepted": [
+          "RB-F09-F10@1.0.0#read-only-investigation"
+        ]
+      },
+      {
+        "facet": "remediation",
+        "accepted": [
+          "RB-F09-F10@1.0.0#allowed-remediation"
+        ]
+      },
+      {
+        "facet": "verification",
+        "accepted": [
+          "RB-F09-F10@1.0.0#verification-rollback-or-escalation"
+        ]
+      }
+    ],
+    "supporting": [
+      "RB-F09-F10@1.0.0#symptoms",
+      "RB-F09-F10@1.0.0#evidence-needed",
+      "RB-F09-F10@1.0.0#forbidden-actions",
+      "RB-F09-F10@1.0.0#replay-and-approval"
+    ],
+    "missingRuntimeFacts": [
+      "the broker acknowledgement for the publication attempt",
+      "the current publication claim owner and expiry"
+    ]
+  },
+  {
+    "id": "f09-successor-publication-never-started",
+    "split": "holdout",
+    "kind": "answerable",
+    "input": {
+      "query": "stage 1 is SUCCESS but the successor Kafka publication is missing and stage 2 never started email worker publish not attempted next stage publish missing SUCCESS accepted valid valid stage success successor not published dlq publication missing kafka publication missing progression stalled no action replay evidence",
+      "providers": [
+        "worker"
+      ],
+      "limit": 3
+    },
+    "requiredFacets": [
+      {
+        "facet": "investigation",
+        "accepted": [
+          "RB-F09-F10@1.0.0#read-only-investigation"
+        ]
+      },
+      {
+        "facet": "remediation",
+        "accepted": [
+          "RB-F09-F10@1.0.0#allowed-remediation"
+        ]
+      },
+      {
+        "facet": "verification",
+        "accepted": [
+          "RB-F09-F10@1.0.0#verification-rollback-or-escalation"
+        ]
+      }
+    ],
+    "supporting": [
+      "RB-F09-F10@1.0.0#symptoms",
+      "RB-F09-F10@1.0.0#evidence-needed",
+      "RB-F09-F10@1.0.0#forbidden-actions",
+      "RB-F09-F10@1.0.0#replay-and-approval"
+    ],
+    "missingRuntimeFacts": [
+      "the stage 2 definition and expected publication record",
+      "the broker acknowledgement for the missing successor publication"
+    ]
+  },
+  {
+    "id": "f09-legacy-run-missing-retry-link",
+    "split": "holdout",
+    "kind": "answerable",
+    "input": {
+      "query": "legacy failed execution has no linked failureId and no DLQ publication record telegram telegram send rejected 400 provider rejected FAILED rejected valid blocked execution row present retry row missing failure id absent dead letter absent legacy evidence gap",
+      "providers": [
+        "telegram"
+      ],
+      "limit": 3
+    },
+    "requiredFacets": [
+      {
+        "facet": "investigation",
+        "accepted": [
+          "RB-F09-F10@1.0.0#read-only-investigation"
+        ]
+      },
+      {
+        "facet": "remediation",
+        "accepted": [
+          "RB-F09-F10@1.0.0#allowed-remediation"
+        ]
+      },
+      {
+        "facet": "verification",
+        "accepted": [
+          "RB-F09-F10@1.0.0#verification-rollback-or-escalation"
+        ]
+      }
+    ],
+    "supporting": [
+      "RB-F09-F10@1.0.0#symptoms",
+      "RB-F09-F10@1.0.0#evidence-needed",
+      "RB-F09-F10@1.0.0#forbidden-actions",
+      "RB-F09-F10@1.0.0#replay-and-approval"
+    ],
+    "missingRuntimeFacts": [
+      "the original failure envelope and its failureId",
+      "the provider outcome for the single attempt",
+      "the missing DLQ publication record"
+    ]
+  },
+  {
+    "id": "f10-async-bounce-event-hidden",
+    "split": "holdout",
+    "kind": "answerable",
+    "input": {
+      "query": "historical email stage recorded SUCCESS; a later provider bounce notice reported mailbox full and was never linked to the stage email email send unknown SUCCESS unknown valid valid email stage success async bounce notice observed bounce not linked to stage success status recorded delivery unproven no receipt id",
+      "providers": [
+        "email"
+      ],
+      "limit": 3
+    },
+    "requiredFacets": [
+      {
+        "facet": "investigation",
+        "accepted": [
+          "RB-F09-F10@1.0.0#read-only-investigation"
+        ]
+      },
+      {
+        "facet": "forbidden",
+        "accepted": [
+          "RB-F09-F10@1.0.0#forbidden-actions"
+        ]
+      }
+    ],
+    "supporting": [
+      "RB-F09-F10@1.0.0#symptoms",
+      "RB-F09-F10@1.0.0#evidence-needed",
+      "RB-F09-F10@1.0.0#replay-and-approval",
+      "RB-F09-F10@1.0.0#verification-rollback-or-escalation"
+    ],
+    "missingRuntimeFacts": [
+      "the raw bounce notice and its provider event id",
+      "whether the bounce refers to this send or another message to the same recipient",
+      "the captured SDK result for the historical send"
+    ]
+  },
+  {
+    "id": "f10-invalid-attachment-hidden",
+    "split": "holdout",
+    "kind": "answerable",
+    "input": {
+      "query": "historical email stage recorded SUCCESS; no receipt was retained and the attachment transmission outcome is unknown email email send unknown SUCCESS unknown valid valid email stage success no safe receipt sdk error not retained stubbed reproduction invalid attachment recipient reported non receipt success status recorded sdk error value discarded",
+      "providers": [
+        "email"
+      ],
+      "limit": 3
+    },
+    "requiredFacets": [
+      {
+        "facet": "investigation",
+        "accepted": [
+          "RB-F09-F10@1.0.0#read-only-investigation"
+        ]
+      },
+      {
+        "facet": "forbidden",
+        "accepted": [
+          "RB-F09-F10@1.0.0#forbidden-actions"
+        ]
+      }
+    ],
+    "supporting": [
+      "RB-F09-F10@1.0.0#symptoms",
+      "RB-F09-F10@1.0.0#evidence-needed",
+      "RB-F09-F10@1.0.0#replay-and-approval",
+      "RB-F09-F10@1.0.0#verification-rollback-or-escalation"
+    ],
+    "missingRuntimeFacts": [
+      "the actual captured SDK result for the historical send",
+      "whether the attachment was transmitted or rejected",
+      "the execution-time attachment definition"
+    ]
+  },
+  {
+    "id": "f10-empty-sdk-result-recorded-success",
+    "split": "holdout",
+    "kind": "answerable",
+    "input": {
+      "query": "historical email stage recorded SUCCESS although the SDK result contained a structured provider error with code invalid_recipient and the error value was discarded email email send unknown SUCCESS unknown valid valid email stage success structured sdk error present sdk error value discarded success status recorded no receipt id delivery unproven",
+      "providers": [
+        "email"
+      ],
+      "limit": 3
+    },
+    "requiredFacets": [
+      {
+        "facet": "investigation",
+        "accepted": [
+          "RB-F09-F10@1.0.0#read-only-investigation"
+        ]
+      },
+      {
+        "facet": "forbidden",
+        "accepted": [
+          "RB-F09-F10@1.0.0#forbidden-actions"
+        ]
+      }
+    ],
+    "supporting": [
+      "RB-F09-F10@1.0.0#symptoms",
+      "RB-F09-F10@1.0.0#evidence-needed",
+      "RB-F09-F10@1.0.0#replay-and-approval",
+      "RB-F09-F10@1.0.0#verification-rollback-or-escalation"
+    ],
+    "missingRuntimeFacts": [
+      "the captured SDK error object and its invalid_recipient code provenance",
+      "whether any provider receipt exists for the historical request",
+      "the execution-time SDK response handling that discarded the error"
+    ]
+  },
+  {
+    "id": "nm-worker-local-queue-capacity",
+    "split": "holdout",
+    "kind": "no_match",
+    "input": {
+      "query": "worker refused the stage because the local execution queue reached its concurrency limit email worker not attempted queue capacity exceeded FAILED not delivered valid valid local queue capacity exceeded no provider call stage not admitted",
+      "providers": [
+        "worker"
+      ],
+      "limit": 3
+    },
+    "requiredFacets": [],
+    "supporting": [
+      "RB-F07@1.0.0#evidence-needed",
+      "RB-F09-F10@1.0.0#read-only-investigation"
+    ],
+    "missingRuntimeFacts": [
+      "the worker concurrency limit at failure time",
+      "whether queued work was dropped or deferred"
+    ]
+  },
+  {
+    "id": "nm-telegram-markup-entity-parse",
+    "split": "holdout",
+    "kind": "no_match",
+    "input": {
+      "query": "Telegram sendMessage returned HTTP 400 because the message entities could not be parsed telegram telegram send rejected 400 entity parse failed FAILED rejected valid valid provider status:400 entity parse failure send stage malformed markup",
+      "providers": [
+        "telegram"
+      ],
+      "limit": 3
+    },
+    "requiredFacets": [],
+    "supporting": [
+      "RB-F01-F02@1.1.0#evidence-needed",
+      "RB-F01-F02@1.1.0#forbidden-actions"
+    ],
+    "missingRuntimeFacts": [
+      "which markup parser mode was active at send time",
+      "the rendered markup that produced the entity error"
+    ]
+  },
+  {
+    "id": "nm-telegram-inline-button-url",
+    "split": "holdout",
+    "kind": "no_match",
+    "input": {
+      "query": "Telegram sendMessage returned HTTP 400 because an inline keyboard button URL was rejected telegram telegram send rejected 400 button url invalid FAILED rejected valid valid provider status:400 button url rejected send stage keyboard content invalid",
+      "providers": [
+        "telegram"
+      ],
+      "limit": 3
+    },
+    "requiredFacets": [],
+    "supporting": [
+      "RB-F01-F02@1.1.0#evidence-needed",
+      "RB-F01-F02@1.1.0#forbidden-actions"
+    ],
+    "missingRuntimeFacts": [
+      "the exact keyboard URL value at send time",
+      "the provider URL scheme requirements for inline buttons"
+    ]
+  },
+  {
+    "id": "nm-telegram-stale-file-reference",
+    "split": "holdout",
+    "kind": "no_match",
+    "input": {
+      "query": "Telegram sendMessage returned HTTP 400 for a file reference that is no longer valid telegram telegram send rejected 400 file reference invalid FAILED rejected valid valid provider status:400 file reference rejected send stage media reference expired",
+      "providers": [
+        "telegram"
+      ],
+      "limit": 3
+    },
+    "requiredFacets": [],
+    "supporting": [
+      "RB-F01-F02@1.1.0#evidence-needed",
+      "RB-F01-F02@1.1.0#forbidden-actions"
+    ],
+    "missingRuntimeFacts": [
+      "when the stored file reference was created",
+      "the intended replacement media source"
+    ]
+  },
+  {
+    "id": "nm-email-payload-too-large",
+    "split": "holdout",
+    "kind": "no_match",
+    "input": {
+      "query": "email provider rejected the request because the payload exceeded the allowed size email email send rejected 413 payload too large FAILED rejected valid valid provider status:413 payload size exceeded send stage single provider attempt",
+      "providers": [
+        "email"
+      ],
+      "limit": 3
+    },
+    "requiredFacets": [],
+    "supporting": [
+      "RB-F01-F02@1.1.0#evidence-needed",
+      "RB-F01-F02@1.1.0#forbidden-actions"
+    ],
+    "missingRuntimeFacts": [
+      "the provider size limit for the intended message",
+      "the encoded size of the rendered body and attachments"
+    ]
+  },
+  {
+    "id": "nm-email-attachment-encoding",
+    "split": "holdout",
+    "kind": "no_match",
+    "input": {
+      "query": "email provider rejected the attachment because its content encoding was invalid email email send rejected 400 attachment encoding invalid FAILED rejected valid valid provider status:400 attachment encoding rejected send stage malformed attachment content",
+      "providers": [
+        "email"
+      ],
+      "limit": 3
+    },
+    "requiredFacets": [],
+    "supporting": [
+      "RB-F01-F02@1.1.0#evidence-needed",
+      "RB-F01-F02@1.1.0#forbidden-actions"
+    ],
+    "missingRuntimeFacts": [
+      "the attachment encoder used at send time",
+      "the original attachment bytes and content type"
+    ]
+  },
+  {
+    "id": "nm-email-subject-header-newline",
+    "split": "holdout",
+    "kind": "no_match",
+    "input": {
+      "query": "email provider rejected the subject because it contained a line break email email send rejected 422 header injection rejected FAILED rejected valid valid provider status:422 subject header rejected send stage line break in header",
+      "providers": [
+        "email"
+      ],
+      "limit": 3
+    },
+    "requiredFacets": [],
+    "supporting": [
+      "RB-F01-F02@1.1.0#evidence-needed",
+      "RB-F01-F02@1.1.0#forbidden-actions"
+    ],
+    "missingRuntimeFacts": [
+      "the rendered subject value at send time",
+      "the provider header-safety rules applied to the subject"
+    ]
+  },
+  {
+    "id": "nm-email-recipient-count-cap",
+    "split": "holdout",
+    "kind": "no_match",
+    "input": {
+      "query": "email provider rejected the request because it exceeded the per-message recipient cap email email send rejected 400 recipient limit exceeded FAILED rejected valid valid provider status:400 recipient cap exceeded send stage all recipients well formed",
+      "providers": [
+        "email"
+      ],
+      "limit": 3
+    },
+    "requiredFacets": [],
+    "supporting": [
+      "RB-F01-F02@1.1.0#evidence-needed",
+      "RB-F01-F02@1.1.0#forbidden-actions"
+    ],
+    "missingRuntimeFacts": [
+      "the provider recipient cap for this message class",
+      "the intended recipient segmentation"
+    ]
+  },
+  {
+    "id": "nm-worker-disk-full-staging",
+    "split": "holdout",
+    "kind": "no_match",
+    "input": {
+      "query": "worker failed while staging the outbound attachment: ENOSPC no space left on device email worker persist not attempted disk full FAILED not delivered valid valid local staging failure enospc no provider call workspace disk exhausted",
+      "providers": [
+        "worker"
+      ],
+      "limit": 3
+    },
+    "requiredFacets": [],
+    "supporting": [
+      "RB-F07@1.0.0#evidence-needed",
+      "RB-F09-F10@1.0.0#read-only-investigation"
+    ],
+    "missingRuntimeFacts": [
+      "the worker volume capacity and cleanup policy",
+      "whether a partial staging file was left behind"
+    ]
+  },
+  {
+    "id": "nm-worker-oom-payload-serialization",
+    "split": "holdout",
+    "kind": "no_match",
+    "input": {
+      "query": "worker process was killed while serializing a 48 MB action payload email worker validate not attempted worker oom FAILED not delivered valid valid worker memory exhausted process killed payload serialization failed no provider call",
+      "providers": [
+        "worker"
+      ],
+      "limit": 3
+    },
+    "requiredFacets": [],
+    "supporting": [
+      "RB-F07@1.0.0#evidence-needed",
+      "RB-F09-F10@1.0.0#read-only-investigation"
+    ],
+    "missingRuntimeFacts": [
+      "the worker memory limit at failure time",
+      "the serialized payload size and growth path"
+    ]
+  }
+]
