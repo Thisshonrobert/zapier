@@ -1,13 +1,15 @@
 import { spawn } from "node:child_process";
 import { fileURLToPath } from "node:url";
-import { searchRunbooks, type RunbookIndex, type RunbookMatch, type RunbookSearchInput } from "./search-runbooks.ts";
+import { searchRunbooks, type RunbookIndex, type RunbookMatch } from "./search-runbooks.ts";
+import type { StructuredRunbookSearchInput } from "./retrieval-profile.ts";
+import { rankStructured, routeCandidates } from "./structured-ranking.ts";
 
 type Scorer = {
   score(query: string, passages: string[]): Promise<number[]>;
   close(): Promise<void>;
 };
 export type RunbookRetriever = {
-  search(input: RunbookSearchInput): Promise<RunbookMatch[]>;
+  search(input: StructuredRunbookSearchInput): Promise<RunbookMatch[]>;
   close(): Promise<void>;
 };
 
@@ -65,8 +67,25 @@ export async function createRunbookRetriever(
   if (method === "keyword") return {
     search: async input => searchRunbooks(index, input), close: async () => {},
   };
-  if (method !== "minilm-original") throw new Error("RUNBOOK_RETRIEVAL_METHOD must be keyword or minilm-original");
+  if (method !== "minilm-original" && method !== "structured-minilm")
+    throw new Error("RUNBOOK_RETRIEVAL_METHOD must be keyword, minilm-original, or structured-minilm");
   const scorer = await scorerFactory(environment);
+  if (method === "structured-minilm") return {
+    async search(input) {
+      // Same eligibility boundary as keyword; the route narrows it further.
+      const { candidates } = routeCandidates(index, input);
+      if (candidates.length > 60) throw new Error("MiniLM eligible section bound exceeded");
+      if (!candidates.length) return [];
+      const logits = await scorer.score(input.query, candidates.map(s => `${s.heading}\n${s.content}`));
+      if (logits.length !== candidates.length || logits.some(l => !Number.isFinite(l)))
+        throw new Error("Invalid MiniLM scores");
+      const byCitation = Object.fromEntries(candidates.map((section, i) => [section.citation, logits[i]!]));
+      // No absolute cutoff here: the structured arm decides no-match from
+      // observed support, and never falls back to keyword results.
+      return rankStructured(index, input, byCitation).matches;
+    },
+    close: () => scorer.close(),
+  };
   return {
     async search(input) {
       // Reuse the frozen keyword boundary for query/filter/limit validation only.

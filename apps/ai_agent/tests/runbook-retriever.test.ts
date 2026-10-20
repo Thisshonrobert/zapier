@@ -62,6 +62,53 @@ test("MiniLM abstention is never replaced by keyword overlap", async () => {
   await retriever.close();
 });
 
+test("structured-minilm packs requested facets and preserves the match contract", async () => {
+  const retriever = await createRunbookRetriever(index, { RUNBOOK_RETRIEVAL_METHOD: "structured-minilm" }, async () => ({
+    score: async (_query, passages) => passages.map(() => 0),
+    close: async () => {},
+  }));
+  const result = await retriever.search({
+    query: "429",
+    providers: ["telegram"],
+    route: { hints: ["F01"], confident: true, reasons: ["provider_status:429"] },
+    requestedFacets: ["evidence", "verification"],
+    limit: 3,
+  });
+  expect(result.length).toBeLessThanOrEqual(3);
+  expect(result.some((match) => match.heading === "Evidence needed")).toBe(true);
+  expect(result.some((match) => match.heading === "Verification, rollback, or escalation")).toBe(true);
+  expect(result.every((match) => match.canChangePolicy === false)).toBe(true);
+  await retriever.close();
+});
+
+test("structured-minilm ranks without facet reservation when no facet is requested", async () => {
+  const retriever = await createRunbookRetriever(index, { RUNBOOK_RETRIEVAL_METHOD: "structured-minilm" }, async () => ({
+    score: async (_query, passages) => passages.map(() => 0),
+    close: async () => {},
+  }));
+  const result = await retriever.search({ ...input, route: { hints: ["F01"], confident: true, reasons: [] } });
+  expect(result).toHaveLength(3);
+  expect(result.map((match) => match.citation)).toEqual(
+    [...result.map((match) => match.citation)].sort((left, right) => left.localeCompare(right)),
+  );
+  await retriever.close();
+});
+
+test("structured-minilm never falls back to keyword and fails closed on bad scores", async () => {
+  const retriever = await createRunbookRetriever(index, { RUNBOOK_RETRIEVAL_METHOD: "structured-minilm" }, async () => ({
+    score: async (_, passages) => passages.map(() => Number.NaN), close: async () => {},
+  }));
+  await expect(retriever.search(input)).rejects.toThrow("Invalid MiniLM scores");
+  await retriever.close();
+
+  const empty = await createRunbookRetriever(index, { RUNBOOK_RETRIEVAL_METHOD: "structured-minilm" }, async () => ({
+    score: async (_, passages) => passages.map(() => -20), close: async () => {},
+  }));
+  expect(await empty.search(input)).toHaveLength(3);
+  expect(await empty.search({ ...input, taxonomy: ["F03"], providers: ["nonexistent"] })).toEqual([]);
+  await empty.close();
+});
+
 test("invalid scores and model errors fail closed", async () => {
   for (const score of [async () => [NaN], async () => { throw new Error("unavailable"); }]) {
     const retriever = await createRunbookRetriever(index, { RUNBOOK_RETRIEVAL_METHOD: "minilm-original" }, async () => ({ score, close: async () => {} }));

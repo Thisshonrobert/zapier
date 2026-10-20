@@ -1,15 +1,17 @@
 # R3 — retrieval target recovery
 
-**Status: R3.1 baseline recorded.** The serving corpus is frozen in `corpus-v1.json` (55 sections, six runbooks, `transient-provider-failure` 1.1.0) with hash `45e85c3585607ebfd0e1ebd1f2b068e2fab7c889b1bdd3af3a565f20afcbd440`, guarded by `tests/rag-corpus-parity.test.ts`. Gates and cohort rules are frozen in `protocol.json` before any score. The 24-case development cohort and its re-adjudicated facet labels are frozen in `development-cases-v1.json` and `development-labels-v1.json` (label hash `a30fd42160326bd6daa02238be50ad0c0cccab23d5ef5372fcae99e7fd49c752`). The true baseline is recorded in `runs/baseline-20261019-v1/`.
+**Status: R3.3 facet packing recorded (development screening).** The serving corpus is frozen in `corpus-v1.json` (55 sections, six runbooks, `transient-provider-failure` 1.1.0) with hash `45e85c3585607ebfd0e1ebd1f2b068e2fab7c889b1bdd3af3a565f20afcbd440`, guarded by `tests/rag-corpus-parity.test.ts`. Gates and cohort rules are frozen in `protocol.json` before any score. The 24-case development cohort and its re-adjudicated facet labels are frozen in `development-cases-v1.json` and `development-labels-v1.json` (label hash `a30fd42160326bd6daa02238be50ad0c0cccab23d5ef5372fcae99e7fd49c752`). The true baseline is recorded in `runs/baseline-20261019-v1/`; the selected R3.2 route arm in `runs/profile-route-20261019-v1/`; the R3.3 facet-packed arm in `runs/profile-route-facets-20261019-v1/`.
 
-## Baseline (development screening, not acceptance)
+## Development results (screening, not acceptance)
 
 | Arm | Sufficient-guidance hit@3 | Macro section recall@3 | Direct precision@3 | No-match abstention |
 | --- | ---: | ---: | ---: | ---: |
 | keyword | 12.5% (2/16) | 37.5% | 22.9% | 0% (0/8) |
 | `minilm-original` | 25.0% (4/16) | 50.0% | 27.1% | 0% (0/8) |
+| `profile-route` (R3.2) | 31.25% (5/16) | 62.5% | 33.3% | 0% (0/8) |
+| `profile-route-facets` (R3.3) | 81.25% (13/16) | 87.5% | 50.0% | 0% (0/8) |
 
-Both arms rank non-procedural sections (`Simulated example`, `Sources`, repeated same-facet sections) into the top three; the `.001` floor never abstains. This is the expected baseline failure, not a method result. R3.2–R3.4 are the predeclared changes measured against it. The offline `minilm` latency in the report is batch scoring time, not warm service latency.
+R3.3 passes its four development checks: hit@3 and macro recall are above 80%, direct precision is above the same-corpus keyword control (22.9%), and false abstention is 0%. No-match abstention remains 0% by design — the support gate is R3.4, and this arm deliberately has no absolute score cutoff. The three remaining misses (`f04-template-path-missing`, `f10-sdk-error-recorded-success`, `s03-sensitive-fields-present`) return the requested facet from a neighbouring routed runbook, not the accepted citation; the report records their missing facets and accepted citations. These 80% figures screen the method and are not release acceptance.
 
 R3 is the third retrieval evaluation round. R1 compared baseline retrieval. R2 and its follow-ups (R2.1–R2.5) compared ranking variants on corpora, queries, and labels that changed between rounds. R3 fixes the measurement first, applies four predeclared changes, and accepts or rejects the result once.
 

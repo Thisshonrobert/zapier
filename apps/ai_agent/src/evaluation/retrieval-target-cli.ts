@@ -16,7 +16,7 @@ import {
   type RunbookIndex,
 } from "../tools/search-runbooks.ts";
 import { buildStructuredRetrievalInput } from "../tools/retrieval-profile.ts";
-import { rankRouteOnly } from "../tools/structured-ranking.ts";
+import { rankRouteOnly, rankStructured, routeCandidates } from "../tools/structured-ranking.ts";
 import { hash } from "./retrieval-r21.ts";
 import {
   canonicalSections,
@@ -476,6 +476,202 @@ export async function reportProfile(
   console.log(`routeGate=${routeGate.status} (${routeGate.selectedArm})`);
 }
 
+// ---- facet-packed arm (R3.3) ----------------------------------------------
+
+export async function reportFacets(
+  outDir: string,
+  scoresDir: string,
+  routeDir: string,
+): Promise<void> {
+  const { index, cases, frozen, labels, evidenceById } =
+    await loadProfileContext();
+  const inference = JSON.parse(
+    await readFile(join(scoresDir, "inference-original.json"), "utf8"),
+  ) as { inputHash: string };
+  const scores = JSON.parse(
+    await readFile(join(scoresDir, "scores-original.json"), "utf8"),
+  ) as ProfileScores;
+  const routeManifest = JSON.parse(
+    await readFile(join(routeDir, "manifest.json"), "utf8"),
+  ) as {
+    routeGate?: {
+      status?: string;
+      selectedArm?: string;
+      routeCoverage?: number;
+      accepted?: number;
+      covered?: number;
+    };
+  };
+  if (scores.inputHash !== inference.inputHash)
+    throw new Error("Scores do not belong to this inference input");
+  if (routeManifest.routeGate?.selectedArm !== "profile-route")
+    throw new Error("Facet packing requires the selected profile-route arm");
+
+  const facetOutputs: TargetOutput[] = [];
+  const keywordOutputs: TargetOutput[] = [];
+  const facetInfo = new Map<string, ArmInfo>();
+  const facetDetail = new Map<string, Record<string, unknown>>();
+  const keywordInfo = new Map<string, ArmInfo>();
+
+  for (const item of cases) {
+    const profile = buildStructuredRetrievalInput(evidenceById.get(item.id)!);
+    const record = scores.records[item.id]?.original;
+    if (!record) throw new Error(`Missing scores for ${item.id}`);
+    const { candidates, routeExcluded } = routeCandidates(index, profile);
+    const candidatesByCitation = candidates.map(
+      (section) => section.citation,
+    );
+    const packed = rankStructured(index, profile, record.logits);
+    const returned = packed.matches.map((match) => match.citation);
+    facetOutputs.push({
+      id: item.id,
+      returned,
+      latencyMs: record.rerankMs,
+      candidates: candidatesByCitation,
+      routeExcluded,
+    });
+    facetInfo.set(item.id, {
+      returned,
+      candidates: candidatesByCitation,
+      scored: candidatesByCitation,
+      routeExcluded,
+      scores: Object.fromEntries(
+        packed.matches.map((match) => [match.citation, match.score]),
+      ),
+    });
+    const missingFacets = item.requiredFacets
+      .filter(
+        (facet) =>
+          !facet.accepted.some((citation) => returned.includes(citation)),
+      )
+      .map((facet) => facet.facet);
+    facetDetail.set(item.id, {
+      facetsRequested: packed.facetsRequested,
+      facetsCovered: packed.facetsCovered,
+      missingFacets,
+      missingAccepted: item.requiredFacets
+        .filter((facet) => missingFacets.includes(facet.facet))
+        .flatMap((facet) => facet.accepted),
+    });
+
+    const started = performance.now();
+    const keywordScored = scoredRunbookSections(index, item.input);
+    const keywordLatency = performance.now() - started;
+    const keywordReturned = keywordScored
+      .slice(0, item.input.limit ?? 3)
+      .map((entry) => entry.section.citation);
+    const keywordCandidates = eligibleRunbookSections(index, item.input).map(
+      (section) => section.citation,
+    );
+    keywordOutputs.push({
+      id: item.id,
+      returned: keywordReturned,
+      latencyMs: keywordLatency,
+      candidates: keywordCandidates,
+      routeExcluded: [],
+    });
+    keywordInfo.set(item.id, {
+      returned: keywordReturned,
+      candidates: keywordCandidates,
+      scored: keywordScored.map((entry) => entry.section.citation),
+      routeExcluded: [],
+      scores: Object.fromEntries(
+        keywordScored.map((entry) => [entry.section.citation, entry.score]),
+      ),
+    });
+  }
+
+  const facetArm = buildTargetArm(
+    index,
+    cases,
+    "structured",
+    facetOutputs,
+    facetInfo,
+    (id) => facetDetail.get(id) ?? {},
+  );
+  const keywordArm = buildTargetArm(
+    index,
+    cases,
+    "keyword",
+    keywordOutputs,
+    keywordInfo,
+  );
+
+  const hit = facetArm.metrics.sufficientGuidanceHitAt3 ?? 0;
+  const recall = facetArm.metrics.macroSectionRecallAt3 ?? 0;
+  const precision = facetArm.metrics.directPrecisionAt3 ?? 0;
+  const keywordPrecision = keywordArm.metrics.directPrecisionAt3 ?? 0;
+  const abstention = facetArm.falseAbstention.rate ?? 0;
+  const checks = {
+    hitAt3: { value: hit, threshold: 0.8, pass: hit >= 0.8 },
+    macroSectionRecallAt3: {
+      value: recall,
+      threshold: 0.8,
+      pass: recall >= 0.8,
+    },
+    directPrecisionAt3: {
+      value: precision,
+      keywordControl: keywordPrecision,
+      pass: precision >= keywordPrecision,
+    },
+    falseAbstention: {
+      value: abstention,
+      threshold: 0.05,
+      pass: abstention <= 0.05,
+    },
+  };
+  const gate = {
+    ...checks,
+    status: Object.values(checks).every((check) => check.pass)
+      ? "passed"
+      : "failed",
+  };
+
+  const manifest = {
+    generatedAt: new Date().toISOString(),
+    packingVersion: "r3.3-v1",
+    corpusHash: frozen.corpusHash,
+    labelHash: targetLabelHash(labels),
+    protocolHash: await sha256File(join(r3Dir, "protocol.json")),
+    inputHash: inference.inputHash,
+    scoresHash: await sha256File(join(scoresDir, "scores-original.json")),
+    routeGate: routeManifest.routeGate,
+    selectedArm: "profile-route-facets",
+    notes: {
+      sharedLogits:
+        "facet packing consumes the same scores-original.json as the selected R3.2 profile-route arm; only top-three selection changes",
+      noCutoff:
+        "the structured arm ranks by sigmoid score without the minilm-original .001 floor",
+      noMatchLedger:
+        "R3.3 has no support gate yet; no-match cases that still return sections are recorded as cutoff_rejection until R3.4",
+    },
+  };
+  await mkdir(outDir, { recursive: true });
+  await writeFile(
+    join(outDir, "manifest.json"),
+    JSON.stringify(manifest, null, 2) + "\n",
+    { flag: "wx" },
+  );
+  await writeFile(
+    join(outDir, "report.json"),
+    JSON.stringify(
+      {
+        ...manifest,
+        gate,
+        arms: { keyword: keywordArm, "profile-route-facets": facetArm },
+      },
+      null,
+      2,
+    ) + "\n",
+    { flag: "wx" },
+  );
+  console.log(
+    `profile-route-facets: hit@3=${hit} recall=${recall} precision=${precision} ` +
+      `keywordPrecision=${keywordPrecision} falseAbstention=${abstention}`,
+  );
+  console.log(`phaseGate=${gate.status}`);
+}
+
 // ---- reporting -------------------------------------------------------------
 
 const facetByHeading: Record<string, string> = {
@@ -504,7 +700,7 @@ type LedgerEntry = { id: string; bucket: string | null };
 
 function ledgerBucket(
   item: TargetCase,
-  arm: "keyword" | "minilm-original",
+  arm: "keyword" | "minilm-original" | "structured",
   info: ArmInfo,
   eligibleAnswerable: boolean,
   sufficient: boolean,
@@ -538,6 +734,60 @@ function ledgerBucket(
     (facet, position) => facets.indexOf(facet) !== position,
   );
   return { id: item.id, bucket: collision ? "facet_packing" : "wrong_rank" };
+}
+
+function buildTargetArm(
+  index: RunbookIndex,
+  cases: readonly TargetCase[],
+  arm: "keyword" | "minilm-original" | "structured",
+  outputs: TargetOutput[],
+  info: Map<string, ArmInfo>,
+  decorate?: (id: string) => Record<string, unknown>,
+) {
+  const latencyById = new Map(
+    outputs.map((output) => [
+      output.id,
+      "latencyMs" in output ? output.latencyMs : 0,
+    ]),
+  );
+  const scored = scoreTarget(index, cases, outputs);
+  const rowById = new Map(scored.rows.map((row) => [row.id, row]));
+  const ledger = cases.map((item) =>
+    ledgerBucket(
+      item,
+      arm,
+      info.get(item.id)!,
+      rowById.get(item.id)!.eligibleAnswerable,
+      rowById.get(item.id)!.sufficient,
+    ),
+  );
+  const ledgerSummary: Record<string, number> = {};
+  for (const entry of ledger)
+    if (entry.bucket)
+      ledgerSummary[entry.bucket] = (ledgerSummary[entry.bucket] ?? 0) + 1;
+  return {
+    ...scored,
+    rows: scored.rows.map((row) => {
+      const detail = info.get(row.id)!;
+      const single = cases.find((item) => item.id === row.id)!;
+      return {
+        id: row.id,
+        kind: row.kind,
+        requiredFacets: single.requiredFacets.map((facet) => facet.facet),
+        returned: row.returned,
+        scores: detail.scores,
+        candidates: detail.candidates.length,
+        routeExcluded: detail.routeExcluded,
+        latencyMs: latencyById.get(row.id) ?? 0,
+        sufficient: row.sufficient,
+        eligibleAnswerable: row.eligibleAnswerable,
+        providerExcluded: row.providerExcluded,
+        ...(decorate?.(row.id) ?? {}),
+      };
+    }),
+    ledger,
+    ledgerSummary,
+  };
 }
 
 export async function reportTargetRun(runDir: string): Promise<void> {
@@ -612,51 +862,7 @@ export async function reportTargetRun(runDir: string): Promise<void> {
     arm: "keyword" | "minilm-original",
     outputs: TargetOutput[],
     info: Map<string, ArmInfo>,
-  ) => {
-    const latencyById = new Map(
-      outputs.map((output) => [
-        output.id,
-        "latencyMs" in output ? output.latencyMs : 0,
-      ]),
-    );
-    const scored = scoreTarget(index, cases, outputs);
-    const rowById = new Map(scored.rows.map((row) => [row.id, row]));
-    const ledger = cases.map((item) =>
-      ledgerBucket(
-        item,
-        arm,
-        info.get(item.id)!,
-        rowById.get(item.id)!.eligibleAnswerable,
-        rowById.get(item.id)!.sufficient,
-      ),
-    );
-    const ledgerSummary: Record<string, number> = {};
-    for (const entry of ledger)
-      if (entry.bucket)
-        ledgerSummary[entry.bucket] = (ledgerSummary[entry.bucket] ?? 0) + 1;
-    return {
-      ...scored,
-      rows: scored.rows.map((row) => {
-        const detail = info.get(row.id)!;
-        const single = cases.find((item) => item.id === row.id)!;
-        return {
-          id: row.id,
-          kind: row.kind,
-          requiredFacets: single.requiredFacets.map((facet) => facet.facet),
-          returned: row.returned,
-          scores: detail.scores,
-          candidates: detail.candidates.length,
-          routeExcluded: detail.routeExcluded,
-          latencyMs: latencyById.get(row.id) ?? 0,
-          sufficient: row.sufficient,
-          eligibleAnswerable: row.eligibleAnswerable,
-          providerExcluded: row.providerExcluded,
-        };
-      }),
-      ledger,
-      ledgerSummary,
-    };
-  };
+  ) => buildTargetArm(index, cases, arm, outputs, info);
 
   const report = {
     run: runDir.split(/[\\/]/).pop(),
@@ -701,6 +907,8 @@ async function main() {
       "prepare-baseline": { type: "string" },
       "prepare-profile": { type: "string" },
       "report-profile": { type: "string" },
+      "report-facets": { type: "string" },
+      "scores-run": { type: "string" },
       "route-run": { type: "string" },
       report: { type: "string" },
     },
@@ -727,9 +935,20 @@ async function main() {
           join(r3Dir, "runs", "profile-route-20261019-v1"),
       ),
     );
+  if (values["report-facets"])
+    return reportFacets(
+      resolve(values["report-facets"]),
+      resolve(
+        values["scores-run"] ??
+          join(r3Dir, "runs", "profile-global-20261019-v1"),
+      ),
+      resolve(
+        values["route-run"] ?? join(r3Dir, "runs", "profile-route-20261019-v1"),
+      ),
+    );
   if (values.report) return reportTargetRun(resolve(values.report));
   throw new Error(
-    "Usage: --freeze-corpus <path> | --prepare-benchmark | --prepare-baseline <dir> | --prepare-profile <dir> | --report-profile <dir> [--route-run <dir>] | --report <dir>",
+    "Usage: --freeze-corpus <path> | --prepare-benchmark | --prepare-baseline <dir> | --prepare-profile <dir> | --report-profile <dir> [--route-run <dir>] | --report-facets <dir> [--scores-run <dir>] [--route-run <dir>] | --report <dir>",
   );
 }
 

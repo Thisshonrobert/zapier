@@ -1,0 +1,23 @@
+{
+  "generatedAt": "2026-10-20T06:15:38.012Z",
+  "packingVersion": "r3.3-v1",
+  "corpusHash": "45e85c3585607ebfd0e1ebd1f2b068e2fab7c889b1bdd3af3a565f20afcbd440",
+  "labelHash": "a30fd42160326bd6daa02238be50ad0c0cccab23d5ef5372fcae99e7fd49c752",
+  "protocolHash": "e6a491cc5d2423485c61ff5d5e8634e07bc9886bb76041b68238f5322290c3ed",
+  "inputHash": "325c380a92039193f788338c3e243ac2d5584f74a1ee54929d09d5e4730ce881",
+  "scoresHash": "1f34ca45d2a1f3b38953e97128d533b744b76f9efa8f6580f0035b279064ce9c",
+  "routeGate": {
+    "threshold": 1,
+    "routeCoverage": 1,
+    "accepted": 28,
+    "covered": 28,
+    "status": "enabled",
+    "selectedArm": "profile-route"
+  },
+  "selectedArm": "profile-route-facets",
+  "notes": {
+    "sharedLogits": "facet packing consumes the same scores-original.json as the selected R3.2 profile-route arm; only top-three selection changes",
+    "noCutoff": "the structured arm ranks by sigmoid score without the minilm-original .001 floor",
+    "noMatchLedger": "R3.3 has no support gate yet; no-match cases that still return sections are recorded as cutoff_rejection until R3.4"
+  }
+}
