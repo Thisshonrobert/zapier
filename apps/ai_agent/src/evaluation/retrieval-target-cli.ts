@@ -16,6 +16,7 @@ import {
   type RunbookIndex,
 } from "../tools/search-runbooks.ts";
 import { buildStructuredRetrievalInput } from "../tools/retrieval-profile.ts";
+import type { SupportPolicy } from "../tools/retrieval-support.ts";
 import { rankRouteOnly, rankStructured, routeCandidates } from "../tools/structured-ranking.ts";
 import { hash } from "./retrieval-r21.ts";
 import {
@@ -672,6 +673,310 @@ export async function reportFacets(
   console.log(`phaseGate=${gate.status}`);
 }
 
+// ---- calibrated support arm (R3.4) ----------------------------------------
+
+const supportSelectionOrder = [
+  "no-match abstention >= 90%",
+  "false abstention <= 5%",
+  "highest sufficient-guidance hit@3",
+  "highest macro section recall@3",
+  "lower p95 latency",
+] as const;
+
+type SupportSetting = {
+  policy: SupportPolicy;
+  arm: ReturnType<typeof buildTargetArm>;
+  cases: Array<Record<string, unknown>>;
+};
+
+function buildKeywordControl(index: RunbookIndex, cases: readonly TargetCase[]) {
+  const outputs: TargetOutput[] = [];
+  const info = new Map<string, ArmInfo>();
+  for (const item of cases) {
+    const started = performance.now();
+    const keywordScored = scoredRunbookSections(index, item.input);
+    const latency = performance.now() - started;
+    const returned = keywordScored
+      .slice(0, item.input.limit ?? 3)
+      .map((entry) => entry.section.citation);
+    const candidates = eligibleRunbookSections(index, item.input).map(
+      (section) => section.citation,
+    );
+    outputs.push({
+      id: item.id,
+      returned,
+      latencyMs: latency,
+      candidates,
+      routeExcluded: [],
+    });
+    info.set(item.id, {
+      returned,
+      candidates,
+      scored: keywordScored.map((entry) => entry.section.citation),
+      routeExcluded: [],
+      scores: Object.fromEntries(
+        keywordScored.map((entry) => [entry.section.citation, entry.score]),
+      ),
+    });
+  }
+  return buildTargetArm(index, cases, "keyword", outputs, info);
+}
+
+function selectSupportSetting(
+  settings: readonly SupportSetting[],
+): SupportSetting {
+  const abstentionEligible = settings.filter(
+    (setting) => (setting.arm.noMatchAbstention.rate ?? 0) >= 0.9,
+  );
+  const abstentionPool = abstentionEligible.length
+    ? abstentionEligible
+    : settings;
+  const falseAbstentionEligible = abstentionPool.filter(
+    (setting) => (setting.arm.falseAbstention.rate ?? 1) <= 0.05,
+  );
+  const pool = falseAbstentionEligible.length
+    ? falseAbstentionEligible
+    : abstentionPool;
+  return [...pool].sort(
+    (left, right) =>
+      (right.arm.metrics.sufficientGuidanceHitAt3 ?? 0) -
+        (left.arm.metrics.sufficientGuidanceHitAt3 ?? 0) ||
+      (right.arm.metrics.macroSectionRecallAt3 ?? 0) -
+        (left.arm.metrics.macroSectionRecallAt3 ?? 0) ||
+      (left.arm.p95LatencyMs ?? 0) - (right.arm.p95LatencyMs ?? 0),
+  )[0]!;
+}
+
+export async function reportSupport(
+  outDir: string,
+  scoresDir: string,
+  routeDir: string,
+): Promise<void> {
+  const { index, cases, frozen, labels, evidenceById } =
+    await loadProfileContext();
+  const inference = JSON.parse(
+    await readFile(join(scoresDir, "inference-original.json"), "utf8"),
+  ) as { inputHash: string };
+  const scores = JSON.parse(
+    await readFile(join(scoresDir, "scores-original.json"), "utf8"),
+  ) as ProfileScores;
+  const routeManifest = JSON.parse(
+    await readFile(join(routeDir, "manifest.json"), "utf8"),
+  ) as {
+    routeGate?: {
+      status?: string;
+      selectedArm?: string;
+      routeCoverage?: number;
+      accepted?: number;
+      covered?: number;
+    };
+  };
+  if (scores.inputHash !== inference.inputHash)
+    throw new Error("Scores do not belong to this inference input");
+  if (routeManifest.routeGate?.selectedArm !== "profile-route")
+    throw new Error("The support gate requires the selected profile-route arm");
+
+  const keywordArm = buildKeywordControl(index, cases);
+  const settings: SupportSetting[] = [];
+  const policies: SupportPolicy[] = [
+    { minAnchorHits: 1 },
+    { minAnchorHits: 2 },
+  ];
+
+  for (const policy of policies) {
+    const outputs: TargetOutput[] = [];
+    const info = new Map<string, ArmInfo>();
+    const detail = new Map<string, Record<string, unknown>>();
+
+    for (const item of cases) {
+      const profile = buildStructuredRetrievalInput(evidenceById.get(item.id)!);
+      const record = scores.records[item.id]?.original;
+      if (!record) throw new Error(`Missing scores for ${item.id}`);
+      const { candidates, routeExcluded } = routeCandidates(index, profile);
+      const candidatesByCitation = candidates.map(
+        (section) => section.citation,
+      );
+      const packed = rankStructured(index, profile, record.logits, policy);
+      const returned = packed.matches.map((match) => match.citation);
+      outputs.push({
+        id: item.id,
+        returned,
+        latencyMs: record.rerankMs,
+        candidates: candidatesByCitation,
+        routeExcluded,
+      });
+      info.set(item.id, {
+        returned,
+        candidates: candidatesByCitation,
+        scored: candidatesByCitation,
+        routeExcluded,
+        scores: Object.fromEntries(
+          packed.matches.map((match) => [match.citation, match.score]),
+        ),
+      });
+      const missingFacets = item.requiredFacets
+        .filter(
+          (facet) =>
+            !facet.accepted.some((citation) => returned.includes(citation)),
+        )
+        .map((facet) => facet.facet);
+      detail.set(item.id, {
+        support: { minAnchorHits: policy.minAnchorHits },
+        supportReason: packed.supportReason,
+        abstained: packed.abstained,
+        anchors: profile.anchors ?? [],
+        matchedAnchors: packed.matchedAnchors,
+        facetsRequested: packed.facetsRequested,
+        facetsCovered: packed.facetsCovered,
+        missingFacets,
+        missingAccepted: item.requiredFacets
+          .filter((facet) => missingFacets.includes(facet.facet))
+          .flatMap((facet) => facet.accepted),
+      });
+    }
+
+    const arm = buildTargetArm(
+      index,
+      cases,
+      "structured",
+      outputs,
+      info,
+      (id) => detail.get(id) ?? {},
+    );
+    settings.push({
+      policy,
+      arm,
+      cases: cases.map((item) => {
+        const value = detail.get(item.id)!;
+        return {
+          id: item.id,
+          kind: item.kind,
+          supportReason: value.supportReason,
+          abstained: value.abstained,
+          anchors: value.anchors,
+          matchedAnchors: value.matchedAnchors,
+          missingFacets: value.missingFacets,
+        };
+      }),
+    });
+  }
+
+  const selected = selectSupportSetting(settings);
+  const selectedArm = selected.arm;
+  const tied =
+    settings.length > 1 &&
+    settings.every(
+      (setting) =>
+        setting.arm.metrics.sufficientGuidanceHitAt3 ===
+          selectedArm.metrics.sufficientGuidanceHitAt3 &&
+        setting.arm.metrics.macroSectionRecallAt3 ===
+          selectedArm.metrics.macroSectionRecallAt3 &&
+        setting.arm.noMatchAbstention.rate ===
+          selectedArm.noMatchAbstention.rate &&
+        setting.arm.falseAbstention.rate ===
+          selectedArm.falseAbstention.rate &&
+        setting.arm.p95LatencyMs === selectedArm.p95LatencyMs,
+    );
+
+  const noMatchAbstentionPass =
+    (selectedArm.noMatchAbstention.rate ?? 0) >= 0.9;
+  const falseAbstentionPass =
+    (selectedArm.falseAbstention.rate ?? 1) <= 0.05;
+  const gate = {
+    noMatchAbstention: {
+      ...selectedArm.noMatchAbstention,
+      threshold: 0.9,
+      pass: noMatchAbstentionPass,
+    },
+    falseAbstention: {
+      ...selectedArm.falseAbstention,
+      threshold: 0.05,
+      pass: falseAbstentionPass,
+    },
+    status:
+      noMatchAbstentionPass && falseAbstentionPass ? "passed" : "failed",
+  };
+
+  const manifest = {
+    generatedAt: new Date().toISOString(),
+    supportVersion: "r3.4-v1",
+    corpusHash: frozen.corpusHash,
+    labelHash: targetLabelHash(labels),
+    protocolHash: await sha256File(join(r3Dir, "protocol.json")),
+    inputHash: inference.inputHash,
+    scoresHash: await sha256File(join(scoresDir, "scores-original.json")),
+    routeGate: routeManifest.routeGate,
+    selectedArm: "profile-route-facets-support",
+    support: {
+      selected: { minAnchorHits: selected.policy.minAnchorHits },
+      policies: [1, 2],
+      selectionOrder: supportSelectionOrder,
+      tie: tied,
+    },
+    gate: { status: gate.status },
+    notes: {
+      sharedRoute:
+        "the support arm reuses the frozen R3.2 profile-route decision; no route rule was retuned",
+      sharedLogits:
+        "facet packing and support reuse the same scores-original.json as the selected R3.2 profile-route arm",
+      noCutoff:
+        "the structured arm ranks by sigmoid score without the minilm-original .001 floor",
+      support:
+        "abstention is decided from route confidence or distinct observed anchors, never from a score threshold",
+    },
+  };
+  await mkdir(outDir, { recursive: true });
+  await writeFile(
+    join(outDir, "manifest.json"),
+    JSON.stringify(manifest, null, 2) + "\n",
+    { flag: "wx" },
+  );
+  await writeFile(
+    join(outDir, "report.json"),
+    JSON.stringify(
+      {
+        ...manifest,
+        gate,
+        support: {
+          ...manifest.support,
+          selectedReason: tied
+            ? "all selection criteria tied; minAnchorHits:1 is the predeclared Task 12 default"
+            : "first setting by the predeclared selection order",
+          settings: settings.map((setting) => ({
+            minAnchorHits: setting.policy.minAnchorHits,
+            sufficientGuidanceHitAt3:
+              setting.arm.metrics.sufficientGuidanceHitAt3,
+            macroSectionRecallAt3:
+              setting.arm.metrics.macroSectionRecallAt3,
+            directPrecisionAt3: setting.arm.metrics.directPrecisionAt3,
+            noMatchAbstention: setting.arm.noMatchAbstention,
+            falseAbstention: setting.arm.falseAbstention,
+            p95LatencyMs: setting.arm.p95LatencyMs,
+            ledgerSummary: setting.arm.ledgerSummary,
+            cases: setting.cases,
+          })),
+        },
+        arms: {
+          keyword: keywordArm,
+          "profile-route-facets-support": selectedArm,
+        },
+      },
+      null,
+      2,
+    ) + "\n",
+    { flag: "wx" },
+  );
+  console.log(
+    `profile-route-facets-support: minAnchorHits=${selected.policy.minAnchorHits} ` +
+      `hit@3=${selectedArm.metrics.sufficientGuidanceHitAt3} ` +
+      `recall=${selectedArm.metrics.macroSectionRecallAt3} ` +
+      `precision=${selectedArm.metrics.directPrecisionAt3} ` +
+      `abstention=${selectedArm.noMatchAbstention.rate} ` +
+      `falseAbstention=${selectedArm.falseAbstention.rate}`,
+  );
+  console.log(`phaseGate=${gate.status}`);
+}
+
 // ---- reporting -------------------------------------------------------------
 
 const facetByHeading: Record<string, string> = {
@@ -908,6 +1213,7 @@ async function main() {
       "prepare-profile": { type: "string" },
       "report-profile": { type: "string" },
       "report-facets": { type: "string" },
+      "report-support": { type: "string" },
       "scores-run": { type: "string" },
       "route-run": { type: "string" },
       report: { type: "string" },
@@ -946,9 +1252,20 @@ async function main() {
         values["route-run"] ?? join(r3Dir, "runs", "profile-route-20261019-v1"),
       ),
     );
+  if (values["report-support"])
+    return reportSupport(
+      resolve(values["report-support"]),
+      resolve(
+        values["scores-run"] ??
+          join(r3Dir, "runs", "profile-global-20261019-v1"),
+      ),
+      resolve(
+        values["route-run"] ?? join(r3Dir, "runs", "profile-route-20261019-v1"),
+      ),
+    );
   if (values.report) return reportTargetRun(resolve(values.report));
   throw new Error(
-    "Usage: --freeze-corpus <path> | --prepare-benchmark | --prepare-baseline <dir> | --prepare-profile <dir> | --report-profile <dir> [--route-run <dir>] | --report-facets <dir> [--scores-run <dir>] [--route-run <dir>] | --report <dir>",
+    "Usage: --freeze-corpus <path> | --prepare-benchmark | --prepare-baseline <dir> | --prepare-profile <dir> | --report-profile <dir> [--route-run <dir>] | --report-facets <dir> [--scores-run <dir>] [--route-run <dir>] | --report-support <dir> [--scores-run <dir>] [--route-run <dir>] | --report <dir>",
   );
 }
 

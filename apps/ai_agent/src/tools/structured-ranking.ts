@@ -14,6 +14,12 @@ import type {
   RequestedFacet,
   StructuredRunbookSearchInput,
 } from "./retrieval-profile.ts";
+import {
+  decideSupport,
+  matchedObservedAnchors,
+  type SupportPolicy,
+  type SupportReason,
+} from "./retrieval-support.ts";
 
 const noRoute: EvidenceRoute = { hints: [], confident: false, reasons: [] };
 
@@ -89,11 +95,15 @@ export function rankStructured(
   index: RunbookIndex,
   input: StructuredRunbookSearchInput,
   logits: Record<string, number>,
+  policy: SupportPolicy = { minAnchorHits: 1 },
 ): {
   matches: RunbookMatch[];
   route: EvidenceRoute;
   facetsRequested: RequestedFacet[];
   facetsCovered: RequestedFacet[];
+  abstained: boolean;
+  supportReason: SupportReason;
+  matchedAnchors: string[];
 } {
   const { candidates, route } = routeCandidates(index, input);
   const limit = input.limit ?? 3;
@@ -101,9 +111,11 @@ export function rankStructured(
     toRunbookMatch(section, score),
   );
   const facetsRequested = [...(input.requestedFacets ?? [])];
-  const matches = facetsRequested.length
+  const packed = facetsRequested.length
     ? packByFacet(ranked, facetsRequested, limit)
     : ranked.slice(0, limit);
+  const support = decideSupport(packed, input, policy);
+  const matches = support.abstain ? [] : packed;
   return {
     matches,
     route,
@@ -111,5 +123,8 @@ export function rankStructured(
     facetsCovered: facetsRequested.filter((facet) =>
       matches.some((match) => sectionFacet(match.heading) === facet),
     ),
+    abstained: support.abstain,
+    supportReason: support.reason,
+    matchedAnchors: matchedObservedAnchors(packed, input),
   };
 }

@@ -1496,7 +1496,7 @@ Use the same scores as `profile-route` or `profile-global`; only packing changes
   - at least one procedural section;
   - no absolute sigmoid threshold as the sole no-match authority.
 
-- [ ] **Step 1: Write the failing tests**
+- [x] **Step 1: Write the failing tests**
 
 ```ts
 import type { RunbookMatch } from "../src/tools/search-runbooks.ts";
@@ -1558,7 +1558,7 @@ test("requires the calibrated number of distinct anchors", () => {
 });
 ```
 
-- [ ] **Step 2: Implement the anchor match**
+- [x] **Step 2: Implement the anchor match**
 
 Anchors are safe observed tokens such as `"429"`, `"telegram"`, `"unsupported_action_type"`, or a missing-field name. Do not include fixture-only controls, raw error bodies, PII, secrets, or labels. Count distinct anchors found in the selected heading and content, case-insensitively. `minAnchorHits` is the only calibrated support setting.
 
@@ -1584,11 +1584,11 @@ export function decideSupport(
 }
 ```
 
-- [ ] **Step 3: Wire the gate into `rankStructured`**
+- [x] **Step 3: Wire the gate into `rankStructured`**
 
 Add `abstained: boolean` to `rankStructured`'s return value and set it from `decideSupport`. If `decideSupport` abstains, return an empty match array. The graph already accepts an empty runbook list and must not substitute keyword results.
 
-- [ ] **Step 4: Run the support tests**
+- [x] **Step 4: Run the support tests**
 
 Run: `bun test apps/ai_agent/tests/retrieval-support.test.ts apps/ai_agent/tests/runbook-retriever.test.ts`
 
@@ -1606,7 +1606,7 @@ Expected: PASS, including the existing "MiniLM abstention is never replaced by k
 - Consumes: the frozen Phase 3 candidate and `development-labels-v1.json`.
 - Produces: `apps/ai_agent/evaluation/r3/selected-retrieval-config.json` with the support-gate setting and hashes.
 
-- [ ] **Step 1: Limit calibration to two predeclared settings**
+- [x] **Step 1: Limit calibration to two predeclared settings**
 
 Test only:
 

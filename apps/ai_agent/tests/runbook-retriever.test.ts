@@ -94,6 +94,15 @@ test("structured-minilm ranks without facet reservation when no facet is request
   await retriever.close();
 });
 
+test("structured abstention is never replaced by keyword overlap", async () => {
+  expect(searchRunbooks(index, input).length).toBeGreaterThan(0);
+  const retriever = await createRunbookRetriever(index, { RUNBOOK_RETRIEVAL_METHOD: "structured-minilm" }, async () => ({
+    score: async (_, passages) => passages.map(() => 0), close: async () => {},
+  }));
+  expect(await retriever.search(input)).toEqual([]);
+  await retriever.close();
+});
+
 test("structured-minilm never falls back to keyword and fails closed on bad scores", async () => {
   const retriever = await createRunbookRetriever(index, { RUNBOOK_RETRIEVAL_METHOD: "structured-minilm" }, async () => ({
     score: async (_, passages) => passages.map(() => Number.NaN), close: async () => {},
@@ -104,7 +113,8 @@ test("structured-minilm never falls back to keyword and fails closed on bad scor
   const empty = await createRunbookRetriever(index, { RUNBOOK_RETRIEVAL_METHOD: "structured-minilm" }, async () => ({
     score: async (_, passages) => passages.map(() => -20), close: async () => {},
   }));
-  expect(await empty.search(input)).toHaveLength(3);
+  expect(searchRunbooks(index, input).length).toBeGreaterThan(0);
+  expect(await empty.search(input)).toEqual([]);
   expect(await empty.search({ ...input, taxonomy: ["F03"], providers: ["nonexistent"] })).toEqual([]);
   await empty.close();
 });

@@ -469,26 +469,26 @@ Expected: PASS.
 - `SupportReason = "no_candidates" | "no_procedural_section" | "no_observed_anchor" | "supported"`
 - `decideSupport(matches, input, policy): { abstain: boolean; reason: SupportReason }`
 
-- [ ] **Step 1: Write the failing support tests**
+- [x] **Step 1: Write the failing support tests**
 
 Cover: empty candidates → `no_candidates`; generic section with no route and no anchor → `no_observed_anchor`; routed observed 429 → `supported`; `minAnchorHits: 2` with one anchor → `no_observed_anchor`.
 
 Run: `bun test apps/ai_agent/tests/retrieval-support.test.ts`
 Expected: FAIL.
 
-- [ ] **Step 2: Implement anchor matching**
+- [x] **Step 2: Implement anchor matching**
 
 Count distinct anchors found case-insensitively in the selected headings and content. Anchors are safe observed tokens only — no fixture-only controls, raw error bodies, PII, secrets, or labels.
 
-- [ ] **Step 3: Wire the gate**
+- [x] **Step 3: Wire the gate**
 
 `rankStructured` returns `abstained` from `decideSupport` and an empty match array when abstaining. The graph already accepts an empty list; it must not substitute keyword results.
 
-- [ ] **Step 4: Calibrate exactly two predeclared settings**
+- [x] **Step 4: Calibrate exactly two predeclared settings**
 
 Test only `minAnchorHits: 1` and `minAnchorHits: 2`, using the frozen R3.2 route decision. Select by: abstention ≥ 90% → false abstention ≤ 5% → highest hit@3 → highest macro recall → lower latency. No third feature, threshold, or rule.
 
-- [ ] **Step 5: Capture the support arm and apply the gate**
+- [x] **Step 5: Capture the support arm and apply the gate**
 
 Run: `bun test apps/ai_agent/tests/retrieval-support.test.ts apps/ai_agent/tests/runbook-retriever.test.ts`
 Expected: PASS, including "MiniLM abstention is never replaced by keyword overlap".
