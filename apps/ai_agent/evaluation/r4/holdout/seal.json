@@ -1,0 +1,63 @@
+{
+  "version": 1,
+  "status": "sealed_before_candidate_freeze",
+  "sealedAt": "2026-10-21T09:03:54.502Z",
+  "hashMethod": "sha256 of raw file bytes",
+  "corpus": {
+    "path": "apps/ai_agent/evaluation/r3/corpus-v1.json",
+    "hash": "45e85c3585607ebfd0e1ebd1f2b068e2fab7c889b1bdd3af3a565f20afcbd440"
+  },
+  "counts": {
+    "cases": 160,
+    "answerable": 120,
+    "noMatch": 40,
+    "labels": 160,
+    "evidence": 160,
+    "diagnosisSubset": 40,
+    "fingerprints": 240
+  },
+  "files": {
+    "cases": {
+      "path": "apps/ai_agent/evaluation/r4/holdout/cases-v1.json",
+      "hash": "a8f5794ab778ddbbd7de0a10181854fb8b2d611439a3a4f688192e314e44bebd",
+      "bytes": 153509
+    },
+    "labels": {
+      "path": "apps/ai_agent/evaluation/r4/holdout/labels-v2.json",
+      "hash": "fecf0bd40e2ad1a39cd409499c9380256ec73b5b2ab5f71f2f9d22ced7be05a2",
+      "bytes": 187130
+    },
+    "evidence": {
+      "path": "apps/ai_agent/evaluation/r4/holdout/evidence-v1.json",
+      "hash": "8fdc05be0b36b03f1fec97bb34eedd8e981b719e94df869e6e07d59d6e3d83b8",
+      "bytes": 706425
+    },
+    "review": {
+      "path": "apps/ai_agent/evaluation/r4/holdout/review-v1.json",
+      "hash": "9c245fc27b31212baf7ff8609b2c8d0eff41d86c3377e61f6e9edc19dc873a4c",
+      "bytes": 35718
+    },
+    "diagnosisSubset": {
+      "path": "apps/ai_agent/evaluation/r4/holdout/diagnosis-subset-v1.json",
+      "hash": "02a26f320afe95d02ab13eecceb6536bf220756680ae5aaba220529360659e40",
+      "bytes": 5058
+    },
+    "fingerprints": {
+      "path": "apps/ai_agent/evaluation/r4/holdout/fingerprints-v1.json",
+      "hash": "e8f4dca164fad8eecbc62c5f0f3182b46b19da7028983f57e56c6d3a1ceb7864",
+      "bytes": 42526
+    },
+    "authoringAttestation": {
+      "path": "apps/ai_agent/evaluation/r4/holdout/authoring-attestation-v1.json",
+      "hash": "4d3315e1a4be6491ce5967c42e4878f4617aafd892688144900d19a7b4316f76",
+      "bytes": 2282
+    }
+  },
+  "review": {
+    "verdict": "provisional_ai_assisted_human_signoff_outstanding",
+    "independence": "ai_assisted_not_human_independent",
+    "kappa": 1,
+    "passes": true
+  },
+  "rule": "Written before the R4.4 candidate freeze and before any retrieval run on the holdout. Any byte change to a sealed file invalidates the holdout; a label defect discovered after a run consumes it and requires a new sealed holdout."
+}

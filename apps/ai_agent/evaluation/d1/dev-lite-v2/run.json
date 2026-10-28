@@ -1,0 +1,10 @@
+{
+  "phase": "R4.5",
+  "runId": "d1-dev-lite-v2-20261028",
+  "startedAt": "2026-10-28T07:09:30.865Z",
+  "protocol": "apps/ai_agent/evaluation/d1/dev-lite-v2/protocol.json",
+  "protocolHash": "debe4388bfaccf0d7e62c99b7b0e9b2dc3235b79f79e0eb942a19ee937d0778c",
+  "subsetHash": "246947d49a31fcd5a35fb941cad54cbe190970a3327c7da3e7a3ec87f700d68e",
+  "model": "gemini-3.5-flash-lite",
+  "tier": "free"
+}

@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "createdAt": "2026-10-26",
+  "hashMethod": "sha256 of raw file bytes",
+  "files": {
+    "dev-subset-v1.json": "246947d49a31fcd5a35fb941cad54cbe190970a3327c7da3e7a3ec87f700d68e",
+    "acceptance-subset-v1.json": "5f8faf6c6672758063e0b698b5de77e441a9e710e1fae2ec768a106f815bbe12"
+  }
+}

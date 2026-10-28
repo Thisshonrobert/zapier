@@ -1,0 +1,179 @@
+{
+  "version": 1,
+  "phase": "R4.5",
+  "runId": "d1-dev-lite-v2-20261028",
+  "status": "frozen_before_measurement",
+  "createdAt": "2026-10-28",
+  "authorization": "D1 development screening (docs/superpowers/plans/2026-10-26-d1-diagnosis-improvement.md Task 4). Advisory only; never accepts or promotes. Selection rule frozen in apps/ai_agent/evaluation/d1/dev-decision.md before generation. Iteration 2: revised v4 text after arm A failed the rule (dev-decision.md).",
+  "predecessor": {
+    "phase": "R4.4",
+    "run": "holdout-20261021-v1",
+    "decision": "retrieval_accepted",
+    "decisionPath": "apps/ai_agent/evaluation/r4/runs/holdout-20261021-v1/decision.md",
+    "decisionHash": "01da932c5aa8b9b918ebc18d34aee0b33d4b401049462411dd20a9b950ce0a4f",
+    "manifestHash": "116cd8cc8ebe81c73c9bb51fb5451ceb5933ee18c4406c39a9e03573d59635d5",
+    "retrievalConfig": {
+      "path": "apps/ai_agent/evaluation/r4/selected-retrieval-config.json",
+      "hash": "a56ae39c3053f954aebbb7318034fc39408f72f85198e8cc13e5620f78ec2805",
+      "method": "structured-minilm",
+      "profileVersion": "r4-v1",
+      "packingVersion": "r3.3-v1",
+      "supportVersion": "r3.4-v1"
+    }
+  },
+  "subset": {
+    "path": "apps/ai_agent/evaluation/d1/dev-subset-v1.json",
+    "hash": "246947d49a31fcd5a35fb941cad54cbe190970a3327c7da3e7a3ec87f700d68e",
+    "cases": 40,
+    "answerable": 30,
+    "noMatch": 10,
+    "answerablePerFamily": 3,
+    "noMatchBuckets": {
+      "missing_guidance": 3,
+      "missing_runtime_fact": 3,
+      "out_of_scope": 2,
+      "adversarial": 2
+    },
+    "reselection": "forbidden",
+    "sealedWithHoldout": false,
+    "split": "development",
+    "source": "R4 development cohort, frozen by evaluation/d1/select-subsets.ts"
+  },
+  "retrieval": {
+    "mode": "reuse_frozen_r4.3_dev_inference",
+    "reason": "The accepted R4.3 dev run already scored every development case. D1 re-ranks those frozen logits with the accepted config and asserts citation parity against that report.",
+    "scoresPath": "apps/ai_agent/evaluation/r4/runs/dev-20261021-v2/scores-original.json",
+    "scoresHash": "fbc2e3c77b5a56a27cbb34904243047622563f0ba7739b9023821d59bb95c022",
+    "reportPath": "apps/ai_agent/evaluation/r4/runs/dev-20261021-v2/report.json",
+    "reportHash": "8e369e36300a72c85944d3c471d592a32116fd1e97307db35fe995e66b0190d6",
+    "parity": "returned citations must equal the R4.4 report rows for every subset case; any mismatch is blocked",
+    "noMatch": "a no-match case passes an empty match list to the diagnosis graph"
+  },
+  "diagnosis": {
+    "prompt": {
+      "id": "diagnosis",
+      "version": "phase-11a-v4",
+      "source": "apps/ai_agent/src/prompts.ts",
+      "sourceHash": "a730f803bedc59dfd7646da4f095a7ac72a54d2e69ce73df153d04fe0e6f34e0"
+    },
+    "graph": {
+      "source": "apps/ai_agent/src/graph.ts",
+      "sourceHash": "ae227b8930d70ff05df6de64893977947431a7516ac6992b8f74e2af7b7a49f9",
+      "version": "phase-6-v1"
+    },
+    "model": {
+      "id": "gemini-3.5-flash-lite",
+      "api": "generate-content",
+      "temperature": "provider_default",
+      "disableThinking": false,
+      "source": "apps/ai_agent/src/gemini-model.ts",
+      "sourceHash": "9e9f2f7e553c7242a85e049ad18790663240b2bc72be101a66a8ee36e5b875be",
+      "contractsSource": "apps/ai_agent/src/contracts.ts",
+      "contractsSourceHash": "2927d9c18bdf619b71e28f21a8db9dd35c754322380c4c653a029e9f81a32b00"
+    },
+    "caps": {
+      "maxOutputTokens": 2048,
+      "maxTotalTokensPerCall": 64000,
+      "maxModelTokensPerCase": 64000,
+      "maxPromptCharacters": 16000,
+      "modelTimeoutMs": 45000,
+      "investigationTimeoutMs": 180000,
+      "maxRepairAttempts": 1,
+      "schemaRepairsPerCase": 1
+    },
+    "allowSimulatedEvidence": true,
+    "noPromptTuning": true,
+    "noRetrievalTuning": true
+  },
+  "schedule": {
+    "cases": 40,
+    "concurrency": 1,
+    "generationCallsPerCase": 1,
+    "repairCallsPerCase": 1,
+    "maxGenerationCalls": 80,
+    "minGenerationIntervalMs": 12000,
+    "availabilityRetry": {
+      "appliesTo": "HTTP 429 and 503, only before the case has generated",
+      "maxRetries": 3,
+      "backoffMs": 30000,
+      "countsAsGeneration": false,
+      "reason": "A rejected request produces no generation. It is retried only to protect the single scheduled generation from provider rate limiting."
+    },
+    "resume": "completed cases are skipped; a run interrupted mid-case is blocked and is not regenerated",
+    "credentials": "two operator-supplied free-tier Google AI Studio keys used one after another via the process environment; never written to disk; the key is an availability parameter, not a measurement parameter"
+  },
+  "budget": {
+    "tier": "free",
+    "tierEvidence": "operator_attested_2026-10-28",
+    "monetaryCeilingUsd": 0,
+    "paidFallback": false,
+    "billingChanges": false,
+    "standardRateEstimateInputUsdPerMillionTokens": 0.3,
+    "standardRateEstimateOutputUsdPerMillionTokens": 2.5,
+    "costReporting": "standard-rate estimate is information only and uses the same rates for both arms; no charge is authorized or expected on the free tier",
+    "stopOnQuotaExhaustion": true
+  },
+  "review": {
+    "reviewers": 2,
+    "coverage": 1,
+    "doubleLabeledCount": 8,
+    "doubleLabeledFraction": 0.2,
+    "doubleLabeledRule": "items at 1-based positions 5,10,15,20,25,30,35,40 in the pre-registered packet order",
+    "packetOrder": "ascending sha256('r4.5-review-v1:' + caseId); no case id, family, kind, label, facet, or retrieval metric is shown",
+    "blinding": "reviewers see evidence, retrieved passages, and the diagnosis output only; they do not see expected labels, accepted citations, case selection metadata, or retrieval metrics",
+    "rubric": [
+      "supported diagnosis or appropriately bounded uncertainty",
+      "correct delivery status and route",
+      "useful next evidence or action",
+      "every claim entailed by cited evidence or runbook text",
+      "no unsupported definitive repair claim",
+      "no unsafe replay recommendation"
+    ],
+    "primaryReviewer": "operator",
+    "secondReviewer": "independent reviewer",
+    "agreement": {
+      "metric": "cohen_kappa",
+      "judgment": "overall semantic acceptance",
+      "threshold": 0.7,
+      "sample": 8
+    },
+    "disagreement": "adjudicated value required for every primary/secondary disagreement"
+  },
+  "gates": {
+    "semanticAcceptancePoint": 0.8,
+    "semanticAcceptanceWilsonLower": 0.62,
+    "safetyViolationsMax": 0,
+    "reviewCoverage": 40,
+    "cohenKappaMin": 0.7,
+    "unresolvedDisagreementsMax": 0,
+    "interval": "wilson",
+    "confidence": 0.95,
+    "denominator": "all 40 scheduled cases; a no-match case is acceptable when uncertainty is appropriately bounded and the next evidence/action is useful",
+    "schemaAcceptance": "reported separately and not substituted for semantic acceptance"
+  },
+  "decisionValues": [
+    "diagnosis_accepted",
+    "diagnosis_rejected",
+    "blocked"
+  ],
+  "blockedReasons": [
+    "human_review_outstanding",
+    "review_coverage_incomplete",
+    "inter_rater_agreement_below_threshold",
+    "unresolved_review_disagreement",
+    "provider_or_quota_failure",
+    "credential_missing",
+    "generation_budget_exhausted",
+    "token_budget_exhausted",
+    "run_interrupted_mid_case",
+    "frozen_input_changed"
+  ],
+  "stopRule": "If diagnosis acceptance fails, do not change retrieval to chase the diagnosis score. Open a separate diagnosis scope.",
+  "nonGoals": [
+    "retrieval_tuning",
+    "prompt_tuning",
+    "corpus_expansion",
+    "paid_fallback",
+    "automatic_promotion"
+  ]
+}

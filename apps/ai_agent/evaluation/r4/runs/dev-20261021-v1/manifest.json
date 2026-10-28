@@ -1,0 +1,19 @@
+{
+  "phase": "R4.3",
+  "run": "dev-20261021-v1",
+  "generatedAt": "2026-10-21T09:31:07.080Z",
+  "gate": {
+    "status": "retrieval_rejected",
+    "failing": [
+      "p95LatencyMs"
+    ],
+    "blockedReasons": []
+  },
+  "files": {
+    "inference-original.json": "bdcc2be753433e7090d5a3206e4825f6877fee7046f0178ae5704d717f071ed5",
+    "scores-original.json": "e1d48a78a219f837330f616d1d5dd410a9440f71584c52601959887e6d5b654f",
+    "report.json": "69b43bedca7ce88a1546350e022859cd1063162e705f83d3409312337cc5c2e0",
+    "failure-ledger.json": "df0c20837f745fe67cda5c2e4c1cd6107d24a41a1a0d655450f2a78347ad2dce",
+    "decision.md": "f56eae87b2b6774968edf2fbcb35da5b0607a1d2caf8643279a1327298586b50"
+  }
+}

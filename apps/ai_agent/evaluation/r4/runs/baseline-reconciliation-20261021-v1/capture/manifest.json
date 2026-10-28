@@ -1,0 +1,109 @@
+{
+  "generatedAt": "2026-10-21T08:24:09.294Z",
+  "profileVersion": "r3.2-v1",
+  "corpusHash": "45e85c3585607ebfd0e1ebd1f2b068e2fab7c889b1bdd3af3a565f20afcbd440",
+  "protocolHash": "e6a491cc5d2423485c61ff5d5e8634e07bc9886bb76041b68238f5322290c3ed",
+  "labelHash": "a30fd42160326bd6daa02238be50ad0c0cccab23d5ef5372fcae99e7fd49c752",
+  "inputHash": "325c380a92039193f788338c3e243ac2d5584f74a1ee54929d09d5e4730ce881",
+  "cases": 24,
+  "routeCoverage": 1,
+  "selectedArm": "profile-route",
+  "candidates": [
+    {
+      "id": "f01-rate-limit-rejected",
+      "candidates": 55
+    },
+    {
+      "id": "f02-connection-refused",
+      "candidates": 55
+    },
+    {
+      "id": "f03-token-missing",
+      "candidates": 55
+    },
+    {
+      "id": "f03-permission-ambiguous",
+      "candidates": 55
+    },
+    {
+      "id": "f04-template-path-missing",
+      "candidates": 55
+    },
+    {
+      "id": "f04-invalid-destination",
+      "candidates": 55
+    },
+    {
+      "id": "f05-unsupported-action",
+      "candidates": 37
+    },
+    {
+      "id": "f05-handler-version-unknown",
+      "candidates": 37
+    },
+    {
+      "id": "f07-provider-response-lost",
+      "candidates": 55
+    },
+    {
+      "id": "f08-duplicate-retry-row",
+      "candidates": 37
+    },
+    {
+      "id": "f08-success-stage-republished",
+      "candidates": 37
+    },
+    {
+      "id": "f09-database-sink-only",
+      "candidates": 37
+    },
+    {
+      "id": "f10-sdk-error-recorded-success",
+      "candidates": 55
+    },
+    {
+      "id": "s02-error-prompt-injection",
+      "candidates": 55
+    },
+    {
+      "id": "s03-sensitive-fields-present",
+      "candidates": 55
+    },
+    {
+      "id": "s05-expired-email-dedup-window",
+      "candidates": 55
+    },
+    {
+      "id": "nm01-telegram-message-too-long",
+      "candidates": 55
+    },
+    {
+      "id": "nm02-email-concurrent-idempotency",
+      "candidates": 55
+    },
+    {
+      "id": "nm03-email-invalid-sender-address",
+      "candidates": 55
+    },
+    {
+      "id": "nm04-email-sender-domain-unverified",
+      "candidates": 55
+    },
+    {
+      "id": "nm05-email-invalid-region",
+      "candidates": 55
+    },
+    {
+      "id": "nm06-email-subject-length",
+      "candidates": 55
+    },
+    {
+      "id": "nm07-email-content-policy",
+      "candidates": 55
+    },
+    {
+      "id": "nm08-email-invalid-idempotency-key",
+      "candidates": 55
+    }
+  ]
+}

@@ -1,0 +1,1776 @@
+{
+  "version": 1,
+  "phase": "R4.5",
+  "runId": "r4.5-20261021-v1",
+  "protocolHash": "27dffcb33d19b1745be366130a5d8ab8730bf7cdca3b1cbba620019779d34fc2",
+  "order": "ascending sha256('r4.5-review-v1:' + caseId)",
+  "seed": "r4.5-review-v1",
+  "blinding": "No case id, family, kind, label, accepted citation, facet, or retrieval metric is present.",
+  "instructions": "Score each item against the six rubric points. Judge only what the evidence and cited runbook passages support. A bounded uncertainty answer can be acceptable for a no-match item.",
+  "items": [
+    {
+      "reviewId": "1d3125e6fbe056b0",
+      "evidence": {
+        "failureContext": {
+          "contract_version": 1,
+          "evidence_id": "fixture:failure:f01-channel-resolution-throttled",
+          "type": "failure_context",
+          "source_ref": {
+            "case_id": "3aa8c804-66b3-4810-8669-53b5001dd284",
+            "zap_run_id": "71e0ab4e-b7f4-4765-8eae-69e6e9763578",
+            "stage": 0
+          },
+          "observed_at": "2026-10-21T00:00:00.000Z",
+          "content_hash": "56c53a84196163ac3171a828c44458d04ec57ea71c9fb2bad7626099034314bf",
+          "facts": {
+            "source_kind": "controlled_fixture",
+            "current_action_type": "getChat",
+            "retry": {
+              "provider": "telegram",
+              "phase": "send",
+              "provider_outcome": "rejected",
+              "safe_code": null,
+              "provider_status": 429,
+              "retry_after_seconds": 12,
+              "requires_human": null,
+              "final_error": "Telegram getChat was throttled with HTTP 429 while resolving a channel handle"
+            },
+            "action_metadata": {
+              "paths": [],
+              "truncated": true
+            },
+            "payload": {
+              "paths": [],
+              "truncated": true
+            }
+          },
+          "unavailable": [
+            "provider_request_ids",
+            "canonical_source_identity",
+            "action_metadata",
+            "payload_values"
+          ],
+          "complete": false,
+          "simulated": true,
+          "fixture_contract_version": 1,
+          "fixture_observation": {
+            "provider": "telegram",
+            "execution_status": "FAILED",
+            "delivery_outcome": "rejected",
+            "attempts": 3,
+            "final_error": "Telegram getChat was throttled with HTTP 429 while resolving a channel handle",
+            "observed_facts": [
+              "all_attempts_rejected"
+            ],
+            "sensitive_fields_present": []
+          },
+          "fixture_source_kind": "normal_dlq"
+        },
+        "executionEvidence": {
+          "contract_version": 1,
+          "evidence_id": "fixture:execution:f01-channel-resolution-throttled",
+          "type": "execution_evidence",
+          "source_ref": {
+            "case_id": "3aa8c804-66b3-4810-8669-53b5001dd284",
+            "zap_run_id": "71e0ab4e-b7f4-4765-8eae-69e6e9763578",
+            "stage": 0
+          },
+          "observed_at": "2026-10-21T00:00:00.000Z",
+          "content_hash": "a44906cbf41cfbe2090ace67b11d79e184343432fae0f9e73ec18161fa0d3b2e",
+          "facts": {
+            "provenance": "controlled_fixture",
+            "current_execution": null,
+            "attempts": [],
+            "history_limit": 10,
+            "history_truncated": true,
+            "predecessors": [],
+            "ordering": {
+              "status": "unknown",
+              "missing_predecessor_stages": []
+            }
+          },
+          "unavailable": [
+            "execution_record",
+            "attempt_history",
+            "execution_ordering"
+          ],
+          "complete": false,
+          "simulated": true,
+          "fixture_contract_version": 1
+        },
+        "inputValidation": {
+          "contract_version": 1,
+          "evidence_id": "fixture:validation:f01-channel-resolution-throttled",
+          "type": "action_input_validation",
+          "source_ref": {
+            "case_id": "3aa8c804-66b3-4810-8669-53b5001dd284",
+            "zap_run_id": "71e0ab4e-b7f4-4765-8eae-69e6e9763578",
+            "stage": 0
+          },
+          "observed_at": "2026-10-21T00:00:00.000Z",
+          "content_hash": "feabbdcaaa7a891d303201ed256a592743fea9c05cae038f2c98e196d2174d8e",
+          "facts": {
+            "action_type": "getChat",
+            "validation_status": "blocked",
+            "supported": null,
+            "missing_required_fields": [],
+            "invalid_field_types": [],
+            "missing_template_paths": [],
+            "credential_presence": [],
+            "blocked_reasons": [
+              "fixture_inputs_unavailable"
+            ],
+            "input_fingerprint": null
+          },
+          "unavailable": [
+            "action_inputs",
+            "input_fingerprint",
+            "handler_registry"
+          ],
+          "complete": false,
+          "simulated": true,
+          "fixture_contract_version": 1
+        }
+      },
+      "retrieved": [
+        {
+          "citation": "RB-F01-F02@1.1.0#allowed-remediation",
+          "heading": "Allowed remediation",
+          "content": "An operator may restore connectivity or reduce sending pressure. For a proven Telegram 429 rejection, record the conservative cooldown deadline and investigate again after it passes. Guidance is not a scheduler and does not claim that the provider recovered.",
+          "score": 0.43548438940902134
+        },
+        {
+          "citation": "RB-F01-F02@1.1.0#replay-and-approval",
+          "heading": "Replay and approval",
+          "content": "Interactive replay exists and requires an explicit **operator** decision; this runbook never grants it. The current initial replay case is limited to complete evidence for one Telegram send-stage 429 rejection, unchanged inputs, valid ordering and safety gates, an unexpired approval, and at most one replay. The operator reviews the application-computed eligibility, approves the case, and then issues a separate explicit replay request; approval alone is not publication and publication alone is not delivery. Unknown outcomes, changed inputs or handlers, a live or completed replay, expired authority and revoked permission all deny.",
+          "score": 0.24229858675398763
+        },
+        {
+          "citation": "RB-F01-F02@1.1.0#verification-rollback-or-escalation",
+          "heading": "Verification, rollback, or escalation",
+          "content": "Verify the recorded retry delay and timestamps without sending. If evidence conflicts or recovery is unproven, abstain and escalate to the provider or platform operator. Roll back any operator configuration change through that system's normal process.",
+          "score": 0.000027041436638095893
+        }
+      ],
+      "diagnosis": {
+        "contract_version": 1,
+        "graph_version": "phase-6-v1",
+        "prompt_version": "phase-11a-v3",
+        "status": "completed",
+        "diagnosis": {
+          "taxonomy_id": "F01",
+          "summary": "The Telegram getChat action failed due to a provider-side throttling (HTTP 429) during channel resolution. All observed attempts were rejected by the provider.",
+          "confidence": "high",
+          "evidence_refs": [
+            "fixture:failure:f01-channel-resolution-throttled"
+          ],
+          "alternate_explanations": [],
+          "missing_evidence": [
+            "provider_request_ids",
+            "canonical_source_identity",
+            "action_metadata",
+            "payload_values",
+            "execution_record",
+            "attempt_history",
+            "execution_ordering",
+            "action_inputs",
+            "input_fingerprint",
+            "handler_registry"
+          ]
+        },
+        "proposal": {
+          "disposition": "engineering_escalation_required",
+          "kind": "escalate",
+          "summary": "Escalate to engineering for investigation into Telegram throttling and potential platform-level rate limit adjustments or retry policy review.",
+          "reasons": [
+            "The failure is due to provider-side throttling (HTTP 429).",
+            "This issue suggests a potential platform-level rate limiting or retry policy misconfiguration for Telegram interactions."
+          ],
+          "evidence_refs": [
+            "fixture:failure:f01-channel-resolution-throttled"
+          ],
+          "runbook_citations": [
+            "RB-F01-F02@1.1.0#allowed-remediation",
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+          ],
+          "preconditions": [
+            "No customer configuration changes are required based on the available evidence.",
+            "Investigation into Telegram API usage and platform-level retry mechanisms is needed."
+          ],
+          "not_before": null
+        }
+      }
+    },
+    {
+      "reviewId": "3b1856f9f959b3a1",
+      "evidence": {
+        "failureContext": {
+          "contract_version": 1,
+          "evidence_id": "fixture:failure:f01-group-slow-mode-reminder",
+          "type": "failure_context",
+          "source_ref": {
+            "case_id": "fb11eec3-f274-4874-858e-b7d4a55b43c5",
+            "zap_run_id": "d3199719-fa7d-4ba1-8f9b-df0fbf949a94",
+            "stage": 0
+          },
+          "observed_at": "2026-10-21T00:00:00.000Z",
+          "content_hash": "74f2f42d99d1e05b25be45946b58b0cbc241c1ad1bf4fbf610ac3d54b16dd3b5",
+          "facts": {
+            "source_kind": "controlled_fixture",
+            "current_action_type": "sendMessage",
+            "retry": {
+              "provider": "telegram",
+              "phase": "send",
+              "provider_outcome": "rejected",
+              "safe_code": null,
+              "provider_status": 429,
+              "retry_after_seconds": 30,
+              "requires_human": null,
+              "final_error": "Telegram sendMessage hit the group slow-mode interval with HTTP 429"
+            },
+            "action_metadata": {
+              "paths": [],
+              "truncated": true
+            },
+            "payload": {
+              "paths": [],
+              "truncated": true
+            }
+          },
+          "unavailable": [
+            "provider_request_ids",
+            "canonical_source_identity",
+            "action_metadata",
+            "payload_values"
+          ],
+          "complete": false,
+          "simulated": true,
+          "fixture_contract_version": 1,
+          "fixture_observation": {
+            "provider": "telegram",
+            "execution_status": "FAILED",
+            "delivery_outcome": "rejected",
+            "attempts": 3,
+            "final_error": "Telegram sendMessage hit the group slow-mode interval with HTTP 429",
+            "observed_facts": [
+              "all_attempts_rejected",
+              "retry_after_30_seconds"
+            ],
+            "sensitive_fields_present": []
+          },
+          "fixture_source_kind": "normal_dlq"
+        },
+        "executionEvidence": {
+          "contract_version": 1,
+          "evidence_id": "fixture:execution:f01-group-slow-mode-reminder",
+          "type": "execution_evidence",
+          "source_ref": {
+            "case_id": "fb11eec3-f274-4874-858e-b7d4a55b43c5",
+            "zap_run_id": "d3199719-fa7d-4ba1-8f9b-df0fbf949a94",
+            "stage": 0
+          },
+          "observed_at": "2026-10-21T00:00:00.000Z",
+          "content_hash": "2cb0d33a2371df7d7e2882295024b834566f9150a9daed3e983963030bbbb865",
+          "facts": {
+            "provenance": "controlled_fixture",
+            "current_execution": null,
+            "attempts": [],
+            "history_limit": 10,
+            "history_truncated": true,
+            "predecessors": [],
+            "ordering": {
+              "status": "unknown",
+              "missing_predecessor_stages": []
+            }
+          },
+          "unavailable": [
+            "execution_record",
+            "attempt_history",
+            "execution_ordering"
+          ],
+          "complete": false,
+          "simulated": true,
+          "fixture_contract_version": 1
+        },
+        "inputValidation": {
+          "contract_version": 1,
+          "evidence_id": "fixture:validation:f01-group-slow-mode-reminder",
+          "type": "action_input_validation",
+          "source_ref": {
+            "case_id": "fb11eec3-f274-4874-858e-b7d4a55b43c5",
+            "zap_run_id": "d3199719-fa7d-4ba1-8f9b-df0fbf949a94",
+            "stage": 0
+          },
+          "observed_at": "2026-10-21T00:00:00.000Z",
+          "content_hash": "8f81cc1d0186e9d4982c14fb64b5b6fb21a23e4c2ad0df3cae61078086bc2fa9",
+          "facts": {
+            "action_type": "sendMessage",
+            "validation_status": "blocked",
+            "supported": null,
+            "missing_required_fields": [],
+            "invalid_field_types": [],
+            "missing_template_paths": [],
+            "credential_presence": [],
+            "blocked_reasons": [
+              "fixture_inputs_unavailable"
+            ],
+            "input_fingerprint": null
+          },
+          "unavailable": [
+            "action_inputs",
+            "input_fingerprint",
+            "handler_registry"
+          ],
+          "complete": false,
+          "simulated": true,
+          "fixture_contract_version": 1
+        }
+      },
+      "retrieved": [
+        {
+          "citation": "RB-F01-F02@1.1.0#allowed-remediation",
+          "heading": "Allowed remediation",
+          "content": "An operator may restore connectivity or reduce sending pressure. For a proven Telegram 429 rejection, record the conservative cooldown deadline and investigate again after it passes. Guidance is not a scheduler and does not claim that the provider recovered.",
+          "score": 0.2018619441223142
+        },
+        {
+          "citation": "RB-F01-F02@1.1.0#replay-and-approval",
+          "heading": "Replay and approval",
+          "content": "Interactive replay exists and requires an explicit **operator** decision; this runbook never grants it. The current initial replay case is limited to complete evidence for one Telegram send-stage 429 rejection, unchanged inputs, valid ordering and safety gates, an unexpired approval, and at most one replay. The operator reviews the application-computed eligibility, approves the case, and then issues a separate explicit replay request; approval alone is not publication and publication alone is not delivery. Unknown outcomes, changed inputs or handlers, a live or completed replay, expired authority and revoked permission all deny.",
+          "score": 0.12883419828030787
+        },
+        {
+          "citation": "RB-F01-F02@1.1.0#verification-rollback-or-escalation",
+          "heading": "Verification, rollback, or escalation",
+          "content": "Verify the recorded retry delay and timestamps without sending. If evidence conflicts or recovery is unproven, abstain and escalate to the provider or platform operator. Roll back any operator configuration change through that system's normal process.",
+          "score": 0.00007823552401216
+        }
+      ],
+      "diagnosis": {
+        "contract_version": 1,
+        "graph_version": "phase-6-v1",
+        "prompt_version": "phase-11a-v3",
+        "status": "abstained",
+        "diagnosis": {
+          "taxonomy_id": "F01",
+          "summary": "The Telegram sendMessage operation was rejected due to a group slow-mode interval, indicated by an HTTP 429 status and a `retry_after_seconds` value of 30. All attempts failed with the same error, suggesting a temporary rate limit or cooldown on the provider's side. However, the outcome is unknown due to missing critical evidence, preventing a definitive diagnosis and replay recommendation.",
+          "confidence": "low",
+          "evidence_refs": [
+            "fixture:failure:f01-group-slow-mode-reminder",
+            "fixture:execution:f01-group-slow-mode-reminder",
+            "fixture:validation:f01-group-slow-mode-reminder"
+          ],
+          "alternate_explanations": [
+            "The issue might be due to an actual slow-mode enforcement on the Telegram group, indicating the application sent messages too frequently.",
+            "A transient network issue or an internal Telegram service problem could have temporarily triggered the 429 error, unrelated to the group's slow-mode."
+          ],
+          "missing_evidence": [
+            "provider_request_ids",
+            "canonical_source_identity",
+            "action_metadata",
+            "payload_values",
+            "execution_record",
+            "attempt_history",
+            "execution_ordering",
+            "action_inputs",
+            "input_fingerprint",
+            "handler_registry"
+          ]
+        },
+        "proposal": {
+          "disposition": "outcome_unknown",
+          "kind": "escalate",
+          "summary": "Escalate to engineering for investigation due to unknown outcome and insufficient evidence to determine the exact cause or safety of a replay. Critical evidence is missing, including actual execution records, full attempt history, and input details.",
+          "reasons": [
+            "All attempts to send the message failed with a Telegram 429 'group slow-mode interval' error.",
+            "The delivery outcome is unknown due to the simulated nature of the evidence and the absence of critical execution details.",
+            "Significant evidence is unavailable, including provider request IDs, full action metadata, payload values, complete execution record, and the full attempt history, which are crucial for a definitive diagnosis and replay safety assessment.",
+            "The input validation status is 'blocked' due to unavailable inputs, preventing verification of message content or destination."
+          ],
+          "evidence_refs": [
+            "fixture:failure:f01-group-slow-mode-reminder",
+            "fixture:execution:f01-group-slow-mode-reminder",
+            "fixture:validation:f01-group-slow-mode-reminder"
+          ],
+          "runbook_citations": [
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+          ],
+          "preconditions": [
+            "Engineering investigation is required to gather the missing evidence and determine the exact cause of the repeated 429 errors.",
+            "Assessment of delivery outcome requires full attempt history and provider request IDs.",
+            "Replay safety cannot be confirmed without complete execution ordering and canonical source identity."
+          ],
+          "not_before": null
+        }
+      }
+    },
+    {
+      "reviewId": "51d0ebc73aab8526",
+      "evidence": {
+        "failureContext": {
+          "contract_version": 1,
+          "evidence_id": "fixture:failure:f01-digest-broadcast-chat-flood",
+          "type": "failure_context",
+          "source_ref": {
+            "case_id": "accc849d-e8a8-4f5a-8d4c-19464597bdc5",
+            "zap_run_id": "c8317102-9623-462c-8b4c-67cf7c77f2c1",
+            "stage": 0
+          },
+          "observed_at": "2026-10-21T00:00:00.000Z",
+          "content_hash": "717fb3e52e06567ea161d6001cbd3f91094316d649d7d33876eb288cbee620bf",
+          "facts": {
+            "source_kind": "controlled_fixture",
+            "current_action_type": "sendMessage",
+            "retry": {
+              "provider": "telegram",
+              "phase": "send",
+              "provider_outcome": "rejected",
+              "safe_code": null,
+              "provider_status": 429,
+              "retry_after_seconds": 47,
+              "requires_human": null,
+              "final_error": "Telegram sendMessage returned HTTP 429 for the digest chat"
+            },
+            "action_metadata": {
+              "paths": [],
+              "truncated": true
+            },
+            "payload": {
+              "paths": [],
+              "truncated": true
+            }
+          },
+          "unavailable": [
+            "provider_request_ids",
+            "canonical_source_identity",
+            "action_metadata",
+            "payload_values"
+          ],
+          "complete": false,
+          "simulated": true,
+          "fixture_contract_version": 1,
+          "fixture_observation": {
+            "provider": "telegram",
+            "execution_status": "FAILED",
+            "delivery_outcome": "rejected",
+            "attempts": 3,
+            "final_error": "Telegram sendMessage returned HTTP 429 for the digest chat",
+            "observed_facts": [
+              "all_attempts_rejected",
+              "retry_after_47_seconds"
+            ],
+            "sensitive_fields_present": []
+          },
+          "fixture_source_kind": "normal_dlq"
+        },
+        "executionEvidence": {
+          "contract_version": 1,
+          "evidence_id": "fixture:execution:f01-digest-broadcast-chat-flood",
+          "type": "execution_evidence",
+          "source_ref": {
+            "case_id": "accc849d-e8a8-4f5a-8d4c-19464597bdc5",
+            "zap_run_id": "c8317102-9623-462c-8b4c-67cf7c77f2c1",
+            "stage": 0
+          },
+          "observed_at": "2026-10-21T00:00:00.000Z",
+          "content_hash": "5e5a1ba8535b762bc756e67bf6619468bf8ea5223d1c88abb73643083d11a841",
+          "facts": {
+            "provenance": "controlled_fixture",
+            "current_execution": null,
+            "attempts": [],
+            "history_limit": 10,
+            "history_truncated": true,
+            "predecessors": [],
+            "ordering": {
+              "status": "unknown",
+              "missing_predecessor_stages": []
+            }
+          },
+          "unavailable": [
+            "execution_record",
+            "attempt_history",
+            "execution_ordering"
+          ],
+          "complete": false,
+          "simulated": true,
+          "fixture_contract_version": 1
+        },
+        "inputValidation": {
+          "contract_version": 1,
+          "evidence_id": "fixture:validation:f01-digest-broadcast-chat-flood",
+          "type": "action_input_validation",
+          "source_ref": {
+            "case_id": "accc849d-e8a8-4f5a-8d4c-19464597bdc5",
+            "zap_run_id": "c8317102-9623-462c-8b4c-67cf7c77f2c1",
+            "stage": 0
+          },
+          "observed_at": "2026-10-21T00:00:00.000Z",
+          "content_hash": "5fcfcd5cd3e74eb35d73080c838a7c752ee48d5b85fd95ec5d1b151c28dc4499",
+          "facts": {
+            "action_type": "sendMessage",
+            "validation_status": "blocked",
+            "supported": null,
+            "missing_required_fields": [],
+            "invalid_field_types": [],
+            "missing_template_paths": [],
+            "credential_presence": [],
+            "blocked_reasons": [
+              "fixture_inputs_unavailable"
+            ],
+            "input_fingerprint": null
+          },
+          "unavailable": [
+            "action_inputs",
+            "input_fingerprint",
+            "handler_registry"
+          ],
+          "complete": false,
+          "simulated": true,
+          "fixture_contract_version": 1
+        }
+      },
+      "retrieved": [
+        {
+          "citation": "RB-F01-F02@1.1.0#allowed-remediation",
+          "heading": "Allowed remediation",
+          "content": "An operator may restore connectivity or reduce sending pressure. For a proven Telegram 429 rejection, record the conservative cooldown deadline and investigate again after it passes. Guidance is not a scheduler and does not claim that the provider recovered.",
+          "score": 0.6180366589412031
+        },
+        {
+          "citation": "RB-F01-F02@1.1.0#replay-and-approval",
+          "heading": "Replay and approval",
+          "content": "Interactive replay exists and requires an explicit **operator** decision; this runbook never grants it. The current initial replay case is limited to complete evidence for one Telegram send-stage 429 rejection, unchanged inputs, valid ordering and safety gates, an unexpired approval, and at most one replay. The operator reviews the application-computed eligibility, approves the case, and then issues a separate explicit replay request; approval alone is not publication and publication alone is not delivery. Unknown outcomes, changed inputs or handlers, a live or completed replay, expired authority and revoked permission all deny.",
+          "score": 0.4966031053264756
+        },
+        {
+          "citation": "RB-F01-F02@1.1.0#verification-rollback-or-escalation",
+          "heading": "Verification, rollback, or escalation",
+          "content": "Verify the recorded retry delay and timestamps without sending. If evidence conflicts or recovery is unproven, abstain and escalate to the provider or platform operator. Roll back any operator configuration change through that system's normal process.",
+          "score": 0.00005454166406157387
+        }
+      ],
+      "diagnosis": {
+        "contract_version": 1,
+        "graph_version": "phase-6-v1",
+        "prompt_version": "phase-11a-v3",
+        "status": "completed",
+        "diagnosis": {
+          "taxonomy_id": "F01",
+          "summary": "The workflow failed due to a provider-side rate limit (HTTP 429) from Telegram during the sendMessage operation. The provider explicitly rejected the request with a retry_after_seconds value, indicating a temporary issue.",
+          "confidence": "high",
+          "evidence_refs": [
+            "fixture:failure:f01-digest-broadcast-chat-flood"
+          ],
+          "alternate_explanations": [],
+          "missing_evidence": [
+            "provider_request_ids",
+            "canonical_source_identity",
+            "action_metadata",
+            "payload_values",
+            "execution_record",
+            "attempt_history",
+            "execution_ordering",
+            "action_inputs",
+            "input_fingerprint",
+            "handler_registry"
+          ]
+        },
+        "proposal": {
+          "disposition": "engineering_escalation_required",
+          "kind": "escalate",
+          "summary": "Escalate to engineering for investigation of the Telegram rate limiting and to assess the impact on the workflow. This may require platform-level adjustments to handle provider rate limits more gracefully or to implement a backoff strategy.",
+          "reasons": [
+            "The failure is due to a provider-side rate limit (HTTP 429) that is not directly addressable by an owner action.",
+            "The runbook suggests recording the cooldown and investigating after it passes, implying a need for platform-level handling or monitoring.",
+            "The provided evidence indicates multiple attempts were rejected with a retry-after header.",
+            "Insufficient information in the available evidence to suggest a simple replay without further investigation into the root cause of the rate limiting and potential systemic impact."
+          ],
+          "evidence_refs": [
+            "fixture:failure:f01-digest-broadcast-chat-flood"
+          ],
+          "runbook_citations": [
+            "RB-F01-F02@1.1.0#allowed-remediation",
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+          ],
+          "preconditions": [
+            "Engineering must investigate the cause of the Telegram rate limit and evaluate potential solutions or mitigations.",
+            "No immediate replay is recommended until the underlying cause of the rate limiting is understood and addressed to prevent recurrence."
+          ],
+          "not_before": null
+        }
+      }
+    },
+    {
+      "reviewId": "575cff9c5e0f5390",
+      "evidence": {
+        "failureContext": {
+          "contract_version": 1,
+          "evidence_id": "fixture:failure:f02-telegram-dns-eai-again",
+          "type": "failure_context",
+          "source_ref": {
+            "case_id": "837b7c37-0272-423a-878d-b95d155d669a",
+            "zap_run_id": "796bb572-2bc3-44ad-8f26-738842916c2c",
+            "stage": 0
+          },
+          "observed_at": "2026-10-21T00:00:00.000Z",
+          "content_hash": "5a113e8d898b500e82bbf3b0b92efb1be9c627d442bbce2bb00b5e7d641092cd",
+          "facts": {
+            "source_kind": "controlled_fixture",
+            "current_action_type": "sendMessage",
+            "retry": {
+              "provider": "telegram",
+              "phase": "dns",
+              "provider_outcome": "not_delivered",
+              "safe_code": null,
+              "provider_status": null,
+              "retry_after_seconds": null,
+              "requires_human": null,
+              "final_error": "DNS lookup returned EAI_AGAIN before connecting"
+            },
+            "action_metadata": {
+              "paths": [],
+              "truncated": true
+            },
+            "payload": {
+              "paths": [],
+              "truncated": true
+            }
+          },
+          "unavailable": [
+            "provider_request_ids",
+            "canonical_source_identity",
+            "action_metadata",
+            "payload_values"
+          ],
+          "complete": false,
+          "simulated": true,
+          "fixture_contract_version": 1,
+          "fixture_observation": {
+            "provider": "telegram",
+            "execution_status": "FAILED",
+            "delivery_outcome": "not_delivered",
+            "attempts": 3,
+            "final_error": "DNS lookup returned EAI_AGAIN before connecting",
+            "observed_facts": [
+              "failure_before_send"
+            ],
+            "sensitive_fields_present": []
+          },
+          "fixture_source_kind": "normal_dlq"
+        },
+        "executionEvidence": {
+          "contract_version": 1,
+          "evidence_id": "fixture:execution:f02-telegram-dns-eai-again",
+          "type": "execution_evidence",
+          "source_ref": {
+            "case_id": "837b7c37-0272-423a-878d-b95d155d669a",
+            "zap_run_id": "796bb572-2bc3-44ad-8f26-738842916c2c",
+            "stage": 0
+          },
+          "observed_at": "2026-10-21T00:00:00.000Z",
+          "content_hash": "6b49f1a1b79c7e4775384ae03c26780a0c09197aafa41f2c5074fa203b242424",
+          "facts": {
+            "provenance": "controlled_fixture",
+            "current_execution": null,
+            "attempts": [],
+            "history_limit": 10,
+            "history_truncated": true,
+            "predecessors": [],
+            "ordering": {
+              "status": "unknown",
+              "missing_predecessor_stages": []
+            }
+          },
+          "unavailable": [
+            "execution_record",
+            "attempt_history",
+            "execution_ordering"
+          ],
+          "complete": false,
+          "simulated": true,
+          "fixture_contract_version": 1
+        },
+        "inputValidation": {
+          "contract_version": 1,
+          "evidence_id": "fixture:validation:f02-telegram-dns-eai-again",
+          "type": "action_input_validation",
+          "source_ref": {
+            "case_id": "837b7c37-0272-423a-878d-b95d155d669a",
+            "zap_run_id": "796bb572-2bc3-44ad-8f26-738842916c2c",
+            "stage": 0
+          },
+          "observed_at": "2026-10-21T00:00:00.000Z",
+          "content_hash": "e7ce85a986cee29eec064470d3ec88a491828dad1028bda18cc4b116b3e7b415",
+          "facts": {
+            "action_type": "sendMessage",
+            "validation_status": "blocked",
+            "supported": null,
+            "missing_required_fields": [],
+            "invalid_field_types": [],
+            "missing_template_paths": [],
+            "credential_presence": [],
+            "blocked_reasons": [
+              "fixture_inputs_unavailable"
+            ],
+            "input_fingerprint": null
+          },
+          "unavailable": [
+            "action_inputs",
+            "input_fingerprint",
+            "handler_registry"
+          ],
+          "complete": false,
+          "simulated": true,
+          "fixture_contract_version": 1
+        }
+      },
+      "retrieved": [
+        {
+          "citation": "RB-F01-F02@1.1.0#read-only-investigation",
+          "heading": "Read-only investigation",
+          "content": "Read failure context and execution evidence. Confirm whether the failure happened before a send, was explicitly rejected, or became ambiguous after a send began. Validate current inputs only when configuration may be involved. Do not probe the provider.",
+          "score": 0.016950131239203834
+        },
+        {
+          "citation": "RB-F01-F02@1.1.0#allowed-remediation",
+          "heading": "Allowed remediation",
+          "content": "An operator may restore connectivity or reduce sending pressure. For a proven Telegram 429 rejection, record the conservative cooldown deadline and investigate again after it passes. Guidance is not a scheduler and does not claim that the provider recovered.",
+          "score": 0.0034358629748080763
+        },
+        {
+          "citation": "RB-F01-F02@1.1.0#verification-rollback-or-escalation",
+          "heading": "Verification, rollback, or escalation",
+          "content": "Verify the recorded retry delay and timestamps without sending. If evidence conflicts or recovery is unproven, abstain and escalate to the provider or platform operator. Roll back any operator configuration change through that system's normal process.",
+          "score": 0.00008651383429424357
+        }
+      ],
+      "diagnosis": {
+        "contract_version": 1,
+        "graph_version": "phase-6-v1",
+        "prompt_version": "phase-11a-v3",
+        "status": "completed",
+        "diagnosis": {
+          "taxonomy_id": "F02",
+          "summary": "The workflow failed due to a DNS lookup error (EAI_AGAIN) with the Telegram provider. This indicates a transient network issue preventing connection to the Telegram service. The failure occurred before any data was sent.",
+          "confidence": "high",
+          "evidence_refs": [
+            "fixture:failure:f02-telegram-dns-eai-again",
+            "fixture:execution:f02-telegram-dns-eai-again"
+          ],
+          "alternate_explanations": [],
+          "missing_evidence": [
+            "provider_request_ids",
+            "canonical_source_identity",
+            "action_metadata",
+            "payload_values",
+            "execution_record",
+            "attempt_history",
+            "execution_ordering",
+            "action_inputs",
+            "input_fingerprint",
+            "handler_registry"
+          ]
+        },
+        "proposal": {
+          "disposition": "engineering_escalation_required",
+          "kind": "escalate",
+          "summary": "Escalate to engineering for investigation into the transient DNS resolution failure affecting Telegram connectivity.",
+          "reasons": [
+            "The failure indicates a platform-level connectivity issue (DNS resolution) rather than a customer configuration fault.",
+            "The `EAI_AGAIN` error suggests a temporary failure in name resolution, which is typically outside of customer control."
+          ],
+          "evidence_refs": [
+            "fixture:failure:f02-telegram-dns-eai-again"
+          ],
+          "runbook_citations": [
+            "RB-F01-F02@1.1.0#read-only-investigation",
+            "RB-F01-F02@1.1.0#allowed-remediation",
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+          ],
+          "preconditions": [
+            "No customer-controlled configuration changes are required to address this issue.",
+            "The issue is identified as a platform or provider infrastructure problem."
+          ],
+          "not_before": null
+        }
+      }
+    },
+    {
+      "reviewId": "61550d69626d23b3",
+      "evidence": {
+        "failureContext": {
+          "contract_version": 1,
+          "evidence_id": "fixture:failure:f04-email-missing-subject-template",
+          "type": "failure_context",
+          "source_ref": {
+            "case_id": "5eabc6ee-0801-45a4-8d14-bddc45f052fb",
+            "zap_run_id": "9ae9136a-4fa0-4c71-8345-5eff27e3cf9f",
+            "stage": 0
+          },
+          "observed_at": "2026-10-21T00:00:00.000Z",
+          "content_hash": "039d9af0d1ed7da64a054e5f1f9261494f6089d86dd24dbf5c9d3c16d5d2a0ca",
+          "facts": {
+            "source_kind": "controlled_fixture",
+            "current_action_type": "sendEmail",
+            "retry": {
+              "provider": "email",
+              "phase": "send",
+              "provider_outcome": "not_attempted",
+              "safe_code": null,
+              "provider_status": null,
+              "retry_after_seconds": null,
+              "requires_human": null,
+              "final_error": "Email input validation found a missing subject template path"
+            },
+            "action_metadata": {
+              "paths": [],
+              "truncated": true
+            },
+            "payload": {
+              "paths": [],
+              "truncated": true
+            }
+          },
+          "unavailable": [
+            "provider_request_ids",
+            "canonical_source_identity",
+            "action_metadata",
+            "payload_values"
+          ],
+          "complete": false,
+          "simulated": true,
+          "fixture_contract_version": 1,
+          "fixture_observation": {
+            "provider": "email",
+            "execution_status": "FAILED",
+            "delivery_outcome": "not_delivered",
+            "attempts": 3,
+            "final_error": "Email input validation found a missing subject template path",
+            "observed_facts": [],
+            "sensitive_fields_present": []
+          },
+          "fixture_source_kind": "normal_dlq"
+        },
+        "executionEvidence": {
+          "contract_version": 1,
+          "evidence_id": "fixture:execution:f04-email-missing-subject-template",
+          "type": "execution_evidence",
+          "source_ref": {
+            "case_id": "5eabc6ee-0801-45a4-8d14-bddc45f052fb",
+            "zap_run_id": "9ae9136a-4fa0-4c71-8345-5eff27e3cf9f",
+            "stage": 0
+          },
+          "observed_at": "2026-10-21T00:00:00.000Z",
+          "content_hash": "ccbc1f4f33ff6288a5d1bb69f35499f6528cf3399a0ded739f35f5d507f1ba06",
+          "facts": {
+            "provenance": "controlled_fixture",
+            "current_execution": null,
+            "attempts": [],
+            "history_limit": 10,
+            "history_truncated": true,
+            "predecessors": [],
+            "ordering": {
+              "status": "unknown",
+              "missing_predecessor_stages": []
+            }
+          },
+          "unavailable": [
+            "execution_record",
+            "attempt_history",
+            "execution_ordering"
+          ],
+          "complete": false,
+          "simulated": true,
+          "fixture_contract_version": 1
+        },
+        "inputValidation": {
+          "contract_version": 1,
+          "evidence_id": "fixture:validation:f04-email-missing-subject-template",
+          "type": "action_input_validation",
+          "source_ref": {
+            "case_id": "5eabc6ee-0801-45a4-8d14-bddc45f052fb",
+            "zap_run_id": "9ae9136a-4fa0-4c71-8345-5eff27e3cf9f",
+            "stage": 0
+          },
+          "observed_at": "2026-10-21T00:00:00.000Z",
+          "content_hash": "28a3a17866bd84732b26b006327ea059cbeb537d60fb61543b0834c6c88e0840",
+          "facts": {
+            "action_type": "sendEmail",
+            "validation_status": "invalid",
+            "supported": null,
+            "missing_required_fields": [],
+            "invalid_field_types": [],
+            "missing_template_paths": [
+              "subject_template"
+            ],
+            "credential_presence": [],
+            "blocked_reasons": [
+              "fixture_inputs_unavailable"
+            ],
+            "input_fingerprint": null
+          },
+          "unavailable": [
+            "action_inputs",
+            "input_fingerprint",
+            "handler_registry"
+          ],
+          "complete": false,
+          "simulated": true,
+          "fixture_contract_version": 1
+        }
+      },
+      "retrieved": [
+        {
+          "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+          "heading": "Read-only investigation",
+          "content": "Run deterministic input validation. The parser replaces a missing template path with an empty string, so report the missing path rather than the rendered value. Compare action type with the current `email` and `telegram` registry and inspect contiguous stage ordering.",
+          "score": 0.9556812075398178
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+          "heading": "Verification, rollback, or escalation",
+          "content": "Verify only non-secret configuration presence and operator-provided permission evidence. If the worker environment or prior delivery remains unknown, abstain. Roll back credential changes in the credential manager and escalate permission failures to the destination owner.",
+          "score": 0.0006471548923643395
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+          "heading": "Allowed remediation",
+          "content": "An authorized operator may rotate or configure credentials and repair destination membership or permissions. Correct invalid workflow configuration through the owning application, then start a fresh investigation with new evidence.",
+          "score": 0.00004934395219213249
+        }
+      ],
+      "diagnosis": {
+        "contract_version": 1,
+        "graph_version": "phase-6-v1",
+        "prompt_version": "phase-11a-v3",
+        "status": "completed",
+        "diagnosis": {
+          "taxonomy_id": "F04",
+          "summary": "The email `sendEmail` action failed due to a missing 'subject_template' field, as indicated by the input validation evidence. This prevents the email from being properly formed and sent.",
+          "confidence": "high",
+          "evidence_refs": [
+            "fixture:failure:f04-email-missing-subject-template",
+            "fixture:validation:f04-email-missing-subject-template"
+          ],
+          "alternate_explanations": [],
+          "missing_evidence": [
+            "provider_request_ids",
+            "canonical_source_identity",
+            "action_metadata",
+            "payload_values",
+            "execution_record",
+            "attempt_history",
+            "execution_ordering",
+            "action_inputs",
+            "input_fingerprint",
+            "handler_registry"
+          ]
+        },
+        "proposal": {
+          "disposition": "owner_action_required",
+          "kind": "request_manual_fix",
+          "summary": "The workflow owner needs to correct the email configuration by providing a valid template path for the 'subject_template' field.",
+          "reasons": [
+            "The 'subject_template' field is missing, which is a customer-controlled configuration error.",
+            "This issue is directly addressable by the owner correcting the workflow definition."
+          ],
+          "evidence_refs": [
+            "fixture:validation:f04-email-missing-subject-template"
+          ],
+          "runbook_citations": [
+            "RB-F03-F04@1.0.0#allowed-remediation"
+          ],
+          "preconditions": [
+            "The workflow definition must be updated by the owner to include a valid 'subject_template'."
+          ],
+          "not_before": null
+        }
+      }
+    },
+    {
+      "reviewId": "6a701f61097db072",
+      "evidence": {
+        "failureContext": {
+          "contract_version": 1,
+          "evidence_id": "fixture:failure:f02-email-tls-handshake-failure",
+          "type": "failure_context",
+          "source_ref": {
+            "case_id": "6ef83dff-c460-4fd7-88f5-e4ef77b7c83e",
+            "zap_run_id": "7cfab9df-152f-4b02-82d6-e96ab4c79752",
+            "stage": 0
+          },
+          "observed_at": "2026-10-21T00:00:00.000Z",
+          "content_hash": "317006268f1b7b14818b70efa3e60f3e50b8084ee04e1f0baac7f69385bca7aa",
+          "facts": {
+            "source_kind": "controlled_fixture",
+            "current_action_type": "sendEmail",
+            "retry": {
+              "provider": "email",
+              "phase": "connect",
+              "provider_outcome": "not_delivered",
+              "safe_code": null,
+              "provider_status": null,
+              "retry_after_seconds": null,
+              "requires_human": null,
+              "final_error": "TLS handshake failed while opening the provider connection"
+            },
+            "action_metadata": {
+              "paths": [],
+              "truncated": true
+            },
+            "payload": {
+              "paths": [],
+              "truncated": true
+            }
+          },
+          "unavailable": [
+            "provider_request_ids",
+            "canonical_source_identity",
+            "action_metadata",
+            "payload_values"
+          ],
+          "complete": false,
+          "simulated": true,
+          "fixture_contract_version": 1,
+          "fixture_observation": {
+            "provider": "email",
+            "execution_status": "FAILED",
+            "delivery_outcome": "not_delivered",
+            "attempts": 3,
+            "final_error": "TLS handshake failed while opening the provider connection",
+            "observed_facts": [
+              "all_attempts_not_delivered"
+            ],
+            "sensitive_fields_present": []
+          },
+          "fixture_source_kind": "normal_dlq"
+        },
+        "executionEvidence": {
+          "contract_version": 1,
+          "evidence_id": "fixture:execution:f02-email-tls-handshake-failure",
+          "type": "execution_evidence",
+          "source_ref": {
+            "case_id": "6ef83dff-c460-4fd7-88f5-e4ef77b7c83e",
+            "zap_run_id": "7cfab9df-152f-4b02-82d6-e96ab4c79752",
+            "stage": 0
+          },
+          "observed_at": "2026-10-21T00:00:00.000Z",
+          "content_hash": "6dfada7be51b2455eb5e95fa6e1aa58a40ba1c2443b3b6b2827f46af981760bb",
+          "facts": {
+            "provenance": "controlled_fixture",
+            "current_execution": null,
+            "attempts": [],
+            "history_limit": 10,
+            "history_truncated": true,
+            "predecessors": [],
+            "ordering": {
+              "status": "unknown",
+              "missing_predecessor_stages": []
+            }
+          },
+          "unavailable": [
+            "execution_record",
+            "attempt_history",
+            "execution_ordering"
+          ],
+          "complete": false,
+          "simulated": true,
+          "fixture_contract_version": 1
+        },
+        "inputValidation": {
+          "contract_version": 1,
+          "evidence_id": "fixture:validation:f02-email-tls-handshake-failure",
+          "type": "action_input_validation",
+          "source_ref": {
+            "case_id": "6ef83dff-c460-4fd7-88f5-e4ef77b7c83e",
+            "zap_run_id": "7cfab9df-152f-4b02-82d6-e96ab4c79752",
+            "stage": 0
+          },
+          "observed_at": "2026-10-21T00:00:00.000Z",
+          "content_hash": "7be4f2ea1eee77c5ee33ea1ac2885b94fc890d78876c2f84cefbe6c41a9f347e",
+          "facts": {
+            "action_type": "sendEmail",
+            "validation_status": "blocked",
+            "supported": null,
+            "missing_required_fields": [],
+            "invalid_field_types": [],
+            "missing_template_paths": [],
+            "credential_presence": [],
+            "blocked_reasons": [
+              "fixture_inputs_unavailable"
+            ],
+            "input_fingerprint": null
+          },
+          "unavailable": [
+            "action_inputs",
+            "input_fingerprint",
+            "handler_registry"
+          ],
+          "complete": false,
+          "simulated": true,
+          "fixture_contract_version": 1
+        }
+      },
+      "retrieved": [
+        {
+          "citation": "RB-F01-F02@1.1.0#read-only-investigation",
+          "heading": "Read-only investigation",
+          "content": "Read failure context and execution evidence. Confirm whether the failure happened before a send, was explicitly rejected, or became ambiguous after a send began. Validate current inputs only when configuration may be involved. Do not probe the provider.",
+          "score": 0.008297458280797452
+        },
+        {
+          "citation": "RB-F01-F02@1.1.0#allowed-remediation",
+          "heading": "Allowed remediation",
+          "content": "An operator may restore connectivity or reduce sending pressure. For a proven Telegram 429 rejection, record the conservative cooldown deadline and investigate again after it passes. Guidance is not a scheduler and does not claim that the provider recovered.",
+          "score": 0.00015337450166184543
+        },
+        {
+          "citation": "RB-F01-F02@1.1.0#verification-rollback-or-escalation",
+          "heading": "Verification, rollback, or escalation",
+          "content": "Verify the recorded retry delay and timestamps without sending. If evidence conflicts or recovery is unproven, abstain and escalate to the provider or platform operator. Roll back any operator configuration change through that system's normal process.",
+          "score": 0.00008389285670517806
+        }
+      ],
+      "diagnosis": {
+        "contract_version": 1,
+        "graph_version": "phase-6-v1",
+        "prompt_version": "phase-11a-v3",
+        "status": "completed",
+        "diagnosis": {
+          "taxonomy_id": "F02",
+          "summary": "The email delivery failed due to a TLS handshake failure during connection establishment with the email provider. This indicates a transient or persistent issue with the provider's server or network connectivity that prevents secure communication.",
+          "confidence": "high",
+          "evidence_refs": [
+            "fixture:failure:f02-email-tls-handshake-failure"
+          ],
+          "alternate_explanations": [],
+          "missing_evidence": [
+            "provider_request_ids",
+            "canonical_source_identity",
+            "action_metadata",
+            "payload_values",
+            "execution_record",
+            "attempt_history",
+            "execution_ordering",
+            "action_inputs",
+            "input_fingerprint",
+            "handler_registry"
+          ]
+        },
+        "proposal": {
+          "disposition": "engineering_escalation_required",
+          "kind": "escalate",
+          "summary": "Escalate to engineering for investigation of the TLS handshake failure with the email provider. This is likely a platform-level issue or external provider problem.",
+          "reasons": [
+            "The failure occurred during the `connect` phase with a `TLS handshake failed` error, indicating a problem at the transport or security layer before message transmission.",
+            "The `provider_outcome` is `not_delivered`, confirming no delivery occurred.",
+            "This type of failure typically points to infrastructure issues (e.g., certificate problems, network interruptions, provider misconfiguration) rather than customer-controlled input errors."
+          ],
+          "evidence_refs": [
+            "fixture:failure:f02-email-tls-handshake-failure"
+          ],
+          "runbook_citations": [
+            "RB-F01-F02@1.1.0#read-only-investigation",
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+          ],
+          "preconditions": [
+            "No customer-controlled configuration or input is identified as the root cause.",
+            "The issue is at the provider connection level, requiring platform or provider intervention."
+          ],
+          "not_before": null
+        }
+      }
+    },
+    {
+      "reviewId": "86b4a52a1a2b081e",
+      "evidence": {
+        "failureContext": {
+          "contract_version": 1,
+          "evidence_id": "fixture:failure:f03-telegram-bot-removed-from-channel",
+          "type": "failure_context",
+          "source_ref": {
+            "case_id": "d233f4e7-a206-489d-86a4-b8b6f78eecc0",
+            "zap_run_id": "c5be1fe9-4475-43ef-8cac-ed1d58838fae",
+            "stage": 0
+          },
+          "observed_at": "2026-10-21T00:00:00.000Z",
+          "content_hash": "0c21d9c8bc51bae56195dc7fd9ab133aa4db318ee54324af0728cf44076d296d",
+          "facts": {
+            "source_kind": "controlled_fixture",
+            "current_action_type": "sendMessage",
+            "retry": {
+              "provider": "telegram",
+              "phase": "send",
+              "provider_outcome": "rejected",
+              "safe_code": null,
+              "provider_status": 403,
+              "retry_after_seconds": null,
+              "requires_human": null,
+              "final_error": "permission denied: the bot is not a member of the target channel"
+            },
+            "action_metadata": {
+              "paths": [],
+              "truncated": true
+            },
+            "payload": {
+              "paths": [],
+              "truncated": true
+            }
+          },
+          "unavailable": [
+            "provider_request_ids",
+            "canonical_source_identity",
+            "action_metadata",
+            "payload_values"
+          ],
+          "complete": false,
+          "simulated": true,
+          "fixture_contract_version": 1,
+          "fixture_observation": {
+            "provider": "telegram",
+            "execution_status": "FAILED",
+            "delivery_outcome": "rejected",
+            "attempts": 3,
+            "final_error": "permission denied: the bot is not a member of the target channel",
+            "observed_facts": [
+              "permission_denied"
+            ],
+            "sensitive_fields_present": []
+          },
+          "fixture_source_kind": "normal_dlq"
+        },
+        "executionEvidence": {
+          "contract_version": 1,
+          "evidence_id": "fixture:execution:f03-telegram-bot-removed-from-channel",
+          "type": "execution_evidence",
+          "source_ref": {
+            "case_id": "d233f4e7-a206-489d-86a4-b8b6f78eecc0",
+            "zap_run_id": "c5be1fe9-4475-43ef-8cac-ed1d58838fae",
+            "stage": 0
+          },
+          "observed_at": "2026-10-21T00:00:00.000Z",
+          "content_hash": "f7e1cd9132f1a0484d2d6279e3135f605a5a3bc0248ce56ae816eb9cb568f820",
+          "facts": {
+            "provenance": "controlled_fixture",
+            "current_execution": null,
+            "attempts": [],
+            "history_limit": 10,
+            "history_truncated": true,
+            "predecessors": [],
+            "ordering": {
+              "status": "unknown",
+              "missing_predecessor_stages": []
+            }
+          },
+          "unavailable": [
+            "execution_record",
+            "attempt_history",
+            "execution_ordering"
+          ],
+          "complete": false,
+          "simulated": true,
+          "fixture_contract_version": 1
+        },
+        "inputValidation": {
+          "contract_version": 1,
+          "evidence_id": "fixture:validation:f03-telegram-bot-removed-from-channel",
+          "type": "action_input_validation",
+          "source_ref": {
+            "case_id": "d233f4e7-a206-489d-86a4-b8b6f78eecc0",
+            "zap_run_id": "c5be1fe9-4475-43ef-8cac-ed1d58838fae",
+            "stage": 0
+          },
+          "observed_at": "2026-10-21T00:00:00.000Z",
+          "content_hash": "36a290b9b488d271771ac19dfc6ce55c1e42c131e957abd03982eccb449e099e",
+          "facts": {
+            "action_type": "sendMessage",
+            "validation_status": "blocked",
+            "supported": null,
+            "missing_required_fields": [],
+            "invalid_field_types": [],
+            "missing_template_paths": [],
+            "credential_presence": [],
+            "blocked_reasons": [
+              "fixture_inputs_unavailable"
+            ],
+            "input_fingerprint": null
+          },
+          "unavailable": [
+            "action_inputs",
+            "input_fingerprint",
+            "handler_registry"
+          ],
+          "complete": false,
+          "simulated": true,
+          "fixture_contract_version": 1
+        }
+      },
+      "retrieved": [
+        {
+          "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+          "heading": "Read-only investigation",
+          "content": "Validate action inputs without returning values. Distinguish an absent action field from an unknown worker environment fallback. Check whether Telegram failed during destination resolution or send. Ask an operator to confirm bot membership and permissions outside the agent.",
+          "score": 0.44640683844236256
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+          "heading": "Verification, rollback, or escalation",
+          "content": "Verify only non-secret configuration presence and operator-provided permission evidence. If the worker environment or prior delivery remains unknown, abstain. Roll back credential changes in the credential manager and escalate permission failures to the destination owner.",
+          "score": 0.0002954262767639356
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+          "heading": "Allowed remediation",
+          "content": "An authorized operator may rotate or configure credentials and repair destination membership or permissions. Correct invalid workflow configuration through the owning application, then start a fresh investigation with new evidence.",
+          "score": 0.00016360504259830739
+        }
+      ],
+      "diagnosis": {
+        "contract_version": 1,
+        "graph_version": "phase-6-v1",
+        "prompt_version": "phase-11a-v3",
+        "status": "completed",
+        "diagnosis": {
+          "taxonomy_id": "F03",
+          "summary": "The Telegram bot encountered a permission denied error, indicating it is not a member of the target channel. This suggests an issue with the bot's membership or permissions in the destination channel, which is typically a customer-controlled configuration.",
+          "confidence": "high",
+          "evidence_refs": [
+            "fixture:failure:f03-telegram-bot-removed-from-channel"
+          ],
+          "alternate_explanations": [],
+          "missing_evidence": [
+            "provider_request_ids",
+            "canonical_source_identity",
+            "action_metadata",
+            "payload_values",
+            "execution_record",
+            "attempt_history",
+            "execution_ordering",
+            "action_inputs",
+            "input_fingerprint",
+            "handler_registry"
+          ]
+        },
+        "proposal": {
+          "disposition": "owner_action_required",
+          "kind": "request_manual_fix",
+          "summary": "Request the owner to manually fix the Telegram bot's membership or permissions in the target channel.",
+          "reasons": [
+            "The Telegram API returned a 403 Forbidden status with the error message 'permission denied: the bot is not a member of the target channel'.",
+            "This error directly indicates that the bot does not have the necessary permissions or membership in the specified channel, which is an external configuration managed by the owner.",
+            "The input validation reports that inputs are unavailable, but the provider error clearly indicates a permissions issue on the provider side, not an input formatting issue."
+          ],
+          "evidence_refs": [
+            "fixture:failure:f03-telegram-bot-removed-from-channel"
+          ],
+          "runbook_citations": [
+            "RB-F03-F04@1.0.0#read-only-investigation",
+            "RB-F03-F04@1.0.0#allowed-remediation"
+          ],
+          "preconditions": [
+            "The owner of the Telegram channel or bot needs to confirm and adjust the bot's membership and permissions.",
+            "No changes to the workflow or internal system configuration are required from engineering."
+          ],
+          "not_before": null
+        }
+      }
+    },
+    {
+      "reviewId": "e7bcea1b6e421e50",
+      "evidence": {
+        "failureContext": {
+          "contract_version": 1,
+          "evidence_id": "fixture:failure:f02-telegram-connect-refused",
+          "type": "failure_context",
+          "source_ref": {
+            "case_id": "ac5dc864-e015-41bd-80f4-6e8cdba79967",
+            "zap_run_id": "9db6f412-73de-450f-8447-938ca3ba0393",
+            "stage": 0
+          },
+          "observed_at": "2026-10-21T00:00:00.000Z",
+          "content_hash": "5a6e886c0f3e2e74b2fab5003c905ac7dd9b5f6bb2e588299804fb6df6316144",
+          "facts": {
+            "source_kind": "controlled_fixture",
+            "current_action_type": "sendMessage",
+            "retry": {
+              "provider": "telegram",
+              "phase": "connect",
+              "provider_outcome": "not_delivered",
+              "safe_code": null,
+              "provider_status": null,
+              "retry_after_seconds": null,
+              "requires_human": null,
+              "final_error": "connect ECONNREFUSED 10.0.0.4:443 before request transmission"
+            },
+            "action_metadata": {
+              "paths": [],
+              "truncated": true
+            },
+            "payload": {
+              "paths": [],
+              "truncated": true
+            }
+          },
+          "unavailable": [
+            "provider_request_ids",
+            "canonical_source_identity",
+            "action_metadata",
+            "payload_values"
+          ],
+          "complete": false,
+          "simulated": true,
+          "fixture_contract_version": 1,
+          "fixture_observation": {
+            "provider": "telegram",
+            "execution_status": "FAILED",
+            "delivery_outcome": "not_delivered",
+            "attempts": 3,
+            "final_error": "connect ECONNREFUSED 10.0.0.4:443 before request transmission",
+            "observed_facts": [
+              "failure_before_send",
+              "all_attempts_not_delivered"
+            ],
+            "sensitive_fields_present": []
+          },
+          "fixture_source_kind": "normal_dlq"
+        },
+        "executionEvidence": {
+          "contract_version": 1,
+          "evidence_id": "fixture:execution:f02-telegram-connect-refused",
+          "type": "execution_evidence",
+          "source_ref": {
+            "case_id": "ac5dc864-e015-41bd-80f4-6e8cdba79967",
+            "zap_run_id": "9db6f412-73de-450f-8447-938ca3ba0393",
+            "stage": 0
+          },
+          "observed_at": "2026-10-21T00:00:00.000Z",
+          "content_hash": "76071c8ef3e51d33fce87a16896acb2985c1f86eef6b81dcf192b89097e96533",
+          "facts": {
+            "provenance": "controlled_fixture",
+            "current_execution": null,
+            "attempts": [],
+            "history_limit": 10,
+            "history_truncated": true,
+            "predecessors": [],
+            "ordering": {
+              "status": "unknown",
+              "missing_predecessor_stages": []
+            }
+          },
+          "unavailable": [
+            "execution_record",
+            "attempt_history",
+            "execution_ordering"
+          ],
+          "complete": false,
+          "simulated": true,
+          "fixture_contract_version": 1
+        },
+        "inputValidation": {
+          "contract_version": 1,
+          "evidence_id": "fixture:validation:f02-telegram-connect-refused",
+          "type": "action_input_validation",
+          "source_ref": {
+            "case_id": "ac5dc864-e015-41bd-80f4-6e8cdba79967",
+            "zap_run_id": "9db6f412-73de-450f-8447-938ca3ba0393",
+            "stage": 0
+          },
+          "observed_at": "2026-10-21T00:00:00.000Z",
+          "content_hash": "39b46534b42461c656215e31e0c114665a8945c78b08b4639b6c0a1391f6d68d",
+          "facts": {
+            "action_type": "sendMessage",
+            "validation_status": "blocked",
+            "supported": null,
+            "missing_required_fields": [],
+            "invalid_field_types": [],
+            "missing_template_paths": [],
+            "credential_presence": [],
+            "blocked_reasons": [
+              "fixture_inputs_unavailable"
+            ],
+            "input_fingerprint": null
+          },
+          "unavailable": [
+            "action_inputs",
+            "input_fingerprint",
+            "handler_registry"
+          ],
+          "complete": false,
+          "simulated": true,
+          "fixture_contract_version": 1
+        }
+      },
+      "retrieved": [
+        {
+          "citation": "RB-F01-F02@1.1.0#read-only-investigation",
+          "heading": "Read-only investigation",
+          "content": "Read failure context and execution evidence. Confirm whether the failure happened before a send, was explicitly rejected, or became ambiguous after a send began. Validate current inputs only when configuration may be involved. Do not probe the provider.",
+          "score": 0.008358639575658014
+        },
+        {
+          "citation": "RB-F01-F02@1.1.0#allowed-remediation",
+          "heading": "Allowed remediation",
+          "content": "An operator may restore connectivity or reduce sending pressure. For a proven Telegram 429 rejection, record the conservative cooldown deadline and investigate again after it passes. Guidance is not a scheduler and does not claim that the provider recovered.",
+          "score": 0.0011239220054960924
+        },
+        {
+          "citation": "RB-F01-F02@1.1.0#verification-rollback-or-escalation",
+          "heading": "Verification, rollback, or escalation",
+          "content": "Verify the recorded retry delay and timestamps without sending. If evidence conflicts or recovery is unproven, abstain and escalate to the provider or platform operator. Roll back any operator configuration change through that system's normal process.",
+          "score": 0.0001259404847845705
+        }
+      ],
+      "diagnosis": {
+        "contract_version": 1,
+        "graph_version": "phase-6-v1",
+        "prompt_version": "phase-11a-v3",
+        "status": "abstained",
+        "diagnosis": {
+          "taxonomy_id": "F02",
+          "summary": "The workflow failed to connect to the Telegram API due to a connection refused error, indicating a network or server-side issue before the request could be transmitted. The delivery outcome is not_delivered. Input validation is blocked because inputs are unavailable, preventing a full diagnosis.",
+          "confidence": "low",
+          "evidence_refs": [
+            "fixture:failure:f02-telegram-connect-refused",
+            "fixture:execution:f02-telegram-connect-refused",
+            "fixture:validation:f02-telegram-connect-refused"
+          ],
+          "alternate_explanations": [
+            "The connection refused error could be a transient network issue, a misconfigured firewall, or the Telegram server being temporarily unavailable.",
+            "Without input validation, it's impossible to rule out an invalid destination or credential issue that would have been caught if inputs were available."
+          ],
+          "missing_evidence": [
+            "provider_request_ids",
+            "canonical_source_identity",
+            "action_metadata",
+            "payload_values",
+            "execution_record",
+            "attempt_history",
+            "execution_ordering",
+            "action_inputs",
+            "input_fingerprint",
+            "handler_registry"
+          ]
+        },
+        "proposal": {
+          "disposition": "outcome_unknown",
+          "kind": "escalate",
+          "summary": "Escalate to engineering for investigation due to connection refused error and unavailability of complete evidence, including inputs for validation. The outcome is unknown as the root cause cannot be fully determined from available information.",
+          "reasons": [
+            "The connection was refused before transmission (ECONNREFUSED), which indicates a problem external to the application logic, likely network or provider availability.",
+            "Critical evidence, including action inputs, payload values, and detailed attempt history, is unavailable, preventing a confident diagnosis or proposed fix.",
+            "Input validation is blocked, so customer configuration issues cannot be fully assessed."
+          ],
+          "evidence_refs": [
+            "fixture:failure:f02-telegram-connect-refused",
+            "fixture:validation:f02-telegram-connect-refused"
+          ],
+          "runbook_citations": [
+            "RB-F01-F02@1.1.0#read-only-investigation",
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+          ],
+          "preconditions": [
+            "No customer-controlled configuration change has been identified as the root cause.",
+            "Further investigation is required to determine the exact cause of the connection refusal and the impact on delivery."
+          ],
+          "not_before": null
+        }
+      }
+    },
+    {
+      "reviewId": "eb8930935beccbe1",
+      "evidence": {
+        "failureContext": {
+          "contract_version": 1,
+          "evidence_id": "fixture:failure:f04-email-numeric-recipient-field",
+          "type": "failure_context",
+          "source_ref": {
+            "case_id": "9630222c-d29c-4386-8662-53bbbf05efbb",
+            "zap_run_id": "1e68ba37-afbb-49e2-8857-dea0d6cc5bf0",
+            "stage": 0
+          },
+          "observed_at": "2026-10-21T00:00:00.000Z",
+          "content_hash": "1d7c1402865f67d9b2f7aca40040c345c34dcfe2e752a34e5055bdd409cd9c96",
+          "facts": {
+            "source_kind": "controlled_fixture",
+            "current_action_type": "sendEmail",
+            "retry": {
+              "provider": "email",
+              "phase": "send",
+              "provider_outcome": "not_attempted",
+              "safe_code": null,
+              "provider_status": null,
+              "retry_after_seconds": null,
+              "requires_human": null,
+              "final_error": "Email input validation rejected to: expected string"
+            },
+            "action_metadata": {
+              "paths": [],
+              "truncated": true
+            },
+            "payload": {
+              "paths": [],
+              "truncated": true
+            }
+          },
+          "unavailable": [
+            "provider_request_ids",
+            "canonical_source_identity",
+            "action_metadata",
+            "payload_values"
+          ],
+          "complete": false,
+          "simulated": true,
+          "fixture_contract_version": 1,
+          "fixture_observation": {
+            "provider": "email",
+            "execution_status": "FAILED",
+            "delivery_outcome": "not_delivered",
+            "attempts": 3,
+            "final_error": "Email input validation rejected to: expected string",
+            "observed_facts": [],
+            "sensitive_fields_present": []
+          },
+          "fixture_source_kind": "normal_dlq"
+        },
+        "executionEvidence": {
+          "contract_version": 1,
+          "evidence_id": "fixture:execution:f04-email-numeric-recipient-field",
+          "type": "execution_evidence",
+          "source_ref": {
+            "case_id": "9630222c-d29c-4386-8662-53bbbf05efbb",
+            "zap_run_id": "1e68ba37-afbb-49e2-8857-dea0d6cc5bf0",
+            "stage": 0
+          },
+          "observed_at": "2026-10-21T00:00:00.000Z",
+          "content_hash": "a3bf14a65996ac800b7b93a4eefb30069f7acd3a2990533b4cef47298cf7e715",
+          "facts": {
+            "provenance": "controlled_fixture",
+            "current_execution": null,
+            "attempts": [],
+            "history_limit": 10,
+            "history_truncated": true,
+            "predecessors": [],
+            "ordering": {
+              "status": "unknown",
+              "missing_predecessor_stages": []
+            }
+          },
+          "unavailable": [
+            "execution_record",
+            "attempt_history",
+            "execution_ordering"
+          ],
+          "complete": false,
+          "simulated": true,
+          "fixture_contract_version": 1
+        },
+        "inputValidation": {
+          "contract_version": 1,
+          "evidence_id": "fixture:validation:f04-email-numeric-recipient-field",
+          "type": "action_input_validation",
+          "source_ref": {
+            "case_id": "9630222c-d29c-4386-8662-53bbbf05efbb",
+            "zap_run_id": "1e68ba37-afbb-49e2-8857-dea0d6cc5bf0",
+            "stage": 0
+          },
+          "observed_at": "2026-10-21T00:00:00.000Z",
+          "content_hash": "3ef2bda976cf387137c53ccad3e8f51e7b2bb67f57a999f72da6c752add1fd88",
+          "facts": {
+            "action_type": "sendEmail",
+            "validation_status": "invalid",
+            "supported": null,
+            "missing_required_fields": [],
+            "invalid_field_types": [
+              {
+                "field": "to",
+                "expected": "string",
+                "actual": "number"
+              }
+            ],
+            "missing_template_paths": [],
+            "credential_presence": [],
+            "blocked_reasons": [
+              "fixture_inputs_unavailable"
+            ],
+            "input_fingerprint": null
+          },
+          "unavailable": [
+            "action_inputs",
+            "input_fingerprint",
+            "handler_registry"
+          ],
+          "complete": false,
+          "simulated": true,
+          "fixture_contract_version": 1
+        }
+      },
+      "retrieved": [
+        {
+          "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+          "heading": "Read-only investigation",
+          "content": "Run deterministic input validation. The parser replaces a missing template path with an empty string, so report the missing path rather than the rendered value. Compare action type with the current `email` and `telegram` registry and inspect contiguous stage ordering.",
+          "score": 0.050073733269363076
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+          "heading": "Verification, rollback, or escalation",
+          "content": "Verify only non-secret configuration presence and operator-provided permission evidence. If the worker environment or prior delivery remains unknown, abstain. Roll back credential changes in the credential manager and escalate permission failures to the destination owner.",
+          "score": 0.0004264445852464755
+        },
+        {
+          "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+          "heading": "Allowed remediation",
+          "content": "An authorized operator may rotate or configure credentials and repair destination membership or permissions. Correct invalid workflow configuration through the owning application, then start a fresh investigation with new evidence.",
+          "score": 0.00003867401059893498
+        }
+      ],
+      "diagnosis": {
+        "contract_version": 1,
+        "graph_version": "phase-6-v1",
+        "prompt_version": "phase-11a-v3",
+        "status": "completed",
+        "diagnosis": {
+          "taxonomy_id": "F04",
+          "summary": "Input validation failed for the 'to' field in a sendEmail action. The expected type was a string, but a number was provided. This indicates a misconfiguration in the workflow's input for the email recipient.",
+          "confidence": "high",
+          "evidence_refs": [
+            "fixture:failure:f04-email-numeric-recipient-field",
+            "fixture:validation:f04-email-numeric-recipient-field"
+          ],
+          "alternate_explanations": [],
+          "missing_evidence": [
+            "provider_request_ids",
+            "canonical_source_identity",
+            "action_metadata",
+            "payload_values",
+            "execution_record",
+            "attempt_history",
+            "execution_ordering",
+            "action_inputs",
+            "input_fingerprint",
+            "handler_registry"
+          ]
+        },
+        "proposal": {
+          "disposition": "owner_action_required",
+          "kind": "request_manual_fix",
+          "summary": "The workflow owner must correct the 'to' field in the sendEmail action configuration. The field currently has a numeric value but expects a string, which is typically an email address.",
+          "reasons": [
+            "The 'to' field for the sendEmail action received a number instead of the expected string.",
+            "This is a customer-controlled configuration error that prevents the action from being processed."
+          ],
+          "evidence_refs": [
+            "fixture:validation:f04-email-numeric-recipient-field"
+          ],
+          "runbook_citations": [
+            "RB-F03-F04@1.0.0#allowed-remediation"
+          ],
+          "preconditions": [
+            "The workflow configuration must be updated to provide a valid string (email address) for the 'to' field in the sendEmail action."
+          ],
+          "not_before": null
+        }
+      }
+    }
+  ]
+}

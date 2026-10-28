@@ -1,0 +1,208 @@
+{
+  "version": 1,
+  "createdAt": "2026-10-26",
+  "purpose": "D1 single-run acceptance subset; opened only after the D1 candidate freeze.",
+  "selection": "R4 sealed holdout minus the 40 R4.5-consumed cases; per family F01-F10 and per no-match bucket (3/3/2/2), ascending sha256('d1-accept-v1:' + id).",
+  "cases": [
+    {
+      "id": "f01-email-daily-quota-window",
+      "kind": "answerable",
+      "family": "F01"
+    },
+    {
+      "id": "f01-email-batch-throttle",
+      "kind": "answerable",
+      "family": "F01"
+    },
+    {
+      "id": "f01-email-recipient-rate-window",
+      "kind": "answerable",
+      "family": "F01"
+    },
+    {
+      "id": "f02-telegram-enotfound-resolve",
+      "kind": "answerable",
+      "family": "F02"
+    },
+    {
+      "id": "f02-email-socket-hang-up",
+      "kind": "answerable",
+      "family": "F02"
+    },
+    {
+      "id": "f02-email-etimedout-presend",
+      "kind": "answerable",
+      "family": "F02"
+    },
+    {
+      "id": "f03-email-oauth-token-expired",
+      "kind": "answerable",
+      "family": "F03"
+    },
+    {
+      "id": "f03-telegram-webhook-secret-mismatch",
+      "kind": "answerable",
+      "family": "F03"
+    },
+    {
+      "id": "f03-email-api-key-revoked",
+      "kind": "answerable",
+      "family": "F03"
+    },
+    {
+      "id": "f04-email-missing-body-template",
+      "kind": "answerable",
+      "family": "F04"
+    },
+    {
+      "id": "f04-telegram-empty-destination",
+      "kind": "answerable",
+      "family": "F04"
+    },
+    {
+      "id": "f04-telegram-template-path-missing",
+      "kind": "answerable",
+      "family": "F04"
+    },
+    {
+      "id": "f05-airtable-registry-gap",
+      "kind": "answerable",
+      "family": "F05"
+    },
+    {
+      "id": "f05-action-type-null",
+      "kind": "answerable",
+      "family": "F05"
+    },
+    {
+      "id": "f05-slack-post-not-registered",
+      "kind": "answerable",
+      "family": "F05"
+    },
+    {
+      "id": "f06-fractional-stage-index",
+      "kind": "answerable",
+      "family": "F06"
+    },
+    {
+      "id": "f06-missing-stage-zero",
+      "kind": "answerable",
+      "family": "F06"
+    },
+    {
+      "id": "f06-out-of-order-successor",
+      "kind": "answerable",
+      "family": "F06"
+    },
+    {
+      "id": "f07-email-connection-dropped-after-send",
+      "kind": "answerable",
+      "family": "F07"
+    },
+    {
+      "id": "f07-telegram-delivery-unknown",
+      "kind": "answerable",
+      "family": "F07"
+    },
+    {
+      "id": "f07-telegram-lease-expired",
+      "kind": "answerable",
+      "family": "F07"
+    },
+    {
+      "id": "f08-already-success-stage",
+      "kind": "answerable",
+      "family": "F08"
+    },
+    {
+      "id": "f08-duplicate-failure-row",
+      "kind": "answerable",
+      "family": "F08"
+    },
+    {
+      "id": "f08-stale-approval-reuse",
+      "kind": "answerable",
+      "family": "F08"
+    },
+    {
+      "id": "f09-publication-ack-lost",
+      "kind": "answerable",
+      "family": "F09"
+    },
+    {
+      "id": "f09-stage-success-without-successor-event",
+      "kind": "answerable",
+      "family": "F09"
+    },
+    {
+      "id": "f09-dead-letter-topic-misconfigured",
+      "kind": "answerable",
+      "family": "F09"
+    },
+    {
+      "id": "f10-sdk-throw-swallowed",
+      "kind": "answerable",
+      "family": "F10"
+    },
+    {
+      "id": "f10-provider-error-in-sdk-result",
+      "kind": "answerable",
+      "family": "F10"
+    },
+    {
+      "id": "f10-success-recorded-after-sdk-rejection",
+      "kind": "answerable",
+      "family": "F10"
+    },
+    {
+      "id": "nm-missing-guidance-telegram-sticker-set-invalid",
+      "kind": "no_match",
+      "bucket": "missing_guidance"
+    },
+    {
+      "id": "nm-missing-guidance-email-subject-header-newline",
+      "kind": "no_match",
+      "bucket": "missing_guidance"
+    },
+    {
+      "id": "nm-missing-guidance-email-custom-header-rejected",
+      "kind": "no_match",
+      "bucket": "missing_guidance"
+    },
+    {
+      "id": "nm-missing-runtime-fact-worker-memory-limit-serialization",
+      "kind": "no_match",
+      "bucket": "missing_runtime_fact"
+    },
+    {
+      "id": "nm-missing-runtime-fact-worker-concurrency-cap",
+      "kind": "no_match",
+      "bucket": "missing_runtime_fact"
+    },
+    {
+      "id": "nm-missing-runtime-fact-provider-ip-allowlist",
+      "kind": "no_match",
+      "bucket": "missing_runtime_fact"
+    },
+    {
+      "id": "nm-out-of-scope-prisma-migration-drift",
+      "kind": "no_match",
+      "bucket": "out_of_scope"
+    },
+    {
+      "id": "nm-out-of-scope-worker-heap-exhausted",
+      "kind": "no_match",
+      "bucket": "out_of_scope"
+    },
+    {
+      "id": "nm-adversarial-dual-cause-ambiguity",
+      "kind": "no_match",
+      "bucket": "adversarial"
+    },
+    {
+      "id": "nm-adversarial-label-shaped-injection",
+      "kind": "no_match",
+      "bucket": "adversarial"
+    }
+  ]
+}

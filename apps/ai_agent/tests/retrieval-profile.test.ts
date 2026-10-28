@@ -12,10 +12,15 @@ import {
 } from "../src/tools/search-runbooks.ts";
 import {
   buildStructuredRetrievalInput,
+  deriveSignals,
   evidenceAnchors,
+  faultSignalKeys,
   observedFacts,
+  requestedFacetsForSignals,
   requestedGuidanceFacets,
   routeEvidence,
+  selectRequestedFacets,
+  type EvidenceSignals,
 } from "../src/tools/retrieval-profile.ts";
 
 const taskA = JSON.parse(
@@ -178,6 +183,321 @@ describe("evidence route", () => {
   });
 });
 
+type TransportOverrides = {
+  finalError: string;
+  provider?: string | null;
+  phase?: string | null;
+  status?: number | null;
+  fixtureFacts?: string[];
+  providerOutcome?: string | null;
+};
+
+// Start from a real no-signal no-match fixture, then expose only the transport
+// observation under test. Everything else is cleared so a route can only come
+// from the typed vocabulary.
+const transportEvidence = ({
+  finalError,
+  provider = null,
+  phase = null,
+  status = null,
+  fixtureFacts = [],
+  providerOutcome = "rejected",
+}: TransportOverrides): DiagnosisEvidence => {
+  const evidence = structuredClone(
+    evidenceFor("nm05-email-invalid-region"),
+  ) as DiagnosisEvidence & {
+    failureContext: {
+      facts: { retry: Record<string, unknown> };
+      fixture_observation: Record<string, unknown>;
+    };
+    executionEvidence: { facts: Record<string, unknown> };
+    inputValidation: { facts: Record<string, unknown> };
+  };
+  const retry = evidence.failureContext.facts.retry;
+  retry.final_error = finalError;
+  retry.provider = provider;
+  retry.phase = phase;
+  retry.provider_status = status;
+  retry.provider_outcome = providerOutcome;
+  retry.retry_after_seconds = null;
+  retry.safe_code = null;
+  evidence.failureContext.fixture_observation.final_error = finalError;
+  evidence.failureContext.fixture_observation.provider = provider;
+  evidence.failureContext.fixture_observation.observed_facts = fixtureFacts;
+  evidence.failureContext.fixture_observation.delivery_outcome = "rejected";
+  evidence.failureContext.fixture_observation.execution_status = "FAILED";
+  evidence.executionEvidence.facts.attempts = [];
+  evidence.executionEvidence.facts.current_execution = null;
+  evidence.executionEvidence.facts.ordering = {
+    status: "unknown",
+    missing_predecessor_stages: [],
+  };
+  const validation = evidence.inputValidation.facts;
+  validation.validation_status = "valid";
+  validation.missing_required_fields = [];
+  validation.invalid_field_types = [];
+  validation.missing_template_paths = [];
+  validation.credential_presence = [];
+  validation.supported = null;
+  return evidence;
+};
+
+describe("typed transport route", () => {
+  test("errno token self-routes with a typed reason", () => {
+    const route = routeEvidence(
+      transportEvidence({ finalError: "connect ETIMEDOUT" }),
+    );
+    expect(route.hints).toEqual(["F02"]);
+    expect(route.reasons).toContain(
+      "final_error_transport:errno:etimedout",
+    );
+  });
+
+  test("weak token routes only with an observed corroborator", () => {
+    const route = routeEvidence(
+      transportEvidence({
+        finalError: "timed out",
+        provider: "smtp",
+        phase: "pre_send",
+      }),
+    );
+    expect(route.hints).toEqual(["F02"]);
+    expect(
+      route.reasons.some((reason) =>
+        reason.startsWith("final_error_transport:weak:timed out+"),
+      ),
+    ).toBe(true);
+  });
+
+  test("a corroborated weak route cites the phase, not the provider", () => {
+    const route = routeEvidence(
+      transportEvidence({
+        finalError: "timed out",
+        provider: "smtp",
+        phase: "pre_send",
+      }),
+    );
+    expect(route.reasons).toEqual([
+      "final_error_transport:weak:timed out+phase:pre_send",
+    ]);
+  });
+
+  test("a provider name alone does not corroborate a weak token", () => {
+    expect(
+      routeEvidence(transportEvidence({ finalError: "timed out", provider: "smtp" })),
+    ).toEqual({ hints: [], confident: false, reasons: [] });
+  });
+
+  test("worker admission refusal stays unrouted even with a provider", () => {
+    expect(
+      routeEvidence(
+        transportEvidence({
+          finalError: "worker admission refused: local queue capacity",
+          provider: "smtp",
+        }),
+      ),
+    ).toEqual({ hints: [], confident: false, reasons: [] });
+  });
+
+  test("TLS handshake failure routes to F02", () => {
+    expect(
+      routeEvidence(transportEvidence({ finalError: "TLS handshake failed" })).hints,
+    ).toEqual(["F02"]);
+  });
+
+  test("DNS token self-routes and prefers the specific code", () => {
+    const route = routeEvidence(
+      transportEvidence({ finalError: "DNS lookup returned EAI_AGAIN" }),
+    );
+    expect(route.hints).toEqual(["F02"]);
+    expect(route.reasons).toContain("final_error_transport:dns:eai_again");
+  });
+
+  test("errno token inside a longer error self-routes", () => {
+    const route = routeEvidence(
+      transportEvidence({
+        finalError: "connect ECONNREFUSED 10.0.0.4:25",
+      }),
+    );
+    expect(route.hints).toEqual(["F02"]);
+    expect(route.reasons).toContain(
+      "final_error_transport:errno:econnrefused",
+    );
+  });
+
+  test("worker admission refusal never routes", () => {
+    expect(
+      routeEvidence(
+        transportEvidence({
+          finalError: "worker admission refused: local queue capacity",
+        }),
+      ),
+    ).toEqual({ hints: [], confident: false, reasons: [] });
+  });
+
+  test("database lock timeout never routes", () => {
+    expect(
+      routeEvidence(
+        transportEvidence({
+          finalError: "database query timed out acquiring lock",
+        }),
+      ),
+    ).toEqual({ hints: [], confident: false, reasons: [] });
+  });
+
+  test("a bare weak word with no corroborator never routes", () => {
+    expect(
+      routeEvidence(transportEvidence({ finalError: "request refused" })),
+    ).toEqual({ hints: [], confident: false, reasons: [] });
+  });
+
+  test("every bare ambiguous word stays unrouted", () => {
+    for (const word of ["refused", "reset", "timeout", "timed out", "network"]) {
+      expect(
+        routeEvidence(transportEvidence({ finalError: `request ${word}` })),
+      ).toEqual({ hints: [], confident: false, reasons: [] });
+    }
+  });
+
+  test("unambiguous phrases and typed codes route F02", () => {
+    for (const text of [
+      "connection refused",
+      "connect ECONNREFUSED",
+      "EAI_AGAIN",
+      "ETIMEDOUT",
+    ]) {
+      const route = routeEvidence(transportEvidence({ finalError: text }));
+      expect(route.hints).toEqual(["F02"]);
+      expect(route.reasons.some((reason) => reason.startsWith("final_error_transport:"))).toBe(
+        true,
+      );
+    }
+  });
+});
+
+describe("per-signal facet derivation", () => {
+  const emptySignals = (): EvidenceSignals => ({
+    dedupWindowExpired: false,
+    deliveryUnknown: false,
+    outcomeUnknown: false,
+    rateLimited: false,
+    transport: false,
+    credential: false,
+    validation: false,
+    handler: false,
+    ordering: false,
+    duplicate: false,
+    sdk: false,
+    publication: false,
+  });
+
+  test("no signal keeps the unchanged default demand", () => {
+    expect(requestedFacetsForSignals(emptySignals())).toEqual([
+      "investigation",
+      "evidence",
+      "remediation",
+    ]);
+  });
+
+  test("outcomeUnknown alone never adds forbidden", () => {
+    expect(
+      requestedFacetsForSignals({ ...emptySignals(), outcomeUnknown: true }),
+    ).toEqual(["verification", "evidence"]);
+  });
+
+  test("the verification invariant holds over every signal subset", () => {
+    const keys = faultSignalKeys;
+    expect(keys).toHaveLength(11);
+    for (let mask = 1; mask < 2 ** keys.length; mask += 1) {
+      const signals = emptySignals();
+      keys.forEach((key, index) => {
+        signals[key] = Boolean(mask & (1 << index));
+      });
+      const facets = requestedFacetsForSignals(signals);
+      expect(facets).toContain("verification");
+      expect(facets).toHaveLength(3);
+    }
+  });
+
+  test("deliveryUnknown alone requests remediation instead of forbidden", () => {
+    expect(
+      requestedFacetsForSignals({ ...emptySignals(), deliveryUnknown: true }),
+    ).toEqual(["investigation", "remediation", "verification"]);
+  });
+
+  test("an expired dedup window outranks deliveryUnknown without suppression", () => {
+    expect(
+      requestedFacetsForSignals({
+        ...emptySignals(),
+        dedupWindowExpired: true,
+        deliveryUnknown: true,
+      }),
+    ).toEqual(["remediation", "forbidden", "verification"]);
+  });
+
+  test("concurrent and malformed idempotency no-match evidence never signals", () => {
+    for (const id of [
+      "nm02-email-concurrent-idempotency",
+      "nm08-email-invalid-idempotency-key",
+    ]) {
+      const signals = deriveSignals(evidenceFor(id));
+      expect(signals.dedupWindowExpired).toBe(false);
+      expect(signals.deliveryUnknown).toBe(false);
+    }
+  });
+
+  test("publication plus bookkeeping-only unknown keeps verification", () => {
+    const signals = {
+      ...emptySignals(),
+      publication: true,
+      outcomeUnknown: true,
+    };
+    expect(requestedFacetsForSignals(signals)).toEqual([
+      "investigation",
+      "remediation",
+      "verification",
+    ]);
+    expect(deriveSignals(evidenceFor("f09-database-sink-only")).publication).toBe(
+      true,
+    );
+  });
+
+  test("drop order removes evidence before verification", () => {
+    const selection = selectRequestedFacets({
+      ...emptySignals(),
+      publication: true,
+      outcomeUnknown: true,
+    });
+    expect(selection.facets).toEqual([
+      "investigation",
+      "remediation",
+      "verification",
+    ]);
+    expect(selection.dropped).toEqual(["evidence"]);
+  });
+
+  test("drop order removes replay before investigation", () => {
+    const selection = selectRequestedFacets({
+      ...emptySignals(),
+      rateLimited: true,
+      transport: true,
+    });
+    expect(selection.facets).toEqual([
+      "remediation",
+      "verification",
+      "investigation",
+    ]);
+    expect(selection.dropped).toEqual(["replay"]);
+  });
+
+  test("a no-signal observation drops nothing", () => {
+    expect(selectRequestedFacets(emptySignals())).toEqual({
+      facets: ["investigation", "evidence", "remediation"],
+      dropped: [],
+    });
+  });
+});
+
 describe("route coverage", () => {
   test("covers every accepted development citation", async () => {
     const index = await loadRunbooks(defaultRunbookDirectory());
@@ -230,6 +550,45 @@ describe("structured retrieval input", () => {
     ]);
   });
 
+  test("bare refused does not set route.confident", () => {
+    const input = buildStructuredRetrievalInput(
+      transportEvidence({ finalError: "request refused" }),
+    );
+    expect(input.route?.confident).toBe(false);
+    expect(input.trace?.weakTokenRejected).toContain(
+      "weak_token_rejected:no_transport_corroborator",
+    );
+  });
+
+  test("worker admission refused does not set a confident route", () => {
+    const input = buildStructuredRetrievalInput(
+      transportEvidence({
+        finalError: "worker admission refused: local queue capacity",
+        provider: "smtp",
+        providerOutcome: null,
+      }),
+    );
+    expect(input.route?.confident).toBe(false);
+  });
+
+  test("confident transport route sets route.confident", () => {
+    const input = buildStructuredRetrievalInput(
+      transportEvidence({ finalError: "connect ECONNREFUSED 10.0.0.4:25" }),
+    );
+    expect(input.route?.confident).toBe(true);
+    expect(input.trace?.weakTokenRejected).toEqual([]);
+  });
+
+  test("the trace exposes dropped facets", () => {
+    const input = buildStructuredRetrievalInput(
+      evidenceFor("f09-database-sink-only"),
+    );
+    expect(input.trace?.facetSelection.requested).toEqual([
+      ...(input.requestedFacets ?? []),
+    ]);
+    expect(input.trace?.facetSelection.dropped).toEqual([]);
+  });
+
   test("anchors exclude generic fields that every runbook repeats", () => {
     const anchors = evidenceAnchors(evidenceFor("f01-rate-limit-rejected"));
     expect(anchors).not.toContain("telegram");
@@ -250,15 +609,15 @@ describe("structured retrieval input", () => {
     ]);
     expect(
       requestedGuidanceFacets(evidenceFor("f07-provider-response-lost")),
-    ).toEqual(["investigation", "remediation", "forbidden"]);
+    ).toEqual(["investigation", "remediation", "verification"]);
     expect(
       requestedGuidanceFacets(evidenceFor("f08-success-stage-republished")),
     ).toEqual(["investigation", "forbidden", "verification"]);
     expect(
       requestedGuidanceFacets(evidenceFor("f10-sdk-error-recorded-success")),
-    ).toEqual(["investigation", "remediation", "forbidden"]);
+    ).toEqual(["investigation", "remediation", "verification"]);
     expect(
       requestedGuidanceFacets(evidenceFor("s05-expired-email-dedup-window")),
-    ).toEqual(["investigation", "remediation", "forbidden"]);
+    ).toEqual(["remediation", "forbidden", "verification"]);
   });
 });

@@ -1,0 +1,1074 @@
+{
+  "artifact": "development-evidence-v2",
+  "version": 1,
+  "status": "authored_r3.5r.3_pending_independent_review",
+  "authoredAt": "2026-10-20",
+  "purpose": "Completes R3.5r.1: observed fixture evidence for the eight predeclared extension cases. Pinned evidence remains in development-review-v3.json and is not duplicated here.",
+  "pinnedSource": {
+    "path": "apps/ai_agent/evaluation/production-selection/development-review-v3.json",
+    "fileBytesHash": "0c7fba48fc0dc1ec86c23bd93d5d04f6c9ef131a4542ca953ca6a32878b7c585",
+    "cases": 24
+  },
+  "extension": {
+    "cases": [
+      {
+        "id": "f02-preconnect-etimedout",
+        "evidence": {
+          "failureContext": {
+            "contract_version": 1,
+            "evidence_id": "fixture:failure:f02-preconnect-etimedout",
+            "type": "failure_context",
+            "source_ref": {
+              "case_id": "b0a4dbcc-70d4-40e2-8b91-5c5e67b9b932",
+              "zap_run_id": "278a4989-7df1-4356-8670-38ea8854e24f",
+              "stage": 0
+            },
+            "observed_at": "2026-10-20T00:00:00.000Z",
+            "content_hash": "03fcfa6dae0c47c3445abd2bec54bbbb3f6f441af7894ae42e5534535a8c248a",
+            "facts": {
+              "source_kind": "controlled_fixture",
+              "current_action_type": "telegram",
+              "retry": {
+                "provider": "telegram",
+                "phase": "pre_send",
+                "provider_outcome": "not_delivered",
+                "safe_code": null,
+                "provider_status": null,
+                "retry_after_seconds": null,
+                "requires_human": null,
+                "final_error": "connect ETIMEDOUT before request transmission"
+              },
+              "action_metadata": {
+                "paths": [],
+                "truncated": true
+              },
+              "payload": {
+                "paths": [],
+                "truncated": true
+              }
+            },
+            "unavailable": [],
+            "complete": false,
+            "simulated": true,
+            "fixture_contract_version": 1,
+            "fixture_observation": {
+              "provider": "telegram",
+              "execution_status": "FAILED",
+              "delivery_outcome": "not_delivered",
+              "attempts": 1,
+              "final_error": "connect ETIMEDOUT before request transmission",
+              "observed_facts": [
+                "failure_before_send",
+                "all_attempts_not_delivered"
+              ],
+              "sensitive_fields_present": []
+            },
+            "fixture_source_kind": "normal_dlq"
+          },
+          "executionEvidence": {
+            "contract_version": 1,
+            "evidence_id": "fixture:execution:f02-preconnect-etimedout",
+            "type": "execution_evidence",
+            "source_ref": {
+              "case_id": "b0a4dbcc-70d4-40e2-8b91-5c5e67b9b932",
+              "zap_run_id": "278a4989-7df1-4356-8670-38ea8854e24f",
+              "stage": 0
+            },
+            "observed_at": "2026-10-20T00:00:00.000Z",
+            "content_hash": "a2d7671d42edf053ed35ab2707297a9312ea6eb59ff12f995570a91381e5a0d6",
+            "facts": {
+              "provenance": "controlled_fixture",
+              "current_execution": {
+                "execution_id": "37b4d7f0-0579-4a13-8a7d-62ce410aa170",
+                "status": "FAILED",
+                "lease_until": null,
+                "completed_at": null,
+                "provider_outcome": "not_delivered",
+                "requires_human": false,
+                "action_fingerprint": null,
+                "request_fingerprint": null
+              },
+              "attempts": [],
+              "history_limit": 10,
+              "history_truncated": true,
+              "predecessors": [],
+              "ordering": {
+                "status": "valid",
+                "missing_predecessor_stages": []
+              }
+            },
+            "unavailable": [
+              "execution_record",
+              "attempt_history",
+              "execution_ordering"
+            ],
+            "complete": false,
+            "simulated": true,
+            "fixture_contract_version": 1
+          },
+          "inputValidation": {
+            "contract_version": 1,
+            "evidence_id": "fixture:validation:f02-preconnect-etimedout",
+            "type": "action_input_validation",
+            "source_ref": {
+              "case_id": "b0a4dbcc-70d4-40e2-8b91-5c5e67b9b932",
+              "zap_run_id": "278a4989-7df1-4356-8670-38ea8854e24f",
+              "stage": 0
+            },
+            "observed_at": "2026-10-20T00:00:00.000Z",
+            "content_hash": "d987182f0761fef91e81e94247766c8edd25d0dd99d671a497bc015c7cc37f64",
+            "facts": {
+              "action_type": "telegram",
+              "validation_status": "blocked",
+              "supported": null,
+              "missing_required_fields": [],
+              "invalid_field_types": [],
+              "missing_template_paths": [],
+              "credential_presence": [],
+              "blocked_reasons": [
+                "fixture_inputs_unavailable"
+              ],
+              "input_fingerprint": null
+            },
+            "unavailable": [
+              "action_inputs",
+              "input_fingerprint",
+              "handler_registry"
+            ],
+            "complete": false,
+            "simulated": true,
+            "fixture_contract_version": 1
+          }
+        }
+      },
+      {
+        "id": "f02-dns-eai-again",
+        "evidence": {
+          "failureContext": {
+            "contract_version": 1,
+            "evidence_id": "fixture:failure:f02-dns-eai-again",
+            "type": "failure_context",
+            "source_ref": {
+              "case_id": "0c3b5641-cf21-4ff2-85b0-d8d62c26ff41",
+              "zap_run_id": "c6346a75-218f-40b5-8975-21758d730512",
+              "stage": 0
+            },
+            "observed_at": "2026-10-20T00:00:00.000Z",
+            "content_hash": "7949bba8b375e10f6afc504e3422e8fc590590cfde801b1ac3bf3873c88e7f44",
+            "facts": {
+              "source_kind": "controlled_fixture",
+              "current_action_type": "email",
+              "retry": {
+                "provider": "email",
+                "phase": "dns",
+                "provider_outcome": "not_delivered",
+                "safe_code": null,
+                "provider_status": null,
+                "retry_after_seconds": null,
+                "requires_human": null,
+                "final_error": "DNS lookup returned EAI_AGAIN before request transmission"
+              },
+              "action_metadata": {
+                "paths": [],
+                "truncated": true
+              },
+              "payload": {
+                "paths": [],
+                "truncated": true
+              }
+            },
+            "unavailable": [],
+            "complete": false,
+            "simulated": true,
+            "fixture_contract_version": 1,
+            "fixture_observation": {
+              "provider": "email",
+              "execution_status": "FAILED",
+              "delivery_outcome": "not_delivered",
+              "attempts": 1,
+              "final_error": "DNS lookup returned EAI_AGAIN before request transmission",
+              "observed_facts": [
+                "failure_before_send",
+                "all_attempts_not_delivered"
+              ],
+              "sensitive_fields_present": []
+            },
+            "fixture_source_kind": "normal_dlq"
+          },
+          "executionEvidence": {
+            "contract_version": 1,
+            "evidence_id": "fixture:execution:f02-dns-eai-again",
+            "type": "execution_evidence",
+            "source_ref": {
+              "case_id": "0c3b5641-cf21-4ff2-85b0-d8d62c26ff41",
+              "zap_run_id": "c6346a75-218f-40b5-8975-21758d730512",
+              "stage": 0
+            },
+            "observed_at": "2026-10-20T00:00:00.000Z",
+            "content_hash": "88836990842b61a0fb7fa04ab8f8acac2b275f8fc652de9ce40a19e0bad266d2",
+            "facts": {
+              "provenance": "controlled_fixture",
+              "current_execution": {
+                "execution_id": "44e0d31c-e6a6-4e6c-8fed-a86fe706e315",
+                "status": "FAILED",
+                "lease_until": null,
+                "completed_at": null,
+                "provider_outcome": "not_delivered",
+                "requires_human": false,
+                "action_fingerprint": null,
+                "request_fingerprint": null
+              },
+              "attempts": [],
+              "history_limit": 10,
+              "history_truncated": true,
+              "predecessors": [],
+              "ordering": {
+                "status": "valid",
+                "missing_predecessor_stages": []
+              }
+            },
+            "unavailable": [
+              "execution_record",
+              "attempt_history",
+              "execution_ordering"
+            ],
+            "complete": false,
+            "simulated": true,
+            "fixture_contract_version": 1
+          },
+          "inputValidation": {
+            "contract_version": 1,
+            "evidence_id": "fixture:validation:f02-dns-eai-again",
+            "type": "action_input_validation",
+            "source_ref": {
+              "case_id": "0c3b5641-cf21-4ff2-85b0-d8d62c26ff41",
+              "zap_run_id": "c6346a75-218f-40b5-8975-21758d730512",
+              "stage": 0
+            },
+            "observed_at": "2026-10-20T00:00:00.000Z",
+            "content_hash": "675e45d0054841b95a266011f71b5db3a37d9501dd71f2b6d8b9f14afd0f29dc",
+            "facts": {
+              "action_type": "email",
+              "validation_status": "blocked",
+              "supported": null,
+              "missing_required_fields": [],
+              "invalid_field_types": [],
+              "missing_template_paths": [],
+              "credential_presence": [],
+              "blocked_reasons": [
+                "fixture_inputs_unavailable"
+              ],
+              "input_fingerprint": null
+            },
+            "unavailable": [
+              "action_inputs",
+              "input_fingerprint",
+              "handler_registry"
+            ],
+            "complete": false,
+            "simulated": true,
+            "fixture_contract_version": 1
+          }
+        }
+      },
+      {
+        "id": "f04-sibling-destination-repair",
+        "evidence": {
+          "failureContext": {
+            "contract_version": 1,
+            "evidence_id": "fixture:failure:f04-sibling-destination-repair",
+            "type": "failure_context",
+            "source_ref": {
+              "case_id": "ce5652dc-9c2a-4d4f-8391-797386eb3e23",
+              "zap_run_id": "9abdb218-047d-4f44-86d8-7158ac9fda9a",
+              "stage": 0
+            },
+            "observed_at": "2026-10-20T00:00:00.000Z",
+            "content_hash": "89772d4e96e55ad233d6882664ea6c597ea8b49c969e9bd295d0710155f775f7",
+            "facts": {
+              "source_kind": "controlled_fixture",
+              "current_action_type": "email",
+              "retry": {
+                "provider": "email",
+                "phase": null,
+                "provider_outcome": "rejected",
+                "safe_code": null,
+                "provider_status": null,
+                "retry_after_seconds": null,
+                "requires_human": null,
+                "final_error": "Resolved destination is empty"
+              },
+              "action_metadata": {
+                "paths": [],
+                "truncated": true
+              },
+              "payload": {
+                "paths": [],
+                "truncated": true
+              }
+            },
+            "unavailable": [],
+            "complete": false,
+            "simulated": true,
+            "fixture_contract_version": 1,
+            "fixture_observation": {
+              "provider": "email",
+              "execution_status": "FAILED",
+              "delivery_outcome": "rejected",
+              "attempts": 1,
+              "final_error": "Resolved destination is empty",
+              "observed_facts": [
+                "destination_format_invalid",
+                "template_path_missing",
+                "resolved_destination_empty"
+              ],
+              "sensitive_fields_present": []
+            },
+            "fixture_source_kind": "normal_dlq"
+          },
+          "executionEvidence": {
+            "contract_version": 1,
+            "evidence_id": "fixture:execution:f04-sibling-destination-repair",
+            "type": "execution_evidence",
+            "source_ref": {
+              "case_id": "ce5652dc-9c2a-4d4f-8391-797386eb3e23",
+              "zap_run_id": "9abdb218-047d-4f44-86d8-7158ac9fda9a",
+              "stage": 0
+            },
+            "observed_at": "2026-10-20T00:00:00.000Z",
+            "content_hash": "cb7d318b1b74ea8ee00c3d369926368bc8f042e75041cd908c7db5774418a415",
+            "facts": {
+              "provenance": "controlled_fixture",
+              "current_execution": {
+                "execution_id": "73d181a0-5e1c-4824-889c-27041d8e24f9",
+                "status": "FAILED",
+                "lease_until": null,
+                "completed_at": null,
+                "provider_outcome": "rejected",
+                "requires_human": false,
+                "action_fingerprint": null,
+                "request_fingerprint": null
+              },
+              "attempts": [],
+              "history_limit": 10,
+              "history_truncated": true,
+              "predecessors": [],
+              "ordering": {
+                "status": "valid",
+                "missing_predecessor_stages": []
+              }
+            },
+            "unavailable": [
+              "execution_record",
+              "attempt_history",
+              "execution_ordering"
+            ],
+            "complete": false,
+            "simulated": true,
+            "fixture_contract_version": 1
+          },
+          "inputValidation": {
+            "contract_version": 1,
+            "evidence_id": "fixture:validation:f04-sibling-destination-repair",
+            "type": "action_input_validation",
+            "source_ref": {
+              "case_id": "ce5652dc-9c2a-4d4f-8391-797386eb3e23",
+              "zap_run_id": "9abdb218-047d-4f44-86d8-7158ac9fda9a",
+              "stage": 0
+            },
+            "observed_at": "2026-10-20T00:00:00.000Z",
+            "content_hash": "7e3b19d786a2e4cc2587b698c6c36a3fda1c0943d7ac315adf747bfb4ef42421",
+            "facts": {
+              "action_type": "email",
+              "validation_status": "invalid",
+              "supported": null,
+              "missing_required_fields": [],
+              "invalid_field_types": [
+                {
+                  "field": "to",
+                  "expected": "string",
+                  "actual": "null"
+                }
+              ],
+              "missing_template_paths": [
+                "destination"
+              ],
+              "credential_presence": [],
+              "blocked_reasons": [],
+              "input_fingerprint": null
+            },
+            "unavailable": [
+              "action_inputs",
+              "input_fingerprint",
+              "handler_registry"
+            ],
+            "complete": false,
+            "simulated": true,
+            "fixture_contract_version": 1
+          }
+        }
+      },
+      {
+        "id": "f09-rejected-publication-unacknowledged",
+        "evidence": {
+          "failureContext": {
+            "contract_version": 1,
+            "evidence_id": "fixture:failure:f09-rejected-publication-unacknowledged",
+            "type": "failure_context",
+            "source_ref": {
+              "case_id": "d56c144a-cfe6-4dad-8459-d603701c535a",
+              "zap_run_id": "fb657220-983d-4f0d-8521-1330b67159fc",
+              "stage": 0
+            },
+            "observed_at": "2026-10-20T00:00:00.000Z",
+            "content_hash": "c2d5eaaf4c55a752462fea3bae9e4dfdb05fa4a2f797f14eecd147821d047945",
+            "facts": {
+              "source_kind": "controlled_fixture",
+              "current_action_type": "email",
+              "retry": {
+                "provider": "email",
+                "phase": null,
+                "provider_outcome": "rejected",
+                "safe_code": null,
+                "provider_status": null,
+                "retry_after_seconds": null,
+                "requires_human": null,
+                "final_error": "Email provider rejected request; dead-letter publication unacknowledged"
+              },
+              "action_metadata": {
+                "paths": [],
+                "truncated": true
+              },
+              "payload": {
+                "paths": [],
+                "truncated": true
+              }
+            },
+            "unavailable": [],
+            "complete": false,
+            "simulated": true,
+            "fixture_contract_version": 1,
+            "fixture_observation": {
+              "provider": "email",
+              "execution_status": "FAILED",
+              "delivery_outcome": "rejected",
+              "attempts": 1,
+              "final_error": "Email provider rejected request; dead-letter publication unacknowledged",
+              "observed_facts": [
+                "provider_rejected",
+                "dead_letter_absent",
+                "retry_row_present"
+              ],
+              "sensitive_fields_present": []
+            },
+            "fixture_source_kind": "normal_dlq"
+          },
+          "executionEvidence": {
+            "contract_version": 1,
+            "evidence_id": "fixture:execution:f09-rejected-publication-unacknowledged",
+            "type": "execution_evidence",
+            "source_ref": {
+              "case_id": "d56c144a-cfe6-4dad-8459-d603701c535a",
+              "zap_run_id": "fb657220-983d-4f0d-8521-1330b67159fc",
+              "stage": 0
+            },
+            "observed_at": "2026-10-20T00:00:00.000Z",
+            "content_hash": "5484878cc352bdb9aff6d08fa85a9d0907fe9123428e8d27232dfeeaa5b285d7",
+            "facts": {
+              "provenance": "controlled_fixture",
+              "current_execution": {
+                "execution_id": "ead257df-635b-4e83-832f-dc8bb792eff7",
+                "status": "FAILED",
+                "lease_until": null,
+                "completed_at": null,
+                "provider_outcome": "unknown",
+                "requires_human": false,
+                "action_fingerprint": null,
+                "request_fingerprint": null
+              },
+              "attempts": [],
+              "history_limit": 10,
+              "history_truncated": true,
+              "predecessors": [],
+              "ordering": {
+                "status": "valid",
+                "missing_predecessor_stages": []
+              }
+            },
+            "unavailable": [
+              "execution_record",
+              "attempt_history",
+              "execution_ordering"
+            ],
+            "complete": false,
+            "simulated": true,
+            "fixture_contract_version": 1
+          },
+          "inputValidation": {
+            "contract_version": 1,
+            "evidence_id": "fixture:validation:f09-rejected-publication-unacknowledged",
+            "type": "action_input_validation",
+            "source_ref": {
+              "case_id": "d56c144a-cfe6-4dad-8459-d603701c535a",
+              "zap_run_id": "fb657220-983d-4f0d-8521-1330b67159fc",
+              "stage": 0
+            },
+            "observed_at": "2026-10-20T00:00:00.000Z",
+            "content_hash": "7cbbf0c9cbe5dfb563fda055a2ddfd6032ed07882246a28e0ea4de73ad777ba0",
+            "facts": {
+              "action_type": "email",
+              "validation_status": "valid",
+              "supported": null,
+              "missing_required_fields": [],
+              "invalid_field_types": [],
+              "missing_template_paths": [],
+              "credential_presence": [],
+              "blocked_reasons": [],
+              "input_fingerprint": null
+            },
+            "unavailable": [
+              "action_inputs",
+              "input_fingerprint",
+              "handler_registry"
+            ],
+            "complete": false,
+            "simulated": true,
+            "fixture_contract_version": 1
+          }
+        }
+      },
+      {
+        "id": "f01-retry-after-zero",
+        "evidence": {
+          "failureContext": {
+            "contract_version": 1,
+            "evidence_id": "fixture:failure:f01-retry-after-zero",
+            "type": "failure_context",
+            "source_ref": {
+              "case_id": "6d2d7faa-398e-4ab4-8463-cad4d45596d7",
+              "zap_run_id": "6d7d0387-b5b8-4105-8bc2-1df61db16437",
+              "stage": 0
+            },
+            "observed_at": "2026-10-20T00:00:00.000Z",
+            "content_hash": "e109b4367971276ed0f70ac474ca5b7eab0372d59a6a44c546a4fb9c082485f1",
+            "facts": {
+              "source_kind": "controlled_fixture",
+              "current_action_type": "telegram",
+              "retry": {
+                "provider": "telegram",
+                "phase": null,
+                "provider_outcome": "rejected",
+                "safe_code": null,
+                "provider_status": 429,
+                "retry_after_seconds": null,
+                "requires_human": null,
+                "final_error": "Telegram sendMessage returned 429 with retry_after 0"
+              },
+              "action_metadata": {
+                "paths": [],
+                "truncated": true
+              },
+              "payload": {
+                "paths": [],
+                "truncated": true
+              }
+            },
+            "unavailable": [],
+            "complete": false,
+            "simulated": true,
+            "fixture_contract_version": 1,
+            "fixture_observation": {
+              "provider": "telegram",
+              "execution_status": "FAILED",
+              "delivery_outcome": "rejected",
+              "attempts": 1,
+              "final_error": "Telegram sendMessage returned 429 with retry_after 0",
+              "observed_facts": [
+                "all_attempts_rejected",
+                "retry_after_0_seconds"
+              ],
+              "sensitive_fields_present": []
+            },
+            "fixture_source_kind": "normal_dlq"
+          },
+          "executionEvidence": {
+            "contract_version": 1,
+            "evidence_id": "fixture:execution:f01-retry-after-zero",
+            "type": "execution_evidence",
+            "source_ref": {
+              "case_id": "6d2d7faa-398e-4ab4-8463-cad4d45596d7",
+              "zap_run_id": "6d7d0387-b5b8-4105-8bc2-1df61db16437",
+              "stage": 0
+            },
+            "observed_at": "2026-10-20T00:00:00.000Z",
+            "content_hash": "5255970b768cc6351b8d45520e0682bfcfa3f7e7aab9604e4c693f4cba409716",
+            "facts": {
+              "provenance": "controlled_fixture",
+              "current_execution": {
+                "execution_id": "d798b81b-32d0-4ff4-8419-fa9030d0b337",
+                "status": "FAILED",
+                "lease_until": null,
+                "completed_at": null,
+                "provider_outcome": "rejected",
+                "requires_human": false,
+                "action_fingerprint": null,
+                "request_fingerprint": null
+              },
+              "attempts": [],
+              "history_limit": 10,
+              "history_truncated": true,
+              "predecessors": [],
+              "ordering": {
+                "status": "valid",
+                "missing_predecessor_stages": []
+              }
+            },
+            "unavailable": [
+              "execution_record",
+              "attempt_history",
+              "execution_ordering"
+            ],
+            "complete": false,
+            "simulated": true,
+            "fixture_contract_version": 1
+          },
+          "inputValidation": {
+            "contract_version": 1,
+            "evidence_id": "fixture:validation:f01-retry-after-zero",
+            "type": "action_input_validation",
+            "source_ref": {
+              "case_id": "6d2d7faa-398e-4ab4-8463-cad4d45596d7",
+              "zap_run_id": "6d7d0387-b5b8-4105-8bc2-1df61db16437",
+              "stage": 0
+            },
+            "observed_at": "2026-10-20T00:00:00.000Z",
+            "content_hash": "b109391d940e069425d4fa28027076c3189c46272dd3d0ddbce40e8c3fb97cf9",
+            "facts": {
+              "action_type": "telegram",
+              "validation_status": "valid",
+              "supported": null,
+              "missing_required_fields": [],
+              "invalid_field_types": [],
+              "missing_template_paths": [],
+              "credential_presence": [],
+              "blocked_reasons": [],
+              "input_fingerprint": null
+            },
+            "unavailable": [
+              "action_inputs",
+              "input_fingerprint",
+              "handler_registry"
+            ],
+            "complete": false,
+            "simulated": true,
+            "fixture_contract_version": 1
+          }
+        }
+      },
+      {
+        "id": "f03-f04-credential-and-template-overlap",
+        "evidence": {
+          "failureContext": {
+            "contract_version": 1,
+            "evidence_id": "fixture:failure:f03-f04-credential-and-template-overlap",
+            "type": "failure_context",
+            "source_ref": {
+              "case_id": "179428be-ebce-4cd2-8364-6b7c945824de",
+              "zap_run_id": "26c79918-8a84-404a-86cc-4158f2c292bf",
+              "stage": 0
+            },
+            "observed_at": "2026-10-20T00:00:00.000Z",
+            "content_hash": "9c1464385530e89cef3b3ab94ba35a8c02746c601abc513ac9a38f6f3833a303",
+            "facts": {
+              "source_kind": "controlled_fixture",
+              "current_action_type": "email",
+              "retry": {
+                "provider": "email",
+                "phase": null,
+                "provider_outcome": "not_delivered",
+                "safe_code": null,
+                "provider_status": null,
+                "retry_after_seconds": null,
+                "requires_human": null,
+                "final_error": "Configured email credential is absent"
+              },
+              "action_metadata": {
+                "paths": [],
+                "truncated": true
+              },
+              "payload": {
+                "paths": [],
+                "truncated": true
+              }
+            },
+            "unavailable": [],
+            "complete": false,
+            "simulated": true,
+            "fixture_contract_version": 1,
+            "fixture_observation": {
+              "provider": "email",
+              "execution_status": "FAILED",
+              "delivery_outcome": "not_delivered",
+              "attempts": 1,
+              "final_error": "Configured email credential is absent",
+              "observed_facts": [
+                "configured_token_absent",
+                "template_path_missing",
+                "resolved_destination_empty"
+              ],
+              "sensitive_fields_present": []
+            },
+            "fixture_source_kind": "normal_dlq"
+          },
+          "executionEvidence": {
+            "contract_version": 1,
+            "evidence_id": "fixture:execution:f03-f04-credential-and-template-overlap",
+            "type": "execution_evidence",
+            "source_ref": {
+              "case_id": "179428be-ebce-4cd2-8364-6b7c945824de",
+              "zap_run_id": "26c79918-8a84-404a-86cc-4158f2c292bf",
+              "stage": 0
+            },
+            "observed_at": "2026-10-20T00:00:00.000Z",
+            "content_hash": "8b25f7977c6b2999e2ce0abe02b3cc12845ed8310081664f13cdc27d8458c2cb",
+            "facts": {
+              "provenance": "controlled_fixture",
+              "current_execution": {
+                "execution_id": "dd44cd8a-eb5f-4de3-8b89-30ed466fe0bc",
+                "status": "FAILED",
+                "lease_until": null,
+                "completed_at": null,
+                "provider_outcome": "not_delivered",
+                "requires_human": false,
+                "action_fingerprint": null,
+                "request_fingerprint": null
+              },
+              "attempts": [],
+              "history_limit": 10,
+              "history_truncated": true,
+              "predecessors": [],
+              "ordering": {
+                "status": "valid",
+                "missing_predecessor_stages": []
+              }
+            },
+            "unavailable": [
+              "execution_record",
+              "attempt_history",
+              "execution_ordering"
+            ],
+            "complete": false,
+            "simulated": true,
+            "fixture_contract_version": 1
+          },
+          "inputValidation": {
+            "contract_version": 1,
+            "evidence_id": "fixture:validation:f03-f04-credential-and-template-overlap",
+            "type": "action_input_validation",
+            "source_ref": {
+              "case_id": "179428be-ebce-4cd2-8364-6b7c945824de",
+              "zap_run_id": "26c79918-8a84-404a-86cc-4158f2c292bf",
+              "stage": 0
+            },
+            "observed_at": "2026-10-20T00:00:00.000Z",
+            "content_hash": "ab501ee16b84e12cbd9eed33f8b2f31d28efcb8fcf83c4686876a551fadb4e89",
+            "facts": {
+              "action_type": "email",
+              "validation_status": "blocked",
+              "supported": null,
+              "missing_required_fields": [],
+              "invalid_field_types": [],
+              "missing_template_paths": [
+                "body"
+              ],
+              "credential_presence": [
+                {
+                  "field": "token",
+                  "present": false,
+                  "source": "action_metadata"
+                }
+              ],
+              "blocked_reasons": [
+                "fixture_inputs_unavailable"
+              ],
+              "input_fingerprint": null
+            },
+            "unavailable": [
+              "action_inputs",
+              "input_fingerprint",
+              "handler_registry"
+            ],
+            "complete": false,
+            "simulated": true,
+            "fixture_contract_version": 1
+          }
+        }
+      },
+      {
+        "id": "nm09-worker-tenant-concurrency-refused",
+        "evidence": {
+          "failureContext": {
+            "contract_version": 1,
+            "evidence_id": "fixture:failure:nm09-worker-tenant-concurrency-refused",
+            "type": "failure_context",
+            "source_ref": {
+              "case_id": "b8c7e744-16df-448e-8b01-5fbbaf432fa7",
+              "zap_run_id": "a0c5d09b-ed6f-4c6a-825b-02463d38845d",
+              "stage": 0
+            },
+            "observed_at": "2026-10-20T00:00:00.000Z",
+            "content_hash": "e05bec81d124f72432335100229882ca440c42e266cfa4882b62e57efbb0606a",
+            "facts": {
+              "source_kind": "controlled_fixture",
+              "current_action_type": "worker",
+              "retry": {
+                "provider": "worker",
+                "phase": null,
+                "provider_outcome": "not_attempted",
+                "safe_code": null,
+                "provider_status": null,
+                "retry_after_seconds": null,
+                "requires_human": null,
+                "final_error": "Worker admission refused: local queue capacity"
+              },
+              "action_metadata": {
+                "paths": [],
+                "truncated": true
+              },
+              "payload": {
+                "paths": [],
+                "truncated": true
+              }
+            },
+            "unavailable": [],
+            "complete": false,
+            "simulated": true,
+            "fixture_contract_version": 1,
+            "fixture_observation": {
+              "provider": "worker",
+              "execution_status": "FAILED",
+              "delivery_outcome": "not_applicable",
+              "attempts": 0,
+              "final_error": "Worker admission refused: local queue capacity",
+              "observed_facts": [
+                "admission_guard",
+                "active_runs_at_limit"
+              ],
+              "sensitive_fields_present": []
+            },
+            "fixture_source_kind": "normal_dlq"
+          },
+          "executionEvidence": {
+            "contract_version": 1,
+            "evidence_id": "fixture:execution:nm09-worker-tenant-concurrency-refused",
+            "type": "execution_evidence",
+            "source_ref": {
+              "case_id": "b8c7e744-16df-448e-8b01-5fbbaf432fa7",
+              "zap_run_id": "a0c5d09b-ed6f-4c6a-825b-02463d38845d",
+              "stage": 0
+            },
+            "observed_at": "2026-10-20T00:00:00.000Z",
+            "content_hash": "ba2c9ccc84a501d590dbd7e4f193d32567f1106dbac6e3a8c4cc0f8020e8db8a",
+            "facts": {
+              "provenance": "controlled_fixture",
+              "current_execution": {
+                "execution_id": "f295618c-a495-4ac7-8a8b-30fe29f33701",
+                "status": "FAILED",
+                "lease_until": null,
+                "completed_at": null,
+                "provider_outcome": null,
+                "requires_human": false,
+                "action_fingerprint": null,
+                "request_fingerprint": null
+              },
+              "attempts": [],
+              "history_limit": 10,
+              "history_truncated": true,
+              "predecessors": [],
+              "ordering": {
+                "status": "valid",
+                "missing_predecessor_stages": []
+              }
+            },
+            "unavailable": [
+              "execution_record",
+              "attempt_history",
+              "execution_ordering"
+            ],
+            "complete": false,
+            "simulated": true,
+            "fixture_contract_version": 1
+          },
+          "inputValidation": {
+            "contract_version": 1,
+            "evidence_id": "fixture:validation:nm09-worker-tenant-concurrency-refused",
+            "type": "action_input_validation",
+            "source_ref": {
+              "case_id": "b8c7e744-16df-448e-8b01-5fbbaf432fa7",
+              "zap_run_id": "a0c5d09b-ed6f-4c6a-825b-02463d38845d",
+              "stage": 0
+            },
+            "observed_at": "2026-10-20T00:00:00.000Z",
+            "content_hash": "790f3cc09498332862885b013cf0ebec1342f7fd8308fc609654a2e9d1d36f6a",
+            "facts": {
+              "action_type": "worker",
+              "validation_status": "blocked",
+              "supported": null,
+              "missing_required_fields": [],
+              "invalid_field_types": [],
+              "missing_template_paths": [],
+              "credential_presence": [],
+              "blocked_reasons": [
+                "fixture_inputs_unavailable"
+              ],
+              "input_fingerprint": null
+            },
+            "unavailable": [
+              "action_inputs",
+              "input_fingerprint",
+              "handler_registry"
+            ],
+            "complete": false,
+            "simulated": true,
+            "fixture_contract_version": 1
+          }
+        }
+      },
+      {
+        "id": "nm10-database-lock-timeout",
+        "evidence": {
+          "failureContext": {
+            "contract_version": 1,
+            "evidence_id": "fixture:failure:nm10-database-lock-timeout",
+            "type": "failure_context",
+            "source_ref": {
+              "case_id": "07b92f24-0c0d-429a-8c09-5ddd8ae2ab37",
+              "zap_run_id": "83fc9449-908e-4502-82ee-661ca70bc7d4",
+              "stage": 0
+            },
+            "observed_at": "2026-10-20T00:00:00.000Z",
+            "content_hash": "d26df65cb4899018a75a2d9fb692535ddb34a6e6335c40a591b841b986da23b1",
+            "facts": {
+              "source_kind": "controlled_fixture",
+              "current_action_type": "database",
+              "retry": {
+                "provider": "database",
+                "phase": null,
+                "provider_outcome": "not_attempted",
+                "safe_code": null,
+                "provider_status": null,
+                "retry_after_seconds": null,
+                "requires_human": null,
+                "final_error": "database query timed out acquiring lock"
+              },
+              "action_metadata": {
+                "paths": [],
+                "truncated": true
+              },
+              "payload": {
+                "paths": [],
+                "truncated": true
+              }
+            },
+            "unavailable": [],
+            "complete": false,
+            "simulated": true,
+            "fixture_contract_version": 1,
+            "fixture_observation": {
+              "provider": "database",
+              "execution_status": "FAILED",
+              "delivery_outcome": "not_applicable",
+              "attempts": 0,
+              "final_error": "database query timed out acquiring lock",
+              "observed_facts": [
+                "prisma_lock_wait_exceeded"
+              ],
+              "sensitive_fields_present": []
+            },
+            "fixture_source_kind": "normal_dlq"
+          },
+          "executionEvidence": {
+            "contract_version": 1,
+            "evidence_id": "fixture:execution:nm10-database-lock-timeout",
+            "type": "execution_evidence",
+            "source_ref": {
+              "case_id": "07b92f24-0c0d-429a-8c09-5ddd8ae2ab37",
+              "zap_run_id": "83fc9449-908e-4502-82ee-661ca70bc7d4",
+              "stage": 0
+            },
+            "observed_at": "2026-10-20T00:00:00.000Z",
+            "content_hash": "ed0c1298860d3510db91dfb2500c8ed50776e769c468c466c375670809593136",
+            "facts": {
+              "provenance": "controlled_fixture",
+              "current_execution": {
+                "execution_id": "eb84d5e3-8852-4144-8655-1862a8388607",
+                "status": "FAILED",
+                "lease_until": null,
+                "completed_at": null,
+                "provider_outcome": null,
+                "requires_human": false,
+                "action_fingerprint": null,
+                "request_fingerprint": null
+              },
+              "attempts": [],
+              "history_limit": 10,
+              "history_truncated": true,
+              "predecessors": [],
+              "ordering": {
+                "status": "valid",
+                "missing_predecessor_stages": []
+              }
+            },
+            "unavailable": [
+              "execution_record",
+              "attempt_history",
+              "execution_ordering"
+            ],
+            "complete": false,
+            "simulated": true,
+            "fixture_contract_version": 1
+          },
+          "inputValidation": {
+            "contract_version": 1,
+            "evidence_id": "fixture:validation:nm10-database-lock-timeout",
+            "type": "action_input_validation",
+            "source_ref": {
+              "case_id": "07b92f24-0c0d-429a-8c09-5ddd8ae2ab37",
+              "zap_run_id": "83fc9449-908e-4502-82ee-661ca70bc7d4",
+              "stage": 0
+            },
+            "observed_at": "2026-10-20T00:00:00.000Z",
+            "content_hash": "be5d0fe4c48e9293a6511bfb5b0c59ed6faa3372e417980847b6dcb58f124cde",
+            "facts": {
+              "action_type": "database",
+              "validation_status": "blocked",
+              "supported": null,
+              "missing_required_fields": [],
+              "invalid_field_types": [],
+              "missing_template_paths": [],
+              "credential_presence": [],
+              "blocked_reasons": [
+                "fixture_inputs_unavailable"
+              ],
+              "input_fingerprint": null
+            },
+            "unavailable": [
+              "action_inputs",
+              "input_fingerprint",
+              "handler_registry"
+            ],
+            "complete": false,
+            "simulated": true,
+            "fixture_contract_version": 1
+          }
+        }
+      }
+    ]
+  },
+  "notes": [
+    "Extension evidence was authored from the frozen extension queries and the published incident descriptions, after the labels were frozen and before any extension ranking or score existed.",
+    "The eight extension rows were not part of the R3.5r.1 independent review; its review covered cases and labels only. The R3.5r.3 report records this limitation.",
+    "F09 uses outcomeUnknown (a conclusive rejection plus a bookkeeping-only unknown) and dead_letter_absent as the publication-gap signal; it must not route to F07 or demand forbidden.",
+    "The two no-match incidents intentionally contain a weak transport word plus a non-provider subsystem so the negative guard, not the absence of a corroborator, is exercised."
+  ]
+}

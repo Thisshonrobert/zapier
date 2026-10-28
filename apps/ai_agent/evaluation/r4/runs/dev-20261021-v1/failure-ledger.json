@@ -1,0 +1,91 @@
+{
+  "phase": "R4.3",
+  "run": "dev-20261021-v1",
+  "generatedAt": "2026-10-21T09:31:07.080Z",
+  "split": "development",
+  "counts": {
+    "entries": 2,
+    "misses": 2,
+    "answerableMisses": 2,
+    "noMatchFalsePositives": 0,
+    "corpusGap": 0
+  },
+  "stages": {
+    "facet_dropped": 2
+  },
+  "entries": [
+    {
+      "id": "f10-sdk-error-recorded-success",
+      "family": "F10",
+      "kind": "answerable",
+      "detail": {
+        "returned": [
+          "RB-F09-F10@1.0.0#verification-rollback-or-escalation",
+          "RB-F07@1.0.0#read-only-investigation",
+          "RB-F07@1.0.0#allowed-remediation"
+        ],
+        "missingFacets": [
+          "investigation",
+          "forbidden"
+        ],
+        "requestedFacets": [
+          "investigation",
+          "remediation",
+          "verification"
+        ],
+        "droppedFacets": [
+          "forbidden"
+        ],
+        "routeHints": [
+          "F07",
+          "F10"
+        ],
+        "routeConfident": true,
+        "supportReason": "supported",
+        "abstained": false,
+        "unavailable": false,
+        "accepted": [
+          "RB-F09-F10@1.0.0#read-only-investigation",
+          "RB-F09-F10@1.0.0#forbidden-actions"
+        ]
+      },
+      "stage": "facet_dropped",
+      "countedAsMiss": true
+    },
+    {
+      "id": "s03-sensitive-fields-present",
+      "family": "S",
+      "kind": "answerable",
+      "detail": {
+        "returned": [
+          "RB-F03-F04@1.0.0#read-only-investigation",
+          "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+          "RB-F03-F04@1.0.0#allowed-remediation"
+        ],
+        "missingFacets": [
+          "forbidden"
+        ],
+        "requestedFacets": [
+          "investigation",
+          "remediation",
+          "verification"
+        ],
+        "droppedFacets": [],
+        "routeHints": [
+          "F03",
+          "F07"
+        ],
+        "routeConfident": true,
+        "supportReason": "supported",
+        "abstained": false,
+        "unavailable": false,
+        "accepted": [
+          "RB-F03-F04@1.0.0#read-only-investigation",
+          "RB-F03-F04@1.0.0#forbidden-actions"
+        ]
+      },
+      "stage": "facet_dropped",
+      "countedAsMiss": true
+    }
+  ]
+}

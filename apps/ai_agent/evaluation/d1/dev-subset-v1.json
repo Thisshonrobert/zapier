@@ -1,0 +1,208 @@
+{
+  "version": 1,
+  "createdAt": "2026-10-26",
+  "purpose": "D1 development slice for prompt/model screening; may be iterated on.",
+  "selection": "R4 development cohort; per family F01-F10 and per no-match bucket (3/3/2/2), ascending sha256('d1-dev-v1:' + id).",
+  "cases": [
+    {
+      "id": "f01-email-bulk-retry-after",
+      "kind": "answerable",
+      "family": "F01"
+    },
+    {
+      "id": "f01-telegram-album-rate-limit",
+      "kind": "answerable",
+      "family": "F01"
+    },
+    {
+      "id": "f01-telegram-edit-rate-limit",
+      "kind": "answerable",
+      "family": "F01"
+    },
+    {
+      "id": "f02-telegram-enetunreach",
+      "kind": "answerable",
+      "family": "F02"
+    },
+    {
+      "id": "f02-telegram-504-gateway",
+      "kind": "answerable",
+      "family": "F02"
+    },
+    {
+      "id": "f02-telegram-tls-handshake",
+      "kind": "answerable",
+      "family": "F02"
+    },
+    {
+      "id": "f03-telegram-token-revoked-401",
+      "kind": "answerable",
+      "family": "F03"
+    },
+    {
+      "id": "f03-telegram-permission-admin-only",
+      "kind": "answerable",
+      "family": "F03"
+    },
+    {
+      "id": "f03-token-missing",
+      "kind": "answerable",
+      "family": "F03"
+    },
+    {
+      "id": "f04-invalid-destination",
+      "kind": "answerable",
+      "family": "F04"
+    },
+    {
+      "id": "f04-email-empty-destination",
+      "kind": "answerable",
+      "family": "F04"
+    },
+    {
+      "id": "f04-template-path-missing",
+      "kind": "answerable",
+      "family": "F04"
+    },
+    {
+      "id": "f05-worker-calendar-action-missing",
+      "kind": "answerable",
+      "family": "F05"
+    },
+    {
+      "id": "f05-worker-legacy-sms-action",
+      "kind": "answerable",
+      "family": "F05"
+    },
+    {
+      "id": "f05-handler-version-unknown",
+      "kind": "answerable",
+      "family": "F05"
+    },
+    {
+      "id": "f06-stage-predecessor-missing-dev",
+      "kind": "answerable",
+      "family": "F06"
+    },
+    {
+      "id": "f06-stage-order-gap-dev",
+      "kind": "answerable",
+      "family": "F06"
+    },
+    {
+      "id": "f06-stage-index-negative-dev",
+      "kind": "answerable",
+      "family": "F06"
+    },
+    {
+      "id": "f07-email-response-missing-dev",
+      "kind": "answerable",
+      "family": "F07"
+    },
+    {
+      "id": "f07-email-pending-lease-dev",
+      "kind": "answerable",
+      "family": "F07"
+    },
+    {
+      "id": "f07-telegram-worker-exit-dev",
+      "kind": "answerable",
+      "family": "F07"
+    },
+    {
+      "id": "f08-duplicate-retry-row",
+      "kind": "answerable",
+      "family": "F08"
+    },
+    {
+      "id": "f08-success-stage-republished",
+      "kind": "answerable",
+      "family": "F08"
+    },
+    {
+      "id": "f08-already-success-command-dev",
+      "kind": "answerable",
+      "family": "F08"
+    },
+    {
+      "id": "f09-successor-publication-gap-dev",
+      "kind": "answerable",
+      "family": "F09"
+    },
+    {
+      "id": "f09-dlq-publication-missing-dev",
+      "kind": "answerable",
+      "family": "F09"
+    },
+    {
+      "id": "f09-dead-letter-absent-dev",
+      "kind": "answerable",
+      "family": "F09"
+    },
+    {
+      "id": "f10-sdk-result-ignored-dev",
+      "kind": "answerable",
+      "family": "F10"
+    },
+    {
+      "id": "f10-sdk-error-recorded-success",
+      "kind": "answerable",
+      "family": "F10"
+    },
+    {
+      "id": "f10-sdk-failure-hidden-dev",
+      "kind": "answerable",
+      "family": "F10"
+    },
+    {
+      "id": "nm-missing-guidance-email-header-encoding",
+      "kind": "no_match",
+      "bucket": "missing_guidance"
+    },
+    {
+      "id": "nm-missing-guidance-telegram-reaction-target",
+      "kind": "no_match",
+      "bucket": "missing_guidance"
+    },
+    {
+      "id": "nm-missing-guidance-telegram-entity-mode",
+      "kind": "no_match",
+      "bucket": "missing_guidance"
+    },
+    {
+      "id": "nm-missing-runtime-fact-worker-volume-capacity",
+      "kind": "no_match",
+      "bucket": "missing_runtime_fact"
+    },
+    {
+      "id": "nm-missing-runtime-fact-telegram-file-size-limit",
+      "kind": "no_match",
+      "bucket": "missing_runtime_fact"
+    },
+    {
+      "id": "nm-missing-runtime-fact-email-sender-reputation",
+      "kind": "no_match",
+      "bucket": "missing_runtime_fact"
+    },
+    {
+      "id": "nm-out-of-scope-broker-producer-quota",
+      "kind": "no_match",
+      "bucket": "out_of_scope"
+    },
+    {
+      "id": "nm-out-of-scope-scheduler-lease-clock-skew",
+      "kind": "no_match",
+      "bucket": "out_of_scope"
+    },
+    {
+      "id": "nm-adversarial-injection-skip-runbook",
+      "kind": "no_match",
+      "bucket": "adversarial"
+    },
+    {
+      "id": "nm-adversarial-empty-provider-detail",
+      "kind": "no_match",
+      "bucket": "adversarial"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "phase": "R4.5",
+  "runId": "d1-accept-20261028-v1",
+  "startedAt": "2026-10-28T07:27:50.220Z",
+  "protocol": "apps/ai_agent/evaluation/d1/accept-v1/protocol.json",
+  "protocolHash": "cebca4fb83aadac0eb9e2d0d57e2a9a085f6ef455701b001164ed00b4cc3c4d7",
+  "subsetHash": "5f8faf6c6672758063e0b698b5de77e441a9e710e1fae2ec768a106f815bbe12",
+  "model": "gemini-3.5-flash-lite",
+  "tier": "free"
+}

@@ -1,0 +1,32 @@
+{
+  "run": "dev-20261020-v6",
+  "generatedAt": "2026-10-20T15:58:40.369Z",
+  "files": {
+    "inference-original.json": "6b722134ddab8701266d0cdcf90ae4dc118d6cdb9df9ac57764929c9354d69c7",
+    "scores-original.json": "7ab74de32571a33c8f29c5edf5107bda4dc1ade1e4e212ebeb1a9f409d5d01f0",
+    "report.json": "d1f4e2b9610209ef7c3d62b62061561b0605d70ffac9ca4f772b2482c2a021ff",
+    "screening.md": "f76fc9723513af09d98efc0b80fe61cc22f6e167d98702a9855f91e000d86a7b"
+  },
+  "counts": {
+    "dev24": {
+      "scheduled": 24,
+      "eligibleAnswerable": 16,
+      "noMatch": 8,
+      "unavailable": 0,
+      "providerExcluded": 0
+    },
+    "dev32": {
+      "scheduled": 32,
+      "eligibleAnswerable": 22,
+      "noMatch": 10,
+      "unavailable": 0,
+      "providerExcluded": 0
+    }
+  },
+  "gate": {
+    "status": "failed",
+    "failing": [
+      "dev32SufficientGuidanceHitAt3"
+    ]
+  }
+}

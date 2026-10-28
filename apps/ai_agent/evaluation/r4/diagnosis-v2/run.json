@@ -1,0 +1,10 @@
+{
+  "phase": "R4.5",
+  "runId": "r4.5-20261026-v2",
+  "startedAt": "2026-10-26T08:45:35.790Z",
+  "protocol": "apps/ai_agent/evaluation/r4/diagnosis-v2/protocol.json",
+  "protocolHash": "91857ea69bac30431685cbf27f7359e35f8a912ee9045bfe2118ae8a9efd7a9e",
+  "subsetHash": "02a26f320afe95d02ab13eecceb6536bf220756680ae5aaba220529360659e40",
+  "model": "gemini-3.5-flash-lite",
+  "tier": "free"
+}

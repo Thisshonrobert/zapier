@@ -30,7 +30,7 @@ import {
   geminiEndpoint,
   type GeminiApi,
 } from "../gemini-model.ts";
-import { DIAGNOSIS_PROMPT_VERSION, buildDiagnosisPrompt } from "../prompts.ts";
+import { buildDiagnosisPrompt } from "../prompts.ts";
 import {
   loadRunbooks,
   searchRunbooks,
@@ -55,6 +55,9 @@ import {
   fixtureInput,
   fixtureRejection,
 } from "./fixture-tools.ts";
+
+// Phase 11A artifacts are v3; pin it so the serving default can move without breaking replays.
+const PROMPT_VERSION = "phase-11a-v3" as const;
 
 const root = fileURLToPath(new URL("../../../../", import.meta.url));
 const endpoint =
@@ -494,6 +497,7 @@ export async function runModelExperiment(options: {
             result = sanitize(
               await buildDiagnosisService(adapter.tools, measuredModel, {
                 allowSimulatedEvidence: true,
+                promptVersion: PROMPT_VERSION,
                 signal: runSignal,
                 modelName: options.modelId,
                 modelTimeoutMs: bounds.callTimeoutMs,
@@ -586,7 +590,7 @@ export async function runModelExperiment(options: {
       },
       bounds,
       graph_version: "phase-6-v1",
-      prompt_version: DIAGNOSIS_PROMPT_VERSION,
+      prompt_version: PROMPT_VERSION,
       fixture_contract_version: 1,
       ...metadata,
       elapsed_ms: performance.now() - started,

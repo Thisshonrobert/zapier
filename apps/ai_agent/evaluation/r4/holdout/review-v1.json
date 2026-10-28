@@ -1,0 +1,1357 @@
+{
+  "version": 1,
+  "reviewer": "ai-assisted-rule-based-audit-v1",
+  "reviewOf": "R4.1 holdout v1",
+  "reviewedAt": "2026-10-21",
+  "independence": "ai_assisted_not_human_independent",
+  "method": "A separate rule-based second pass over a stratified 20% sample plus a full structural review of all 160 holdout cases. The second pass judged binary sufficient guidance from the case kind, the case's required facets, the frozen corpus, and runbook access eligibility. It did not read the label file's rationales or the author's prose.",
+  "limitation": "This is an automated/AI-assisted audit, not an independent human second review. It measures internal consistency and citation validity, not human inter-rater reliability. A human reviewer must still sign off before R4.4; if that review disagrees, the holdout must be revised before sealing or re-authored and re-sealed.",
+  "accessAttestation": "Read only the R4.1 holdout cases, labels, and evidence; the frozen corpus; and docs/AI/runbooks. Did not read candidate outputs, rankings, scores, retrieval runs, or the R3.5 failure ledger. Did not run the retriever, model, or scoring pipeline.",
+  "sample": {
+    "cases": 32,
+    "fractionOfHoldout": 0.2,
+    "strategy": "First two answerable cases per family (20) and first three no-match cases per bucket (12), in file order.",
+    "ids": [
+      "f01-digest-broadcast-chat-flood",
+      "f01-group-slow-mode-reminder",
+      "f02-telegram-connect-refused",
+      "f02-telegram-dns-eai-again",
+      "f03-telegram-revoked-bot-token",
+      "f03-telegram-bot-removed-from-channel",
+      "f04-email-missing-subject-template",
+      "f04-email-numeric-recipient-field",
+      "f05-unregistered-discord-webhook",
+      "f05-telegram-v2-seed-mismatch",
+      "f06-stage-order-collision",
+      "f06-stage-order-gap",
+      "f07-telegram-response-lost-after-send",
+      "f07-worker-terminated-after-dispatch",
+      "f08-duplicate-redelivery-rebalance",
+      "f08-expired-replay-approval",
+      "f09-unacknowledged-failure-publication",
+      "f09-successor-publication-never-started",
+      "f10-sdk-error-recorded-success-hidden",
+      "f10-empty-sdk-result-success",
+      "nm-missing-guidance-telegram-markup-entity-parse",
+      "nm-missing-guidance-telegram-inline-button-url-rejected",
+      "nm-missing-guidance-telegram-stale-file-reference",
+      "nm-missing-runtime-fact-email-recipient-count-cap",
+      "nm-missing-runtime-fact-email-encoded-payload-size",
+      "nm-missing-runtime-fact-email-attachment-total-size",
+      "nm-out-of-scope-kafka-consumer-rebalance-loop",
+      "nm-out-of-scope-postgres-advisory-lock-contention",
+      "nm-out-of-scope-prisma-migration-drift",
+      "nm-adversarial-prompt-injection-mark-safe",
+      "nm-adversarial-contradictory-status-body",
+      "nm-adversarial-truncated-unknown-error"
+    ]
+  },
+  "kappa": {
+    "judgment": "binary sufficient guidance (answerable = sufficient, no_match = insufficient)",
+    "threshold": 0.7,
+    "passes": true,
+    "interpretation": "Because the second pass is rule-based, perfect agreement is expected when every answerable case has an eligible accepted citation. This confirms internal consistency; it is not evidence of independent human agreement.",
+    "n": 32,
+    "observedAgreement": 1,
+    "expectedAgreement": 0.53125,
+    "kappa": 1,
+    "confusion": {
+      "bothTrue": 20,
+      "bothFalse": 12,
+      "authorOnly": 0,
+      "secondOnly": 0
+    }
+  },
+  "holdoutReview": {
+    "cases": 160,
+    "answerable": 120,
+    "noMatch": 40,
+    "coverage": "100%",
+    "defects": [],
+    "caseVerdicts": [
+      {
+        "id": "f01-digest-broadcast-chat-flood",
+        "kind": "answerable",
+        "family": "F01",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f01-group-slow-mode-reminder",
+        "kind": "answerable",
+        "family": "F01",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f01-channel-resolution-throttled",
+        "kind": "answerable",
+        "family": "F01",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f01-email-batch-throttle",
+        "kind": "answerable",
+        "family": "F01",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f01-email-recipient-rate-window",
+        "kind": "answerable",
+        "family": "F01",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f01-telegram-media-retry-after",
+        "kind": "answerable",
+        "family": "F01",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f01-telegram-pin-rate-limit",
+        "kind": "answerable",
+        "family": "F01",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f01-email-daily-quota-window",
+        "kind": "answerable",
+        "family": "F01",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f01-telegram-callback-rate-limit",
+        "kind": "answerable",
+        "family": "F01",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f01-email-smtp-temporary-throttle",
+        "kind": "answerable",
+        "family": "F01",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f01-telegram-broadcast-burst",
+        "kind": "answerable",
+        "family": "F01",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f01-email-newsletter-throttle",
+        "kind": "answerable",
+        "family": "F01",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f02-telegram-connect-refused",
+        "kind": "answerable",
+        "family": "F02",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f02-telegram-dns-eai-again",
+        "kind": "answerable",
+        "family": "F02",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f02-email-tls-handshake-failure",
+        "kind": "answerable",
+        "family": "F02",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f02-email-socket-hang-up",
+        "kind": "answerable",
+        "family": "F02",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f02-telegram-enotfound-resolve",
+        "kind": "answerable",
+        "family": "F02",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f02-email-etimedout-presend",
+        "kind": "answerable",
+        "family": "F02",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f02-telegram-econnreset-presend",
+        "kind": "answerable",
+        "family": "F02",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f02-email-503-upstream",
+        "kind": "answerable",
+        "family": "F02",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f02-telegram-502-gateway",
+        "kind": "answerable",
+        "family": "F02",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f02-email-getaddrinfo-failure",
+        "kind": "answerable",
+        "family": "F02",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f02-telegram-epipe-write",
+        "kind": "answerable",
+        "family": "F02",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f02-email-network-unreachable",
+        "kind": "answerable",
+        "family": "F02",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f03-telegram-revoked-bot-token",
+        "kind": "answerable",
+        "family": "F03",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f03-telegram-bot-removed-from-channel",
+        "kind": "answerable",
+        "family": "F03",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f03-email-api-key-rejected",
+        "kind": "answerable",
+        "family": "F03",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f03-email-oauth-token-expired",
+        "kind": "answerable",
+        "family": "F03",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f03-telegram-webhook-secret-mismatch",
+        "kind": "answerable",
+        "family": "F03",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f03-email-smtp-auth-failed",
+        "kind": "answerable",
+        "family": "F03",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f03-telegram-channel-username-invalid",
+        "kind": "answerable",
+        "family": "F03",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f03-email-sender-permission-denied",
+        "kind": "answerable",
+        "family": "F03",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f03-telegram-token-absent",
+        "kind": "answerable",
+        "family": "F03",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f03-email-credential-missing",
+        "kind": "answerable",
+        "family": "F03",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f03-telegram-bot-blocked-by-recipient",
+        "kind": "answerable",
+        "family": "F03",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f03-email-api-key-revoked",
+        "kind": "answerable",
+        "family": "F03",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f04-email-missing-subject-template",
+        "kind": "answerable",
+        "family": "F04",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f04-email-numeric-recipient-field",
+        "kind": "answerable",
+        "family": "F04",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f04-telegram-null-ticket-summary",
+        "kind": "answerable",
+        "family": "F04",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f04-email-missing-body-template",
+        "kind": "answerable",
+        "family": "F04",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f04-telegram-chat-id-type",
+        "kind": "answerable",
+        "family": "F04",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f04-email-cc-array-type",
+        "kind": "answerable",
+        "family": "F04",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f04-telegram-empty-destination",
+        "kind": "answerable",
+        "family": "F04",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f04-email-destination-format",
+        "kind": "answerable",
+        "family": "F04",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f04-telegram-template-path-missing",
+        "kind": "answerable",
+        "family": "F04",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f04-email-missing-recipient-field",
+        "kind": "answerable",
+        "family": "F04",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f04-telegram-unsupported-field-type",
+        "kind": "answerable",
+        "family": "F04",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f04-email-template-variable-unknown",
+        "kind": "answerable",
+        "family": "F04",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f05-unregistered-discord-webhook",
+        "kind": "answerable",
+        "family": "F05",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f05-telegram-v2-seed-mismatch",
+        "kind": "answerable",
+        "family": "F05",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f05-teams-card-legacy-run",
+        "kind": "answerable",
+        "family": "F05",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f05-action-type-null",
+        "kind": "answerable",
+        "family": "F05",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f05-slack-post-not-registered",
+        "kind": "answerable",
+        "family": "F05",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f05-notion-create-handler-skew",
+        "kind": "answerable",
+        "family": "F05",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f05-sms-unsupported-action",
+        "kind": "answerable",
+        "family": "F05",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f05-github-issue-handler-missing",
+        "kind": "answerable",
+        "family": "F05",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f05-airtable-registry-gap",
+        "kind": "answerable",
+        "family": "F05",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f05-decommissioned-action-type",
+        "kind": "answerable",
+        "family": "F05",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f05-sheets-handler-missing",
+        "kind": "answerable",
+        "family": "F05",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f05-shopify-registry-unavailable",
+        "kind": "answerable",
+        "family": "F05",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f06-stage-order-collision",
+        "kind": "answerable",
+        "family": "F06",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f06-stage-order-gap",
+        "kind": "answerable",
+        "family": "F06",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f06-negative-stage-index",
+        "kind": "answerable",
+        "family": "F06",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f06-missing-stage-zero",
+        "kind": "answerable",
+        "family": "F06",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f06-out-of-order-successor",
+        "kind": "answerable",
+        "family": "F06",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f06-predecessor-listed-twice",
+        "kind": "answerable",
+        "family": "F06",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f06-circular-stage-dependency",
+        "kind": "answerable",
+        "family": "F06",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f06-fractional-stage-index",
+        "kind": "answerable",
+        "family": "F06",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f06-predecessor-never-published",
+        "kind": "answerable",
+        "family": "F06",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f06-stage-order-regression",
+        "kind": "answerable",
+        "family": "F06",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f06-stage-index-reused",
+        "kind": "answerable",
+        "family": "F06",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f06-orphan-successor-stage",
+        "kind": "answerable",
+        "family": "F06",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f07-telegram-response-lost-after-send",
+        "kind": "answerable",
+        "family": "F07",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f07-worker-terminated-after-dispatch",
+        "kind": "answerable",
+        "family": "F07",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f07-expired-lease-masked-outcome",
+        "kind": "answerable",
+        "family": "F07",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f07-email-receipt-missing",
+        "kind": "answerable",
+        "family": "F07",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f07-telegram-lease-expired",
+        "kind": "answerable",
+        "family": "F07",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f07-email-connection-dropped-after-send",
+        "kind": "answerable",
+        "family": "F07",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f07-telegram-timeout-after-body",
+        "kind": "answerable",
+        "family": "F07",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f07-email-acknowledgement-lost",
+        "kind": "answerable",
+        "family": "F07",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f07-worker-crash-after-dispatch",
+        "kind": "answerable",
+        "family": "F07",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f07-telegram-delivery-unknown",
+        "kind": "answerable",
+        "family": "F07",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f07-email-reconciliation-unknown",
+        "kind": "answerable",
+        "family": "F07",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f07-telegram-dispatch-without-terminal-write",
+        "kind": "answerable",
+        "family": "F07",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f08-duplicate-redelivery-rebalance",
+        "kind": "answerable",
+        "family": "F08",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f08-expired-replay-approval",
+        "kind": "answerable",
+        "family": "F08",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f08-redelivered-success-after-successor",
+        "kind": "answerable",
+        "family": "F08",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f08-same-retry-row-twice",
+        "kind": "answerable",
+        "family": "F08",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f08-success-stage-republished-again",
+        "kind": "answerable",
+        "family": "F08",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f08-stale-event-received",
+        "kind": "answerable",
+        "family": "F08",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f08-duplicate-failure-row",
+        "kind": "answerable",
+        "family": "F08",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f08-already-success-stage",
+        "kind": "answerable",
+        "family": "F08",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f08-stale-worker-lease",
+        "kind": "answerable",
+        "family": "F08",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f08-duplicate-kafka-delivery",
+        "kind": "answerable",
+        "family": "F08",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f08-replayed-completed-stage",
+        "kind": "answerable",
+        "family": "F08",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f08-stale-approval-reuse",
+        "kind": "answerable",
+        "family": "F08",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f09-unacknowledged-failure-publication",
+        "kind": "answerable",
+        "family": "F09",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f09-successor-publication-never-started",
+        "kind": "answerable",
+        "family": "F09",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f09-legacy-run-missing-retry-link",
+        "kind": "answerable",
+        "family": "F09",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f09-dlq-topic-unavailable",
+        "kind": "answerable",
+        "family": "F09",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f09-failure-row-without-dlq",
+        "kind": "answerable",
+        "family": "F09",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f09-publication-ack-lost",
+        "kind": "answerable",
+        "family": "F09",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f09-stage-success-without-successor-event",
+        "kind": "answerable",
+        "family": "F09",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f09-dead-letter-topic-misconfigured",
+        "kind": "answerable",
+        "family": "F09",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f09-retry-row-linked-to-missing-dlq",
+        "kind": "answerable",
+        "family": "F09",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f09-multi-stage-publication-gap",
+        "kind": "answerable",
+        "family": "F09",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f09-dlq-record-absent-after-failure",
+        "kind": "answerable",
+        "family": "F09",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f09-publication-acknowledgement-timeout-free",
+        "kind": "answerable",
+        "family": "F09",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f10-sdk-error-recorded-success-hidden",
+        "kind": "answerable",
+        "family": "F10",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f10-empty-sdk-result-success",
+        "kind": "answerable",
+        "family": "F10",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f10-discarded-provider-error",
+        "kind": "answerable",
+        "family": "F10",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f10-success-despite-sdk-error",
+        "kind": "answerable",
+        "family": "F10",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f10-accepted-status-with-sdk-failure",
+        "kind": "answerable",
+        "family": "F10",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f10-provider-error-in-sdk-result",
+        "kind": "answerable",
+        "family": "F10",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f10-sdk-throw-swallowed",
+        "kind": "answerable",
+        "family": "F10",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f10-success-recorded-after-sdk-rejection",
+        "kind": "answerable",
+        "family": "F10",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f10-sdk-result-null-success",
+        "kind": "answerable",
+        "family": "F10",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f10-provider-result-error-hidden",
+        "kind": "answerable",
+        "family": "F10",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f10-success-stage-with-sdk-error",
+        "kind": "answerable",
+        "family": "F10",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "f10-sdk-validation-error-discarded",
+        "kind": "answerable",
+        "family": "F10",
+        "bucket": null,
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "nm-missing-guidance-telegram-markup-entity-parse",
+        "kind": "no_match",
+        "family": null,
+        "bucket": "missing-guidance",
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "nm-missing-guidance-telegram-inline-button-url-rejected",
+        "kind": "no_match",
+        "family": null,
+        "bucket": "missing-guidance",
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "nm-missing-guidance-telegram-stale-file-reference",
+        "kind": "no_match",
+        "family": null,
+        "bucket": "missing-guidance",
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "nm-missing-guidance-telegram-sticker-set-invalid",
+        "kind": "no_match",
+        "family": null,
+        "bucket": "missing-guidance",
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "nm-missing-guidance-telegram-poll-question-too-long",
+        "kind": "no_match",
+        "family": null,
+        "bucket": "missing-guidance",
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "nm-missing-guidance-email-attachment-encoding-invalid",
+        "kind": "no_match",
+        "family": null,
+        "bucket": "missing-guidance",
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "nm-missing-guidance-email-subject-header-newline",
+        "kind": "no_match",
+        "family": null,
+        "bucket": "missing-guidance",
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "nm-missing-guidance-email-calendar-method-unsupported",
+        "kind": "no_match",
+        "family": null,
+        "bucket": "missing-guidance",
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "nm-missing-guidance-email-custom-header-rejected",
+        "kind": "no_match",
+        "family": null,
+        "bucket": "missing-guidance",
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "nm-missing-guidance-telegram-thread-not-found",
+        "kind": "no_match",
+        "family": null,
+        "bucket": "missing-guidance",
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "nm-missing-runtime-fact-email-recipient-count-cap",
+        "kind": "no_match",
+        "family": null,
+        "bucket": "missing-runtime-fact",
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "nm-missing-runtime-fact-email-encoded-payload-size",
+        "kind": "no_match",
+        "family": null,
+        "bucket": "missing-runtime-fact",
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "nm-missing-runtime-fact-email-attachment-total-size",
+        "kind": "no_match",
+        "family": null,
+        "bucket": "missing-runtime-fact",
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "nm-missing-runtime-fact-telegram-media-group-cap",
+        "kind": "no_match",
+        "family": null,
+        "bucket": "missing-runtime-fact",
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "nm-missing-runtime-fact-telegram-caption-length",
+        "kind": "no_match",
+        "family": null,
+        "bucket": "missing-runtime-fact",
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "nm-missing-runtime-fact-worker-disk-capacity",
+        "kind": "no_match",
+        "family": null,
+        "bucket": "missing-runtime-fact",
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "nm-missing-runtime-fact-worker-memory-limit-serialization",
+        "kind": "no_match",
+        "family": null,
+        "bucket": "missing-runtime-fact",
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "nm-missing-runtime-fact-worker-concurrency-cap",
+        "kind": "no_match",
+        "family": null,
+        "bucket": "missing-runtime-fact",
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "nm-missing-runtime-fact-provider-daily-quota",
+        "kind": "no_match",
+        "family": null,
+        "bucket": "missing-runtime-fact",
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "nm-missing-runtime-fact-provider-ip-allowlist",
+        "kind": "no_match",
+        "family": null,
+        "bucket": "missing-runtime-fact",
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "nm-out-of-scope-kafka-consumer-rebalance-loop",
+        "kind": "no_match",
+        "family": null,
+        "bucket": "out-of-scope",
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "nm-out-of-scope-postgres-advisory-lock-contention",
+        "kind": "no_match",
+        "family": null,
+        "bucket": "out-of-scope",
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "nm-out-of-scope-prisma-migration-drift",
+        "kind": "no_match",
+        "family": null,
+        "bucket": "out-of-scope",
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "nm-out-of-scope-scheduler-cron-overlap",
+        "kind": "no_match",
+        "family": null,
+        "bucket": "out-of-scope",
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "nm-out-of-scope-redis-cache-eviction",
+        "kind": "no_match",
+        "family": null,
+        "bucket": "out-of-scope",
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "nm-out-of-scope-worker-heap-exhausted",
+        "kind": "no_match",
+        "family": null,
+        "bucket": "out-of-scope",
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "nm-out-of-scope-broker-topic-retention",
+        "kind": "no_match",
+        "family": null,
+        "bucket": "out-of-scope",
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "nm-out-of-scope-schema-registry-incompatible",
+        "kind": "no_match",
+        "family": null,
+        "bucket": "out-of-scope",
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "nm-out-of-scope-object-storage-policy-denied",
+        "kind": "no_match",
+        "family": null,
+        "bucket": "out-of-scope",
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "nm-out-of-scope-load-balancer-idle-close",
+        "kind": "no_match",
+        "family": null,
+        "bucket": "out-of-scope",
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "nm-adversarial-prompt-injection-mark-safe",
+        "kind": "no_match",
+        "family": null,
+        "bucket": "adversarial",
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "nm-adversarial-contradictory-status-body",
+        "kind": "no_match",
+        "family": null,
+        "bucket": "adversarial",
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "nm-adversarial-truncated-unknown-error",
+        "kind": "no_match",
+        "family": null,
+        "bucket": "adversarial",
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "nm-adversarial-label-shaped-injection",
+        "kind": "no_match",
+        "family": null,
+        "bucket": "adversarial",
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "nm-adversarial-citation-injection",
+        "kind": "no_match",
+        "family": null,
+        "bucket": "adversarial",
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "nm-adversarial-dual-cause-ambiguity",
+        "kind": "no_match",
+        "family": null,
+        "bucket": "adversarial",
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "nm-adversarial-malformed-json-error",
+        "kind": "no_match",
+        "family": null,
+        "bucket": "adversarial",
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "nm-adversarial-homoglyph-error-text",
+        "kind": "no_match",
+        "family": null,
+        "bucket": "adversarial",
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "nm-adversarial-empty-final-error",
+        "kind": "no_match",
+        "family": null,
+        "bucket": "adversarial",
+        "verdict": "accept",
+        "issues": []
+      },
+      {
+        "id": "nm-adversarial-safe-marked-injection",
+        "kind": "no_match",
+        "family": null,
+        "bucket": "adversarial",
+        "verdict": "accept",
+        "issues": []
+      }
+    ],
+    "verdict": "structurally_clean"
+  },
+  "verdict": "provisional_ai_assisted_human_signoff_outstanding",
+  "humanIndependentReview": "outstanding"
+}

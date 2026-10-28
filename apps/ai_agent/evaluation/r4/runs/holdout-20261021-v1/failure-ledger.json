@@ -1,0 +1,15 @@
+{
+  "phase": "R4.4",
+  "run": "holdout-20261021-v1",
+  "generatedAt": "2026-10-21T11:55:48.911Z",
+  "split": "holdout",
+  "counts": {
+    "entries": 0,
+    "misses": 0,
+    "answerableMisses": 0,
+    "noMatchFalsePositives": 0,
+    "corpusGap": 0
+  },
+  "stages": {},
+  "entries": []
+}

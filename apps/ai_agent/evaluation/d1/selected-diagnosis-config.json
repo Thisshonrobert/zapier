@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "phase": "D1",
+  "status": "frozen_before_acceptance",
+  "frozenAt": "2026-10-28",
+  "selectedArm": "dev-lite-v2",
+  "model": {
+    "id": "gemini-3.5-flash-lite",
+    "disableThinking": false
+  },
+  "prompt": {
+    "version": "phase-11a-v4"
+  },
+  "graphVersion": "phase-6-v1",
+  "retrievalConfigHash": "a56ae39c3053f954aebbb7318034fc39408f72f85198e8cc13e5620f78ec2805",
+  "files": {
+    "prompts": {
+      "path": "apps/ai_agent/src/prompts.ts",
+      "sha256": "a730f803bedc59dfd7646da4f095a7ac72a54d2e69ce73df153d04fe0e6f34e0"
+    },
+    "graph": {
+      "path": "apps/ai_agent/src/graph.ts",
+      "sha256": "ae227b8930d70ff05df6de64893977947431a7516ac6992b8f74e2af7b7a49f9"
+    },
+    "geminiModel": {
+      "path": "apps/ai_agent/src/gemini-model.ts",
+      "sha256": "9e9f2f7e553c7242a85e049ad18790663240b2bc72be101a66a8ee36e5b875be"
+    },
+    "contracts": {
+      "path": "apps/ai_agent/src/contracts.ts",
+      "sha256": "2927d9c18bdf619b71e28f21a8db9dd35c754322380c4c653a029e9f81a32b00"
+    },
+    "diagnosisHarness": {
+      "path": "apps/ai_agent/src/evaluation/diagnosis-r4.ts",
+      "sha256": "6dae49c7a5b8a927433d1dacea17fef6ebf3b7f570623d256f13a36c75330c73"
+    },
+    "devDecision": {
+      "path": "apps/ai_agent/evaluation/d1/dev-decision.md",
+      "sha256": "0301211dd3a3be5e5b41c380d1315bb5555cd63b9a8620cacc3632dbc33c7b48"
+    },
+    "acceptanceSubset": {
+      "path": "apps/ai_agent/evaluation/d1/acceptance-subset-v1.json",
+      "sha256": "5f8faf6c6672758063e0b698b5de77e441a9e710e1fae2ec768a106f815bbe12"
+    }
+  }
+}

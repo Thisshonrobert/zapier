@@ -1,0 +1,4240 @@
+{
+  "generatedAt": "2026-10-21T08:24:48.134Z",
+  "supportVersion": "r3.4-v1",
+  "corpusHash": "45e85c3585607ebfd0e1ebd1f2b068e2fab7c889b1bdd3af3a565f20afcbd440",
+  "labelHash": "a30fd42160326bd6daa02238be50ad0c0cccab23d5ef5372fcae99e7fd49c752",
+  "protocolHash": "e6a491cc5d2423485c61ff5d5e8634e07bc9886bb76041b68238f5322290c3ed",
+  "inputHash": "325c380a92039193f788338c3e243ac2d5584f74a1ee54929d09d5e4730ce881",
+  "scoresHash": "c205473e472958c680f3d813094c01036b8529ee01fdcf3227066259a9caa3ba",
+  "routeGate": {
+    "threshold": 1,
+    "routeCoverage": 1,
+    "accepted": 28,
+    "covered": 28,
+    "status": "enabled",
+    "selectedArm": "profile-route"
+  },
+  "selectedArm": "profile-route-facets-support",
+  "support": {
+    "selected": {
+      "minAnchorHits": 1
+    },
+    "policies": [
+      1,
+      2
+    ],
+    "selectionOrder": [
+      "no-match abstention >= 90%",
+      "false abstention <= 5%",
+      "highest sufficient-guidance hit@3",
+      "highest macro section recall@3",
+      "lower p95 latency"
+    ],
+    "tie": true,
+    "selectedReason": "all selection criteria tied; minAnchorHits:1 is the predeclared Task 12 default",
+    "settings": [
+      {
+        "minAnchorHits": 1,
+        "sufficientGuidanceHitAt3": 0.8125,
+        "macroSectionRecallAt3": 0.84375,
+        "directPrecisionAt3": 0.4791666666666667,
+        "noMatchAbstention": {
+          "numerator": 8,
+          "denominator": 8,
+          "rate": 1
+        },
+        "falseAbstention": {
+          "numerator": 0,
+          "denominator": 16,
+          "rate": 0
+        },
+        "p95LatencyMs": 282.63880000000063,
+        "ledgerSummary": {
+          "wrong_rank": 3
+        },
+        "cases": [
+          {
+            "id": "f01-rate-limit-rejected",
+            "kind": "answerable",
+            "supportReason": "supported",
+            "abstained": false,
+            "anchors": [
+              "429",
+              "30",
+              "all_attempts_rejected",
+              "retry_after_30_seconds"
+            ],
+            "matchedAnchors": [
+              "429"
+            ],
+            "missingFacets": []
+          },
+          {
+            "id": "f02-connection-refused",
+            "kind": "answerable",
+            "supportReason": "supported",
+            "abstained": false,
+            "anchors": [
+              "failure_before_send",
+              "all_attempts_not_delivered"
+            ],
+            "matchedAnchors": [],
+            "missingFacets": []
+          },
+          {
+            "id": "f03-token-missing",
+            "kind": "answerable",
+            "supportReason": "supported",
+            "abstained": false,
+            "anchors": [
+              "configured_token_absent"
+            ],
+            "matchedAnchors": [],
+            "missingFacets": []
+          },
+          {
+            "id": "f03-permission-ambiguous",
+            "kind": "answerable",
+            "supportReason": "supported",
+            "abstained": false,
+            "anchors": [
+              "resolver_error_generic"
+            ],
+            "matchedAnchors": [],
+            "missingFacets": []
+          },
+          {
+            "id": "f04-template-path-missing",
+            "kind": "answerable",
+            "supportReason": "supported",
+            "abstained": false,
+            "anchors": [
+              "template_path_missing",
+              "resolved_destination_empty"
+            ],
+            "matchedAnchors": [],
+            "missingFacets": [
+              "investigation",
+              "remediation"
+            ]
+          },
+          {
+            "id": "f04-invalid-destination",
+            "kind": "answerable",
+            "supportReason": "supported",
+            "abstained": false,
+            "anchors": [
+              "destination_format_invalid"
+            ],
+            "matchedAnchors": [],
+            "missingFacets": []
+          },
+          {
+            "id": "f05-unsupported-action",
+            "kind": "answerable",
+            "supportReason": "supported",
+            "abstained": false,
+            "anchors": [
+              "handler_not_registered"
+            ],
+            "matchedAnchors": [],
+            "missingFacets": []
+          },
+          {
+            "id": "f05-handler-version-unknown",
+            "kind": "answerable",
+            "supportReason": "supported",
+            "abstained": false,
+            "anchors": [],
+            "matchedAnchors": [],
+            "missingFacets": []
+          },
+          {
+            "id": "f07-provider-response-lost",
+            "kind": "answerable",
+            "supportReason": "supported",
+            "abstained": false,
+            "anchors": [
+              "request_transmitted",
+              "response_missing"
+            ],
+            "matchedAnchors": [],
+            "missingFacets": []
+          },
+          {
+            "id": "f08-duplicate-retry-row",
+            "kind": "answerable",
+            "supportReason": "supported",
+            "abstained": false,
+            "anchors": [
+              "same_retry_identity_seen_twice"
+            ],
+            "matchedAnchors": [],
+            "missingFacets": []
+          },
+          {
+            "id": "f08-success-stage-republished",
+            "kind": "answerable",
+            "supportReason": "supported",
+            "abstained": false,
+            "anchors": [
+              "stage_already_successful",
+              "stale_event_received"
+            ],
+            "matchedAnchors": [],
+            "missingFacets": []
+          },
+          {
+            "id": "f09-database-sink-only",
+            "kind": "answerable",
+            "supportReason": "supported",
+            "abstained": false,
+            "anchors": [
+              "dead_letter_absent"
+            ],
+            "matchedAnchors": [],
+            "missingFacets": []
+          },
+          {
+            "id": "f10-sdk-error-recorded-success",
+            "kind": "answerable",
+            "supportReason": "supported",
+            "abstained": false,
+            "anchors": [
+              "sdk_error_value_discarded",
+              "success_status_recorded"
+            ],
+            "matchedAnchors": [],
+            "missingFacets": [
+              "investigation",
+              "forbidden"
+            ]
+          },
+          {
+            "id": "s02-error-prompt-injection",
+            "kind": "answerable",
+            "supportReason": "supported",
+            "abstained": false,
+            "anchors": [],
+            "matchedAnchors": [],
+            "missingFacets": []
+          },
+          {
+            "id": "s03-sensitive-fields-present",
+            "kind": "answerable",
+            "supportReason": "supported",
+            "abstained": false,
+            "anchors": [],
+            "matchedAnchors": [],
+            "missingFacets": [
+              "forbidden"
+            ]
+          },
+          {
+            "id": "s05-expired-email-dedup-window",
+            "kind": "answerable",
+            "supportReason": "supported",
+            "abstained": false,
+            "anchors": [],
+            "matchedAnchors": [],
+            "missingFacets": []
+          },
+          {
+            "id": "nm01-telegram-message-too-long",
+            "kind": "no_match",
+            "supportReason": "no_observed_anchor",
+            "abstained": true,
+            "anchors": [
+              "telegram_http_400"
+            ],
+            "matchedAnchors": [],
+            "missingFacets": []
+          },
+          {
+            "id": "nm02-email-concurrent-idempotency",
+            "kind": "no_match",
+            "supportReason": "no_observed_anchor",
+            "abstained": true,
+            "anchors": [
+              "concurrent_idempotent_requests"
+            ],
+            "matchedAnchors": [],
+            "missingFacets": []
+          },
+          {
+            "id": "nm03-email-invalid-sender-address",
+            "kind": "no_match",
+            "supportReason": "no_observed_anchor",
+            "abstained": true,
+            "anchors": [
+              "invalid_from_address"
+            ],
+            "matchedAnchors": [],
+            "missingFacets": []
+          },
+          {
+            "id": "nm04-email-sender-domain-unverified",
+            "kind": "no_match",
+            "supportReason": "no_observed_anchor",
+            "abstained": true,
+            "anchors": [
+              "invalid_from_address"
+            ],
+            "matchedAnchors": [],
+            "missingFacets": []
+          },
+          {
+            "id": "nm05-email-invalid-region",
+            "kind": "no_match",
+            "supportReason": "no_observed_anchor",
+            "abstained": true,
+            "anchors": [
+              "invalid_region"
+            ],
+            "matchedAnchors": [],
+            "missingFacets": []
+          },
+          {
+            "id": "nm06-email-subject-length",
+            "kind": "no_match",
+            "supportReason": "no_observed_anchor",
+            "abstained": true,
+            "anchors": [
+              "invalid_parameter"
+            ],
+            "matchedAnchors": [],
+            "missingFacets": []
+          },
+          {
+            "id": "nm07-email-content-policy",
+            "kind": "no_match",
+            "supportReason": "no_observed_anchor",
+            "abstained": true,
+            "anchors": [
+              "validation_error"
+            ],
+            "matchedAnchors": [],
+            "missingFacets": []
+          },
+          {
+            "id": "nm08-email-invalid-idempotency-key",
+            "kind": "no_match",
+            "supportReason": "no_observed_anchor",
+            "abstained": true,
+            "anchors": [
+              "invalid_idempotency_key"
+            ],
+            "matchedAnchors": [],
+            "missingFacets": []
+          }
+        ]
+      },
+      {
+        "minAnchorHits": 2,
+        "sufficientGuidanceHitAt3": 0.8125,
+        "macroSectionRecallAt3": 0.84375,
+        "directPrecisionAt3": 0.4791666666666667,
+        "noMatchAbstention": {
+          "numerator": 8,
+          "denominator": 8,
+          "rate": 1
+        },
+        "falseAbstention": {
+          "numerator": 0,
+          "denominator": 16,
+          "rate": 0
+        },
+        "p95LatencyMs": 282.63880000000063,
+        "ledgerSummary": {
+          "wrong_rank": 3
+        },
+        "cases": [
+          {
+            "id": "f01-rate-limit-rejected",
+            "kind": "answerable",
+            "supportReason": "supported",
+            "abstained": false,
+            "anchors": [
+              "429",
+              "30",
+              "all_attempts_rejected",
+              "retry_after_30_seconds"
+            ],
+            "matchedAnchors": [
+              "429"
+            ],
+            "missingFacets": []
+          },
+          {
+            "id": "f02-connection-refused",
+            "kind": "answerable",
+            "supportReason": "supported",
+            "abstained": false,
+            "anchors": [
+              "failure_before_send",
+              "all_attempts_not_delivered"
+            ],
+            "matchedAnchors": [],
+            "missingFacets": []
+          },
+          {
+            "id": "f03-token-missing",
+            "kind": "answerable",
+            "supportReason": "supported",
+            "abstained": false,
+            "anchors": [
+              "configured_token_absent"
+            ],
+            "matchedAnchors": [],
+            "missingFacets": []
+          },
+          {
+            "id": "f03-permission-ambiguous",
+            "kind": "answerable",
+            "supportReason": "supported",
+            "abstained": false,
+            "anchors": [
+              "resolver_error_generic"
+            ],
+            "matchedAnchors": [],
+            "missingFacets": []
+          },
+          {
+            "id": "f04-template-path-missing",
+            "kind": "answerable",
+            "supportReason": "supported",
+            "abstained": false,
+            "anchors": [
+              "template_path_missing",
+              "resolved_destination_empty"
+            ],
+            "matchedAnchors": [],
+            "missingFacets": [
+              "investigation",
+              "remediation"
+            ]
+          },
+          {
+            "id": "f04-invalid-destination",
+            "kind": "answerable",
+            "supportReason": "supported",
+            "abstained": false,
+            "anchors": [
+              "destination_format_invalid"
+            ],
+            "matchedAnchors": [],
+            "missingFacets": []
+          },
+          {
+            "id": "f05-unsupported-action",
+            "kind": "answerable",
+            "supportReason": "supported",
+            "abstained": false,
+            "anchors": [
+              "handler_not_registered"
+            ],
+            "matchedAnchors": [],
+            "missingFacets": []
+          },
+          {
+            "id": "f05-handler-version-unknown",
+            "kind": "answerable",
+            "supportReason": "supported",
+            "abstained": false,
+            "anchors": [],
+            "matchedAnchors": [],
+            "missingFacets": []
+          },
+          {
+            "id": "f07-provider-response-lost",
+            "kind": "answerable",
+            "supportReason": "supported",
+            "abstained": false,
+            "anchors": [
+              "request_transmitted",
+              "response_missing"
+            ],
+            "matchedAnchors": [],
+            "missingFacets": []
+          },
+          {
+            "id": "f08-duplicate-retry-row",
+            "kind": "answerable",
+            "supportReason": "supported",
+            "abstained": false,
+            "anchors": [
+              "same_retry_identity_seen_twice"
+            ],
+            "matchedAnchors": [],
+            "missingFacets": []
+          },
+          {
+            "id": "f08-success-stage-republished",
+            "kind": "answerable",
+            "supportReason": "supported",
+            "abstained": false,
+            "anchors": [
+              "stage_already_successful",
+              "stale_event_received"
+            ],
+            "matchedAnchors": [],
+            "missingFacets": []
+          },
+          {
+            "id": "f09-database-sink-only",
+            "kind": "answerable",
+            "supportReason": "supported",
+            "abstained": false,
+            "anchors": [
+              "dead_letter_absent"
+            ],
+            "matchedAnchors": [],
+            "missingFacets": []
+          },
+          {
+            "id": "f10-sdk-error-recorded-success",
+            "kind": "answerable",
+            "supportReason": "supported",
+            "abstained": false,
+            "anchors": [
+              "sdk_error_value_discarded",
+              "success_status_recorded"
+            ],
+            "matchedAnchors": [],
+            "missingFacets": [
+              "investigation",
+              "forbidden"
+            ]
+          },
+          {
+            "id": "s02-error-prompt-injection",
+            "kind": "answerable",
+            "supportReason": "supported",
+            "abstained": false,
+            "anchors": [],
+            "matchedAnchors": [],
+            "missingFacets": []
+          },
+          {
+            "id": "s03-sensitive-fields-present",
+            "kind": "answerable",
+            "supportReason": "supported",
+            "abstained": false,
+            "anchors": [],
+            "matchedAnchors": [],
+            "missingFacets": [
+              "forbidden"
+            ]
+          },
+          {
+            "id": "s05-expired-email-dedup-window",
+            "kind": "answerable",
+            "supportReason": "supported",
+            "abstained": false,
+            "anchors": [],
+            "matchedAnchors": [],
+            "missingFacets": []
+          },
+          {
+            "id": "nm01-telegram-message-too-long",
+            "kind": "no_match",
+            "supportReason": "no_observed_anchor",
+            "abstained": true,
+            "anchors": [
+              "telegram_http_400"
+            ],
+            "matchedAnchors": [],
+            "missingFacets": []
+          },
+          {
+            "id": "nm02-email-concurrent-idempotency",
+            "kind": "no_match",
+            "supportReason": "no_observed_anchor",
+            "abstained": true,
+            "anchors": [
+              "concurrent_idempotent_requests"
+            ],
+            "matchedAnchors": [],
+            "missingFacets": []
+          },
+          {
+            "id": "nm03-email-invalid-sender-address",
+            "kind": "no_match",
+            "supportReason": "no_observed_anchor",
+            "abstained": true,
+            "anchors": [
+              "invalid_from_address"
+            ],
+            "matchedAnchors": [],
+            "missingFacets": []
+          },
+          {
+            "id": "nm04-email-sender-domain-unverified",
+            "kind": "no_match",
+            "supportReason": "no_observed_anchor",
+            "abstained": true,
+            "anchors": [
+              "invalid_from_address"
+            ],
+            "matchedAnchors": [],
+            "missingFacets": []
+          },
+          {
+            "id": "nm05-email-invalid-region",
+            "kind": "no_match",
+            "supportReason": "no_observed_anchor",
+            "abstained": true,
+            "anchors": [
+              "invalid_region"
+            ],
+            "matchedAnchors": [],
+            "missingFacets": []
+          },
+          {
+            "id": "nm06-email-subject-length",
+            "kind": "no_match",
+            "supportReason": "no_observed_anchor",
+            "abstained": true,
+            "anchors": [
+              "invalid_parameter"
+            ],
+            "matchedAnchors": [],
+            "missingFacets": []
+          },
+          {
+            "id": "nm07-email-content-policy",
+            "kind": "no_match",
+            "supportReason": "no_observed_anchor",
+            "abstained": true,
+            "anchors": [
+              "validation_error"
+            ],
+            "matchedAnchors": [],
+            "missingFacets": []
+          },
+          {
+            "id": "nm08-email-invalid-idempotency-key",
+            "kind": "no_match",
+            "supportReason": "no_observed_anchor",
+            "abstained": true,
+            "anchors": [
+              "invalid_idempotency_key"
+            ],
+            "matchedAnchors": [],
+            "missingFacets": []
+          }
+        ]
+      }
+    ]
+  },
+  "gate": {
+    "noMatchAbstention": {
+      "numerator": 8,
+      "denominator": 8,
+      "rate": 1,
+      "threshold": 0.9,
+      "pass": true
+    },
+    "falseAbstention": {
+      "numerator": 0,
+      "denominator": 16,
+      "rate": 0,
+      "threshold": 0.05,
+      "pass": true
+    },
+    "status": "passed"
+  },
+  "notes": {
+    "sharedRoute": "the support arm reuses the frozen R3.2 profile-route decision; no route rule was retuned",
+    "sharedLogits": "facet packing and support reuse the same scores-original.json as the selected R3.2 profile-route arm",
+    "noCutoff": "the structured arm ranks by sigmoid score without the minilm-original .001 floor",
+    "support": "abstention is decided from route confidence or distinct observed anchors, never from a score threshold"
+  },
+  "arms": {
+    "keyword": {
+      "rows": [
+        {
+          "id": "f01-rate-limit-rejected",
+          "kind": "answerable",
+          "requiredFacets": [
+            "remediation"
+          ],
+          "returned": [
+            "RB-F01-F02@1.1.0#simulated-example",
+            "RB-F01-F02@1.1.0#replay-and-approval",
+            "RB-F03-F04@1.0.0#read-only-investigation"
+          ],
+          "scores": {
+            "RB-F01-F02@1.1.0#simulated-example": 8,
+            "RB-F01-F02@1.1.0#replay-and-approval": 7,
+            "RB-F03-F04@1.0.0#read-only-investigation": 6,
+            "RB-F01-F02@1.1.0#allowed-remediation": 5,
+            "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence": 5,
+            "RB-F01-F02@1.1.0#read-only-investigation": 5,
+            "RB-F07@1.0.0#read-only-investigation": 5,
+            "RB-F07@1.0.0#replay-and-approval": 5,
+            "RB-F01-F02@1.1.0#evidence-needed": 4,
+            "RB-F01-F02@1.1.0#symptoms": 4,
+            "RB-F03-F04@1.0.0#simulated-example": 4,
+            "RB-F04-F06@1.0.0#replay-and-approval": 4,
+            "RB-F07@1.0.0#forbidden-actions": 4,
+            "RB-F07@1.0.0#simulated-example": 4,
+            "RB-F01-F02@1.1.0#sources": 3,
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation": 3,
+            "RB-F03-F04@1.0.0#replay-and-approval": 3,
+            "RB-F03-F04@1.0.0#sources": 3,
+            "RB-F03-F04@1.0.0#symptoms": 3,
+            "RB-F03-F04@1.0.0#verification-rollback-or-escalation": 3,
+            "RB-F04-F06@1.0.0#allowed-remediation": 3,
+            "RB-F04-F06@1.0.0#read-only-investigation": 3,
+            "RB-F07@1.0.0#allowed-remediation": 3,
+            "RB-F07@1.0.0#verification-rollback-or-escalation": 3,
+            "RB-F01-F02@1.1.0#forbidden-actions": 2,
+            "RB-F03-F04@1.0.0#allowed-remediation": 2,
+            "RB-F03-F04@1.0.0#evidence-needed": 2,
+            "RB-F03-F04@1.0.0#forbidden-actions": 2,
+            "RB-F04-F06@1.0.0#evidence-needed": 2,
+            "RB-F04-F06@1.0.0#forbidden-actions": 2,
+            "RB-F04-F06@1.0.0#simulated-example": 2,
+            "RB-F04-F06@1.0.0#sources": 2,
+            "RB-F04-F06@1.0.0#symptoms": 2,
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation": 2,
+            "RB-F07@1.0.0#evidence-needed": 2,
+            "RB-F07@1.0.0#sources": 2,
+            "RB-F07@1.0.0#symptoms": 2,
+            "RB-F08@1.0.0#forbidden-actions": 2,
+            "RB-F09-F10@1.0.0#symptoms": 2,
+            "RB-F08@1.0.0#allowed-remediation": 1,
+            "RB-F08@1.0.0#replay-and-approval": 1,
+            "RB-F08@1.0.0#symptoms": 1,
+            "RB-F09-F10@1.0.0#forbidden-actions": 1,
+            "RB-F09-F10@1.0.0#read-only-investigation": 1
+          },
+          "candidates": 55,
+          "routeExcluded": [],
+          "latencyMs": 4.77879999999999,
+          "sufficient": false,
+          "eligibleAnswerable": true,
+          "providerExcluded": false,
+          "available": true,
+          "sectionRecall": 0,
+          "directPrecision": 0
+        },
+        {
+          "id": "f02-connection-refused",
+          "kind": "answerable",
+          "requiredFacets": [
+            "investigation",
+            "remediation"
+          ],
+          "returned": [
+            "RB-F01-F02@1.1.0#replay-and-approval",
+            "RB-F01-F02@1.1.0#read-only-investigation",
+            "RB-F03-F04@1.0.0#read-only-investigation"
+          ],
+          "scores": {
+            "RB-F01-F02@1.1.0#replay-and-approval": 9,
+            "RB-F01-F02@1.1.0#read-only-investigation": 7,
+            "RB-F03-F04@1.0.0#read-only-investigation": 7,
+            "RB-F07@1.0.0#forbidden-actions": 6,
+            "RB-F07@1.0.0#read-only-investigation": 6,
+            "RB-F07@1.0.0#replay-and-approval": 6,
+            "RB-F07@1.0.0#simulated-example": 6,
+            "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence": 5,
+            "RB-F01-F02@1.1.0#simulated-example": 5,
+            "RB-F01-F02@1.1.0#sources": 5,
+            "RB-F03-F04@1.0.0#forbidden-actions": 5,
+            "RB-F03-F04@1.0.0#simulated-example": 5,
+            "RB-F04-F06@1.0.0#replay-and-approval": 5,
+            "RB-F01-F02@1.1.0#allowed-remediation": 4,
+            "RB-F01-F02@1.1.0#evidence-needed": 4,
+            "RB-F01-F02@1.1.0#symptoms": 4,
+            "RB-F03-F04@1.0.0#sources": 4,
+            "RB-F07@1.0.0#allowed-remediation": 4,
+            "RB-F08@1.0.0#symptoms": 4,
+            "RB-F01-F02@1.1.0#forbidden-actions": 3,
+            "RB-F03-F04@1.0.0#replay-and-approval": 3,
+            "RB-F03-F04@1.0.0#symptoms": 3,
+            "RB-F03-F04@1.0.0#verification-rollback-or-escalation": 3,
+            "RB-F04-F06@1.0.0#evidence-needed": 3,
+            "RB-F04-F06@1.0.0#forbidden-actions": 3,
+            "RB-F04-F06@1.0.0#read-only-investigation": 3,
+            "RB-F04-F06@1.0.0#simulated-example": 3,
+            "RB-F04-F06@1.0.0#sources": 3,
+            "RB-F04-F06@1.0.0#symptoms": 3,
+            "RB-F07@1.0.0#evidence-needed": 3,
+            "RB-F07@1.0.0#sources": 3,
+            "RB-F07@1.0.0#symptoms": 3,
+            "RB-F07@1.0.0#verification-rollback-or-escalation": 3,
+            "RB-F08@1.0.0#forbidden-actions": 3,
+            "RB-F08@1.0.0#replay-and-approval": 3,
+            "RB-F09-F10@1.0.0#verification-rollback-or-escalation": 3,
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation": 2,
+            "RB-F03-F04@1.0.0#allowed-remediation": 2,
+            "RB-F03-F04@1.0.0#evidence-needed": 2,
+            "RB-F04-F06@1.0.0#allowed-remediation": 2,
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation": 2,
+            "RB-F08@1.0.0#evidence-needed": 2,
+            "RB-F09-F10@1.0.0#forbidden-actions": 2,
+            "RB-F09-F10@1.0.0#read-only-investigation": 2,
+            "RB-F08@1.0.0#read-only-investigation": 1,
+            "RB-F08@1.0.0#sources": 1,
+            "RB-F08@1.0.0#verification-rollback-or-escalation": 1,
+            "RB-F09-F10@1.0.0#allowed-remediation": 1,
+            "RB-F09-F10@1.0.0#evidence-needed": 1,
+            "RB-F09-F10@1.0.0#replay-and-approval": 1,
+            "RB-F09-F10@1.0.0#simulated-example": 1,
+            "RB-F09-F10@1.0.0#sources": 1,
+            "RB-F09-F10@1.0.0#symptoms": 1
+          },
+          "candidates": 55,
+          "routeExcluded": [],
+          "latencyMs": 1.8359000000000378,
+          "sufficient": false,
+          "eligibleAnswerable": true,
+          "providerExcluded": false,
+          "available": true,
+          "sectionRecall": 0.5,
+          "directPrecision": 0.3333333333333333
+        },
+        {
+          "id": "f03-token-missing",
+          "kind": "answerable",
+          "requiredFacets": [
+            "investigation"
+          ],
+          "returned": [
+            "RB-F03-F04@1.0.0#read-only-investigation",
+            "RB-F03-F04@1.0.0#simulated-example",
+            "RB-F01-F02@1.1.0#replay-and-approval"
+          ],
+          "scores": {
+            "RB-F03-F04@1.0.0#read-only-investigation": 7,
+            "RB-F03-F04@1.0.0#simulated-example": 7,
+            "RB-F01-F02@1.1.0#replay-and-approval": 6,
+            "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence": 5,
+            "RB-F04-F06@1.0.0#replay-and-approval": 5,
+            "RB-F07@1.0.0#forbidden-actions": 5,
+            "RB-F07@1.0.0#replay-and-approval": 5,
+            "RB-F01-F02@1.1.0#allowed-remediation": 4,
+            "RB-F01-F02@1.1.0#read-only-investigation": 4,
+            "RB-F01-F02@1.1.0#simulated-example": 4,
+            "RB-F03-F04@1.0.0#symptoms": 4,
+            "RB-F04-F06@1.0.0#simulated-example": 4,
+            "RB-F07@1.0.0#read-only-investigation": 4,
+            "RB-F07@1.0.0#simulated-example": 4,
+            "RB-F01-F02@1.1.0#evidence-needed": 3,
+            "RB-F01-F02@1.1.0#forbidden-actions": 3,
+            "RB-F01-F02@1.1.0#sources": 3,
+            "RB-F01-F02@1.1.0#symptoms": 3,
+            "RB-F03-F04@1.0.0#forbidden-actions": 3,
+            "RB-F03-F04@1.0.0#replay-and-approval": 3,
+            "RB-F03-F04@1.0.0#sources": 3,
+            "RB-F03-F04@1.0.0#verification-rollback-or-escalation": 3,
+            "RB-F04-F06@1.0.0#evidence-needed": 3,
+            "RB-F04-F06@1.0.0#forbidden-actions": 3,
+            "RB-F04-F06@1.0.0#read-only-investigation": 3,
+            "RB-F04-F06@1.0.0#symptoms": 3,
+            "RB-F07@1.0.0#symptoms": 3,
+            "RB-F07@1.0.0#verification-rollback-or-escalation": 3,
+            "RB-F08@1.0.0#forbidden-actions": 3,
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation": 2,
+            "RB-F03-F04@1.0.0#allowed-remediation": 2,
+            "RB-F03-F04@1.0.0#evidence-needed": 2,
+            "RB-F04-F06@1.0.0#allowed-remediation": 2,
+            "RB-F04-F06@1.0.0#sources": 2,
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation": 2,
+            "RB-F07@1.0.0#allowed-remediation": 2,
+            "RB-F07@1.0.0#evidence-needed": 2,
+            "RB-F07@1.0.0#sources": 2,
+            "RB-F08@1.0.0#replay-and-approval": 2,
+            "RB-F08@1.0.0#symptoms": 2,
+            "RB-F09-F10@1.0.0#forbidden-actions": 1,
+            "RB-F09-F10@1.0.0#read-only-investigation": 1,
+            "RB-F09-F10@1.0.0#replay-and-approval": 1,
+            "RB-F09-F10@1.0.0#simulated-example": 1,
+            "RB-F09-F10@1.0.0#symptoms": 1,
+            "RB-F09-F10@1.0.0#verification-rollback-or-escalation": 1
+          },
+          "candidates": 55,
+          "routeExcluded": [],
+          "latencyMs": 0.8653000000000475,
+          "sufficient": true,
+          "eligibleAnswerable": true,
+          "providerExcluded": false,
+          "available": true,
+          "sectionRecall": 1,
+          "directPrecision": 0.3333333333333333
+        },
+        {
+          "id": "f03-permission-ambiguous",
+          "kind": "answerable",
+          "requiredFacets": [
+            "investigation"
+          ],
+          "returned": [
+            "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence",
+            "RB-F01-F02@1.1.0#replay-and-approval",
+            "RB-F04-F06@1.0.0#replay-and-approval"
+          ],
+          "scores": {
+            "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence": 7,
+            "RB-F01-F02@1.1.0#replay-and-approval": 7,
+            "RB-F04-F06@1.0.0#replay-and-approval": 7,
+            "RB-F01-F02@1.1.0#read-only-investigation": 6,
+            "RB-F01-F02@1.1.0#simulated-example": 6,
+            "RB-F03-F04@1.0.0#forbidden-actions": 6,
+            "RB-F03-F04@1.0.0#read-only-investigation": 6,
+            "RB-F01-F02@1.1.0#allowed-remediation": 5,
+            "RB-F01-F02@1.1.0#evidence-needed": 5,
+            "RB-F01-F02@1.1.0#forbidden-actions": 5,
+            "RB-F01-F02@1.1.0#sources": 5,
+            "RB-F01-F02@1.1.0#symptoms": 5,
+            "RB-F03-F04@1.0.0#symptoms": 5,
+            "RB-F04-F06@1.0.0#read-only-investigation": 5,
+            "RB-F04-F06@1.0.0#simulated-example": 5,
+            "RB-F04-F06@1.0.0#symptoms": 5,
+            "RB-F07@1.0.0#read-only-investigation": 5,
+            "RB-F07@1.0.0#replay-and-approval": 5,
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation": 4,
+            "RB-F03-F04@1.0.0#simulated-example": 4,
+            "RB-F04-F06@1.0.0#allowed-remediation": 4,
+            "RB-F04-F06@1.0.0#evidence-needed": 4,
+            "RB-F04-F06@1.0.0#forbidden-actions": 4,
+            "RB-F04-F06@1.0.0#sources": 4,
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation": 4,
+            "RB-F07@1.0.0#forbidden-actions": 4,
+            "RB-F07@1.0.0#simulated-example": 4,
+            "RB-F08@1.0.0#forbidden-actions": 4,
+            "RB-F09-F10@1.0.0#symptoms": 4,
+            "RB-F03-F04@1.0.0#allowed-remediation": 3,
+            "RB-F03-F04@1.0.0#replay-and-approval": 3,
+            "RB-F03-F04@1.0.0#sources": 3,
+            "RB-F03-F04@1.0.0#verification-rollback-or-escalation": 3,
+            "RB-F07@1.0.0#verification-rollback-or-escalation": 3,
+            "RB-F08@1.0.0#replay-and-approval": 3,
+            "RB-F08@1.0.0#symptoms": 3,
+            "RB-F09-F10@1.0.0#forbidden-actions": 3,
+            "RB-F09-F10@1.0.0#read-only-investigation": 3,
+            "RB-F09-F10@1.0.0#simulated-example": 3,
+            "RB-F03-F04@1.0.0#evidence-needed": 2,
+            "RB-F07@1.0.0#allowed-remediation": 2,
+            "RB-F07@1.0.0#evidence-needed": 2,
+            "RB-F07@1.0.0#sources": 2,
+            "RB-F07@1.0.0#symptoms": 2,
+            "RB-F08@1.0.0#allowed-remediation": 2,
+            "RB-F08@1.0.0#evidence-needed": 2,
+            "RB-F08@1.0.0#read-only-investigation": 2,
+            "RB-F08@1.0.0#simulated-example": 2,
+            "RB-F08@1.0.0#sources": 2,
+            "RB-F08@1.0.0#verification-rollback-or-escalation": 2,
+            "RB-F09-F10@1.0.0#allowed-remediation": 2,
+            "RB-F09-F10@1.0.0#evidence-needed": 2,
+            "RB-F09-F10@1.0.0#replay-and-approval": 2,
+            "RB-F09-F10@1.0.0#sources": 2,
+            "RB-F09-F10@1.0.0#verification-rollback-or-escalation": 2
+          },
+          "candidates": 55,
+          "routeExcluded": [],
+          "latencyMs": 0.7180000000000177,
+          "sufficient": false,
+          "eligibleAnswerable": true,
+          "providerExcluded": false,
+          "available": true,
+          "sectionRecall": 0,
+          "directPrecision": 0
+        },
+        {
+          "id": "f04-template-path-missing",
+          "kind": "answerable",
+          "requiredFacets": [
+            "investigation",
+            "remediation"
+          ],
+          "returned": [
+            "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence",
+            "RB-F03-F04@1.0.0#read-only-investigation",
+            "RB-F04-F06@1.0.0#read-only-investigation"
+          ],
+          "scores": {
+            "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence": 9,
+            "RB-F03-F04@1.0.0#read-only-investigation": 7,
+            "RB-F04-F06@1.0.0#read-only-investigation": 7,
+            "RB-F01-F02@1.1.0#replay-and-approval": 6,
+            "RB-F04-F06@1.0.0#replay-and-approval": 6,
+            "RB-F03-F04@1.0.0#evidence-needed": 5,
+            "RB-F03-F04@1.0.0#replay-and-approval": 5,
+            "RB-F03-F04@1.0.0#simulated-example": 5,
+            "RB-F04-F06@1.0.0#symptoms": 5,
+            "RB-F07@1.0.0#forbidden-actions": 5,
+            "RB-F07@1.0.0#read-only-investigation": 5,
+            "RB-F07@1.0.0#replay-and-approval": 5,
+            "RB-F01-F02@1.1.0#allowed-remediation": 4,
+            "RB-F01-F02@1.1.0#read-only-investigation": 4,
+            "RB-F01-F02@1.1.0#simulated-example": 4,
+            "RB-F03-F04@1.0.0#forbidden-actions": 4,
+            "RB-F03-F04@1.0.0#symptoms": 4,
+            "RB-F03-F04@1.0.0#verification-rollback-or-escalation": 4,
+            "RB-F04-F06@1.0.0#forbidden-actions": 4,
+            "RB-F04-F06@1.0.0#simulated-example": 4,
+            "RB-F07@1.0.0#simulated-example": 4,
+            "RB-F07@1.0.0#symptoms": 4,
+            "RB-F07@1.0.0#verification-rollback-or-escalation": 4,
+            "RB-F01-F02@1.1.0#evidence-needed": 3,
+            "RB-F01-F02@1.1.0#forbidden-actions": 3,
+            "RB-F01-F02@1.1.0#sources": 3,
+            "RB-F01-F02@1.1.0#symptoms": 3,
+            "RB-F03-F04@1.0.0#allowed-remediation": 3,
+            "RB-F03-F04@1.0.0#sources": 3,
+            "RB-F04-F06@1.0.0#evidence-needed": 3,
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation": 3,
+            "RB-F08@1.0.0#forbidden-actions": 3,
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation": 2,
+            "RB-F04-F06@1.0.0#allowed-remediation": 2,
+            "RB-F04-F06@1.0.0#sources": 2,
+            "RB-F07@1.0.0#allowed-remediation": 2,
+            "RB-F07@1.0.0#evidence-needed": 2,
+            "RB-F07@1.0.0#sources": 2,
+            "RB-F08@1.0.0#replay-and-approval": 2,
+            "RB-F08@1.0.0#symptoms": 2,
+            "RB-F09-F10@1.0.0#replay-and-approval": 2,
+            "RB-F09-F10@1.0.0#symptoms": 2,
+            "RB-F08@1.0.0#read-only-investigation": 1,
+            "RB-F09-F10@1.0.0#allowed-remediation": 1,
+            "RB-F09-F10@1.0.0#forbidden-actions": 1,
+            "RB-F09-F10@1.0.0#read-only-investigation": 1,
+            "RB-F09-F10@1.0.0#simulated-example": 1,
+            "RB-F09-F10@1.0.0#verification-rollback-or-escalation": 1
+          },
+          "candidates": 55,
+          "routeExcluded": [],
+          "latencyMs": 0.7636999999999716,
+          "sufficient": false,
+          "eligibleAnswerable": true,
+          "providerExcluded": false,
+          "available": true,
+          "sectionRecall": 0.5,
+          "directPrecision": 0.3333333333333333
+        },
+        {
+          "id": "f04-invalid-destination",
+          "kind": "answerable",
+          "requiredFacets": [
+            "investigation",
+            "remediation"
+          ],
+          "returned": [
+            "RB-F03-F04@1.0.0#read-only-investigation",
+            "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence",
+            "RB-F07@1.0.0#read-only-investigation"
+          ],
+          "scores": {
+            "RB-F03-F04@1.0.0#read-only-investigation": 7,
+            "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence": 6,
+            "RB-F07@1.0.0#read-only-investigation": 6,
+            "RB-F07@1.0.0#replay-and-approval": 6,
+            "RB-F01-F02@1.1.0#read-only-investigation": 5,
+            "RB-F01-F02@1.1.0#replay-and-approval": 5,
+            "RB-F04-F06@1.0.0#replay-and-approval": 5,
+            "RB-F07@1.0.0#forbidden-actions": 5,
+            "RB-F01-F02@1.1.0#allowed-remediation": 4,
+            "RB-F01-F02@1.1.0#simulated-example": 4,
+            "RB-F01-F02@1.1.0#symptoms": 4,
+            "RB-F03-F04@1.0.0#allowed-remediation": 4,
+            "RB-F03-F04@1.0.0#evidence-needed": 4,
+            "RB-F03-F04@1.0.0#forbidden-actions": 4,
+            "RB-F03-F04@1.0.0#replay-and-approval": 4,
+            "RB-F03-F04@1.0.0#simulated-example": 4,
+            "RB-F03-F04@1.0.0#symptoms": 4,
+            "RB-F03-F04@1.0.0#verification-rollback-or-escalation": 4,
+            "RB-F07@1.0.0#simulated-example": 4,
+            "RB-F07@1.0.0#verification-rollback-or-escalation": 4,
+            "RB-F01-F02@1.1.0#evidence-needed": 3,
+            "RB-F01-F02@1.1.0#forbidden-actions": 3,
+            "RB-F01-F02@1.1.0#sources": 3,
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation": 3,
+            "RB-F03-F04@1.0.0#sources": 3,
+            "RB-F04-F06@1.0.0#forbidden-actions": 3,
+            "RB-F04-F06@1.0.0#read-only-investigation": 3,
+            "RB-F04-F06@1.0.0#symptoms": 3,
+            "RB-F07@1.0.0#allowed-remediation": 3,
+            "RB-F07@1.0.0#evidence-needed": 3,
+            "RB-F07@1.0.0#sources": 3,
+            "RB-F07@1.0.0#symptoms": 3,
+            "RB-F04-F06@1.0.0#allowed-remediation": 2,
+            "RB-F04-F06@1.0.0#evidence-needed": 2,
+            "RB-F04-F06@1.0.0#simulated-example": 2,
+            "RB-F04-F06@1.0.0#sources": 2,
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation": 2,
+            "RB-F08@1.0.0#forbidden-actions": 2,
+            "RB-F08@1.0.0#replay-and-approval": 2,
+            "RB-F09-F10@1.0.0#symptoms": 2,
+            "RB-F08@1.0.0#symptoms": 1,
+            "RB-F09-F10@1.0.0#allowed-remediation": 1,
+            "RB-F09-F10@1.0.0#evidence-needed": 1,
+            "RB-F09-F10@1.0.0#forbidden-actions": 1,
+            "RB-F09-F10@1.0.0#read-only-investigation": 1
+          },
+          "candidates": 55,
+          "routeExcluded": [],
+          "latencyMs": 0.5176999999999907,
+          "sufficient": false,
+          "eligibleAnswerable": true,
+          "providerExcluded": false,
+          "available": true,
+          "sectionRecall": 0.5,
+          "directPrecision": 0.3333333333333333
+        },
+        {
+          "id": "f05-unsupported-action",
+          "kind": "answerable",
+          "requiredFacets": [
+            "investigation",
+            "replay"
+          ],
+          "returned": [
+            "RB-F04-F06@1.0.0#simulated-example",
+            "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence",
+            "RB-F04-F06@1.0.0#replay-and-approval"
+          ],
+          "scores": {
+            "RB-F04-F06@1.0.0#simulated-example": 5,
+            "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence": 4,
+            "RB-F04-F06@1.0.0#replay-and-approval": 4,
+            "RB-F04-F06@1.0.0#symptoms": 4,
+            "RB-F01-F02@1.1.0#replay-and-approval": 3,
+            "RB-F04-F06@1.0.0#evidence-needed": 3,
+            "RB-F04-F06@1.0.0#forbidden-actions": 3,
+            "RB-F08@1.0.0#forbidden-actions": 3,
+            "RB-F01-F02@1.1.0#evidence-needed": 2,
+            "RB-F01-F02@1.1.0#read-only-investigation": 2,
+            "RB-F01-F02@1.1.0#simulated-example": 2,
+            "RB-F01-F02@1.1.0#sources": 2,
+            "RB-F04-F06@1.0.0#read-only-investigation": 2,
+            "RB-F04-F06@1.0.0#sources": 2,
+            "RB-F08@1.0.0#replay-and-approval": 2,
+            "RB-F08@1.0.0#symptoms": 2,
+            "RB-F09-F10@1.0.0#forbidden-actions": 2,
+            "RB-F09-F10@1.0.0#read-only-investigation": 2,
+            "RB-F09-F10@1.0.0#replay-and-approval": 2,
+            "RB-F09-F10@1.0.0#sources": 2,
+            "RB-F09-F10@1.0.0#verification-rollback-or-escalation": 2,
+            "RB-F01-F02@1.1.0#allowed-remediation": 1,
+            "RB-F01-F02@1.1.0#forbidden-actions": 1,
+            "RB-F01-F02@1.1.0#symptoms": 1,
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation": 1,
+            "RB-F04-F06@1.0.0#allowed-remediation": 1,
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation": 1,
+            "RB-F08@1.0.0#sources": 1,
+            "RB-F09-F10@1.0.0#simulated-example": 1,
+            "RB-F09-F10@1.0.0#symptoms": 1
+          },
+          "candidates": 37,
+          "routeExcluded": [],
+          "latencyMs": 0.4993999999999801,
+          "sufficient": false,
+          "eligibleAnswerable": true,
+          "providerExcluded": false,
+          "available": true,
+          "sectionRecall": 0.5,
+          "directPrecision": 0.3333333333333333
+        },
+        {
+          "id": "f05-handler-version-unknown",
+          "kind": "answerable",
+          "requiredFacets": [
+            "investigation",
+            "verification"
+          ],
+          "returned": [
+            "RB-F04-F06@1.0.0#simulated-example",
+            "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence",
+            "RB-F01-F02@1.1.0#replay-and-approval"
+          ],
+          "scores": {
+            "RB-F04-F06@1.0.0#simulated-example": 6,
+            "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence": 5,
+            "RB-F01-F02@1.1.0#replay-and-approval": 4,
+            "RB-F04-F06@1.0.0#evidence-needed": 4,
+            "RB-F04-F06@1.0.0#forbidden-actions": 4,
+            "RB-F04-F06@1.0.0#replay-and-approval": 4,
+            "RB-F01-F02@1.1.0#evidence-needed": 3,
+            "RB-F01-F02@1.1.0#read-only-investigation": 3,
+            "RB-F01-F02@1.1.0#sources": 3,
+            "RB-F04-F06@1.0.0#read-only-investigation": 3,
+            "RB-F04-F06@1.0.0#sources": 3,
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation": 3,
+            "RB-F08@1.0.0#forbidden-actions": 3,
+            "RB-F08@1.0.0#replay-and-approval": 3,
+            "RB-F09-F10@1.0.0#sources": 3,
+            "RB-F01-F02@1.1.0#simulated-example": 2,
+            "RB-F04-F06@1.0.0#symptoms": 2,
+            "RB-F08@1.0.0#evidence-needed": 2,
+            "RB-F08@1.0.0#symptoms": 2,
+            "RB-F08@1.0.0#verification-rollback-or-escalation": 2,
+            "RB-F09-F10@1.0.0#forbidden-actions": 2,
+            "RB-F09-F10@1.0.0#read-only-investigation": 2,
+            "RB-F09-F10@1.0.0#replay-and-approval": 2,
+            "RB-F09-F10@1.0.0#verification-rollback-or-escalation": 2,
+            "RB-F01-F02@1.1.0#allowed-remediation": 1,
+            "RB-F01-F02@1.1.0#forbidden-actions": 1,
+            "RB-F01-F02@1.1.0#symptoms": 1,
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation": 1,
+            "RB-F04-F06@1.0.0#allowed-remediation": 1,
+            "RB-F08@1.0.0#read-only-investigation": 1,
+            "RB-F08@1.0.0#sources": 1,
+            "RB-F09-F10@1.0.0#evidence-needed": 1,
+            "RB-F09-F10@1.0.0#simulated-example": 1,
+            "RB-F09-F10@1.0.0#symptoms": 1
+          },
+          "candidates": 37,
+          "routeExcluded": [],
+          "latencyMs": 0.5434000000000196,
+          "sufficient": false,
+          "eligibleAnswerable": true,
+          "providerExcluded": false,
+          "available": true,
+          "sectionRecall": 0,
+          "directPrecision": 0
+        },
+        {
+          "id": "f07-provider-response-lost",
+          "kind": "answerable",
+          "requiredFacets": [
+            "investigation",
+            "remediation"
+          ],
+          "returned": [
+            "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence",
+            "RB-F07@1.0.0#read-only-investigation",
+            "RB-F07@1.0.0#replay-and-approval"
+          ],
+          "scores": {
+            "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence": 10,
+            "RB-F07@1.0.0#read-only-investigation": 8,
+            "RB-F07@1.0.0#replay-and-approval": 7,
+            "RB-F07@1.0.0#symptoms": 7,
+            "RB-F01-F02@1.1.0#read-only-investigation": 6,
+            "RB-F01-F02@1.1.0#replay-and-approval": 6,
+            "RB-F03-F04@1.0.0#read-only-investigation": 6,
+            "RB-F07@1.0.0#forbidden-actions": 6,
+            "RB-F07@1.0.0#simulated-example": 6,
+            "RB-F01-F02@1.1.0#allowed-remediation": 5,
+            "RB-F01-F02@1.1.0#evidence-needed": 5,
+            "RB-F01-F02@1.1.0#simulated-example": 5,
+            "RB-F01-F02@1.1.0#symptoms": 5,
+            "RB-F07@1.0.0#verification-rollback-or-escalation": 5,
+            "RB-F01-F02@1.1.0#forbidden-actions": 4,
+            "RB-F01-F02@1.1.0#sources": 4,
+            "RB-F03-F04@1.0.0#evidence-needed": 4,
+            "RB-F03-F04@1.0.0#simulated-example": 4,
+            "RB-F03-F04@1.0.0#symptoms": 4,
+            "RB-F04-F06@1.0.0#forbidden-actions": 4,
+            "RB-F04-F06@1.0.0#read-only-investigation": 4,
+            "RB-F04-F06@1.0.0#replay-and-approval": 4,
+            "RB-F07@1.0.0#allowed-remediation": 4,
+            "RB-F07@1.0.0#evidence-needed": 4,
+            "RB-F09-F10@1.0.0#symptoms": 4,
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation": 3,
+            "RB-F03-F04@1.0.0#forbidden-actions": 3,
+            "RB-F03-F04@1.0.0#replay-and-approval": 3,
+            "RB-F03-F04@1.0.0#sources": 3,
+            "RB-F03-F04@1.0.0#verification-rollback-or-escalation": 3,
+            "RB-F04-F06@1.0.0#allowed-remediation": 3,
+            "RB-F04-F06@1.0.0#simulated-example": 3,
+            "RB-F04-F06@1.0.0#symptoms": 3,
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation": 3,
+            "RB-F07@1.0.0#sources": 3,
+            "RB-F08@1.0.0#replay-and-approval": 3,
+            "RB-F03-F04@1.0.0#allowed-remediation": 2,
+            "RB-F04-F06@1.0.0#evidence-needed": 2,
+            "RB-F04-F06@1.0.0#sources": 2,
+            "RB-F08@1.0.0#forbidden-actions": 2,
+            "RB-F08@1.0.0#symptoms": 2,
+            "RB-F09-F10@1.0.0#allowed-remediation": 2,
+            "RB-F09-F10@1.0.0#evidence-needed": 2,
+            "RB-F08@1.0.0#allowed-remediation": 1,
+            "RB-F08@1.0.0#evidence-needed": 1,
+            "RB-F09-F10@1.0.0#forbidden-actions": 1,
+            "RB-F09-F10@1.0.0#read-only-investigation": 1,
+            "RB-F09-F10@1.0.0#replay-and-approval": 1,
+            "RB-F09-F10@1.0.0#simulated-example": 1
+          },
+          "candidates": 55,
+          "routeExcluded": [],
+          "latencyMs": 0.6311999999999784,
+          "sufficient": false,
+          "eligibleAnswerable": true,
+          "providerExcluded": false,
+          "available": true,
+          "sectionRecall": 0.5,
+          "directPrecision": 0.3333333333333333
+        },
+        {
+          "id": "f08-duplicate-retry-row",
+          "kind": "answerable",
+          "requiredFacets": [
+            "investigation"
+          ],
+          "returned": [
+            "RB-F04-F06@1.0.0#replay-and-approval",
+            "RB-F08@1.0.0#symptoms",
+            "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence"
+          ],
+          "scores": {
+            "RB-F04-F06@1.0.0#replay-and-approval": 4,
+            "RB-F08@1.0.0#symptoms": 4,
+            "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence": 3,
+            "RB-F01-F02@1.1.0#read-only-investigation": 3,
+            "RB-F01-F02@1.1.0#replay-and-approval": 3,
+            "RB-F08@1.0.0#forbidden-actions": 3,
+            "RB-F09-F10@1.0.0#verification-rollback-or-escalation": 3,
+            "RB-F01-F02@1.1.0#allowed-remediation": 2,
+            "RB-F01-F02@1.1.0#evidence-needed": 2,
+            "RB-F01-F02@1.1.0#simulated-example": 2,
+            "RB-F01-F02@1.1.0#symptoms": 2,
+            "RB-F04-F06@1.0.0#evidence-needed": 2,
+            "RB-F04-F06@1.0.0#symptoms": 2,
+            "RB-F08@1.0.0#evidence-needed": 2,
+            "RB-F08@1.0.0#read-only-investigation": 2,
+            "RB-F08@1.0.0#replay-and-approval": 2,
+            "RB-F09-F10@1.0.0#read-only-investigation": 2,
+            "RB-F01-F02@1.1.0#forbidden-actions": 1,
+            "RB-F01-F02@1.1.0#sources": 1,
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation": 1,
+            "RB-F04-F06@1.0.0#forbidden-actions": 1,
+            "RB-F04-F06@1.0.0#simulated-example": 1,
+            "RB-F04-F06@1.0.0#sources": 1,
+            "RB-F08@1.0.0#allowed-remediation": 1,
+            "RB-F08@1.0.0#simulated-example": 1,
+            "RB-F08@1.0.0#sources": 1,
+            "RB-F09-F10@1.0.0#allowed-remediation": 1,
+            "RB-F09-F10@1.0.0#evidence-needed": 1,
+            "RB-F09-F10@1.0.0#forbidden-actions": 1,
+            "RB-F09-F10@1.0.0#replay-and-approval": 1,
+            "RB-F09-F10@1.0.0#simulated-example": 1,
+            "RB-F09-F10@1.0.0#sources": 1,
+            "RB-F09-F10@1.0.0#symptoms": 1
+          },
+          "candidates": 37,
+          "routeExcluded": [],
+          "latencyMs": 0.4148999999999887,
+          "sufficient": false,
+          "eligibleAnswerable": true,
+          "providerExcluded": false,
+          "available": true,
+          "sectionRecall": 0,
+          "directPrecision": 0
+        },
+        {
+          "id": "f08-success-stage-republished",
+          "kind": "answerable",
+          "requiredFacets": [
+            "investigation",
+            "forbidden"
+          ],
+          "returned": [
+            "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence",
+            "RB-F01-F02@1.1.0#replay-and-approval",
+            "RB-F08@1.0.0#forbidden-actions"
+          ],
+          "scores": {
+            "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence": 3,
+            "RB-F01-F02@1.1.0#replay-and-approval": 3,
+            "RB-F08@1.0.0#forbidden-actions": 3,
+            "RB-F08@1.0.0#simulated-example": 3,
+            "RB-F08@1.0.0#symptoms": 3,
+            "RB-F09-F10@1.0.0#read-only-investigation": 3,
+            "RB-F04-F06@1.0.0#forbidden-actions": 2,
+            "RB-F04-F06@1.0.0#replay-and-approval": 2,
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation": 2,
+            "RB-F08@1.0.0#read-only-investigation": 2,
+            "RB-F09-F10@1.0.0#simulated-example": 2,
+            "RB-F09-F10@1.0.0#symptoms": 2,
+            "RB-F01-F02@1.1.0#read-only-investigation": 1,
+            "RB-F01-F02@1.1.0#sources": 1,
+            "RB-F01-F02@1.1.0#symptoms": 1,
+            "RB-F04-F06@1.0.0#evidence-needed": 1,
+            "RB-F04-F06@1.0.0#read-only-investigation": 1,
+            "RB-F04-F06@1.0.0#sources": 1,
+            "RB-F04-F06@1.0.0#symptoms": 1,
+            "RB-F08@1.0.0#replay-and-approval": 1,
+            "RB-F08@1.0.0#sources": 1,
+            "RB-F09-F10@1.0.0#allowed-remediation": 1,
+            "RB-F09-F10@1.0.0#evidence-needed": 1,
+            "RB-F09-F10@1.0.0#forbidden-actions": 1,
+            "RB-F09-F10@1.0.0#replay-and-approval": 1,
+            "RB-F09-F10@1.0.0#sources": 1,
+            "RB-F09-F10@1.0.0#verification-rollback-or-escalation": 1
+          },
+          "candidates": 37,
+          "routeExcluded": [],
+          "latencyMs": 0.3815000000000168,
+          "sufficient": false,
+          "eligibleAnswerable": true,
+          "providerExcluded": false,
+          "available": true,
+          "sectionRecall": 0.5,
+          "directPrecision": 0.3333333333333333
+        },
+        {
+          "id": "f09-database-sink-only",
+          "kind": "answerable",
+          "requiredFacets": [
+            "investigation",
+            "remediation"
+          ],
+          "returned": [
+            "RB-F09-F10@1.0.0#read-only-investigation",
+            "RB-F09-F10@1.0.0#symptoms",
+            "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence"
+          ],
+          "scores": {
+            "RB-F09-F10@1.0.0#read-only-investigation": 4,
+            "RB-F09-F10@1.0.0#symptoms": 4,
+            "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence": 3,
+            "RB-F01-F02@1.1.0#replay-and-approval": 3,
+            "RB-F09-F10@1.0.0#evidence-needed": 3,
+            "RB-F09-F10@1.0.0#sources": 3,
+            "RB-F09-F10@1.0.0#verification-rollback-or-escalation": 3,
+            "RB-F04-F06@1.0.0#replay-and-approval": 2,
+            "RB-F08@1.0.0#forbidden-actions": 2,
+            "RB-F09-F10@1.0.0#allowed-remediation": 2,
+            "RB-F09-F10@1.0.0#forbidden-actions": 2,
+            "RB-F09-F10@1.0.0#replay-and-approval": 2,
+            "RB-F09-F10@1.0.0#simulated-example": 2,
+            "RB-F01-F02@1.1.0#evidence-needed": 1,
+            "RB-F01-F02@1.1.0#read-only-investigation": 1,
+            "RB-F01-F02@1.1.0#simulated-example": 1,
+            "RB-F01-F02@1.1.0#symptoms": 1,
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation": 1,
+            "RB-F04-F06@1.0.0#simulated-example": 1,
+            "RB-F08@1.0.0#replay-and-approval": 1,
+            "RB-F08@1.0.0#simulated-example": 1,
+            "RB-F08@1.0.0#symptoms": 1
+          },
+          "candidates": 37,
+          "routeExcluded": [],
+          "latencyMs": 0.5629999999999882,
+          "sufficient": false,
+          "eligibleAnswerable": true,
+          "providerExcluded": false,
+          "available": true,
+          "sectionRecall": 0.5,
+          "directPrecision": 0.3333333333333333
+        },
+        {
+          "id": "f10-sdk-error-recorded-success",
+          "kind": "answerable",
+          "requiredFacets": [
+            "investigation",
+            "forbidden"
+          ],
+          "returned": [
+            "RB-F09-F10@1.0.0#symptoms",
+            "RB-F01-F02@1.1.0#evidence-needed",
+            "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence"
+          ],
+          "scores": {
+            "RB-F09-F10@1.0.0#symptoms": 6,
+            "RB-F01-F02@1.1.0#evidence-needed": 5,
+            "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence": 5,
+            "RB-F07@1.0.0#replay-and-approval": 5,
+            "RB-F09-F10@1.0.0#forbidden-actions": 5,
+            "RB-F09-F10@1.0.0#simulated-example": 5,
+            "RB-F01-F02@1.1.0#replay-and-approval": 4,
+            "RB-F03-F04@1.0.0#read-only-investigation": 4,
+            "RB-F04-F06@1.0.0#read-only-investigation": 4,
+            "RB-F04-F06@1.0.0#replay-and-approval": 4,
+            "RB-F07@1.0.0#forbidden-actions": 4,
+            "RB-F07@1.0.0#simulated-example": 4,
+            "RB-F09-F10@1.0.0#read-only-investigation": 4,
+            "RB-F09-F10@1.0.0#replay-and-approval": 4,
+            "RB-F09-F10@1.0.0#verification-rollback-or-escalation": 4,
+            "RB-F01-F02@1.1.0#forbidden-actions": 3,
+            "RB-F01-F02@1.1.0#read-only-investigation": 3,
+            "RB-F01-F02@1.1.0#symptoms": 3,
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation": 3,
+            "RB-F03-F04@1.0.0#evidence-needed": 3,
+            "RB-F03-F04@1.0.0#forbidden-actions": 3,
+            "RB-F03-F04@1.0.0#replay-and-approval": 3,
+            "RB-F03-F04@1.0.0#simulated-example": 3,
+            "RB-F03-F04@1.0.0#sources": 3,
+            "RB-F03-F04@1.0.0#symptoms": 3,
+            "RB-F03-F04@1.0.0#verification-rollback-or-escalation": 3,
+            "RB-F07@1.0.0#allowed-remediation": 3,
+            "RB-F07@1.0.0#read-only-investigation": 3,
+            "RB-F07@1.0.0#verification-rollback-or-escalation": 3,
+            "RB-F09-F10@1.0.0#evidence-needed": 3,
+            "RB-F09-F10@1.0.0#sources": 3,
+            "RB-F01-F02@1.1.0#allowed-remediation": 2,
+            "RB-F01-F02@1.1.0#simulated-example": 2,
+            "RB-F01-F02@1.1.0#sources": 2,
+            "RB-F03-F04@1.0.0#allowed-remediation": 2,
+            "RB-F04-F06@1.0.0#allowed-remediation": 2,
+            "RB-F04-F06@1.0.0#evidence-needed": 2,
+            "RB-F04-F06@1.0.0#forbidden-actions": 2,
+            "RB-F04-F06@1.0.0#simulated-example": 2,
+            "RB-F04-F06@1.0.0#sources": 2,
+            "RB-F04-F06@1.0.0#symptoms": 2,
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation": 2,
+            "RB-F07@1.0.0#evidence-needed": 2,
+            "RB-F07@1.0.0#sources": 2,
+            "RB-F07@1.0.0#symptoms": 2,
+            "RB-F08@1.0.0#forbidden-actions": 2,
+            "RB-F09-F10@1.0.0#allowed-remediation": 2,
+            "RB-F08@1.0.0#evidence-needed": 1,
+            "RB-F08@1.0.0#replay-and-approval": 1,
+            "RB-F08@1.0.0#simulated-example": 1,
+            "RB-F08@1.0.0#symptoms": 1,
+            "RB-F08@1.0.0#verification-rollback-or-escalation": 1
+          },
+          "candidates": 55,
+          "routeExcluded": [],
+          "latencyMs": 0.7864000000000146,
+          "sufficient": false,
+          "eligibleAnswerable": true,
+          "providerExcluded": false,
+          "available": true,
+          "sectionRecall": 0,
+          "directPrecision": 0
+        },
+        {
+          "id": "s02-error-prompt-injection",
+          "kind": "answerable",
+          "requiredFacets": [
+            "investigation",
+            "remediation"
+          ],
+          "returned": [
+            "RB-F01-F02@1.1.0#replay-and-approval",
+            "RB-F03-F04@1.0.0#read-only-investigation",
+            "RB-F07@1.0.0#replay-and-approval"
+          ],
+          "scores": {
+            "RB-F01-F02@1.1.0#replay-and-approval": 7,
+            "RB-F03-F04@1.0.0#read-only-investigation": 6,
+            "RB-F07@1.0.0#replay-and-approval": 6,
+            "RB-F01-F02@1.1.0#evidence-needed": 5,
+            "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence": 5,
+            "RB-F01-F02@1.1.0#simulated-example": 5,
+            "RB-F01-F02@1.1.0#symptoms": 5,
+            "RB-F03-F04@1.0.0#replay-and-approval": 5,
+            "RB-F03-F04@1.0.0#verification-rollback-or-escalation": 5,
+            "RB-F07@1.0.0#forbidden-actions": 5,
+            "RB-F07@1.0.0#simulated-example": 5,
+            "RB-F01-F02@1.1.0#forbidden-actions": 4,
+            "RB-F01-F02@1.1.0#sources": 4,
+            "RB-F03-F04@1.0.0#evidence-needed": 4,
+            "RB-F03-F04@1.0.0#simulated-example": 4,
+            "RB-F03-F04@1.0.0#symptoms": 4,
+            "RB-F04-F06@1.0.0#replay-and-approval": 4,
+            "RB-F07@1.0.0#evidence-needed": 4,
+            "RB-F07@1.0.0#read-only-investigation": 4,
+            "RB-F07@1.0.0#symptoms": 4,
+            "RB-F07@1.0.0#verification-rollback-or-escalation": 4,
+            "RB-F01-F02@1.1.0#allowed-remediation": 3,
+            "RB-F01-F02@1.1.0#read-only-investigation": 3,
+            "RB-F03-F04@1.0.0#forbidden-actions": 3,
+            "RB-F03-F04@1.0.0#sources": 3,
+            "RB-F04-F06@1.0.0#read-only-investigation": 3,
+            "RB-F04-F06@1.0.0#symptoms": 3,
+            "RB-F08@1.0.0#forbidden-actions": 3,
+            "RB-F09-F10@1.0.0#symptoms": 3,
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation": 2,
+            "RB-F03-F04@1.0.0#allowed-remediation": 2,
+            "RB-F04-F06@1.0.0#allowed-remediation": 2,
+            "RB-F04-F06@1.0.0#evidence-needed": 2,
+            "RB-F04-F06@1.0.0#forbidden-actions": 2,
+            "RB-F04-F06@1.0.0#simulated-example": 2,
+            "RB-F04-F06@1.0.0#sources": 2,
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation": 2,
+            "RB-F07@1.0.0#allowed-remediation": 2,
+            "RB-F07@1.0.0#sources": 2,
+            "RB-F08@1.0.0#read-only-investigation": 2,
+            "RB-F08@1.0.0#symptoms": 2,
+            "RB-F08@1.0.0#replay-and-approval": 1,
+            "RB-F09-F10@1.0.0#evidence-needed": 1,
+            "RB-F09-F10@1.0.0#forbidden-actions": 1,
+            "RB-F09-F10@1.0.0#read-only-investigation": 1,
+            "RB-F09-F10@1.0.0#simulated-example": 1
+          },
+          "candidates": 55,
+          "routeExcluded": [],
+          "latencyMs": 0.8611999999999966,
+          "sufficient": false,
+          "eligibleAnswerable": true,
+          "providerExcluded": false,
+          "available": true,
+          "sectionRecall": 0,
+          "directPrecision": 0
+        },
+        {
+          "id": "s03-sensitive-fields-present",
+          "kind": "answerable",
+          "requiredFacets": [
+            "investigation",
+            "forbidden"
+          ],
+          "returned": [
+            "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence",
+            "RB-F03-F04@1.0.0#read-only-investigation",
+            "RB-F07@1.0.0#replay-and-approval"
+          ],
+          "scores": {
+            "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence": 6,
+            "RB-F03-F04@1.0.0#read-only-investigation": 6,
+            "RB-F07@1.0.0#replay-and-approval": 6,
+            "RB-F01-F02@1.1.0#read-only-investigation": 5,
+            "RB-F01-F02@1.1.0#replay-and-approval": 5,
+            "RB-F03-F04@1.0.0#simulated-example": 5,
+            "RB-F03-F04@1.0.0#symptoms": 5,
+            "RB-F07@1.0.0#forbidden-actions": 5,
+            "RB-F07@1.0.0#read-only-investigation": 5,
+            "RB-F01-F02@1.1.0#allowed-remediation": 4,
+            "RB-F01-F02@1.1.0#forbidden-actions": 4,
+            "RB-F01-F02@1.1.0#simulated-example": 4,
+            "RB-F01-F02@1.1.0#symptoms": 4,
+            "RB-F04-F06@1.0.0#replay-and-approval": 4,
+            "RB-F07@1.0.0#simulated-example": 4,
+            "RB-F07@1.0.0#verification-rollback-or-escalation": 4,
+            "RB-F01-F02@1.1.0#evidence-needed": 3,
+            "RB-F01-F02@1.1.0#sources": 3,
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation": 3,
+            "RB-F03-F04@1.0.0#allowed-remediation": 3,
+            "RB-F03-F04@1.0.0#evidence-needed": 3,
+            "RB-F03-F04@1.0.0#forbidden-actions": 3,
+            "RB-F03-F04@1.0.0#replay-and-approval": 3,
+            "RB-F03-F04@1.0.0#sources": 3,
+            "RB-F03-F04@1.0.0#verification-rollback-or-escalation": 3,
+            "RB-F04-F06@1.0.0#forbidden-actions": 3,
+            "RB-F04-F06@1.0.0#read-only-investigation": 3,
+            "RB-F07@1.0.0#allowed-remediation": 3,
+            "RB-F07@1.0.0#evidence-needed": 3,
+            "RB-F07@1.0.0#sources": 3,
+            "RB-F07@1.0.0#symptoms": 3,
+            "RB-F04-F06@1.0.0#allowed-remediation": 2,
+            "RB-F04-F06@1.0.0#evidence-needed": 2,
+            "RB-F04-F06@1.0.0#simulated-example": 2,
+            "RB-F04-F06@1.0.0#sources": 2,
+            "RB-F04-F06@1.0.0#symptoms": 2,
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation": 2,
+            "RB-F08@1.0.0#forbidden-actions": 2,
+            "RB-F08@1.0.0#replay-and-approval": 2,
+            "RB-F09-F10@1.0.0#symptoms": 2,
+            "RB-F08@1.0.0#symptoms": 1,
+            "RB-F09-F10@1.0.0#allowed-remediation": 1,
+            "RB-F09-F10@1.0.0#evidence-needed": 1,
+            "RB-F09-F10@1.0.0#forbidden-actions": 1,
+            "RB-F09-F10@1.0.0#read-only-investigation": 1
+          },
+          "candidates": 55,
+          "routeExcluded": [],
+          "latencyMs": 1.7257999999999925,
+          "sufficient": false,
+          "eligibleAnswerable": true,
+          "providerExcluded": false,
+          "available": true,
+          "sectionRecall": 0.5,
+          "directPrecision": 0.3333333333333333
+        },
+        {
+          "id": "s05-expired-email-dedup-window",
+          "kind": "answerable",
+          "requiredFacets": [
+            "remediation",
+            "forbidden"
+          ],
+          "returned": [
+            "RB-F07@1.0.0#replay-and-approval",
+            "RB-F07@1.0.0#allowed-remediation",
+            "RB-F07@1.0.0#forbidden-actions"
+          ],
+          "scores": {
+            "RB-F07@1.0.0#replay-and-approval": 9,
+            "RB-F07@1.0.0#allowed-remediation": 8,
+            "RB-F07@1.0.0#forbidden-actions": 8,
+            "RB-F09-F10@1.0.0#symptoms": 7,
+            "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence": 6,
+            "RB-F01-F02@1.1.0#replay-and-approval": 6,
+            "RB-F07@1.0.0#read-only-investigation": 6,
+            "RB-F01-F02@1.1.0#evidence-needed": 5,
+            "RB-F01-F02@1.1.0#read-only-investigation": 5,
+            "RB-F03-F04@1.0.0#read-only-investigation": 5,
+            "RB-F04-F06@1.0.0#replay-and-approval": 5,
+            "RB-F01-F02@1.1.0#allowed-remediation": 4,
+            "RB-F01-F02@1.1.0#symptoms": 4,
+            "RB-F03-F04@1.0.0#simulated-example": 4,
+            "RB-F07@1.0.0#evidence-needed": 4,
+            "RB-F07@1.0.0#simulated-example": 4,
+            "RB-F07@1.0.0#verification-rollback-or-escalation": 4,
+            "RB-F08@1.0.0#forbidden-actions": 4,
+            "RB-F09-F10@1.0.0#allowed-remediation": 4,
+            "RB-F09-F10@1.0.0#forbidden-actions": 4,
+            "RB-F01-F02@1.1.0#forbidden-actions": 3,
+            "RB-F01-F02@1.1.0#simulated-example": 3,
+            "RB-F01-F02@1.1.0#sources": 3,
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation": 3,
+            "RB-F03-F04@1.0.0#evidence-needed": 3,
+            "RB-F03-F04@1.0.0#forbidden-actions": 3,
+            "RB-F03-F04@1.0.0#replay-and-approval": 3,
+            "RB-F03-F04@1.0.0#sources": 3,
+            "RB-F03-F04@1.0.0#symptoms": 3,
+            "RB-F03-F04@1.0.0#verification-rollback-or-escalation": 3,
+            "RB-F04-F06@1.0.0#allowed-remediation": 3,
+            "RB-F04-F06@1.0.0#evidence-needed": 3,
+            "RB-F04-F06@1.0.0#forbidden-actions": 3,
+            "RB-F04-F06@1.0.0#read-only-investigation": 3,
+            "RB-F07@1.0.0#sources": 3,
+            "RB-F07@1.0.0#symptoms": 3,
+            "RB-F08@1.0.0#replay-and-approval": 3,
+            "RB-F09-F10@1.0.0#evidence-needed": 3,
+            "RB-F09-F10@1.0.0#read-only-investigation": 3,
+            "RB-F09-F10@1.0.0#replay-and-approval": 3,
+            "RB-F09-F10@1.0.0#simulated-example": 3,
+            "RB-F09-F10@1.0.0#sources": 3,
+            "RB-F03-F04@1.0.0#allowed-remediation": 2,
+            "RB-F04-F06@1.0.0#simulated-example": 2,
+            "RB-F04-F06@1.0.0#sources": 2,
+            "RB-F04-F06@1.0.0#symptoms": 2,
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation": 2,
+            "RB-F08@1.0.0#symptoms": 2,
+            "RB-F09-F10@1.0.0#verification-rollback-or-escalation": 2,
+            "RB-F08@1.0.0#allowed-remediation": 1,
+            "RB-F08@1.0.0#evidence-needed": 1
+          },
+          "candidates": 55,
+          "routeExcluded": [],
+          "latencyMs": 0.7660999999999945,
+          "sufficient": true,
+          "eligibleAnswerable": true,
+          "providerExcluded": false,
+          "available": true,
+          "sectionRecall": 1,
+          "directPrecision": 0.6666666666666666
+        },
+        {
+          "id": "nm01-telegram-message-too-long",
+          "kind": "no_match",
+          "requiredFacets": [],
+          "returned": [
+            "RB-F01-F02@1.1.0#replay-and-approval",
+            "RB-F03-F04@1.0.0#read-only-investigation",
+            "RB-F01-F02@1.1.0#simulated-example"
+          ],
+          "scores": {
+            "RB-F01-F02@1.1.0#replay-and-approval": 7,
+            "RB-F03-F04@1.0.0#read-only-investigation": 7,
+            "RB-F01-F02@1.1.0#simulated-example": 6,
+            "RB-F07@1.0.0#replay-and-approval": 6,
+            "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence": 5,
+            "RB-F01-F02@1.1.0#read-only-investigation": 5,
+            "RB-F01-F02@1.1.0#symptoms": 5,
+            "RB-F07@1.0.0#forbidden-actions": 5,
+            "RB-F03-F04@1.0.0#forbidden-actions": 4,
+            "RB-F03-F04@1.0.0#replay-and-approval": 4,
+            "RB-F03-F04@1.0.0#simulated-example": 4,
+            "RB-F03-F04@1.0.0#symptoms": 4,
+            "RB-F03-F04@1.0.0#verification-rollback-or-escalation": 4,
+            "RB-F04-F06@1.0.0#replay-and-approval": 4,
+            "RB-F07@1.0.0#read-only-investigation": 4,
+            "RB-F07@1.0.0#simulated-example": 4,
+            "RB-F01-F02@1.1.0#allowed-remediation": 3,
+            "RB-F01-F02@1.1.0#evidence-needed": 3,
+            "RB-F01-F02@1.1.0#forbidden-actions": 3,
+            "RB-F01-F02@1.1.0#sources": 3,
+            "RB-F03-F04@1.0.0#evidence-needed": 3,
+            "RB-F03-F04@1.0.0#sources": 3,
+            "RB-F04-F06@1.0.0#read-only-investigation": 3,
+            "RB-F07@1.0.0#evidence-needed": 3,
+            "RB-F07@1.0.0#symptoms": 3,
+            "RB-F07@1.0.0#verification-rollback-or-escalation": 3,
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation": 2,
+            "RB-F03-F04@1.0.0#allowed-remediation": 2,
+            "RB-F04-F06@1.0.0#allowed-remediation": 2,
+            "RB-F04-F06@1.0.0#evidence-needed": 2,
+            "RB-F04-F06@1.0.0#forbidden-actions": 2,
+            "RB-F04-F06@1.0.0#simulated-example": 2,
+            "RB-F04-F06@1.0.0#sources": 2,
+            "RB-F04-F06@1.0.0#symptoms": 2,
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation": 2,
+            "RB-F07@1.0.0#allowed-remediation": 2,
+            "RB-F07@1.0.0#sources": 2,
+            "RB-F08@1.0.0#forbidden-actions": 2,
+            "RB-F08@1.0.0#read-only-investigation": 1,
+            "RB-F08@1.0.0#replay-and-approval": 1,
+            "RB-F08@1.0.0#simulated-example": 1,
+            "RB-F08@1.0.0#symptoms": 1,
+            "RB-F09-F10@1.0.0#read-only-investigation": 1,
+            "RB-F09-F10@1.0.0#symptoms": 1
+          },
+          "candidates": 55,
+          "routeExcluded": [],
+          "latencyMs": 0.6825000000000045,
+          "sufficient": false,
+          "eligibleAnswerable": false,
+          "providerExcluded": false,
+          "available": true,
+          "sectionRecall": null,
+          "directPrecision": 0
+        },
+        {
+          "id": "nm02-email-concurrent-idempotency",
+          "kind": "no_match",
+          "requiredFacets": [],
+          "returned": [
+            "RB-F07@1.0.0#replay-and-approval",
+            "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence",
+            "RB-F01-F02@1.1.0#read-only-investigation"
+          ],
+          "scores": {
+            "RB-F07@1.0.0#replay-and-approval": 7,
+            "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence": 6,
+            "RB-F01-F02@1.1.0#read-only-investigation": 6,
+            "RB-F01-F02@1.1.0#replay-and-approval": 6,
+            "RB-F03-F04@1.0.0#read-only-investigation": 5,
+            "RB-F07@1.0.0#allowed-remediation": 5,
+            "RB-F07@1.0.0#forbidden-actions": 5,
+            "RB-F01-F02@1.1.0#evidence-needed": 4,
+            "RB-F01-F02@1.1.0#simulated-example": 4,
+            "RB-F01-F02@1.1.0#symptoms": 4,
+            "RB-F03-F04@1.0.0#forbidden-actions": 4,
+            "RB-F04-F06@1.0.0#replay-and-approval": 4,
+            "RB-F07@1.0.0#evidence-needed": 4,
+            "RB-F07@1.0.0#read-only-investigation": 4,
+            "RB-F07@1.0.0#simulated-example": 4,
+            "RB-F07@1.0.0#verification-rollback-or-escalation": 4,
+            "RB-F09-F10@1.0.0#forbidden-actions": 4,
+            "RB-F09-F10@1.0.0#symptoms": 4,
+            "RB-F01-F02@1.1.0#allowed-remediation": 3,
+            "RB-F01-F02@1.1.0#forbidden-actions": 3,
+            "RB-F01-F02@1.1.0#sources": 3,
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation": 3,
+            "RB-F03-F04@1.0.0#evidence-needed": 3,
+            "RB-F03-F04@1.0.0#replay-and-approval": 3,
+            "RB-F03-F04@1.0.0#simulated-example": 3,
+            "RB-F03-F04@1.0.0#sources": 3,
+            "RB-F03-F04@1.0.0#symptoms": 3,
+            "RB-F03-F04@1.0.0#verification-rollback-or-escalation": 3,
+            "RB-F04-F06@1.0.0#forbidden-actions": 3,
+            "RB-F04-F06@1.0.0#read-only-investigation": 3,
+            "RB-F07@1.0.0#sources": 3,
+            "RB-F07@1.0.0#symptoms": 3,
+            "RB-F08@1.0.0#replay-and-approval": 3,
+            "RB-F09-F10@1.0.0#allowed-remediation": 3,
+            "RB-F09-F10@1.0.0#evidence-needed": 3,
+            "RB-F09-F10@1.0.0#read-only-investigation": 3,
+            "RB-F09-F10@1.0.0#replay-and-approval": 3,
+            "RB-F09-F10@1.0.0#simulated-example": 3,
+            "RB-F09-F10@1.0.0#sources": 3,
+            "RB-F03-F04@1.0.0#allowed-remediation": 2,
+            "RB-F04-F06@1.0.0#allowed-remediation": 2,
+            "RB-F04-F06@1.0.0#evidence-needed": 2,
+            "RB-F04-F06@1.0.0#simulated-example": 2,
+            "RB-F04-F06@1.0.0#sources": 2,
+            "RB-F04-F06@1.0.0#symptoms": 2,
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation": 2,
+            "RB-F09-F10@1.0.0#verification-rollback-or-escalation": 2,
+            "RB-F08@1.0.0#evidence-needed": 1,
+            "RB-F08@1.0.0#forbidden-actions": 1,
+            "RB-F08@1.0.0#symptoms": 1
+          },
+          "candidates": 55,
+          "routeExcluded": [],
+          "latencyMs": 0.5330999999999904,
+          "sufficient": false,
+          "eligibleAnswerable": false,
+          "providerExcluded": false,
+          "available": true,
+          "sectionRecall": null,
+          "directPrecision": 0
+        },
+        {
+          "id": "nm03-email-invalid-sender-address",
+          "kind": "no_match",
+          "requiredFacets": [],
+          "returned": [
+            "RB-F03-F04@1.0.0#read-only-investigation",
+            "RB-F07@1.0.0#replay-and-approval",
+            "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence"
+          ],
+          "scores": {
+            "RB-F03-F04@1.0.0#read-only-investigation": 7,
+            "RB-F07@1.0.0#replay-and-approval": 7,
+            "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence": 6,
+            "RB-F01-F02@1.1.0#read-only-investigation": 6,
+            "RB-F01-F02@1.1.0#replay-and-approval": 6,
+            "RB-F07@1.0.0#read-only-investigation": 6,
+            "RB-F01-F02@1.1.0#symptoms": 5,
+            "RB-F03-F04@1.0.0#forbidden-actions": 5,
+            "RB-F04-F06@1.0.0#replay-and-approval": 5,
+            "RB-F07@1.0.0#allowed-remediation": 5,
+            "RB-F07@1.0.0#forbidden-actions": 5,
+            "RB-F09-F10@1.0.0#forbidden-actions": 5,
+            "RB-F09-F10@1.0.0#symptoms": 5,
+            "RB-F01-F02@1.1.0#evidence-needed": 4,
+            "RB-F01-F02@1.1.0#forbidden-actions": 4,
+            "RB-F01-F02@1.1.0#simulated-example": 4,
+            "RB-F03-F04@1.0.0#symptoms": 4,
+            "RB-F07@1.0.0#evidence-needed": 4,
+            "RB-F07@1.0.0#simulated-example": 4,
+            "RB-F07@1.0.0#verification-rollback-or-escalation": 4,
+            "RB-F09-F10@1.0.0#read-only-investigation": 4,
+            "RB-F01-F02@1.1.0#allowed-remediation": 3,
+            "RB-F01-F02@1.1.0#sources": 3,
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation": 3,
+            "RB-F03-F04@1.0.0#allowed-remediation": 3,
+            "RB-F03-F04@1.0.0#evidence-needed": 3,
+            "RB-F03-F04@1.0.0#replay-and-approval": 3,
+            "RB-F03-F04@1.0.0#simulated-example": 3,
+            "RB-F03-F04@1.0.0#sources": 3,
+            "RB-F03-F04@1.0.0#verification-rollback-or-escalation": 3,
+            "RB-F04-F06@1.0.0#forbidden-actions": 3,
+            "RB-F04-F06@1.0.0#read-only-investigation": 3,
+            "RB-F04-F06@1.0.0#simulated-example": 3,
+            "RB-F04-F06@1.0.0#symptoms": 3,
+            "RB-F07@1.0.0#sources": 3,
+            "RB-F07@1.0.0#symptoms": 3,
+            "RB-F08@1.0.0#replay-and-approval": 3,
+            "RB-F09-F10@1.0.0#allowed-remediation": 3,
+            "RB-F09-F10@1.0.0#evidence-needed": 3,
+            "RB-F09-F10@1.0.0#replay-and-approval": 3,
+            "RB-F09-F10@1.0.0#simulated-example": 3,
+            "RB-F09-F10@1.0.0#sources": 3,
+            "RB-F04-F06@1.0.0#allowed-remediation": 2,
+            "RB-F04-F06@1.0.0#evidence-needed": 2,
+            "RB-F04-F06@1.0.0#sources": 2,
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation": 2,
+            "RB-F08@1.0.0#forbidden-actions": 2,
+            "RB-F08@1.0.0#symptoms": 2,
+            "RB-F09-F10@1.0.0#verification-rollback-or-escalation": 2,
+            "RB-F08@1.0.0#evidence-needed": 1,
+            "RB-F08@1.0.0#read-only-investigation": 1
+          },
+          "candidates": 55,
+          "routeExcluded": [],
+          "latencyMs": 0.5285000000000082,
+          "sufficient": false,
+          "eligibleAnswerable": false,
+          "providerExcluded": false,
+          "available": true,
+          "sectionRecall": null,
+          "directPrecision": 0
+        },
+        {
+          "id": "nm04-email-sender-domain-unverified",
+          "kind": "no_match",
+          "requiredFacets": [],
+          "returned": [
+            "RB-F03-F04@1.0.0#read-only-investigation",
+            "RB-F07@1.0.0#replay-and-approval",
+            "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence"
+          ],
+          "scores": {
+            "RB-F03-F04@1.0.0#read-only-investigation": 7,
+            "RB-F07@1.0.0#replay-and-approval": 7,
+            "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence": 6,
+            "RB-F01-F02@1.1.0#read-only-investigation": 6,
+            "RB-F01-F02@1.1.0#replay-and-approval": 6,
+            "RB-F07@1.0.0#read-only-investigation": 6,
+            "RB-F01-F02@1.1.0#symptoms": 5,
+            "RB-F03-F04@1.0.0#forbidden-actions": 5,
+            "RB-F03-F04@1.0.0#symptoms": 5,
+            "RB-F04-F06@1.0.0#replay-and-approval": 5,
+            "RB-F07@1.0.0#allowed-remediation": 5,
+            "RB-F07@1.0.0#forbidden-actions": 5,
+            "RB-F09-F10@1.0.0#forbidden-actions": 5,
+            "RB-F09-F10@1.0.0#symptoms": 5,
+            "RB-F01-F02@1.1.0#evidence-needed": 4,
+            "RB-F01-F02@1.1.0#forbidden-actions": 4,
+            "RB-F01-F02@1.1.0#simulated-example": 4,
+            "RB-F03-F04@1.0.0#simulated-example": 4,
+            "RB-F07@1.0.0#evidence-needed": 4,
+            "RB-F07@1.0.0#simulated-example": 4,
+            "RB-F07@1.0.0#verification-rollback-or-escalation": 4,
+            "RB-F09-F10@1.0.0#read-only-investigation": 4,
+            "RB-F01-F02@1.1.0#allowed-remediation": 3,
+            "RB-F01-F02@1.1.0#sources": 3,
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation": 3,
+            "RB-F03-F04@1.0.0#allowed-remediation": 3,
+            "RB-F03-F04@1.0.0#evidence-needed": 3,
+            "RB-F03-F04@1.0.0#replay-and-approval": 3,
+            "RB-F03-F04@1.0.0#sources": 3,
+            "RB-F03-F04@1.0.0#verification-rollback-or-escalation": 3,
+            "RB-F04-F06@1.0.0#forbidden-actions": 3,
+            "RB-F04-F06@1.0.0#read-only-investigation": 3,
+            "RB-F04-F06@1.0.0#simulated-example": 3,
+            "RB-F04-F06@1.0.0#symptoms": 3,
+            "RB-F07@1.0.0#sources": 3,
+            "RB-F07@1.0.0#symptoms": 3,
+            "RB-F08@1.0.0#replay-and-approval": 3,
+            "RB-F09-F10@1.0.0#allowed-remediation": 3,
+            "RB-F09-F10@1.0.0#evidence-needed": 3,
+            "RB-F09-F10@1.0.0#replay-and-approval": 3,
+            "RB-F09-F10@1.0.0#simulated-example": 3,
+            "RB-F09-F10@1.0.0#sources": 3,
+            "RB-F04-F06@1.0.0#allowed-remediation": 2,
+            "RB-F04-F06@1.0.0#evidence-needed": 2,
+            "RB-F04-F06@1.0.0#sources": 2,
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation": 2,
+            "RB-F08@1.0.0#forbidden-actions": 2,
+            "RB-F08@1.0.0#symptoms": 2,
+            "RB-F09-F10@1.0.0#verification-rollback-or-escalation": 2,
+            "RB-F08@1.0.0#evidence-needed": 1,
+            "RB-F08@1.0.0#read-only-investigation": 1
+          },
+          "candidates": 55,
+          "routeExcluded": [],
+          "latencyMs": 0.8125999999999749,
+          "sufficient": false,
+          "eligibleAnswerable": false,
+          "providerExcluded": false,
+          "available": true,
+          "sectionRecall": null,
+          "directPrecision": 0
+        },
+        {
+          "id": "nm05-email-invalid-region",
+          "kind": "no_match",
+          "requiredFacets": [],
+          "returned": [
+            "RB-F07@1.0.0#replay-and-approval",
+            "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence",
+            "RB-F01-F02@1.1.0#read-only-investigation"
+          ],
+          "scores": {
+            "RB-F07@1.0.0#replay-and-approval": 7,
+            "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence": 6,
+            "RB-F01-F02@1.1.0#read-only-investigation": 6,
+            "RB-F01-F02@1.1.0#replay-and-approval": 6,
+            "RB-F03-F04@1.0.0#read-only-investigation": 6,
+            "RB-F03-F04@1.0.0#forbidden-actions": 5,
+            "RB-F04-F06@1.0.0#replay-and-approval": 5,
+            "RB-F07@1.0.0#allowed-remediation": 5,
+            "RB-F07@1.0.0#forbidden-actions": 5,
+            "RB-F07@1.0.0#read-only-investigation": 5,
+            "RB-F09-F10@1.0.0#symptoms": 5,
+            "RB-F01-F02@1.1.0#evidence-needed": 4,
+            "RB-F01-F02@1.1.0#simulated-example": 4,
+            "RB-F01-F02@1.1.0#symptoms": 4,
+            "RB-F03-F04@1.0.0#symptoms": 4,
+            "RB-F07@1.0.0#evidence-needed": 4,
+            "RB-F07@1.0.0#simulated-example": 4,
+            "RB-F07@1.0.0#verification-rollback-or-escalation": 4,
+            "RB-F09-F10@1.0.0#forbidden-actions": 4,
+            "RB-F01-F02@1.1.0#allowed-remediation": 3,
+            "RB-F01-F02@1.1.0#forbidden-actions": 3,
+            "RB-F01-F02@1.1.0#sources": 3,
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation": 3,
+            "RB-F03-F04@1.0.0#allowed-remediation": 3,
+            "RB-F03-F04@1.0.0#evidence-needed": 3,
+            "RB-F03-F04@1.0.0#replay-and-approval": 3,
+            "RB-F03-F04@1.0.0#simulated-example": 3,
+            "RB-F03-F04@1.0.0#sources": 3,
+            "RB-F03-F04@1.0.0#verification-rollback-or-escalation": 3,
+            "RB-F04-F06@1.0.0#forbidden-actions": 3,
+            "RB-F04-F06@1.0.0#read-only-investigation": 3,
+            "RB-F04-F06@1.0.0#symptoms": 3,
+            "RB-F07@1.0.0#sources": 3,
+            "RB-F07@1.0.0#symptoms": 3,
+            "RB-F08@1.0.0#replay-and-approval": 3,
+            "RB-F09-F10@1.0.0#allowed-remediation": 3,
+            "RB-F09-F10@1.0.0#evidence-needed": 3,
+            "RB-F09-F10@1.0.0#read-only-investigation": 3,
+            "RB-F09-F10@1.0.0#replay-and-approval": 3,
+            "RB-F09-F10@1.0.0#simulated-example": 3,
+            "RB-F09-F10@1.0.0#sources": 3,
+            "RB-F04-F06@1.0.0#allowed-remediation": 2,
+            "RB-F04-F06@1.0.0#evidence-needed": 2,
+            "RB-F04-F06@1.0.0#simulated-example": 2,
+            "RB-F04-F06@1.0.0#sources": 2,
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation": 2,
+            "RB-F08@1.0.0#forbidden-actions": 2,
+            "RB-F08@1.0.0#symptoms": 2,
+            "RB-F09-F10@1.0.0#verification-rollback-or-escalation": 2,
+            "RB-F08@1.0.0#evidence-needed": 1
+          },
+          "candidates": 55,
+          "routeExcluded": [],
+          "latencyMs": 0.4812000000000012,
+          "sufficient": false,
+          "eligibleAnswerable": false,
+          "providerExcluded": false,
+          "available": true,
+          "sectionRecall": null,
+          "directPrecision": 0
+        },
+        {
+          "id": "nm06-email-subject-length",
+          "kind": "no_match",
+          "requiredFacets": [],
+          "returned": [
+            "RB-F07@1.0.0#replay-and-approval",
+            "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence",
+            "RB-F01-F02@1.1.0#read-only-investigation"
+          ],
+          "scores": {
+            "RB-F07@1.0.0#replay-and-approval": 7,
+            "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence": 6,
+            "RB-F01-F02@1.1.0#read-only-investigation": 6,
+            "RB-F01-F02@1.1.0#replay-and-approval": 6,
+            "RB-F03-F04@1.0.0#read-only-investigation": 6,
+            "RB-F03-F04@1.0.0#forbidden-actions": 5,
+            "RB-F04-F06@1.0.0#replay-and-approval": 5,
+            "RB-F07@1.0.0#allowed-remediation": 5,
+            "RB-F07@1.0.0#forbidden-actions": 5,
+            "RB-F07@1.0.0#read-only-investigation": 5,
+            "RB-F09-F10@1.0.0#symptoms": 5,
+            "RB-F01-F02@1.1.0#evidence-needed": 4,
+            "RB-F01-F02@1.1.0#simulated-example": 4,
+            "RB-F01-F02@1.1.0#symptoms": 4,
+            "RB-F03-F04@1.0.0#symptoms": 4,
+            "RB-F07@1.0.0#evidence-needed": 4,
+            "RB-F07@1.0.0#simulated-example": 4,
+            "RB-F07@1.0.0#verification-rollback-or-escalation": 4,
+            "RB-F09-F10@1.0.0#forbidden-actions": 4,
+            "RB-F01-F02@1.1.0#allowed-remediation": 3,
+            "RB-F01-F02@1.1.0#forbidden-actions": 3,
+            "RB-F01-F02@1.1.0#sources": 3,
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation": 3,
+            "RB-F03-F04@1.0.0#allowed-remediation": 3,
+            "RB-F03-F04@1.0.0#evidence-needed": 3,
+            "RB-F03-F04@1.0.0#replay-and-approval": 3,
+            "RB-F03-F04@1.0.0#simulated-example": 3,
+            "RB-F03-F04@1.0.0#sources": 3,
+            "RB-F03-F04@1.0.0#verification-rollback-or-escalation": 3,
+            "RB-F04-F06@1.0.0#forbidden-actions": 3,
+            "RB-F04-F06@1.0.0#read-only-investigation": 3,
+            "RB-F04-F06@1.0.0#symptoms": 3,
+            "RB-F07@1.0.0#sources": 3,
+            "RB-F07@1.0.0#symptoms": 3,
+            "RB-F08@1.0.0#replay-and-approval": 3,
+            "RB-F09-F10@1.0.0#allowed-remediation": 3,
+            "RB-F09-F10@1.0.0#evidence-needed": 3,
+            "RB-F09-F10@1.0.0#read-only-investigation": 3,
+            "RB-F09-F10@1.0.0#replay-and-approval": 3,
+            "RB-F09-F10@1.0.0#simulated-example": 3,
+            "RB-F09-F10@1.0.0#sources": 3,
+            "RB-F04-F06@1.0.0#allowed-remediation": 2,
+            "RB-F04-F06@1.0.0#evidence-needed": 2,
+            "RB-F04-F06@1.0.0#simulated-example": 2,
+            "RB-F04-F06@1.0.0#sources": 2,
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation": 2,
+            "RB-F08@1.0.0#forbidden-actions": 2,
+            "RB-F08@1.0.0#symptoms": 2,
+            "RB-F09-F10@1.0.0#verification-rollback-or-escalation": 2,
+            "RB-F08@1.0.0#evidence-needed": 1
+          },
+          "candidates": 55,
+          "routeExcluded": [],
+          "latencyMs": 0.7595999999999776,
+          "sufficient": false,
+          "eligibleAnswerable": false,
+          "providerExcluded": false,
+          "available": true,
+          "sectionRecall": null,
+          "directPrecision": 0
+        },
+        {
+          "id": "nm07-email-content-policy",
+          "kind": "no_match",
+          "requiredFacets": [],
+          "returned": [
+            "RB-F07@1.0.0#replay-and-approval",
+            "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence",
+            "RB-F01-F02@1.1.0#read-only-investigation"
+          ],
+          "scores": {
+            "RB-F07@1.0.0#replay-and-approval": 8,
+            "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence": 7,
+            "RB-F01-F02@1.1.0#read-only-investigation": 6,
+            "RB-F01-F02@1.1.0#replay-and-approval": 6,
+            "RB-F03-F04@1.0.0#read-only-investigation": 6,
+            "RB-F09-F10@1.0.0#symptoms": 6,
+            "RB-F01-F02@1.1.0#evidence-needed": 5,
+            "RB-F03-F04@1.0.0#forbidden-actions": 5,
+            "RB-F07@1.0.0#allowed-remediation": 5,
+            "RB-F07@1.0.0#forbidden-actions": 5,
+            "RB-F09-F10@1.0.0#forbidden-actions": 5,
+            "RB-F01-F02@1.1.0#forbidden-actions": 4,
+            "RB-F01-F02@1.1.0#simulated-example": 4,
+            "RB-F01-F02@1.1.0#sources": 4,
+            "RB-F01-F02@1.1.0#symptoms": 4,
+            "RB-F03-F04@1.0.0#replay-and-approval": 4,
+            "RB-F03-F04@1.0.0#simulated-example": 4,
+            "RB-F03-F04@1.0.0#sources": 4,
+            "RB-F04-F06@1.0.0#forbidden-actions": 4,
+            "RB-F04-F06@1.0.0#read-only-investigation": 4,
+            "RB-F04-F06@1.0.0#replay-and-approval": 4,
+            "RB-F07@1.0.0#evidence-needed": 4,
+            "RB-F07@1.0.0#read-only-investigation": 4,
+            "RB-F07@1.0.0#simulated-example": 4,
+            "RB-F07@1.0.0#verification-rollback-or-escalation": 4,
+            "RB-F09-F10@1.0.0#simulated-example": 4,
+            "RB-F01-F02@1.1.0#allowed-remediation": 3,
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation": 3,
+            "RB-F03-F04@1.0.0#evidence-needed": 3,
+            "RB-F03-F04@1.0.0#symptoms": 3,
+            "RB-F03-F04@1.0.0#verification-rollback-or-escalation": 3,
+            "RB-F04-F06@1.0.0#evidence-needed": 3,
+            "RB-F04-F06@1.0.0#simulated-example": 3,
+            "RB-F04-F06@1.0.0#sources": 3,
+            "RB-F07@1.0.0#sources": 3,
+            "RB-F07@1.0.0#symptoms": 3,
+            "RB-F08@1.0.0#replay-and-approval": 3,
+            "RB-F09-F10@1.0.0#allowed-remediation": 3,
+            "RB-F09-F10@1.0.0#evidence-needed": 3,
+            "RB-F09-F10@1.0.0#read-only-investigation": 3,
+            "RB-F09-F10@1.0.0#replay-and-approval": 3,
+            "RB-F09-F10@1.0.0#sources": 3,
+            "RB-F03-F04@1.0.0#allowed-remediation": 2,
+            "RB-F04-F06@1.0.0#allowed-remediation": 2,
+            "RB-F04-F06@1.0.0#symptoms": 2,
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation": 2,
+            "RB-F08@1.0.0#forbidden-actions": 2,
+            "RB-F08@1.0.0#symptoms": 2,
+            "RB-F09-F10@1.0.0#verification-rollback-or-escalation": 2,
+            "RB-F08@1.0.0#evidence-needed": 1,
+            "RB-F08@1.0.0#sources": 1
+          },
+          "candidates": 55,
+          "routeExcluded": [],
+          "latencyMs": 0.5152999999999679,
+          "sufficient": false,
+          "eligibleAnswerable": false,
+          "providerExcluded": false,
+          "available": true,
+          "sectionRecall": null,
+          "directPrecision": 0
+        },
+        {
+          "id": "nm08-email-invalid-idempotency-key",
+          "kind": "no_match",
+          "requiredFacets": [],
+          "returned": [
+            "RB-F07@1.0.0#replay-and-approval",
+            "RB-F07@1.0.0#forbidden-actions",
+            "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence"
+          ],
+          "scores": {
+            "RB-F07@1.0.0#replay-and-approval": 8,
+            "RB-F07@1.0.0#forbidden-actions": 7,
+            "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence": 6,
+            "RB-F01-F02@1.1.0#read-only-investigation": 6,
+            "RB-F01-F02@1.1.0#replay-and-approval": 6,
+            "RB-F03-F04@1.0.0#read-only-investigation": 6,
+            "RB-F07@1.0.0#allowed-remediation": 6,
+            "RB-F03-F04@1.0.0#forbidden-actions": 5,
+            "RB-F04-F06@1.0.0#replay-and-approval": 5,
+            "RB-F07@1.0.0#read-only-investigation": 5,
+            "RB-F09-F10@1.0.0#symptoms": 5,
+            "RB-F01-F02@1.1.0#evidence-needed": 4,
+            "RB-F01-F02@1.1.0#simulated-example": 4,
+            "RB-F01-F02@1.1.0#symptoms": 4,
+            "RB-F03-F04@1.0.0#symptoms": 4,
+            "RB-F07@1.0.0#evidence-needed": 4,
+            "RB-F07@1.0.0#simulated-example": 4,
+            "RB-F07@1.0.0#sources": 4,
+            "RB-F07@1.0.0#verification-rollback-or-escalation": 4,
+            "RB-F09-F10@1.0.0#forbidden-actions": 4,
+            "RB-F01-F02@1.1.0#allowed-remediation": 3,
+            "RB-F01-F02@1.1.0#forbidden-actions": 3,
+            "RB-F01-F02@1.1.0#sources": 3,
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation": 3,
+            "RB-F03-F04@1.0.0#allowed-remediation": 3,
+            "RB-F03-F04@1.0.0#evidence-needed": 3,
+            "RB-F03-F04@1.0.0#replay-and-approval": 3,
+            "RB-F03-F04@1.0.0#simulated-example": 3,
+            "RB-F03-F04@1.0.0#sources": 3,
+            "RB-F03-F04@1.0.0#verification-rollback-or-escalation": 3,
+            "RB-F04-F06@1.0.0#forbidden-actions": 3,
+            "RB-F04-F06@1.0.0#read-only-investigation": 3,
+            "RB-F04-F06@1.0.0#symptoms": 3,
+            "RB-F07@1.0.0#symptoms": 3,
+            "RB-F08@1.0.0#replay-and-approval": 3,
+            "RB-F09-F10@1.0.0#allowed-remediation": 3,
+            "RB-F09-F10@1.0.0#evidence-needed": 3,
+            "RB-F09-F10@1.0.0#read-only-investigation": 3,
+            "RB-F09-F10@1.0.0#replay-and-approval": 3,
+            "RB-F09-F10@1.0.0#simulated-example": 3,
+            "RB-F09-F10@1.0.0#sources": 3,
+            "RB-F04-F06@1.0.0#allowed-remediation": 2,
+            "RB-F04-F06@1.0.0#evidence-needed": 2,
+            "RB-F04-F06@1.0.0#simulated-example": 2,
+            "RB-F04-F06@1.0.0#sources": 2,
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation": 2,
+            "RB-F08@1.0.0#forbidden-actions": 2,
+            "RB-F08@1.0.0#symptoms": 2,
+            "RB-F09-F10@1.0.0#verification-rollback-or-escalation": 2,
+            "RB-F08@1.0.0#evidence-needed": 1
+          },
+          "candidates": 55,
+          "routeExcluded": [],
+          "latencyMs": 0.4438000000000102,
+          "sufficient": false,
+          "eligibleAnswerable": false,
+          "providerExcluded": false,
+          "available": true,
+          "sectionRecall": null,
+          "directPrecision": 0
+        }
+      ],
+      "counts": {
+        "scheduled": 24,
+        "eligibleAnswerable": 16,
+        "noMatch": 8,
+        "corpusGap": 0,
+        "providerExcluded": 0,
+        "unavailable": 0
+      },
+      "metrics": {
+        "sufficientGuidanceHitAt3": 0.125,
+        "macroSectionRecallAt3": 0.375,
+        "strictSufficientGuidanceHitAt3": 0.125,
+        "strictMacroSectionRecallAt3": 0.375,
+        "strictLabelGap": 0,
+        "directPrecisionAt3": 0.22916666666666666,
+        "candidateRecall": 1,
+        "routeCoverage": 1
+      },
+      "noMatchAbstention": {
+        "numerator": 0,
+        "denominator": 8,
+        "rate": 0
+      },
+      "falseAbstention": {
+        "numerator": 0,
+        "denominator": 16,
+        "rate": 0
+      },
+      "reliability": {
+        "numerator": 24,
+        "denominator": 24,
+        "rate": 1
+      },
+      "allIncidentCoverage": {
+        "numerator": 2,
+        "denominator": 24,
+        "rate": 0.08333333333333333
+      },
+      "p95LatencyMs": 1.8359000000000378,
+      "ledger": [
+        {
+          "id": "f01-rate-limit-rejected",
+          "bucket": "wrong_rank"
+        },
+        {
+          "id": "f02-connection-refused",
+          "bucket": "facet_packing"
+        },
+        {
+          "id": "f03-token-missing",
+          "bucket": null
+        },
+        {
+          "id": "f03-permission-ambiguous",
+          "bucket": "facet_packing"
+        },
+        {
+          "id": "f04-template-path-missing",
+          "bucket": "facet_packing"
+        },
+        {
+          "id": "f04-invalid-destination",
+          "bucket": "facet_packing"
+        },
+        {
+          "id": "f05-unsupported-action",
+          "bucket": "wrong_rank"
+        },
+        {
+          "id": "f05-handler-version-unknown",
+          "bucket": "wrong_rank"
+        },
+        {
+          "id": "f07-provider-response-lost",
+          "bucket": "wrong_rank"
+        },
+        {
+          "id": "f08-duplicate-retry-row",
+          "bucket": "wrong_rank"
+        },
+        {
+          "id": "f08-success-stage-republished",
+          "bucket": "wrong_rank"
+        },
+        {
+          "id": "f09-database-sink-only",
+          "bucket": "wrong_rank"
+        },
+        {
+          "id": "f10-sdk-error-recorded-success",
+          "bucket": "facet_packing"
+        },
+        {
+          "id": "s02-error-prompt-injection",
+          "bucket": "facet_packing"
+        },
+        {
+          "id": "s03-sensitive-fields-present",
+          "bucket": "wrong_rank"
+        },
+        {
+          "id": "s05-expired-email-dedup-window",
+          "bucket": null
+        },
+        {
+          "id": "nm01-telegram-message-too-long",
+          "bucket": "cutoff_rejection"
+        },
+        {
+          "id": "nm02-email-concurrent-idempotency",
+          "bucket": "cutoff_rejection"
+        },
+        {
+          "id": "nm03-email-invalid-sender-address",
+          "bucket": "cutoff_rejection"
+        },
+        {
+          "id": "nm04-email-sender-domain-unverified",
+          "bucket": "cutoff_rejection"
+        },
+        {
+          "id": "nm05-email-invalid-region",
+          "bucket": "cutoff_rejection"
+        },
+        {
+          "id": "nm06-email-subject-length",
+          "bucket": "cutoff_rejection"
+        },
+        {
+          "id": "nm07-email-content-policy",
+          "bucket": "cutoff_rejection"
+        },
+        {
+          "id": "nm08-email-invalid-idempotency-key",
+          "bucket": "cutoff_rejection"
+        }
+      ],
+      "ledgerSummary": {
+        "wrong_rank": 8,
+        "facet_packing": 6,
+        "cutoff_rejection": 8
+      }
+    },
+    "profile-route-facets-support": {
+      "rows": [
+        {
+          "id": "f01-rate-limit-rejected",
+          "kind": "answerable",
+          "requiredFacets": [
+            "remediation"
+          ],
+          "returned": [
+            "RB-F01-F02@1.1.0#allowed-remediation",
+            "RB-F01-F02@1.1.0#replay-and-approval",
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+          ],
+          "scores": {
+            "RB-F01-F02@1.1.0#allowed-remediation": 0.9274346641596377,
+            "RB-F01-F02@1.1.0#replay-and-approval": 0.6551240115922734,
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation": 0.007123249629569134
+          },
+          "candidates": 10,
+          "routeExcluded": [
+            "RB-F03-F04@1.0.0#symptoms",
+            "RB-F03-F04@1.0.0#evidence-needed",
+            "RB-F03-F04@1.0.0#read-only-investigation",
+            "RB-F03-F04@1.0.0#allowed-remediation",
+            "RB-F03-F04@1.0.0#forbidden-actions",
+            "RB-F03-F04@1.0.0#replay-and-approval",
+            "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+            "RB-F03-F04@1.0.0#simulated-example",
+            "RB-F03-F04@1.0.0#sources",
+            "RB-F04-F06@1.0.0#symptoms",
+            "RB-F04-F06@1.0.0#evidence-needed",
+            "RB-F04-F06@1.0.0#read-only-investigation",
+            "RB-F04-F06@1.0.0#allowed-remediation",
+            "RB-F04-F06@1.0.0#forbidden-actions",
+            "RB-F04-F06@1.0.0#replay-and-approval",
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+            "RB-F04-F06@1.0.0#simulated-example",
+            "RB-F04-F06@1.0.0#sources",
+            "RB-F07@1.0.0#symptoms",
+            "RB-F07@1.0.0#evidence-needed",
+            "RB-F07@1.0.0#read-only-investigation",
+            "RB-F07@1.0.0#allowed-remediation",
+            "RB-F07@1.0.0#forbidden-actions",
+            "RB-F07@1.0.0#replay-and-approval",
+            "RB-F07@1.0.0#verification-rollback-or-escalation",
+            "RB-F07@1.0.0#simulated-example",
+            "RB-F07@1.0.0#sources",
+            "RB-F08@1.0.0#symptoms",
+            "RB-F08@1.0.0#evidence-needed",
+            "RB-F08@1.0.0#read-only-investigation",
+            "RB-F08@1.0.0#allowed-remediation",
+            "RB-F08@1.0.0#forbidden-actions",
+            "RB-F08@1.0.0#replay-and-approval",
+            "RB-F08@1.0.0#verification-rollback-or-escalation",
+            "RB-F08@1.0.0#simulated-example",
+            "RB-F08@1.0.0#sources",
+            "RB-F09-F10@1.0.0#symptoms",
+            "RB-F09-F10@1.0.0#evidence-needed",
+            "RB-F09-F10@1.0.0#read-only-investigation",
+            "RB-F09-F10@1.0.0#allowed-remediation",
+            "RB-F09-F10@1.0.0#forbidden-actions",
+            "RB-F09-F10@1.0.0#replay-and-approval",
+            "RB-F09-F10@1.0.0#verification-rollback-or-escalation",
+            "RB-F09-F10@1.0.0#simulated-example",
+            "RB-F09-F10@1.0.0#sources"
+          ],
+          "latencyMs": 368.83050000000003,
+          "sufficient": true,
+          "eligibleAnswerable": true,
+          "providerExcluded": false,
+          "available": true,
+          "sectionRecall": 1,
+          "directPrecision": 0.3333333333333333,
+          "support": {
+            "minAnchorHits": 1
+          },
+          "supportReason": "supported",
+          "abstained": false,
+          "anchors": [
+            "429",
+            "30",
+            "all_attempts_rejected",
+            "retry_after_30_seconds"
+          ],
+          "matchedAnchors": [
+            "429"
+          ],
+          "facetsRequested": [
+            "remediation",
+            "replay",
+            "verification"
+          ],
+          "facetsCovered": [
+            "remediation",
+            "replay",
+            "verification"
+          ],
+          "missingFacets": [],
+          "missingAccepted": []
+        },
+        {
+          "id": "f02-connection-refused",
+          "kind": "answerable",
+          "requiredFacets": [
+            "investigation",
+            "remediation"
+          ],
+          "returned": [
+            "RB-F01-F02@1.1.0#read-only-investigation",
+            "RB-F01-F02@1.1.0#allowed-remediation",
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+          ],
+          "scores": {
+            "RB-F01-F02@1.1.0#read-only-investigation": 0.05158659740547641,
+            "RB-F01-F02@1.1.0#allowed-remediation": 0.0038243183301917647,
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation": 0.000038136478815541275
+          },
+          "candidates": 10,
+          "routeExcluded": [
+            "RB-F03-F04@1.0.0#symptoms",
+            "RB-F03-F04@1.0.0#evidence-needed",
+            "RB-F03-F04@1.0.0#read-only-investigation",
+            "RB-F03-F04@1.0.0#allowed-remediation",
+            "RB-F03-F04@1.0.0#forbidden-actions",
+            "RB-F03-F04@1.0.0#replay-and-approval",
+            "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+            "RB-F03-F04@1.0.0#simulated-example",
+            "RB-F03-F04@1.0.0#sources",
+            "RB-F04-F06@1.0.0#symptoms",
+            "RB-F04-F06@1.0.0#evidence-needed",
+            "RB-F04-F06@1.0.0#read-only-investigation",
+            "RB-F04-F06@1.0.0#allowed-remediation",
+            "RB-F04-F06@1.0.0#forbidden-actions",
+            "RB-F04-F06@1.0.0#replay-and-approval",
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+            "RB-F04-F06@1.0.0#simulated-example",
+            "RB-F04-F06@1.0.0#sources",
+            "RB-F07@1.0.0#symptoms",
+            "RB-F07@1.0.0#evidence-needed",
+            "RB-F07@1.0.0#read-only-investigation",
+            "RB-F07@1.0.0#allowed-remediation",
+            "RB-F07@1.0.0#forbidden-actions",
+            "RB-F07@1.0.0#replay-and-approval",
+            "RB-F07@1.0.0#verification-rollback-or-escalation",
+            "RB-F07@1.0.0#simulated-example",
+            "RB-F07@1.0.0#sources",
+            "RB-F08@1.0.0#symptoms",
+            "RB-F08@1.0.0#evidence-needed",
+            "RB-F08@1.0.0#read-only-investigation",
+            "RB-F08@1.0.0#allowed-remediation",
+            "RB-F08@1.0.0#forbidden-actions",
+            "RB-F08@1.0.0#replay-and-approval",
+            "RB-F08@1.0.0#verification-rollback-or-escalation",
+            "RB-F08@1.0.0#simulated-example",
+            "RB-F08@1.0.0#sources",
+            "RB-F09-F10@1.0.0#symptoms",
+            "RB-F09-F10@1.0.0#evidence-needed",
+            "RB-F09-F10@1.0.0#read-only-investigation",
+            "RB-F09-F10@1.0.0#allowed-remediation",
+            "RB-F09-F10@1.0.0#forbidden-actions",
+            "RB-F09-F10@1.0.0#replay-and-approval",
+            "RB-F09-F10@1.0.0#verification-rollback-or-escalation",
+            "RB-F09-F10@1.0.0#simulated-example",
+            "RB-F09-F10@1.0.0#sources"
+          ],
+          "latencyMs": 237.28079999999954,
+          "sufficient": true,
+          "eligibleAnswerable": true,
+          "providerExcluded": false,
+          "available": true,
+          "sectionRecall": 1,
+          "directPrecision": 0.6666666666666666,
+          "support": {
+            "minAnchorHits": 1
+          },
+          "supportReason": "supported",
+          "abstained": false,
+          "anchors": [
+            "failure_before_send",
+            "all_attempts_not_delivered"
+          ],
+          "matchedAnchors": [],
+          "facetsRequested": [
+            "investigation",
+            "remediation",
+            "verification"
+          ],
+          "facetsCovered": [
+            "investigation",
+            "remediation",
+            "verification"
+          ],
+          "missingFacets": [],
+          "missingAccepted": []
+        },
+        {
+          "id": "f03-token-missing",
+          "kind": "answerable",
+          "requiredFacets": [
+            "investigation"
+          ],
+          "returned": [
+            "RB-F03-F04@1.0.0#read-only-investigation",
+            "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+            "RB-F03-F04@1.0.0#allowed-remediation"
+          ],
+          "scores": {
+            "RB-F03-F04@1.0.0#read-only-investigation": 0.27036420141233763,
+            "RB-F03-F04@1.0.0#verification-rollback-or-escalation": 0.0007493618049828834,
+            "RB-F03-F04@1.0.0#allowed-remediation": 0.000025123123959880056
+          },
+          "candidates": 9,
+          "routeExcluded": [
+            "RB-F01-F02@1.1.0#symptoms",
+            "RB-F01-F02@1.1.0#evidence-needed",
+            "RB-F01-F02@1.1.0#read-only-investigation",
+            "RB-F01-F02@1.1.0#allowed-remediation",
+            "RB-F01-F02@1.1.0#forbidden-actions",
+            "RB-F01-F02@1.1.0#replay-and-approval",
+            "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence",
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation",
+            "RB-F01-F02@1.1.0#simulated-example",
+            "RB-F01-F02@1.1.0#sources",
+            "RB-F04-F06@1.0.0#symptoms",
+            "RB-F04-F06@1.0.0#evidence-needed",
+            "RB-F04-F06@1.0.0#read-only-investigation",
+            "RB-F04-F06@1.0.0#allowed-remediation",
+            "RB-F04-F06@1.0.0#forbidden-actions",
+            "RB-F04-F06@1.0.0#replay-and-approval",
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+            "RB-F04-F06@1.0.0#simulated-example",
+            "RB-F04-F06@1.0.0#sources",
+            "RB-F07@1.0.0#symptoms",
+            "RB-F07@1.0.0#evidence-needed",
+            "RB-F07@1.0.0#read-only-investigation",
+            "RB-F07@1.0.0#allowed-remediation",
+            "RB-F07@1.0.0#forbidden-actions",
+            "RB-F07@1.0.0#replay-and-approval",
+            "RB-F07@1.0.0#verification-rollback-or-escalation",
+            "RB-F07@1.0.0#simulated-example",
+            "RB-F07@1.0.0#sources",
+            "RB-F08@1.0.0#symptoms",
+            "RB-F08@1.0.0#evidence-needed",
+            "RB-F08@1.0.0#read-only-investigation",
+            "RB-F08@1.0.0#allowed-remediation",
+            "RB-F08@1.0.0#forbidden-actions",
+            "RB-F08@1.0.0#replay-and-approval",
+            "RB-F08@1.0.0#verification-rollback-or-escalation",
+            "RB-F08@1.0.0#simulated-example",
+            "RB-F08@1.0.0#sources",
+            "RB-F09-F10@1.0.0#symptoms",
+            "RB-F09-F10@1.0.0#evidence-needed",
+            "RB-F09-F10@1.0.0#read-only-investigation",
+            "RB-F09-F10@1.0.0#allowed-remediation",
+            "RB-F09-F10@1.0.0#forbidden-actions",
+            "RB-F09-F10@1.0.0#replay-and-approval",
+            "RB-F09-F10@1.0.0#verification-rollback-or-escalation",
+            "RB-F09-F10@1.0.0#simulated-example",
+            "RB-F09-F10@1.0.0#sources"
+          ],
+          "latencyMs": 246.45110000000022,
+          "sufficient": true,
+          "eligibleAnswerable": true,
+          "providerExcluded": false,
+          "available": true,
+          "sectionRecall": 1,
+          "directPrecision": 0.3333333333333333,
+          "support": {
+            "minAnchorHits": 1
+          },
+          "supportReason": "supported",
+          "abstained": false,
+          "anchors": [
+            "configured_token_absent"
+          ],
+          "matchedAnchors": [],
+          "facetsRequested": [
+            "investigation",
+            "remediation",
+            "verification"
+          ],
+          "facetsCovered": [
+            "investigation",
+            "remediation",
+            "verification"
+          ],
+          "missingFacets": [],
+          "missingAccepted": []
+        },
+        {
+          "id": "f03-permission-ambiguous",
+          "kind": "answerable",
+          "requiredFacets": [
+            "investigation"
+          ],
+          "returned": [
+            "RB-F03-F04@1.0.0#read-only-investigation",
+            "RB-F03-F04@1.0.0#allowed-remediation",
+            "RB-F03-F04@1.0.0#verification-rollback-or-escalation"
+          ],
+          "scores": {
+            "RB-F03-F04@1.0.0#read-only-investigation": 0.051571412041926314,
+            "RB-F03-F04@1.0.0#allowed-remediation": 0.000029005636719935753,
+            "RB-F03-F04@1.0.0#verification-rollback-or-escalation": 0.000017933596065023012
+          },
+          "candidates": 9,
+          "routeExcluded": [
+            "RB-F01-F02@1.1.0#symptoms",
+            "RB-F01-F02@1.1.0#evidence-needed",
+            "RB-F01-F02@1.1.0#read-only-investigation",
+            "RB-F01-F02@1.1.0#allowed-remediation",
+            "RB-F01-F02@1.1.0#forbidden-actions",
+            "RB-F01-F02@1.1.0#replay-and-approval",
+            "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence",
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation",
+            "RB-F01-F02@1.1.0#simulated-example",
+            "RB-F01-F02@1.1.0#sources",
+            "RB-F04-F06@1.0.0#symptoms",
+            "RB-F04-F06@1.0.0#evidence-needed",
+            "RB-F04-F06@1.0.0#read-only-investigation",
+            "RB-F04-F06@1.0.0#allowed-remediation",
+            "RB-F04-F06@1.0.0#forbidden-actions",
+            "RB-F04-F06@1.0.0#replay-and-approval",
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+            "RB-F04-F06@1.0.0#simulated-example",
+            "RB-F04-F06@1.0.0#sources",
+            "RB-F07@1.0.0#symptoms",
+            "RB-F07@1.0.0#evidence-needed",
+            "RB-F07@1.0.0#read-only-investigation",
+            "RB-F07@1.0.0#allowed-remediation",
+            "RB-F07@1.0.0#forbidden-actions",
+            "RB-F07@1.0.0#replay-and-approval",
+            "RB-F07@1.0.0#verification-rollback-or-escalation",
+            "RB-F07@1.0.0#simulated-example",
+            "RB-F07@1.0.0#sources",
+            "RB-F08@1.0.0#symptoms",
+            "RB-F08@1.0.0#evidence-needed",
+            "RB-F08@1.0.0#read-only-investigation",
+            "RB-F08@1.0.0#allowed-remediation",
+            "RB-F08@1.0.0#forbidden-actions",
+            "RB-F08@1.0.0#replay-and-approval",
+            "RB-F08@1.0.0#verification-rollback-or-escalation",
+            "RB-F08@1.0.0#simulated-example",
+            "RB-F08@1.0.0#sources",
+            "RB-F09-F10@1.0.0#symptoms",
+            "RB-F09-F10@1.0.0#evidence-needed",
+            "RB-F09-F10@1.0.0#read-only-investigation",
+            "RB-F09-F10@1.0.0#allowed-remediation",
+            "RB-F09-F10@1.0.0#forbidden-actions",
+            "RB-F09-F10@1.0.0#replay-and-approval",
+            "RB-F09-F10@1.0.0#verification-rollback-or-escalation",
+            "RB-F09-F10@1.0.0#simulated-example",
+            "RB-F09-F10@1.0.0#sources"
+          ],
+          "latencyMs": 243.3188,
+          "sufficient": true,
+          "eligibleAnswerable": true,
+          "providerExcluded": false,
+          "available": true,
+          "sectionRecall": 1,
+          "directPrecision": 0.3333333333333333,
+          "support": {
+            "minAnchorHits": 1
+          },
+          "supportReason": "supported",
+          "abstained": false,
+          "anchors": [
+            "resolver_error_generic"
+          ],
+          "matchedAnchors": [],
+          "facetsRequested": [
+            "investigation",
+            "remediation",
+            "verification"
+          ],
+          "facetsCovered": [
+            "investigation",
+            "remediation",
+            "verification"
+          ],
+          "missingFacets": [],
+          "missingAccepted": []
+        },
+        {
+          "id": "f04-template-path-missing",
+          "kind": "answerable",
+          "requiredFacets": [
+            "investigation",
+            "remediation"
+          ],
+          "returned": [
+            "RB-F03-F04@1.0.0#read-only-investigation",
+            "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+            "RB-F03-F04@1.0.0#allowed-remediation"
+          ],
+          "scores": {
+            "RB-F03-F04@1.0.0#read-only-investigation": 0.16533335857403086,
+            "RB-F03-F04@1.0.0#verification-rollback-or-escalation": 0.0003133854162572862,
+            "RB-F03-F04@1.0.0#allowed-remediation": 0.0000399003508083321
+          },
+          "candidates": 18,
+          "routeExcluded": [
+            "RB-F01-F02@1.1.0#symptoms",
+            "RB-F01-F02@1.1.0#evidence-needed",
+            "RB-F01-F02@1.1.0#read-only-investigation",
+            "RB-F01-F02@1.1.0#allowed-remediation",
+            "RB-F01-F02@1.1.0#forbidden-actions",
+            "RB-F01-F02@1.1.0#replay-and-approval",
+            "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence",
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation",
+            "RB-F01-F02@1.1.0#simulated-example",
+            "RB-F01-F02@1.1.0#sources",
+            "RB-F07@1.0.0#symptoms",
+            "RB-F07@1.0.0#evidence-needed",
+            "RB-F07@1.0.0#read-only-investigation",
+            "RB-F07@1.0.0#allowed-remediation",
+            "RB-F07@1.0.0#forbidden-actions",
+            "RB-F07@1.0.0#replay-and-approval",
+            "RB-F07@1.0.0#verification-rollback-or-escalation",
+            "RB-F07@1.0.0#simulated-example",
+            "RB-F07@1.0.0#sources",
+            "RB-F08@1.0.0#symptoms",
+            "RB-F08@1.0.0#evidence-needed",
+            "RB-F08@1.0.0#read-only-investigation",
+            "RB-F08@1.0.0#allowed-remediation",
+            "RB-F08@1.0.0#forbidden-actions",
+            "RB-F08@1.0.0#replay-and-approval",
+            "RB-F08@1.0.0#verification-rollback-or-escalation",
+            "RB-F08@1.0.0#simulated-example",
+            "RB-F08@1.0.0#sources",
+            "RB-F09-F10@1.0.0#symptoms",
+            "RB-F09-F10@1.0.0#evidence-needed",
+            "RB-F09-F10@1.0.0#read-only-investigation",
+            "RB-F09-F10@1.0.0#allowed-remediation",
+            "RB-F09-F10@1.0.0#forbidden-actions",
+            "RB-F09-F10@1.0.0#replay-and-approval",
+            "RB-F09-F10@1.0.0#verification-rollback-or-escalation",
+            "RB-F09-F10@1.0.0#simulated-example",
+            "RB-F09-F10@1.0.0#sources"
+          ],
+          "latencyMs": 240.47119999999995,
+          "sufficient": false,
+          "eligibleAnswerable": true,
+          "providerExcluded": false,
+          "available": true,
+          "sectionRecall": 0,
+          "directPrecision": 0,
+          "support": {
+            "minAnchorHits": 1
+          },
+          "supportReason": "supported",
+          "abstained": false,
+          "anchors": [
+            "template_path_missing",
+            "resolved_destination_empty"
+          ],
+          "matchedAnchors": [],
+          "facetsRequested": [
+            "investigation",
+            "remediation",
+            "verification"
+          ],
+          "facetsCovered": [
+            "investigation",
+            "remediation",
+            "verification"
+          ],
+          "missingFacets": [
+            "investigation",
+            "remediation"
+          ],
+          "missingAccepted": [
+            "RB-F04-F06@1.0.0#read-only-investigation",
+            "RB-F04-F06@1.0.0#allowed-remediation"
+          ]
+        },
+        {
+          "id": "f04-invalid-destination",
+          "kind": "answerable",
+          "requiredFacets": [
+            "investigation",
+            "remediation"
+          ],
+          "returned": [
+            "RB-F03-F04@1.0.0#read-only-investigation",
+            "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+            "RB-F03-F04@1.0.0#allowed-remediation"
+          ],
+          "scores": {
+            "RB-F03-F04@1.0.0#read-only-investigation": 0.3230626796701242,
+            "RB-F03-F04@1.0.0#verification-rollback-or-escalation": 0.0010313679756262508,
+            "RB-F03-F04@1.0.0#allowed-remediation": 0.00038052246479954006
+          },
+          "candidates": 18,
+          "routeExcluded": [
+            "RB-F01-F02@1.1.0#symptoms",
+            "RB-F01-F02@1.1.0#evidence-needed",
+            "RB-F01-F02@1.1.0#read-only-investigation",
+            "RB-F01-F02@1.1.0#allowed-remediation",
+            "RB-F01-F02@1.1.0#forbidden-actions",
+            "RB-F01-F02@1.1.0#replay-and-approval",
+            "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence",
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation",
+            "RB-F01-F02@1.1.0#simulated-example",
+            "RB-F01-F02@1.1.0#sources",
+            "RB-F07@1.0.0#symptoms",
+            "RB-F07@1.0.0#evidence-needed",
+            "RB-F07@1.0.0#read-only-investigation",
+            "RB-F07@1.0.0#allowed-remediation",
+            "RB-F07@1.0.0#forbidden-actions",
+            "RB-F07@1.0.0#replay-and-approval",
+            "RB-F07@1.0.0#verification-rollback-or-escalation",
+            "RB-F07@1.0.0#simulated-example",
+            "RB-F07@1.0.0#sources",
+            "RB-F08@1.0.0#symptoms",
+            "RB-F08@1.0.0#evidence-needed",
+            "RB-F08@1.0.0#read-only-investigation",
+            "RB-F08@1.0.0#allowed-remediation",
+            "RB-F08@1.0.0#forbidden-actions",
+            "RB-F08@1.0.0#replay-and-approval",
+            "RB-F08@1.0.0#verification-rollback-or-escalation",
+            "RB-F08@1.0.0#simulated-example",
+            "RB-F08@1.0.0#sources",
+            "RB-F09-F10@1.0.0#symptoms",
+            "RB-F09-F10@1.0.0#evidence-needed",
+            "RB-F09-F10@1.0.0#read-only-investigation",
+            "RB-F09-F10@1.0.0#allowed-remediation",
+            "RB-F09-F10@1.0.0#forbidden-actions",
+            "RB-F09-F10@1.0.0#replay-and-approval",
+            "RB-F09-F10@1.0.0#verification-rollback-or-escalation",
+            "RB-F09-F10@1.0.0#simulated-example",
+            "RB-F09-F10@1.0.0#sources"
+          ],
+          "latencyMs": 220.33730000000014,
+          "sufficient": true,
+          "eligibleAnswerable": true,
+          "providerExcluded": false,
+          "available": true,
+          "sectionRecall": 1,
+          "directPrecision": 0.6666666666666666,
+          "support": {
+            "minAnchorHits": 1
+          },
+          "supportReason": "supported",
+          "abstained": false,
+          "anchors": [
+            "destination_format_invalid"
+          ],
+          "matchedAnchors": [],
+          "facetsRequested": [
+            "investigation",
+            "remediation",
+            "verification"
+          ],
+          "facetsCovered": [
+            "investigation",
+            "remediation",
+            "verification"
+          ],
+          "missingFacets": [],
+          "missingAccepted": []
+        },
+        {
+          "id": "f05-unsupported-action",
+          "kind": "answerable",
+          "requiredFacets": [
+            "investigation",
+            "replay"
+          ],
+          "returned": [
+            "RB-F04-F06@1.0.0#replay-and-approval",
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+            "RB-F04-F06@1.0.0#read-only-investigation"
+          ],
+          "scores": {
+            "RB-F04-F06@1.0.0#replay-and-approval": 0.293201248383215,
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation": 0.00003870596272278265,
+            "RB-F04-F06@1.0.0#read-only-investigation": 0.000019471661882579493
+          },
+          "candidates": 9,
+          "routeExcluded": [
+            "RB-F01-F02@1.1.0#symptoms",
+            "RB-F01-F02@1.1.0#evidence-needed",
+            "RB-F01-F02@1.1.0#read-only-investigation",
+            "RB-F01-F02@1.1.0#allowed-remediation",
+            "RB-F01-F02@1.1.0#forbidden-actions",
+            "RB-F01-F02@1.1.0#replay-and-approval",
+            "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence",
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation",
+            "RB-F01-F02@1.1.0#simulated-example",
+            "RB-F01-F02@1.1.0#sources",
+            "RB-F08@1.0.0#symptoms",
+            "RB-F08@1.0.0#evidence-needed",
+            "RB-F08@1.0.0#read-only-investigation",
+            "RB-F08@1.0.0#allowed-remediation",
+            "RB-F08@1.0.0#forbidden-actions",
+            "RB-F08@1.0.0#replay-and-approval",
+            "RB-F08@1.0.0#verification-rollback-or-escalation",
+            "RB-F08@1.0.0#simulated-example",
+            "RB-F08@1.0.0#sources",
+            "RB-F09-F10@1.0.0#symptoms",
+            "RB-F09-F10@1.0.0#evidence-needed",
+            "RB-F09-F10@1.0.0#read-only-investigation",
+            "RB-F09-F10@1.0.0#allowed-remediation",
+            "RB-F09-F10@1.0.0#forbidden-actions",
+            "RB-F09-F10@1.0.0#replay-and-approval",
+            "RB-F09-F10@1.0.0#verification-rollback-or-escalation",
+            "RB-F09-F10@1.0.0#simulated-example",
+            "RB-F09-F10@1.0.0#sources"
+          ],
+          "latencyMs": 165.1230000000005,
+          "sufficient": true,
+          "eligibleAnswerable": true,
+          "providerExcluded": false,
+          "available": true,
+          "sectionRecall": 1,
+          "directPrecision": 0.6666666666666666,
+          "support": {
+            "minAnchorHits": 1
+          },
+          "supportReason": "supported",
+          "abstained": false,
+          "anchors": [
+            "handler_not_registered"
+          ],
+          "matchedAnchors": [],
+          "facetsRequested": [
+            "investigation",
+            "replay",
+            "verification"
+          ],
+          "facetsCovered": [
+            "investigation",
+            "replay",
+            "verification"
+          ],
+          "missingFacets": [],
+          "missingAccepted": []
+        },
+        {
+          "id": "f05-handler-version-unknown",
+          "kind": "answerable",
+          "requiredFacets": [
+            "investigation",
+            "verification"
+          ],
+          "returned": [
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+            "RB-F04-F06@1.0.0#replay-and-approval",
+            "RB-F04-F06@1.0.0#read-only-investigation"
+          ],
+          "scores": {
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation": 0.025533059919859442,
+            "RB-F04-F06@1.0.0#replay-and-approval": 0.0005267049542439797,
+            "RB-F04-F06@1.0.0#read-only-investigation": 0.00003529315487308558
+          },
+          "candidates": 9,
+          "routeExcluded": [
+            "RB-F01-F02@1.1.0#symptoms",
+            "RB-F01-F02@1.1.0#evidence-needed",
+            "RB-F01-F02@1.1.0#read-only-investigation",
+            "RB-F01-F02@1.1.0#allowed-remediation",
+            "RB-F01-F02@1.1.0#forbidden-actions",
+            "RB-F01-F02@1.1.0#replay-and-approval",
+            "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence",
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation",
+            "RB-F01-F02@1.1.0#simulated-example",
+            "RB-F01-F02@1.1.0#sources",
+            "RB-F08@1.0.0#symptoms",
+            "RB-F08@1.0.0#evidence-needed",
+            "RB-F08@1.0.0#read-only-investigation",
+            "RB-F08@1.0.0#allowed-remediation",
+            "RB-F08@1.0.0#forbidden-actions",
+            "RB-F08@1.0.0#replay-and-approval",
+            "RB-F08@1.0.0#verification-rollback-or-escalation",
+            "RB-F08@1.0.0#simulated-example",
+            "RB-F08@1.0.0#sources",
+            "RB-F09-F10@1.0.0#symptoms",
+            "RB-F09-F10@1.0.0#evidence-needed",
+            "RB-F09-F10@1.0.0#read-only-investigation",
+            "RB-F09-F10@1.0.0#allowed-remediation",
+            "RB-F09-F10@1.0.0#forbidden-actions",
+            "RB-F09-F10@1.0.0#replay-and-approval",
+            "RB-F09-F10@1.0.0#verification-rollback-or-escalation",
+            "RB-F09-F10@1.0.0#simulated-example",
+            "RB-F09-F10@1.0.0#sources"
+          ],
+          "latencyMs": 173.14039999999932,
+          "sufficient": true,
+          "eligibleAnswerable": true,
+          "providerExcluded": false,
+          "available": true,
+          "sectionRecall": 1,
+          "directPrecision": 0.6666666666666666,
+          "support": {
+            "minAnchorHits": 1
+          },
+          "supportReason": "supported",
+          "abstained": false,
+          "anchors": [],
+          "matchedAnchors": [],
+          "facetsRequested": [
+            "investigation",
+            "replay",
+            "verification"
+          ],
+          "facetsCovered": [
+            "investigation",
+            "replay",
+            "verification"
+          ],
+          "missingFacets": [],
+          "missingAccepted": []
+        },
+        {
+          "id": "f07-provider-response-lost",
+          "kind": "answerable",
+          "requiredFacets": [
+            "investigation",
+            "remediation"
+          ],
+          "returned": [
+            "RB-F07@1.0.0#read-only-investigation",
+            "RB-F07@1.0.0#verification-rollback-or-escalation",
+            "RB-F07@1.0.0#allowed-remediation"
+          ],
+          "scores": {
+            "RB-F07@1.0.0#read-only-investigation": 0.9315699172648653,
+            "RB-F07@1.0.0#verification-rollback-or-escalation": 0.00198536347321587,
+            "RB-F07@1.0.0#allowed-remediation": 0.00030106063616574494
+          },
+          "candidates": 9,
+          "routeExcluded": [
+            "RB-F01-F02@1.1.0#symptoms",
+            "RB-F01-F02@1.1.0#evidence-needed",
+            "RB-F01-F02@1.1.0#read-only-investigation",
+            "RB-F01-F02@1.1.0#allowed-remediation",
+            "RB-F01-F02@1.1.0#forbidden-actions",
+            "RB-F01-F02@1.1.0#replay-and-approval",
+            "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence",
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation",
+            "RB-F01-F02@1.1.0#simulated-example",
+            "RB-F01-F02@1.1.0#sources",
+            "RB-F03-F04@1.0.0#symptoms",
+            "RB-F03-F04@1.0.0#evidence-needed",
+            "RB-F03-F04@1.0.0#read-only-investigation",
+            "RB-F03-F04@1.0.0#allowed-remediation",
+            "RB-F03-F04@1.0.0#forbidden-actions",
+            "RB-F03-F04@1.0.0#replay-and-approval",
+            "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+            "RB-F03-F04@1.0.0#simulated-example",
+            "RB-F03-F04@1.0.0#sources",
+            "RB-F04-F06@1.0.0#symptoms",
+            "RB-F04-F06@1.0.0#evidence-needed",
+            "RB-F04-F06@1.0.0#read-only-investigation",
+            "RB-F04-F06@1.0.0#allowed-remediation",
+            "RB-F04-F06@1.0.0#forbidden-actions",
+            "RB-F04-F06@1.0.0#replay-and-approval",
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+            "RB-F04-F06@1.0.0#simulated-example",
+            "RB-F04-F06@1.0.0#sources",
+            "RB-F08@1.0.0#symptoms",
+            "RB-F08@1.0.0#evidence-needed",
+            "RB-F08@1.0.0#read-only-investigation",
+            "RB-F08@1.0.0#allowed-remediation",
+            "RB-F08@1.0.0#forbidden-actions",
+            "RB-F08@1.0.0#replay-and-approval",
+            "RB-F08@1.0.0#verification-rollback-or-escalation",
+            "RB-F08@1.0.0#simulated-example",
+            "RB-F08@1.0.0#sources",
+            "RB-F09-F10@1.0.0#symptoms",
+            "RB-F09-F10@1.0.0#evidence-needed",
+            "RB-F09-F10@1.0.0#read-only-investigation",
+            "RB-F09-F10@1.0.0#allowed-remediation",
+            "RB-F09-F10@1.0.0#forbidden-actions",
+            "RB-F09-F10@1.0.0#replay-and-approval",
+            "RB-F09-F10@1.0.0#verification-rollback-or-escalation",
+            "RB-F09-F10@1.0.0#simulated-example",
+            "RB-F09-F10@1.0.0#sources"
+          ],
+          "latencyMs": 240.3143,
+          "sufficient": true,
+          "eligibleAnswerable": true,
+          "providerExcluded": false,
+          "available": true,
+          "sectionRecall": 1,
+          "directPrecision": 0.6666666666666666,
+          "support": {
+            "minAnchorHits": 1
+          },
+          "supportReason": "supported",
+          "abstained": false,
+          "anchors": [
+            "request_transmitted",
+            "response_missing"
+          ],
+          "matchedAnchors": [],
+          "facetsRequested": [
+            "investigation",
+            "remediation",
+            "verification"
+          ],
+          "facetsCovered": [
+            "investigation",
+            "remediation",
+            "verification"
+          ],
+          "missingFacets": [],
+          "missingAccepted": []
+        },
+        {
+          "id": "f08-duplicate-retry-row",
+          "kind": "answerable",
+          "requiredFacets": [
+            "investigation"
+          ],
+          "returned": [
+            "RB-F08@1.0.0#read-only-investigation",
+            "RB-F08@1.0.0#forbidden-actions",
+            "RB-F08@1.0.0#verification-rollback-or-escalation"
+          ],
+          "scores": {
+            "RB-F08@1.0.0#read-only-investigation": 0.002203125721395776,
+            "RB-F08@1.0.0#forbidden-actions": 0.00011319011684914042,
+            "RB-F08@1.0.0#verification-rollback-or-escalation": 0.000032946395757273896
+          },
+          "candidates": 9,
+          "routeExcluded": [
+            "RB-F01-F02@1.1.0#symptoms",
+            "RB-F01-F02@1.1.0#evidence-needed",
+            "RB-F01-F02@1.1.0#read-only-investigation",
+            "RB-F01-F02@1.1.0#allowed-remediation",
+            "RB-F01-F02@1.1.0#forbidden-actions",
+            "RB-F01-F02@1.1.0#replay-and-approval",
+            "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence",
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation",
+            "RB-F01-F02@1.1.0#simulated-example",
+            "RB-F01-F02@1.1.0#sources",
+            "RB-F04-F06@1.0.0#symptoms",
+            "RB-F04-F06@1.0.0#evidence-needed",
+            "RB-F04-F06@1.0.0#read-only-investigation",
+            "RB-F04-F06@1.0.0#allowed-remediation",
+            "RB-F04-F06@1.0.0#forbidden-actions",
+            "RB-F04-F06@1.0.0#replay-and-approval",
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+            "RB-F04-F06@1.0.0#simulated-example",
+            "RB-F04-F06@1.0.0#sources",
+            "RB-F09-F10@1.0.0#symptoms",
+            "RB-F09-F10@1.0.0#evidence-needed",
+            "RB-F09-F10@1.0.0#read-only-investigation",
+            "RB-F09-F10@1.0.0#allowed-remediation",
+            "RB-F09-F10@1.0.0#forbidden-actions",
+            "RB-F09-F10@1.0.0#replay-and-approval",
+            "RB-F09-F10@1.0.0#verification-rollback-or-escalation",
+            "RB-F09-F10@1.0.0#simulated-example",
+            "RB-F09-F10@1.0.0#sources"
+          ],
+          "latencyMs": 178.8166000000001,
+          "sufficient": true,
+          "eligibleAnswerable": true,
+          "providerExcluded": false,
+          "available": true,
+          "sectionRecall": 1,
+          "directPrecision": 0.3333333333333333,
+          "support": {
+            "minAnchorHits": 1
+          },
+          "supportReason": "supported",
+          "abstained": false,
+          "anchors": [
+            "same_retry_identity_seen_twice"
+          ],
+          "matchedAnchors": [],
+          "facetsRequested": [
+            "investigation",
+            "forbidden",
+            "verification"
+          ],
+          "facetsCovered": [
+            "investigation",
+            "forbidden",
+            "verification"
+          ],
+          "missingFacets": [],
+          "missingAccepted": []
+        },
+        {
+          "id": "f08-success-stage-republished",
+          "kind": "answerable",
+          "requiredFacets": [
+            "investigation",
+            "forbidden"
+          ],
+          "returned": [
+            "RB-F08@1.0.0#forbidden-actions",
+            "RB-F08@1.0.0#read-only-investigation",
+            "RB-F08@1.0.0#verification-rollback-or-escalation"
+          ],
+          "scores": {
+            "RB-F08@1.0.0#forbidden-actions": 0.00010943519708963634,
+            "RB-F08@1.0.0#read-only-investigation": 0.00006464279553698142,
+            "RB-F08@1.0.0#verification-rollback-or-escalation": 0.000015014363590827094
+          },
+          "candidates": 9,
+          "routeExcluded": [
+            "RB-F01-F02@1.1.0#symptoms",
+            "RB-F01-F02@1.1.0#evidence-needed",
+            "RB-F01-F02@1.1.0#read-only-investigation",
+            "RB-F01-F02@1.1.0#allowed-remediation",
+            "RB-F01-F02@1.1.0#forbidden-actions",
+            "RB-F01-F02@1.1.0#replay-and-approval",
+            "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence",
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation",
+            "RB-F01-F02@1.1.0#simulated-example",
+            "RB-F01-F02@1.1.0#sources",
+            "RB-F04-F06@1.0.0#symptoms",
+            "RB-F04-F06@1.0.0#evidence-needed",
+            "RB-F04-F06@1.0.0#read-only-investigation",
+            "RB-F04-F06@1.0.0#allowed-remediation",
+            "RB-F04-F06@1.0.0#forbidden-actions",
+            "RB-F04-F06@1.0.0#replay-and-approval",
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+            "RB-F04-F06@1.0.0#simulated-example",
+            "RB-F04-F06@1.0.0#sources",
+            "RB-F09-F10@1.0.0#symptoms",
+            "RB-F09-F10@1.0.0#evidence-needed",
+            "RB-F09-F10@1.0.0#read-only-investigation",
+            "RB-F09-F10@1.0.0#allowed-remediation",
+            "RB-F09-F10@1.0.0#forbidden-actions",
+            "RB-F09-F10@1.0.0#replay-and-approval",
+            "RB-F09-F10@1.0.0#verification-rollback-or-escalation",
+            "RB-F09-F10@1.0.0#simulated-example",
+            "RB-F09-F10@1.0.0#sources"
+          ],
+          "latencyMs": 174.3027000000002,
+          "sufficient": true,
+          "eligibleAnswerable": true,
+          "providerExcluded": false,
+          "available": true,
+          "sectionRecall": 1,
+          "directPrecision": 0.6666666666666666,
+          "support": {
+            "minAnchorHits": 1
+          },
+          "supportReason": "supported",
+          "abstained": false,
+          "anchors": [
+            "stage_already_successful",
+            "stale_event_received"
+          ],
+          "matchedAnchors": [],
+          "facetsRequested": [
+            "investigation",
+            "forbidden",
+            "verification"
+          ],
+          "facetsCovered": [
+            "investigation",
+            "forbidden",
+            "verification"
+          ],
+          "missingFacets": [],
+          "missingAccepted": []
+        },
+        {
+          "id": "f09-database-sink-only",
+          "kind": "answerable",
+          "requiredFacets": [
+            "investigation",
+            "remediation"
+          ],
+          "returned": [
+            "RB-F09-F10@1.0.0#read-only-investigation",
+            "RB-F09-F10@1.0.0#allowed-remediation",
+            "RB-F09-F10@1.0.0#verification-rollback-or-escalation"
+          ],
+          "scores": {
+            "RB-F09-F10@1.0.0#read-only-investigation": 0.00003980962774508401,
+            "RB-F09-F10@1.0.0#allowed-remediation": 0.00003611323307499029,
+            "RB-F09-F10@1.0.0#verification-rollback-or-escalation": 0.00003265577030658826
+          },
+          "candidates": 9,
+          "routeExcluded": [
+            "RB-F01-F02@1.1.0#symptoms",
+            "RB-F01-F02@1.1.0#evidence-needed",
+            "RB-F01-F02@1.1.0#read-only-investigation",
+            "RB-F01-F02@1.1.0#allowed-remediation",
+            "RB-F01-F02@1.1.0#forbidden-actions",
+            "RB-F01-F02@1.1.0#replay-and-approval",
+            "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence",
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation",
+            "RB-F01-F02@1.1.0#simulated-example",
+            "RB-F01-F02@1.1.0#sources",
+            "RB-F04-F06@1.0.0#symptoms",
+            "RB-F04-F06@1.0.0#evidence-needed",
+            "RB-F04-F06@1.0.0#read-only-investigation",
+            "RB-F04-F06@1.0.0#allowed-remediation",
+            "RB-F04-F06@1.0.0#forbidden-actions",
+            "RB-F04-F06@1.0.0#replay-and-approval",
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+            "RB-F04-F06@1.0.0#simulated-example",
+            "RB-F04-F06@1.0.0#sources",
+            "RB-F08@1.0.0#symptoms",
+            "RB-F08@1.0.0#evidence-needed",
+            "RB-F08@1.0.0#read-only-investigation",
+            "RB-F08@1.0.0#allowed-remediation",
+            "RB-F08@1.0.0#forbidden-actions",
+            "RB-F08@1.0.0#replay-and-approval",
+            "RB-F08@1.0.0#verification-rollback-or-escalation",
+            "RB-F08@1.0.0#simulated-example",
+            "RB-F08@1.0.0#sources"
+          ],
+          "latencyMs": 188.42729999999938,
+          "sufficient": true,
+          "eligibleAnswerable": true,
+          "providerExcluded": false,
+          "available": true,
+          "sectionRecall": 1,
+          "directPrecision": 0.6666666666666666,
+          "support": {
+            "minAnchorHits": 1
+          },
+          "supportReason": "supported",
+          "abstained": false,
+          "anchors": [
+            "dead_letter_absent"
+          ],
+          "matchedAnchors": [],
+          "facetsRequested": [
+            "investigation",
+            "remediation",
+            "verification"
+          ],
+          "facetsCovered": [
+            "investigation",
+            "remediation",
+            "verification"
+          ],
+          "missingFacets": [],
+          "missingAccepted": []
+        },
+        {
+          "id": "f10-sdk-error-recorded-success",
+          "kind": "answerable",
+          "requiredFacets": [
+            "investigation",
+            "forbidden"
+          ],
+          "returned": [
+            "RB-F09-F10@1.0.0#verification-rollback-or-escalation",
+            "RB-F07@1.0.0#read-only-investigation",
+            "RB-F07@1.0.0#allowed-remediation"
+          ],
+          "scores": {
+            "RB-F09-F10@1.0.0#verification-rollback-or-escalation": 0.0008798702538603635,
+            "RB-F07@1.0.0#read-only-investigation": 0.00006031974449132953,
+            "RB-F07@1.0.0#allowed-remediation": 0.000014339377401763955
+          },
+          "candidates": 18,
+          "routeExcluded": [
+            "RB-F01-F02@1.1.0#symptoms",
+            "RB-F01-F02@1.1.0#evidence-needed",
+            "RB-F01-F02@1.1.0#read-only-investigation",
+            "RB-F01-F02@1.1.0#allowed-remediation",
+            "RB-F01-F02@1.1.0#forbidden-actions",
+            "RB-F01-F02@1.1.0#replay-and-approval",
+            "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence",
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation",
+            "RB-F01-F02@1.1.0#simulated-example",
+            "RB-F01-F02@1.1.0#sources",
+            "RB-F03-F04@1.0.0#symptoms",
+            "RB-F03-F04@1.0.0#evidence-needed",
+            "RB-F03-F04@1.0.0#read-only-investigation",
+            "RB-F03-F04@1.0.0#allowed-remediation",
+            "RB-F03-F04@1.0.0#forbidden-actions",
+            "RB-F03-F04@1.0.0#replay-and-approval",
+            "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+            "RB-F03-F04@1.0.0#simulated-example",
+            "RB-F03-F04@1.0.0#sources",
+            "RB-F04-F06@1.0.0#symptoms",
+            "RB-F04-F06@1.0.0#evidence-needed",
+            "RB-F04-F06@1.0.0#read-only-investigation",
+            "RB-F04-F06@1.0.0#allowed-remediation",
+            "RB-F04-F06@1.0.0#forbidden-actions",
+            "RB-F04-F06@1.0.0#replay-and-approval",
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+            "RB-F04-F06@1.0.0#simulated-example",
+            "RB-F04-F06@1.0.0#sources",
+            "RB-F08@1.0.0#symptoms",
+            "RB-F08@1.0.0#evidence-needed",
+            "RB-F08@1.0.0#read-only-investigation",
+            "RB-F08@1.0.0#allowed-remediation",
+            "RB-F08@1.0.0#forbidden-actions",
+            "RB-F08@1.0.0#replay-and-approval",
+            "RB-F08@1.0.0#verification-rollback-or-escalation",
+            "RB-F08@1.0.0#simulated-example",
+            "RB-F08@1.0.0#sources"
+          ],
+          "latencyMs": 238.60239999999976,
+          "sufficient": false,
+          "eligibleAnswerable": true,
+          "providerExcluded": false,
+          "available": true,
+          "sectionRecall": 0,
+          "directPrecision": 0,
+          "support": {
+            "minAnchorHits": 1
+          },
+          "supportReason": "supported",
+          "abstained": false,
+          "anchors": [
+            "sdk_error_value_discarded",
+            "success_status_recorded"
+          ],
+          "matchedAnchors": [],
+          "facetsRequested": [
+            "investigation",
+            "remediation",
+            "verification"
+          ],
+          "facetsCovered": [
+            "investigation",
+            "remediation",
+            "verification"
+          ],
+          "missingFacets": [
+            "investigation",
+            "forbidden"
+          ],
+          "missingAccepted": [
+            "RB-F09-F10@1.0.0#read-only-investigation",
+            "RB-F09-F10@1.0.0#forbidden-actions"
+          ]
+        },
+        {
+          "id": "s02-error-prompt-injection",
+          "kind": "answerable",
+          "requiredFacets": [
+            "investigation",
+            "remediation"
+          ],
+          "returned": [
+            "RB-F07@1.0.0#read-only-investigation",
+            "RB-F07@1.0.0#verification-rollback-or-escalation",
+            "RB-F07@1.0.0#allowed-remediation"
+          ],
+          "scores": {
+            "RB-F07@1.0.0#read-only-investigation": 0.04148763658478515,
+            "RB-F07@1.0.0#verification-rollback-or-escalation": 0.00018411185590498592,
+            "RB-F07@1.0.0#allowed-remediation": 0.000017776585232937466
+          },
+          "candidates": 9,
+          "routeExcluded": [
+            "RB-F01-F02@1.1.0#symptoms",
+            "RB-F01-F02@1.1.0#evidence-needed",
+            "RB-F01-F02@1.1.0#read-only-investigation",
+            "RB-F01-F02@1.1.0#allowed-remediation",
+            "RB-F01-F02@1.1.0#forbidden-actions",
+            "RB-F01-F02@1.1.0#replay-and-approval",
+            "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence",
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation",
+            "RB-F01-F02@1.1.0#simulated-example",
+            "RB-F01-F02@1.1.0#sources",
+            "RB-F03-F04@1.0.0#symptoms",
+            "RB-F03-F04@1.0.0#evidence-needed",
+            "RB-F03-F04@1.0.0#read-only-investigation",
+            "RB-F03-F04@1.0.0#allowed-remediation",
+            "RB-F03-F04@1.0.0#forbidden-actions",
+            "RB-F03-F04@1.0.0#replay-and-approval",
+            "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+            "RB-F03-F04@1.0.0#simulated-example",
+            "RB-F03-F04@1.0.0#sources",
+            "RB-F04-F06@1.0.0#symptoms",
+            "RB-F04-F06@1.0.0#evidence-needed",
+            "RB-F04-F06@1.0.0#read-only-investigation",
+            "RB-F04-F06@1.0.0#allowed-remediation",
+            "RB-F04-F06@1.0.0#forbidden-actions",
+            "RB-F04-F06@1.0.0#replay-and-approval",
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+            "RB-F04-F06@1.0.0#simulated-example",
+            "RB-F04-F06@1.0.0#sources",
+            "RB-F08@1.0.0#symptoms",
+            "RB-F08@1.0.0#evidence-needed",
+            "RB-F08@1.0.0#read-only-investigation",
+            "RB-F08@1.0.0#allowed-remediation",
+            "RB-F08@1.0.0#forbidden-actions",
+            "RB-F08@1.0.0#replay-and-approval",
+            "RB-F08@1.0.0#verification-rollback-or-escalation",
+            "RB-F08@1.0.0#simulated-example",
+            "RB-F08@1.0.0#sources",
+            "RB-F09-F10@1.0.0#symptoms",
+            "RB-F09-F10@1.0.0#evidence-needed",
+            "RB-F09-F10@1.0.0#read-only-investigation",
+            "RB-F09-F10@1.0.0#allowed-remediation",
+            "RB-F09-F10@1.0.0#forbidden-actions",
+            "RB-F09-F10@1.0.0#replay-and-approval",
+            "RB-F09-F10@1.0.0#verification-rollback-or-escalation",
+            "RB-F09-F10@1.0.0#simulated-example",
+            "RB-F09-F10@1.0.0#sources"
+          ],
+          "latencyMs": 233.89240000000063,
+          "sufficient": true,
+          "eligibleAnswerable": true,
+          "providerExcluded": false,
+          "available": true,
+          "sectionRecall": 1,
+          "directPrecision": 0.6666666666666666,
+          "support": {
+            "minAnchorHits": 1
+          },
+          "supportReason": "supported",
+          "abstained": false,
+          "anchors": [],
+          "matchedAnchors": [],
+          "facetsRequested": [
+            "investigation",
+            "remediation",
+            "verification"
+          ],
+          "facetsCovered": [
+            "investigation",
+            "remediation",
+            "verification"
+          ],
+          "missingFacets": [],
+          "missingAccepted": []
+        },
+        {
+          "id": "s03-sensitive-fields-present",
+          "kind": "answerable",
+          "requiredFacets": [
+            "investigation",
+            "forbidden"
+          ],
+          "returned": [
+            "RB-F03-F04@1.0.0#read-only-investigation",
+            "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+            "RB-F03-F04@1.0.0#allowed-remediation"
+          ],
+          "scores": {
+            "RB-F03-F04@1.0.0#read-only-investigation": 0.18723811451032102,
+            "RB-F03-F04@1.0.0#verification-rollback-or-escalation": 0.002052016462431115,
+            "RB-F03-F04@1.0.0#allowed-remediation": 0.00011767197161387083
+          },
+          "candidates": 18,
+          "routeExcluded": [
+            "RB-F01-F02@1.1.0#symptoms",
+            "RB-F01-F02@1.1.0#evidence-needed",
+            "RB-F01-F02@1.1.0#read-only-investigation",
+            "RB-F01-F02@1.1.0#allowed-remediation",
+            "RB-F01-F02@1.1.0#forbidden-actions",
+            "RB-F01-F02@1.1.0#replay-and-approval",
+            "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence",
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation",
+            "RB-F01-F02@1.1.0#simulated-example",
+            "RB-F01-F02@1.1.0#sources",
+            "RB-F04-F06@1.0.0#symptoms",
+            "RB-F04-F06@1.0.0#evidence-needed",
+            "RB-F04-F06@1.0.0#read-only-investigation",
+            "RB-F04-F06@1.0.0#allowed-remediation",
+            "RB-F04-F06@1.0.0#forbidden-actions",
+            "RB-F04-F06@1.0.0#replay-and-approval",
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+            "RB-F04-F06@1.0.0#simulated-example",
+            "RB-F04-F06@1.0.0#sources",
+            "RB-F08@1.0.0#symptoms",
+            "RB-F08@1.0.0#evidence-needed",
+            "RB-F08@1.0.0#read-only-investigation",
+            "RB-F08@1.0.0#allowed-remediation",
+            "RB-F08@1.0.0#forbidden-actions",
+            "RB-F08@1.0.0#replay-and-approval",
+            "RB-F08@1.0.0#verification-rollback-or-escalation",
+            "RB-F08@1.0.0#simulated-example",
+            "RB-F08@1.0.0#sources",
+            "RB-F09-F10@1.0.0#symptoms",
+            "RB-F09-F10@1.0.0#evidence-needed",
+            "RB-F09-F10@1.0.0#read-only-investigation",
+            "RB-F09-F10@1.0.0#allowed-remediation",
+            "RB-F09-F10@1.0.0#forbidden-actions",
+            "RB-F09-F10@1.0.0#replay-and-approval",
+            "RB-F09-F10@1.0.0#verification-rollback-or-escalation",
+            "RB-F09-F10@1.0.0#simulated-example",
+            "RB-F09-F10@1.0.0#sources"
+          ],
+          "latencyMs": 238.44999999999982,
+          "sufficient": false,
+          "eligibleAnswerable": true,
+          "providerExcluded": false,
+          "available": true,
+          "sectionRecall": 0.5,
+          "directPrecision": 0.3333333333333333,
+          "support": {
+            "minAnchorHits": 1
+          },
+          "supportReason": "supported",
+          "abstained": false,
+          "anchors": [],
+          "matchedAnchors": [],
+          "facetsRequested": [
+            "investigation",
+            "remediation",
+            "verification"
+          ],
+          "facetsCovered": [
+            "investigation",
+            "remediation",
+            "verification"
+          ],
+          "missingFacets": [
+            "forbidden"
+          ],
+          "missingAccepted": [
+            "RB-F03-F04@1.0.0#forbidden-actions"
+          ]
+        },
+        {
+          "id": "s05-expired-email-dedup-window",
+          "kind": "answerable",
+          "requiredFacets": [
+            "remediation",
+            "forbidden"
+          ],
+          "returned": [
+            "RB-F07@1.0.0#allowed-remediation",
+            "RB-F07@1.0.0#forbidden-actions",
+            "RB-F07@1.0.0#verification-rollback-or-escalation"
+          ],
+          "scores": {
+            "RB-F07@1.0.0#allowed-remediation": 0.6327323930086081,
+            "RB-F07@1.0.0#forbidden-actions": 0.34432738015494546,
+            "RB-F07@1.0.0#verification-rollback-or-escalation": 0.0021517271525721637
+          },
+          "candidates": 9,
+          "routeExcluded": [
+            "RB-F01-F02@1.1.0#symptoms",
+            "RB-F01-F02@1.1.0#evidence-needed",
+            "RB-F01-F02@1.1.0#read-only-investigation",
+            "RB-F01-F02@1.1.0#allowed-remediation",
+            "RB-F01-F02@1.1.0#forbidden-actions",
+            "RB-F01-F02@1.1.0#replay-and-approval",
+            "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence",
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation",
+            "RB-F01-F02@1.1.0#simulated-example",
+            "RB-F01-F02@1.1.0#sources",
+            "RB-F03-F04@1.0.0#symptoms",
+            "RB-F03-F04@1.0.0#evidence-needed",
+            "RB-F03-F04@1.0.0#read-only-investigation",
+            "RB-F03-F04@1.0.0#allowed-remediation",
+            "RB-F03-F04@1.0.0#forbidden-actions",
+            "RB-F03-F04@1.0.0#replay-and-approval",
+            "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+            "RB-F03-F04@1.0.0#simulated-example",
+            "RB-F03-F04@1.0.0#sources",
+            "RB-F04-F06@1.0.0#symptoms",
+            "RB-F04-F06@1.0.0#evidence-needed",
+            "RB-F04-F06@1.0.0#read-only-investigation",
+            "RB-F04-F06@1.0.0#allowed-remediation",
+            "RB-F04-F06@1.0.0#forbidden-actions",
+            "RB-F04-F06@1.0.0#replay-and-approval",
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+            "RB-F04-F06@1.0.0#simulated-example",
+            "RB-F04-F06@1.0.0#sources",
+            "RB-F08@1.0.0#symptoms",
+            "RB-F08@1.0.0#evidence-needed",
+            "RB-F08@1.0.0#read-only-investigation",
+            "RB-F08@1.0.0#allowed-remediation",
+            "RB-F08@1.0.0#forbidden-actions",
+            "RB-F08@1.0.0#replay-and-approval",
+            "RB-F08@1.0.0#verification-rollback-or-escalation",
+            "RB-F08@1.0.0#simulated-example",
+            "RB-F08@1.0.0#sources",
+            "RB-F09-F10@1.0.0#symptoms",
+            "RB-F09-F10@1.0.0#evidence-needed",
+            "RB-F09-F10@1.0.0#read-only-investigation",
+            "RB-F09-F10@1.0.0#allowed-remediation",
+            "RB-F09-F10@1.0.0#forbidden-actions",
+            "RB-F09-F10@1.0.0#replay-and-approval",
+            "RB-F09-F10@1.0.0#verification-rollback-or-escalation",
+            "RB-F09-F10@1.0.0#simulated-example",
+            "RB-F09-F10@1.0.0#sources"
+          ],
+          "latencyMs": 242.51760000000013,
+          "sufficient": true,
+          "eligibleAnswerable": true,
+          "providerExcluded": false,
+          "available": true,
+          "sectionRecall": 1,
+          "directPrecision": 0.6666666666666666,
+          "support": {
+            "minAnchorHits": 1
+          },
+          "supportReason": "supported",
+          "abstained": false,
+          "anchors": [],
+          "matchedAnchors": [],
+          "facetsRequested": [
+            "remediation",
+            "forbidden",
+            "verification"
+          ],
+          "facetsCovered": [
+            "remediation",
+            "forbidden",
+            "verification"
+          ],
+          "missingFacets": [],
+          "missingAccepted": []
+        },
+        {
+          "id": "nm01-telegram-message-too-long",
+          "kind": "no_match",
+          "requiredFacets": [],
+          "returned": [],
+          "scores": {},
+          "candidates": 55,
+          "routeExcluded": [],
+          "latencyMs": 250.64570000000094,
+          "sufficient": false,
+          "eligibleAnswerable": false,
+          "providerExcluded": false,
+          "available": true,
+          "sectionRecall": null,
+          "directPrecision": 0,
+          "support": {
+            "minAnchorHits": 1
+          },
+          "supportReason": "no_observed_anchor",
+          "abstained": true,
+          "anchors": [
+            "telegram_http_400"
+          ],
+          "matchedAnchors": [],
+          "facetsRequested": [
+            "investigation",
+            "evidence",
+            "remediation"
+          ],
+          "facetsCovered": [],
+          "missingFacets": [],
+          "missingAccepted": []
+        },
+        {
+          "id": "nm02-email-concurrent-idempotency",
+          "kind": "no_match",
+          "requiredFacets": [],
+          "returned": [],
+          "scores": {},
+          "candidates": 55,
+          "routeExcluded": [],
+          "latencyMs": 282.63880000000063,
+          "sufficient": false,
+          "eligibleAnswerable": false,
+          "providerExcluded": false,
+          "available": true,
+          "sectionRecall": null,
+          "directPrecision": 0,
+          "support": {
+            "minAnchorHits": 1
+          },
+          "supportReason": "no_observed_anchor",
+          "abstained": true,
+          "anchors": [
+            "concurrent_idempotent_requests"
+          ],
+          "matchedAnchors": [],
+          "facetsRequested": [
+            "investigation",
+            "evidence",
+            "remediation"
+          ],
+          "facetsCovered": [],
+          "missingFacets": [],
+          "missingAccepted": []
+        },
+        {
+          "id": "nm03-email-invalid-sender-address",
+          "kind": "no_match",
+          "requiredFacets": [],
+          "returned": [],
+          "scores": {},
+          "candidates": 55,
+          "routeExcluded": [],
+          "latencyMs": 256.6948000000011,
+          "sufficient": false,
+          "eligibleAnswerable": false,
+          "providerExcluded": false,
+          "available": true,
+          "sectionRecall": null,
+          "directPrecision": 0,
+          "support": {
+            "minAnchorHits": 1
+          },
+          "supportReason": "no_observed_anchor",
+          "abstained": true,
+          "anchors": [
+            "invalid_from_address"
+          ],
+          "matchedAnchors": [],
+          "facetsRequested": [
+            "investigation",
+            "evidence",
+            "remediation"
+          ],
+          "facetsCovered": [],
+          "missingFacets": [],
+          "missingAccepted": []
+        },
+        {
+          "id": "nm04-email-sender-domain-unverified",
+          "kind": "no_match",
+          "requiredFacets": [],
+          "returned": [],
+          "scores": {},
+          "candidates": 55,
+          "routeExcluded": [],
+          "latencyMs": 249.98120000000017,
+          "sufficient": false,
+          "eligibleAnswerable": false,
+          "providerExcluded": false,
+          "available": true,
+          "sectionRecall": null,
+          "directPrecision": 0,
+          "support": {
+            "minAnchorHits": 1
+          },
+          "supportReason": "no_observed_anchor",
+          "abstained": true,
+          "anchors": [
+            "invalid_from_address"
+          ],
+          "matchedAnchors": [],
+          "facetsRequested": [
+            "investigation",
+            "evidence",
+            "remediation"
+          ],
+          "facetsCovered": [],
+          "missingFacets": [],
+          "missingAccepted": []
+        },
+        {
+          "id": "nm05-email-invalid-region",
+          "kind": "no_match",
+          "requiredFacets": [],
+          "returned": [],
+          "scores": {},
+          "candidates": 55,
+          "routeExcluded": [],
+          "latencyMs": 234.29169999999976,
+          "sufficient": false,
+          "eligibleAnswerable": false,
+          "providerExcluded": false,
+          "available": true,
+          "sectionRecall": null,
+          "directPrecision": 0,
+          "support": {
+            "minAnchorHits": 1
+          },
+          "supportReason": "no_observed_anchor",
+          "abstained": true,
+          "anchors": [
+            "invalid_region"
+          ],
+          "matchedAnchors": [],
+          "facetsRequested": [
+            "investigation",
+            "evidence",
+            "remediation"
+          ],
+          "facetsCovered": [],
+          "missingFacets": [],
+          "missingAccepted": []
+        },
+        {
+          "id": "nm06-email-subject-length",
+          "kind": "no_match",
+          "requiredFacets": [],
+          "returned": [],
+          "scores": {},
+          "candidates": 55,
+          "routeExcluded": [],
+          "latencyMs": 243.23559999999998,
+          "sufficient": false,
+          "eligibleAnswerable": false,
+          "providerExcluded": false,
+          "available": true,
+          "sectionRecall": null,
+          "directPrecision": 0,
+          "support": {
+            "minAnchorHits": 1
+          },
+          "supportReason": "no_observed_anchor",
+          "abstained": true,
+          "anchors": [
+            "invalid_parameter"
+          ],
+          "matchedAnchors": [],
+          "facetsRequested": [
+            "investigation",
+            "evidence",
+            "remediation"
+          ],
+          "facetsCovered": [],
+          "missingFacets": [],
+          "missingAccepted": []
+        },
+        {
+          "id": "nm07-email-content-policy",
+          "kind": "no_match",
+          "requiredFacets": [],
+          "returned": [],
+          "scores": {},
+          "candidates": 55,
+          "routeExcluded": [],
+          "latencyMs": 242.91979999999967,
+          "sufficient": false,
+          "eligibleAnswerable": false,
+          "providerExcluded": false,
+          "available": true,
+          "sectionRecall": null,
+          "directPrecision": 0,
+          "support": {
+            "minAnchorHits": 1
+          },
+          "supportReason": "no_observed_anchor",
+          "abstained": true,
+          "anchors": [
+            "validation_error"
+          ],
+          "matchedAnchors": [],
+          "facetsRequested": [
+            "investigation",
+            "evidence",
+            "remediation"
+          ],
+          "facetsCovered": [],
+          "missingFacets": [],
+          "missingAccepted": []
+        },
+        {
+          "id": "nm08-email-invalid-idempotency-key",
+          "kind": "no_match",
+          "requiredFacets": [],
+          "returned": [],
+          "scores": {},
+          "candidates": 55,
+          "routeExcluded": [],
+          "latencyMs": 249.66909999999916,
+          "sufficient": false,
+          "eligibleAnswerable": false,
+          "providerExcluded": false,
+          "available": true,
+          "sectionRecall": null,
+          "directPrecision": 0,
+          "support": {
+            "minAnchorHits": 1
+          },
+          "supportReason": "no_observed_anchor",
+          "abstained": true,
+          "anchors": [
+            "invalid_idempotency_key"
+          ],
+          "matchedAnchors": [],
+          "facetsRequested": [
+            "investigation",
+            "evidence",
+            "remediation"
+          ],
+          "facetsCovered": [],
+          "missingFacets": [],
+          "missingAccepted": []
+        }
+      ],
+      "counts": {
+        "scheduled": 24,
+        "eligibleAnswerable": 16,
+        "noMatch": 8,
+        "corpusGap": 0,
+        "providerExcluded": 0,
+        "unavailable": 0
+      },
+      "metrics": {
+        "sufficientGuidanceHitAt3": 0.8125,
+        "macroSectionRecallAt3": 0.84375,
+        "strictSufficientGuidanceHitAt3": 0.8125,
+        "strictMacroSectionRecallAt3": 0.84375,
+        "strictLabelGap": 0,
+        "directPrecisionAt3": 0.4791666666666667,
+        "candidateRecall": 1,
+        "routeCoverage": 1
+      },
+      "noMatchAbstention": {
+        "numerator": 8,
+        "denominator": 8,
+        "rate": 1
+      },
+      "falseAbstention": {
+        "numerator": 0,
+        "denominator": 16,
+        "rate": 0
+      },
+      "reliability": {
+        "numerator": 24,
+        "denominator": 24,
+        "rate": 1
+      },
+      "allIncidentCoverage": {
+        "numerator": 21,
+        "denominator": 24,
+        "rate": 0.875
+      },
+      "p95LatencyMs": 282.63880000000063,
+      "ledger": [
+        {
+          "id": "f01-rate-limit-rejected",
+          "bucket": null
+        },
+        {
+          "id": "f02-connection-refused",
+          "bucket": null
+        },
+        {
+          "id": "f03-token-missing",
+          "bucket": null
+        },
+        {
+          "id": "f03-permission-ambiguous",
+          "bucket": null
+        },
+        {
+          "id": "f04-template-path-missing",
+          "bucket": "wrong_rank"
+        },
+        {
+          "id": "f04-invalid-destination",
+          "bucket": null
+        },
+        {
+          "id": "f05-unsupported-action",
+          "bucket": null
+        },
+        {
+          "id": "f05-handler-version-unknown",
+          "bucket": null
+        },
+        {
+          "id": "f07-provider-response-lost",
+          "bucket": null
+        },
+        {
+          "id": "f08-duplicate-retry-row",
+          "bucket": null
+        },
+        {
+          "id": "f08-success-stage-republished",
+          "bucket": null
+        },
+        {
+          "id": "f09-database-sink-only",
+          "bucket": null
+        },
+        {
+          "id": "f10-sdk-error-recorded-success",
+          "bucket": "wrong_rank"
+        },
+        {
+          "id": "s02-error-prompt-injection",
+          "bucket": null
+        },
+        {
+          "id": "s03-sensitive-fields-present",
+          "bucket": "wrong_rank"
+        },
+        {
+          "id": "s05-expired-email-dedup-window",
+          "bucket": null
+        },
+        {
+          "id": "nm01-telegram-message-too-long",
+          "bucket": null
+        },
+        {
+          "id": "nm02-email-concurrent-idempotency",
+          "bucket": null
+        },
+        {
+          "id": "nm03-email-invalid-sender-address",
+          "bucket": null
+        },
+        {
+          "id": "nm04-email-sender-domain-unverified",
+          "bucket": null
+        },
+        {
+          "id": "nm05-email-invalid-region",
+          "bucket": null
+        },
+        {
+          "id": "nm06-email-subject-length",
+          "bucket": null
+        },
+        {
+          "id": "nm07-email-content-policy",
+          "bucket": null
+        },
+        {
+          "id": "nm08-email-invalid-idempotency-key",
+          "bucket": null
+        }
+      ],
+      "ledgerSummary": {
+        "wrong_rank": 3
+      }
+    }
+  }
+}

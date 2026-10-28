@@ -96,6 +96,7 @@ export function rankStructured(
   input: StructuredRunbookSearchInput,
   logits: Record<string, number>,
   policy: SupportPolicy = { minAnchorHits: 1 },
+  acceptance?: ReadonlyMap<RequestedFacet, readonly string[]>,
 ): {
   matches: RunbookMatch[];
   route: EvidenceRoute;
@@ -120,9 +121,15 @@ export function rankStructured(
     matches,
     route,
     facetsRequested,
-    facetsCovered: facetsRequested.filter((facet) =>
-      matches.some((match) => sectionFacet(match.heading) === facet),
-    ),
+    facetsCovered: facetsRequested.filter((facet) => {
+      const accepted = acceptance?.get(facet);
+      // When the metric's accepted citations are available, coverage means the
+      // same thing as sufficient guidance: a returned citation is accepted for
+      // this facet. Heading family is only a fallback when no label exists.
+      return accepted
+        ? matches.some((match) => accepted.includes(match.citation))
+        : matches.some((match) => sectionFacet(match.heading) === facet);
+    }),
     abstained: support.abstain,
     supportReason: support.reason,
     matchedAnchors: matchedObservedAnchors(packed, input),

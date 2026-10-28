@@ -363,7 +363,7 @@ export const IntegratedDiagnosisResultSchema = z
   .object({
     contract_version: z.literal(1),
     graph_version: z.literal("phase-6-v1"),
-    prompt_version: z.enum(["phase-6-v1", "phase-11a-v2", "phase-11a-v3"]),
+    prompt_version: z.enum(["phase-6-v1", "phase-11a-v2", "phase-11a-v3", "phase-11a-v4"]),
     status: z.enum(["completed", "abstained"]),
     diagnosis: integratedDiagnosis,
     proposal: modelProposal.extend({

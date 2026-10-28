@@ -1,0 +1,35 @@
+{
+  "run": "dev-20261020-v5",
+  "generatedAt": "2026-10-20T11:02:02.026Z",
+  "files": {
+    "inference-original.json": "6b722134ddab8701266d0cdcf90ae4dc118d6cdb9df9ac57764929c9354d69c7",
+    "scores-original.json": "3472e069a078757750ae361b318a35d01c01ec7ef848de3ed3f9b6ca47ac1df4",
+    "report.json": "eeb8a809169555da27f879d18d7e0bcb8688a1c357410a967af448df020a27e5",
+    "screening.md": "5a8a81a7bb9027483bb5fca07592635c04e7d3af22d31be467e4a793e5c32331"
+  },
+  "counts": {
+    "dev24": {
+      "scheduled": 24,
+      "eligibleAnswerable": 16,
+      "noMatch": 8,
+      "unavailable": 0,
+      "providerExcluded": 0
+    },
+    "dev32": {
+      "scheduled": 32,
+      "eligibleAnswerable": 22,
+      "noMatch": 10,
+      "unavailable": 0,
+      "providerExcluded": 0
+    }
+  },
+  "gate": {
+    "status": "failed",
+    "failing": [
+      "dev24SufficientGuidanceHitAt3",
+      "dev24MacroSectionRecallAt3",
+      "dev32SufficientGuidanceHitAt3",
+      "dev32MacroSectionRecallAt3"
+    ]
+  }
+}

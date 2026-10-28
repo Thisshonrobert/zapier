@@ -1,0 +1,345 @@
+{
+  "version": 1,
+  "phase": "R4.0",
+  "generatedAt": "2026-10-21",
+  "purpose": "Establish a reproducible starting point for R4 by running the current structured-minilm path on the frozen 24-case R3 development cohort and diffing it against the frozen R3.4 run. R4.0 changes no source file; it records behavior, attributes every difference, and gates every R3.5r change.",
+  "startingState": {
+    "commit": "da3b860e1a07866cbe34f9b1231c63ecc58d7a8c",
+    "branch": "main",
+    "shortCommit": "da3b860",
+    "workingTreeState": "dirty",
+    "workingTreeSummary": "R3.5r changes are present and uncommitted: retrieval-profile.ts, retrieval-target.ts, structured-ranking.ts, their tests, and r3/README.md. The closed R3.5r recovery line is untracked (r3/recovery/, recovery-score.mjs, recovery-screening.ts, recovery-screening.test.ts). Generated Prisma and Graphify changes are excluded from this record.",
+    "r35rSourceChanges": [
+      "apps/ai_agent/src/tools/retrieval-profile.ts",
+      "apps/ai_agent/src/evaluation/retrieval-target.ts",
+      "apps/ai_agent/src/tools/structured-ranking.ts",
+      "apps/ai_agent/tests/retrieval-profile.test.ts",
+      "apps/ai_agent/tests/retrieval-target.test.ts",
+      "apps/ai_agent/evaluation/r3/README.md"
+    ],
+    "untrackedR35rArtifacts": [
+      "apps/ai_agent/evaluation/r3/recovery/",
+      "apps/ai_agent/src/evaluation/recovery-score.mjs",
+      "apps/ai_agent/src/evaluation/recovery-screening.ts",
+      "apps/ai_agent/tests/recovery-screening.test.ts"
+    ],
+    "excludedWorkingTreeChanges": [
+      "packages/db/generated/prisma/**",
+      "graphify-out/**"
+    ]
+  },
+  "frozenReference": {
+    "run": "apps/ai_agent/evaluation/r3/runs/profile-route-facets-support-20261019-v1",
+    "arm": "profile-route-facets-support",
+    "profileVersion": "r3.2-v1",
+    "packingVersion": "r3.3-v1",
+    "supportVersion": "r3.4-v1",
+    "supportPolicy": { "minAnchorHits": 1 },
+    "cohort": "apps/ai_agent/evaluation/r3/development-cases-v1.json",
+    "cases": 24,
+    "answerable": 16,
+    "noMatch": 8,
+    "corpusHash": "45e85c3585607ebfd0e1ebd1f2b068e2fab7c889b1bdd3af3a565f20afcbd440",
+    "labelHash": "a30fd42160326bd6daa02238be50ad0c0cccab23d5ef5372fcae99e7fd49c752",
+    "protocolHash": "e6a491cc5d2423485c61ff5d5e8634e07bc9886bb76041b68238f5322290c3ed",
+    "inputHash": "325c380a92039193f788338c3e243ac2d5584f74a1ee54929d09d5e4730ce881",
+    "scoresHash": "1f34ca45d2a1f3b38953e97128d533b744b76f9efa8f6580f0035b279064ce9c",
+    "reportSha256": "b5629a361a47c9d3e7bec9b999f800328a971fe94292028de3944ddc957c2700"
+  },
+  "reconciledBaseline": {
+    "run": "apps/ai_agent/evaluation/r4/runs/baseline-reconciliation-20261021-v1",
+    "captureDir": "capture",
+    "routeDir": "route",
+    "supportDir": "support",
+    "inputHash": "325c380a92039193f788338c3e243ac2d5584f74a1ee54929d09d5e4730ce881",
+    "inferenceFileSha256": "ed48f584a102e011df179c5b09799cbd02532dda6297fd19619bcb1fb8a492a1",
+    "scoresHash": "c205473e472958c680f3d813094c01036b8529ee01fdcf3227066259a9caa3ba",
+    "supportReportSha256": "deac81b8458938c27102abf7fe57ea6c0dcef93bada28a5df2d004fb64782512",
+    "supportPolicy": { "minAnchorHits": 1 },
+    "determinism": {
+      "casesCompared": 24,
+      "logitsCompared": 1230,
+      "maxAbsoluteLogitDelta": 0,
+      "tokenHashesIdentical": true,
+      "note": "The pinned local MiniLM inference is bit-identical to the R3.4 capture. The scores file byte hash differs only because it stores model-load and rerank timings."
+    }
+  },
+  "harness": {
+    "note": "The existing R3 capture/replay path was reused; no second scoring system was created. reportSupport calls scoreTarget unchanged.",
+    "commands": [
+      "bun run apps/ai_agent/src/evaluation/retrieval-target-cli.ts --prepare-profile apps/ai_agent/evaluation/r4/runs/baseline-reconciliation-20261021-v1/capture",
+      "node apps/ai_agent/src/evaluation/r23-models.mjs apps/ai_agent/evaluation/r4/runs/baseline-reconciliation-20261021-v1/capture/inference-original.json apps/ai_agent/evaluation/r4/runs/baseline-reconciliation-20261021-v1/capture/scores-original.json .tmp-turbo-user/r2-models",
+      "bun run apps/ai_agent/src/evaluation/retrieval-target-cli.ts --report-profile apps/ai_agent/evaluation/r4/runs/baseline-reconciliation-20261021-v1/capture --route-run apps/ai_agent/evaluation/r4/runs/baseline-reconciliation-20261021-v1/route",
+      "bun run apps/ai_agent/src/evaluation/retrieval-target-cli.ts --report-support apps/ai_agent/evaluation/r4/runs/baseline-reconciliation-20261021-v1/support --scores-run apps/ai_agent/evaluation/r4/runs/baseline-reconciliation-20261021-v1/capture --route-run apps/ai_agent/evaluation/r4/runs/baseline-reconciliation-20261021-v1/route"
+    ]
+  },
+  "metricComparison": [
+    {
+      "metric": "sufficientGuidanceHitAt3",
+      "frozen": { "numerator": 13, "denominator": 16, "rate": 0.8125 },
+      "current": { "numerator": 13, "denominator": 16, "rate": 0.8125 },
+      "delta": 0,
+      "status": "identical"
+    },
+    {
+      "metric": "macroSectionRecallAt3",
+      "frozen": 0.875,
+      "current": 0.84375,
+      "delta": -0.03125,
+      "aggregation": "mean of per-case section recall over 16 answerable cases",
+      "status": "changed_by_facet_selection"
+    },
+    {
+      "metric": "directPrecisionAt3",
+      "frozen": 0.5,
+      "current": 0.4791666666666667,
+      "delta": -0.0208333333333333,
+      "aggregation": "mean of per-case direct precision over 16 answerable cases",
+      "status": "changed_by_facet_selection"
+    },
+    {
+      "metric": "candidateRecall",
+      "frozen": 1,
+      "current": 1,
+      "delta": 0,
+      "status": "identical"
+    },
+    {
+      "metric": "routeCoverage",
+      "frozen": 1,
+      "current": 1,
+      "delta": 0,
+      "status": "identical"
+    },
+    {
+      "metric": "noMatchAbstention",
+      "frozen": { "numerator": 8, "denominator": 8, "rate": 1 },
+      "current": { "numerator": 8, "denominator": 8, "rate": 1 },
+      "delta": 0,
+      "status": "identical"
+    },
+    {
+      "metric": "falseAbstention",
+      "frozen": { "numerator": 0, "denominator": 16, "rate": 0 },
+      "current": { "numerator": 0, "denominator": 16, "rate": 0 },
+      "delta": 0,
+      "status": "identical"
+    },
+    {
+      "metric": "reliability",
+      "frozen": { "numerator": 24, "denominator": 24, "rate": 1 },
+      "current": { "numerator": 24, "denominator": 24, "rate": 1 },
+      "delta": 0,
+      "status": "identical"
+    },
+    {
+      "metric": "p95LatencyMs",
+      "frozen": 217.7448,
+      "current": 282.6388,
+      "delta": 64.894,
+      "status": "environment_only",
+      "note": "Single-machine warm timings; the R4 gate is 3000 ms. The delta is not a behavior change."
+    }
+  ],
+  "behavioralDifferences": [
+    {
+      "id": "f07-provider-response-lost",
+      "kind": "answerable",
+      "change": "requested facets and returned third citation changed from forbidden to verification",
+      "frozen": {
+        "requestedFacets": ["investigation", "remediation", "forbidden"],
+        "returned": ["RB-F07@1.0.0#read-only-investigation", "RB-F07@1.0.0#allowed-remediation", "RB-F07@1.0.0#forbidden-actions"]
+      },
+      "current": {
+        "requestedFacets": ["investigation", "remediation", "verification"],
+        "returned": ["RB-F07@1.0.0#read-only-investigation", "RB-F07@1.0.0#allowed-remediation", "RB-F07@1.0.0#verification-rollback-or-escalation"]
+      },
+      "hitAt3": { "frozen": true, "current": true },
+      "cause": "R3.5r per-signal facet demands order verification before forbidden and truncate the union to three.",
+      "effect": "No metric change: the replaced citation is not an accepted citation for this case.",
+      "decision": "keep_provisionally_gated"
+    },
+    {
+      "id": "f09-database-sink-only",
+      "kind": "answerable",
+      "change": "requested facets and returned third citation changed from forbidden to verification",
+      "frozen": {
+        "requestedFacets": ["investigation", "remediation", "forbidden"],
+        "returned": ["RB-F09-F10@1.0.0#read-only-investigation", "RB-F09-F10@1.0.0#allowed-remediation", "RB-F09-F10@1.0.0#forbidden-actions"]
+      },
+      "current": {
+        "requestedFacets": ["investigation", "remediation", "verification"],
+        "returned": ["RB-F09-F10@1.0.0#read-only-investigation", "RB-F09-F10@1.0.0#allowed-remediation", "RB-F09-F10@1.0.0#verification-rollback-or-escalation"]
+      },
+      "hitAt3": { "frozen": true, "current": true },
+      "cause": "Same R3.5r facet-demand union and truncation.",
+      "effect": "No metric change: the replaced citation is not an accepted citation for this case.",
+      "decision": "keep_provisionally_gated"
+    },
+    {
+      "id": "f10-sdk-error-recorded-success",
+      "kind": "answerable",
+      "change": "requested facets replaced forbidden with verification; the accepted forbidden citation is no longer returned",
+      "frozen": {
+        "requestedFacets": ["investigation", "remediation", "forbidden"],
+        "returned": ["RB-F09-F10@1.0.0#read-only-investigation", "RB-F09-F10@1.0.0#allowed-remediation", "RB-F09-F10@1.0.0#forbidden-actions"],
+        "missingFacets": ["investigation"],
+        "sectionRecall": 0.5,
+        "directPrecision": 0.3333333333333333
+      },
+      "current": {
+        "requestedFacets": ["investigation", "remediation", "verification"],
+        "returned": ["RB-F09-F10@1.0.0#read-only-investigation", "RB-F09-F10@1.0.0#allowed-remediation", "RB-F09-F10@1.0.0#verification-rollback-or-escalation"],
+        "missingFacets": ["investigation", "forbidden"],
+        "sectionRecall": 0,
+        "directPrecision": 0
+      },
+      "hitAt3": { "frozen": false, "current": false },
+      "cause": "Same R3.5r facet-demand union and truncation.",
+      "effect": "This case alone accounts for the full metric delta: recall -0.5/16 = -0.03125 and precision -0.3333/16 = -0.02083. hit@3 is already false in both.",
+      "decision": "keep_provisionally_gated"
+    },
+    {
+      "id": "s02-error-prompt-injection",
+      "kind": "answerable",
+      "change": "requested facets and returned third citation changed from forbidden to verification",
+      "frozen": {
+        "requestedFacets": ["investigation", "remediation", "forbidden"],
+        "returned": ["RB-F07@1.0.0#read-only-investigation", "RB-F07@1.0.0#allowed-remediation", "RB-F07@1.0.0#forbidden-actions"]
+      },
+      "current": {
+        "requestedFacets": ["investigation", "remediation", "verification"],
+        "returned": ["RB-F07@1.0.0#read-only-investigation", "RB-F07@1.0.0#allowed-remediation", "RB-F07@1.0.0#verification-rollback-or-escalation"]
+      },
+      "hitAt3": { "frozen": true, "current": true },
+      "cause": "Same R3.5r facet-demand union and truncation.",
+      "effect": "No metric change: the replaced citation is not an accepted citation for this case.",
+      "decision": "keep_provisionally_gated"
+    },
+    {
+      "id": "s03-sensitive-fields-present",
+      "kind": "answerable",
+      "change": "requested facets replaced forbidden with verification; the returned sibling section changed",
+      "frozen": {
+        "requestedFacets": ["investigation", "remediation", "forbidden"],
+        "returned": ["RB-F07@1.0.0#read-only-investigation", "RB-F07@1.0.0#allowed-remediation", "RB-F07@1.0.0#forbidden-actions"]
+      },
+      "current": {
+        "requestedFacets": ["investigation", "remediation", "verification"],
+        "returned": ["RB-F07@1.0.0#read-only-investigation", "RB-F07@1.0.0#allowed-remediation", "RB-F03-F04@1.0.0#verification-rollback-or-escalation"]
+      },
+      "hitAt3": { "frozen": false, "current": false },
+      "cause": "Same R3.5r facet-demand union and truncation.",
+      "effect": "No metric change: this case is a miss in both runs (missing the accepted forbidden section).",
+      "decision": "keep_provisionally_gated"
+    },
+    {
+      "id": "s05-expired-email-dedup-window",
+      "kind": "answerable",
+      "change": "requested facets dropped investigation and added verification; the returned investigation citation changed",
+      "frozen": {
+        "requestedFacets": ["investigation", "remediation", "forbidden"],
+        "returned": ["RB-F07@1.0.0#read-only-investigation", "RB-F07@1.0.0#allowed-remediation", "RB-F07@1.0.0#forbidden-actions"]
+      },
+      "current": {
+        "requestedFacets": ["remediation", "forbidden", "verification"],
+        "returned": ["RB-F07@1.0.0#allowed-remediation", "RB-F07@1.0.0#forbidden-actions", "RB-F07@1.0.0#verification-rollback-or-escalation"]
+      },
+      "hitAt3": { "frozen": true, "current": true },
+      "cause": "R3.5r signal order places dedupWindowExpired first; its demand fills the three slots before deliveryUnknown can add investigation.",
+      "effect": "No metric change: both required facets (remediation, forbidden) remain covered.",
+      "decision": "keep_provisionally_gated"
+    }
+  ],
+  "unexplainedDifferences": [],
+  "routeAudit": {
+    "casesCompared": 24,
+    "confidentRouteDifferences": 0,
+    "hintDifferences": 0,
+    "requestedFacetDifferences": 6,
+    "note": "The R3.5r transport vocabulary and route changes are inert on the 24-case R3 cohort; every route, hint, and exclusion set is identical to R3.4. Only facet selection differs."
+  },
+  "r35rChangeInventory": [
+    {
+      "file": "apps/ai_agent/src/tools/retrieval-profile.ts",
+      "change": "Closed transport vocabulary (errno/dns/phrase/weak), weak-token corroborator, non-provider subsystem exclusion, and typed route reasons.",
+      "authorizedBy": "R4.2a F02 transport route and no-match weak-token guard",
+      "observedEffectOnBaseline": "none on the 24-case cohort (no route or hint differences)",
+      "decision": "gate_pending_r4_2a_reproduction"
+    },
+    {
+      "file": "apps/ai_agent/src/tools/retrieval-profile.ts",
+      "change": "EvidenceSignals plus per-signal facet demands (signalDemands/requestedFacetsForSignals) replacing hint-based requestedGuidanceFacets.",
+      "authorizedBy": "R4.2a F09 verification invariant",
+      "observedEffectOnBaseline": "six cases changed requested facets; one accepted citation lost",
+      "decision": "gate_pending_r4_2a_reproduction; R4.2b must enforce section 3.2 drop order and must not drop forbidden for a fault signal"
+    },
+    {
+      "file": "apps/ai_agent/src/tools/retrieval-profile.ts",
+      "change": "observedFacts outcomeUnknown split from deliveryUnknown.",
+      "authorizedBy": "none directly; supports the F07/F09 signal split",
+      "observedEffectOnBaseline": "no difference in the six changed cases beyond facet selection",
+      "decision": "gate_pending_r4_2a_reproduction"
+    },
+    {
+      "file": "apps/ai_agent/src/evaluation/retrieval-target.ts",
+      "change": "RequiredFacetSchema.accepted and LabelFacetSchema.accepted capped at max(2); multi-citation line-based rationale check.",
+      "authorizedBy": "R4.1 F04 label equivalence schema (precursor)",
+      "observedEffectOnBaseline": "no scoring change; existing labels parse",
+      "decision": "keep; R4.1 raises the cap to max(4) and adds TargetLabelFileV2Schema"
+    },
+    {
+      "file": "apps/ai_agent/src/evaluation/retrieval-target.ts",
+      "change": "Additive strict-label sensitivity fields (strictSufficient, strictSectionRecall, canonicalAccepted) and metrics.",
+      "authorizedBy": "none; R3.5r robustness instrumentation",
+      "observedEffectOnBaseline": "none on the primary or secondary metrics",
+      "decision": "keep_inert; not used by any R4 gate or decision"
+    },
+    {
+      "file": "apps/ai_agent/src/tools/structured-ranking.ts",
+      "change": "Optional acceptance map for facetsCovered.",
+      "authorizedBy": "none; used only by the closed R3.5r recovery driver",
+      "observedEffectOnBaseline": "none; the R3/R4 path calls rankStructured without the map",
+      "decision": "keep_inert; the R4 driver must not pass acceptance because scoreTarget already does acceptance"
+    },
+    {
+      "file": "apps/ai_agent/tests/retrieval-profile.test.ts",
+      "change": "Tests for the transport vocabulary, route guard, and facet demands.",
+      "authorizedBy": "R4.2a contract tests",
+      "observedEffectOnBaseline": "none (tests only)",
+      "decision": "keep; used as R4.2a evidence"
+    },
+    {
+      "file": "apps/ai_agent/tests/retrieval-target.test.ts",
+      "change": "Tests for label equivalence and strict-label metrics.",
+      "authorizedBy": "R4.1 label schema contract",
+      "observedEffectOnBaseline": "none (tests only)",
+      "decision": "keep"
+    },
+    {
+      "file": "apps/ai_agent/evaluation/r3/README.md",
+      "change": "Records the closed R3.5r line and the instrument-repair note.",
+      "authorizedBy": "documentation",
+      "observedEffectOnBaseline": "none",
+      "decision": "keep"
+    }
+  ],
+  "decision": {
+    "baselineReproducible": true,
+    "baselineFrozenAs": "current working tree at commit da3b860e1a07866cbe34f9b1231c63ecc58d7a8c with the R3.5r working-tree changes listed above",
+    "primaryMetricsUnchanged": true,
+    "changesKept": [
+      "retrieval-target.ts label cap max(2) and line-based rationale check (R4.1 precursor)",
+      "retrieval-target.ts strict-label sensitivity fields (inert)",
+      "structured-ranking.ts acceptance map (inert)",
+      "tests and r3/README.md"
+    ],
+    "changesGated": [
+      "retrieval-profile.ts transport vocabulary and weak-token route guard (R4.2a)",
+      "retrieval-profile.ts per-signal facet demands and outcomeUnknown split (R4.2a F09)"
+    ],
+    "changesReverted": [],
+    "revertRationale": "A broad revert is unsafe and unnecessary. The frozen query input hash is identical to R3.4, inference is bit-identical, route behavior is identical, and the only behavioral delta is six facet selections attributable to the F09 candidate change. R4.2a reproduces the defects; R4.2b implements only the three runtime fixes relative to this frozen baseline.",
+    "nextPhase": "R4.2a reproduction matrix on this frozen baseline"
+  }
+}

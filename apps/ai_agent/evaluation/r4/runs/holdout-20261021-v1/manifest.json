@@ -1,0 +1,19 @@
+{
+  "phase": "R4.4",
+  "run": "holdout-20261021-v1",
+  "generatedAt": "2026-10-21T11:55:48.911Z",
+  "candidateConfigHash": "a56ae39c3053f954aebbb7318034fc39408f72f85198e8cc13e5620f78ec2805",
+  "sealHash": "8d6cb47c3032e0ae051ad83c2009d007b644162d95f7f8e44d24ec61f558c886",
+  "gate": {
+    "status": "retrieval_accepted",
+    "failing": [],
+    "blockedReasons": []
+  },
+  "files": {
+    "inference-original.json": "5cec5b945df35b32b2a2b1f22307e1740c45292973662f3aee58e08a25719fdb",
+    "scores-original.json": "1d9b2017a3b9141ef73fe7d1dd63d445eb6a9677ca8ac130ddd5af4f16a9199a",
+    "report.json": "042657c1640795f98bf1b268dff3bad73c5c4997238fbc3b084ccb358d9e9e27",
+    "failure-ledger.json": "513714bc57c3c42e50998adaa5cdf6d492afc3994a74259fd714491e5848e37f",
+    "decision.md": "01da932c5aa8b9b918ebc18d34aee0b33d4b401049462411dd20a9b950ce0a4f"
+  }
+}

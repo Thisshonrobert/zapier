@@ -87,7 +87,8 @@ export type TargetFacet = z.infer<typeof FacetSchema>;
 const RequiredFacetSchema = z
   .object({
     facet: FacetSchema,
-    accepted: z.array(z.string().min(1)).min(1),
+    // Up to four independently sufficient sections may answer one facet.
+    accepted: z.array(z.string().min(1)).min(1).max(4),
   })
   .strict();
 
@@ -128,39 +129,88 @@ export async function loadTargetCases(path: string): Promise<TargetCase[]> {
 // Reviewed label file (source of truth for the frozen label hash)
 // ---------------------------------------------------------------------------
 
+// Equivalence provenance is line-based: a multi-citation facet carries one
+// reviewer rationale line per accepted citation, and each line names its
+// citation. Single-citation facets keep the existing free-form rationale.
+export const rationaleLines = (rationale: string): string[] =>
+  rationale
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter(Boolean);
+
 const LabelFacetSchema = z
   .object({
     facet: FacetSchema,
-    accepted: z.array(z.string().min(1)).min(1),
+    accepted: z.array(z.string().min(1)).min(1).max(4),
     rationale: z.string().min(1),
+  })
+  .strict()
+  .superRefine((facet, context) => {
+    if (facet.accepted.length < 2) return;
+    const lines = rationaleLines(facet.rationale);
+    if (lines.length !== facet.accepted.length) {
+      context.addIssue({
+        code: "custom",
+        message: "Multi-citation facet needs one rationale line per citation",
+        path: ["rationale"],
+      });
+      return;
+    }
+    for (const citation of facet.accepted) {
+      if (!lines.some((line) => line.startsWith(citation))) {
+        context.addIssue({
+          code: "custom",
+          message: `Missing rationale line for ${citation}`,
+          path: ["rationale"],
+        });
+      }
+    }
+  });
+
+const LabelCaseSchema = z
+  .object({
+    id: z.string().min(1),
+    requiredFacets: z.array(LabelFacetSchema).max(3),
+    supporting: z.array(z.string().min(1)),
+    missingRuntimeFacts: z.array(z.string().min(1)),
+    noMatchRationale: z.string().min(1).nullable(),
   })
   .strict();
 
 export const TargetLabelFileSchema = z
   .object({
     version: z.literal(1),
-    cases: z.array(
-      z
-        .object({
-          id: z.string().min(1),
-          requiredFacets: z.array(LabelFacetSchema).max(3),
-          supporting: z.array(z.string().min(1)),
-          missingRuntimeFacts: z.array(z.string().min(1)),
-          noMatchRationale: z.string().min(1).nullable(),
-        })
-        .strict(),
-    ),
+    cases: z.array(LabelCaseSchema),
+  })
+  .strict();
+
+// v2 keeps the v1 case/label shape and adds no required field. It exists so an
+// R4 label file can be identified as authored under the equivalence rules:
+// every independently sufficient citation is accepted, up to four per facet.
+export const TargetLabelFileV2Schema = z
+  .object({
+    version: z.literal(2),
+    cases: z.array(LabelCaseSchema),
   })
   .strict();
 
 export type TargetLabelFile = z.infer<typeof TargetLabelFileSchema>;
-export type TargetLabelCase = TargetLabelFile["cases"][number];
+export type TargetLabelFileV2 = z.infer<typeof TargetLabelFileV2Schema>;
+export type TargetLabelCase = z.infer<typeof LabelCaseSchema>;
 
 export async function loadTargetLabels(path: string): Promise<TargetLabelFile> {
   return TargetLabelFileSchema.parse(JSON.parse(await readFile(path, "utf8")));
 }
 
-export const targetLabelHash = (labels: TargetLabelFile) =>
+export async function loadTargetLabelsV2(
+  path: string,
+): Promise<TargetLabelFileV2> {
+  return TargetLabelFileV2Schema.parse(
+    JSON.parse(await readFile(path, "utf8")),
+  );
+}
+
+export const targetLabelHash = (labels: TargetLabelFile | TargetLabelFileV2) =>
   createHash("sha256").update(JSON.stringify(labels)).digest("hex");
 
 // ---------------------------------------------------------------------------
@@ -242,6 +292,9 @@ export function scoreTarget(
         eligibleAnswerable: false,
         sufficient: false,
         sectionRecall: null as number | null,
+        strictSufficient: false,
+        strictSectionRecall: null as number | null,
+        canonicalAccepted: [] as string[],
         directPrecision: 0,
         candidateRecall: null as number | null,
         routeCoverage: null as number | null,
@@ -282,6 +335,9 @@ export function scoreTarget(
         eligibleAnswerable: false,
         sufficient: false,
         sectionRecall: null as number | null,
+        strictSufficient: false,
+        strictSectionRecall: null as number | null,
+        canonicalAccepted: [] as string[],
         directPrecision: 0,
         candidateRecall: null as number | null,
         routeCoverage: null as number | null,
@@ -293,6 +349,13 @@ export function scoreTarget(
     const hits = accepted.filter((citation) => returned.includes(citation));
     const facetsCovered = feasible.filter((facet) =>
       facet.accepted.some((citation) => returned.includes(citation)),
+    );
+    // Strict-label sensitivity: one canonical citation per facet, defined as
+    // the first listed accepted citation. Provider-excluded citations are
+    // already removed by the eligibility filter above.
+    const canonicalAccepted = feasible.map((facet) => facet.accepted[0]!);
+    const strictFacetsCovered = feasible.filter((facet) =>
+      returned.includes(facet.accepted[0]!),
     );
     const candidates = output && "returned" in output ? output.candidates : undefined;
     if (candidates?.some((citation) => !known.has(citation)))
@@ -315,6 +378,11 @@ export function scoreTarget(
       eligibleAnswerable: true,
       sufficient: facetsCovered.length === feasible.length,
       sectionRecall: hits.length / accepted.length,
+      strictSufficient: strictFacetsCovered.length === feasible.length,
+      strictSectionRecall: canonicalAccepted.length
+        ? strictFacetsCovered.length / canonicalAccepted.length
+        : null,
+      canonicalAccepted,
       directPrecision: returned.length ? hits.length / returned.length : 0,
       candidateRecall: candidateHits / accepted.length,
       routeCoverage: accepted.length
@@ -336,6 +404,14 @@ export function scoreTarget(
       return output && "latencyMs" in output ? [output.latencyMs] : [];
     })
     .sort((left, right) => left - right);
+  const sufficientRate = fraction(
+    positives.filter((row) => row.sufficient).length,
+    positives.length,
+  ).rate;
+  const strictSufficientRate = fraction(
+    positives.filter((row) => row.strictSufficient).length,
+    positives.length,
+  ).rate;
 
   return {
     rows,
@@ -348,11 +424,16 @@ export function scoreTarget(
       unavailable: rows.filter((row) => !row.available).length,
     },
     metrics: {
-      sufficientGuidanceHitAt3: fraction(
-        positives.filter((row) => row.sufficient).length,
-        positives.length,
-      ).rate,
+      sufficientGuidanceHitAt3: sufficientRate,
       macroSectionRecallAt3: mean(positives.map((row) => row.sectionRecall ?? 0)),
+      strictSufficientGuidanceHitAt3: strictSufficientRate,
+      strictMacroSectionRecallAt3: mean(
+        positives.map((row) => row.strictSectionRecall ?? 0),
+      ),
+      strictLabelGap:
+        sufficientRate !== null && strictSufficientRate !== null
+          ? sufficientRate - strictSufficientRate
+          : null,
       directPrecisionAt3: mean(positives.map((row) => row.directPrecision)),
       candidateRecall: mean(positives.map((row) => row.candidateRecall ?? 1)),
       routeCoverage: mean(positives.map((row) => row.routeCoverage ?? 1)),

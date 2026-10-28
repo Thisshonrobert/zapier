@@ -1,0 +1,17 @@
+{
+  "phase": "R4.3",
+  "run": "dev-20261021-v2",
+  "generatedAt": "2026-10-21T09:35:01.464Z",
+  "gate": {
+    "status": "retrieval_accepted",
+    "failing": [],
+    "blockedReasons": []
+  },
+  "files": {
+    "inference-original.json": "bdcc2be753433e7090d5a3206e4825f6877fee7046f0178ae5704d717f071ed5",
+    "scores-original.json": "fbc2e3c77b5a56a27cbb34904243047622563f0ba7739b9023821d59bb95c022",
+    "report.json": "8e369e36300a72c85944d3c471d592a32116fd1e97307db35fe995e66b0190d6",
+    "failure-ledger.json": "89726ec0697cfc78ac153af34cb40e3f8b54470db0c8030de1cfe716197f76a0",
+    "decision.md": "8939fe4b780eaf5fe56fea7ea996cc70f83d6e55855563af550b3a23081bb040"
+  }
+}

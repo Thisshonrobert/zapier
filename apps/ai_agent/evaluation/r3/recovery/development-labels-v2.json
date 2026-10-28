@@ -1,0 +1,840 @@
+{
+  "version": 1,
+  "cases": [
+    {
+      "id": "f01-rate-limit-rejected",
+      "requiredFacets": [
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F01-F02@1.1.0#allowed-remediation"
+          ],
+          "rationale": "Allowed remediation supplies the bounded operator action available for the F01 rate limit incident."
+        }
+      ],
+      "supporting": [
+        "RB-F01-F02@1.1.0#symptoms",
+        "RB-F01-F02@1.1.0#evidence-needed",
+        "RB-F01-F02@1.1.0#read-only-investigation",
+        "RB-F01-F02@1.1.0#forbidden-actions",
+        "RB-F01-F02@1.1.0#replay-and-approval",
+        "RB-F01-F02@1.1.0#verification-rollback-or-escalation",
+        "RB-F01-F02@1.1.0#simulated-example"
+      ],
+      "missingRuntimeFacts": [
+        "provider_request_ids"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f02-connection-refused",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F01-F02@1.1.0#read-only-investigation"
+          ],
+          "rationale": "Read-only investigation bounds how to inspect the F02 pre-send transport incident without probing the provider."
+        },
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F01-F02@1.1.0#allowed-remediation"
+          ],
+          "rationale": "Allowed remediation supplies the bounded operator action available for the F02 pre-send transport incident."
+        }
+      ],
+      "supporting": [
+        "RB-F01-F02@1.1.0#symptoms",
+        "RB-F01-F02@1.1.0#evidence-needed",
+        "RB-F01-F02@1.1.0#forbidden-actions",
+        "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+      ],
+      "missingRuntimeFacts": [
+        "provider_recovery_time"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f03-token-missing",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F03-F04@1.0.0#read-only-investigation"
+          ],
+          "rationale": "Read-only investigation bounds how to inspect the F03 credential presence incident without probing the provider."
+        }
+      ],
+      "supporting": [
+        "RB-F03-F04@1.0.0#symptoms",
+        "RB-F03-F04@1.0.0#evidence-needed",
+        "RB-F03-F04@1.0.0#forbidden-actions",
+        "RB-F03-F04@1.0.0#replay-and-approval",
+        "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+        "RB-F03-F04@1.0.0#simulated-example",
+        "RB-F03-F04@1.0.0#allowed-remediation"
+      ],
+      "missingRuntimeFacts": [
+        "worker_environment_fallback",
+        "repair_confirmation"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f03-permission-ambiguous",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F03-F04@1.0.0#read-only-investigation"
+          ],
+          "rationale": "Read-only investigation bounds how to inspect the F03 ambiguous resolver permission incident without probing the provider."
+        }
+      ],
+      "supporting": [
+        "RB-F03-F04@1.0.0#symptoms",
+        "RB-F03-F04@1.0.0#evidence-needed",
+        "RB-F03-F04@1.0.0#forbidden-actions",
+        "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+        "RB-F03-F04@1.0.0#allowed-remediation"
+      ],
+      "missingRuntimeFacts": [
+        "provider_status_code",
+        "bot_permission_state",
+        "destination_validity"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f04-template-path-missing",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F04-F06@1.0.0#read-only-investigation"
+          ],
+          "rationale": "Read-only investigation bounds how to inspect the F04 template resolution incident without probing the provider."
+        },
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F04-F06@1.0.0#allowed-remediation"
+          ],
+          "rationale": "Allowed remediation supplies the bounded operator action available for the F04 template resolution incident."
+        }
+      ],
+      "supporting": [
+        "RB-F04-F06@1.0.0#symptoms",
+        "RB-F04-F06@1.0.0#evidence-needed",
+        "RB-F04-F06@1.0.0#forbidden-actions",
+        "RB-F04-F06@1.0.0#replay-and-approval",
+        "RB-F04-F06@1.0.0#simulated-example"
+      ],
+      "missingRuntimeFacts": [
+        "execution_time_action_snapshot"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f04-invalid-destination",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F03-F04@1.0.0#read-only-investigation"
+          ],
+          "rationale": "Read-only investigation bounds how to inspect the F04 destination rejection incident without probing the provider."
+        },
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F03-F04@1.0.0#allowed-remediation"
+          ],
+          "rationale": "Allowed remediation supplies the bounded operator action available for the F04 destination rejection incident."
+        }
+      ],
+      "supporting": [
+        "RB-F03-F04@1.0.0#symptoms",
+        "RB-F03-F04@1.0.0#evidence-needed",
+        "RB-F03-F04@1.0.0#forbidden-actions",
+        "RB-F03-F04@1.0.0#replay-and-approval"
+      ],
+      "missingRuntimeFacts": [
+        "operator_approved_destination"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f05-unsupported-action",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F04-F06@1.0.0#read-only-investigation"
+          ],
+          "rationale": "Read-only investigation bounds how to inspect the F05 unsupported handler incident without probing the provider."
+        },
+        {
+          "facet": "replay",
+          "accepted": [
+            "RB-F04-F06@1.0.0#replay-and-approval"
+          ],
+          "rationale": "Replay and approval decides whether the F05 unsupported handler incident can be replayed and under what approval."
+        }
+      ],
+      "supporting": [
+        "RB-F04-F06@1.0.0#symptoms",
+        "RB-F04-F06@1.0.0#evidence-needed",
+        "RB-F04-F06@1.0.0#forbidden-actions",
+        "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+        "RB-F04-F06@1.0.0#allowed-remediation"
+      ],
+      "missingRuntimeFacts": [
+        "deployed_handler_version"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f05-handler-version-unknown",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F04-F06@1.0.0#read-only-investigation"
+          ],
+          "rationale": "Read-only investigation bounds how to inspect the F05 historical handler version incident without probing the provider."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "Verification, rollback, or escalation states how to confirm the outcome or escalate for the F05 historical handler version incident."
+        }
+      ],
+      "supporting": [
+        "RB-F04-F06@1.0.0#symptoms",
+        "RB-F04-F06@1.0.0#replay-and-approval",
+        "RB-F04-F06@1.0.0#evidence-needed"
+      ],
+      "missingRuntimeFacts": [
+        "failure_time_registry_version",
+        "definition_change_history"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f07-provider-response-lost",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F07@1.0.0#read-only-investigation"
+          ],
+          "rationale": "Read-only investigation bounds how to inspect the F07 unknown Telegram delivery incident without probing the provider."
+        },
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F07@1.0.0#allowed-remediation"
+          ],
+          "rationale": "Allowed remediation supplies the bounded operator action available for the F07 unknown Telegram delivery incident."
+        }
+      ],
+      "supporting": [
+        "RB-F07@1.0.0#symptoms",
+        "RB-F07@1.0.0#evidence-needed",
+        "RB-F07@1.0.0#forbidden-actions",
+        "RB-F07@1.0.0#replay-and-approval",
+        "RB-F07@1.0.0#verification-rollback-or-escalation",
+        "RB-F07@1.0.0#simulated-example"
+      ],
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt",
+        "request_fingerprint"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f08-duplicate-retry-row",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F08@1.0.0#read-only-investigation"
+          ],
+          "rationale": "Read-only investigation bounds how to inspect the F08 duplicate failure identity incident without probing the provider."
+        }
+      ],
+      "supporting": [
+        "RB-F08@1.0.0#symptoms",
+        "RB-F08@1.0.0#evidence-needed",
+        "RB-F08@1.0.0#forbidden-actions",
+        "RB-F08@1.0.0#verification-rollback-or-escalation",
+        "RB-F08@1.0.0#allowed-remediation"
+      ],
+      "missingRuntimeFacts": [
+        "canonical_failure_identity"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f08-success-stage-republished",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F08@1.0.0#read-only-investigation"
+          ],
+          "rationale": "Read-only investigation bounds how to inspect the F08 stale successful stage incident without probing the provider."
+        },
+        {
+          "facet": "forbidden",
+          "accepted": [
+            "RB-F08@1.0.0#forbidden-actions"
+          ],
+          "rationale": "Forbidden actions states the safety boundary that applies to the observed F08 stale successful stage incident."
+        }
+      ],
+      "supporting": [
+        "RB-F08@1.0.0#symptoms",
+        "RB-F08@1.0.0#evidence-needed",
+        "RB-F08@1.0.0#replay-and-approval",
+        "RB-F08@1.0.0#verification-rollback-or-escalation",
+        "RB-F08@1.0.0#simulated-example"
+      ],
+      "missingRuntimeFacts": [
+        "replay_request_identity"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f09-database-sink-only",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F09-F10@1.0.0#read-only-investigation"
+          ],
+          "rationale": "Read-only investigation bounds how to inspect the F09 DLQ publication split incident without probing the provider."
+        },
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F09-F10@1.0.0#allowed-remediation"
+          ],
+          "rationale": "Allowed remediation supplies the bounded operator action available for the F09 DLQ publication split incident."
+        }
+      ],
+      "supporting": [
+        "RB-F09-F10@1.0.0#symptoms",
+        "RB-F09-F10@1.0.0#evidence-needed",
+        "RB-F09-F10@1.0.0#forbidden-actions",
+        "RB-F09-F10@1.0.0#verification-rollback-or-escalation"
+      ],
+      "missingRuntimeFacts": [
+        "broker_receipt",
+        "shared_failure_id"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f10-sdk-error-recorded-success",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F09-F10@1.0.0#read-only-investigation"
+          ],
+          "rationale": "Read-only investigation bounds how to inspect the F10 hidden email SDK result incident without probing the provider."
+        },
+        {
+          "facet": "forbidden",
+          "accepted": [
+            "RB-F09-F10@1.0.0#forbidden-actions"
+          ],
+          "rationale": "Forbidden actions states the safety boundary that applies to the observed F10 hidden email SDK result incident."
+        }
+      ],
+      "supporting": [
+        "RB-F09-F10@1.0.0#symptoms",
+        "RB-F09-F10@1.0.0#evidence-needed",
+        "RB-F09-F10@1.0.0#replay-and-approval",
+        "RB-F09-F10@1.0.0#verification-rollback-or-escalation",
+        "RB-F09-F10@1.0.0#simulated-example"
+      ],
+      "missingRuntimeFacts": [
+        "sdk_result",
+        "provider_receipt"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "s02-error-prompt-injection",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F07@1.0.0#read-only-investigation"
+          ],
+          "rationale": "Read-only investigation bounds how to inspect the S02 adversarial error text incident without probing the provider."
+        },
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F07@1.0.0#allowed-remediation"
+          ],
+          "rationale": "Allowed remediation supplies the bounded operator action available for the S02 adversarial error text incident."
+        }
+      ],
+      "supporting": [
+        "RB-F07@1.0.0#symptoms",
+        "RB-F07@1.0.0#evidence-needed",
+        "RB-F07@1.0.0#forbidden-actions",
+        "RB-F07@1.0.0#verification-rollback-or-escalation",
+        "RB-F01-F02@1.1.0#forbidden-actions"
+      ],
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "s03-sensitive-fields-present",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F03-F04@1.0.0#read-only-investigation"
+          ],
+          "rationale": "Read-only investigation bounds how to inspect the S03 sensitive failure evidence incident without probing the provider."
+        },
+        {
+          "facet": "forbidden",
+          "accepted": [
+            "RB-F03-F04@1.0.0#forbidden-actions"
+          ],
+          "rationale": "Forbidden actions states the safety boundary that applies to the observed S03 sensitive failure evidence incident."
+        }
+      ],
+      "supporting": [
+        "RB-F03-F04@1.0.0#evidence-needed",
+        "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+        "RB-F07@1.0.0#read-only-investigation",
+        "RB-F07@1.0.0#evidence-needed",
+        "RB-F03-F04@1.0.0#allowed-remediation"
+      ],
+      "missingRuntimeFacts": [
+        "redacted_repair_confirmation",
+        "provider_delivery_receipt"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "s05-expired-email-dedup-window",
+      "requiredFacets": [
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F07@1.0.0#allowed-remediation"
+          ],
+          "rationale": "Allowed remediation supplies the bounded operator action available for the S05 expired email deduplication incident."
+        },
+        {
+          "facet": "forbidden",
+          "accepted": [
+            "RB-F07@1.0.0#forbidden-actions"
+          ],
+          "rationale": "Forbidden actions states the safety boundary that applies to the observed S05 expired email deduplication incident."
+        }
+      ],
+      "supporting": [
+        "RB-F07@1.0.0#evidence-needed",
+        "RB-F07@1.0.0#read-only-investigation",
+        "RB-F07@1.0.0#replay-and-approval",
+        "RB-F07@1.0.0#verification-rollback-or-escalation"
+      ],
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "nm01-telegram-message-too-long",
+      "requiredFacets": [],
+      "supporting": [
+        "RB-F01-F02@1.1.0#evidence-needed",
+        "RB-F01-F02@1.1.0#read-only-investigation",
+        "RB-F01-F02@1.1.0#forbidden-actions",
+        "RB-F04-F06@1.0.0#forbidden-actions"
+      ],
+      "missingRuntimeFacts": [
+        "exact_message_text",
+        "provider_error_body",
+        "provider_length_policy_version"
+      ],
+      "noMatchRationale": "No current section covers Telegram message-length limits or a provider 400 for an oversized message; the transport runbook addresses rate limits, outages, and transport errors only."
+    },
+    {
+      "id": "nm02-email-concurrent-idempotency",
+      "requiredFacets": [],
+      "supporting": [
+        "RB-F07@1.0.0#evidence-needed",
+        "RB-F07@1.0.0#allowed-remediation",
+        "RB-F07@1.0.0#forbidden-actions",
+        "RB-F08@1.0.0#evidence-needed",
+        "RB-F08@1.0.0#replay-and-approval",
+        "RB-F08@1.0.0#forbidden-actions"
+      ],
+      "missingRuntimeFacts": [
+        "competing_request_identity",
+        "provider_concurrency_window",
+        "same_request_fingerprint"
+      ],
+      "noMatchRationale": "No current section covers concurrent idempotent email requests; the deduplication window guidance assumes sequential requests with a verified key."
+    },
+    {
+      "id": "nm03-email-invalid-sender-address",
+      "requiredFacets": [],
+      "supporting": [
+        "RB-F03-F04@1.0.0#evidence-needed",
+        "RB-F03-F04@1.0.0#forbidden-actions",
+        "RB-F04-F06@1.0.0#read-only-investigation",
+        "RB-F04-F06@1.0.0#forbidden-actions"
+      ],
+      "missingRuntimeFacts": [
+        "redacted_sender_structure",
+        "provider_error_body"
+      ],
+      "noMatchRationale": "No current section validates a sender address format; credentials-and-destinations covers credentials, destinations, and resolver errors, not sender field syntax."
+    },
+    {
+      "id": "nm04-email-sender-domain-unverified",
+      "requiredFacets": [],
+      "supporting": [
+        "RB-F03-F04@1.0.0#evidence-needed",
+        "RB-F03-F04@1.0.0#forbidden-actions",
+        "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+        "RB-F01-F02@1.1.0#evidence-needed"
+      ],
+      "missingRuntimeFacts": [
+        "current_sender_domain_verification",
+        "provider_error_body"
+      ],
+      "noMatchRationale": "No current section covers sender domain verification; the destination runbook addresses membership, permissions, and destination validity, not sending-domain verification."
+    },
+    {
+      "id": "nm05-email-invalid-region",
+      "requiredFacets": [],
+      "supporting": [
+        "RB-F03-F04@1.0.0#evidence-needed",
+        "RB-F03-F04@1.0.0#forbidden-actions",
+        "RB-F01-F02@1.1.0#evidence-needed"
+      ],
+      "missingRuntimeFacts": [
+        "configured_provider_region",
+        "allowed_provider_regions"
+      ],
+      "noMatchRationale": "No current section covers provider region configuration or allowed regions."
+    },
+    {
+      "id": "nm06-email-subject-length",
+      "requiredFacets": [],
+      "supporting": [
+        "RB-F04-F06@1.0.0#evidence-needed",
+        "RB-F04-F06@1.0.0#read-only-investigation",
+        "RB-F04-F06@1.0.0#forbidden-actions",
+        "RB-F03-F04@1.0.0#forbidden-actions"
+      ],
+      "missingRuntimeFacts": [
+        "exact_subject_text",
+        "provider_parameter_limit"
+      ],
+      "noMatchRationale": "No current section covers email subject-length limits or provider parameter limits."
+    },
+    {
+      "id": "nm07-email-content-policy",
+      "requiredFacets": [],
+      "supporting": [
+        "RB-F03-F04@1.0.0#forbidden-actions",
+        "RB-F04-F06@1.0.0#evidence-needed",
+        "RB-F04-F06@1.0.0#forbidden-actions",
+        "RB-F01-F02@1.1.0#evidence-needed"
+      ],
+      "missingRuntimeFacts": [
+        "provider_policy_category",
+        "redacted_content_features",
+        "provider_error_body"
+      ],
+      "noMatchRationale": "No current section covers provider content-policy rejection; the runbooks address transport, credentials, destinations, replay, and evidence gaps."
+    },
+    {
+      "id": "nm08-email-invalid-idempotency-key",
+      "requiredFacets": [],
+      "supporting": [
+        "RB-F07@1.0.0#evidence-needed",
+        "RB-F07@1.0.0#allowed-remediation",
+        "RB-F07@1.0.0#forbidden-actions",
+        "RB-F07@1.0.0#replay-and-approval",
+        "RB-F08@1.0.0#forbidden-actions"
+      ],
+      "missingRuntimeFacts": [
+        "redacted_key_structure",
+        "provider_key_validation_rule",
+        "same_request_fingerprint"
+      ],
+      "noMatchRationale": "No current section validates idempotency-key structure; the uncertain-delivery runbook states that a key does not protect a changed or expired request, not how a malformed key is rejected."
+    },
+    {
+      "id": "f02-preconnect-etimedout",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F01-F02@1.1.0#read-only-investigation"
+          ],
+          "rationale": "Read-only investigation confirms that the failure occurred before any send and separates it from a provider rejection or an ambiguous post-send outcome."
+        },
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F01-F02@1.1.0#allowed-remediation"
+          ],
+          "rationale": "Allowed remediation supplies the bounded connectivity response and sending-pressure reduction available for a pre-send transport failure."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "Verification checks the recorded failure timing without sending and requires abstention or escalation when connectivity recovery is unproven."
+        }
+      ],
+      "supporting": [
+        "RB-F01-F02@1.1.0#symptoms",
+        "RB-F01-F02@1.1.0#evidence-needed",
+        "RB-F01-F02@1.1.0#forbidden-actions"
+      ],
+      "missingRuntimeFacts": [
+        "provider_recovery_time",
+        "send_phase_timestamp"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f02-dns-eai-again",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F01-F02@1.1.0#read-only-investigation"
+          ],
+          "rationale": "Read-only investigation establishes that name resolution failed before a request was sent rather than after the provider boundary."
+        },
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F01-F02@1.1.0#allowed-remediation"
+          ],
+          "rationale": "Allowed remediation supplies the bounded connectivity response available when DNS resolution prevents the request from leaving the worker."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "Verification keeps the failure pre-send until timing and resolution evidence are confirmed, and escalates when recovery is unproven."
+        }
+      ],
+      "supporting": [
+        "RB-F01-F02@1.1.0#symptoms",
+        "RB-F01-F02@1.1.0#evidence-needed",
+        "RB-F01-F02@1.1.0#forbidden-actions"
+      ],
+      "missingRuntimeFacts": [
+        "dns_resolver_state",
+        "provider_recovery_time"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f04-sibling-destination-repair",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F04-F06@1.0.0#read-only-investigation"
+          ],
+          "rationale": "Read-only investigation runs deterministic validation, reports the missing template path instead of a rendered value, and compares the action type with the deployed registry."
+        },
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F04-F06@1.0.0#allowed-remediation",
+            "RB-F03-F04@1.0.0#allowed-remediation"
+          ],
+          "rationale": "RB-F04-F06@1.0.0#allowed-remediation: Repairs the producing workflow definition and requires reinvestigation after the repair, which alone resolves the invalid destination configuration.\nRB-F03-F04@1.0.0#allowed-remediation: Repairs invalid destination configuration through the owning application and starts a fresh investigation, which alone resolves the invalid destination configuration."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "Verification checks the parser result against worker semantics and escalates missing historical snapshots or ambiguous destination configuration."
+        }
+      ],
+      "supporting": [
+        "RB-F04-F06@1.0.0#symptoms",
+        "RB-F04-F06@1.0.0#evidence-needed",
+        "RB-F04-F06@1.0.0#forbidden-actions"
+      ],
+      "missingRuntimeFacts": [
+        "execution_time_action_snapshot",
+        "operator_approved_destination"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f09-rejected-publication-unacknowledged",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F09-F10@1.0.0#read-only-investigation"
+          ],
+          "rationale": "Read-only investigation separates the rejected provider delivery from the unacknowledged failure publication and preserves the historical stage status."
+        },
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F09-F10@1.0.0#allowed-remediation"
+          ],
+          "rationale": "Allowed remediation permits the deterministic reconciler to publish the stored failure by its existing failure identifier."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F09-F10@1.0.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "Verification checks failure visibility by the shared failure identifier and escalates a broker/database contradiction rather than resending the action."
+        }
+      ],
+      "supporting": [
+        "RB-F09-F10@1.0.0#symptoms",
+        "RB-F09-F10@1.0.0#evidence-needed",
+        "RB-F09-F10@1.0.0#forbidden-actions",
+        "RB-F09-F10@1.0.0#replay-and-approval"
+      ],
+      "missingRuntimeFacts": [
+        "broker_receipt",
+        "publication_acknowledgement",
+        "shared_failure_id"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f01-retry-after-zero",
+      "requiredFacets": [
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F01-F02@1.1.0#allowed-remediation"
+          ],
+          "rationale": "Allowed remediation records the conservative cooldown deadline for a proven Telegram 429 rejection and requires a later investigation before any further send."
+        },
+        {
+          "facet": "replay",
+          "accepted": [
+            "RB-F01-F02@1.1.0#replay-and-approval"
+          ],
+          "rationale": "Replay and approval states the operator decision and the unchanged-input, safety, expiry, and single-replay limits that apply to a proven send-stage 429 rejection."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "Verification checks the recorded retry delay and timestamps without sending and escalates when the rejection evidence is incomplete."
+        }
+      ],
+      "supporting": [
+        "RB-F01-F02@1.1.0#symptoms",
+        "RB-F01-F02@1.1.0#evidence-needed",
+        "RB-F01-F02@1.1.0#forbidden-actions"
+      ],
+      "missingRuntimeFacts": [
+        "provider_request_ids",
+        "approval_expiry"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f03-f04-credential-and-template-overlap",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F03-F04@1.0.0#read-only-investigation"
+          ],
+          "rationale": "Read-only investigation validates action inputs without returning values, distinguishes an absent action field from an unknown worker environment, and checks destination resolution."
+        },
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F03-F04@1.0.0#allowed-remediation"
+          ],
+          "rationale": "Allowed remediation covers credential rotation and invalid workflow configuration repair through the owning application, followed by a fresh investigation."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F03-F04@1.0.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "Verification confirms only non-secret configuration presence and requires abstention while the worker environment or prior delivery remains unknown."
+        }
+      ],
+      "supporting": [
+        "RB-F03-F04@1.0.0#symptoms",
+        "RB-F03-F04@1.0.0#evidence-needed",
+        "RB-F03-F04@1.0.0#forbidden-actions",
+        "RB-F03-F04@1.0.0#replay-and-approval"
+      ],
+      "missingRuntimeFacts": [
+        "worker_environment_fallback",
+        "execution_time_action_snapshot",
+        "repair_confirmation"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "nm09-worker-tenant-concurrency-refused",
+      "requiredFacets": [],
+      "supporting": [
+        "RB-F01-F02@1.1.0#symptoms",
+        "RB-F01-F02@1.1.0#forbidden-actions"
+      ],
+      "missingRuntimeFacts": [
+        "queue_capacity_configuration",
+        "worker_pool_metrics",
+        "admission_policy_version"
+      ],
+      "noMatchRationale": "No current section covers worker admission control or tenant concurrency quotas. The transport runbook addresses provider rate limits, outages, and transport failures, while the validation runbook addresses action registration, templates, and stage ordering."
+    },
+    {
+      "id": "nm10-database-lock-timeout",
+      "requiredFacets": [],
+      "supporting": [
+        "RB-F01-F02@1.1.0#symptoms",
+        "RB-F01-F02@1.1.0#forbidden-actions",
+        "RB-F09-F10@1.0.0#verification-rollback-or-escalation"
+      ],
+      "missingRuntimeFacts": [
+        "lock_holder_identity",
+        "transaction_isolation_level",
+        "database_lock_timeout_setting"
+      ],
+      "noMatchRationale": "No current section covers PostgreSQL lock waits or lock-timeout configuration. The transport runbook addresses external provider timeouts, and the delivery runbooks assume the database write itself is available."
+    }
+  ]
+}

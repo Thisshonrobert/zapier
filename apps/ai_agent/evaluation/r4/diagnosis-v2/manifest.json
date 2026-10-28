@@ -1,0 +1,16 @@
+{
+  "phase": "R4.5",
+  "runId": "r4.5-20261026-v2",
+  "generatedAt": "2026-10-26T08:54:27.485Z",
+  "protocolHash": "91857ea69bac30431685cbf27f7359e35f8a912ee9045bfe2118ae8a9efd7a9e",
+  "subsetHash": "02a26f320afe95d02ab13eecceb6536bf220756680ae5aaba220529360659e40",
+  "model": "gemini-3.5-flash-lite",
+  "decision": "blocked",
+  "files": {
+    "raw.json": "6c05bcd64f0887157997ee69d9579ce6873f79ac4e07489e6a3b39ce21258341",
+    "report.json": "bf119c000eff29260f1c6c7012b0b7bd87ba953481ba74102203ca648ef63437",
+    "review-packet.json": "4d4e26c88d1e640fc02248b519de0721c878aa2fe75f9a2ba9a177ec1ee8da8e",
+    "review-v1.json": "a3f3dcc66e4d551428597fb6adc6d487e6cc85c82dc6029ac9988605a240c846",
+    "decision.md": "da82d01caf4581e7541adc75e6fe46571489fc0cfe8b3cc87cc0b89d1b3d5633"
+  }
+}

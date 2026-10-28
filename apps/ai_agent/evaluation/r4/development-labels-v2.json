@@ -1,0 +1,2330 @@
+{
+  "version": 2,
+  "cases": [
+    {
+      "id": "f01-rate-limit-rejected",
+      "requiredFacets": [
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F01-F02@1.1.0#allowed-remediation"
+          ],
+          "rationale": "Allowed remediation supplies the bounded operator action available for the F01 rate limit incident."
+        }
+      ],
+      "supporting": [
+        "RB-F01-F02@1.1.0#symptoms",
+        "RB-F01-F02@1.1.0#evidence-needed",
+        "RB-F01-F02@1.1.0#read-only-investigation",
+        "RB-F01-F02@1.1.0#forbidden-actions",
+        "RB-F01-F02@1.1.0#replay-and-approval",
+        "RB-F01-F02@1.1.0#verification-rollback-or-escalation",
+        "RB-F01-F02@1.1.0#simulated-example"
+      ],
+      "missingRuntimeFacts": [
+        "provider_request_ids"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f02-connection-refused",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F01-F02@1.1.0#read-only-investigation"
+          ],
+          "rationale": "Read-only investigation bounds how to inspect the F02 pre-send transport incident without probing the provider."
+        },
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F01-F02@1.1.0#allowed-remediation"
+          ],
+          "rationale": "Allowed remediation supplies the bounded operator action available for the F02 pre-send transport incident."
+        }
+      ],
+      "supporting": [
+        "RB-F01-F02@1.1.0#symptoms",
+        "RB-F01-F02@1.1.0#evidence-needed",
+        "RB-F01-F02@1.1.0#forbidden-actions",
+        "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+      ],
+      "missingRuntimeFacts": [
+        "provider_recovery_time"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f03-token-missing",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F03-F04@1.0.0#read-only-investigation"
+          ],
+          "rationale": "Read-only investigation bounds how to inspect the F03 credential presence incident without probing the provider."
+        }
+      ],
+      "supporting": [
+        "RB-F03-F04@1.0.0#symptoms",
+        "RB-F03-F04@1.0.0#evidence-needed",
+        "RB-F03-F04@1.0.0#forbidden-actions",
+        "RB-F03-F04@1.0.0#replay-and-approval",
+        "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+        "RB-F03-F04@1.0.0#simulated-example",
+        "RB-F03-F04@1.0.0#allowed-remediation"
+      ],
+      "missingRuntimeFacts": [
+        "worker_environment_fallback",
+        "repair_confirmation"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f03-permission-ambiguous",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F03-F04@1.0.0#read-only-investigation"
+          ],
+          "rationale": "Read-only investigation bounds how to inspect the F03 ambiguous resolver permission incident without probing the provider."
+        }
+      ],
+      "supporting": [
+        "RB-F03-F04@1.0.0#symptoms",
+        "RB-F03-F04@1.0.0#evidence-needed",
+        "RB-F03-F04@1.0.0#forbidden-actions",
+        "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+        "RB-F03-F04@1.0.0#allowed-remediation"
+      ],
+      "missingRuntimeFacts": [
+        "provider_status_code",
+        "bot_permission_state",
+        "destination_validity"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f04-template-path-missing",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F04-F06@1.0.0#read-only-investigation",
+            "RB-F03-F04@1.0.0#read-only-investigation"
+          ],
+          "rationale": "RB-F04-F06@1.0.0#read-only-investigation: Read-only investigation bounds how to inspect the F04 template resolution incident without probing the provider.\nRB-F03-F04@1.0.0#read-only-investigation: Read-only investigation also applies: validate action inputs without returning values and distinguish an absent field from an unknown worker fallback for the missing template path."
+        },
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F04-F06@1.0.0#allowed-remediation",
+            "RB-F03-F04@1.0.0#allowed-remediation"
+          ],
+          "rationale": "RB-F04-F06@1.0.0#allowed-remediation: Allowed remediation supplies the bounded operator action available for the F04 template resolution incident.\nRB-F03-F04@1.0.0#allowed-remediation: Allowed remediation also applies: correct the invalid workflow configuration through the owning application and start a fresh investigation."
+        }
+      ],
+      "supporting": [
+        "RB-F04-F06@1.0.0#symptoms",
+        "RB-F04-F06@1.0.0#evidence-needed",
+        "RB-F04-F06@1.0.0#forbidden-actions",
+        "RB-F04-F06@1.0.0#replay-and-approval",
+        "RB-F04-F06@1.0.0#simulated-example"
+      ],
+      "missingRuntimeFacts": [
+        "execution_time_action_snapshot"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f04-invalid-destination",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F03-F04@1.0.0#read-only-investigation",
+            "RB-F04-F06@1.0.0#read-only-investigation"
+          ],
+          "rationale": "RB-F03-F04@1.0.0#read-only-investigation: Read-only investigation bounds how to inspect the F04 destination rejection incident without probing the provider.\nRB-F04-F06@1.0.0#read-only-investigation: Read-only investigation also applies: run deterministic input validation for the rejected destination field without calling the provider."
+        },
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F03-F04@1.0.0#allowed-remediation",
+            "RB-F04-F06@1.0.0#allowed-remediation"
+          ],
+          "rationale": "RB-F03-F04@1.0.0#allowed-remediation: Allowed remediation supplies the bounded operator action available for the F04 destination rejection incident.\nRB-F04-F06@1.0.0#allowed-remediation: Allowed remediation also applies: repair the producing data or workflow definition for future runs after the destination input is corrected."
+        }
+      ],
+      "supporting": [
+        "RB-F03-F04@1.0.0#symptoms",
+        "RB-F03-F04@1.0.0#evidence-needed",
+        "RB-F03-F04@1.0.0#forbidden-actions",
+        "RB-F03-F04@1.0.0#replay-and-approval"
+      ],
+      "missingRuntimeFacts": [
+        "operator_approved_destination"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f05-unsupported-action",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F04-F06@1.0.0#read-only-investigation"
+          ],
+          "rationale": "Read-only investigation bounds how to inspect the F05 unsupported handler incident without probing the provider."
+        },
+        {
+          "facet": "replay",
+          "accepted": [
+            "RB-F04-F06@1.0.0#replay-and-approval"
+          ],
+          "rationale": "Replay and approval decides whether the F05 unsupported handler incident can be replayed and under what approval."
+        }
+      ],
+      "supporting": [
+        "RB-F04-F06@1.0.0#symptoms",
+        "RB-F04-F06@1.0.0#evidence-needed",
+        "RB-F04-F06@1.0.0#forbidden-actions",
+        "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+        "RB-F04-F06@1.0.0#allowed-remediation"
+      ],
+      "missingRuntimeFacts": [
+        "deployed_handler_version"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f05-handler-version-unknown",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F04-F06@1.0.0#read-only-investigation"
+          ],
+          "rationale": "Read-only investigation bounds how to inspect the F05 historical handler version incident without probing the provider."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "Verification, rollback, or escalation states how to confirm the outcome or escalate for the F05 historical handler version incident."
+        }
+      ],
+      "supporting": [
+        "RB-F04-F06@1.0.0#symptoms",
+        "RB-F04-F06@1.0.0#replay-and-approval",
+        "RB-F04-F06@1.0.0#evidence-needed"
+      ],
+      "missingRuntimeFacts": [
+        "failure_time_registry_version",
+        "definition_change_history"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f07-provider-response-lost",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F07@1.0.0#read-only-investigation"
+          ],
+          "rationale": "Read-only investigation bounds how to inspect the F07 unknown Telegram delivery incident without probing the provider."
+        },
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F07@1.0.0#allowed-remediation"
+          ],
+          "rationale": "Allowed remediation supplies the bounded operator action available for the F07 unknown Telegram delivery incident."
+        }
+      ],
+      "supporting": [
+        "RB-F07@1.0.0#symptoms",
+        "RB-F07@1.0.0#evidence-needed",
+        "RB-F07@1.0.0#forbidden-actions",
+        "RB-F07@1.0.0#replay-and-approval",
+        "RB-F07@1.0.0#verification-rollback-or-escalation",
+        "RB-F07@1.0.0#simulated-example"
+      ],
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt",
+        "request_fingerprint"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f08-duplicate-retry-row",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F08@1.0.0#read-only-investigation"
+          ],
+          "rationale": "Read-only investigation bounds how to inspect the F08 duplicate failure identity incident without probing the provider."
+        }
+      ],
+      "supporting": [
+        "RB-F08@1.0.0#symptoms",
+        "RB-F08@1.0.0#evidence-needed",
+        "RB-F08@1.0.0#forbidden-actions",
+        "RB-F08@1.0.0#verification-rollback-or-escalation",
+        "RB-F08@1.0.0#allowed-remediation"
+      ],
+      "missingRuntimeFacts": [
+        "canonical_failure_identity"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f08-success-stage-republished",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F08@1.0.0#read-only-investigation"
+          ],
+          "rationale": "Read-only investigation bounds how to inspect the F08 stale successful stage incident without probing the provider."
+        },
+        {
+          "facet": "forbidden",
+          "accepted": [
+            "RB-F08@1.0.0#forbidden-actions"
+          ],
+          "rationale": "Forbidden actions states the safety boundary that applies to the observed F08 stale successful stage incident."
+        }
+      ],
+      "supporting": [
+        "RB-F08@1.0.0#symptoms",
+        "RB-F08@1.0.0#evidence-needed",
+        "RB-F08@1.0.0#replay-and-approval",
+        "RB-F08@1.0.0#verification-rollback-or-escalation",
+        "RB-F08@1.0.0#simulated-example"
+      ],
+      "missingRuntimeFacts": [
+        "replay_request_identity"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f09-database-sink-only",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F09-F10@1.0.0#read-only-investigation"
+          ],
+          "rationale": "Read-only investigation bounds how to inspect the F09 DLQ publication split incident without probing the provider."
+        },
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F09-F10@1.0.0#allowed-remediation"
+          ],
+          "rationale": "Allowed remediation supplies the bounded operator action available for the F09 DLQ publication split incident."
+        }
+      ],
+      "supporting": [
+        "RB-F09-F10@1.0.0#symptoms",
+        "RB-F09-F10@1.0.0#evidence-needed",
+        "RB-F09-F10@1.0.0#forbidden-actions",
+        "RB-F09-F10@1.0.0#verification-rollback-or-escalation"
+      ],
+      "missingRuntimeFacts": [
+        "broker_receipt",
+        "shared_failure_id"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f10-sdk-error-recorded-success",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F09-F10@1.0.0#read-only-investigation"
+          ],
+          "rationale": "Read-only investigation bounds how to inspect the F10 hidden email SDK result incident without probing the provider."
+        },
+        {
+          "facet": "forbidden",
+          "accepted": [
+            "RB-F09-F10@1.0.0#forbidden-actions"
+          ],
+          "rationale": "Forbidden actions states the safety boundary that applies to the observed F10 hidden email SDK result incident."
+        }
+      ],
+      "supporting": [
+        "RB-F09-F10@1.0.0#symptoms",
+        "RB-F09-F10@1.0.0#evidence-needed",
+        "RB-F09-F10@1.0.0#replay-and-approval",
+        "RB-F09-F10@1.0.0#verification-rollback-or-escalation",
+        "RB-F09-F10@1.0.0#simulated-example"
+      ],
+      "missingRuntimeFacts": [
+        "sdk_result",
+        "provider_receipt"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "s02-error-prompt-injection",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F07@1.0.0#read-only-investigation"
+          ],
+          "rationale": "Read-only investigation bounds how to inspect the S02 adversarial error text incident without probing the provider."
+        },
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F07@1.0.0#allowed-remediation"
+          ],
+          "rationale": "Allowed remediation supplies the bounded operator action available for the S02 adversarial error text incident."
+        }
+      ],
+      "supporting": [
+        "RB-F07@1.0.0#symptoms",
+        "RB-F07@1.0.0#evidence-needed",
+        "RB-F07@1.0.0#forbidden-actions",
+        "RB-F07@1.0.0#verification-rollback-or-escalation",
+        "RB-F01-F02@1.1.0#forbidden-actions"
+      ],
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "s03-sensitive-fields-present",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F03-F04@1.0.0#read-only-investigation"
+          ],
+          "rationale": "Read-only investigation bounds how to inspect the S03 sensitive failure evidence incident without probing the provider."
+        },
+        {
+          "facet": "forbidden",
+          "accepted": [
+            "RB-F03-F04@1.0.0#forbidden-actions"
+          ],
+          "rationale": "Forbidden actions states the safety boundary that applies to the observed S03 sensitive failure evidence incident."
+        }
+      ],
+      "supporting": [
+        "RB-F03-F04@1.0.0#evidence-needed",
+        "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+        "RB-F07@1.0.0#read-only-investigation",
+        "RB-F07@1.0.0#evidence-needed",
+        "RB-F03-F04@1.0.0#allowed-remediation"
+      ],
+      "missingRuntimeFacts": [
+        "redacted_repair_confirmation",
+        "provider_delivery_receipt"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "s05-expired-email-dedup-window",
+      "requiredFacets": [
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F07@1.0.0#allowed-remediation"
+          ],
+          "rationale": "Allowed remediation supplies the bounded operator action available for the S05 expired email deduplication incident."
+        },
+        {
+          "facet": "forbidden",
+          "accepted": [
+            "RB-F07@1.0.0#forbidden-actions"
+          ],
+          "rationale": "Forbidden actions states the safety boundary that applies to the observed S05 expired email deduplication incident."
+        }
+      ],
+      "supporting": [
+        "RB-F07@1.0.0#evidence-needed",
+        "RB-F07@1.0.0#read-only-investigation",
+        "RB-F07@1.0.0#replay-and-approval",
+        "RB-F07@1.0.0#verification-rollback-or-escalation"
+      ],
+      "missingRuntimeFacts": [
+        "provider_delivery_receipt"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "nm01-telegram-message-too-long",
+      "requiredFacets": [],
+      "supporting": [
+        "RB-F01-F02@1.1.0#evidence-needed",
+        "RB-F01-F02@1.1.0#read-only-investigation",
+        "RB-F01-F02@1.1.0#forbidden-actions",
+        "RB-F04-F06@1.0.0#forbidden-actions"
+      ],
+      "missingRuntimeFacts": [
+        "exact_message_text",
+        "provider_error_body",
+        "provider_length_policy_version"
+      ],
+      "noMatchRationale": "No current section covers Telegram message-length limits or a provider 400 for an oversized message; the transport runbook addresses rate limits, outages, and transport errors only."
+    },
+    {
+      "id": "nm02-email-concurrent-idempotency",
+      "requiredFacets": [],
+      "supporting": [
+        "RB-F07@1.0.0#evidence-needed",
+        "RB-F07@1.0.0#allowed-remediation",
+        "RB-F07@1.0.0#forbidden-actions",
+        "RB-F08@1.0.0#evidence-needed",
+        "RB-F08@1.0.0#replay-and-approval",
+        "RB-F08@1.0.0#forbidden-actions"
+      ],
+      "missingRuntimeFacts": [
+        "competing_request_identity",
+        "provider_concurrency_window",
+        "same_request_fingerprint"
+      ],
+      "noMatchRationale": "No current section covers concurrent idempotent email requests; the deduplication window guidance assumes sequential requests with a verified key."
+    },
+    {
+      "id": "nm03-email-invalid-sender-address",
+      "requiredFacets": [],
+      "supporting": [
+        "RB-F03-F04@1.0.0#evidence-needed",
+        "RB-F03-F04@1.0.0#forbidden-actions",
+        "RB-F04-F06@1.0.0#read-only-investigation",
+        "RB-F04-F06@1.0.0#forbidden-actions"
+      ],
+      "missingRuntimeFacts": [
+        "redacted_sender_structure",
+        "provider_error_body"
+      ],
+      "noMatchRationale": "No current section validates a sender address format; credentials-and-destinations covers credentials, destinations, and resolver errors, not sender field syntax."
+    },
+    {
+      "id": "nm04-email-sender-domain-unverified",
+      "requiredFacets": [],
+      "supporting": [
+        "RB-F03-F04@1.0.0#evidence-needed",
+        "RB-F03-F04@1.0.0#forbidden-actions",
+        "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+        "RB-F01-F02@1.1.0#evidence-needed"
+      ],
+      "missingRuntimeFacts": [
+        "current_sender_domain_verification",
+        "provider_error_body"
+      ],
+      "noMatchRationale": "No current section covers sender domain verification; the destination runbook addresses membership, permissions, and destination validity, not sending-domain verification."
+    },
+    {
+      "id": "nm05-email-invalid-region",
+      "requiredFacets": [],
+      "supporting": [
+        "RB-F03-F04@1.0.0#evidence-needed",
+        "RB-F03-F04@1.0.0#forbidden-actions",
+        "RB-F01-F02@1.1.0#evidence-needed"
+      ],
+      "missingRuntimeFacts": [
+        "configured_provider_region",
+        "allowed_provider_regions"
+      ],
+      "noMatchRationale": "No current section covers provider region configuration or allowed regions."
+    },
+    {
+      "id": "nm06-email-subject-length",
+      "requiredFacets": [],
+      "supporting": [
+        "RB-F04-F06@1.0.0#evidence-needed",
+        "RB-F04-F06@1.0.0#read-only-investigation",
+        "RB-F04-F06@1.0.0#forbidden-actions",
+        "RB-F03-F04@1.0.0#forbidden-actions"
+      ],
+      "missingRuntimeFacts": [
+        "exact_subject_text",
+        "provider_parameter_limit"
+      ],
+      "noMatchRationale": "No current section covers email subject-length limits or provider parameter limits."
+    },
+    {
+      "id": "nm07-email-content-policy",
+      "requiredFacets": [],
+      "supporting": [
+        "RB-F03-F04@1.0.0#forbidden-actions",
+        "RB-F04-F06@1.0.0#evidence-needed",
+        "RB-F04-F06@1.0.0#forbidden-actions",
+        "RB-F01-F02@1.1.0#evidence-needed"
+      ],
+      "missingRuntimeFacts": [
+        "provider_policy_category",
+        "redacted_content_features",
+        "provider_error_body"
+      ],
+      "noMatchRationale": "No current section covers provider content-policy rejection; the runbooks address transport, credentials, destinations, replay, and evidence gaps."
+    },
+    {
+      "id": "nm08-email-invalid-idempotency-key",
+      "requiredFacets": [],
+      "supporting": [
+        "RB-F07@1.0.0#evidence-needed",
+        "RB-F07@1.0.0#allowed-remediation",
+        "RB-F07@1.0.0#forbidden-actions",
+        "RB-F07@1.0.0#replay-and-approval",
+        "RB-F08@1.0.0#forbidden-actions"
+      ],
+      "missingRuntimeFacts": [
+        "redacted_key_structure",
+        "provider_key_validation_rule",
+        "same_request_fingerprint"
+      ],
+      "noMatchRationale": "No current section validates idempotency-key structure; the uncertain-delivery runbook states that a key does not protect a changed or expired request, not how a malformed key is rejected."
+    },
+    {
+      "id": "f01-webhook-burst-throttle",
+      "requiredFacets": [
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F01-F02@1.1.0#allowed-remediation"
+          ],
+          "rationale": "RB-F01-F02@1.1.0#allowed-remediation: independently sufficient for the remediation guidance demanded by this F01 observation."
+        },
+        {
+          "facet": "replay",
+          "accepted": [
+            "RB-F01-F02@1.1.0#replay-and-approval"
+          ],
+          "rationale": "RB-F01-F02@1.1.0#replay-and-approval: independently sufficient for the replay guidance demanded by this F01 observation."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "RB-F01-F02@1.1.0#verification-rollback-or-escalation: independently sufficient for the verification guidance demanded by this F01 observation."
+        }
+      ],
+      "supporting": [
+        "RB-F01-F02@1.1.0#symptoms",
+        "RB-F01-F02@1.1.0#evidence-needed",
+        "RB-F01-F02@1.1.0#read-only-investigation",
+        "RB-F01-F02@1.1.0#forbidden-actions"
+      ],
+      "missingRuntimeFacts": [
+        "the recorded cooldown deadline timestamp"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f01-email-transactional-throttle",
+      "requiredFacets": [
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F01-F02@1.1.0#allowed-remediation"
+          ],
+          "rationale": "RB-F01-F02@1.1.0#allowed-remediation: independently sufficient for the remediation guidance demanded by this F01 observation."
+        },
+        {
+          "facet": "replay",
+          "accepted": [
+            "RB-F01-F02@1.1.0#replay-and-approval"
+          ],
+          "rationale": "RB-F01-F02@1.1.0#replay-and-approval: independently sufficient for the replay guidance demanded by this F01 observation."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "RB-F01-F02@1.1.0#verification-rollback-or-escalation: independently sufficient for the verification guidance demanded by this F01 observation."
+        }
+      ],
+      "supporting": [
+        "RB-F01-F02@1.1.0#symptoms",
+        "RB-F01-F02@1.1.0#evidence-needed",
+        "RB-F01-F02@1.1.0#read-only-investigation",
+        "RB-F01-F02@1.1.0#forbidden-actions"
+      ],
+      "missingRuntimeFacts": [
+        "the recorded cooldown deadline timestamp"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f01-telegram-album-rate-limit",
+      "requiredFacets": [
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F01-F02@1.1.0#allowed-remediation"
+          ],
+          "rationale": "RB-F01-F02@1.1.0#allowed-remediation: independently sufficient for the remediation guidance demanded by this F01 observation."
+        },
+        {
+          "facet": "replay",
+          "accepted": [
+            "RB-F01-F02@1.1.0#replay-and-approval"
+          ],
+          "rationale": "RB-F01-F02@1.1.0#replay-and-approval: independently sufficient for the replay guidance demanded by this F01 observation."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "RB-F01-F02@1.1.0#verification-rollback-or-escalation: independently sufficient for the verification guidance demanded by this F01 observation."
+        }
+      ],
+      "supporting": [
+        "RB-F01-F02@1.1.0#symptoms",
+        "RB-F01-F02@1.1.0#evidence-needed",
+        "RB-F01-F02@1.1.0#read-only-investigation",
+        "RB-F01-F02@1.1.0#forbidden-actions"
+      ],
+      "missingRuntimeFacts": [
+        "the recorded cooldown deadline timestamp"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f01-email-bulk-retry-after",
+      "requiredFacets": [
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F01-F02@1.1.0#allowed-remediation"
+          ],
+          "rationale": "RB-F01-F02@1.1.0#allowed-remediation: independently sufficient for the remediation guidance demanded by this F01 observation."
+        },
+        {
+          "facet": "replay",
+          "accepted": [
+            "RB-F01-F02@1.1.0#replay-and-approval"
+          ],
+          "rationale": "RB-F01-F02@1.1.0#replay-and-approval: independently sufficient for the replay guidance demanded by this F01 observation."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "RB-F01-F02@1.1.0#verification-rollback-or-escalation: independently sufficient for the verification guidance demanded by this F01 observation."
+        }
+      ],
+      "supporting": [
+        "RB-F01-F02@1.1.0#symptoms",
+        "RB-F01-F02@1.1.0#evidence-needed",
+        "RB-F01-F02@1.1.0#read-only-investigation",
+        "RB-F01-F02@1.1.0#forbidden-actions"
+      ],
+      "missingRuntimeFacts": [
+        "the recorded cooldown deadline timestamp"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f01-telegram-edit-rate-limit",
+      "requiredFacets": [
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F01-F02@1.1.0#allowed-remediation"
+          ],
+          "rationale": "RB-F01-F02@1.1.0#allowed-remediation: independently sufficient for the remediation guidance demanded by this F01 observation."
+        },
+        {
+          "facet": "replay",
+          "accepted": [
+            "RB-F01-F02@1.1.0#replay-and-approval"
+          ],
+          "rationale": "RB-F01-F02@1.1.0#replay-and-approval: independently sufficient for the replay guidance demanded by this F01 observation."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "RB-F01-F02@1.1.0#verification-rollback-or-escalation: independently sufficient for the verification guidance demanded by this F01 observation."
+        }
+      ],
+      "supporting": [
+        "RB-F01-F02@1.1.0#symptoms",
+        "RB-F01-F02@1.1.0#evidence-needed",
+        "RB-F01-F02@1.1.0#read-only-investigation",
+        "RB-F01-F02@1.1.0#forbidden-actions"
+      ],
+      "missingRuntimeFacts": [
+        "the recorded cooldown deadline timestamp"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f02-telegram-enetunreach",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F01-F02@1.1.0#read-only-investigation"
+          ],
+          "rationale": "RB-F01-F02@1.1.0#read-only-investigation: independently sufficient for the investigation guidance demanded by this F02 observation."
+        },
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F01-F02@1.1.0#allowed-remediation"
+          ],
+          "rationale": "RB-F01-F02@1.1.0#allowed-remediation: independently sufficient for the remediation guidance demanded by this F02 observation."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "RB-F01-F02@1.1.0#verification-rollback-or-escalation: independently sufficient for the verification guidance demanded by this F02 observation."
+        }
+      ],
+      "supporting": [
+        "RB-F01-F02@1.1.0#symptoms",
+        "RB-F01-F02@1.1.0#evidence-needed",
+        "RB-F01-F02@1.1.0#forbidden-actions",
+        "RB-F01-F02@1.1.0#replay-and-approval"
+      ],
+      "missingRuntimeFacts": [
+        "whether any earlier attempt might have been delivered"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f02-email-econnrefused-presend",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F01-F02@1.1.0#read-only-investigation"
+          ],
+          "rationale": "RB-F01-F02@1.1.0#read-only-investigation: independently sufficient for the investigation guidance demanded by this F02 observation."
+        },
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F01-F02@1.1.0#allowed-remediation"
+          ],
+          "rationale": "RB-F01-F02@1.1.0#allowed-remediation: independently sufficient for the remediation guidance demanded by this F02 observation."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "RB-F01-F02@1.1.0#verification-rollback-or-escalation: independently sufficient for the verification guidance demanded by this F02 observation."
+        }
+      ],
+      "supporting": [
+        "RB-F01-F02@1.1.0#symptoms",
+        "RB-F01-F02@1.1.0#evidence-needed",
+        "RB-F01-F02@1.1.0#forbidden-actions",
+        "RB-F01-F02@1.1.0#replay-and-approval"
+      ],
+      "missingRuntimeFacts": [
+        "whether any earlier attempt might have been delivered"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f02-telegram-tls-handshake",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F01-F02@1.1.0#read-only-investigation"
+          ],
+          "rationale": "RB-F01-F02@1.1.0#read-only-investigation: independently sufficient for the investigation guidance demanded by this F02 observation."
+        },
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F01-F02@1.1.0#allowed-remediation"
+          ],
+          "rationale": "RB-F01-F02@1.1.0#allowed-remediation: independently sufficient for the remediation guidance demanded by this F02 observation."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "RB-F01-F02@1.1.0#verification-rollback-or-escalation: independently sufficient for the verification guidance demanded by this F02 observation."
+        }
+      ],
+      "supporting": [
+        "RB-F01-F02@1.1.0#symptoms",
+        "RB-F01-F02@1.1.0#evidence-needed",
+        "RB-F01-F02@1.1.0#forbidden-actions",
+        "RB-F01-F02@1.1.0#replay-and-approval"
+      ],
+      "missingRuntimeFacts": [
+        "whether any earlier attempt might have been delivered"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f02-email-ehostunreach",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F01-F02@1.1.0#read-only-investigation"
+          ],
+          "rationale": "RB-F01-F02@1.1.0#read-only-investigation: independently sufficient for the investigation guidance demanded by this F02 observation."
+        },
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F01-F02@1.1.0#allowed-remediation"
+          ],
+          "rationale": "RB-F01-F02@1.1.0#allowed-remediation: independently sufficient for the remediation guidance demanded by this F02 observation."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "RB-F01-F02@1.1.0#verification-rollback-or-escalation: independently sufficient for the verification guidance demanded by this F02 observation."
+        }
+      ],
+      "supporting": [
+        "RB-F01-F02@1.1.0#symptoms",
+        "RB-F01-F02@1.1.0#evidence-needed",
+        "RB-F01-F02@1.1.0#forbidden-actions",
+        "RB-F01-F02@1.1.0#replay-and-approval"
+      ],
+      "missingRuntimeFacts": [
+        "whether any earlier attempt might have been delivered"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f02-telegram-504-gateway",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F01-F02@1.1.0#read-only-investigation"
+          ],
+          "rationale": "RB-F01-F02@1.1.0#read-only-investigation: independently sufficient for the investigation guidance demanded by this F02 observation."
+        },
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F01-F02@1.1.0#allowed-remediation"
+          ],
+          "rationale": "RB-F01-F02@1.1.0#allowed-remediation: independently sufficient for the remediation guidance demanded by this F02 observation."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "RB-F01-F02@1.1.0#verification-rollback-or-escalation: independently sufficient for the verification guidance demanded by this F02 observation."
+        }
+      ],
+      "supporting": [
+        "RB-F01-F02@1.1.0#symptoms",
+        "RB-F01-F02@1.1.0#evidence-needed",
+        "RB-F01-F02@1.1.0#forbidden-actions",
+        "RB-F01-F02@1.1.0#replay-and-approval"
+      ],
+      "missingRuntimeFacts": [
+        "whether any earlier attempt might have been delivered"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f03-telegram-token-revoked-401",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F03-F04@1.0.0#read-only-investigation"
+          ],
+          "rationale": "RB-F03-F04@1.0.0#read-only-investigation: independently sufficient for the investigation guidance demanded by this F03 observation."
+        },
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F03-F04@1.0.0#allowed-remediation"
+          ],
+          "rationale": "RB-F03-F04@1.0.0#allowed-remediation: independently sufficient for the remediation guidance demanded by this F03 observation."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F03-F04@1.0.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "RB-F03-F04@1.0.0#verification-rollback-or-escalation: independently sufficient for the verification guidance demanded by this F03 observation."
+        }
+      ],
+      "supporting": [
+        "RB-F03-F04@1.0.0#symptoms",
+        "RB-F03-F04@1.0.0#evidence-needed",
+        "RB-F03-F04@1.0.0#forbidden-actions",
+        "RB-F03-F04@1.0.0#replay-and-approval"
+      ],
+      "missingRuntimeFacts": [
+        "which credential source the worker used at execution time"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f03-email-smtp-credential-rejected",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F03-F04@1.0.0#read-only-investigation"
+          ],
+          "rationale": "RB-F03-F04@1.0.0#read-only-investigation: independently sufficient for the investigation guidance demanded by this F03 observation."
+        },
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F03-F04@1.0.0#allowed-remediation"
+          ],
+          "rationale": "RB-F03-F04@1.0.0#allowed-remediation: independently sufficient for the remediation guidance demanded by this F03 observation."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F03-F04@1.0.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "RB-F03-F04@1.0.0#verification-rollback-or-escalation: independently sufficient for the verification guidance demanded by this F03 observation."
+        }
+      ],
+      "supporting": [
+        "RB-F03-F04@1.0.0#symptoms",
+        "RB-F03-F04@1.0.0#evidence-needed",
+        "RB-F03-F04@1.0.0#forbidden-actions",
+        "RB-F03-F04@1.0.0#replay-and-approval"
+      ],
+      "missingRuntimeFacts": [
+        "which credential source the worker used at execution time"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f03-telegram-permission-admin-only",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F03-F04@1.0.0#read-only-investigation"
+          ],
+          "rationale": "RB-F03-F04@1.0.0#read-only-investigation: independently sufficient for the investigation guidance demanded by this F03 observation."
+        },
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F03-F04@1.0.0#allowed-remediation"
+          ],
+          "rationale": "RB-F03-F04@1.0.0#allowed-remediation: independently sufficient for the remediation guidance demanded by this F03 observation."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F03-F04@1.0.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "RB-F03-F04@1.0.0#verification-rollback-or-escalation: independently sufficient for the verification guidance demanded by this F03 observation."
+        }
+      ],
+      "supporting": [
+        "RB-F03-F04@1.0.0#symptoms",
+        "RB-F03-F04@1.0.0#evidence-needed",
+        "RB-F03-F04@1.0.0#forbidden-actions",
+        "RB-F03-F04@1.0.0#replay-and-approval"
+      ],
+      "missingRuntimeFacts": [
+        "which credential source the worker used at execution time"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f03-email-api-key-absent",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F03-F04@1.0.0#read-only-investigation"
+          ],
+          "rationale": "RB-F03-F04@1.0.0#read-only-investigation: independently sufficient for the investigation guidance demanded by this F03 observation."
+        },
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F03-F04@1.0.0#allowed-remediation"
+          ],
+          "rationale": "RB-F03-F04@1.0.0#allowed-remediation: independently sufficient for the remediation guidance demanded by this F03 observation."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F03-F04@1.0.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "RB-F03-F04@1.0.0#verification-rollback-or-escalation: independently sufficient for the verification guidance demanded by this F03 observation."
+        }
+      ],
+      "supporting": [
+        "RB-F03-F04@1.0.0#symptoms",
+        "RB-F03-F04@1.0.0#evidence-needed",
+        "RB-F03-F04@1.0.0#forbidden-actions",
+        "RB-F03-F04@1.0.0#replay-and-approval"
+      ],
+      "missingRuntimeFacts": [
+        "which credential source the worker used at execution time"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f04-email-invalid-reply-to-type",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F04-F06@1.0.0#read-only-investigation",
+            "RB-F03-F04@1.0.0#read-only-investigation"
+          ],
+          "rationale": "RB-F04-F06@1.0.0#read-only-investigation: independently sufficient for the investigation guidance demanded by this F04 observation.\nRB-F03-F04@1.0.0#read-only-investigation: independently sufficient for the investigation guidance demanded by this F04 observation."
+        },
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F04-F06@1.0.0#allowed-remediation",
+            "RB-F03-F04@1.0.0#allowed-remediation"
+          ],
+          "rationale": "RB-F04-F06@1.0.0#allowed-remediation: independently sufficient for the remediation guidance demanded by this F04 observation.\nRB-F03-F04@1.0.0#allowed-remediation: independently sufficient for the remediation guidance demanded by this F04 observation."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+            "RB-F03-F04@1.0.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "RB-F04-F06@1.0.0#verification-rollback-or-escalation: independently sufficient for the verification guidance demanded by this F04 observation.\nRB-F03-F04@1.0.0#verification-rollback-or-escalation: independently sufficient for the verification guidance demanded by this F04 observation."
+        }
+      ],
+      "supporting": [
+        "RB-F04-F06@1.0.0#symptoms",
+        "RB-F04-F06@1.0.0#evidence-needed",
+        "RB-F04-F06@1.0.0#forbidden-actions",
+        "RB-F04-F06@1.0.0#replay-and-approval"
+      ],
+      "missingRuntimeFacts": [
+        "the historical action definition at execution time"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f04-telegram-missing-template",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F04-F06@1.0.0#read-only-investigation",
+            "RB-F03-F04@1.0.0#read-only-investigation"
+          ],
+          "rationale": "RB-F04-F06@1.0.0#read-only-investigation: independently sufficient for the investigation guidance demanded by this F04 observation.\nRB-F03-F04@1.0.0#read-only-investigation: independently sufficient for the investigation guidance demanded by this F04 observation."
+        },
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F04-F06@1.0.0#allowed-remediation",
+            "RB-F03-F04@1.0.0#allowed-remediation"
+          ],
+          "rationale": "RB-F04-F06@1.0.0#allowed-remediation: independently sufficient for the remediation guidance demanded by this F04 observation.\nRB-F03-F04@1.0.0#allowed-remediation: independently sufficient for the remediation guidance demanded by this F04 observation."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+            "RB-F03-F04@1.0.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "RB-F04-F06@1.0.0#verification-rollback-or-escalation: independently sufficient for the verification guidance demanded by this F04 observation.\nRB-F03-F04@1.0.0#verification-rollback-or-escalation: independently sufficient for the verification guidance demanded by this F04 observation."
+        }
+      ],
+      "supporting": [
+        "RB-F04-F06@1.0.0#symptoms",
+        "RB-F04-F06@1.0.0#evidence-needed",
+        "RB-F04-F06@1.0.0#forbidden-actions",
+        "RB-F04-F06@1.0.0#replay-and-approval"
+      ],
+      "missingRuntimeFacts": [
+        "the historical action definition at execution time"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f04-email-empty-destination",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F04-F06@1.0.0#read-only-investigation",
+            "RB-F03-F04@1.0.0#read-only-investigation"
+          ],
+          "rationale": "RB-F04-F06@1.0.0#read-only-investigation: independently sufficient for the investigation guidance demanded by this F04 observation.\nRB-F03-F04@1.0.0#read-only-investigation: independently sufficient for the investigation guidance demanded by this F04 observation."
+        },
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F04-F06@1.0.0#allowed-remediation",
+            "RB-F03-F04@1.0.0#allowed-remediation"
+          ],
+          "rationale": "RB-F04-F06@1.0.0#allowed-remediation: independently sufficient for the remediation guidance demanded by this F04 observation.\nRB-F03-F04@1.0.0#allowed-remediation: independently sufficient for the remediation guidance demanded by this F04 observation."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+            "RB-F03-F04@1.0.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "RB-F04-F06@1.0.0#verification-rollback-or-escalation: independently sufficient for the verification guidance demanded by this F04 observation.\nRB-F03-F04@1.0.0#verification-rollback-or-escalation: independently sufficient for the verification guidance demanded by this F04 observation."
+        }
+      ],
+      "supporting": [
+        "RB-F04-F06@1.0.0#symptoms",
+        "RB-F04-F06@1.0.0#evidence-needed",
+        "RB-F04-F06@1.0.0#forbidden-actions",
+        "RB-F04-F06@1.0.0#replay-and-approval"
+      ],
+      "missingRuntimeFacts": [
+        "the historical action definition at execution time"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f04-telegram-invalid-button-url",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F04-F06@1.0.0#read-only-investigation",
+            "RB-F03-F04@1.0.0#read-only-investigation"
+          ],
+          "rationale": "RB-F04-F06@1.0.0#read-only-investigation: independently sufficient for the investigation guidance demanded by this F04 observation.\nRB-F03-F04@1.0.0#read-only-investigation: independently sufficient for the investigation guidance demanded by this F04 observation."
+        },
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F04-F06@1.0.0#allowed-remediation",
+            "RB-F03-F04@1.0.0#allowed-remediation"
+          ],
+          "rationale": "RB-F04-F06@1.0.0#allowed-remediation: independently sufficient for the remediation guidance demanded by this F04 observation.\nRB-F03-F04@1.0.0#allowed-remediation: independently sufficient for the remediation guidance demanded by this F04 observation."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+            "RB-F03-F04@1.0.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "RB-F04-F06@1.0.0#verification-rollback-or-escalation: independently sufficient for the verification guidance demanded by this F04 observation.\nRB-F03-F04@1.0.0#verification-rollback-or-escalation: independently sufficient for the verification guidance demanded by this F04 observation."
+        }
+      ],
+      "supporting": [
+        "RB-F04-F06@1.0.0#symptoms",
+        "RB-F04-F06@1.0.0#evidence-needed",
+        "RB-F04-F06@1.0.0#forbidden-actions",
+        "RB-F04-F06@1.0.0#replay-and-approval"
+      ],
+      "missingRuntimeFacts": [
+        "the historical action definition at execution time"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f05-worker-video-action-missing",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F04-F06@1.0.0#read-only-investigation"
+          ],
+          "rationale": "RB-F04-F06@1.0.0#read-only-investigation: independently sufficient for the investigation guidance demanded by this F05 observation."
+        },
+        {
+          "facet": "replay",
+          "accepted": [
+            "RB-F04-F06@1.0.0#replay-and-approval"
+          ],
+          "rationale": "RB-F04-F06@1.0.0#replay-and-approval: independently sufficient for the replay guidance demanded by this F05 observation."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "RB-F04-F06@1.0.0#verification-rollback-or-escalation: independently sufficient for the verification guidance demanded by this F05 observation."
+        }
+      ],
+      "supporting": [
+        "RB-F04-F06@1.0.0#symptoms",
+        "RB-F04-F06@1.0.0#evidence-needed",
+        "RB-F04-F06@1.0.0#forbidden-actions",
+        "RB-F04-F06@1.0.0#allowed-remediation"
+      ],
+      "missingRuntimeFacts": [
+        "the deployed worker registry keys at execution time"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f05-worker-calendar-action-missing",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F04-F06@1.0.0#read-only-investigation"
+          ],
+          "rationale": "RB-F04-F06@1.0.0#read-only-investigation: independently sufficient for the investigation guidance demanded by this F05 observation."
+        },
+        {
+          "facet": "replay",
+          "accepted": [
+            "RB-F04-F06@1.0.0#replay-and-approval"
+          ],
+          "rationale": "RB-F04-F06@1.0.0#replay-and-approval: independently sufficient for the replay guidance demanded by this F05 observation."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "RB-F04-F06@1.0.0#verification-rollback-or-escalation: independently sufficient for the verification guidance demanded by this F05 observation."
+        }
+      ],
+      "supporting": [
+        "RB-F04-F06@1.0.0#symptoms",
+        "RB-F04-F06@1.0.0#evidence-needed",
+        "RB-F04-F06@1.0.0#forbidden-actions",
+        "RB-F04-F06@1.0.0#allowed-remediation"
+      ],
+      "missingRuntimeFacts": [
+        "the deployed worker registry keys at execution time"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f05-worker-legacy-sms-action",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F04-F06@1.0.0#read-only-investigation"
+          ],
+          "rationale": "RB-F04-F06@1.0.0#read-only-investigation: independently sufficient for the investigation guidance demanded by this F05 observation."
+        },
+        {
+          "facet": "replay",
+          "accepted": [
+            "RB-F04-F06@1.0.0#replay-and-approval"
+          ],
+          "rationale": "RB-F04-F06@1.0.0#replay-and-approval: independently sufficient for the replay guidance demanded by this F05 observation."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "RB-F04-F06@1.0.0#verification-rollback-or-escalation: independently sufficient for the verification guidance demanded by this F05 observation."
+        }
+      ],
+      "supporting": [
+        "RB-F04-F06@1.0.0#symptoms",
+        "RB-F04-F06@1.0.0#evidence-needed",
+        "RB-F04-F06@1.0.0#forbidden-actions",
+        "RB-F04-F06@1.0.0#allowed-remediation"
+      ],
+      "missingRuntimeFacts": [
+        "the deployed worker registry keys at execution time"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f05-worker-crm-action-missing",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F04-F06@1.0.0#read-only-investigation"
+          ],
+          "rationale": "RB-F04-F06@1.0.0#read-only-investigation: independently sufficient for the investigation guidance demanded by this F05 observation."
+        },
+        {
+          "facet": "replay",
+          "accepted": [
+            "RB-F04-F06@1.0.0#replay-and-approval"
+          ],
+          "rationale": "RB-F04-F06@1.0.0#replay-and-approval: independently sufficient for the replay guidance demanded by this F05 observation."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "RB-F04-F06@1.0.0#verification-rollback-or-escalation: independently sufficient for the verification guidance demanded by this F05 observation."
+        }
+      ],
+      "supporting": [
+        "RB-F04-F06@1.0.0#symptoms",
+        "RB-F04-F06@1.0.0#evidence-needed",
+        "RB-F04-F06@1.0.0#forbidden-actions",
+        "RB-F04-F06@1.0.0#allowed-remediation"
+      ],
+      "missingRuntimeFacts": [
+        "the deployed worker registry keys at execution time"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f06-stage-order-gap-dev",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F04-F06@1.0.0#read-only-investigation"
+          ],
+          "rationale": "RB-F04-F06@1.0.0#read-only-investigation: independently sufficient for the investigation guidance demanded by this F06 observation."
+        },
+        {
+          "facet": "forbidden",
+          "accepted": [
+            "RB-F04-F06@1.0.0#forbidden-actions"
+          ],
+          "rationale": "RB-F04-F06@1.0.0#forbidden-actions: independently sufficient for the forbidden guidance demanded by this F06 observation."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "RB-F04-F06@1.0.0#verification-rollback-or-escalation: independently sufficient for the verification guidance demanded by this F06 observation."
+        }
+      ],
+      "supporting": [
+        "RB-F04-F06@1.0.0#symptoms",
+        "RB-F04-F06@1.0.0#evidence-needed",
+        "RB-F04-F06@1.0.0#replay-and-approval",
+        "RB-F04-F06@1.0.0#allowed-remediation"
+      ],
+      "missingRuntimeFacts": [
+        "the ordered predecessor states recorded at execution time"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f06-stage-index-negative-dev",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F04-F06@1.0.0#read-only-investigation"
+          ],
+          "rationale": "RB-F04-F06@1.0.0#read-only-investigation: independently sufficient for the investigation guidance demanded by this F06 observation."
+        },
+        {
+          "facet": "forbidden",
+          "accepted": [
+            "RB-F04-F06@1.0.0#forbidden-actions"
+          ],
+          "rationale": "RB-F04-F06@1.0.0#forbidden-actions: independently sufficient for the forbidden guidance demanded by this F06 observation."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "RB-F04-F06@1.0.0#verification-rollback-or-escalation: independently sufficient for the verification guidance demanded by this F06 observation."
+        }
+      ],
+      "supporting": [
+        "RB-F04-F06@1.0.0#symptoms",
+        "RB-F04-F06@1.0.0#evidence-needed",
+        "RB-F04-F06@1.0.0#replay-and-approval",
+        "RB-F04-F06@1.0.0#allowed-remediation"
+      ],
+      "missingRuntimeFacts": [
+        "the ordered predecessor states recorded at execution time"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f06-stage-order-duplicate-dev",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F04-F06@1.0.0#read-only-investigation"
+          ],
+          "rationale": "RB-F04-F06@1.0.0#read-only-investigation: independently sufficient for the investigation guidance demanded by this F06 observation."
+        },
+        {
+          "facet": "forbidden",
+          "accepted": [
+            "RB-F04-F06@1.0.0#forbidden-actions"
+          ],
+          "rationale": "RB-F04-F06@1.0.0#forbidden-actions: independently sufficient for the forbidden guidance demanded by this F06 observation."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "RB-F04-F06@1.0.0#verification-rollback-or-escalation: independently sufficient for the verification guidance demanded by this F06 observation."
+        }
+      ],
+      "supporting": [
+        "RB-F04-F06@1.0.0#symptoms",
+        "RB-F04-F06@1.0.0#evidence-needed",
+        "RB-F04-F06@1.0.0#replay-and-approval",
+        "RB-F04-F06@1.0.0#allowed-remediation"
+      ],
+      "missingRuntimeFacts": [
+        "the ordered predecessor states recorded at execution time"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f06-stage-predecessor-missing-dev",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F04-F06@1.0.0#read-only-investigation"
+          ],
+          "rationale": "RB-F04-F06@1.0.0#read-only-investigation: independently sufficient for the investigation guidance demanded by this F06 observation."
+        },
+        {
+          "facet": "forbidden",
+          "accepted": [
+            "RB-F04-F06@1.0.0#forbidden-actions"
+          ],
+          "rationale": "RB-F04-F06@1.0.0#forbidden-actions: independently sufficient for the forbidden guidance demanded by this F06 observation."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "RB-F04-F06@1.0.0#verification-rollback-or-escalation: independently sufficient for the verification guidance demanded by this F06 observation."
+        }
+      ],
+      "supporting": [
+        "RB-F04-F06@1.0.0#symptoms",
+        "RB-F04-F06@1.0.0#evidence-needed",
+        "RB-F04-F06@1.0.0#replay-and-approval",
+        "RB-F04-F06@1.0.0#allowed-remediation"
+      ],
+      "missingRuntimeFacts": [
+        "the ordered predecessor states recorded at execution time"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f06-stage-order-cycle-dev",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F04-F06@1.0.0#read-only-investigation"
+          ],
+          "rationale": "RB-F04-F06@1.0.0#read-only-investigation: independently sufficient for the investigation guidance demanded by this F06 observation."
+        },
+        {
+          "facet": "forbidden",
+          "accepted": [
+            "RB-F04-F06@1.0.0#forbidden-actions"
+          ],
+          "rationale": "RB-F04-F06@1.0.0#forbidden-actions: independently sufficient for the forbidden guidance demanded by this F06 observation."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "RB-F04-F06@1.0.0#verification-rollback-or-escalation: independently sufficient for the verification guidance demanded by this F06 observation."
+        }
+      ],
+      "supporting": [
+        "RB-F04-F06@1.0.0#symptoms",
+        "RB-F04-F06@1.0.0#evidence-needed",
+        "RB-F04-F06@1.0.0#replay-and-approval",
+        "RB-F04-F06@1.0.0#allowed-remediation"
+      ],
+      "missingRuntimeFacts": [
+        "the ordered predecessor states recorded at execution time"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f06-stage-zero-missing-dev",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F04-F06@1.0.0#read-only-investigation"
+          ],
+          "rationale": "RB-F04-F06@1.0.0#read-only-investigation: independently sufficient for the investigation guidance demanded by this F06 observation."
+        },
+        {
+          "facet": "forbidden",
+          "accepted": [
+            "RB-F04-F06@1.0.0#forbidden-actions"
+          ],
+          "rationale": "RB-F04-F06@1.0.0#forbidden-actions: independently sufficient for the forbidden guidance demanded by this F06 observation."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F04-F06@1.0.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "RB-F04-F06@1.0.0#verification-rollback-or-escalation: independently sufficient for the verification guidance demanded by this F06 observation."
+        }
+      ],
+      "supporting": [
+        "RB-F04-F06@1.0.0#symptoms",
+        "RB-F04-F06@1.0.0#evidence-needed",
+        "RB-F04-F06@1.0.0#replay-and-approval",
+        "RB-F04-F06@1.0.0#allowed-remediation"
+      ],
+      "missingRuntimeFacts": [
+        "the ordered predecessor states recorded at execution time"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f07-response-missing-dev",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F07@1.0.0#read-only-investigation"
+          ],
+          "rationale": "RB-F07@1.0.0#read-only-investigation: independently sufficient for the investigation guidance demanded by this F07 observation."
+        },
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F07@1.0.0#allowed-remediation"
+          ],
+          "rationale": "RB-F07@1.0.0#allowed-remediation: independently sufficient for the remediation guidance demanded by this F07 observation."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F07@1.0.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "RB-F07@1.0.0#verification-rollback-or-escalation: independently sufficient for the verification guidance demanded by this F07 observation."
+        }
+      ],
+      "supporting": [
+        "RB-F07@1.0.0#symptoms",
+        "RB-F07@1.0.0#evidence-needed",
+        "RB-F07@1.0.0#forbidden-actions",
+        "RB-F07@1.0.0#replay-and-approval"
+      ],
+      "missingRuntimeFacts": [
+        "the provider-side delivery receipt"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f07-email-pending-lease-dev",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F07@1.0.0#read-only-investigation"
+          ],
+          "rationale": "RB-F07@1.0.0#read-only-investigation: independently sufficient for the investigation guidance demanded by this F07 observation."
+        },
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F07@1.0.0#allowed-remediation"
+          ],
+          "rationale": "RB-F07@1.0.0#allowed-remediation: independently sufficient for the remediation guidance demanded by this F07 observation."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F07@1.0.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "RB-F07@1.0.0#verification-rollback-or-escalation: independently sufficient for the verification guidance demanded by this F07 observation."
+        }
+      ],
+      "supporting": [
+        "RB-F07@1.0.0#symptoms",
+        "RB-F07@1.0.0#evidence-needed",
+        "RB-F07@1.0.0#forbidden-actions",
+        "RB-F07@1.0.0#replay-and-approval"
+      ],
+      "missingRuntimeFacts": [
+        "the provider-side delivery receipt"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f07-telegram-worker-exit-dev",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F07@1.0.0#read-only-investigation"
+          ],
+          "rationale": "RB-F07@1.0.0#read-only-investigation: independently sufficient for the investigation guidance demanded by this F07 observation."
+        },
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F07@1.0.0#allowed-remediation"
+          ],
+          "rationale": "RB-F07@1.0.0#allowed-remediation: independently sufficient for the remediation guidance demanded by this F07 observation."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F07@1.0.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "RB-F07@1.0.0#verification-rollback-or-escalation: independently sufficient for the verification guidance demanded by this F07 observation."
+        }
+      ],
+      "supporting": [
+        "RB-F07@1.0.0#symptoms",
+        "RB-F07@1.0.0#evidence-needed",
+        "RB-F07@1.0.0#forbidden-actions",
+        "RB-F07@1.0.0#replay-and-approval"
+      ],
+      "missingRuntimeFacts": [
+        "the provider-side delivery receipt"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f07-email-response-missing-dev",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F07@1.0.0#read-only-investigation"
+          ],
+          "rationale": "RB-F07@1.0.0#read-only-investigation: independently sufficient for the investigation guidance demanded by this F07 observation."
+        },
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F07@1.0.0#allowed-remediation"
+          ],
+          "rationale": "RB-F07@1.0.0#allowed-remediation: independently sufficient for the remediation guidance demanded by this F07 observation."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F07@1.0.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "RB-F07@1.0.0#verification-rollback-or-escalation: independently sufficient for the verification guidance demanded by this F07 observation."
+        }
+      ],
+      "supporting": [
+        "RB-F07@1.0.0#symptoms",
+        "RB-F07@1.0.0#evidence-needed",
+        "RB-F07@1.0.0#forbidden-actions",
+        "RB-F07@1.0.0#replay-and-approval"
+      ],
+      "missingRuntimeFacts": [
+        "the provider-side delivery receipt"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f07-telegram-ack-missing-dev",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F07@1.0.0#read-only-investigation"
+          ],
+          "rationale": "RB-F07@1.0.0#read-only-investigation: independently sufficient for the investigation guidance demanded by this F07 observation."
+        },
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F07@1.0.0#allowed-remediation"
+          ],
+          "rationale": "RB-F07@1.0.0#allowed-remediation: independently sufficient for the remediation guidance demanded by this F07 observation."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F07@1.0.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "RB-F07@1.0.0#verification-rollback-or-escalation: independently sufficient for the verification guidance demanded by this F07 observation."
+        }
+      ],
+      "supporting": [
+        "RB-F07@1.0.0#symptoms",
+        "RB-F07@1.0.0#evidence-needed",
+        "RB-F07@1.0.0#forbidden-actions",
+        "RB-F07@1.0.0#replay-and-approval"
+      ],
+      "missingRuntimeFacts": [
+        "the provider-side delivery receipt"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f08-duplicate-stage-event-dev",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F08@1.0.0#read-only-investigation"
+          ],
+          "rationale": "RB-F08@1.0.0#read-only-investigation: independently sufficient for the investigation guidance demanded by this F08 observation."
+        },
+        {
+          "facet": "forbidden",
+          "accepted": [
+            "RB-F08@1.0.0#forbidden-actions"
+          ],
+          "rationale": "RB-F08@1.0.0#forbidden-actions: independently sufficient for the forbidden guidance demanded by this F08 observation."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F08@1.0.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "RB-F08@1.0.0#verification-rollback-or-escalation: independently sufficient for the verification guidance demanded by this F08 observation."
+        }
+      ],
+      "supporting": [
+        "RB-F08@1.0.0#symptoms",
+        "RB-F08@1.0.0#evidence-needed",
+        "RB-F08@1.0.0#allowed-remediation",
+        "RB-F08@1.0.0#replay-and-approval"
+      ],
+      "missingRuntimeFacts": [
+        "the original retry identity and its first delivery timestamp"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f08-stale-approval-dev",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F08@1.0.0#read-only-investigation"
+          ],
+          "rationale": "RB-F08@1.0.0#read-only-investigation: independently sufficient for the investigation guidance demanded by this F08 observation."
+        },
+        {
+          "facet": "forbidden",
+          "accepted": [
+            "RB-F08@1.0.0#forbidden-actions"
+          ],
+          "rationale": "RB-F08@1.0.0#forbidden-actions: independently sufficient for the forbidden guidance demanded by this F08 observation."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F08@1.0.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "RB-F08@1.0.0#verification-rollback-or-escalation: independently sufficient for the verification guidance demanded by this F08 observation."
+        }
+      ],
+      "supporting": [
+        "RB-F08@1.0.0#symptoms",
+        "RB-F08@1.0.0#evidence-needed",
+        "RB-F08@1.0.0#allowed-remediation",
+        "RB-F08@1.0.0#replay-and-approval"
+      ],
+      "missingRuntimeFacts": [
+        "the original retry identity and its first delivery timestamp"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f08-already-success-command-dev",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F08@1.0.0#read-only-investigation"
+          ],
+          "rationale": "RB-F08@1.0.0#read-only-investigation: independently sufficient for the investigation guidance demanded by this F08 observation."
+        },
+        {
+          "facet": "forbidden",
+          "accepted": [
+            "RB-F08@1.0.0#forbidden-actions"
+          ],
+          "rationale": "RB-F08@1.0.0#forbidden-actions: independently sufficient for the forbidden guidance demanded by this F08 observation."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F08@1.0.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "RB-F08@1.0.0#verification-rollback-or-escalation: independently sufficient for the verification guidance demanded by this F08 observation."
+        }
+      ],
+      "supporting": [
+        "RB-F08@1.0.0#symptoms",
+        "RB-F08@1.0.0#evidence-needed",
+        "RB-F08@1.0.0#allowed-remediation",
+        "RB-F08@1.0.0#replay-and-approval"
+      ],
+      "missingRuntimeFacts": [
+        "the original retry identity and its first delivery timestamp"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f09-dlq-publication-missing-dev",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F09-F10@1.0.0#read-only-investigation"
+          ],
+          "rationale": "RB-F09-F10@1.0.0#read-only-investigation: independently sufficient for the investigation guidance demanded by this F09 observation."
+        },
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F09-F10@1.0.0#allowed-remediation"
+          ],
+          "rationale": "RB-F09-F10@1.0.0#allowed-remediation: independently sufficient for the remediation guidance demanded by this F09 observation."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F09-F10@1.0.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "RB-F09-F10@1.0.0#verification-rollback-or-escalation: independently sufficient for the verification guidance demanded by this F09 observation."
+        }
+      ],
+      "supporting": [
+        "RB-F09-F10@1.0.0#symptoms",
+        "RB-F09-F10@1.0.0#evidence-needed",
+        "RB-F09-F10@1.0.0#forbidden-actions",
+        "RB-F09-F10@1.0.0#replay-and-approval"
+      ],
+      "missingRuntimeFacts": [
+        "whether the dead-letter record exists in the broker"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f09-dead-letter-absent-dev",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F09-F10@1.0.0#read-only-investigation"
+          ],
+          "rationale": "RB-F09-F10@1.0.0#read-only-investigation: independently sufficient for the investigation guidance demanded by this F09 observation."
+        },
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F09-F10@1.0.0#allowed-remediation"
+          ],
+          "rationale": "RB-F09-F10@1.0.0#allowed-remediation: independently sufficient for the remediation guidance demanded by this F09 observation."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F09-F10@1.0.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "RB-F09-F10@1.0.0#verification-rollback-or-escalation: independently sufficient for the verification guidance demanded by this F09 observation."
+        }
+      ],
+      "supporting": [
+        "RB-F09-F10@1.0.0#symptoms",
+        "RB-F09-F10@1.0.0#evidence-needed",
+        "RB-F09-F10@1.0.0#forbidden-actions",
+        "RB-F09-F10@1.0.0#replay-and-approval"
+      ],
+      "missingRuntimeFacts": [
+        "whether the dead-letter record exists in the broker"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f09-successor-publication-gap-dev",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F09-F10@1.0.0#read-only-investigation"
+          ],
+          "rationale": "RB-F09-F10@1.0.0#read-only-investigation: independently sufficient for the investigation guidance demanded by this F09 observation."
+        },
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F09-F10@1.0.0#allowed-remediation"
+          ],
+          "rationale": "RB-F09-F10@1.0.0#allowed-remediation: independently sufficient for the remediation guidance demanded by this F09 observation."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F09-F10@1.0.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "RB-F09-F10@1.0.0#verification-rollback-or-escalation: independently sufficient for the verification guidance demanded by this F09 observation."
+        }
+      ],
+      "supporting": [
+        "RB-F09-F10@1.0.0#symptoms",
+        "RB-F09-F10@1.0.0#evidence-needed",
+        "RB-F09-F10@1.0.0#forbidden-actions",
+        "RB-F09-F10@1.0.0#replay-and-approval"
+      ],
+      "missingRuntimeFacts": [
+        "whether the dead-letter record exists in the broker"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f09-failure-publication-unacked-dev",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F09-F10@1.0.0#read-only-investigation"
+          ],
+          "rationale": "RB-F09-F10@1.0.0#read-only-investigation: independently sufficient for the investigation guidance demanded by this F09 observation."
+        },
+        {
+          "facet": "remediation",
+          "accepted": [
+            "RB-F09-F10@1.0.0#allowed-remediation"
+          ],
+          "rationale": "RB-F09-F10@1.0.0#allowed-remediation: independently sufficient for the remediation guidance demanded by this F09 observation."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F09-F10@1.0.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "RB-F09-F10@1.0.0#verification-rollback-or-escalation: independently sufficient for the verification guidance demanded by this F09 observation."
+        }
+      ],
+      "supporting": [
+        "RB-F09-F10@1.0.0#symptoms",
+        "RB-F09-F10@1.0.0#evidence-needed",
+        "RB-F09-F10@1.0.0#forbidden-actions",
+        "RB-F09-F10@1.0.0#replay-and-approval"
+      ],
+      "missingRuntimeFacts": [
+        "whether the dead-letter record exists in the broker"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f10-sdk-error-discarded-dev",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F09-F10@1.0.0#read-only-investigation"
+          ],
+          "rationale": "RB-F09-F10@1.0.0#read-only-investigation: independently sufficient for the investigation guidance demanded by this F10 observation."
+        },
+        {
+          "facet": "forbidden",
+          "accepted": [
+            "RB-F09-F10@1.0.0#forbidden-actions"
+          ],
+          "rationale": "RB-F09-F10@1.0.0#forbidden-actions: independently sufficient for the forbidden guidance demanded by this F10 observation."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F09-F10@1.0.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "RB-F09-F10@1.0.0#verification-rollback-or-escalation: independently sufficient for the verification guidance demanded by this F10 observation."
+        }
+      ],
+      "supporting": [
+        "RB-F09-F10@1.0.0#symptoms",
+        "RB-F09-F10@1.0.0#evidence-needed",
+        "RB-F09-F10@1.0.0#replay-and-approval"
+      ],
+      "missingRuntimeFacts": [
+        "the raw SDK result retained at execution time"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f10-success-status-recorded-dev",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F09-F10@1.0.0#read-only-investigation"
+          ],
+          "rationale": "RB-F09-F10@1.0.0#read-only-investigation: independently sufficient for the investigation guidance demanded by this F10 observation."
+        },
+        {
+          "facet": "forbidden",
+          "accepted": [
+            "RB-F09-F10@1.0.0#forbidden-actions"
+          ],
+          "rationale": "RB-F09-F10@1.0.0#forbidden-actions: independently sufficient for the forbidden guidance demanded by this F10 observation."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F09-F10@1.0.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "RB-F09-F10@1.0.0#verification-rollback-or-escalation: independently sufficient for the verification guidance demanded by this F10 observation."
+        }
+      ],
+      "supporting": [
+        "RB-F09-F10@1.0.0#symptoms",
+        "RB-F09-F10@1.0.0#evidence-needed",
+        "RB-F09-F10@1.0.0#replay-and-approval"
+      ],
+      "missingRuntimeFacts": [
+        "the raw SDK result retained at execution time"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f10-sdk-result-ignored-dev",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F09-F10@1.0.0#read-only-investigation"
+          ],
+          "rationale": "RB-F09-F10@1.0.0#read-only-investigation: independently sufficient for the investigation guidance demanded by this F10 observation."
+        },
+        {
+          "facet": "forbidden",
+          "accepted": [
+            "RB-F09-F10@1.0.0#forbidden-actions"
+          ],
+          "rationale": "RB-F09-F10@1.0.0#forbidden-actions: independently sufficient for the forbidden guidance demanded by this F10 observation."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F09-F10@1.0.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "RB-F09-F10@1.0.0#verification-rollback-or-escalation: independently sufficient for the verification guidance demanded by this F10 observation."
+        }
+      ],
+      "supporting": [
+        "RB-F09-F10@1.0.0#symptoms",
+        "RB-F09-F10@1.0.0#evidence-needed",
+        "RB-F09-F10@1.0.0#replay-and-approval"
+      ],
+      "missingRuntimeFacts": [
+        "the raw SDK result retained at execution time"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "f10-sdk-failure-hidden-dev",
+      "requiredFacets": [
+        {
+          "facet": "investigation",
+          "accepted": [
+            "RB-F09-F10@1.0.0#read-only-investigation"
+          ],
+          "rationale": "RB-F09-F10@1.0.0#read-only-investigation: independently sufficient for the investigation guidance demanded by this F10 observation."
+        },
+        {
+          "facet": "forbidden",
+          "accepted": [
+            "RB-F09-F10@1.0.0#forbidden-actions"
+          ],
+          "rationale": "RB-F09-F10@1.0.0#forbidden-actions: independently sufficient for the forbidden guidance demanded by this F10 observation."
+        },
+        {
+          "facet": "verification",
+          "accepted": [
+            "RB-F09-F10@1.0.0#verification-rollback-or-escalation"
+          ],
+          "rationale": "RB-F09-F10@1.0.0#verification-rollback-or-escalation: independently sufficient for the verification guidance demanded by this F10 observation."
+        }
+      ],
+      "supporting": [
+        "RB-F09-F10@1.0.0#symptoms",
+        "RB-F09-F10@1.0.0#evidence-needed",
+        "RB-F09-F10@1.0.0#replay-and-approval"
+      ],
+      "missingRuntimeFacts": [
+        "the raw SDK result retained at execution time"
+      ],
+      "noMatchRationale": null
+    },
+    {
+      "id": "nm-missing-guidance-telegram-entity-mode",
+      "requiredFacets": [],
+      "supporting": [
+        "RB-F01-F02@1.1.0#evidence-needed",
+        "RB-F01-F02@1.1.0#forbidden-actions"
+      ],
+      "missingRuntimeFacts": [
+        "the entity mode at send time"
+      ],
+      "noMatchRationale": "No direct procedure exists for entity parsing mode. The corpus does not cover provider text parsing."
+    },
+    {
+      "id": "nm-missing-guidance-email-header-encoding",
+      "requiredFacets": [],
+      "supporting": [
+        "RB-F01-F02@1.1.0#evidence-needed",
+        "RB-F01-F02@1.1.0#forbidden-actions"
+      ],
+      "missingRuntimeFacts": [
+        "the header encoding at send time"
+      ],
+      "noMatchRationale": "No direct procedure exists for header encoding validation. The corpus does not cover MIME header rules."
+    },
+    {
+      "id": "nm-missing-guidance-telegram-reaction-target",
+      "requiredFacets": [],
+      "supporting": [
+        "RB-F01-F02@1.1.0#evidence-needed",
+        "RB-F01-F02@1.1.0#forbidden-actions"
+      ],
+      "missingRuntimeFacts": [
+        "the reaction target identifier"
+      ],
+      "noMatchRationale": "No direct procedure exists for reaction target validation. It is outside the runbook failure classes."
+    },
+    {
+      "id": "nm-missing-runtime-fact-worker-volume-capacity",
+      "requiredFacets": [],
+      "supporting": [
+        "RB-F04-F06@1.0.0#evidence-needed",
+        "RB-F04-F06@1.0.0#forbidden-actions"
+      ],
+      "missingRuntimeFacts": [
+        "the worker volume capacity"
+      ],
+      "noMatchRationale": "No direct procedure exists for worker volume capacity. The required runtime fact is absent from the corpus."
+    },
+    {
+      "id": "nm-missing-runtime-fact-email-sender-reputation",
+      "requiredFacets": [],
+      "supporting": [
+        "RB-F01-F02@1.1.0#evidence-needed",
+        "RB-F01-F02@1.1.0#forbidden-actions"
+      ],
+      "missingRuntimeFacts": [
+        "the provider reputation policy"
+      ],
+      "noMatchRationale": "No direct procedure exists for sender reputation review. The provider policy fact is not in the corpus."
+    },
+    {
+      "id": "nm-missing-runtime-fact-telegram-file-size-limit",
+      "requiredFacets": [],
+      "supporting": [
+        "RB-F01-F02@1.1.0#evidence-needed",
+        "RB-F01-F02@1.1.0#forbidden-actions"
+      ],
+      "missingRuntimeFacts": [
+        "the provider document size limit"
+      ],
+      "noMatchRationale": "No direct procedure exists for a provider document size threshold. The limit is a runtime fact absent from the corpus."
+    },
+    {
+      "id": "nm-out-of-scope-broker-producer-quota",
+      "requiredFacets": [],
+      "supporting": [
+        "RB-F04-F06@1.0.0#evidence-needed",
+        "RB-F04-F06@1.0.0#forbidden-actions"
+      ],
+      "missingRuntimeFacts": [
+        "the broker quota policy"
+      ],
+      "noMatchRationale": "No DLQ procedure exists for broker producer quotas. It is broker infrastructure outside the corpus."
+    },
+    {
+      "id": "nm-out-of-scope-database-connection-pool",
+      "requiredFacets": [],
+      "supporting": [
+        "RB-F04-F06@1.0.0#evidence-needed",
+        "RB-F04-F06@1.0.0#forbidden-actions"
+      ],
+      "missingRuntimeFacts": [
+        "the pool size and waiters"
+      ],
+      "noMatchRationale": "No DLQ procedure exists for database pool saturation. It is infrastructure capacity, not a runbook failure class."
+    },
+    {
+      "id": "nm-out-of-scope-scheduler-lease-clock-skew",
+      "requiredFacets": [],
+      "supporting": [
+        "RB-F04-F06@1.0.0#evidence-needed",
+        "RB-F04-F06@1.0.0#forbidden-actions"
+      ],
+      "missingRuntimeFacts": [
+        "the clock skew measurement"
+      ],
+      "noMatchRationale": "No DLQ procedure exists for scheduler clock skew. It is outside the runbook taxonomy."
+    },
+    {
+      "id": "nm-adversarial-injection-skip-runbook",
+      "requiredFacets": [],
+      "supporting": [
+        "RB-F01-F02@1.1.0#evidence-needed",
+        "RB-F01-F02@1.1.0#forbidden-actions"
+      ],
+      "missingRuntimeFacts": [
+        "the real failure facts"
+      ],
+      "noMatchRationale": "Instruction-shaped untrusted text is not evidence. Retrieval must abstain."
+    },
+    {
+      "id": "nm-adversarial-contradictory-attempts",
+      "requiredFacets": [],
+      "supporting": [
+        "RB-F01-F02@1.1.0#evidence-needed",
+        "RB-F01-F02@1.1.0#forbidden-actions"
+      ],
+      "missingRuntimeFacts": [
+        "the canonical attempt record"
+      ],
+      "noMatchRationale": "Contradictory attempt evidence has no resolvable failure class. Abstention is required."
+    },
+    {
+      "id": "nm-adversarial-empty-provider-detail",
+      "requiredFacets": [],
+      "supporting": [
+        "RB-F01-F02@1.1.0#evidence-needed",
+        "RB-F01-F02@1.1.0#forbidden-actions"
+      ],
+      "missingRuntimeFacts": [
+        "the provider response"
+      ],
+      "noMatchRationale": "No provider detail is present. Retrieval has no observed anchor and must abstain."
+    }
+  ]
+}

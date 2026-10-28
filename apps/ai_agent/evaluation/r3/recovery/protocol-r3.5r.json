@@ -1,0 +1,257 @@
+{
+  "version": 4,
+  "phase": "R3.5-recovery",
+  "status": "frozen_before_measurement",
+  "createdAt": "2026-10-20T07:38:33.249Z",
+  "revisionLog": [
+    {
+      "version": 2,
+      "date": "2026-10-20",
+      "note": "Frozen at R3.5r.0 before any recovery score existed. File bytes hash ba37021c0f7e0a809e8f1ebf6fc8f81a5e4869e83ec1bfcaf2a040beb76fc061."
+    },
+    {
+      "version": 3,
+      "date": "2026-10-20",
+      "note": "Corrected development.combined.cases from 34 to 32 and renamed the screening keys from dev-34 to dev-32, per independent review-development-v2.md §9 and E1. The pinned 24 are 16 answerable + 8 no-match; the predeclared extension is 6 answerable + 2 no-match; the combined cohort is 32 (22 answerable, 10 no-match). No case was added or removed.",
+      "supersededFileBytesHash": "ba37021c0f7e0a809e8f1ebf6fc8f81a5e4869e83ec1bfcaf2a040beb76fc061",
+      "review": "apps/ai_agent/evaluation/r3/recovery/review-development-v2.md"
+    },
+    {
+      "version": 4,
+      "date": "2026-10-20",
+      "note": "Pre-registered composite implementation before any revision-4 score: D1a changes the deliveryUnknown demand from investigation/forbidden/verification to investigation/remediation/verification; D1b adds the typed dedupWindowExpired signal (requires both deduplication_window_expired and same_request_key_known) ahead of deliveryUnknown with demand remediation/forbidden/verification; D2 accepts RB-F03-F04@1.0.0#verification-rollback-or-escalation as the second verification citation for f04-sibling-destination-repair, with RB-F04-F06@1.0.0#verification-rollback-or-escalation remaining first and strict canonical. No gate, threshold, denominator, exclusion rule, corpus, model, prompt, packing, or support setting changed.",
+      "supersededFileBytesHash": "ae513bbfc86b84328166b943a87ec45cd9a7fba7d83fc0a0db11ff60c4e9481e",
+      "review": "apps/ai_agent/evaluation/r3/recovery/protocol-r3.5r.revision-4.json"
+    }
+  ],
+  "preRegistration": {
+    "declaredBeforeAnyScore": true,
+    "budget": "single composite predeclared implementation (D1a+D1b+D2-accept); no post-run tuning; failure closes the line under stop rules 4 and 14",
+    "prediction": {
+      "dev24SufficientGuidanceHitAt3": 0.8125,
+      "dev24MacroSectionRecallAt3": 0.875,
+      "dev32SufficientGuidanceHitAt3": 0.8182,
+      "dev32MacroSectionRecallAt3": 0.8864,
+      "dev32StrictLabelHitAt3": 0.7727,
+      "dev32NoMatchAbstention": 1,
+      "dev32FalseAbstention": 0
+    },
+    "expectedMisses": [
+      "f04-template-path-missing",
+      "f10-sdk-error-recorded-success",
+      "s03-sensitive-fields-present",
+      "f03-f04-credential-and-template-overlap"
+    ]
+  },
+  "supersedes": {
+    "path": "apps/ai_agent/evaluation/r3/protocol.json",
+    "hash": "e6a491cc5d2423485c61ff5d5e8634e07bc9886bb76041b68238f5322290c3ed",
+    "outcome": "rejected",
+    "note": "Immutable. Not reused and not re-scored. This file starts a new acceptance event with its own corpus, label, and holdout hashes."
+  },
+  "seal": {
+    "path": "apps/ai_agent/evaluation/r3/holdout",
+    "status": "consumed_sealed",
+    "readProhibited": true,
+    "permittedReferences": {
+      "cases-v1.json": "7fa54e7afa174b9d4bb256c6b8f4de81d6e312681e8accb0209d1c4b2026839c",
+      "labels-v1.json": "2ed46c5561b75a0953e5ddf1ece9bdeafab60fb4b97ce14446dae978e40cc39b",
+      "evidence-v1.json": "55994aa6f0f49f28bb194f039473445c9e03ecafbdbc0654301027fce50716d2",
+      "review-final-v1.json": "1e433af93b83fd0702e9b22eb0ea80773012f9c7a0d667d0ed97a583460a595f",
+      "authoring-attestation-v1.json": "7e472fc0297d03a5050c2952a1caa7d645b47c5baff6d4cd03095a57048aa20b"
+    },
+    "rule": "No file under this directory may be opened, copied, diffed, paraphrased, or re-scored. Only the published hashes, the aggregate gate table in decision.md §2, the miss ids in decision.md §4, and the post-hoc notes in decision.md §7 may be referenced."
+  },
+  "corpus": {
+    "path": "apps/ai_agent/evaluation/r3/corpus-v1.json",
+    "runbooks": 6,
+    "sections": 55,
+    "hashBasis": "sha256(JSON.stringify(sections))",
+    "sectionsHash": "45e85c3585607ebfd0e1ebd1f2b068e2fab7c889b1bdd3af3a565f20afcbd440",
+    "declaredCorpusHash": "45e85c3585607ebfd0e1ebd1f2b068e2fab7c889b1bdd3af3a565f20afcbd440",
+    "fileBytesHash": "496f3e7f2daf13e88c405bb4110e9796175432f4d1eac8c834b693d8f39de6d0",
+    "verifiedAt": "2026-10-20T07:38:33.249Z",
+    "changeRule": "Any runbook edit stops this phase. It requires corpus-v2.json, an updated parity test, a new protocol, and re-adjudicated labels. No in-place edit and no hash carry-over."
+  },
+  "model": {
+    "id": "Xenova/ms-marco-MiniLM-L-6-v2",
+    "revision": "a09144355adeed5f58c8ed011d209bf8ee5a1fec",
+    "quantization": "q8",
+    "maxLength": 512,
+    "batchSize": 8,
+    "device": "cpu"
+  },
+  "prompt": {
+    "id": "diagnosis",
+    "version": "phase-11a-v3",
+    "sourceHash": "aa4a038a8b2748826933a9deb13aa883546d9d6cb79369a5424402d1c9485a9f"
+  },
+  "development": {
+    "pinned": {
+      "cases": 24,
+      "answerable": 16,
+      "noMatch": 8,
+      "casesFile": "apps/ai_agent/evaluation/r3/development-cases-v1.json",
+      "labelsFile": "apps/ai_agent/evaluation/r3/development-labels-v1.json",
+      "labelHash": "a30fd42160326bd6daa02238be50ad0c0cccab23d5ef5372fcae99e7fd49c752",
+      "status": "retained_unchanged",
+      "rule": "Rows are copied byte-identically into v2. No pinned label is edited to fit new profile output."
+    },
+    "extension": {
+      "answerable": 6,
+      "noMatch": 2,
+      "status": "authored_reviewed"
+    },
+    "combined": {
+      "cases": 32,
+      "answerable": 22,
+      "noMatch": 10,
+      "status": "authored_reviewed",
+      "casesFile": "apps/ai_agent/evaluation/r3/recovery/development-cases-v2.json",
+      "labelsFile": "apps/ai_agent/evaluation/r3/recovery/development-labels-v3.json",
+      "labelsConstituentsFile": "apps/ai_agent/evaluation/r3/recovery/development-labels-v3.constituents.json"
+    },
+    "screening": {
+      "dev24SufficientGuidanceHitAt3": 0.8,
+      "dev24MacroSectionRecallAt3": 0.8,
+      "dev32SufficientGuidanceHitAt3": 0.8,
+      "dev32MacroSectionRecallAt3": 0.8,
+      "dev32NoMatchAbstention": 0.9,
+      "dev32FalseAbstentionMax": 0.05,
+      "directPrecisionNotBelow": "same-corpus keyword control",
+      "mechanismInvariants": 1.0,
+      "note": "Screening only. Never reported as release acceptance."
+    }
+  },
+  "holdout": {
+    "version": 2,
+    "path": "apps/ai_agent/evaluation/r3/recovery/holdout-v2",
+    "cases": 40,
+    "answerable": 30,
+    "noMatch": 10,
+    "corpusGapScheduled": 0,
+    "status": "not_authored",
+    "authoringPlan": "apps/ai_agent/evaluation/r3/recovery/holdout-v2-authoring-plan.md",
+    "authoringGate": "Authored only after the candidate config is frozen at R3.5r.4, by an author who has not seen the implementation diff, any development ranking or score, or any content of holdout v1.",
+    "strataMinimums": {
+      "answerablePerFamily": 3,
+      "genericOnlyEligible": 6,
+      "s1PreConnectionTransportNoStatus": 4,
+      "s2RejectedDeliveryUnacknowledgedPublication": 3,
+      "s3F04SiblingSufficiency": 3,
+      "s4AmbiguousWordNoMatch": 3,
+      "s5ConfidentSignalNoMatch": 3,
+      "s6NoRouteNoAnchorNoMatch": 2
+    },
+    "hashPolicy": "Holdout v2 hashes are recorded in the freeze manifest and the run manifest only. They are never written into the pre-frozen candidate config."
+  },
+  "routeProfile": {
+    "retrievalMethod": "structured-minilm",
+    "routeEnabled": true,
+    "candidateArm": "profile-route-facets-support-r3.5r",
+    "profileVersion": "r3.5r-v1",
+    "routeTableVersion": "r3.5r-v1",
+    "packingVersion": "r3.3-v1",
+    "supportVersion": "r3.4-v1",
+    "support": {
+      "minAnchorHits": 1
+    },
+    "changes": [
+      "typed pre-connection transport vocabulary as an F02 route signal (errno/dns/phrase self-sufficient; weak tokens require corroboration; non-provider subsystems suppress weak tokens)",
+      "per-signal facet derivation with no early return; deliveryUnknown split from bookkeeping-only outcomeUnknown; verification invariant over all signal subsets",
+      "label-side citation equivalence for independently sufficient sibling sections (maximum two, same family and facet, second-reviewer signed)",
+      "route precision: no hint may fire on a bare ambiguous word; every fired hint carries a typed signal class"
+    ],
+    "unchanged": [
+      "corpus-v1.json",
+      "packing r3.3-v1",
+      "support r3.4-v1 and minAnchorHits 1",
+      "model, revision, quantization, prompt",
+      "top-k = 3"
+    ]
+  },
+  "labelEquivalence": {
+    "option": "A",
+    "scope": "labels and scoring only; retrieval output must be identical with or without this option",
+    "maxAcceptedPerFacet": 2,
+    "requirements": [
+      "same taxonomy family and same facet",
+      "per-citation independent-sufficiency rationale",
+      "decided blind, before the run",
+      "independent reviewer sign-off",
+      "strict-label sensitivity row reported beside the primary metric"
+    ],
+    "multiCitationRationale": "one rationale line per accepted citation, each line prefixed with its citation",
+    "strictCanonicalCitation": "first citation listed in accepted after access-eligibility filtering",
+    "noMatchExcluded": true,
+    "deferredAlternative": "Corpus deduplication (Option B) is a separate content change requiring corpus-v2 and is out of scope for this acceptance event."
+  },
+  "gates": {
+    "developmentSufficientGuidanceHitAt3": 0.8,
+    "releaseSufficientGuidanceHitAt3": 0.9,
+    "releaseMacroSectionRecallAt3": 0.9,
+    "noMatchAbstention": 0.9,
+    "falseAbstentionMax": 0.05,
+    "directPrecisionNotBelow": "keyword control on the same holdout; every per-case regression explained",
+    "releaseRouteCoverage": 1.0,
+    "reliability": 0.95,
+    "p95LatencyMs": 3000,
+    "safetyViolationsMax": 0,
+    "diagnosisAcceptance": 0.8,
+    "diagnosisScope": "R3.6 only; not part of the R3.5-recovery decision"
+  },
+  "absoluteCounts": {
+    "scheduled": 40,
+    "eligibleAnswerable": 30,
+    "noMatch": 10,
+    "sufficientGuidanceHitsMin": 27,
+    "macroRecallCasesMin": 27,
+    "noMatchAbstentionsMin": 9,
+    "falseAbstentionsMax": 1,
+    "reliableOutputsMin": 38,
+    "safetyViolationsMax": 0
+  },
+  "integrityGates": {
+    "facetInvariant": "100% of cases with a fault signal request verification, and every fault request set has length 3",
+    "typedRouteAudit": "100% of fired hints carry a typed signal class",
+    "equivalenceProvenance": "every multi-citation accepted facet has two reviewer rationale lines",
+    "freezeIntegrity": "config, corpus, label, and holdout hashes equal the values written at freeze",
+    "noConsumedData": "no r3/holdout path appears in the recovery work log or diffs"
+  },
+  "denominatorRules": [
+    "An accepted citation that is access-ineligible under the case input moves the case to providerExcluded; it is neither a hit nor a miss.",
+    "An unavailable output never earns abstention credit.",
+    "corpus_gap cases never enter the recall denominator and are reported separately.",
+    "A case is eligible answerable only when every accepted citation is eligible under the case input."
+  ],
+  "stopRules": [
+    "Corpus parity fails and cannot be repaired without editing runbooks.",
+    "A label cannot be re-adjudicated against the frozen corpus without inventing a citation.",
+    "Route coverage falls below 100% and cannot be repaired without a gold filter or a case-identity rule.",
+    "dev-32 hit@3 stays below 80% after the one predeclared implementation.",
+    "Abstention cannot reach 90% on development without false abstention above 5%.",
+    "Any release gate fails on holdout v2.",
+    "Diagnosis credentials or budget are unavailable (R3.6 only).",
+    "The work would require a new dependency, model, vector store, or open-ended method search.",
+    "Any part of holdout v1 would need to be opened to proceed, including duplicate detection.",
+    "The holdout v2 author or reviewer fails the independence separation.",
+    "A gate, threshold, denominator, or exclusion rule changes after any recovery score exists.",
+    "The candidate is edited after the R3.5r.4 freeze.",
+    "A fired hint cannot be expressed as a typed signal without a case-identity rule.",
+    "A second independent rejection closes the structured-minilm line; no third holdout and no further recovery of this method."
+  ],
+  "excluded": [
+    "apps/ai_agent/evaluation/r3/holdout (sealed)",
+    "apps/ai_agent/evaluation/r25/runs/fresh-v1",
+    "apps/ai_agent/evaluation/r25/runs/exhaustive-v2",
+    "development scores as release evidence",
+    "any third recovery attempt of structured-minilm after a second rejection"
+  ],
+  "notes": {
+    "freezeRule": "This file was written before any recovery score existed. Any edit invalidates the recovery acceptance run.",
+    "runtimeDefault": "minilm-original. RUNBOOK_RETRIEVAL_METHOD is unchanged and no arm is promoted by this phase.",
+    "configFreeze": "selected-retrieval-config-r3.5r.json is frozen at R3.5r.4 because it must record the dev label hash and dev run hashes.",
+    "tuningRule": "Development is exposed and may be tuned on. Holdout v2 may not be inspected before the single run.",
+    "evidenceStandard": "The recovery decision must disclose that the four changes were motivated by holdout v1 observations; holdout v2 tests transfer, not discovery."
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "artifactId": "development-labels-v3.constituents",
+  "status": "pending_second_review",
+  "authoredAt": "2026-10-20T14:42:02.894Z",
+  "protocol": {
+    "path": "apps/ai_agent/evaluation/r3/recovery/protocol-r3.5r.json",
+    "fileBytesHash": "f4ee2f19cf13a40ad20211fac71ae297715bfd277fbb618f8dcc18b0935f20ad",
+    "revision": 4
+  },
+  "corpus": {
+    "path": "apps/ai_agent/evaluation/r3/corpus-v1.json",
+    "sectionsHash": "45e85c3585607ebfd0e1ebd1f2b068e2fab7c889b1bdd3af3a565f20afcbd440"
+  },
+  "base": {
+    "labelSource": "apps/ai_agent/evaluation/r3/recovery/development-labels-v2.json",
+    "labelsFileBytesHash": "f7e1ac024b86a7a375f724737794b9998910c664d7a521aa3d35ba127c682203",
+    "labelsHash": "5a0f75659aa3e86498be441bb3cf2935cf98ba26eecdb58c5dd7eba6ddb061e6",
+    "labelsHashBasis": "sha256(JSON.stringify(parsed labels file))",
+    "rowCount": 32
+  },
+  "changedRows": [
+    {
+      "caseId": "f04-sibling-destination-repair",
+      "facet": "verification",
+      "addedCitation": "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+      "position": "second",
+      "acceptedAfter": [
+        "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+        "RB-F03-F04@1.0.0#verification-rollback-or-escalation"
+      ],
+      "strictCanonicalCitation": "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+      "labelRowHashBefore": "ddf74329946ebed63c964464e9946d2fe39833450aa23f46415d158a3fa4f7a3",
+      "labelRowHashAfter": "840c8f9021831c11e40ac1ed7d1d53ca3b9d8670f1cbadf7b3e0a5c242008497",
+      "labelRowHashBasis": "sha256(JSON.stringify(parsed label row))"
+    }
+  ],
+  "unchangedRows": 31,
+  "declinedEquivalences": [
+    {
+      "caseId": "f03-f04-credential-and-template-overlap",
+      "facet": "investigation",
+      "declinedCitation": "RB-F04-F06@1.0.0#read-only-investigation",
+      "reason": "Not independently sufficient for a credential plus template overlap. RB-F04-F06#read-only-investigation covers template and registry validation, while the observed overlap requires the credential-presence and worker-environment reasoning in RB-F03-F04#read-only-investigation. Joint sufficiency would require amending labelEquivalence.requirements, so this is deferred to corpus-v2 work rather than slipped into revision 4."
+    }
+  ],
+  "labelEquivalence": {
+    "option": "A",
+    "maxAcceptedPerFacet": 2,
+    "multiCitationFacets": [
+      {
+        "caseId": "f04-sibling-destination-repair",
+        "family": "F04",
+        "facet": "verification",
+        "accepted": [
+          "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+          "RB-F03-F04@1.0.0#verification-rollback-or-escalation"
+        ],
+        "rationaleLines": 2
+      }
+    ],
+    "reviewStatus": "pending_second_review",
+    "reviewer": null,
+    "reviewNote": "The equivalence requires an independent reviewer sign-off written into this file before the revision-4 run. The implementation agent cannot self-satisfy that gate."
+  },
+  "labelFile": "apps/ai_agent/evaluation/r3/recovery/development-labels-v3.json",
+  "labelFileHash": "cb4b9caecd5243a31eca57abbb6d452311a84ad3983a42a73a8c91e2c0545793",
+  "labelFileHashBasis": "sha256(JSON.stringify({version,cases}))",
+  "labelFileBytesHash": "f20513eaf51ad0e377a8a41595dba261288915a4116bc2501fb4cbbfdac39d12",
+  "schemaNote": "development-labels-v3.json is exactly {version,cases} and copies every v2 row except the single documented f04-sibling-destination-repair verification facet.",
+  "moveNote": "This sibling file holds provenance only and is never read by the scoring loader."
+}

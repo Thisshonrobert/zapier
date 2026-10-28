@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "holdoutId": "r4-holdout-20261021-v1",
+  "createdAt": "2026-10-21T09:55:00.000Z",
+  "retrievalMethod": "structured-minilm",
+  "profileVersion": "r4-v1",
+  "packingVersion": "r3.3-v1",
+  "supportVersion": "r3.4-v1",
+  "support": {
+    "minAnchorHits": 1
+  },
+  "corpusHash": "45e85c3585607ebfd0e1ebd1f2b068e2fab7c889b1bdd3af3a565f20afcbd440",
+  "developmentLabelHash": "e7b0ac196e66dd53c92605dcf4c7113a2478509a3d07826241761700668ec809",
+  "developmentRunHash": "301a9e6f6c54b5c05174ebeafe1e0485674d14603dd3ae64ffc0b38c349d9be8",
+  "protocolHash": "d47669b7f567a2436d13a0a7bc127898e9ad774f4082c047091e7dcdfc391b5e",
+  "model": {
+    "id": "Xenova/ms-marco-MiniLM-L-6-v2",
+    "revision": "a09144355adeed5f58c8ed011d209bf8ee5a1fec",
+    "quantization": "q8"
+  },
+  "prompt": {
+    "id": "diagnosis",
+    "version": "phase-11a-v3"
+  },
+  "holdoutSealHash": "8d6cb47c3032e0ae051ad83c2009d007b644162d95f7f8e44d24ec61f558c886",
+  "hashMethods": {
+    "corpusHash": "canonical sections hash from loadFrozenCorpus, equal to protocol.corpus.sectionsHash",
+    "developmentLabelHash": "sha256 of raw development-labels-v2.json bytes",
+    "developmentRunHash": "sha256 of runs/dev-20261021-v2/manifest.json raw bytes",
+    "protocolHash": "sha256 of protocol.json raw bytes after the R4.1 seal",
+    "holdoutSealHash": "sha256 of holdout/seal.json raw bytes"
+  },
+  "notes": "Frozen before the sealed holdout is opened. The pinned development run is runs/dev-20261021-v2 (retrieval_accepted). No route, facet, packer, support, corpus, label, gate, or prompt changes are authorized after this file is written."
+}

@@ -1,0 +1,276 @@
+{
+  "version": 1,
+  "phase": "R4.2a",
+  "createdAt": "2026-10-21T08:41:59.628Z",
+  "startingCommit": "da3b860e1a07866cbe34f9b1231c63ecc58d7a8c",
+  "baselineProtocolHash": "2a750560b0c47a723094ef2d0bd5c112e5c464ee7f32bcf18d5951f91363c47c",
+  "scope": "Synthetic fixtures only. No retriever, model, R3.5 holdout, or R4 holdout was opened.",
+  "summary": {
+    "alreadyFixed": [
+      "f02-dns-presend",
+      "f02-timeout-presend",
+      "f02-timeout-presend-no-provider",
+      "f02-no-match-worker-admission",
+      "f09-publication-verification"
+    ],
+    "stillBroken": [
+      "f02-weak-provider-only"
+    ],
+    "notImplemented": [
+      "f04-label-equivalence"
+    ]
+  },
+  "gaps": [
+    {
+      "id": "trace-weak-token-rejection",
+      "requiredBy": "plan 3.3",
+      "observed": "No evaluation trace field exists. A rejected weak token is silent; routeEvidence.reasons correctly stays empty.",
+      "owner": "R4.2b"
+    },
+    {
+      "id": "trace-facet-selection-dropped",
+      "requiredBy": "plan 3.2",
+      "observed": "requestedFacetsForSignals returns the selected facets only; the dropped facets are not exposed.",
+      "owner": "R4.2b"
+    },
+    {
+      "id": "facet-drop-order",
+      "requiredBy": "plan 3.2",
+      "observed": "Selection is a first-occurrence union truncated to three. The prescribed drop order evidence, symptoms, replay is not implemented, and no signal ever requests symptoms. The verification invariant itself holds for every signal subset.",
+      "owner": "R4.2b"
+    },
+    {
+      "id": "f04-label-schema",
+      "requiredBy": "plan 3.4",
+      "observed": "RequiredFacetSchema and LabelFacetSchema still cap accepted citations at two; a three-way equivalent facet does not parse. Scoring already treats any accepted citation as covering the facet.",
+      "owner": "R4.1"
+    }
+  ],
+  "entries": [
+    {
+      "id": "f02-dns-presend",
+      "defect": "F02",
+      "fixture": {
+        "finalError": "DNS lookup returned EAI_AGAIN",
+        "provider": null,
+        "phase": "pre_send",
+        "status": null,
+        "fixtureFacts": [],
+        "providerOutcome": "rejected"
+      },
+      "expected": "route.hints=[\"F02\"], route.confident=true; a weak token must not be corroborated by a provider name alone",
+      "observed": {
+        "hints": [
+          "F02"
+        ],
+        "confident": true,
+        "reasons": [
+          "final_error_transport:dns:eai_again"
+        ],
+        "weakCorroborators": [],
+        "providerOnlyCorroboration": false,
+        "requestedFacets": [
+          "investigation",
+          "remediation",
+          "verification"
+        ],
+        "anchors": [],
+        "supportOutcome": "depends_on_candidate_set"
+      },
+      "verdict": "already_fixed",
+      "notes": ""
+    },
+    {
+      "id": "f02-timeout-presend",
+      "defect": "F02",
+      "fixture": {
+        "finalError": "timed out",
+        "provider": "smtp",
+        "phase": "pre_send",
+        "status": null,
+        "fixtureFacts": [],
+        "providerOutcome": "rejected"
+      },
+      "expected": "route.hints=[\"F02\"], route.confident=true; a weak token must not be corroborated by a provider name alone",
+      "observed": {
+        "hints": [
+          "F02"
+        ],
+        "confident": true,
+        "reasons": [
+          "final_error_transport:weak:timed out+provider:smtp"
+        ],
+        "weakCorroborators": [
+          "provider:smtp"
+        ],
+        "providerOnlyCorroboration": false,
+        "requestedFacets": [
+          "investigation",
+          "remediation",
+          "verification"
+        ],
+        "anchors": [],
+        "supportOutcome": "depends_on_candidate_set"
+      },
+      "verdict": "already_fixed",
+      "notes": ""
+    },
+    {
+      "id": "f02-timeout-presend-no-provider",
+      "defect": "F02",
+      "fixture": {
+        "finalError": "timed out",
+        "provider": null,
+        "phase": "pre_send",
+        "status": null,
+        "fixtureFacts": [],
+        "providerOutcome": "rejected"
+      },
+      "expected": "route.hints=[\"F02\"], route.confident=true; a weak token must not be corroborated by a provider name alone",
+      "observed": {
+        "hints": [
+          "F02"
+        ],
+        "confident": true,
+        "reasons": [
+          "final_error_transport:weak:timed out+phase:pre_send"
+        ],
+        "weakCorroborators": [
+          "phase:pre_send"
+        ],
+        "providerOnlyCorroboration": false,
+        "requestedFacets": [
+          "investigation",
+          "remediation",
+          "verification"
+        ],
+        "anchors": [],
+        "supportOutcome": "depends_on_candidate_set"
+      },
+      "verdict": "already_fixed",
+      "notes": ""
+    },
+    {
+      "id": "f02-weak-provider-only",
+      "defect": "no-match",
+      "fixture": {
+        "finalError": "timed out",
+        "provider": "smtp",
+        "phase": null,
+        "status": null,
+        "fixtureFacts": [],
+        "providerOutcome": "rejected"
+      },
+      "expected": "route.hints=[], route.confident=false; a weak token must not be corroborated by a provider name alone",
+      "observed": {
+        "hints": [
+          "F02"
+        ],
+        "confident": true,
+        "reasons": [
+          "final_error_transport:weak:timed out+provider:smtp"
+        ],
+        "weakCorroborators": [
+          "provider:smtp"
+        ],
+        "providerOnlyCorroboration": true,
+        "requestedFacets": [
+          "investigation",
+          "remediation",
+          "verification"
+        ],
+        "anchors": [],
+        "supportOutcome": "depends_on_candidate_set"
+      },
+      "verdict": "still_broken",
+      "notes": "Routes only because the provider name is treated as a corroborator."
+    },
+    {
+      "id": "f02-no-match-worker-admission",
+      "defect": "no-match",
+      "fixture": {
+        "finalError": "worker admission refused: local queue capacity",
+        "provider": "smtp",
+        "phase": null,
+        "status": null,
+        "fixtureFacts": [],
+        "providerOutcome": "rejected"
+      },
+      "expected": "route.hints=[], route.confident=false; a weak token must not be corroborated by a provider name alone",
+      "observed": {
+        "hints": [],
+        "confident": false,
+        "reasons": [],
+        "weakCorroborators": [],
+        "providerOnlyCorroboration": false,
+        "requestedFacets": [
+          "investigation",
+          "evidence",
+          "remediation"
+        ],
+        "anchors": [],
+        "supportOutcome": "abstain(no_procedural_section|no_observed_anchor)"
+      },
+      "verdict": "already_fixed",
+      "notes": "Route is not confident and there are no anchors, so support abstains for any candidate set."
+    },
+    {
+      "id": "f09-publication-verification",
+      "defect": "F09",
+      "fixture": {
+        "developmentCase": "f09-database-sink-only",
+        "syntheticSignals": [
+          "publication",
+          "outcomeUnknown"
+        ]
+      },
+      "expected": "verification retained in both, facets length 3, never evidence dropped",
+      "observed": {
+        "signals": {
+          "dedupWindowExpired": false,
+          "deliveryUnknown": true,
+          "outcomeUnknown": false,
+          "rateLimited": false,
+          "transport": false,
+          "credential": false,
+          "validation": false,
+          "handler": false,
+          "ordering": false,
+          "duplicate": false,
+          "sdk": false,
+          "publication": true
+        },
+        "liveFacets": [
+          "investigation",
+          "remediation",
+          "verification"
+        ],
+        "syntheticFacets": [
+          "investigation",
+          "remediation",
+          "verification"
+        ]
+      },
+      "verdict": "already_fixed",
+      "notes": "Signal order also decides which non-verification facet fills the third slot."
+    },
+    {
+      "id": "f04-label-equivalence",
+      "defect": "F04",
+      "fixture": {
+        "acceptedCitationsInCase": 3,
+        "secondAcceptedReturned": "RB-F01-F02@1.1.0#read-only-investigation"
+      },
+      "expected": "three accepted citations parse; scoring a non-first accepted citation is sufficient",
+      "observed": {
+        "threeWayParseSucceeded": false,
+        "threeWayParseError": [
+          "Too big: expected array to have <=2 items"
+        ],
+        "secondAcceptedSufficient": true
+      },
+      "verdict": "not_implemented",
+      "notes": "R4.1 owns the label-schema fix; scoring already uses any accepted citation."
+    }
+  ]
+}

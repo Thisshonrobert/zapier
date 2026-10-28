@@ -1,0 +1,44 @@
+{
+  "generatedAt": "2026-10-21T08:24:48.134Z",
+  "supportVersion": "r3.4-v1",
+  "corpusHash": "45e85c3585607ebfd0e1ebd1f2b068e2fab7c889b1bdd3af3a565f20afcbd440",
+  "labelHash": "a30fd42160326bd6daa02238be50ad0c0cccab23d5ef5372fcae99e7fd49c752",
+  "protocolHash": "e6a491cc5d2423485c61ff5d5e8634e07bc9886bb76041b68238f5322290c3ed",
+  "inputHash": "325c380a92039193f788338c3e243ac2d5584f74a1ee54929d09d5e4730ce881",
+  "scoresHash": "c205473e472958c680f3d813094c01036b8529ee01fdcf3227066259a9caa3ba",
+  "routeGate": {
+    "threshold": 1,
+    "routeCoverage": 1,
+    "accepted": 28,
+    "covered": 28,
+    "status": "enabled",
+    "selectedArm": "profile-route"
+  },
+  "selectedArm": "profile-route-facets-support",
+  "support": {
+    "selected": {
+      "minAnchorHits": 1
+    },
+    "policies": [
+      1,
+      2
+    ],
+    "selectionOrder": [
+      "no-match abstention >= 90%",
+      "false abstention <= 5%",
+      "highest sufficient-guidance hit@3",
+      "highest macro section recall@3",
+      "lower p95 latency"
+    ],
+    "tie": true
+  },
+  "gate": {
+    "status": "passed"
+  },
+  "notes": {
+    "sharedRoute": "the support arm reuses the frozen R3.2 profile-route decision; no route rule was retuned",
+    "sharedLogits": "facet packing and support reuse the same scores-original.json as the selected R3.2 profile-route arm",
+    "noCutoff": "the structured arm ranks by sigmoid score without the minilm-original .001 floor",
+    "support": "abstention is decided from route confidence or distinct observed anchors, never from a score threshold"
+  }
+}

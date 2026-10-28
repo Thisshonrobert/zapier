@@ -1,0 +1,29 @@
+{
+  "artifact": "protocol-r3.5r.revision-3",
+  "date": "2026-10-20",
+  "authority": "independent review-development-v2.md §9 and E1",
+  "reason": "The protocol recorded development.combined.cases 34 and named the cohort dev-34, but its own pinned (16 answerable + 8 no-match) and extension (6 answerable + 2 no-match) components total 32. Revision 3 records the authored truth: dev-32 = 22 answerable + 10 no-match.",
+  "supersedes": {
+    "version": 2,
+    "fileBytesHash": "ba37021c0f7e0a809e8f1ebf6fc8f81a5e4869e83ec1bfcaf2a040beb76fc061"
+  },
+  "version": 3,
+  "fileBytesHash": "ae513bbfc86b84328166b943a87ec45cd9a7fba7d83fc0a0db11ff60c4e9481e",
+  "changes": [
+    "development.combined.cases 34 -> 32",
+    "screening keys dev34* -> dev32*",
+    "stop rule dev-34 -> dev-32",
+    "development.extension.status and development.combined.status not_authored -> authored_reviewed",
+    "development.combined records casesFile, labelsFile, and labelsConstituentsFile"
+  ],
+  "invariants": {
+    "noCaseAddedOrRemoved": true,
+    "corpusUnchanged": true,
+    "modelUnchanged": true,
+    "promptUnchanged": true,
+    "packingVersion": "r3.3-v1",
+    "supportVersion": "r3.4-v1",
+    "supportMinAnchorHits": 1,
+    "topK": 3
+  }
+}

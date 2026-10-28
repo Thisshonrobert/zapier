@@ -1,0 +1,16 @@
+{
+  "phase": "R4.5",
+  "runId": "d1-dev-lite-v1-20261028",
+  "generatedAt": "2026-10-27T23:03:10.442Z",
+  "protocolHash": "76e074a418b51cdd1917904140c3398d1a17668635828c745c0c5bd8455ff645",
+  "subsetHash": "246947d49a31fcd5a35fb941cad54cbe190970a3327c7da3e7a3ec87f700d68e",
+  "model": "gemini-3.5-flash-lite",
+  "decision": "blocked",
+  "files": {
+    "raw.json": "1ceaebac2c3d970fe4d47191dbcadc49c4f3ccdcc613eb56d4be9f1c13169618",
+    "report.json": "65e5c7704ea5f889116edf6a843e0c1d6053fc494af26493c89a58637c64a325",
+    "review-packet.json": "149409e11f5180a52755bdf165c5e5603ba1dfe21e0012a61d9381e5262272dd",
+    "review-v1.json": "dc70a34f2134b067f07efd56d7d649f4083a82a91e5395b07fc3e6c3993583ac",
+    "decision.md": "c952890da4b091f1a1dbe2d3ed82808337cecec5c3223d9174c2fc3e4be16656"
+  }
+}

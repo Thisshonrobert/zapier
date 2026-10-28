@@ -28,7 +28,7 @@ import {
   type ModelGeneration,
   type PreviewResult,
 } from "./contracts.ts";
-import { DIAGNOSIS_PROMPT_VERSION, buildDiagnosisPrompt } from "./prompts.ts";
+import { DIAGNOSIS_PROMPT_VERSION, buildDiagnosisPrompt, hasUnknownDelivery, type DiagnosisPromptVersion } from "./prompts.ts";
 import {
   InvestigationTracer,
   safeIdentifier,
@@ -368,6 +368,8 @@ export type DiagnosisOptions = {
   maxRepairAttempts?: 0 | 1;
   observability?: TraceExporter;
   modelName?: string;
+  // D1 evaluation selects a prompt; the serving default stays DIAGNOSIS_PROMPT_VERSION.
+  promptVersion?: DiagnosisPromptVersion;
   checkpointer?: BaseCheckpointSaver;
   threadId?: string;
   requireDecision?: boolean;
@@ -468,10 +470,11 @@ export function requiresPlatformInvestigation(evidence: z.infer<typeof Diagnosis
     (facts.includes("failure_before_send") && facts.includes("all_attempts_not_delivered")));
 }
 
-function issueForOutput(
+export function issueForOutput(
   evidence: z.infer<typeof DiagnosisEvidenceBundleSchema>,
   runbooks: readonly RunbookMatch[],
   output: IntegratedModelOutput,
+  options: { strictOutcomeUnknown?: boolean } = {},
 ): string | undefined {
   if (
     evidence.failureContext.facts.retry.provider === "telegram" &&
@@ -570,6 +573,16 @@ function issueForOutput(
       (["F01", "F02"].includes(output.diagnosis.taxonomy_id) && !customerInputFault))
   ) {
     return "platform_ownership_requires_escalation";
+  }
+
+  // D1 (prompt v4 only): outcome_unknown is reserved for unknown or contradictory
+  // delivery; an explicit rejection without guidance is insufficient_evidence.
+  if (
+    options.strictOutcomeUnknown &&
+    output.proposal.disposition === "outcome_unknown" &&
+    !hasUnknownDelivery(evidence)
+  ) {
+    return "unsupported_outcome_unknown";
   }
 
   if (
@@ -682,6 +695,7 @@ export function buildDiagnosisService(
   const maxModelTokens = options.maxModelTokens ?? 8_000;
   const maxPromptCharacters = options.maxPromptCharacters ?? 48_000;
   const maxRepairAttempts = options.maxRepairAttempts ?? 1;
+  const promptVersion = options.promptVersion ?? DIAGNOSIS_PROMPT_VERSION;
   if (options.requireDecision && (!options.checkpointer || !options.threadId))
     throw new Error("Durable decision requires a checkpointer and thread ID");
 
@@ -761,6 +775,7 @@ export function buildDiagnosisService(
             state.evidence,
             state.runbooks,
             repair,
+            promptVersion,
           );
           if (prompt.instructions.length + prompt.input.length > maxPromptCharacters) {
             throw new TokenBudgetExceeded("Diagnosis prompt budget exhausted");
@@ -800,13 +815,15 @@ export function buildDiagnosisService(
             generation.output,
           );
           const issue = parsed.success
-            ? issueForOutput(state.evidence, state.runbooks, parsed.data)
+            ? issueForOutput(state.evidence, state.runbooks, parsed.data, {
+                strictOutcomeUnknown: promptVersion === "phase-11a-v4",
+              })
             : "schema_validation_failed";
           if (!issue && parsed.success) {
             const result = IntegratedDiagnosisResultSchema.parse({
               contract_version: 1,
               graph_version: DIAGNOSIS_GRAPH_VERSION,
-              prompt_version: DIAGNOSIS_PROMPT_VERSION,
+              prompt_version: promptVersion,
               ...parsed.data,
               proposal: {
                 ...parsed.data.proposal,
@@ -836,7 +853,7 @@ export function buildDiagnosisService(
         ? new InvestigationTracer(
             options.observability,
             DIAGNOSIS_GRAPH_VERSION,
-            DIAGNOSIS_PROMPT_VERSION,
+            promptVersion,
           )
         : undefined;
       let traceError: unknown;

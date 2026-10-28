@@ -1,0 +1,149 @@
+{
+  "version": 1,
+  "reviewer": "independent read-only review (AI-assisted audit, operator-attested decision)",
+  "reviewOf": "R4.1 sealed holdout v1 (apps/ai_agent/evaluation/r4/holdout/seal.json)",
+  "reviewedAt": "2026-10-21",
+  "attestedBy": "Thisshon Robert",
+  "independence": "audit_ai_assisted; attestation_human_self_declared",
+  "placement": {
+    "reason": "holdout/review-v1.json is one of the eight files hashed by holdout/seal.json. Editing it would change its sha256 and invalidate the sealed holdout and protocol.holdoutSeal.hash. This record is additive and is not part of the sealed set.",
+    "sealedFilesModified": false,
+    "reviewV1HashAtReview": "9c245fc27b31212baf7ff8609b2c8d0eff41d86c3377e61f6e9edc19dc873a4c"
+  },
+  "accessAttestation": "Read the sealed cases, labels, evidence, fingerprints manifest, authoring attestation, seal, protocol, the frozen R3 corpus, docs/AI/runbooks, the label-authoring script, the R4 driver/profile/ranking/support code, and the R3/R4 development run reports. Did not open or create any holdout run, did not execute the retriever or reranker on holdout evidence, and did not produce any holdout score.",
+  "method": "Read-only structural and semantic audit against the measurement path R4.4 will actually use: sealed evidence -> buildStructuredRetrievalInput -> eligibleRunbookSections -> routeCandidates -> per-facet packing against label accepted citations. Reproducible via `bun run apps/ai_agent/evaluation/r4/authoring/audit-holdout-reviewer.ts`.",
+  "sealVerification": {
+    "sealedFilesChecked": 8,
+    "fileHashesMatch": true,
+    "fileByteLengthsMatch": true,
+    "sealHashMatchesProtocol": true,
+    "sealHash": "8d6cb47c3032e0ae051ad83c2009d007b644162d95f7f8e44d24ec61f558c886",
+    "corpusSectionsHashMatchesProtocol": true,
+    "corpusSectionsHash": "45e85c3585607ebfd0e1ebd1f2b068e2fab7c889b1bdd3af3a565f20afcbd440",
+    "corpusRawFileBytesHash": "496f3e7f2daf13e88c405bb4110e9796175432f4d1eac8c834b693d8f39de6d0",
+    "hashSemanticsNote": "protocol.corpus.corpusHash and seal.corpus.hash are the canonical sections hash (loadFrozenCorpus), not the raw file hash. seal.hashMethod (\"sha256 of raw file bytes\") describes only seal.files entries and is misleading for seal.corpus. No integrity defect.",
+    "verdict": "sealed_holdout_intact"
+  },
+  "structuralAudit": {
+    "cases": 160,
+    "answerable": 120,
+    "noMatch": 40,
+    "families": { "F01": 12, "F02": 12, "F03": 12, "F04": 12, "F05": 12, "F06": 12, "F07": 12, "F08": 12, "F09": 12, "F10": 12 },
+    "noMatchBuckets": { "missing-guidance": 10, "missing-runtime-fact": 10, "out-of-scope": 10, "adversarial": 10 },
+    "answerableRouteToExactlyOneConfidentFamilyHint": 120,
+    "answerableWithAllAcceptedCitationsEligible": 120,
+    "answerableWithEveryRequiredFacetRequested": 120,
+    "answerableWithEveryAcceptedCitationInRoute": 120,
+    "noMatchWithConfidentRoute": 0,
+    "noMatchMissingRationale": 0,
+    "unresolvedSupportingCitations": 0,
+    "exactFingerprintDuplicatesAcrossDevelopmentAndHoldout": 0,
+    "distinctAcceptedCitations": 22,
+    "distinctRequiredFacetPlusAcceptedSignatures": 10,
+    "structuralLabelIssues": 0
+  },
+  "findings": [
+    {
+      "id": "label-clustering",
+      "severity": "medium",
+      "scope": "120 answerable cases",
+      "observation": "Every case in a family carries an identical required-facet and accepted-citation signature: 120 cases reduce to 10 signatures and 22 distinct accepted citations, with 12 cases per family.",
+      "evidence": "audit-holdout-reviewer.ts distinctRequiredFacetPlusAcceptedSignatures; build-cohorts.ts familyFacets and acceptedFor",
+      "impact": "The per-case Wilson interval at n=120 is anti-conservative because cases are not independent judgments; effective independent units are approximately the 10 families. The R4.4 hitAt3 gate (point >= 0.90, wilsonLower95 >= 0.82) cannot be read as evidence about independent cases.",
+      "disposition": "recorded_condition"
+    },
+    {
+      "id": "no-match-abstention-structural",
+      "severity": "medium",
+      "scope": "40 no-match cases",
+      "observation": "All 40 no-match observations yield 0 route hints and 0 observed anchors. decideSupport abstains by construction (no confident route, matchedObservedAnchors 0 < minAnchorHits 1) for any implementation that uses the shipped support policy.",
+      "evidence": "retrieval-support.ts decideSupport; profile audit shows anchors=0 and hints=0 for 40/40 no-match cases",
+      "impact": "noMatchAbstention and its Wilson lower bound confirm policy wiring, not discrimination. The holdout has no near-miss case where a family routes and guidance looks plausible but observed facts are insufficient, which is the hard abstention decision. corpusGap/providerExcluded classification is also unexercised (development counts: corpusGap 0).",
+      "disposition": "recorded_condition"
+    },
+    {
+      "id": "f04-dual-acceptance-leniency",
+      "severity": "low",
+      "scope": "12 of 120 answerable cases (10%)",
+      "observation": "All F04 cases accept both RB-F04-F06 and RB-F03-F04 for all three required facets. For the template-path cases (f04-email-missing-subject-template, f04-email-missing-body-template, f04-telegram-template-path-missing, f04-email-template-variable-unknown) the parser/template guidance exists only in RB-F04-F06; RB-F03-F04 investigation and verification are action-input, credential, and destination oriented.",
+      "evidence": "build-cohorts.ts acceptedFor F04 sibling list; corpus sections RB-F03-F04@1.0.0#read-only-investigation and RB-F04-F06@1.0.0#read-only-investigation",
+      "impact": "A less specific sibling answer scores as fully sufficient for those cases, so F04 hit@3 and recall are lenient by up to 10% of the answerable set.",
+      "disposition": "accepted_as_documented_leniency"
+    },
+    {
+      "id": "missing-runtime-fact-bucket-conflation",
+      "severity": "low",
+      "scope": "10 of 40 no-match cases",
+      "observation": "The missing-runtime-fact rationales state that the needed provider limit is not recorded in the corpus (recipient cap, encoded payload size, attachment total size, media group cap, and similar). These are corpus-coverage gaps, not cases where guidance exists but a runtime fact is absent.",
+      "evidence": "labels-v2.json noMatchRationale for nm-missing-runtime-fact-*; corpus keyword scan finds no provider-limit guidance",
+      "impact": "The bucket name overstates coverage of the fact-insufficiency scenario. No scoring impact: abstention is correct either way.",
+      "disposition": "recorded_condition"
+    },
+    {
+      "id": "development-holdout-scenario-reuse",
+      "severity": "low",
+      "scope": "3 holdout cases (2.5% of holdout, below the 10% near-duplicate threshold)",
+      "observation": "Near-identical scenario pairs across splits on the derived profile query: f06-stage-order-gap vs f06-stage-order-gap-dev (0.938), f06-negative-stage-index vs f06-stage-index-negative-dev (0.867), f07-email-acknowledgement-lost vs f07-email-response-missing-dev (0.857). Only stage numbers and error phrasing differ.",
+      "evidence": "audit-holdout-reviewer.ts duplicates.nearAcrossSplits",
+      "impact": "F06 and F07 holdout cases are not fully independent of development tuning. Below the plan's defect threshold; no exact fingerprint duplicates exist.",
+      "disposition": "recorded_condition"
+    },
+    {
+      "id": "duplicate-retrieval-view",
+      "severity": "low",
+      "scope": "2 holdout cases",
+      "observation": "f04-email-numeric-recipient-field and f04-email-cc-array-type produce an identical derived profile query (Jaccard 1.0); only the offending field name differs. They are effectively one observation counted twice.",
+      "evidence": "audit-holdout-reviewer.ts duplicates.nearWithinHoldout",
+      "impact": "Marginal loss of independence in F04; combined with dual acceptance, F04 is the weakest family.",
+      "disposition": "recorded_condition"
+    },
+    {
+      "id": "tautological-verification-fields",
+      "severity": "info",
+      "scope": "all cases",
+      "observation": "case.input.query is by construction the same string as the runtime profile query, and each label's required facets are asserted equal to requestedGuidanceFacets(evidence) at build time. Therefore 'facets requested by the runtime' and 'query coherence' are guaranteed, not independently verified.",
+      "evidence": "build-cohorts.ts assertion block after label assembly",
+      "impact": "These checks carry no evidentiary weight. The substantive check is citation sufficiency, which was reviewed separately.",
+      "disposition": "noted"
+    },
+    {
+      "id": "weakest-development-cohort-not-held-out",
+      "severity": "low",
+      "scope": "S cohort, 3 development cases",
+      "observation": "Development includes s02-error-prompt-injection, s03-sensitive-fields-present, and s05-expired-email-dedup-window, reported by the driver as family S at 66.67% hit@3 (2/3) - the only cohort below the 0.70 per-family acceptance floor. The holdout is specified as 12 answerable cases per family F01-F10 and contains no S cases.",
+      "evidence": "dev-20261021-v2/decision.md per-family table; holdout case id prefixes are f01..f10 and nm only; plan holdout spec 12 per family F01-F10",
+      "impact": "Acceptance over F01-F10 says nothing about the behaviour development already showed to be weak, and the per-family floor is never exercised on that cohort. Plan-conformant, not a holdout defect.",
+      "disposition": "recorded_condition"
+    }
+  ],
+  "verdict": {
+    "holdoutContent": "accepted",
+    "integrity": "sealed_holdout_intact",
+    "r4_4MayProceed": "yes_with_recorded_conditions",
+    "labelDefectsRequiringReseal": 0,
+    "summary": "All eight sealed files and the corpus hash verify. All 120 answerable labels are corpus-supported alternatives for every required facet, every accepted citation is eligible and routed, every no-match case has a specific rationale and abstains without a confident route, and there are no exact duplicate fingerprints. The holdout is usable for R4.4. It is not a strong statistical instrument: the Wilson intervals are case-level over 10 label clusters, no-match abstention is guaranteed by construction, and F04 is lenient by dual acceptance."
+  },
+  "conditionsForR4.4": [
+    "Record in decision.md that hitAt3 and recall Wilson intervals are case-level; report the per-family breakdown and state that effective independent units are ~10 families. Do not cite wilsonLower95 alone as evidence of ~82% true performance.",
+    "Record that noMatchAbstention is structurally guaranteed (0 route hints and 0 anchors on 40/40 no-match cases) and therefore confirms policy wiring, not discrimination.",
+    "Record the F04 dual-acceptance leniency (RB-F03-F04 accepted alongside RB-F04-F06 for 12 cases).",
+    "Do not modify any sealed file. holdout/review-v1.json remains sealed with humanIndependentReview=outstanding; any post-seal edit requires a new holdout id, a new seal, and a new protocol.",
+    "The audit portion of this record is AI-assisted; the human attestation is by Thisshon Robert (2026-10-21) and covers the accept decision."
+  ],
+  "conditionsStatus": "recorded_in_decision_md",
+  "conditionsRecordedAt": "apps/ai_agent/evaluation/r4/decision.md (sections: Measurement limitations, Acceptance gates, Governance)",
+  "humanAttestation": {
+    "completed": true,
+    "reviewerName": "Thisshon Robert",
+    "reviewedAt": "2026-10-21",
+    "independenceStatement": "I did not hand-author the holdout cases, I did not tune the candidate on holdout evidence, and no holdout score existed before this review.",
+    "decision": "accept",
+    "signature": "Thisshon Robert",
+    "attestedBy": "Thisshon Robert",
+    "recordedBy": "AI assistant, entered on the named reviewer's explicit instruction (chat, 2026-10-21)",
+    "attestationChannel": "operator instruction in chat; not a handwritten or key-backed signature",
+    "verificationNote": "The assistant cannot verify independence and did not attempt to. The named reviewer is accountable for the independence statement and the accept decision.",
+    "roleDisclosure": "Plan owner and operator who commissioned the AI-authored holdout and reviewed its construction; did not hand-write case text or labels, and no holdout run or holdout score exists at signing time.",
+    "decisionScope": "holdout content accepted for R4.4 with the five conditions above recorded in decision.md"
+  }
+}

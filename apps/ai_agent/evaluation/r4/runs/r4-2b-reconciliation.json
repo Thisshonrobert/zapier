@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "phase": "R4.2b",
+  "createdAt": "2026-10-21T09:10:36.530Z",
+  "baselineInputHash": "325c380a92039193f788338c3e243ac2d5584f74a1ee54929d09d5e4730ce881",
+  "cohort": "apps/ai_agent/evaluation/r3/development-cases-v1.json (24 cases)",
+  "compared": [
+    "hints",
+    "confident",
+    "requestedFacets"
+  ],
+  "unchanged": 24,
+  "changed": 0,
+  "changes": []
+}

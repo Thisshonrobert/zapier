@@ -1,0 +1,40 @@
+(fail) CLI uses only fixed development captures, records hashes, and refuses overwriting results
+(fail) Phase 11A preserves the checked-in Phase 11 control report exactly
+(fail) R2 has 12 useful runbooks and 40 valid section labels with disjoint splits
+(fail) R2.2 frozen replay reproduces quality and cannot overwrite the baseline
+(fail) R2.2 rejects changed provenance, candidate order, missing logits and extra scores
+(fail) R2.2 retains baseline top 12 and lets branch-only evidence reach the reranker
+(fail) R2.3 context comes from the same frozen runbook and preserves the target section
+(fail) R2.3 rejects incomplete logits/token captures and changed provenance
+(fail) R2.3 replay reproduces quality and rejects tampered logits and baseline overwrite
+(fail) R2.4 rejects missing scores and changed model provenance
+(fail) R2.4 replay freezes calibration and rejects finite-logit tampering and baseline overwrite
+(fail) V4 frozen artifacts still reproduce under their original prompt and acceptance contract
+(fail) a blocked token preflight stops the pilot without any generation request
+(fail) a countTokens 429 stops before generation and leaves one durable failed slot
+(fail) advisory-v2 accepts supported routes without relabeling the original gate or permitting replay
+(fail) bounds preserve failure records and planner fallback; no unbounded repair
+(fail) default CLI artifacts are stubbed, frozen before invocation, reproducible and never overwritten
+(fail) exhaustive candidates preserve metadata and stale exclusion without truncation
+(fail) f01-rate-limit-rejected: platform repair cannot be assigned to the customer
+(fail) f02-connection-refused: platform repair cannot be assigned to the customer
+(fail) f05-handler-version-unknown: platform repair cannot be assigned to the customer
+(fail) frozen R2 replay preserves diagnoses without model calls and rejects changed labels
+(fail) frozen v1 prompts remain reproducible
+(fail) global pacing covers planner and diagnosis starts without changing prompts or labels
+(fail) local frozen replay preserves selected thresholds and quality metrics without inference
+(fail) offline investigation reproduces both baselines, traces provider loss, and refuses overwrite
+(fail) oracle pairs preserve evidence and instructions, keep annotations out of prompts, and enforce call caps
+(fail) paired fresh diagnoses use identical evidence, label-isolated planners and zero-call rejection gates
+(fail) pilot makes exactly four initial attempts, keeps retrieval fixed and refuses replay of its slots
+(fail) pilot persists four single attempts in counterbalanced order, without repairing invalid output
+(fail) pilot stops after provider failure without repair or fallback
+(fail) pilot stops on provider failure, retains safe audit and skips failed attempts on explicit resume
+(fail) production admission reads the same evaluation reservation table and fails closed when absent
+(fail) provider quota failures record safe HTTP status and stop subsequent paid requests
+(fail) rejects non-development, incomplete, mismatched and invented rejection captures
+(fail) shared run deadline bounds models that ignore abort and token exhaustion makes no calls
+(fail) threshold calibration never reads held-out labels or scores
+(fail) unknown delivery with a defect cannot pass the existing service as correction or replay
+(fail) v2 prepares six paired generations and evaluates both preserved responses equally
+(fail) v2 preserves a provider failure and stops without replacement generations

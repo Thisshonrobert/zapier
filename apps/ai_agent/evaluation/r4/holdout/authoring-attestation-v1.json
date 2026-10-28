@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "author": "ai-assisted-authoring-v1",
+  "authoredAt": "2026-10-21",
+  "scope": "R4.1 development and holdout benchmark for the R4 measurement-recovery protocol",
+  "scoreBlind": true,
+  "accessAttestation": "Authored from the frozen runbook corpus (docs/AI/runbooks), apps/ai_agent/evaluation/r3/corpus-v1.json, and synthetic sanitized evidence shapes from the R3 fixtures. Did not read candidate outputs, rankings, scores, retrieval runs, or the R3.5 failure ledger beyond the published aggregate table. Did not run the retriever, the reranker model, a candidate, or a scoring report.",
+  "derivationAttestation": "The authoring script used only deterministic label-side helpers (requestedGuidanceFacets, routeEvidence, and buildStructuredRetrievalInput) to verify that each answerable case demands the intended family facets and that each no-match case has no route hint and no evidence anchor. No candidate citation set, ranking, score, or cutoff was observed. Route hints are not stored in the sealed labels and do not affect scoring.",
+  "corpus": {
+    "path": "apps/ai_agent/evaluation/r3/corpus-v1.json",
+    "hash": "45e85c3585607ebfd0e1ebd1f2b068e2fab7c889b1bdd3af3a565f20afcbd440",
+    "sections": 55,
+    "edited": false
+  },
+  "development": {
+    "cases": 80,
+    "answerable": 60,
+    "noMatch": 20,
+    "baselineReused": 24,
+    "newlyAuthored": 56
+  },
+  "holdout": {
+    "cases": 160,
+    "answerable": 120,
+    "noMatch": 40,
+    "answerablePerFamily": 12,
+    "noMatchPerBucket": 10
+  },
+  "diagnosisSubset": {
+    "cases": 40,
+    "answerable": 30,
+    "noMatch": 10,
+    "preregisteredBeforeSeal": true
+  },
+  "scripts": [
+    "apps/ai_agent/evaluation/r4/authoring/build-cohorts.ts",
+    "apps/ai_agent/evaluation/r4/authoring/audit-holdout.ts"
+  ],
+  "reviewRecord": "review-v1.json",
+  "limitations": [
+    "The label audit in review-v1.json is automated and AI-assisted, not an independent human second review. Human sign-off remains outstanding before R4.4.",
+    "The holdout evidence is synthetic and sanitized; it reproduces observed failure shapes but is not a sample of production payloads.",
+    "Provider eligibility is evaluated against the frozen runbook metadata at authoring time; a corpus edit consumes the holdout."
+  ]
+}

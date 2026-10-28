@@ -1,0 +1,18 @@
+(fail) V4 frozen artifacts still reproduce under their original prompt and acceptance contract
+(fail) advisory-v2 accepts supported routes without relabeling the original gate or permitting replay
+(fail) bounds preserve failure records and planner fallback; no unbounded repair
+(fail) default CLI artifacts are stubbed, frozen before invocation, reproducible and never overwritten
+(fail) f01-rate-limit-rejected: platform repair cannot be assigned to the customer
+(fail) f02-connection-refused: platform repair cannot be assigned to the customer
+(fail) f05-handler-version-unknown: platform repair cannot be assigned to the customer
+(fail) frozen v1 prompts remain reproducible
+(fail) global pacing covers planner and diagnosis starts without changing prompts or labels
+(fail) paired fresh diagnoses use identical evidence, label-isolated planners and zero-call rejection gates
+(fail) pilot makes exactly four initial attempts, keeps retrieval fixed and refuses replay of its slots
+(fail) pilot stops after provider failure without repair or fallback
+(fail) provider quota failures record safe HTTP status and stop subsequent paid requests
+(fail) rejects non-development, incomplete, mismatched and invented rejection captures
+(fail) shared run deadline bounds models that ignore abort and token exhaustion makes no calls
+(fail) unknown delivery with a defect cannot pass the existing service as correction or replay
+(fail) v2 prepares six paired generations and evaluates both preserved responses equally
+(fail) v2 preserves a provider failure and stops without replacement generations

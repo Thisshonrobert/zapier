@@ -1,0 +1,87 @@
+{
+  "version": 1,
+  "status": "frozen_before_measurement",
+  "createdAt": "2026-10-21",
+  "primaryMetric": "sufficientGuidanceHitAt3",
+  "corpus": {
+    "path": "apps/ai_agent/evaluation/r3/corpus-v1.json",
+    "sectionsHash": "45e85c3585607ebfd0e1ebd1f2b068e2fab7c889b1bdd3af3a565f20afcbd440",
+    "corpusHash": "45e85c3585607ebfd0e1ebd1f2b068e2fab7c889b1bdd3af3a565f20afcbd440",
+    "sections": 55,
+    "runbooks": 6,
+    "source": "docs/AI/runbooks",
+    "parityTest": "apps/ai_agent/tests/rag-corpus-parity.test.ts"
+  },
+  "model": {
+    "id": "Xenova/ms-marco-MiniLM-L-6-v2",
+    "revision": "a09144355adeed5f58c8ed011d209bf8ee5a1fec",
+    "quantization": "q8",
+    "config": "apps/ai_agent/evaluation/r23/config.json"
+  },
+  "development": { "cases": 80, "answerable": 60, "noMatch": 20 },
+  "holdout": { "cases": 160, "answerable": 120, "noMatch": 40, "status": "authored_and_sealed" },
+  "gates": {
+    "development": {
+      "sufficientGuidanceHitAt3": 0.8,
+      "macroSectionRecallAt3": 0.8,
+      "noMatchAbstention": 0.9,
+      "falseAbstentionMax": 0.05,
+      "routeCoverage": 1.0,
+      "reliability": 0.95,
+      "p95LatencyMs": 3000
+    },
+    "acceptance": {
+      "sufficientGuidanceHitAt3Point": 0.9,
+      "sufficientGuidanceHitAt3WilsonLower": 0.82,
+      "macroSectionRecallAt3Point": 0.9,
+      "macroSectionRecallAt3WilsonLower": 0.82,
+      "noMatchAbstentionPoint": 0.9,
+      "noMatchAbstentionWilsonLower": 0.75,
+      "falseAbstentionPointMax": 0.05,
+      "perFamilyHitAt3Min": 0.7,
+      "routeCoverage": 1.0,
+      "reliability": 0.95,
+      "p95LatencyMs": 3000,
+      "safetyViolationsMax": 0
+    }
+  },
+  "diagnosis": {
+    "cases": 40,
+    "answerable": 30,
+    "acceptancePoint": 0.8,
+    "acceptanceWilsonLower": 0.62,
+    "safetyViolationsMax": 0
+  },
+  "statistics": {
+    "interval": "wilson",
+    "confidence": 0.95,
+    "pairedBootstrapResamples": 10000
+  },
+  "decisionRule": "retrievalAccepted and diagnosisAccepted exactly as defined in section 2.4; a failed retrieval gate is rejected, and reliability, safety, or credential failures are blocked",
+  "excluded": [
+    "hyde",
+    "pageindex",
+    "vector_db",
+    "embedding_index",
+    "bm25_serving",
+    "new_reranker",
+    "llm_planner",
+    "corpus_expansion"
+  ],
+  "holdoutSeal": {
+    "path": "apps/ai_agent/evaluation/r4/holdout/seal.json",
+    "hash": "8d6cb47c3032e0ae051ad83c2009d007b644162d95f7f8e44d24ec61f558c886",
+    "hashMethod": "sha256 of raw file bytes",
+    "sealedAt": "2026-10-21T09:03:54.502Z",
+    "reviewVerdict": "provisional_ai_assisted_human_signoff_outstanding",
+    "independentHumanReview": "outstanding"
+  },
+  "startingState": {
+    "commit": "da3b860e1a07866cbe34f9b1231c63ecc58d7a8c",
+    "branch": "main",
+    "workingTreeState": "dirty",
+    "workingTreeSummary": "R3.5r source changes (retrieval-profile.ts, retrieval-target.ts, structured-ranking.ts, tests, r3/README.md) plus the untracked closed R3.5r recovery line. Generated Prisma and Graphify changes are excluded. The reconciled baseline is frozen in r4/baseline-reconciliation.json; no source file changed in R4.0.",
+    "fullRecord": "apps/ai_agent/evaluation/r4/baseline-reconciliation.json"
+  },
+  "baselineReconciliationHash": "a6eb1f4a7fa410518ee05c5e62b918eacd41dd3d05d9a33c98a30675d972b287"
+}

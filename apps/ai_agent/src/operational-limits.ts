@@ -16,7 +16,7 @@ function positiveMoney(name: string) {
   return value;
 }
 
-export function operationalLimits(model = process.env.GEMINI_MODEL ?? "gemini-2.5-flash") {
+export function operationalLimits(model = process.env.GEMINI_MODEL ?? "gemini-3.5-flash-lite") {
   const tokensPerAttempt = 64000;
   const enabled = investigationEnabled();
   if (enabled && model !== "gemini-2.5-flash" && model !== "gemini-3.5-flash-lite")

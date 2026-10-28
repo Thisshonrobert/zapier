@@ -1,0 +1,1843 @@
+{
+  "phase": "R4.5",
+  "runId": "d1-dev-38flash-v1-20261028",
+  "generatedAt": "2026-10-28T06:17:18.910Z",
+  "status": "blocked",
+  "predecessor": {
+    "phase": "R4.4",
+    "decision": "retrieval_accepted",
+    "retrievalConfigHash": "a56ae39c3053f954aebbb7318034fc39408f72f85198e8cc13e5620f78ec2805",
+    "sealHash": null
+  },
+  "inputs": {
+    "protocol": "apps/ai_agent/evaluation/d1/dev-38flash-v1/protocol.json",
+    "protocolHash": "f89d3b0ea0dd35dc15e165d3c7dfde20862358cc55cbcced53c5add1ce43fa9c",
+    "subset": "apps/ai_agent/evaluation/d1/dev-subset-v1.json",
+    "split": "development",
+    "subsetHash": "246947d49a31fcd5a35fb941cad54cbe190970a3327c7da3e7a3ec87f700d68e",
+    "retrievalScoresHash": "fbc2e3c77b5a56a27cbb34904243047622563f0ba7739b9023821d59bb95c022",
+    "retrievalReportHash": "8e369e36300a72c85944d3c471d592a32116fd1e97307db35fe995e66b0190d6",
+    "corpusHash": "45e85c3585607ebfd0e1ebd1f2b068e2fab7c889b1bdd3af3a565f20afcbd440",
+    "casesHash": "753d9b2b8f12275c5d90a8d9b7cbef2a3d724019561031ce796f8090015cb677",
+    "evidenceHash": "d91ade93af6554614321fdcc58d4ab5f5e5a3e06387e54577575513f6b748724"
+  },
+  "schedule": {
+    "scheduled": 15,
+    "answerable": 15,
+    "noMatch": 0,
+    "completed": 3,
+    "failed": 12,
+    "generations": 3,
+    "repairedCases": 0,
+    "rateLimitRetries": 8,
+    "haltedOnQuota": true,
+    "subset": {
+      "cases": 40,
+      "answerable": 30,
+      "noMatch": 10,
+      "families": {
+        "F01": 3,
+        "F02": 3,
+        "F03": 3,
+        "F04": 3,
+        "F05": 3,
+        "F06": 3,
+        "F07": 3,
+        "F08": 3,
+        "F09": 3,
+        "F10": 3
+      },
+      "buckets": {
+        "adversarial": 2,
+        "missing_guidance": 3,
+        "missing_runtime_fact": 3,
+        "out_of_scope": 2
+      }
+    }
+  },
+  "schema": {
+    "accepted": 3,
+    "firstAttemptValid": 3,
+    "rejectedAfterRepair": 0,
+    "acceptance": {
+      "numerator": 3,
+      "denominator": 15,
+      "rate": 0.2,
+      "point": 0.2,
+      "wilson": {
+        "lower": 0.07047553568351334,
+        "upper": 0.4518543275458617,
+        "confidence": 0.95
+      },
+      "basis": "proportion"
+    }
+  },
+  "grounding": {
+    "citationMembership": 3,
+    "citationMembershipOfCompleted": {
+      "numerator": 3,
+      "denominator": 3,
+      "rate": 1,
+      "point": 1,
+      "wilson": {
+        "lower": 0.43850326503514775,
+        "upper": 1,
+        "confidence": 0.95
+      },
+      "basis": "proportion"
+    },
+    "repairedCases": 0
+  },
+  "semantic": {
+    "reviewed": 0,
+    "accepted": 0,
+    "pending": 15,
+    "note": "Semantic acceptance is not inferred from retrieval or schema metrics. It requires the blinded human review."
+  },
+  "safety": {
+    "finalViolations": 0,
+    "finalViolationDetails": [],
+    "unsafeAttempts": 0,
+    "unsafeAttemptDetails": []
+  },
+  "usage": {
+    "inputTokens": 9898,
+    "outputTokens": 5364,
+    "totalTokens": 15262,
+    "estimatedStandardRateUsd": 0.016379,
+    "billedUsd": null,
+    "tier": "free",
+    "monetaryCeilingUsd": 0,
+    "paidFallback": false
+  },
+  "latency": {
+    "p50Ms": 45864.131499999996,
+    "p95Ms": 128839.63419999997,
+    "maxMs": 128839.63419999997
+  },
+  "perFamily": {
+    "F01": {
+      "cases": 3,
+      "completed": 0,
+      "schemaAccepted": 0
+    },
+    "F02": {
+      "cases": 3,
+      "completed": 1,
+      "schemaAccepted": 1
+    },
+    "F03": {
+      "cases": 3,
+      "completed": 0,
+      "schemaAccepted": 0
+    },
+    "F04": {
+      "cases": 3,
+      "completed": 2,
+      "schemaAccepted": 2
+    },
+    "F05": {
+      "cases": 3,
+      "completed": 0,
+      "schemaAccepted": 0
+    }
+  },
+  "failures": [
+    {
+      "id": "f01-email-bulk-retry-after",
+      "failure": "model_timeout",
+      "generations": 0
+    },
+    {
+      "id": "f01-telegram-album-rate-limit",
+      "failure": "model_timeout",
+      "generations": 0
+    },
+    {
+      "id": "f01-telegram-edit-rate-limit",
+      "failure": "model_timeout",
+      "generations": 0
+    },
+    {
+      "id": "f02-telegram-enetunreach",
+      "failure": "model_timeout",
+      "generations": 0
+    },
+    {
+      "id": "f02-telegram-504-gateway",
+      "failure": "model_timeout",
+      "generations": 0
+    },
+    {
+      "id": "f03-telegram-token-revoked-401",
+      "failure": "model_timeout",
+      "generations": 0
+    },
+    {
+      "id": "f03-telegram-permission-admin-only",
+      "failure": "model_timeout",
+      "generations": 0
+    },
+    {
+      "id": "f03-token-missing",
+      "failure": "model_timeout",
+      "generations": 0
+    },
+    {
+      "id": "f04-template-path-missing",
+      "failure": "model_timeout",
+      "generations": 0
+    },
+    {
+      "id": "f05-worker-calendar-action-missing",
+      "failure": "model_timeout",
+      "generations": 0
+    },
+    {
+      "id": "f05-worker-legacy-sms-action",
+      "failure": "model_timeout",
+      "generations": 0
+    },
+    {
+      "id": "f05-handler-version-unknown",
+      "failure": "provider_or_quota_failure:http_error:429",
+      "generations": 0
+    }
+  ],
+  "blockedReasons": [
+    "provider_or_quota_failure"
+  ],
+  "cases": [
+    {
+      "id": "f01-email-bulk-retry-after",
+      "reviewId": "984a2c5eb476d913",
+      "kind": "answerable",
+      "family": "F01",
+      "bucket": null,
+      "status": "failed",
+      "failure": "model_timeout",
+      "result": null,
+      "matches": [
+        {
+          "runbookId": "RB-F01-F02",
+          "version": "1.1.0",
+          "citation": "RB-F01-F02@1.1.0#allowed-remediation",
+          "heading": "Allowed remediation",
+          "content": "An operator may restore connectivity or reduce sending pressure. For a proven Telegram 429 rejection, record the conservative cooldown deadline and investigate again after it passes. Guidance is not a scheduler and does not claim that the provider recovered.",
+          "contentHash": "54ccb769f613147b8ed8fbf41c926e563802069fec637507681e03c8a4c8c766",
+          "taxonomy": [
+            "F01",
+            "F02"
+          ],
+          "providers": [
+            "telegram",
+            "email",
+            "generic"
+          ],
+          "simulated": true,
+          "authority": "untrusted_procedural_guidance",
+          "canChangePolicy": false,
+          "score": 0.2758322274760007
+        },
+        {
+          "runbookId": "RB-F01-F02",
+          "version": "1.1.0",
+          "citation": "RB-F01-F02@1.1.0#replay-and-approval",
+          "heading": "Replay and approval",
+          "content": "Interactive replay exists and requires an explicit **operator** decision; this runbook never grants it. The current initial replay case is limited to complete evidence for one Telegram send-stage 429 rejection, unchanged inputs, valid ordering and safety gates, an unexpired approval, and at most one replay. The operator reviews the application-computed eligibility, approves the case, and then issues a separate explicit replay request; approval alone is not publication and publication alone is not delivery. Unknown outcomes, changed inputs or handlers, a live or completed replay, expired authority and revoked permission all deny.",
+          "contentHash": "cbbe6ecf0083cc9b9e6dacae69b0deb7a0fed4d50c88908a92002646579411d6",
+          "taxonomy": [
+            "F01",
+            "F02"
+          ],
+          "providers": [
+            "telegram",
+            "email",
+            "generic"
+          ],
+          "simulated": true,
+          "authority": "untrusted_procedural_guidance",
+          "canChangePolicy": false,
+          "score": 0.21564498181840808
+        },
+        {
+          "runbookId": "RB-F01-F02",
+          "version": "1.1.0",
+          "citation": "RB-F01-F02@1.1.0#verification-rollback-or-escalation",
+          "heading": "Verification, rollback, or escalation",
+          "content": "Verify the recorded retry delay and timestamps without sending. If evidence conflicts or recovery is unproven, abstain and escalate to the provider or platform operator. Roll back any operator configuration change through that system's normal process.",
+          "contentHash": "f7350316722bd1ebdbd89cef9f7f72905d2f65563f88b27e11208d2d5ec9b2f1",
+          "taxonomy": [
+            "F01",
+            "F02"
+          ],
+          "providers": [
+            "telegram",
+            "email",
+            "generic"
+          ],
+          "simulated": true,
+          "authority": "untrusted_procedural_guidance",
+          "canChangePolicy": false,
+          "score": 0.0006754297915883063
+        }
+      ],
+      "generations": [],
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0
+      },
+      "latencyMs": 45864.131499999996,
+      "schemaAccepted": false,
+      "citationMembership": false,
+      "safetyViolations": []
+    },
+    {
+      "id": "f01-telegram-album-rate-limit",
+      "reviewId": "eaefb719a919ef9e",
+      "kind": "answerable",
+      "family": "F01",
+      "bucket": null,
+      "status": "failed",
+      "failure": "model_timeout",
+      "result": null,
+      "matches": [
+        {
+          "runbookId": "RB-F01-F02",
+          "version": "1.1.0",
+          "citation": "RB-F01-F02@1.1.0#replay-and-approval",
+          "heading": "Replay and approval",
+          "content": "Interactive replay exists and requires an explicit **operator** decision; this runbook never grants it. The current initial replay case is limited to complete evidence for one Telegram send-stage 429 rejection, unchanged inputs, valid ordering and safety gates, an unexpired approval, and at most one replay. The operator reviews the application-computed eligibility, approves the case, and then issues a separate explicit replay request; approval alone is not publication and publication alone is not delivery. Unknown outcomes, changed inputs or handlers, a live or completed replay, expired authority and revoked permission all deny.",
+          "contentHash": "cbbe6ecf0083cc9b9e6dacae69b0deb7a0fed4d50c88908a92002646579411d6",
+          "taxonomy": [
+            "F01",
+            "F02"
+          ],
+          "providers": [
+            "telegram",
+            "email",
+            "generic"
+          ],
+          "simulated": true,
+          "authority": "untrusted_procedural_guidance",
+          "canChangePolicy": false,
+          "score": 0.8579614129003129
+        },
+        {
+          "runbookId": "RB-F01-F02",
+          "version": "1.1.0",
+          "citation": "RB-F01-F02@1.1.0#allowed-remediation",
+          "heading": "Allowed remediation",
+          "content": "An operator may restore connectivity or reduce sending pressure. For a proven Telegram 429 rejection, record the conservative cooldown deadline and investigate again after it passes. Guidance is not a scheduler and does not claim that the provider recovered.",
+          "contentHash": "54ccb769f613147b8ed8fbf41c926e563802069fec637507681e03c8a4c8c766",
+          "taxonomy": [
+            "F01",
+            "F02"
+          ],
+          "providers": [
+            "telegram",
+            "email",
+            "generic"
+          ],
+          "simulated": true,
+          "authority": "untrusted_procedural_guidance",
+          "canChangePolicy": false,
+          "score": 0.8435264068779138
+        },
+        {
+          "runbookId": "RB-F01-F02",
+          "version": "1.1.0",
+          "citation": "RB-F01-F02@1.1.0#verification-rollback-or-escalation",
+          "heading": "Verification, rollback, or escalation",
+          "content": "Verify the recorded retry delay and timestamps without sending. If evidence conflicts or recovery is unproven, abstain and escalate to the provider or platform operator. Roll back any operator configuration change through that system's normal process.",
+          "contentHash": "f7350316722bd1ebdbd89cef9f7f72905d2f65563f88b27e11208d2d5ec9b2f1",
+          "taxonomy": [
+            "F01",
+            "F02"
+          ],
+          "providers": [
+            "telegram",
+            "email",
+            "generic"
+          ],
+          "simulated": true,
+          "authority": "untrusted_procedural_guidance",
+          "canChangePolicy": false,
+          "score": 0.00004432661433925166
+        }
+      ],
+      "generations": [],
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0
+      },
+      "latencyMs": 45386.147899999996,
+      "schemaAccepted": false,
+      "citationMembership": false,
+      "safetyViolations": []
+    },
+    {
+      "id": "f01-telegram-edit-rate-limit",
+      "reviewId": "28f393e0544ab573",
+      "kind": "answerable",
+      "family": "F01",
+      "bucket": null,
+      "status": "failed",
+      "failure": "model_timeout",
+      "result": null,
+      "matches": [
+        {
+          "runbookId": "RB-F01-F02",
+          "version": "1.1.0",
+          "citation": "RB-F01-F02@1.1.0#allowed-remediation",
+          "heading": "Allowed remediation",
+          "content": "An operator may restore connectivity or reduce sending pressure. For a proven Telegram 429 rejection, record the conservative cooldown deadline and investigate again after it passes. Guidance is not a scheduler and does not claim that the provider recovered.",
+          "contentHash": "54ccb769f613147b8ed8fbf41c926e563802069fec637507681e03c8a4c8c766",
+          "taxonomy": [
+            "F01",
+            "F02"
+          ],
+          "providers": [
+            "telegram",
+            "email",
+            "generic"
+          ],
+          "simulated": true,
+          "authority": "untrusted_procedural_guidance",
+          "canChangePolicy": false,
+          "score": 0.7887664036860885
+        },
+        {
+          "runbookId": "RB-F01-F02",
+          "version": "1.1.0",
+          "citation": "RB-F01-F02@1.1.0#replay-and-approval",
+          "heading": "Replay and approval",
+          "content": "Interactive replay exists and requires an explicit **operator** decision; this runbook never grants it. The current initial replay case is limited to complete evidence for one Telegram send-stage 429 rejection, unchanged inputs, valid ordering and safety gates, an unexpired approval, and at most one replay. The operator reviews the application-computed eligibility, approves the case, and then issues a separate explicit replay request; approval alone is not publication and publication alone is not delivery. Unknown outcomes, changed inputs or handlers, a live or completed replay, expired authority and revoked permission all deny.",
+          "contentHash": "cbbe6ecf0083cc9b9e6dacae69b0deb7a0fed4d50c88908a92002646579411d6",
+          "taxonomy": [
+            "F01",
+            "F02"
+          ],
+          "providers": [
+            "telegram",
+            "email",
+            "generic"
+          ],
+          "simulated": true,
+          "authority": "untrusted_procedural_guidance",
+          "canChangePolicy": false,
+          "score": 0.7464320613206638
+        },
+        {
+          "runbookId": "RB-F01-F02",
+          "version": "1.1.0",
+          "citation": "RB-F01-F02@1.1.0#verification-rollback-or-escalation",
+          "heading": "Verification, rollback, or escalation",
+          "content": "Verify the recorded retry delay and timestamps without sending. If evidence conflicts or recovery is unproven, abstain and escalate to the provider or platform operator. Roll back any operator configuration change through that system's normal process.",
+          "contentHash": "f7350316722bd1ebdbd89cef9f7f72905d2f65563f88b27e11208d2d5ec9b2f1",
+          "taxonomy": [
+            "F01",
+            "F02"
+          ],
+          "providers": [
+            "telegram",
+            "email",
+            "generic"
+          ],
+          "simulated": true,
+          "authority": "untrusted_procedural_guidance",
+          "canChangePolicy": false,
+          "score": 0.000030475566981210434
+        }
+      ],
+      "generations": [],
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0
+      },
+      "latencyMs": 45344.92659999999,
+      "schemaAccepted": false,
+      "citationMembership": false,
+      "safetyViolations": []
+    },
+    {
+      "id": "f02-telegram-enetunreach",
+      "reviewId": "d404a18c63a8eef7",
+      "kind": "answerable",
+      "family": "F02",
+      "bucket": null,
+      "status": "failed",
+      "failure": "model_timeout",
+      "result": null,
+      "matches": [
+        {
+          "runbookId": "RB-F01-F02",
+          "version": "1.1.0",
+          "citation": "RB-F01-F02@1.1.0#read-only-investigation",
+          "heading": "Read-only investigation",
+          "content": "Read failure context and execution evidence. Confirm whether the failure happened before a send, was explicitly rejected, or became ambiguous after a send began. Validate current inputs only when configuration may be involved. Do not probe the provider.",
+          "contentHash": "6ce9c06396a9c59607345ba5d6ffa4f6986cf3a76ca57ffaaa6feaf8802ff350",
+          "taxonomy": [
+            "F01",
+            "F02"
+          ],
+          "providers": [
+            "telegram",
+            "email",
+            "generic"
+          ],
+          "simulated": true,
+          "authority": "untrusted_procedural_guidance",
+          "canChangePolicy": false,
+          "score": 0.07988531272301447
+        },
+        {
+          "runbookId": "RB-F01-F02",
+          "version": "1.1.0",
+          "citation": "RB-F01-F02@1.1.0#allowed-remediation",
+          "heading": "Allowed remediation",
+          "content": "An operator may restore connectivity or reduce sending pressure. For a proven Telegram 429 rejection, record the conservative cooldown deadline and investigate again after it passes. Guidance is not a scheduler and does not claim that the provider recovered.",
+          "contentHash": "54ccb769f613147b8ed8fbf41c926e563802069fec637507681e03c8a4c8c766",
+          "taxonomy": [
+            "F01",
+            "F02"
+          ],
+          "providers": [
+            "telegram",
+            "email",
+            "generic"
+          ],
+          "simulated": true,
+          "authority": "untrusted_procedural_guidance",
+          "canChangePolicy": false,
+          "score": 0.00022086795985291712
+        },
+        {
+          "runbookId": "RB-F01-F02",
+          "version": "1.1.0",
+          "citation": "RB-F01-F02@1.1.0#verification-rollback-or-escalation",
+          "heading": "Verification, rollback, or escalation",
+          "content": "Verify the recorded retry delay and timestamps without sending. If evidence conflicts or recovery is unproven, abstain and escalate to the provider or platform operator. Roll back any operator configuration change through that system's normal process.",
+          "contentHash": "f7350316722bd1ebdbd89cef9f7f72905d2f65563f88b27e11208d2d5ec9b2f1",
+          "taxonomy": [
+            "F01",
+            "F02"
+          ],
+          "providers": [
+            "telegram",
+            "email",
+            "generic"
+          ],
+          "simulated": true,
+          "authority": "untrusted_procedural_guidance",
+          "canChangePolicy": false,
+          "score": 0.00003468085527295964
+        }
+      ],
+      "generations": [],
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0
+      },
+      "latencyMs": 128269.38009999998,
+      "schemaAccepted": false,
+      "citationMembership": false,
+      "safetyViolations": []
+    },
+    {
+      "id": "f02-telegram-504-gateway",
+      "reviewId": "2646e1e93dde1a0d",
+      "kind": "answerable",
+      "family": "F02",
+      "bucket": null,
+      "status": "failed",
+      "failure": "model_timeout",
+      "result": null,
+      "matches": [
+        {
+          "runbookId": "RB-F01-F02",
+          "version": "1.1.0",
+          "citation": "RB-F01-F02@1.1.0#allowed-remediation",
+          "heading": "Allowed remediation",
+          "content": "An operator may restore connectivity or reduce sending pressure. For a proven Telegram 429 rejection, record the conservative cooldown deadline and investigate again after it passes. Guidance is not a scheduler and does not claim that the provider recovered.",
+          "contentHash": "54ccb769f613147b8ed8fbf41c926e563802069fec637507681e03c8a4c8c766",
+          "taxonomy": [
+            "F01",
+            "F02"
+          ],
+          "providers": [
+            "telegram",
+            "email",
+            "generic"
+          ],
+          "simulated": true,
+          "authority": "untrusted_procedural_guidance",
+          "canChangePolicy": false,
+          "score": 0.003282948608604382
+        },
+        {
+          "runbookId": "RB-F01-F02",
+          "version": "1.1.0",
+          "citation": "RB-F01-F02@1.1.0#read-only-investigation",
+          "heading": "Read-only investigation",
+          "content": "Read failure context and execution evidence. Confirm whether the failure happened before a send, was explicitly rejected, or became ambiguous after a send began. Validate current inputs only when configuration may be involved. Do not probe the provider.",
+          "contentHash": "6ce9c06396a9c59607345ba5d6ffa4f6986cf3a76ca57ffaaa6feaf8802ff350",
+          "taxonomy": [
+            "F01",
+            "F02"
+          ],
+          "providers": [
+            "telegram",
+            "email",
+            "generic"
+          ],
+          "simulated": true,
+          "authority": "untrusted_procedural_guidance",
+          "canChangePolicy": false,
+          "score": 0.00025449320323698356
+        },
+        {
+          "runbookId": "RB-F01-F02",
+          "version": "1.1.0",
+          "citation": "RB-F01-F02@1.1.0#verification-rollback-or-escalation",
+          "heading": "Verification, rollback, or escalation",
+          "content": "Verify the recorded retry delay and timestamps without sending. If evidence conflicts or recovery is unproven, abstain and escalate to the provider or platform operator. Roll back any operator configuration change through that system's normal process.",
+          "contentHash": "f7350316722bd1ebdbd89cef9f7f72905d2f65563f88b27e11208d2d5ec9b2f1",
+          "taxonomy": [
+            "F01",
+            "F02"
+          ],
+          "providers": [
+            "telegram",
+            "email",
+            "generic"
+          ],
+          "simulated": true,
+          "authority": "untrusted_procedural_guidance",
+          "canChangePolicy": false,
+          "score": 0.000033236057525915785
+        }
+      ],
+      "generations": [],
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0
+      },
+      "latencyMs": 45316.91739999998,
+      "schemaAccepted": false,
+      "citationMembership": false,
+      "safetyViolations": []
+    },
+    {
+      "id": "f02-telegram-tls-handshake",
+      "reviewId": "aaccd929809d8853",
+      "kind": "answerable",
+      "family": "F02",
+      "bucket": null,
+      "status": "completed",
+      "failure": null,
+      "result": {
+        "contract_version": 1,
+        "graph_version": "phase-6-v1",
+        "prompt_version": "phase-11a-v4",
+        "status": "completed",
+        "diagnosis": {
+          "taxonomy_id": "F02",
+          "summary": "Telegram connection failed during connect phase due to TLS handshake failure against the provider endpoint, resulting in non-delivery.",
+          "confidence": "high",
+          "evidence_refs": [
+            "fixture:failure:f02-telegram-tls-handshake",
+            "fixture:execution:f02-telegram-tls-handshake",
+            "fixture:validation:f02-telegram-tls-handshake"
+          ],
+          "alternate_explanations": [
+            "Transient network egress or provider-side TLS termination disruption.",
+            "Provider endpoint infrastructure outage or cipher negotiation failure."
+          ],
+          "missing_evidence": [
+            "provider_request_ids",
+            "canonical_source_identity",
+            "action_metadata",
+            "payload_values",
+            "execution_record",
+            "attempt_history",
+            "execution_ordering",
+            "action_inputs",
+            "input_fingerprint",
+            "handler_registry"
+          ]
+        },
+        "proposal": {
+          "disposition": "engineering_escalation_required",
+          "kind": "escalate",
+          "summary": "Escalate to engineering or platform operations to investigate and resolve transport connectivity issues with the Telegram provider endpoint.",
+          "reasons": [
+            "Observed failure occurred during the connect phase with provider_outcome not_delivered due to a TLS handshake failure.",
+            "Transport recovery, connection failures, and provider infrastructure reachability belong to platform engineering investigation rather than customer configuration.",
+            "Simulated fixture evidence cannot establish a replay candidate."
+          ],
+          "evidence_refs": [
+            "fixture:failure:f02-telegram-tls-handshake",
+            "fixture:execution:f02-telegram-tls-handshake",
+            "fixture:validation:f02-telegram-tls-handshake"
+          ],
+          "runbook_citations": [
+            "RB-F01-F02@1.1.0#read-only-investigation",
+            "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+          ],
+          "preconditions": [
+            "Investigate egress network paths and verify TLS handshake success against the provider endpoint.",
+            "Obtain complete non-simulated execution records and provider request telemetry prior to evaluating replay safety."
+          ],
+          "not_before": null
+        }
+      },
+      "matches": [
+        {
+          "runbookId": "RB-F01-F02",
+          "version": "1.1.0",
+          "citation": "RB-F01-F02@1.1.0#read-only-investigation",
+          "heading": "Read-only investigation",
+          "content": "Read failure context and execution evidence. Confirm whether the failure happened before a send, was explicitly rejected, or became ambiguous after a send began. Validate current inputs only when configuration may be involved. Do not probe the provider.",
+          "contentHash": "6ce9c06396a9c59607345ba5d6ffa4f6986cf3a76ca57ffaaa6feaf8802ff350",
+          "taxonomy": [
+            "F01",
+            "F02"
+          ],
+          "providers": [
+            "telegram",
+            "email",
+            "generic"
+          ],
+          "simulated": true,
+          "authority": "untrusted_procedural_guidance",
+          "canChangePolicy": false,
+          "score": 0.004985409966971725
+        },
+        {
+          "runbookId": "RB-F01-F02",
+          "version": "1.1.0",
+          "citation": "RB-F01-F02@1.1.0#allowed-remediation",
+          "heading": "Allowed remediation",
+          "content": "An operator may restore connectivity or reduce sending pressure. For a proven Telegram 429 rejection, record the conservative cooldown deadline and investigate again after it passes. Guidance is not a scheduler and does not claim that the provider recovered.",
+          "contentHash": "54ccb769f613147b8ed8fbf41c926e563802069fec637507681e03c8a4c8c766",
+          "taxonomy": [
+            "F01",
+            "F02"
+          ],
+          "providers": [
+            "telegram",
+            "email",
+            "generic"
+          ],
+          "simulated": true,
+          "authority": "untrusted_procedural_guidance",
+          "canChangePolicy": false,
+          "score": 0.0017558425790478174
+        },
+        {
+          "runbookId": "RB-F01-F02",
+          "version": "1.1.0",
+          "citation": "RB-F01-F02@1.1.0#verification-rollback-or-escalation",
+          "heading": "Verification, rollback, or escalation",
+          "content": "Verify the recorded retry delay and timestamps without sending. If evidence conflicts or recovery is unproven, abstain and escalate to the provider or platform operator. Roll back any operator configuration change through that system's normal process.",
+          "contentHash": "f7350316722bd1ebdbd89cef9f7f72905d2f65563f88b27e11208d2d5ec9b2f1",
+          "taxonomy": [
+            "F01",
+            "F02"
+          ],
+          "providers": [
+            "telegram",
+            "email",
+            "generic"
+          ],
+          "simulated": true,
+          "authority": "untrusted_procedural_guidance",
+          "canChangePolicy": false,
+          "score": 0.00006802334718462215
+        }
+      ],
+      "generations": [
+        {
+          "caseId": "f02-telegram-tls-handshake",
+          "index": 0,
+          "promptHash": "1813465fc0719d0917a85e6239f7dcfd0726dc521ac9b08682ea85c4a9b21419",
+          "promptCharacters": 10774,
+          "repairIssue": null,
+          "output": {
+            "status": "completed",
+            "diagnosis": {
+              "taxonomy_id": "F02",
+              "summary": "Telegram connection failed during connect phase due to TLS handshake failure against the provider endpoint, resulting in non-delivery.",
+              "confidence": "high",
+              "evidence_refs": [
+                "fixture:failure:f02-telegram-tls-handshake",
+                "fixture:execution:f02-telegram-tls-handshake",
+                "fixture:validation:f02-telegram-tls-handshake"
+              ],
+              "alternate_explanations": [
+                "Transient network egress or provider-side TLS termination disruption.",
+                "Provider endpoint infrastructure outage or cipher negotiation failure."
+              ],
+              "missing_evidence": [
+                "provider_request_ids",
+                "canonical_source_identity",
+                "action_metadata",
+                "payload_values",
+                "execution_record",
+                "attempt_history",
+                "execution_ordering",
+                "action_inputs",
+                "input_fingerprint",
+                "handler_registry"
+              ]
+            },
+            "proposal": {
+              "disposition": "engineering_escalation_required",
+              "kind": "escalate",
+              "summary": "Escalate to engineering or platform operations to investigate and resolve transport connectivity issues with the Telegram provider endpoint.",
+              "reasons": [
+                "Observed failure occurred during the connect phase with provider_outcome not_delivered due to a TLS handshake failure.",
+                "Transport recovery, connection failures, and provider infrastructure reachability belong to platform engineering investigation rather than customer configuration.",
+                "Simulated fixture evidence cannot establish a replay candidate."
+              ],
+              "evidence_refs": [
+                "fixture:failure:f02-telegram-tls-handshake",
+                "fixture:execution:f02-telegram-tls-handshake",
+                "fixture:validation:f02-telegram-tls-handshake"
+              ],
+              "runbook_citations": [
+                "RB-F01-F02@1.1.0#read-only-investigation",
+                "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+              ],
+              "preconditions": [
+                "Investigate egress network paths and verify TLS handshake success against the provider endpoint.",
+                "Obtain complete non-simulated execution records and provider request telemetry prior to evaluating replay safety."
+              ]
+            }
+          },
+          "usage": {
+            "input_tokens": 3334,
+            "output_tokens": 2029,
+            "total_tokens": 5363
+          },
+          "latencyMs": 21032.886400000018,
+          "schemaValid": true,
+          "groundingIssue": null,
+          "safetyIssue": null,
+          "at": "2026-10-27T23:08:59.323Z"
+        }
+      ],
+      "usage": {
+        "input_tokens": 3334,
+        "output_tokens": 2029,
+        "total_tokens": 5363
+      },
+      "latencyMs": 66837.87340000001,
+      "schemaAccepted": true,
+      "citationMembership": true,
+      "safetyViolations": []
+    },
+    {
+      "id": "f03-telegram-token-revoked-401",
+      "reviewId": "803fb482356a8746",
+      "kind": "answerable",
+      "family": "F03",
+      "bucket": null,
+      "status": "failed",
+      "failure": "model_timeout",
+      "result": null,
+      "matches": [
+        {
+          "runbookId": "RB-F03-F04",
+          "version": "1.0.0",
+          "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+          "heading": "Read-only investigation",
+          "content": "Validate action inputs without returning values. Distinguish an absent action field from an unknown worker environment fallback. Check whether Telegram failed during destination resolution or send. Ask an operator to confirm bot membership and permissions outside the agent.",
+          "contentHash": "e3e354580e4f248633bedc459f2f0e07a8e8d89461cd416ee4db0f204cedf0f4",
+          "taxonomy": [
+            "F03",
+            "F04"
+          ],
+          "providers": [
+            "telegram",
+            "email"
+          ],
+          "simulated": true,
+          "authority": "untrusted_procedural_guidance",
+          "canChangePolicy": false,
+          "score": 0.025935333688233645
+        },
+        {
+          "runbookId": "RB-F03-F04",
+          "version": "1.0.0",
+          "citation": "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+          "heading": "Verification, rollback, or escalation",
+          "content": "Verify only non-secret configuration presence and operator-provided permission evidence. If the worker environment or prior delivery remains unknown, abstain. Roll back credential changes in the credential manager and escalate permission failures to the destination owner.",
+          "contentHash": "c277a1ce6dffb57c893e611c4e00ba12121e0cdaa29c6dd14d3c29fbd44ce400",
+          "taxonomy": [
+            "F03",
+            "F04"
+          ],
+          "providers": [
+            "telegram",
+            "email"
+          ],
+          "simulated": true,
+          "authority": "untrusted_procedural_guidance",
+          "canChangePolicy": false,
+          "score": 0.00003759641350371627
+        },
+        {
+          "runbookId": "RB-F03-F04",
+          "version": "1.0.0",
+          "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+          "heading": "Allowed remediation",
+          "content": "An authorized operator may rotate or configure credentials and repair destination membership or permissions. Correct invalid workflow configuration through the owning application, then start a fresh investigation with new evidence.",
+          "contentHash": "f5c5685987d62a1e7c185bb8d413920e266c3023df0e07f44f3edcb2e88ca804",
+          "taxonomy": [
+            "F03",
+            "F04"
+          ],
+          "providers": [
+            "telegram",
+            "email"
+          ],
+          "simulated": true,
+          "authority": "untrusted_procedural_guidance",
+          "canChangePolicy": false,
+          "score": 0.000036530233523015396
+        }
+      ],
+      "generations": [],
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0
+      },
+      "latencyMs": 45231.26279999997,
+      "schemaAccepted": false,
+      "citationMembership": false,
+      "safetyViolations": []
+    },
+    {
+      "id": "f03-telegram-permission-admin-only",
+      "reviewId": "a57d4e39746bc940",
+      "kind": "answerable",
+      "family": "F03",
+      "bucket": null,
+      "status": "failed",
+      "failure": "model_timeout",
+      "result": null,
+      "matches": [
+        {
+          "runbookId": "RB-F03-F04",
+          "version": "1.0.0",
+          "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+          "heading": "Read-only investigation",
+          "content": "Validate action inputs without returning values. Distinguish an absent action field from an unknown worker environment fallback. Check whether Telegram failed during destination resolution or send. Ask an operator to confirm bot membership and permissions outside the agent.",
+          "contentHash": "e3e354580e4f248633bedc459f2f0e07a8e8d89461cd416ee4db0f204cedf0f4",
+          "taxonomy": [
+            "F03",
+            "F04"
+          ],
+          "providers": [
+            "telegram",
+            "email"
+          ],
+          "simulated": true,
+          "authority": "untrusted_procedural_guidance",
+          "canChangePolicy": false,
+          "score": 0.0060537049275947805
+        },
+        {
+          "runbookId": "RB-F03-F04",
+          "version": "1.0.0",
+          "citation": "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+          "heading": "Verification, rollback, or escalation",
+          "content": "Verify only non-secret configuration presence and operator-provided permission evidence. If the worker environment or prior delivery remains unknown, abstain. Roll back credential changes in the credential manager and escalate permission failures to the destination owner.",
+          "contentHash": "c277a1ce6dffb57c893e611c4e00ba12121e0cdaa29c6dd14d3c29fbd44ce400",
+          "taxonomy": [
+            "F03",
+            "F04"
+          ],
+          "providers": [
+            "telegram",
+            "email"
+          ],
+          "simulated": true,
+          "authority": "untrusted_procedural_guidance",
+          "canChangePolicy": false,
+          "score": 0.0009675504314469157
+        },
+        {
+          "runbookId": "RB-F03-F04",
+          "version": "1.0.0",
+          "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+          "heading": "Allowed remediation",
+          "content": "An authorized operator may rotate or configure credentials and repair destination membership or permissions. Correct invalid workflow configuration through the owning application, then start a fresh investigation with new evidence.",
+          "contentHash": "f5c5685987d62a1e7c185bb8d413920e266c3023df0e07f44f3edcb2e88ca804",
+          "taxonomy": [
+            "F03",
+            "F04"
+          ],
+          "providers": [
+            "telegram",
+            "email"
+          ],
+          "simulated": true,
+          "authority": "untrusted_procedural_guidance",
+          "canChangePolicy": false,
+          "score": 0.0002661960149801041
+        }
+      ],
+      "generations": [],
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0
+      },
+      "latencyMs": 45110.312399999995,
+      "schemaAccepted": false,
+      "citationMembership": false,
+      "safetyViolations": []
+    },
+    {
+      "id": "f03-token-missing",
+      "reviewId": "2e60cbbd4989ba2d",
+      "kind": "answerable",
+      "family": "F03",
+      "bucket": null,
+      "status": "failed",
+      "failure": "model_timeout",
+      "result": null,
+      "matches": [
+        {
+          "runbookId": "RB-F03-F04",
+          "version": "1.0.0",
+          "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+          "heading": "Read-only investigation",
+          "content": "Validate action inputs without returning values. Distinguish an absent action field from an unknown worker environment fallback. Check whether Telegram failed during destination resolution or send. Ask an operator to confirm bot membership and permissions outside the agent.",
+          "contentHash": "e3e354580e4f248633bedc459f2f0e07a8e8d89461cd416ee4db0f204cedf0f4",
+          "taxonomy": [
+            "F03",
+            "F04"
+          ],
+          "providers": [
+            "telegram",
+            "email"
+          ],
+          "simulated": true,
+          "authority": "untrusted_procedural_guidance",
+          "canChangePolicy": false,
+          "score": 0.27036420141233763
+        },
+        {
+          "runbookId": "RB-F03-F04",
+          "version": "1.0.0",
+          "citation": "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+          "heading": "Verification, rollback, or escalation",
+          "content": "Verify only non-secret configuration presence and operator-provided permission evidence. If the worker environment or prior delivery remains unknown, abstain. Roll back credential changes in the credential manager and escalate permission failures to the destination owner.",
+          "contentHash": "c277a1ce6dffb57c893e611c4e00ba12121e0cdaa29c6dd14d3c29fbd44ce400",
+          "taxonomy": [
+            "F03",
+            "F04"
+          ],
+          "providers": [
+            "telegram",
+            "email"
+          ],
+          "simulated": true,
+          "authority": "untrusted_procedural_guidance",
+          "canChangePolicy": false,
+          "score": 0.0007493618049828834
+        },
+        {
+          "runbookId": "RB-F03-F04",
+          "version": "1.0.0",
+          "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+          "heading": "Allowed remediation",
+          "content": "An authorized operator may rotate or configure credentials and repair destination membership or permissions. Correct invalid workflow configuration through the owning application, then start a fresh investigation with new evidence.",
+          "contentHash": "f5c5685987d62a1e7c185bb8d413920e266c3023df0e07f44f3edcb2e88ca804",
+          "taxonomy": [
+            "F03",
+            "F04"
+          ],
+          "providers": [
+            "telegram",
+            "email"
+          ],
+          "simulated": true,
+          "authority": "untrusted_procedural_guidance",
+          "canChangePolicy": false,
+          "score": 0.000025123123959880056
+        }
+      ],
+      "generations": [],
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0
+      },
+      "latencyMs": 45077.42339999997,
+      "schemaAccepted": false,
+      "citationMembership": false,
+      "safetyViolations": []
+    },
+    {
+      "id": "f04-invalid-destination",
+      "reviewId": "0f3f5f500dd115bb",
+      "kind": "answerable",
+      "family": "F04",
+      "bucket": null,
+      "status": "completed",
+      "failure": null,
+      "result": {
+        "contract_version": 1,
+        "graph_version": "phase-6-v1",
+        "prompt_version": "phase-11a-v4",
+        "status": "completed",
+        "diagnosis": {
+          "taxonomy_id": "F04",
+          "summary": "Provider Telegram rejected the message delivery due to an invalid destination format.",
+          "confidence": "high",
+          "evidence_refs": [
+            "fixture:failure:f04-invalid-destination",
+            "fixture:execution:f04-invalid-destination",
+            "fixture:validation:f04-invalid-destination"
+          ],
+          "alternate_explanations": [
+            "The exact malformed destination string could not be verified directly because payload values and action inputs are unavailable."
+          ],
+          "missing_evidence": [
+            "operator_approved_destination",
+            "canonical_source_identity",
+            "action_metadata",
+            "payload_values",
+            "execution_record",
+            "attempt_history",
+            "execution_ordering",
+            "action_inputs",
+            "input_fingerprint",
+            "handler_registry"
+          ]
+        },
+        "proposal": {
+          "disposition": "owner_action_required",
+          "kind": "request_manual_fix",
+          "summary": "The workflow owner must inspect and correct the Telegram recipient destination configuration.",
+          "reasons": [
+            "Provider Telegram recorded delivery rejection with observed fact destination_format_invalid.",
+            "Action input values are blocked and unavailable, requiring customer-controlled repair of the destination setting."
+          ],
+          "evidence_refs": [
+            "fixture:failure:f04-invalid-destination",
+            "fixture:validation:f04-invalid-destination"
+          ],
+          "runbook_citations": [
+            "RB-F03-F04@1.0.0#allowed-remediation",
+            "RB-F03-F04@1.0.0#read-only-investigation"
+          ],
+          "preconditions": [
+            "Owner validates the target Telegram chat/user identifier against Telegram format requirements.",
+            "Workflow configuration is updated with a valid destination prior to re-execution."
+          ],
+          "not_before": null
+        }
+      },
+      "matches": [
+        {
+          "runbookId": "RB-F03-F04",
+          "version": "1.0.0",
+          "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+          "heading": "Read-only investigation",
+          "content": "Validate action inputs without returning values. Distinguish an absent action field from an unknown worker environment fallback. Check whether Telegram failed during destination resolution or send. Ask an operator to confirm bot membership and permissions outside the agent.",
+          "contentHash": "e3e354580e4f248633bedc459f2f0e07a8e8d89461cd416ee4db0f204cedf0f4",
+          "taxonomy": [
+            "F03",
+            "F04"
+          ],
+          "providers": [
+            "telegram",
+            "email"
+          ],
+          "simulated": true,
+          "authority": "untrusted_procedural_guidance",
+          "canChangePolicy": false,
+          "score": 0.3230626796701242
+        },
+        {
+          "runbookId": "RB-F03-F04",
+          "version": "1.0.0",
+          "citation": "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+          "heading": "Verification, rollback, or escalation",
+          "content": "Verify only non-secret configuration presence and operator-provided permission evidence. If the worker environment or prior delivery remains unknown, abstain. Roll back credential changes in the credential manager and escalate permission failures to the destination owner.",
+          "contentHash": "c277a1ce6dffb57c893e611c4e00ba12121e0cdaa29c6dd14d3c29fbd44ce400",
+          "taxonomy": [
+            "F03",
+            "F04"
+          ],
+          "providers": [
+            "telegram",
+            "email"
+          ],
+          "simulated": true,
+          "authority": "untrusted_procedural_guidance",
+          "canChangePolicy": false,
+          "score": 0.0010313679756262508
+        },
+        {
+          "runbookId": "RB-F03-F04",
+          "version": "1.0.0",
+          "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+          "heading": "Allowed remediation",
+          "content": "An authorized operator may rotate or configure credentials and repair destination membership or permissions. Correct invalid workflow configuration through the owning application, then start a fresh investigation with new evidence.",
+          "contentHash": "f5c5685987d62a1e7c185bb8d413920e266c3023df0e07f44f3edcb2e88ca804",
+          "taxonomy": [
+            "F03",
+            "F04"
+          ],
+          "providers": [
+            "telegram",
+            "email"
+          ],
+          "simulated": true,
+          "authority": "untrusted_procedural_guidance",
+          "canChangePolicy": false,
+          "score": 0.00038052246479954006
+        }
+      ],
+      "generations": [
+        {
+          "caseId": "f04-invalid-destination",
+          "index": 0,
+          "promptHash": "59b7c2e350e436565663d8b427290c3ac28b6406354b6c18f2c220e636bece9e",
+          "promptCharacters": 10672,
+          "repairIssue": null,
+          "output": {
+            "status": "completed",
+            "diagnosis": {
+              "taxonomy_id": "F04",
+              "summary": "Provider Telegram rejected the message delivery due to an invalid destination format.",
+              "confidence": "high",
+              "evidence_refs": [
+                "fixture:failure:f04-invalid-destination",
+                "fixture:execution:f04-invalid-destination",
+                "fixture:validation:f04-invalid-destination"
+              ],
+              "alternate_explanations": [
+                "The exact malformed destination string could not be verified directly because payload values and action inputs are unavailable."
+              ],
+              "missing_evidence": [
+                "operator_approved_destination",
+                "canonical_source_identity",
+                "action_metadata",
+                "payload_values",
+                "execution_record",
+                "attempt_history",
+                "execution_ordering",
+                "action_inputs",
+                "input_fingerprint",
+                "handler_registry"
+              ]
+            },
+            "proposal": {
+              "disposition": "owner_action_required",
+              "kind": "request_manual_fix",
+              "summary": "The workflow owner must inspect and correct the Telegram recipient destination configuration.",
+              "reasons": [
+                "Provider Telegram recorded delivery rejection with observed fact destination_format_invalid.",
+                "Action input values are blocked and unavailable, requiring customer-controlled repair of the destination setting."
+              ],
+              "evidence_refs": [
+                "fixture:failure:f04-invalid-destination",
+                "fixture:validation:f04-invalid-destination"
+              ],
+              "runbook_citations": [
+                "RB-F03-F04@1.0.0#allowed-remediation",
+                "RB-F03-F04@1.0.0#read-only-investigation"
+              ],
+              "preconditions": [
+                "Owner validates the target Telegram chat/user identifier against Telegram format requirements.",
+                "Workflow configuration is updated with a valid destination prior to re-execution."
+              ]
+            }
+          },
+          "usage": {
+            "input_tokens": 3260,
+            "output_tokens": 1545,
+            "total_tokens": 4805
+          },
+          "latencyMs": 14907.773099999991,
+          "schemaValid": true,
+          "groundingIssue": null,
+          "safetyIssue": null,
+          "at": "2026-10-28T06:11:48.247Z"
+        }
+      ],
+      "usage": {
+        "input_tokens": 3260,
+        "output_tokens": 1545,
+        "total_tokens": 4805
+      },
+      "latencyMs": 61128.2193,
+      "schemaAccepted": true,
+      "citationMembership": true,
+      "safetyViolations": []
+    },
+    {
+      "id": "f04-email-empty-destination",
+      "reviewId": "76d8d445a8314630",
+      "kind": "answerable",
+      "family": "F04",
+      "bucket": null,
+      "status": "completed",
+      "failure": null,
+      "result": {
+        "contract_version": 1,
+        "graph_version": "phase-6-v1",
+        "prompt_version": "phase-11a-v4",
+        "status": "completed",
+        "diagnosis": {
+          "taxonomy_id": "F04",
+          "summary": "Validation for the sendEmail action failed prior to dispatch because the resolved recipient destination was empty.",
+          "confidence": "medium",
+          "evidence_refs": [
+            "fixture:failure:f04-email-empty-destination",
+            "fixture:validation:f04-email-empty-destination"
+          ],
+          "alternate_explanations": [
+            "Upstream trigger data or workflow mapping produced an empty string or null value for the destination email address.",
+            "Workflow configuration omitted the recipient email parameter."
+          ],
+          "missing_evidence": [
+            "provider_request_ids",
+            "canonical_source_identity",
+            "action_metadata",
+            "payload_values",
+            "execution_record",
+            "attempt_history",
+            "execution_ordering",
+            "action_inputs",
+            "input_fingerprint",
+            "handler_registry"
+          ]
+        },
+        "proposal": {
+          "disposition": "owner_action_required",
+          "kind": "request_manual_fix",
+          "summary": "Request that the workflow owner update the workflow destination configuration or mapping to supply a valid non-empty recipient email address.",
+          "reasons": [
+            "Email validation confirmed the resolved destination was empty before sending.",
+            "The delivery outcome is recorded as not_delivered and the provider call was not attempted.",
+            "Destination mapping and input values are customer-managed settings that require owner intervention."
+          ],
+          "evidence_refs": [
+            "fixture:failure:f04-email-empty-destination",
+            "fixture:validation:f04-email-empty-destination"
+          ],
+          "runbook_citations": [
+            "RB-F03-F04@1.0.0#read-only-investigation",
+            "RB-F03-F04@1.0.0#allowed-remediation"
+          ],
+          "preconditions": [
+            "The workflow owner verifies and populates the recipient destination mapping in the action configuration.",
+            "A new execution or investigation is initiated with updated inputs."
+          ],
+          "not_before": null
+        }
+      },
+      "matches": [
+        {
+          "runbookId": "RB-F03-F04",
+          "version": "1.0.0",
+          "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+          "heading": "Read-only investigation",
+          "content": "Validate action inputs without returning values. Distinguish an absent action field from an unknown worker environment fallback. Check whether Telegram failed during destination resolution or send. Ask an operator to confirm bot membership and permissions outside the agent.",
+          "contentHash": "e3e354580e4f248633bedc459f2f0e07a8e8d89461cd416ee4db0f204cedf0f4",
+          "taxonomy": [
+            "F03",
+            "F04"
+          ],
+          "providers": [
+            "telegram",
+            "email"
+          ],
+          "simulated": true,
+          "authority": "untrusted_procedural_guidance",
+          "canChangePolicy": false,
+          "score": 0.017746154394600935
+        },
+        {
+          "runbookId": "RB-F03-F04",
+          "version": "1.0.0",
+          "citation": "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+          "heading": "Verification, rollback, or escalation",
+          "content": "Verify only non-secret configuration presence and operator-provided permission evidence. If the worker environment or prior delivery remains unknown, abstain. Roll back credential changes in the credential manager and escalate permission failures to the destination owner.",
+          "contentHash": "c277a1ce6dffb57c893e611c4e00ba12121e0cdaa29c6dd14d3c29fbd44ce400",
+          "taxonomy": [
+            "F03",
+            "F04"
+          ],
+          "providers": [
+            "telegram",
+            "email"
+          ],
+          "simulated": true,
+          "authority": "untrusted_procedural_guidance",
+          "canChangePolicy": false,
+          "score": 0.0018939332327438064
+        },
+        {
+          "runbookId": "RB-F03-F04",
+          "version": "1.0.0",
+          "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+          "heading": "Allowed remediation",
+          "content": "An authorized operator may rotate or configure credentials and repair destination membership or permissions. Correct invalid workflow configuration through the owning application, then start a fresh investigation with new evidence.",
+          "contentHash": "f5c5685987d62a1e7c185bb8d413920e266c3023df0e07f44f3edcb2e88ca804",
+          "taxonomy": [
+            "F03",
+            "F04"
+          ],
+          "providers": [
+            "telegram",
+            "email"
+          ],
+          "simulated": true,
+          "authority": "untrusted_procedural_guidance",
+          "canChangePolicy": false,
+          "score": 0.0005522443759980084
+        }
+      ],
+      "generations": [
+        {
+          "caseId": "f04-email-empty-destination",
+          "index": 0,
+          "promptHash": "4c2a1b70cf4b076d7eee9f83a83dc9d488b5b29838f40d0bfc241fc1e56e1ff1",
+          "promptCharacters": 10783,
+          "repairIssue": null,
+          "output": {
+            "status": "completed",
+            "diagnosis": {
+              "taxonomy_id": "F04",
+              "summary": "Validation for the sendEmail action failed prior to dispatch because the resolved recipient destination was empty.",
+              "confidence": "medium",
+              "evidence_refs": [
+                "fixture:failure:f04-email-empty-destination",
+                "fixture:validation:f04-email-empty-destination"
+              ],
+              "alternate_explanations": [
+                "Upstream trigger data or workflow mapping produced an empty string or null value for the destination email address.",
+                "Workflow configuration omitted the recipient email parameter."
+              ],
+              "missing_evidence": [
+                "provider_request_ids",
+                "canonical_source_identity",
+                "action_metadata",
+                "payload_values",
+                "execution_record",
+                "attempt_history",
+                "execution_ordering",
+                "action_inputs",
+                "input_fingerprint",
+                "handler_registry"
+              ]
+            },
+            "proposal": {
+              "disposition": "owner_action_required",
+              "kind": "request_manual_fix",
+              "summary": "Request that the workflow owner update the workflow destination configuration or mapping to supply a valid non-empty recipient email address.",
+              "reasons": [
+                "Email validation confirmed the resolved destination was empty before sending.",
+                "The delivery outcome is recorded as not_delivered and the provider call was not attempted.",
+                "Destination mapping and input values are customer-managed settings that require owner intervention."
+              ],
+              "evidence_refs": [
+                "fixture:failure:f04-email-empty-destination",
+                "fixture:validation:f04-email-empty-destination"
+              ],
+              "runbook_citations": [
+                "RB-F03-F04@1.0.0#read-only-investigation",
+                "RB-F03-F04@1.0.0#allowed-remediation"
+              ],
+              "preconditions": [
+                "The workflow owner verifies and populates the recipient destination mapping in the action configuration.",
+                "A new execution or investigation is initiated with updated inputs."
+              ]
+            }
+          },
+          "usage": {
+            "input_tokens": 3304,
+            "output_tokens": 1790,
+            "total_tokens": 5094
+          },
+          "latencyMs": 19777.380600000033,
+          "schemaValid": true,
+          "groundingIssue": null,
+          "safetyIssue": null,
+          "at": "2026-10-27T23:14:04.184Z"
+        }
+      ],
+      "usage": {
+        "input_tokens": 3304,
+        "output_tokens": 1790,
+        "total_tokens": 5094
+      },
+      "latencyMs": 124709.6803,
+      "schemaAccepted": true,
+      "citationMembership": true,
+      "safetyViolations": []
+    },
+    {
+      "id": "f04-template-path-missing",
+      "reviewId": "10f24a8eaf1e09ef",
+      "kind": "answerable",
+      "family": "F04",
+      "bucket": null,
+      "status": "failed",
+      "failure": "model_timeout",
+      "result": null,
+      "matches": [
+        {
+          "runbookId": "RB-F03-F04",
+          "version": "1.0.0",
+          "citation": "RB-F03-F04@1.0.0#read-only-investigation",
+          "heading": "Read-only investigation",
+          "content": "Validate action inputs without returning values. Distinguish an absent action field from an unknown worker environment fallback. Check whether Telegram failed during destination resolution or send. Ask an operator to confirm bot membership and permissions outside the agent.",
+          "contentHash": "e3e354580e4f248633bedc459f2f0e07a8e8d89461cd416ee4db0f204cedf0f4",
+          "taxonomy": [
+            "F03",
+            "F04"
+          ],
+          "providers": [
+            "telegram",
+            "email"
+          ],
+          "simulated": true,
+          "authority": "untrusted_procedural_guidance",
+          "canChangePolicy": false,
+          "score": 0.16533335857403086
+        },
+        {
+          "runbookId": "RB-F03-F04",
+          "version": "1.0.0",
+          "citation": "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+          "heading": "Verification, rollback, or escalation",
+          "content": "Verify only non-secret configuration presence and operator-provided permission evidence. If the worker environment or prior delivery remains unknown, abstain. Roll back credential changes in the credential manager and escalate permission failures to the destination owner.",
+          "contentHash": "c277a1ce6dffb57c893e611c4e00ba12121e0cdaa29c6dd14d3c29fbd44ce400",
+          "taxonomy": [
+            "F03",
+            "F04"
+          ],
+          "providers": [
+            "telegram",
+            "email"
+          ],
+          "simulated": true,
+          "authority": "untrusted_procedural_guidance",
+          "canChangePolicy": false,
+          "score": 0.0003133854162572862
+        },
+        {
+          "runbookId": "RB-F03-F04",
+          "version": "1.0.0",
+          "citation": "RB-F03-F04@1.0.0#allowed-remediation",
+          "heading": "Allowed remediation",
+          "content": "An authorized operator may rotate or configure credentials and repair destination membership or permissions. Correct invalid workflow configuration through the owning application, then start a fresh investigation with new evidence.",
+          "contentHash": "f5c5685987d62a1e7c185bb8d413920e266c3023df0e07f44f3edcb2e88ca804",
+          "taxonomy": [
+            "F03",
+            "F04"
+          ],
+          "providers": [
+            "telegram",
+            "email"
+          ],
+          "simulated": true,
+          "authority": "untrusted_procedural_guidance",
+          "canChangePolicy": false,
+          "score": 0.0000399003508083321
+        }
+      ],
+      "generations": [],
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0
+      },
+      "latencyMs": 45049.21740000008,
+      "schemaAccepted": false,
+      "citationMembership": false,
+      "safetyViolations": []
+    },
+    {
+      "id": "f05-worker-calendar-action-missing",
+      "reviewId": "eb77a2e75eebac92",
+      "kind": "answerable",
+      "family": "F05",
+      "bucket": null,
+      "status": "failed",
+      "failure": "model_timeout",
+      "result": null,
+      "matches": [
+        {
+          "runbookId": "RB-F04-F06",
+          "version": "1.0.0",
+          "citation": "RB-F04-F06@1.0.0#replay-and-approval",
+          "heading": "Replay and approval",
+          "content": "Phase 5 is read-only. Repeating invalid input is not useful, changed input is outside same-input replay, and malformed or orphaned events have no replay path. Unsupported handlers remain blocked until deployment and inputs are verified.",
+          "contentHash": "5d1e53be83b808985478819502542ffd8c7ad7ca28661d36a14af804415e4fdf",
+          "taxonomy": [
+            "F04",
+            "F05",
+            "F06"
+          ],
+          "providers": [
+            "telegram",
+            "email",
+            "generic"
+          ],
+          "simulated": true,
+          "authority": "untrusted_procedural_guidance",
+          "canChangePolicy": false,
+          "score": 0.02296285344636865
+        },
+        {
+          "runbookId": "RB-F04-F06",
+          "version": "1.0.0",
+          "citation": "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+          "heading": "Verification, rollback, or escalation",
+          "content": "Verify parser results against current worker semantics and confirm registry and stage order without executing actions. Escalate missing historical snapshots, ambiguous ordering, and producer schema faults to engineering. Roll back definition changes through normal deployment controls.",
+          "contentHash": "415dd258d7c1657e7a1c72da038fe0297fa7b253cf4490be1b1a8b005bdefbfc",
+          "taxonomy": [
+            "F04",
+            "F05",
+            "F06"
+          ],
+          "providers": [
+            "telegram",
+            "email",
+            "generic"
+          ],
+          "simulated": true,
+          "authority": "untrusted_procedural_guidance",
+          "canChangePolicy": false,
+          "score": 0.0009743557099785188
+        },
+        {
+          "runbookId": "RB-F04-F06",
+          "version": "1.0.0",
+          "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+          "heading": "Read-only investigation",
+          "content": "Run deterministic input validation. The parser replaces a missing template path with an empty string, so report the missing path rather than the rendered value. Compare action type with the current `email` and `telegram` registry and inspect contiguous stage ordering.",
+          "contentHash": "3c7bf6af06785d4ceb044d23ef2b756ce5a3829029c089340754762768d5a39e",
+          "taxonomy": [
+            "F04",
+            "F05",
+            "F06"
+          ],
+          "providers": [
+            "telegram",
+            "email",
+            "generic"
+          ],
+          "simulated": true,
+          "authority": "untrusted_procedural_guidance",
+          "canChangePolicy": false,
+          "score": 0.000018780972616819203
+        }
+      ],
+      "generations": [],
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0
+      },
+      "latencyMs": 77534.94169999997,
+      "schemaAccepted": false,
+      "citationMembership": false,
+      "safetyViolations": []
+    },
+    {
+      "id": "f05-worker-legacy-sms-action",
+      "reviewId": "0e886c9abb711d3d",
+      "kind": "answerable",
+      "family": "F05",
+      "bucket": null,
+      "status": "failed",
+      "failure": "model_timeout",
+      "result": null,
+      "matches": [
+        {
+          "runbookId": "RB-F04-F06",
+          "version": "1.0.0",
+          "citation": "RB-F04-F06@1.0.0#replay-and-approval",
+          "heading": "Replay and approval",
+          "content": "Phase 5 is read-only. Repeating invalid input is not useful, changed input is outside same-input replay, and malformed or orphaned events have no replay path. Unsupported handlers remain blocked until deployment and inputs are verified.",
+          "contentHash": "5d1e53be83b808985478819502542ffd8c7ad7ca28661d36a14af804415e4fdf",
+          "taxonomy": [
+            "F04",
+            "F05",
+            "F06"
+          ],
+          "providers": [
+            "telegram",
+            "email",
+            "generic"
+          ],
+          "simulated": true,
+          "authority": "untrusted_procedural_guidance",
+          "canChangePolicy": false,
+          "score": 0.05299846287532695
+        },
+        {
+          "runbookId": "RB-F04-F06",
+          "version": "1.0.0",
+          "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+          "heading": "Read-only investigation",
+          "content": "Run deterministic input validation. The parser replaces a missing template path with an empty string, so report the missing path rather than the rendered value. Compare action type with the current `email` and `telegram` registry and inspect contiguous stage ordering.",
+          "contentHash": "3c7bf6af06785d4ceb044d23ef2b756ce5a3829029c089340754762768d5a39e",
+          "taxonomy": [
+            "F04",
+            "F05",
+            "F06"
+          ],
+          "providers": [
+            "telegram",
+            "email",
+            "generic"
+          ],
+          "simulated": true,
+          "authority": "untrusted_procedural_guidance",
+          "canChangePolicy": false,
+          "score": 0.00249218003163966
+        },
+        {
+          "runbookId": "RB-F04-F06",
+          "version": "1.0.0",
+          "citation": "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+          "heading": "Verification, rollback, or escalation",
+          "content": "Verify parser results against current worker semantics and confirm registry and stage order without executing actions. Escalate missing historical snapshots, ambiguous ordering, and producer schema faults to engineering. Roll back definition changes through normal deployment controls.",
+          "contentHash": "415dd258d7c1657e7a1c72da038fe0297fa7b253cf4490be1b1a8b005bdefbfc",
+          "taxonomy": [
+            "F04",
+            "F05",
+            "F06"
+          ],
+          "providers": [
+            "telegram",
+            "email",
+            "generic"
+          ],
+          "simulated": true,
+          "authority": "untrusted_procedural_guidance",
+          "canChangePolicy": false,
+          "score": 0.0016137971209813054
+        }
+      ],
+      "generations": [],
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0
+      },
+      "latencyMs": 79166.18459999992,
+      "schemaAccepted": false,
+      "citationMembership": false,
+      "safetyViolations": []
+    },
+    {
+      "id": "f05-handler-version-unknown",
+      "reviewId": "bc7f20fe8bd8f39f",
+      "kind": "answerable",
+      "family": "F05",
+      "bucket": null,
+      "status": "failed",
+      "failure": "provider_or_quota_failure:http_error:429",
+      "result": null,
+      "matches": [
+        {
+          "runbookId": "RB-F04-F06",
+          "version": "1.0.0",
+          "citation": "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+          "heading": "Verification, rollback, or escalation",
+          "content": "Verify parser results against current worker semantics and confirm registry and stage order without executing actions. Escalate missing historical snapshots, ambiguous ordering, and producer schema faults to engineering. Roll back definition changes through normal deployment controls.",
+          "contentHash": "415dd258d7c1657e7a1c72da038fe0297fa7b253cf4490be1b1a8b005bdefbfc",
+          "taxonomy": [
+            "F04",
+            "F05",
+            "F06"
+          ],
+          "providers": [
+            "telegram",
+            "email",
+            "generic"
+          ],
+          "simulated": true,
+          "authority": "untrusted_procedural_guidance",
+          "canChangePolicy": false,
+          "score": 0.025533059919859442
+        },
+        {
+          "runbookId": "RB-F04-F06",
+          "version": "1.0.0",
+          "citation": "RB-F04-F06@1.0.0#replay-and-approval",
+          "heading": "Replay and approval",
+          "content": "Phase 5 is read-only. Repeating invalid input is not useful, changed input is outside same-input replay, and malformed or orphaned events have no replay path. Unsupported handlers remain blocked until deployment and inputs are verified.",
+          "contentHash": "5d1e53be83b808985478819502542ffd8c7ad7ca28661d36a14af804415e4fdf",
+          "taxonomy": [
+            "F04",
+            "F05",
+            "F06"
+          ],
+          "providers": [
+            "telegram",
+            "email",
+            "generic"
+          ],
+          "simulated": true,
+          "authority": "untrusted_procedural_guidance",
+          "canChangePolicy": false,
+          "score": 0.0005267049542439797
+        },
+        {
+          "runbookId": "RB-F04-F06",
+          "version": "1.0.0",
+          "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+          "heading": "Read-only investigation",
+          "content": "Run deterministic input validation. The parser replaces a missing template path with an empty string, so report the missing path rather than the rendered value. Compare action type with the current `email` and `telegram` registry and inspect contiguous stage ordering.",
+          "contentHash": "3c7bf6af06785d4ceb044d23ef2b756ce5a3829029c089340754762768d5a39e",
+          "taxonomy": [
+            "F04",
+            "F05",
+            "F06"
+          ],
+          "providers": [
+            "telegram",
+            "email",
+            "generic"
+          ],
+          "simulated": true,
+          "authority": "untrusted_procedural_guidance",
+          "canChangePolicy": false,
+          "score": 0.00003529315487308558
+        }
+      ],
+      "generations": [],
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0
+      },
+      "latencyMs": 128839.63419999997,
+      "schemaAccepted": false,
+      "citationMembership": false,
+      "safetyViolations": []
+    }
+  ]
+}

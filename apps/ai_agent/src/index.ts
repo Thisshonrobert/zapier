@@ -14,7 +14,7 @@ import { investigationEnabled, operationalLimits } from "./operational-limits.ts
 const port = Number(process.env.PORT ?? 3004);
 const serviceSecret = process.env.TRIAGE_SERVICE_SECRET;
 const geminiApiKey = process.env.GEMINI_API_KEY;
-const geminiModel = process.env.GEMINI_MODEL ?? "gemini-2.5-flash";
+const geminiModel = process.env.GEMINI_MODEL ?? "gemini-3.5-flash-lite";
 const databaseUrl = process.env.AI_AGENT_DATABASE_URL;
 if (investigationEnabled()) operationalLimits(geminiModel);
 if (investigationEnabled() && (!databaseUrl || !serviceSecret || serviceSecret.length < 32 || !geminiApiKey))

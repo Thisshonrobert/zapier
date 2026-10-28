@@ -20,6 +20,7 @@ import {
   TokenBudgetExceeded,
   ToolBudgetExceeded,
   buildDiagnosisService,
+  issueForOutput,
   type IntegratedInvestigationTools,
 } from "../src/graph.ts";
 import type { RunbookMatch } from "../src/tools/search-runbooks.ts";
@@ -625,5 +626,76 @@ describe("Phase 6 integrated diagnosis graph", () => {
     await expect(stepLimit.diagnose()).rejects.toBeInstanceOf(
       GraphStepLimitExceeded,
     );
+  });
+});
+
+describe("D1 strict outcome_unknown guard", () => {
+  const bundle = (providerOutcome: "rejected" | "unknown") => ({
+    failureContext: failureContext(providerOutcome),
+    executionEvidence: executionEvidence(providerOutcome),
+    inputValidation: inputValidation(),
+  });
+  const outcomeUnknown = () => {
+    const output = safeOutput();
+    output.status = "abstained";
+    output.proposal.disposition = "outcome_unknown";
+    output.proposal.kind = "escalate";
+    return output as Parameters<typeof issueForOutput>[2];
+  };
+
+  test("strict guard rejects outcome_unknown for an explicit rejection", () => {
+    expect(
+      issueForOutput(bundle("rejected"), [runbook()], outcomeUnknown(), { strictOutcomeUnknown: true }),
+    ).toBe("unsupported_outcome_unknown");
+  });
+
+  test("strict guard allows outcome_unknown when delivery is unknown", () => {
+    expect(
+      issueForOutput(bundle("unknown"), [runbook()], outcomeUnknown(), { strictOutcomeUnknown: true }),
+    ).toBeUndefined();
+  });
+
+  test("guard is off without the option", () => {
+    expect(issueForOutput(bundle("rejected"), [runbook()], outcomeUnknown())).toBeUndefined();
+  });
+});
+
+describe("D1 prompt v4 service", () => {
+  const explicitRejectionUnknown = () => {
+    const output = safeOutput();
+    output.status = "abstained";
+    output.proposal.disposition = "outcome_unknown";
+    output.proposal.kind = "escalate";
+    return output;
+  };
+  const insufficient = () => {
+    const output = explicitRejectionUnknown();
+    output.proposal.disposition = "insufficient_evidence";
+    output.proposal.summary = "Telegram rejected the send with HTTP 429 in phase send; collect the provider error body.";
+    return output;
+  };
+
+  test("v4 service repairs outcome_unknown on an explicit rejection", async () => {
+    const prompts: DiagnosisPrompt[] = [];
+    const outputs = [explicitRejectionUnknown(), insufficient()];
+    const result = await buildDiagnosisService(
+      tools("rejected"),
+      model(async (prompt) => { prompts.push(prompt); return generation(outputs[prompts.length - 1]); }),
+      { promptVersion: "phase-11a-v4" },
+    ).diagnose();
+    expect(prompts).toHaveLength(2);
+    expect(prompts[1]!.repair).toEqual({ issue: "unsupported_outcome_unknown" });
+    expect(result.prompt_version).toBe("phase-11a-v4");
+    expect(result.proposal.disposition).toBe("insufficient_evidence");
+  });
+
+  test("explicit v3 service accepts outcome_unknown on an explicit rejection", async () => {
+    const result = await buildDiagnosisService(
+      tools("rejected"),
+      model(async () => generation(explicitRejectionUnknown())),
+      { promptVersion: "phase-11a-v3" },
+    ).diagnose();
+    expect(result.prompt_version).toBe("phase-11a-v3");
+    expect(result.proposal.disposition).toBe("outcome_unknown");
   });
 });

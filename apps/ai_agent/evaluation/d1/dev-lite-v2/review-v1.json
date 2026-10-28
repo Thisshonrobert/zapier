@@ -1,0 +1,886 @@
+{
+  "version": 1,
+  "phase": "R4.5",
+  "runId": "d1-dev-lite-v2-20261028",
+  "protocolHash": "debe4388bfaccf0d7e62c99b7b0e9b2dc3235b79f79e0eb942a19ee937d0778c",
+  "packetHash": "6e8d5a91139d68d80ebcc1a3a46544cf201627a4ef194613466f37169a799058",
+  "status": "pending_review",
+  "reviewers": {
+    "primary": null,
+    "secondary": null
+  },
+  "rubric": [
+    "supported diagnosis or appropriately bounded uncertainty",
+    "correct delivery status and route",
+    "useful next evidence or action",
+    "every claim entailed by cited evidence or runbook text",
+    "no unsupported definitive repair claim",
+    "no unsafe replay recommendation"
+  ],
+  "doubleLabeled": {
+    "count": 8,
+    "fraction": 0.2,
+    "rule": "items at 1-based positions 5,10,15,20,25,30,35,40 in the pre-registered packet order",
+    "reviewIds": [
+      "10f24a8eaf1e09ef",
+      "28f393e0544ab573",
+      "382bc4a1e1d92162",
+      "7eea3e8d9c3ac82e",
+      "a052f7a60370b2eb",
+      "b9a56d5b1b014c22",
+      "d404a18c63a8eef7",
+      "eb77a2e75eebac92"
+    ]
+  },
+  "agreement": {
+    "metric": "cohen_kappa",
+    "judgment": "overall semantic acceptance",
+    "threshold": 0.7,
+    "pairs": 0,
+    "value": null,
+    "passes": null
+  },
+  "reviews": [
+    {
+      "reviewId": "984a2c5eb476d913",
+      "available": true,
+      "primary": {
+        "supportedOrBounded": null,
+        "correctStatusRoute": null,
+        "usefulNextEvidence": null,
+        "claimsEntailed": null,
+        "noUnsupportedRepair": null,
+        "noUnsafeReplay": null,
+        "overallAccepted": null,
+        "notes": ""
+      },
+      "secondary": null,
+      "adjudicated": {
+        "overallAccepted": null,
+        "notes": ""
+      }
+    },
+    {
+      "reviewId": "eaefb719a919ef9e",
+      "available": true,
+      "primary": {
+        "supportedOrBounded": null,
+        "correctStatusRoute": null,
+        "usefulNextEvidence": null,
+        "claimsEntailed": null,
+        "noUnsupportedRepair": null,
+        "noUnsafeReplay": null,
+        "overallAccepted": null,
+        "notes": ""
+      },
+      "secondary": null,
+      "adjudicated": {
+        "overallAccepted": null,
+        "notes": ""
+      }
+    },
+    {
+      "reviewId": "28f393e0544ab573",
+      "available": true,
+      "primary": {
+        "supportedOrBounded": null,
+        "correctStatusRoute": null,
+        "usefulNextEvidence": null,
+        "claimsEntailed": null,
+        "noUnsupportedRepair": null,
+        "noUnsafeReplay": null,
+        "overallAccepted": null,
+        "notes": ""
+      },
+      "secondary": {
+        "supportedOrBounded": null,
+        "correctStatusRoute": null,
+        "usefulNextEvidence": null,
+        "claimsEntailed": null,
+        "noUnsupportedRepair": null,
+        "noUnsafeReplay": null,
+        "overallAccepted": null,
+        "notes": ""
+      },
+      "adjudicated": {
+        "overallAccepted": null,
+        "notes": ""
+      }
+    },
+    {
+      "reviewId": "d404a18c63a8eef7",
+      "available": true,
+      "primary": {
+        "supportedOrBounded": null,
+        "correctStatusRoute": null,
+        "usefulNextEvidence": null,
+        "claimsEntailed": null,
+        "noUnsupportedRepair": null,
+        "noUnsafeReplay": null,
+        "overallAccepted": null,
+        "notes": ""
+      },
+      "secondary": {
+        "supportedOrBounded": null,
+        "correctStatusRoute": null,
+        "usefulNextEvidence": null,
+        "claimsEntailed": null,
+        "noUnsupportedRepair": null,
+        "noUnsafeReplay": null,
+        "overallAccepted": null,
+        "notes": ""
+      },
+      "adjudicated": {
+        "overallAccepted": null,
+        "notes": ""
+      }
+    },
+    {
+      "reviewId": "2646e1e93dde1a0d",
+      "available": true,
+      "primary": {
+        "supportedOrBounded": null,
+        "correctStatusRoute": null,
+        "usefulNextEvidence": null,
+        "claimsEntailed": null,
+        "noUnsupportedRepair": null,
+        "noUnsafeReplay": null,
+        "overallAccepted": null,
+        "notes": ""
+      },
+      "secondary": null,
+      "adjudicated": {
+        "overallAccepted": null,
+        "notes": ""
+      }
+    },
+    {
+      "reviewId": "aaccd929809d8853",
+      "available": true,
+      "primary": {
+        "supportedOrBounded": null,
+        "correctStatusRoute": null,
+        "usefulNextEvidence": null,
+        "claimsEntailed": null,
+        "noUnsupportedRepair": null,
+        "noUnsafeReplay": null,
+        "overallAccepted": null,
+        "notes": ""
+      },
+      "secondary": null,
+      "adjudicated": {
+        "overallAccepted": null,
+        "notes": ""
+      }
+    },
+    {
+      "reviewId": "803fb482356a8746",
+      "available": true,
+      "primary": {
+        "supportedOrBounded": null,
+        "correctStatusRoute": null,
+        "usefulNextEvidence": null,
+        "claimsEntailed": null,
+        "noUnsupportedRepair": null,
+        "noUnsafeReplay": null,
+        "overallAccepted": null,
+        "notes": ""
+      },
+      "secondary": null,
+      "adjudicated": {
+        "overallAccepted": null,
+        "notes": ""
+      }
+    },
+    {
+      "reviewId": "a57d4e39746bc940",
+      "available": true,
+      "primary": {
+        "supportedOrBounded": null,
+        "correctStatusRoute": null,
+        "usefulNextEvidence": null,
+        "claimsEntailed": null,
+        "noUnsupportedRepair": null,
+        "noUnsafeReplay": null,
+        "overallAccepted": null,
+        "notes": ""
+      },
+      "secondary": null,
+      "adjudicated": {
+        "overallAccepted": null,
+        "notes": ""
+      }
+    },
+    {
+      "reviewId": "2e60cbbd4989ba2d",
+      "available": true,
+      "primary": {
+        "supportedOrBounded": null,
+        "correctStatusRoute": null,
+        "usefulNextEvidence": null,
+        "claimsEntailed": null,
+        "noUnsupportedRepair": null,
+        "noUnsafeReplay": null,
+        "overallAccepted": null,
+        "notes": ""
+      },
+      "secondary": null,
+      "adjudicated": {
+        "overallAccepted": null,
+        "notes": ""
+      }
+    },
+    {
+      "reviewId": "0f3f5f500dd115bb",
+      "available": true,
+      "primary": {
+        "supportedOrBounded": null,
+        "correctStatusRoute": null,
+        "usefulNextEvidence": null,
+        "claimsEntailed": null,
+        "noUnsupportedRepair": null,
+        "noUnsafeReplay": null,
+        "overallAccepted": null,
+        "notes": ""
+      },
+      "secondary": null,
+      "adjudicated": {
+        "overallAccepted": null,
+        "notes": ""
+      }
+    },
+    {
+      "reviewId": "76d8d445a8314630",
+      "available": true,
+      "primary": {
+        "supportedOrBounded": null,
+        "correctStatusRoute": null,
+        "usefulNextEvidence": null,
+        "claimsEntailed": null,
+        "noUnsupportedRepair": null,
+        "noUnsafeReplay": null,
+        "overallAccepted": null,
+        "notes": ""
+      },
+      "secondary": null,
+      "adjudicated": {
+        "overallAccepted": null,
+        "notes": ""
+      }
+    },
+    {
+      "reviewId": "10f24a8eaf1e09ef",
+      "available": true,
+      "primary": {
+        "supportedOrBounded": null,
+        "correctStatusRoute": null,
+        "usefulNextEvidence": null,
+        "claimsEntailed": null,
+        "noUnsupportedRepair": null,
+        "noUnsafeReplay": null,
+        "overallAccepted": null,
+        "notes": ""
+      },
+      "secondary": {
+        "supportedOrBounded": null,
+        "correctStatusRoute": null,
+        "usefulNextEvidence": null,
+        "claimsEntailed": null,
+        "noUnsupportedRepair": null,
+        "noUnsafeReplay": null,
+        "overallAccepted": null,
+        "notes": ""
+      },
+      "adjudicated": {
+        "overallAccepted": null,
+        "notes": ""
+      }
+    },
+    {
+      "reviewId": "eb77a2e75eebac92",
+      "available": true,
+      "primary": {
+        "supportedOrBounded": null,
+        "correctStatusRoute": null,
+        "usefulNextEvidence": null,
+        "claimsEntailed": null,
+        "noUnsupportedRepair": null,
+        "noUnsafeReplay": null,
+        "overallAccepted": null,
+        "notes": ""
+      },
+      "secondary": {
+        "supportedOrBounded": null,
+        "correctStatusRoute": null,
+        "usefulNextEvidence": null,
+        "claimsEntailed": null,
+        "noUnsupportedRepair": null,
+        "noUnsafeReplay": null,
+        "overallAccepted": null,
+        "notes": ""
+      },
+      "adjudicated": {
+        "overallAccepted": null,
+        "notes": ""
+      }
+    },
+    {
+      "reviewId": "0e886c9abb711d3d",
+      "available": true,
+      "primary": {
+        "supportedOrBounded": null,
+        "correctStatusRoute": null,
+        "usefulNextEvidence": null,
+        "claimsEntailed": null,
+        "noUnsupportedRepair": null,
+        "noUnsafeReplay": null,
+        "overallAccepted": null,
+        "notes": ""
+      },
+      "secondary": null,
+      "adjudicated": {
+        "overallAccepted": null,
+        "notes": ""
+      }
+    },
+    {
+      "reviewId": "bc7f20fe8bd8f39f",
+      "available": true,
+      "primary": {
+        "supportedOrBounded": null,
+        "correctStatusRoute": null,
+        "usefulNextEvidence": null,
+        "claimsEntailed": null,
+        "noUnsupportedRepair": null,
+        "noUnsafeReplay": null,
+        "overallAccepted": null,
+        "notes": ""
+      },
+      "secondary": null,
+      "adjudicated": {
+        "overallAccepted": null,
+        "notes": ""
+      }
+    },
+    {
+      "reviewId": "ca69c0e7975b8076",
+      "available": true,
+      "primary": {
+        "supportedOrBounded": null,
+        "correctStatusRoute": null,
+        "usefulNextEvidence": null,
+        "claimsEntailed": null,
+        "noUnsupportedRepair": null,
+        "noUnsafeReplay": null,
+        "overallAccepted": null,
+        "notes": ""
+      },
+      "secondary": null,
+      "adjudicated": {
+        "overallAccepted": null,
+        "notes": ""
+      }
+    },
+    {
+      "reviewId": "6427686c81a355c5",
+      "available": true,
+      "primary": {
+        "supportedOrBounded": null,
+        "correctStatusRoute": null,
+        "usefulNextEvidence": null,
+        "claimsEntailed": null,
+        "noUnsupportedRepair": null,
+        "noUnsafeReplay": null,
+        "overallAccepted": null,
+        "notes": ""
+      },
+      "secondary": null,
+      "adjudicated": {
+        "overallAccepted": null,
+        "notes": ""
+      }
+    },
+    {
+      "reviewId": "7eea3e8d9c3ac82e",
+      "available": true,
+      "primary": {
+        "supportedOrBounded": null,
+        "correctStatusRoute": null,
+        "usefulNextEvidence": null,
+        "claimsEntailed": null,
+        "noUnsupportedRepair": null,
+        "noUnsafeReplay": null,
+        "overallAccepted": null,
+        "notes": ""
+      },
+      "secondary": {
+        "supportedOrBounded": null,
+        "correctStatusRoute": null,
+        "usefulNextEvidence": null,
+        "claimsEntailed": null,
+        "noUnsupportedRepair": null,
+        "noUnsafeReplay": null,
+        "overallAccepted": null,
+        "notes": ""
+      },
+      "adjudicated": {
+        "overallAccepted": null,
+        "notes": ""
+      }
+    },
+    {
+      "reviewId": "382bc4a1e1d92162",
+      "available": true,
+      "primary": {
+        "supportedOrBounded": null,
+        "correctStatusRoute": null,
+        "usefulNextEvidence": null,
+        "claimsEntailed": null,
+        "noUnsupportedRepair": null,
+        "noUnsafeReplay": null,
+        "overallAccepted": null,
+        "notes": ""
+      },
+      "secondary": {
+        "supportedOrBounded": null,
+        "correctStatusRoute": null,
+        "usefulNextEvidence": null,
+        "claimsEntailed": null,
+        "noUnsupportedRepair": null,
+        "noUnsafeReplay": null,
+        "overallAccepted": null,
+        "notes": ""
+      },
+      "adjudicated": {
+        "overallAccepted": null,
+        "notes": ""
+      }
+    },
+    {
+      "reviewId": "111d668f28cb6ae2",
+      "available": true,
+      "primary": {
+        "supportedOrBounded": null,
+        "correctStatusRoute": null,
+        "usefulNextEvidence": null,
+        "claimsEntailed": null,
+        "noUnsupportedRepair": null,
+        "noUnsafeReplay": null,
+        "overallAccepted": null,
+        "notes": ""
+      },
+      "secondary": null,
+      "adjudicated": {
+        "overallAccepted": null,
+        "notes": ""
+      }
+    },
+    {
+      "reviewId": "958e8cfd802a286a",
+      "available": true,
+      "primary": {
+        "supportedOrBounded": null,
+        "correctStatusRoute": null,
+        "usefulNextEvidence": null,
+        "claimsEntailed": null,
+        "noUnsupportedRepair": null,
+        "noUnsafeReplay": null,
+        "overallAccepted": null,
+        "notes": ""
+      },
+      "secondary": null,
+      "adjudicated": {
+        "overallAccepted": null,
+        "notes": ""
+      }
+    },
+    {
+      "reviewId": "3204378ccc8c6af6",
+      "available": true,
+      "primary": {
+        "supportedOrBounded": null,
+        "correctStatusRoute": null,
+        "usefulNextEvidence": null,
+        "claimsEntailed": null,
+        "noUnsupportedRepair": null,
+        "noUnsafeReplay": null,
+        "overallAccepted": null,
+        "notes": ""
+      },
+      "secondary": null,
+      "adjudicated": {
+        "overallAccepted": null,
+        "notes": ""
+      }
+    },
+    {
+      "reviewId": "0bce2a0f631982fc",
+      "available": true,
+      "primary": {
+        "supportedOrBounded": null,
+        "correctStatusRoute": null,
+        "usefulNextEvidence": null,
+        "claimsEntailed": null,
+        "noUnsupportedRepair": null,
+        "noUnsafeReplay": null,
+        "overallAccepted": null,
+        "notes": ""
+      },
+      "secondary": null,
+      "adjudicated": {
+        "overallAccepted": null,
+        "notes": ""
+      }
+    },
+    {
+      "reviewId": "9175fcedfa83638b",
+      "available": true,
+      "primary": {
+        "supportedOrBounded": null,
+        "correctStatusRoute": null,
+        "usefulNextEvidence": null,
+        "claimsEntailed": null,
+        "noUnsupportedRepair": null,
+        "noUnsafeReplay": null,
+        "overallAccepted": null,
+        "notes": ""
+      },
+      "secondary": null,
+      "adjudicated": {
+        "overallAccepted": null,
+        "notes": ""
+      }
+    },
+    {
+      "reviewId": "aa8931dd8edb9122",
+      "available": true,
+      "primary": {
+        "supportedOrBounded": null,
+        "correctStatusRoute": null,
+        "usefulNextEvidence": null,
+        "claimsEntailed": null,
+        "noUnsupportedRepair": null,
+        "noUnsafeReplay": null,
+        "overallAccepted": null,
+        "notes": ""
+      },
+      "secondary": null,
+      "adjudicated": {
+        "overallAccepted": null,
+        "notes": ""
+      }
+    },
+    {
+      "reviewId": "c2b5b7b9d3f60343",
+      "available": true,
+      "primary": {
+        "supportedOrBounded": null,
+        "correctStatusRoute": null,
+        "usefulNextEvidence": null,
+        "claimsEntailed": null,
+        "noUnsupportedRepair": null,
+        "noUnsafeReplay": null,
+        "overallAccepted": null,
+        "notes": ""
+      },
+      "secondary": null,
+      "adjudicated": {
+        "overallAccepted": null,
+        "notes": ""
+      }
+    },
+    {
+      "reviewId": "06a56eb05c7099ac",
+      "available": true,
+      "primary": {
+        "supportedOrBounded": null,
+        "correctStatusRoute": null,
+        "usefulNextEvidence": null,
+        "claimsEntailed": null,
+        "noUnsupportedRepair": null,
+        "noUnsafeReplay": null,
+        "overallAccepted": null,
+        "notes": ""
+      },
+      "secondary": null,
+      "adjudicated": {
+        "overallAccepted": null,
+        "notes": ""
+      }
+    },
+    {
+      "reviewId": "b9a56d5b1b014c22",
+      "available": true,
+      "primary": {
+        "supportedOrBounded": null,
+        "correctStatusRoute": null,
+        "usefulNextEvidence": null,
+        "claimsEntailed": null,
+        "noUnsupportedRepair": null,
+        "noUnsafeReplay": null,
+        "overallAccepted": null,
+        "notes": ""
+      },
+      "secondary": {
+        "supportedOrBounded": null,
+        "correctStatusRoute": null,
+        "usefulNextEvidence": null,
+        "claimsEntailed": null,
+        "noUnsupportedRepair": null,
+        "noUnsafeReplay": null,
+        "overallAccepted": null,
+        "notes": ""
+      },
+      "adjudicated": {
+        "overallAccepted": null,
+        "notes": ""
+      }
+    },
+    {
+      "reviewId": "4ec221da931dfa78",
+      "available": true,
+      "primary": {
+        "supportedOrBounded": null,
+        "correctStatusRoute": null,
+        "usefulNextEvidence": null,
+        "claimsEntailed": null,
+        "noUnsupportedRepair": null,
+        "noUnsafeReplay": null,
+        "overallAccepted": null,
+        "notes": ""
+      },
+      "secondary": null,
+      "adjudicated": {
+        "overallAccepted": null,
+        "notes": ""
+      }
+    },
+    {
+      "reviewId": "323d9f2bdb8e905f",
+      "available": true,
+      "primary": {
+        "supportedOrBounded": null,
+        "correctStatusRoute": null,
+        "usefulNextEvidence": null,
+        "claimsEntailed": null,
+        "noUnsupportedRepair": null,
+        "noUnsafeReplay": null,
+        "overallAccepted": null,
+        "notes": ""
+      },
+      "secondary": null,
+      "adjudicated": {
+        "overallAccepted": null,
+        "notes": ""
+      }
+    },
+    {
+      "reviewId": "c3ca63f7d965529d",
+      "available": true,
+      "primary": {
+        "supportedOrBounded": null,
+        "correctStatusRoute": null,
+        "usefulNextEvidence": null,
+        "claimsEntailed": null,
+        "noUnsupportedRepair": null,
+        "noUnsafeReplay": null,
+        "overallAccepted": null,
+        "notes": ""
+      },
+      "secondary": null,
+      "adjudicated": {
+        "overallAccepted": null,
+        "notes": ""
+      }
+    },
+    {
+      "reviewId": "b273d65b5a1b1eb5",
+      "available": true,
+      "primary": {
+        "supportedOrBounded": null,
+        "correctStatusRoute": null,
+        "usefulNextEvidence": null,
+        "claimsEntailed": null,
+        "noUnsupportedRepair": null,
+        "noUnsafeReplay": null,
+        "overallAccepted": null,
+        "notes": ""
+      },
+      "secondary": null,
+      "adjudicated": {
+        "overallAccepted": null,
+        "notes": ""
+      }
+    },
+    {
+      "reviewId": "183e2685857c3852",
+      "available": true,
+      "primary": {
+        "supportedOrBounded": null,
+        "correctStatusRoute": null,
+        "usefulNextEvidence": null,
+        "claimsEntailed": null,
+        "noUnsupportedRepair": null,
+        "noUnsafeReplay": null,
+        "overallAccepted": null,
+        "notes": ""
+      },
+      "secondary": null,
+      "adjudicated": {
+        "overallAccepted": null,
+        "notes": ""
+      }
+    },
+    {
+      "reviewId": "e3e796921c68e1f9",
+      "available": true,
+      "primary": {
+        "supportedOrBounded": null,
+        "correctStatusRoute": null,
+        "usefulNextEvidence": null,
+        "claimsEntailed": null,
+        "noUnsupportedRepair": null,
+        "noUnsafeReplay": null,
+        "overallAccepted": null,
+        "notes": ""
+      },
+      "secondary": null,
+      "adjudicated": {
+        "overallAccepted": null,
+        "notes": ""
+      }
+    },
+    {
+      "reviewId": "4a8813ddedc73627",
+      "available": true,
+      "primary": {
+        "supportedOrBounded": null,
+        "correctStatusRoute": null,
+        "usefulNextEvidence": null,
+        "claimsEntailed": null,
+        "noUnsupportedRepair": null,
+        "noUnsafeReplay": null,
+        "overallAccepted": null,
+        "notes": ""
+      },
+      "secondary": null,
+      "adjudicated": {
+        "overallAccepted": null,
+        "notes": ""
+      }
+    },
+    {
+      "reviewId": "e02bc56cfb359d01",
+      "available": true,
+      "primary": {
+        "supportedOrBounded": null,
+        "correctStatusRoute": null,
+        "usefulNextEvidence": null,
+        "claimsEntailed": null,
+        "noUnsupportedRepair": null,
+        "noUnsafeReplay": null,
+        "overallAccepted": null,
+        "notes": ""
+      },
+      "secondary": null,
+      "adjudicated": {
+        "overallAccepted": null,
+        "notes": ""
+      }
+    },
+    {
+      "reviewId": "2dd43e2ce012e740",
+      "available": true,
+      "primary": {
+        "supportedOrBounded": null,
+        "correctStatusRoute": null,
+        "usefulNextEvidence": null,
+        "claimsEntailed": null,
+        "noUnsupportedRepair": null,
+        "noUnsafeReplay": null,
+        "overallAccepted": null,
+        "notes": ""
+      },
+      "secondary": null,
+      "adjudicated": {
+        "overallAccepted": null,
+        "notes": ""
+      }
+    },
+    {
+      "reviewId": "183e8e5f442f715f",
+      "available": true,
+      "primary": {
+        "supportedOrBounded": null,
+        "correctStatusRoute": null,
+        "usefulNextEvidence": null,
+        "claimsEntailed": null,
+        "noUnsupportedRepair": null,
+        "noUnsafeReplay": null,
+        "overallAccepted": null,
+        "notes": ""
+      },
+      "secondary": null,
+      "adjudicated": {
+        "overallAccepted": null,
+        "notes": ""
+      }
+    },
+    {
+      "reviewId": "a052f7a60370b2eb",
+      "available": true,
+      "primary": {
+        "supportedOrBounded": null,
+        "correctStatusRoute": null,
+        "usefulNextEvidence": null,
+        "claimsEntailed": null,
+        "noUnsupportedRepair": null,
+        "noUnsafeReplay": null,
+        "overallAccepted": null,
+        "notes": ""
+      },
+      "secondary": {
+        "supportedOrBounded": null,
+        "correctStatusRoute": null,
+        "usefulNextEvidence": null,
+        "claimsEntailed": null,
+        "noUnsupportedRepair": null,
+        "noUnsafeReplay": null,
+        "overallAccepted": null,
+        "notes": ""
+      },
+      "adjudicated": {
+        "overallAccepted": null,
+        "notes": ""
+      }
+    },
+    {
+      "reviewId": "ea7691756fa5ddf2",
+      "available": true,
+      "primary": {
+        "supportedOrBounded": null,
+        "correctStatusRoute": null,
+        "usefulNextEvidence": null,
+        "claimsEntailed": null,
+        "noUnsupportedRepair": null,
+        "noUnsafeReplay": null,
+        "overallAccepted": null,
+        "notes": ""
+      },
+      "secondary": null,
+      "adjudicated": {
+        "overallAccepted": null,
+        "notes": ""
+      }
+    }
+  ],
+  "gate": {
+    "scheduled": 40,
+    "reviewed": 0,
+    "semanticAccepted": 0,
+    "status": "blocked",
+    "blockedReasons": [
+      "human_review_outstanding"
+    ]
+  }
+}

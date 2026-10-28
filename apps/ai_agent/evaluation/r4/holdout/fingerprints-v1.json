@@ -1,0 +1,1207 @@
+{
+  "version": 1,
+  "algorithm": "sha256",
+  "normalization": "UTF-8 JSON of {input, requiredFacets, supporting, missingRuntimeFacts}; id, split, and kind excluded",
+  "cases": [
+    {
+      "id": "f01-rate-limit-rejected",
+      "split": "development",
+      "fingerprint": "4e04eb365263a698772e13479637ebed6bce99aa9d768da7dd78a85ed61e5ae1"
+    },
+    {
+      "id": "f02-connection-refused",
+      "split": "development",
+      "fingerprint": "c34716372205e46d07354afb77079d1cdc4c573634618d72f3c2177fbd872238"
+    },
+    {
+      "id": "f03-token-missing",
+      "split": "development",
+      "fingerprint": "2504c096e0aab18226777287a56ce4616855e7c5414a98f181d215958c6e9e2b"
+    },
+    {
+      "id": "f03-permission-ambiguous",
+      "split": "development",
+      "fingerprint": "76f48dd13cd835acc2dcded1d3ca0425e384bc1daef30e13f0b7e1a844760516"
+    },
+    {
+      "id": "f04-template-path-missing",
+      "split": "development",
+      "fingerprint": "c8b285f1723b20135ad0de64b01e03c5724d5d22b977d7283acbaa2ab7cf15d4"
+    },
+    {
+      "id": "f04-invalid-destination",
+      "split": "development",
+      "fingerprint": "39bca7b67478b2b65558ad7c18b6b4a651e66aade15544adc6048c6d94ba2d15"
+    },
+    {
+      "id": "f05-unsupported-action",
+      "split": "development",
+      "fingerprint": "895c781914d841fd12efd3c82544b677220e9c7c9033547257a76e9f89f09c56"
+    },
+    {
+      "id": "f05-handler-version-unknown",
+      "split": "development",
+      "fingerprint": "17fbef65e0a256b7f8a2ecb052e24d223311362ec19e733fa51580ee2d53a128"
+    },
+    {
+      "id": "f07-provider-response-lost",
+      "split": "development",
+      "fingerprint": "2afa3d4a3ac76fd93ce1fd8be2fa228524bfb55d068efc06cd91f3a3d7285eea"
+    },
+    {
+      "id": "f08-duplicate-retry-row",
+      "split": "development",
+      "fingerprint": "db8982b9c03594ef85822cd0c29eace579c2fa58763da7d7b2efd68dc88b8f81"
+    },
+    {
+      "id": "f08-success-stage-republished",
+      "split": "development",
+      "fingerprint": "1616bf508a679c68b490a63238acef89b1f87e6a4b94b544b167073d7a227e87"
+    },
+    {
+      "id": "f09-database-sink-only",
+      "split": "development",
+      "fingerprint": "bd3ee83fa705a8c9b4f7b8b5615ecdd2e59acba29ca901bebc3addd4992b35ef"
+    },
+    {
+      "id": "f10-sdk-error-recorded-success",
+      "split": "development",
+      "fingerprint": "cea381460f1457df7683627ca4dcb6479705a161a405978c27ec0bf44673a3cb"
+    },
+    {
+      "id": "s02-error-prompt-injection",
+      "split": "development",
+      "fingerprint": "ba6418a1bbf51507b0dda5bdcd89dd66c11336b69210041f46f61cb56f17cc6a"
+    },
+    {
+      "id": "s03-sensitive-fields-present",
+      "split": "development",
+      "fingerprint": "a04ccb772c685d9caedfa63379c7e3a18009b7f8e1a53c7d331b6ffe96768d9b"
+    },
+    {
+      "id": "s05-expired-email-dedup-window",
+      "split": "development",
+      "fingerprint": "3220f2d79b45af9f42038552f4be6475d4c726c81eb9961830d7be468de111a5"
+    },
+    {
+      "id": "nm01-telegram-message-too-long",
+      "split": "development",
+      "fingerprint": "ab05ea89a6030c6fb7377326f4be96d7a146b42d1fc3f33ee27bfcc011294023"
+    },
+    {
+      "id": "nm02-email-concurrent-idempotency",
+      "split": "development",
+      "fingerprint": "19e2b2e6f47532a43bba30e75b13370375492d9017a746799ad26b41dcb5766b"
+    },
+    {
+      "id": "nm03-email-invalid-sender-address",
+      "split": "development",
+      "fingerprint": "6284088909d92450f6ed376acc87b3f9d7bbf8f630d5df3ab99ad04f27737326"
+    },
+    {
+      "id": "nm04-email-sender-domain-unverified",
+      "split": "development",
+      "fingerprint": "2345911d2d7b834c94844ee315004060e8cdab1d592b43588412f39ffd9b3cef"
+    },
+    {
+      "id": "nm05-email-invalid-region",
+      "split": "development",
+      "fingerprint": "9baf56bac994492d6e88ac0f736ecd10228be27ca0c05c0d58762f3bc0df8ba2"
+    },
+    {
+      "id": "nm06-email-subject-length",
+      "split": "development",
+      "fingerprint": "08165fd3cd31cdee84d8880863e873b774c6e11c8b70c017da2fade5a11bdabb"
+    },
+    {
+      "id": "nm07-email-content-policy",
+      "split": "development",
+      "fingerprint": "0411e0131f68d07957e2aebbd33231a38e158ab7cc00931c43699671c36017c9"
+    },
+    {
+      "id": "nm08-email-invalid-idempotency-key",
+      "split": "development",
+      "fingerprint": "27b2ee543a42106c988dce4bdd9ad51653cd11919bbc9c7be8cb80a1c47b05cd"
+    },
+    {
+      "id": "f01-webhook-burst-throttle",
+      "split": "development",
+      "fingerprint": "35c78181a3e0dbc45f9c6d644d15658db164015f7274a8e775f4d3d09e92fae0"
+    },
+    {
+      "id": "f01-email-transactional-throttle",
+      "split": "development",
+      "fingerprint": "ec7edc9125112892f76dc627348a2158ff927e03f5228aa4b34337e08143056f"
+    },
+    {
+      "id": "f01-telegram-album-rate-limit",
+      "split": "development",
+      "fingerprint": "9abd4c197ad6f49fb7a55826efe8872a951d874fa8c34c8e982889d3e8e12d64"
+    },
+    {
+      "id": "f01-email-bulk-retry-after",
+      "split": "development",
+      "fingerprint": "4b1d5f58696d503a3b917d4cd9bbadc32438ea617494fdefd6f24f260e153cac"
+    },
+    {
+      "id": "f01-telegram-edit-rate-limit",
+      "split": "development",
+      "fingerprint": "321919ffd2d9093f136cf62794882f338ebb02945ec377cfac74c8ffb8db0a27"
+    },
+    {
+      "id": "f02-telegram-enetunreach",
+      "split": "development",
+      "fingerprint": "450c1e194f8cbfe3d59ca3d03eb5a6705d3744454b9781b4979219c070e589c3"
+    },
+    {
+      "id": "f02-email-econnrefused-presend",
+      "split": "development",
+      "fingerprint": "10d3be6185d05bf8312011323c251a82b98d6cb47e5e508c845ecffee2652c55"
+    },
+    {
+      "id": "f02-telegram-tls-handshake",
+      "split": "development",
+      "fingerprint": "a8048fb4169cb5236037671b88f29f2d70c52334202dc6ee0f096d09b0ad689d"
+    },
+    {
+      "id": "f02-email-ehostunreach",
+      "split": "development",
+      "fingerprint": "a59cbe83b3d968fc142c2757db61eed6ed965a63d26cc255931a9fc3e4950cf6"
+    },
+    {
+      "id": "f02-telegram-504-gateway",
+      "split": "development",
+      "fingerprint": "959b6f5767558c292f349adf196ed064279c226f97e5e13f055e1721034b56d4"
+    },
+    {
+      "id": "f03-telegram-token-revoked-401",
+      "split": "development",
+      "fingerprint": "8e012d4790a3a7625f6feae5faff4659c7050a9f8a8e8aa8b3adcb65b9cfb695"
+    },
+    {
+      "id": "f03-email-smtp-credential-rejected",
+      "split": "development",
+      "fingerprint": "b3021c108b26be8c5e3a1de9869faef786addce73e5194f2c207a3a0909edbc2"
+    },
+    {
+      "id": "f03-telegram-permission-admin-only",
+      "split": "development",
+      "fingerprint": "aecd5d3b145541844774112abdf2ffe6caad81252c954e6a2327c407516a727d"
+    },
+    {
+      "id": "f03-email-api-key-absent",
+      "split": "development",
+      "fingerprint": "a2692cedc286cecd47a899f67b4c0b04b750790b91499fbc362896ccb680cf50"
+    },
+    {
+      "id": "f04-email-invalid-reply-to-type",
+      "split": "development",
+      "fingerprint": "731e0a911e42127d3ad0e98a6a86914b6e72216993f5a9739fffbf32b023fb3e"
+    },
+    {
+      "id": "f04-telegram-missing-template",
+      "split": "development",
+      "fingerprint": "024f7ec250809d41ca49a5987d7d42818218bdf801f0d5553b610b9baee3ed00"
+    },
+    {
+      "id": "f04-email-empty-destination",
+      "split": "development",
+      "fingerprint": "c8d237fab246deefb8357e5e9035c06edb6e968c1f4f758a06d471912a2d358f"
+    },
+    {
+      "id": "f04-telegram-invalid-button-url",
+      "split": "development",
+      "fingerprint": "bd54bb997deca359eb6f53f18f6f4071c5e5be25a98894ef4f0bae3b303bceae"
+    },
+    {
+      "id": "f05-worker-video-action-missing",
+      "split": "development",
+      "fingerprint": "dda3743060f1d9f4a7091f0a7511ecf40c5be2e2c7858895ed3ac0469bccd5c7"
+    },
+    {
+      "id": "f05-worker-calendar-action-missing",
+      "split": "development",
+      "fingerprint": "c424b0a1b9f4c157e354b5e1e3b4362591f3a5f34918a66e993e633c4fb6abfa"
+    },
+    {
+      "id": "f05-worker-legacy-sms-action",
+      "split": "development",
+      "fingerprint": "c0d57ea9bf33a92937dba3144cecd25fcdaa51a47dff4dc5efa357dfab107cab"
+    },
+    {
+      "id": "f05-worker-crm-action-missing",
+      "split": "development",
+      "fingerprint": "5129e82979b939a52f20e5bc7f228272f361748626cbd9698c5e8b3cae25bff1"
+    },
+    {
+      "id": "f06-stage-order-gap-dev",
+      "split": "development",
+      "fingerprint": "2d294c1384a469e254c81db793b69b3e8b2122824df8a8904b0645ac101da0f8"
+    },
+    {
+      "id": "f06-stage-index-negative-dev",
+      "split": "development",
+      "fingerprint": "c561b46a85bc20496f4a20436a1ed9effe8486e8bb63a0bbdb289fa77c416df2"
+    },
+    {
+      "id": "f06-stage-order-duplicate-dev",
+      "split": "development",
+      "fingerprint": "77dad54f0e5a3c402451d9f8fa85b9c558c2b954dc4e6a1e678104862e98af30"
+    },
+    {
+      "id": "f06-stage-predecessor-missing-dev",
+      "split": "development",
+      "fingerprint": "f46ada03c26f0874482b38d7fc1a7a385b15c66d33606afbbbac02e2658db2cc"
+    },
+    {
+      "id": "f06-stage-order-cycle-dev",
+      "split": "development",
+      "fingerprint": "473df019946e4ba10260e265ec38eebde98cfd00929557b6a3e00865cacc8bb4"
+    },
+    {
+      "id": "f06-stage-zero-missing-dev",
+      "split": "development",
+      "fingerprint": "80a1b23321aa4c8a035d6d8e062e9a6562a1dd05991f3ee0626364de09320b2f"
+    },
+    {
+      "id": "f07-response-missing-dev",
+      "split": "development",
+      "fingerprint": "a395eaf4a7a02e9b03cccc05bce836987c8055e2f8216e5a9c2b78543286132c"
+    },
+    {
+      "id": "f07-email-pending-lease-dev",
+      "split": "development",
+      "fingerprint": "32abafeb223f386a5a18c025796c1bbb8f371eae8f493c1dcc51ba51897db27a"
+    },
+    {
+      "id": "f07-telegram-worker-exit-dev",
+      "split": "development",
+      "fingerprint": "e9f697aa9a002a2dc0052adbfc7e90124a5d3a42b494592a1dcca92b2946c49a"
+    },
+    {
+      "id": "f07-email-response-missing-dev",
+      "split": "development",
+      "fingerprint": "1fd50dfe2545b61b989526073f8deb811a04a2a64b0aefd9143b1f6ae6e9c217"
+    },
+    {
+      "id": "f07-telegram-ack-missing-dev",
+      "split": "development",
+      "fingerprint": "1d11f64a8e11e04da84d8ddddcaf89a71cd241d6be2f00ec59801fd424ec02f0"
+    },
+    {
+      "id": "f08-duplicate-stage-event-dev",
+      "split": "development",
+      "fingerprint": "80afac318b41a158bc5fb3d3f80f20a52ddcc88b82df1a65748b92a9871f8052"
+    },
+    {
+      "id": "f08-stale-approval-dev",
+      "split": "development",
+      "fingerprint": "cf294c506317da6910c7bce312019da8145a2827be982f6e42044208325d135c"
+    },
+    {
+      "id": "f08-already-success-command-dev",
+      "split": "development",
+      "fingerprint": "89de16d45fd716789f5e4b33b752516ae48ef10731a69919b3e434407b3c0528"
+    },
+    {
+      "id": "f09-dlq-publication-missing-dev",
+      "split": "development",
+      "fingerprint": "8ee22d611a686cefcf6693ee75ee37f18c1ad83b09a1b2f04d745a77d32e107b"
+    },
+    {
+      "id": "f09-dead-letter-absent-dev",
+      "split": "development",
+      "fingerprint": "1a5068e1b87675ff89ee9e7f5c652ba9a2e468ade6dfa5c371e4d1d35a80a8d8"
+    },
+    {
+      "id": "f09-successor-publication-gap-dev",
+      "split": "development",
+      "fingerprint": "c9cdaa65fc9b9501c0654b55f9411dcfbad96f6f69574e95d277444bc64f7e41"
+    },
+    {
+      "id": "f09-failure-publication-unacked-dev",
+      "split": "development",
+      "fingerprint": "89b93e2a0b542fb25cd70fc4adb93774677fbbaa9c521c2944da3372d2dd7563"
+    },
+    {
+      "id": "f10-sdk-error-discarded-dev",
+      "split": "development",
+      "fingerprint": "954af4ea14eb8dd90e8fee531d3938715d01317283efb0a2d1f98887ccfcecbe"
+    },
+    {
+      "id": "f10-success-status-recorded-dev",
+      "split": "development",
+      "fingerprint": "9649e1c8a403d0af67c932929fcf17ce5bbf8ecb1214ee7c008fcf29c40cef7f"
+    },
+    {
+      "id": "f10-sdk-result-ignored-dev",
+      "split": "development",
+      "fingerprint": "3de171955594cf9104859d3ef88e0c4fd266a1f6b0db68f2fd014fa462063758"
+    },
+    {
+      "id": "f10-sdk-failure-hidden-dev",
+      "split": "development",
+      "fingerprint": "970ea8ebab257fd525a21678c7a8c6c5eb3e4dff0eb045f1b55568008ce824af"
+    },
+    {
+      "id": "nm-missing-guidance-telegram-entity-mode",
+      "split": "development",
+      "fingerprint": "96367bf4be0ce3757baeb6853513c49833e65413e1eaed1217fc9bdaa2b6ea1d"
+    },
+    {
+      "id": "nm-missing-guidance-email-header-encoding",
+      "split": "development",
+      "fingerprint": "0ff9839c3043ef518d1ed50da47423c6f6efe830c0f7981b1153e130a5ee1eca"
+    },
+    {
+      "id": "nm-missing-guidance-telegram-reaction-target",
+      "split": "development",
+      "fingerprint": "a6463fd2815bbe64134d8179a01bd65730eb227dcc3f7368bc646bdfa16fe032"
+    },
+    {
+      "id": "nm-missing-runtime-fact-worker-volume-capacity",
+      "split": "development",
+      "fingerprint": "9330fe009aa867b64df5d4d02fa8dc7045b961a4e01aedf5c748dadf4f490ca2"
+    },
+    {
+      "id": "nm-missing-runtime-fact-email-sender-reputation",
+      "split": "development",
+      "fingerprint": "2bd494602ea6965d03ad59f3b9f50e906795fe8c4b5d2ba104b974af2f03ea73"
+    },
+    {
+      "id": "nm-missing-runtime-fact-telegram-file-size-limit",
+      "split": "development",
+      "fingerprint": "5397a195c05d13a4d26199806916d15f5b3ca202ede2ed52c2bdf232aa49d957"
+    },
+    {
+      "id": "nm-out-of-scope-broker-producer-quota",
+      "split": "development",
+      "fingerprint": "0ab6fccb108e97d1245624677ec27e1c1d6c48909fdbbf6b904d4c2cbff84697"
+    },
+    {
+      "id": "nm-out-of-scope-database-connection-pool",
+      "split": "development",
+      "fingerprint": "6c07541beae31e410f86126a96396fbcce82c6394969d8aded69a458e29ed714"
+    },
+    {
+      "id": "nm-out-of-scope-scheduler-lease-clock-skew",
+      "split": "development",
+      "fingerprint": "ab7410094a6b6598686eb410fcca016ae7a98866f1ea4e107ae35f5d64b25efc"
+    },
+    {
+      "id": "nm-adversarial-injection-skip-runbook",
+      "split": "development",
+      "fingerprint": "955d80975ffae3e76c21cbad089e715841d874726750aec99271c1e3d476862d"
+    },
+    {
+      "id": "nm-adversarial-contradictory-attempts",
+      "split": "development",
+      "fingerprint": "fe7e26e1cd33df485ac823afea17593731246a2d96f1693b1005e9e9335da1f4"
+    },
+    {
+      "id": "nm-adversarial-empty-provider-detail",
+      "split": "development",
+      "fingerprint": "f86f7295b080fd1cb9c56e63f06079d1cf9e914eaf1e39791e17d48dc2522766"
+    },
+    {
+      "id": "f01-digest-broadcast-chat-flood",
+      "split": "holdout",
+      "fingerprint": "cc28896af8df48303d0ee8cf42b1493778646f25eba5d287b96399c66d646f1c"
+    },
+    {
+      "id": "f01-group-slow-mode-reminder",
+      "split": "holdout",
+      "fingerprint": "be020d25eadf7bd690fae2987a8b77a7e63fc0af3793d98e2d93edc075f81868"
+    },
+    {
+      "id": "f01-channel-resolution-throttled",
+      "split": "holdout",
+      "fingerprint": "6c762c5a72a3969ba9beaf42965557b02d614ea740e52065ebad5bb459fcbc08"
+    },
+    {
+      "id": "f01-email-batch-throttle",
+      "split": "holdout",
+      "fingerprint": "05222bfea4ad7bfb3f331e9418fcf846d4a8131dce649660a7e0293a9ad4a09e"
+    },
+    {
+      "id": "f01-email-recipient-rate-window",
+      "split": "holdout",
+      "fingerprint": "d0e24cdd5b9641a3082fded2c7ebd7b63baf3280dbc69f6a2db4ec68e903356a"
+    },
+    {
+      "id": "f01-telegram-media-retry-after",
+      "split": "holdout",
+      "fingerprint": "c69cad979328a98c81fe8c488d19dbd0a400efd5f2e334ab0693d6dd20138b3a"
+    },
+    {
+      "id": "f01-telegram-pin-rate-limit",
+      "split": "holdout",
+      "fingerprint": "6c92c75d9bc191280e9a90cc1cdf607e9a658ad6145bf0ae0537133273a8ad24"
+    },
+    {
+      "id": "f01-email-daily-quota-window",
+      "split": "holdout",
+      "fingerprint": "917f54a7d5cb7faf348cf7f6e53dbe0a070c62655c24b823b0be29539e3f75ee"
+    },
+    {
+      "id": "f01-telegram-callback-rate-limit",
+      "split": "holdout",
+      "fingerprint": "7684aef136b36c1d2765f5366b3179ba9d759cdb4998779ffa5645a0f95eb1fa"
+    },
+    {
+      "id": "f01-email-smtp-temporary-throttle",
+      "split": "holdout",
+      "fingerprint": "a07a3023d34183adf9efcb823f88e0d8fc7dff75ed8cb1b9a04506f726ccbb3d"
+    },
+    {
+      "id": "f01-telegram-broadcast-burst",
+      "split": "holdout",
+      "fingerprint": "e4111dd3ae78ecb4d035820cc0b3c9fca71a1f31e39fcb3b7800b6df8c75a53f"
+    },
+    {
+      "id": "f01-email-newsletter-throttle",
+      "split": "holdout",
+      "fingerprint": "41849359838fb627d88c4f61db399bbf3de311cb34af7036de911314e0a95612"
+    },
+    {
+      "id": "f02-telegram-connect-refused",
+      "split": "holdout",
+      "fingerprint": "6480285377c8d22f77540928c8a222ce6d801c23dc7ea2c2ceb318e4cdb8873f"
+    },
+    {
+      "id": "f02-telegram-dns-eai-again",
+      "split": "holdout",
+      "fingerprint": "77cb89a27adc3a1cd2ec55b15533bc5c7d8c67e7c6ad59301d9029686664bb7c"
+    },
+    {
+      "id": "f02-email-tls-handshake-failure",
+      "split": "holdout",
+      "fingerprint": "bb04060b71fb047a2137a237adfe92866c143c3bce1a9305f39a161517c17e22"
+    },
+    {
+      "id": "f02-email-socket-hang-up",
+      "split": "holdout",
+      "fingerprint": "4f7f18a0c19df3aa0f9856006a3d4fd1334ce5073fdd239ef69e58a4e8d38ec6"
+    },
+    {
+      "id": "f02-telegram-enotfound-resolve",
+      "split": "holdout",
+      "fingerprint": "f5038d18ccb296fa3b7502ed8bd9a519037a593a9b464bd3504ecb09e8dccbe8"
+    },
+    {
+      "id": "f02-email-etimedout-presend",
+      "split": "holdout",
+      "fingerprint": "b21179bec86160861b05a3d85d90d059013949a52d4623a24c0ed8d640166b68"
+    },
+    {
+      "id": "f02-telegram-econnreset-presend",
+      "split": "holdout",
+      "fingerprint": "c82ed5fd1a7106bd76694503947babe4bfa3bd889559a9ae53840cb8265c4b21"
+    },
+    {
+      "id": "f02-email-503-upstream",
+      "split": "holdout",
+      "fingerprint": "5ae459edf7b68beedc1e936cdfa6fa8033104cdfaa3fe2b8fd5b14a06652cd57"
+    },
+    {
+      "id": "f02-telegram-502-gateway",
+      "split": "holdout",
+      "fingerprint": "2fca7e468fe9b7ed12b71f5bb966f73eab8a782275b3e8668f54cfe64b877fd2"
+    },
+    {
+      "id": "f02-email-getaddrinfo-failure",
+      "split": "holdout",
+      "fingerprint": "fca6a4ca1d25709065f5752ec6a47b9f5beebcec6013456846e16270b950dbed"
+    },
+    {
+      "id": "f02-telegram-epipe-write",
+      "split": "holdout",
+      "fingerprint": "39974b735966e73bd0f1795138a2baa0ed970e4c6bacaf4c6072c2dc92d41834"
+    },
+    {
+      "id": "f02-email-network-unreachable",
+      "split": "holdout",
+      "fingerprint": "32e5e0dbd9f91f076398795618648a753074ef4eadc9323a296769664efbb73e"
+    },
+    {
+      "id": "f03-telegram-revoked-bot-token",
+      "split": "holdout",
+      "fingerprint": "dcf5d85106a311e0fe937712918677a85a899be4e337c013fe4028029fb850ab"
+    },
+    {
+      "id": "f03-telegram-bot-removed-from-channel",
+      "split": "holdout",
+      "fingerprint": "2b5bb40a76212baca6a12b5689ce9dc5c317a241c841e50b7f0766d1eece859b"
+    },
+    {
+      "id": "f03-email-api-key-rejected",
+      "split": "holdout",
+      "fingerprint": "df51e165459dc9688251b22c52522452d2fabe8907fd2f19b58643131391a51e"
+    },
+    {
+      "id": "f03-email-oauth-token-expired",
+      "split": "holdout",
+      "fingerprint": "5cc2e8a57d1cd54d10fea1376824a3d72ff51ac81ed251000e6f76b6f35bab82"
+    },
+    {
+      "id": "f03-telegram-webhook-secret-mismatch",
+      "split": "holdout",
+      "fingerprint": "fd20db98d4d5e051b0c9b76b593b9d0a7fab447c3247d8a536eaf2cbe23e6279"
+    },
+    {
+      "id": "f03-email-smtp-auth-failed",
+      "split": "holdout",
+      "fingerprint": "edaa946fd128510032e770891a31fd9d73563cd51415c75de89a124c218b37f3"
+    },
+    {
+      "id": "f03-telegram-channel-username-invalid",
+      "split": "holdout",
+      "fingerprint": "03d340256a09c3dfc5c3d68260aeb179c487d473ef9cd731881bdd563725708c"
+    },
+    {
+      "id": "f03-email-sender-permission-denied",
+      "split": "holdout",
+      "fingerprint": "7fb9020900fe4aa9198dd5a1e6253940e61440d9d254a6eb22602d059e7944fb"
+    },
+    {
+      "id": "f03-telegram-token-absent",
+      "split": "holdout",
+      "fingerprint": "b0a2a3a38abec992cdf4a8ae6ffbf4697046d7e28db0052d605ac0459fef6259"
+    },
+    {
+      "id": "f03-email-credential-missing",
+      "split": "holdout",
+      "fingerprint": "66f8afed9fc010cf78c25164b389cb888e6958863d5b420562c4df9100e3e896"
+    },
+    {
+      "id": "f03-telegram-bot-blocked-by-recipient",
+      "split": "holdout",
+      "fingerprint": "29e9c7a950aac83b6812696aee1a6bbbea3b5d4e394cda02f1bdf0e9a8637122"
+    },
+    {
+      "id": "f03-email-api-key-revoked",
+      "split": "holdout",
+      "fingerprint": "6a9bff98d1e5b6560862178ee2ab18523adc79fa6272b4cee26c512af47b90ec"
+    },
+    {
+      "id": "f04-email-missing-subject-template",
+      "split": "holdout",
+      "fingerprint": "fbc1d7323d1e71dd5c9af010fd22f660a50ae9f91913bcb766661513784052c1"
+    },
+    {
+      "id": "f04-email-numeric-recipient-field",
+      "split": "holdout",
+      "fingerprint": "f5b71db7f92dd64e5877884b95d222060ba43fb0df26dd0cf7e74cfbca7cb8f0"
+    },
+    {
+      "id": "f04-telegram-null-ticket-summary",
+      "split": "holdout",
+      "fingerprint": "42d49a77ceb3333e9475bd64066e4c37b2c922f234905a5b6cadaccd9d21fbc5"
+    },
+    {
+      "id": "f04-email-missing-body-template",
+      "split": "holdout",
+      "fingerprint": "76a486b430cdf1796a537228256b1ccfda1774cc651c01b98f7b4d8de711853b"
+    },
+    {
+      "id": "f04-telegram-chat-id-type",
+      "split": "holdout",
+      "fingerprint": "6bd717b50a9e7ec7d3704caf5fad2040a5e45a74eef268f3d0eb2b85b835b83b"
+    },
+    {
+      "id": "f04-email-cc-array-type",
+      "split": "holdout",
+      "fingerprint": "a3c3acfd4036c886ac9e1be5f60be15a62d672e9e072bd427bcb3a957c58df02"
+    },
+    {
+      "id": "f04-telegram-empty-destination",
+      "split": "holdout",
+      "fingerprint": "cceaa108caf4361764590ba8fb30380ed5510e067a07f35910cfe6cbd7174a51"
+    },
+    {
+      "id": "f04-email-destination-format",
+      "split": "holdout",
+      "fingerprint": "0cbc065a20880081d3ca9050131e24c86a97357b7fb56094c5d40c46963d6f2a"
+    },
+    {
+      "id": "f04-telegram-template-path-missing",
+      "split": "holdout",
+      "fingerprint": "15e6e04d65845422c28c3f47d12d1dec191022cbf5fd4e5c2f38dfeaac5aa9da"
+    },
+    {
+      "id": "f04-email-missing-recipient-field",
+      "split": "holdout",
+      "fingerprint": "d58d80c2da814b585ed72ee3faac7cf470f4a5eff505f3c3af6e359ba0792af9"
+    },
+    {
+      "id": "f04-telegram-unsupported-field-type",
+      "split": "holdout",
+      "fingerprint": "8d7c4f3efa30db96a131925cb7ba96f3fab38fbd98e80a0d36452ad8cd27e5bd"
+    },
+    {
+      "id": "f04-email-template-variable-unknown",
+      "split": "holdout",
+      "fingerprint": "c48e42381817b261bd674f994dd0b81afdfe02e3d827b1cad3efb6ca113207eb"
+    },
+    {
+      "id": "f05-unregistered-discord-webhook",
+      "split": "holdout",
+      "fingerprint": "216c8650a1498c6d1238f84fa18f7b4d0cb1ba9c118d42616f93e7365cec630d"
+    },
+    {
+      "id": "f05-telegram-v2-seed-mismatch",
+      "split": "holdout",
+      "fingerprint": "dfab4b8b57b31bfe4fcf159574a899d7aac200ea54d02903f00e12936b6b3785"
+    },
+    {
+      "id": "f05-teams-card-legacy-run",
+      "split": "holdout",
+      "fingerprint": "b9c3b3b40bbcc4dfb1865faf0eb03cd7c5f80af6602018ccbe3d48476615a8d9"
+    },
+    {
+      "id": "f05-action-type-null",
+      "split": "holdout",
+      "fingerprint": "c1b694d7b5f649dd68cf0d93a83787546940f94f6eec78602a6098839d287835"
+    },
+    {
+      "id": "f05-slack-post-not-registered",
+      "split": "holdout",
+      "fingerprint": "ea773fd6df58b32e52533723ae19a13371068b060fcbc7641cac598fbe639489"
+    },
+    {
+      "id": "f05-notion-create-handler-skew",
+      "split": "holdout",
+      "fingerprint": "1eb28fc974ebf4aaffd392be6a23416eee509c810e9cf39c27829852fee57f2d"
+    },
+    {
+      "id": "f05-sms-unsupported-action",
+      "split": "holdout",
+      "fingerprint": "b8a026985c6967d3d5c43bb29e94d5b19132207d65640beeba0c90aa3de45dc9"
+    },
+    {
+      "id": "f05-github-issue-handler-missing",
+      "split": "holdout",
+      "fingerprint": "cd608623c8c55542b7f85032fddd387f4d87009c672b915ec7ce05cfcb19c713"
+    },
+    {
+      "id": "f05-airtable-registry-gap",
+      "split": "holdout",
+      "fingerprint": "01acf62296fdf1f22f315bfa3607fb933a3005fa6f3ae31a8e410371640d719b"
+    },
+    {
+      "id": "f05-decommissioned-action-type",
+      "split": "holdout",
+      "fingerprint": "a23f97891e60ddc9ad1181a49f3d3307d83950974aed0b4383aa2b91ba1c9f85"
+    },
+    {
+      "id": "f05-sheets-handler-missing",
+      "split": "holdout",
+      "fingerprint": "574c3db1e440b83d5fb80a7275d396d0edaab724ecc8923a871f18ee62be19c1"
+    },
+    {
+      "id": "f05-shopify-registry-unavailable",
+      "split": "holdout",
+      "fingerprint": "c627a939339df487a355526c7e5efddb51a00e4b715bfe7f8f39d62e5a8e8cb2"
+    },
+    {
+      "id": "f06-stage-order-collision",
+      "split": "holdout",
+      "fingerprint": "ac90f4844143018e46fbc4acda68438bdfa030d91e19f86eb04fa047e395ad9d"
+    },
+    {
+      "id": "f06-stage-order-gap",
+      "split": "holdout",
+      "fingerprint": "8efe3d9182cde064f79dbb96e8177309c7395e4a638c73d4826c69f19df7bd40"
+    },
+    {
+      "id": "f06-negative-stage-index",
+      "split": "holdout",
+      "fingerprint": "d842ec1420dff446ab852dffffe247fde6c7a95a4e5bcbfbb5e0e94f214d3a45"
+    },
+    {
+      "id": "f06-missing-stage-zero",
+      "split": "holdout",
+      "fingerprint": "1af36cc71916324863fa8ce0f98474473fa763a168fe3fd3cc50e6a0cccf3d7f"
+    },
+    {
+      "id": "f06-out-of-order-successor",
+      "split": "holdout",
+      "fingerprint": "5b88e0569e89701f029ff13c3656ab96b84b19e851b088db44a5985cd633e63c"
+    },
+    {
+      "id": "f06-predecessor-listed-twice",
+      "split": "holdout",
+      "fingerprint": "7adee97aa2926ea2a58bab0ec71d610c385da8251d66ae257effcde6e862ff77"
+    },
+    {
+      "id": "f06-circular-stage-dependency",
+      "split": "holdout",
+      "fingerprint": "111274fdad35767327a4a4b6c93775d13fae62426f0480317b3f821f59254168"
+    },
+    {
+      "id": "f06-fractional-stage-index",
+      "split": "holdout",
+      "fingerprint": "fa51f74da91219fc6e693f210ef648aa41baf858ed233cdad15faa1a76a7da94"
+    },
+    {
+      "id": "f06-predecessor-never-published",
+      "split": "holdout",
+      "fingerprint": "aff0949460187d6deacf9c3ad3e37b6f406d1013cf69f6b2dc91d16903b72dd3"
+    },
+    {
+      "id": "f06-stage-order-regression",
+      "split": "holdout",
+      "fingerprint": "2f4bf561a5a65095f80a25476d1b79890bacea83a975e81fa54c0a4b4cb856e4"
+    },
+    {
+      "id": "f06-stage-index-reused",
+      "split": "holdout",
+      "fingerprint": "2dbcc75df83545cd7cb958d3a987294e63e29fa1bae15c38fdc77935e808dcb1"
+    },
+    {
+      "id": "f06-orphan-successor-stage",
+      "split": "holdout",
+      "fingerprint": "0f6f6c6b8d0e11fc92111c239b754a9cfc0d070ca6657f5d4b0e0b8d2abbaf2c"
+    },
+    {
+      "id": "f07-telegram-response-lost-after-send",
+      "split": "holdout",
+      "fingerprint": "29385e0eeb53fc028af280a78fb2eaff0644cc90dd2bb7559ccc95634f664326"
+    },
+    {
+      "id": "f07-worker-terminated-after-dispatch",
+      "split": "holdout",
+      "fingerprint": "93e6d561bcbf147527228c65a2fa114af639c6b9625c14ba1f9e2d3ebf2e4c0d"
+    },
+    {
+      "id": "f07-expired-lease-masked-outcome",
+      "split": "holdout",
+      "fingerprint": "2d7facf142ba342bd9aa20d64c0ce850ace992eee965df1c58a984f7195f607f"
+    },
+    {
+      "id": "f07-email-receipt-missing",
+      "split": "holdout",
+      "fingerprint": "f7d9d2f9310fb5504a80267aaee894398eeb89d20937e2bde33d6dd46e5988d3"
+    },
+    {
+      "id": "f07-telegram-lease-expired",
+      "split": "holdout",
+      "fingerprint": "ca82dc6786715ace14930763bb8273abb832935d92f118830ffab4d357235a9a"
+    },
+    {
+      "id": "f07-email-connection-dropped-after-send",
+      "split": "holdout",
+      "fingerprint": "fc860c933a5474a0d2e22c3863a6c1905200a674627709dd0161fcc6383d7375"
+    },
+    {
+      "id": "f07-telegram-timeout-after-body",
+      "split": "holdout",
+      "fingerprint": "2b2ada5e2b20d8eb52e72416a9cdbd0a698fea22455137bc458578a8bc1c238d"
+    },
+    {
+      "id": "f07-email-acknowledgement-lost",
+      "split": "holdout",
+      "fingerprint": "fdc979d90f665ca129293e0159d4aa6d63c0f20f7bd4ca2ac1522185a4ba2da1"
+    },
+    {
+      "id": "f07-worker-crash-after-dispatch",
+      "split": "holdout",
+      "fingerprint": "ba8553b70704a2632fc090d1941a5bb465f9ce7831b3b561372a405f6e3d2227"
+    },
+    {
+      "id": "f07-telegram-delivery-unknown",
+      "split": "holdout",
+      "fingerprint": "ac25af2ff59ef4298d5df30e13f3542c10497925b9c3efd85ca01be6dca95eea"
+    },
+    {
+      "id": "f07-email-reconciliation-unknown",
+      "split": "holdout",
+      "fingerprint": "8b1c371907e276642eecf272607a27ede2aef0383db01c4f06e462760da114a1"
+    },
+    {
+      "id": "f07-telegram-dispatch-without-terminal-write",
+      "split": "holdout",
+      "fingerprint": "2f4fcd2ab8297c8dd2d13846c8995e1d99051f8f997e69d2e36fd7d90892e2e7"
+    },
+    {
+      "id": "f08-duplicate-redelivery-rebalance",
+      "split": "holdout",
+      "fingerprint": "3a7519b58b73945a0b54a398a980fa48ce10969b7fffe7cd82465ca14120e192"
+    },
+    {
+      "id": "f08-expired-replay-approval",
+      "split": "holdout",
+      "fingerprint": "3987857e57e5cce52403a1192de7c5355246070c24bdacf47cd0c5f0e361fa42"
+    },
+    {
+      "id": "f08-redelivered-success-after-successor",
+      "split": "holdout",
+      "fingerprint": "a4ac8a62e7b9e128eb041f17c1a30d7986b0a8b4041d55c351dfb82d8b8a893f"
+    },
+    {
+      "id": "f08-same-retry-row-twice",
+      "split": "holdout",
+      "fingerprint": "aeadbc2f9d0f240bc23bc8dbb94ecb774d4339b0a2f660e817295cbe7b4b2969"
+    },
+    {
+      "id": "f08-success-stage-republished-again",
+      "split": "holdout",
+      "fingerprint": "d89f9d6183d069a705986dd1906d48297c4b233ce1d74293522f8c3ff515693f"
+    },
+    {
+      "id": "f08-stale-event-received",
+      "split": "holdout",
+      "fingerprint": "94185e2c93769d959da9666cad938e8dc6ec9feeda6de829a3f4733eace93ead"
+    },
+    {
+      "id": "f08-duplicate-failure-row",
+      "split": "holdout",
+      "fingerprint": "0fc27b2ebc63d237d635e1783cb94ccc318d9d5ef4937eeb67bace5e8baf807c"
+    },
+    {
+      "id": "f08-already-success-stage",
+      "split": "holdout",
+      "fingerprint": "6843f764f2938753e24dfb94b9db755352f42551f6ad786d53468a27fc7ab862"
+    },
+    {
+      "id": "f08-stale-worker-lease",
+      "split": "holdout",
+      "fingerprint": "f9ec64fdd7c66b53bb4867ab7aa7b16fc0c09a9e1c3018e96fd6d372e263b2c7"
+    },
+    {
+      "id": "f08-duplicate-kafka-delivery",
+      "split": "holdout",
+      "fingerprint": "3a7ba03c168ce6794fad8884241cd458c9e954469ffd27fb16a192ce099dba4f"
+    },
+    {
+      "id": "f08-replayed-completed-stage",
+      "split": "holdout",
+      "fingerprint": "c25d375c051efbae69d6a6a058bff93561dd549ba77772741475f33cc1a9a84f"
+    },
+    {
+      "id": "f08-stale-approval-reuse",
+      "split": "holdout",
+      "fingerprint": "fa0ac4141a24a67ffdda4974a3e0b3a9bc11e1cd23497586ac2e0afdbc296279"
+    },
+    {
+      "id": "f09-unacknowledged-failure-publication",
+      "split": "holdout",
+      "fingerprint": "78b903ab6964e88b355cc57511f16ed63a197bf9089410c08623c1923d93d216"
+    },
+    {
+      "id": "f09-successor-publication-never-started",
+      "split": "holdout",
+      "fingerprint": "f8bf18f348318dce4ce688f65d7264ffaca902e9a849cd010c0bc690e86437b5"
+    },
+    {
+      "id": "f09-legacy-run-missing-retry-link",
+      "split": "holdout",
+      "fingerprint": "77018d2c1c7f8cf9e44e8258d7427aa8dec5cb23eb5234105a6c40e7a086ad71"
+    },
+    {
+      "id": "f09-dlq-topic-unavailable",
+      "split": "holdout",
+      "fingerprint": "d0428b2d02f3bb2ffd3429e5a1af4995100dc2354a133bef5ce01eae301a2a6e"
+    },
+    {
+      "id": "f09-failure-row-without-dlq",
+      "split": "holdout",
+      "fingerprint": "c4138c871984df74174ec9919c9a426ddb2e0588d5882c7a90b8b0510f8d56cd"
+    },
+    {
+      "id": "f09-publication-ack-lost",
+      "split": "holdout",
+      "fingerprint": "2e881fa60460e37a98c99bde3aef9ffcd80e995d47f8a1e70b9ade0343119eda"
+    },
+    {
+      "id": "f09-stage-success-without-successor-event",
+      "split": "holdout",
+      "fingerprint": "3503096a17f4f4119dc892fa083db3bcd67160dfd332ff4bc85eab710db6207f"
+    },
+    {
+      "id": "f09-dead-letter-topic-misconfigured",
+      "split": "holdout",
+      "fingerprint": "f98bc0fb79bfe531791378558affbb00564f276620a30c392d9d5761e6d0b78c"
+    },
+    {
+      "id": "f09-retry-row-linked-to-missing-dlq",
+      "split": "holdout",
+      "fingerprint": "45f25eaf72b4611007b93edd8fb47a57ae78938e69ee21ab5ab4a61c4d4193fe"
+    },
+    {
+      "id": "f09-multi-stage-publication-gap",
+      "split": "holdout",
+      "fingerprint": "bfbbaeba8d7a3aad6e064a42a081c2aed224c2e82475d1ea666becc6c1b7865a"
+    },
+    {
+      "id": "f09-dlq-record-absent-after-failure",
+      "split": "holdout",
+      "fingerprint": "331f6060f9b3753a54bd0e968eed2ae53e1fd8579479f2e58bdad768c9713b39"
+    },
+    {
+      "id": "f09-publication-acknowledgement-timeout-free",
+      "split": "holdout",
+      "fingerprint": "0527c2b879f2a1c37ff75b5f959ef51692800d5d51a61dfc0077d2e10b718029"
+    },
+    {
+      "id": "f10-sdk-error-recorded-success-hidden",
+      "split": "holdout",
+      "fingerprint": "35ab5a154f933977effad1faa83b21c0f05de6fb89311e45983a35e637908b01"
+    },
+    {
+      "id": "f10-empty-sdk-result-success",
+      "split": "holdout",
+      "fingerprint": "cda6d091899420933b3a525d308beb30126f6051d6a1d31656529634b2905ccf"
+    },
+    {
+      "id": "f10-discarded-provider-error",
+      "split": "holdout",
+      "fingerprint": "c7070595a16cfbcef013e8472b1433e6fd392a62b5cbea284e882269e88a34c6"
+    },
+    {
+      "id": "f10-success-despite-sdk-error",
+      "split": "holdout",
+      "fingerprint": "9489e6fbf2be940c99b4ca8dee919cf06fcfd532b87afa096bd7233e3ca20717"
+    },
+    {
+      "id": "f10-accepted-status-with-sdk-failure",
+      "split": "holdout",
+      "fingerprint": "8f74c71e8198982fc9068c32161b7a447d33c02e55bfd9670858c65a726c072a"
+    },
+    {
+      "id": "f10-provider-error-in-sdk-result",
+      "split": "holdout",
+      "fingerprint": "62354886af9e5f0e0e596bc9f36fc61e7f098ea07594c941037335d9326c5a5b"
+    },
+    {
+      "id": "f10-sdk-throw-swallowed",
+      "split": "holdout",
+      "fingerprint": "053b51c441e582a80ece4a74826cc84a15f7b19c33bdcbb466efb541ebfc42a4"
+    },
+    {
+      "id": "f10-success-recorded-after-sdk-rejection",
+      "split": "holdout",
+      "fingerprint": "1828a74dca127267a03b2b4bfac74c5546723fd83f5c05d7230ef1d0766f2949"
+    },
+    {
+      "id": "f10-sdk-result-null-success",
+      "split": "holdout",
+      "fingerprint": "444be2c65fb27c44d798366880a99746893464c58e7b1ad0cccd7c30b029db25"
+    },
+    {
+      "id": "f10-provider-result-error-hidden",
+      "split": "holdout",
+      "fingerprint": "d7eb673f5f57784e12936d2310105f4dc9610e9636d876a78e8adcc29687fc43"
+    },
+    {
+      "id": "f10-success-stage-with-sdk-error",
+      "split": "holdout",
+      "fingerprint": "e522feea8a3e95dde79220891243c186998a54bdc9af1bbe42af1897608257fa"
+    },
+    {
+      "id": "f10-sdk-validation-error-discarded",
+      "split": "holdout",
+      "fingerprint": "dc38c31e319aabb72e316e7d8c030669fbcfa55a3ce158427b96a7748d3dd1e7"
+    },
+    {
+      "id": "nm-missing-guidance-telegram-markup-entity-parse",
+      "split": "holdout",
+      "fingerprint": "6c9cb391b3b56d30709490c66f60dbf84b1673b20eed2cc1510200e5cbfc28f8"
+    },
+    {
+      "id": "nm-missing-guidance-telegram-inline-button-url-rejected",
+      "split": "holdout",
+      "fingerprint": "c3c522709184e369e931f11860da85ba7e653d3b67bfaae728cd16d4b382cc5e"
+    },
+    {
+      "id": "nm-missing-guidance-telegram-stale-file-reference",
+      "split": "holdout",
+      "fingerprint": "578e3a78436fd73271aed280a8bbc0842cc430986abc484bf26d2858d9c65b50"
+    },
+    {
+      "id": "nm-missing-guidance-telegram-sticker-set-invalid",
+      "split": "holdout",
+      "fingerprint": "77c76bbc3c02059d131a9b318895b07f4140db93f8ea36fb3e7ebfa741a85568"
+    },
+    {
+      "id": "nm-missing-guidance-telegram-poll-question-too-long",
+      "split": "holdout",
+      "fingerprint": "36d75d0c7042e4381a2b2eb263b946ae9036218a09acd22631197f813c11dd6b"
+    },
+    {
+      "id": "nm-missing-guidance-email-attachment-encoding-invalid",
+      "split": "holdout",
+      "fingerprint": "398b69603a4db6d3e2f5377e5299c6d86665204230080a5c91b008b12fea378c"
+    },
+    {
+      "id": "nm-missing-guidance-email-subject-header-newline",
+      "split": "holdout",
+      "fingerprint": "11ba0f26a238c74a88808c41a2582a580db1504c7874bf0a7213424b7779c605"
+    },
+    {
+      "id": "nm-missing-guidance-email-calendar-method-unsupported",
+      "split": "holdout",
+      "fingerprint": "4f057dd1f79c8ba69a74e16a78350f8c89f221fb46bce45801bd9e38fb6eb80b"
+    },
+    {
+      "id": "nm-missing-guidance-email-custom-header-rejected",
+      "split": "holdout",
+      "fingerprint": "d9fc1e8dbb2a76b8bd46fda9a1c8f53ecf2ed42220aa11175251e54878736d2f"
+    },
+    {
+      "id": "nm-missing-guidance-telegram-thread-not-found",
+      "split": "holdout",
+      "fingerprint": "d40564841c4bd4da90a9882611e66cd4e71198f9e07c82e7704542fdf9d145cb"
+    },
+    {
+      "id": "nm-missing-runtime-fact-email-recipient-count-cap",
+      "split": "holdout",
+      "fingerprint": "e6796dada500f33214251d737cf1c0cf711749ea492717cca5c6abc10fa93260"
+    },
+    {
+      "id": "nm-missing-runtime-fact-email-encoded-payload-size",
+      "split": "holdout",
+      "fingerprint": "e2221228980fd196ed13475b947dd19b977e624da4122532d220f4f477433673"
+    },
+    {
+      "id": "nm-missing-runtime-fact-email-attachment-total-size",
+      "split": "holdout",
+      "fingerprint": "97601456a1665e982ca2f011f6a5c8d5760e618666d2f9dcbc590672afaafd6f"
+    },
+    {
+      "id": "nm-missing-runtime-fact-telegram-media-group-cap",
+      "split": "holdout",
+      "fingerprint": "3beb3c0193f1efec9d303f0e05de1e232f2570a6bda554c2b584ee2383094761"
+    },
+    {
+      "id": "nm-missing-runtime-fact-telegram-caption-length",
+      "split": "holdout",
+      "fingerprint": "53c0ed1aca6b138f08c228d8616794c9cd0bba5743a164edda3b5f32c6b06199"
+    },
+    {
+      "id": "nm-missing-runtime-fact-worker-disk-capacity",
+      "split": "holdout",
+      "fingerprint": "64d319fe7365913876532255302db72f59e7d218c0cad26acd5731e46df1e1dc"
+    },
+    {
+      "id": "nm-missing-runtime-fact-worker-memory-limit-serialization",
+      "split": "holdout",
+      "fingerprint": "935ca9af160ebe7eff989f3683aa023eb2de66c0cb6ab93f3c30e177bd0a54c0"
+    },
+    {
+      "id": "nm-missing-runtime-fact-worker-concurrency-cap",
+      "split": "holdout",
+      "fingerprint": "fcb6f3fda06d157754d8524c7ccdb2919d9198fa5ec09fb5570f10b4b7909dee"
+    },
+    {
+      "id": "nm-missing-runtime-fact-provider-daily-quota",
+      "split": "holdout",
+      "fingerprint": "310b418b035284a0beedb4db5f56137811a34b94d65fe6590f64098fc70d00a4"
+    },
+    {
+      "id": "nm-missing-runtime-fact-provider-ip-allowlist",
+      "split": "holdout",
+      "fingerprint": "7828cb1708c95ec7dc3fc9c75d5144913b13dbd5a834279de6588b50041f5d2c"
+    },
+    {
+      "id": "nm-out-of-scope-kafka-consumer-rebalance-loop",
+      "split": "holdout",
+      "fingerprint": "49b6e3a94aab3918359eea5aadb51ea93ff430438c49f48397bcbe2858fc6697"
+    },
+    {
+      "id": "nm-out-of-scope-postgres-advisory-lock-contention",
+      "split": "holdout",
+      "fingerprint": "9ea4b4b52c5037d060777482a556a7b745a3e8d864c02d28770bc198465cb2df"
+    },
+    {
+      "id": "nm-out-of-scope-prisma-migration-drift",
+      "split": "holdout",
+      "fingerprint": "a4cf0bdad02cfdeb2a04d4778e15149123f6641f85157dfd22ddf0be0b1a4567"
+    },
+    {
+      "id": "nm-out-of-scope-scheduler-cron-overlap",
+      "split": "holdout",
+      "fingerprint": "60f9b0fd938353cb9946dd5036b6a7f263e73c19f300b184c34b16f4b3f432f9"
+    },
+    {
+      "id": "nm-out-of-scope-redis-cache-eviction",
+      "split": "holdout",
+      "fingerprint": "87b72916ff4abd3c75b90e1adff34af7fc2fd06b90bd61a077b0d1efd3420b73"
+    },
+    {
+      "id": "nm-out-of-scope-worker-heap-exhausted",
+      "split": "holdout",
+      "fingerprint": "32fa1240128bf30c53c17eb4c9afd86594d1cf62871c66a5742d60bd280ebdfa"
+    },
+    {
+      "id": "nm-out-of-scope-broker-topic-retention",
+      "split": "holdout",
+      "fingerprint": "c4424ea067b7d28abad71d9844c72b563203bb937d77ad903e2e3104bd836169"
+    },
+    {
+      "id": "nm-out-of-scope-schema-registry-incompatible",
+      "split": "holdout",
+      "fingerprint": "01b0f104aa098b476b9a9d883667be8f76ca2d7ac47fc88ca84e2c8a7d624da2"
+    },
+    {
+      "id": "nm-out-of-scope-object-storage-policy-denied",
+      "split": "holdout",
+      "fingerprint": "e425d2b66f17fe02fe5a19ca9eb7bc552ebca03d4e9b58d2a1181d2c1eab9a61"
+    },
+    {
+      "id": "nm-out-of-scope-load-balancer-idle-close",
+      "split": "holdout",
+      "fingerprint": "c5f56a6add0b38fdce757a27629541c1f716f52b4c8596cfc602eccbeea2120e"
+    },
+    {
+      "id": "nm-adversarial-prompt-injection-mark-safe",
+      "split": "holdout",
+      "fingerprint": "8545dbc04e075a08fd8602e35f224c344aa301ba2516ec08f93e0376d962c6b3"
+    },
+    {
+      "id": "nm-adversarial-contradictory-status-body",
+      "split": "holdout",
+      "fingerprint": "9310fce015773040113cd4fb162d5903ccf715d4a5cd207885cf61172eddf3cf"
+    },
+    {
+      "id": "nm-adversarial-truncated-unknown-error",
+      "split": "holdout",
+      "fingerprint": "dcad4448d07e7cc10321fec6e0b16fb218df530b0c29a18854ada72b729f4953"
+    },
+    {
+      "id": "nm-adversarial-label-shaped-injection",
+      "split": "holdout",
+      "fingerprint": "d78334535c73fad117584fdbaec7ceb1942c8bc43e3c7d9e092e29a3d4bbfa1c"
+    },
+    {
+      "id": "nm-adversarial-citation-injection",
+      "split": "holdout",
+      "fingerprint": "2cdcccce2ac90234c4448262bf74dade5dd10730d149f820c4a23098847a91d5"
+    },
+    {
+      "id": "nm-adversarial-dual-cause-ambiguity",
+      "split": "holdout",
+      "fingerprint": "3aab09a40449c0b02daa0832792c7ebfa12b14fea33a1cda91eba76b77a024a2"
+    },
+    {
+      "id": "nm-adversarial-malformed-json-error",
+      "split": "holdout",
+      "fingerprint": "91b389bad4ddd92f692e004b87ffe45d7a837ef018b8a25a4671f5acb93a591d"
+    },
+    {
+      "id": "nm-adversarial-homoglyph-error-text",
+      "split": "holdout",
+      "fingerprint": "34a094b2e5d51802fd41e582279441d360c863f80b710060c105cdcbc3c5b377"
+    },
+    {
+      "id": "nm-adversarial-empty-final-error",
+      "split": "holdout",
+      "fingerprint": "6451969f3ce87d3db6f553129c1362b272d71a1f9cc542ecf85225b7e6f8ec7c"
+    },
+    {
+      "id": "nm-adversarial-safe-marked-injection",
+      "split": "holdout",
+      "fingerprint": "76d41e723e339fde3560b29cbf3c797b904a2f3cd372945f272ce5a5adbf08df"
+    }
+  ]
+}

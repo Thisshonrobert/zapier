@@ -1,0 +1,57 @@
+{
+  "artifact": "protocol-r3.5r.revision-4",
+  "date": "2026-10-20",
+  "authority": "Owner decision for R3.5 stage 5 recovery screening, revision 4",
+  "reason": "dev-20261020-v5 failed only the four sufficient-guidance gates. Diagnosis found the four deliveryUnknown regressions (f07, f09, s02, s05) return the correct runbook sections, so the defects are demand-model and label-artefact defects, not retrieval defects. f07 and s02 need investigation+remediation and s05 needs remediation+forbidden; f07 and s02 share identical signal sets, so no single deliveryUnknown demand can satisfy both under the 3-slot cap. Revision 4 records the one predeclared composite implementation (D1a + D1b + D2-accept) before any revision-4 score exists.",
+  "supersedes": {
+    "version": 3,
+    "fileBytesHash": "ae513bbfc86b84328166b943a87ec45cd9a7fba7d83fc0a0db11ff60c4e9481e"
+  },
+  "version": 4,
+  "fileBytesHash": "f4ee2f19cf13a40ad20211fac71ae297715bfd277fbb618f8dcc18b0935f20ad",
+  "changes": [
+    "D1a: deliveryUnknown demand investigation/forbidden/verification -> investigation/remediation/verification",
+    "D1b: added typed dedupWindowExpired signal requiring both deduplication_window_expired and same_request_key_known, first in fixed signal order, demand remediation/forbidden/verification",
+    "D2-accept: f04-sibling-destination-repair verification accepts RB-F03-F04@1.0.0#verification-rollback-or-escalation as its second citation; RB-F04-F06@1.0.0#verification-rollback-or-escalation remains first and strict canonical",
+    "development labels v2 -> v3 with exactly one changed row and 31 unchanged rows",
+    "development.combined.labelsFile and labelsConstituentsFile point at the v3 artifacts"
+  ],
+  "invariants": {
+    "noCaseAddedOrRemoved": true,
+    "corpusUnchanged": true,
+    "modelUnchanged": true,
+    "promptUnchanged": true,
+    "packingVersion": "r3.3-v1",
+    "supportVersion": "r3.4-v1",
+    "supportMinAnchorHits": 1,
+    "topK": 3
+  },
+  "decisions": {
+    "D1a": "deliveryUnknown now requests investigation, remediation, verification. f07 and s02 need remediation; forbidden is no longer demanded by this signal.",
+    "D1b": "dedupWindowExpired is a typed signal derived only when fixture facts contain both deduplication_window_expired and same_request_key_known. It precedes deliveryUnknown and requests remediation, forbidden, verification. The no-match cases nm02 (concurrent_idempotent_requests) and nm08 (invalid_idempotency_key) do not fire it.",
+    "D1c": "No per-facet suppression, early return, or signal special-casing was added. Fixed order plus 3-slot truncation is the whole mechanism. evidenceAnchors and the anchor regex are unchanged, so demand changes cannot move support or abstention.",
+    "D2": {
+      "accepted": {
+        "caseId": "f04-sibling-destination-repair",
+        "facet": "verification",
+        "citation": "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+        "position": "second",
+        "strictCanonicalCitation": "RB-F04-F06@1.0.0#verification-rollback-or-escalation"
+      },
+      "declined": {
+        "caseId": "f03-f04-credential-and-template-overlap",
+        "facet": "investigation",
+        "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+        "reason": "Not independently sufficient for a credential plus template overlap"
+      }
+    }
+  },
+  "declinedEquivalences": [
+    {
+      "caseId": "f03-f04-credential-and-template-overlap",
+      "facet": "investigation",
+      "citation": "RB-F04-F06@1.0.0#read-only-investigation",
+      "reason": "Not independently sufficient for a credential plus template overlap. RB-F04-F06#read-only-investigation covers template and registry validation, while the observed overlap requires the credential-presence and worker-environment reasoning in RB-F03-F04#read-only-investigation. Joint sufficiency would require amending labelEquivalence.requirements, so it is deferred to corpus-v2 work and is not slipped into revision 4."
+    }
+  ]
+}

@@ -1,0 +1,260 @@
+{
+  "artifactId": "development-labels-v2.constituents",
+  "status": "reviewed_provenance_moved",
+  "authoredAt": "2026-10-20T08:01:20.021Z",
+  "protocol": {
+    "path": "apps/ai_agent/evaluation/r3/recovery/protocol-r3.5r.json",
+    "fileBytesHash": "ae513bbfc86b84328166b943a87ec45cd9a7fba7d83fc0a0db11ff60c4e9481e",
+    "revision": 3
+  },
+  "corpus": {
+    "path": "apps/ai_agent/evaluation/r3/corpus-v1.json",
+    "sectionsHash": "45e85c3585607ebfd0e1ebd1f2b068e2fab7c889b1bdd3af3a565f20afcbd440"
+  },
+  "pinned": {
+    "labelSource": "apps/ai_agent/evaluation/r3/development-labels-v1.json",
+    "casesSource": "apps/ai_agent/evaluation/r3/development-cases-v1.json",
+    "labelHash": "a30fd42160326bd6daa02238be50ad0c0cccab23d5ef5372fcae99e7fd49c752",
+    "labelHashBasis": "sha256(JSON.stringify(parsed labels file))",
+    "casesHash": "17c7821f3fd45cffe9bc8939984c23cd9d5b1453e5612be7b6b0507d59067a3d",
+    "casesHashBasis": "sha256(JSON.stringify(parsed cases file))",
+    "labelsFileBytesHash": "59a7093ac4bdff28efba628b182e47170a4169072b6804ebde1c1c285d53d8eb",
+    "casesFileBytesHash": "f0044066643cd1f87a01c3b7724e75c8e78ef47292aa93eabc9c6e945e7439dd",
+    "rowCount": 24,
+    "answerable": 16,
+    "noMatch": 8,
+    "rowsCopiedVerbatim": [
+      {
+        "id": "f01-rate-limit-rejected",
+        "caseRowHash": "b4e76c1311a9aaa88ef3762b82285c0dcdbcb3ac93fe25b3f445815e78c2e053",
+        "labelRowHash": "df9f6bf16853df30d893a365b020e05f25b9fce364bdf98df613d4312af41ed8"
+      },
+      {
+        "id": "f02-connection-refused",
+        "caseRowHash": "35e67845238fc003313b7b463d071c9c1e611cdd8fd96a58be39629d237c7c7e",
+        "labelRowHash": "bbcf8dbfae69e8215bcd7e81887043d616caefa06b9d7288ae97fae32debae1c"
+      },
+      {
+        "id": "f03-token-missing",
+        "caseRowHash": "d4964af493eb260142d74ce5f4787a9fb1ca66fdd4c3705343b80cb94fe367da",
+        "labelRowHash": "a9e5954598a6f2b87e09181374e3f0e596b7802baaede0505b5b6cabbd0ced45"
+      },
+      {
+        "id": "f03-permission-ambiguous",
+        "caseRowHash": "8496eff69b10c5db4697c9ae18cf1b893f989d83123727f44fb75038b61c4f12",
+        "labelRowHash": "4027a263ac322bb9ce732939ac069c5faaec70923c426e9468216ba5d6671829"
+      },
+      {
+        "id": "f04-template-path-missing",
+        "caseRowHash": "cb8ff16ac85b96d4fa5a3960400373d2a0b27bf8ea4f776e3c4d420044c45517",
+        "labelRowHash": "6bcf420022b840e482864330e849e3b5d04438a0b61e5f2fc0637685308990d3"
+      },
+      {
+        "id": "f04-invalid-destination",
+        "caseRowHash": "6c3e5515654c51a1023288c9cb866d7b694bf1eea2cb365c036175a92fde2977",
+        "labelRowHash": "2560a81f9b0c0f52f885e5a6feebaf69d7b400ba6762d62eabd74afaffa67812"
+      },
+      {
+        "id": "f05-unsupported-action",
+        "caseRowHash": "1d09818e981f8505a7e116f97ee64c091fd2223ddb3adb2352b4b5c09f64045b",
+        "labelRowHash": "59404d09bd078953bf2fb751165b8cdf2f4199b944f5ffc177380b7775115793"
+      },
+      {
+        "id": "f05-handler-version-unknown",
+        "caseRowHash": "db478f420ebf64202fa596590473b200a520b7866ce9e24155b62bdf7b409e7e",
+        "labelRowHash": "356976145428f3dbc47a8a24385be040b11b8f135b9a7d62e6d8782929cf0680"
+      },
+      {
+        "id": "f07-provider-response-lost",
+        "caseRowHash": "fab581c6a55e40e7a1e7c249ee540adabc4929d36a3f4a092a489f1c9c15e4eb",
+        "labelRowHash": "1a6a149d59e211aaf12efd84f83d0ba2ff261518c9fdff23d26dfc56c7fd1add"
+      },
+      {
+        "id": "f08-duplicate-retry-row",
+        "caseRowHash": "f6cc3c6f8be6e52c3f6c4ccd4e4fa6af4f9535269eda26b40072ce5519417f2c",
+        "labelRowHash": "d74737524322be9964d96953738953783f39dca56549fb0c4dc45613a01dd876"
+      },
+      {
+        "id": "f08-success-stage-republished",
+        "caseRowHash": "dc101405d9d548daf2500b8754ccd4d716ac81cf1695eb958d19b20e646ff12b",
+        "labelRowHash": "008b233c543d0bc7ed9710d8b38f626649ba15cbc92b65807d86629ce6145107"
+      },
+      {
+        "id": "f09-database-sink-only",
+        "caseRowHash": "a8a0ac52970897963c9dddbf7e6d09d16f738db451021b73803e26e6a6c5fabb",
+        "labelRowHash": "b54f94ba1e634fc1df1b25c9b39f1b1a556585af777df3879b809d01f1e33b70"
+      },
+      {
+        "id": "f10-sdk-error-recorded-success",
+        "caseRowHash": "259dfcddb5b8947913b02c5aa3350f1d26db4feaaf60638639ba1cbe946a2bd0",
+        "labelRowHash": "a443e5d7a5e8fe37a5a09a552c9272b6eb0e7c0bc91c83d27fbacbc0e7060351"
+      },
+      {
+        "id": "s02-error-prompt-injection",
+        "caseRowHash": "f21c3a105994939a1a0383b68c95a2af8d9b47d67b1c9bb4e687a5085e258621",
+        "labelRowHash": "2f3bf66d328a381647502debd84bae70db517a4b6b49a5bcfa73a79ea6ee7567"
+      },
+      {
+        "id": "s03-sensitive-fields-present",
+        "caseRowHash": "4b88355c7a90fc872dac1101552b53d4df5ef6d3daf7162569a8b9ca5f5f9656",
+        "labelRowHash": "cd118f443b135e31c821be9fcc5db275d08da9886e09f4cf788dd0349453cddf"
+      },
+      {
+        "id": "s05-expired-email-dedup-window",
+        "caseRowHash": "a6df1bf9a76f80abfdc4eda2890bee9d862827d625e61bef4582c33729dffc8f",
+        "labelRowHash": "15dc381c86452366717d8770dbf92a714955ee34ab9d1eaa21f56ff626da02f7"
+      },
+      {
+        "id": "nm01-telegram-message-too-long",
+        "caseRowHash": "58678c7a23102c22206f923287d76e7f28c1f3e896751c0c4789474a55e98cd6",
+        "labelRowHash": "242f9adfc25bc6bb2b3a07e8a4aee662a037f671e58ba2224f1524dfa4ff9a04"
+      },
+      {
+        "id": "nm02-email-concurrent-idempotency",
+        "caseRowHash": "00220b3762636fa58d4ef9524944b96191d750b1885966efc9fa1f6f5eb4a320",
+        "labelRowHash": "cc428bd072be16addb670e6b0c5c5734d1cd822f3e0ef6195b434f687129f3cb"
+      },
+      {
+        "id": "nm03-email-invalid-sender-address",
+        "caseRowHash": "de5a69da65e9dcaa243ed9c22319d7ab39d91de95aa2f2a1758b14c22d85167e",
+        "labelRowHash": "a7d9e72bdd67bb099b5157593de1233c7340f9849ba4a7d6e48b7c8e7c1b351c"
+      },
+      {
+        "id": "nm04-email-sender-domain-unverified",
+        "caseRowHash": "15bf2ad67228417a599132909ad27b86b83a2d3fab6f20f67b48c89e351aa817",
+        "labelRowHash": "7d3ab2cc22496734dbdb4477eb01de21110ba0f959b05ddfd5ebbb7eae5566be"
+      },
+      {
+        "id": "nm05-email-invalid-region",
+        "caseRowHash": "a2a3ca1e69943acb046ffc2ae5eb96da7d42f1912263a3ba0170690acf62e102",
+        "labelRowHash": "65ceddeabbbfde9123a381778a312563937adcbc4b568b85ec828d3b31d7bfaf"
+      },
+      {
+        "id": "nm06-email-subject-length",
+        "caseRowHash": "23f1dc6c40e15c2b8711b1a3a6bb2ce9cf3cbf4df123a7054342ca31b83f24df",
+        "labelRowHash": "de9bf19ab64f619e9b9c8b6ce19807e7035f5a8e21b3331ceb810602915fb6b6"
+      },
+      {
+        "id": "nm07-email-content-policy",
+        "caseRowHash": "f27f93b893d5a97e0764823397dfe31dc91c9da56de5c9b68846904a23467d4e",
+        "labelRowHash": "c2caa053bba5985cfc4a6e69dfa67f59b203e2d1ddb8902d527112d54675ea6b"
+      },
+      {
+        "id": "nm08-email-invalid-idempotency-key",
+        "caseRowHash": "b193924ffee536b09fad96529a46f85cf0c2ae6b261d7b1dddca03764542e767",
+        "labelRowHash": "736ccef32039fe2e57222aac57648c9dcf1ed30f670e3d8db3166655ec72c094"
+      }
+    ],
+    "method": "Pinned rows were spliced from the v1 file text; they were never parsed and re-serialized."
+  },
+  "extension": {
+    "rowCount": 8,
+    "answerable": 6,
+    "noMatch": 2,
+    "casesHash": "e938e7f98473d6d92ed10d5c95a4379853e913a8ff2e19fc62f8e3a6fde31835",
+    "labelsHash": "495ba5e84e4daf29f4a4199bf81365bc1bdcebff2637fff13cd9c375b3de3cea",
+    "rows": [
+      {
+        "id": "f02-preconnect-etimedout",
+        "caseRowHash": "25d58cb7b26cb9d5e25d7fa6a6aeec207a886e9f67a83b7407c4f549f9523e42",
+        "labelRowHash": "d637830c59eba3d9d753d5bc317121c0757369f6977ed040e74852230b283dff"
+      },
+      {
+        "id": "f02-dns-eai-again",
+        "caseRowHash": "94a27edca3c926e53c9f4aceabdc4d86637c4e88f647b6826ff8d540ed8f5c09",
+        "labelRowHash": "f7fbabc66608fb01a45732f7da45212475ca1e1a972c5bad677f8d72a00eeb17"
+      },
+      {
+        "id": "f04-sibling-destination-repair",
+        "caseRowHash": "cb6519c002d7c942a10900e6cf98d7c1b19c11e9fdf63336b6c9bdc1bbc8e33f",
+        "labelRowHash": "ddf74329946ebed63c964464e9946d2fe39833450aa23f46415d158a3fa4f7a3"
+      },
+      {
+        "id": "f09-rejected-publication-unacknowledged",
+        "caseRowHash": "3888d2dc3e1dfa6fc5a999a6cee790642d4b101f1cf8e6c8143643b15f4c56a6",
+        "labelRowHash": "72aba2f65133cc76c7a9fb881338ffbfcfea0a2c272d5fb3954d379aaceaf696"
+      },
+      {
+        "id": "f01-retry-after-zero",
+        "caseRowHash": "eef11705accdbc5b0a1b584b8653028d22004eedbb1ab8f5f9d34dcd9640dd33",
+        "labelRowHash": "e5296b96d9fdd4dea511e7c2de7fb4e184ddecc6a093f92bd0283fe915c0479c"
+      },
+      {
+        "id": "f03-f04-credential-and-template-overlap",
+        "caseRowHash": "bdfe0fbde43a04119e084f6029a7126ef6f1eedbb1302a0ef501a72e23345123",
+        "labelRowHash": "ccbd9008002fa920ad8f0a104117f95d044b7d247ff7f1f9bd9d6670fe55dc37"
+      },
+      {
+        "id": "nm09-worker-tenant-concurrency-refused",
+        "caseRowHash": "40c8220c7a628645faaff1fb8be4761720dbdf4be84386f900b8139a5cc2fe53",
+        "labelRowHash": "32deebf9dcd1898d252bd97c7eb65e82a5fd0f3dd26569dd9055ee6d736cb7f9"
+      },
+      {
+        "id": "nm10-database-lock-timeout",
+        "caseRowHash": "05ceb8fe92148f8c6181b03a57e697f6343bd2544a948b8219f84ec8265ba672",
+        "labelRowHash": "0371ffc95ef08de756de3b22b3fa5717c337a634c7647342c36d41be26159163"
+      }
+    ]
+  },
+  "combined": {
+    "cases": 32,
+    "answerable": 22,
+    "noMatch": 10,
+    "casesHash": "57557fa3c41df2a1aa3af2e8fc9cd446efff125c617b53c3e14e2b7d32544adf",
+    "casesFileBytesHash": "4738fb2cb5e91f07c265d2e123f2301545096806a420e7863d329f3f4b0bbc4d",
+    "labelsCasesHash": "3570dbe02a70fdd3a502e2629dbace4d6b11f44f4ed91839159a9eca6d903919",
+    "labelsFileHash": "5a0f75659aa3e86498be441bb3cf2935cf98ba26eecdb58c5dd7eba6ddb061e6",
+    "labelsFileHashBasis": "sha256(JSON.stringify({version,cases}))",
+    "labelsFileBytesHash": "f7e1ac024b86a7a375f724737794b9998910c664d7a521aa3d35ba127c682203",
+    "declaredInProtocol": {
+      "path": "apps/ai_agent/evaluation/r3/recovery/protocol-r3.5r.json",
+      "cases": 32,
+      "answerable": 22,
+      "noMatch": 10
+    },
+    "labelFileHashRule": "labelsFileHash is the v1-comparable {version,cases} basis. The file-bytes hash is recorded in the R3.5r.4 freeze manifest."
+  },
+  "findings": [
+    {
+      "id": "protocol-combined-count-arithmetic",
+      "severity": "resolved",
+      "detail": "Protocol revision 3 corrects development.combined.cases from 34 to 32 and renames the screening keys from dev-34 to dev-32. The combined cohort is 22 answerable + 10 no-match = 32.",
+      "resolution": "protocol-r3.5r.json version 3"
+    },
+    {
+      "id": "constituents-provenance-key",
+      "severity": "resolved",
+      "detail": "The constituents block was moved to this sibling provenance artifact in R3.5r.2 per review-development-v2.md §10. The scoring label file now validates against the strict TargetLabelFileSchema without a loader change.",
+      "resolution": "development-labels-v2.constituents.json"
+    }
+  ],
+  "pinnedAudit": {
+    "pinnedCitationsChanged": false,
+    "result": "no_finding",
+    "note": "No pinned accepted citation was re-adjudicated. The 24 pinned label rows are byte-identical to v1."
+  },
+  "labelEquivalence": {
+    "option": "A",
+    "maxAcceptedPerFacet": 2,
+    "multiCitationFacets": [
+      {
+        "caseId": "f04-sibling-destination-repair",
+        "family": "F04",
+        "facet": "remediation",
+        "accepted": [
+          "RB-F04-F06@1.0.0#allowed-remediation",
+          "RB-F03-F04@1.0.0#allowed-remediation"
+        ],
+        "rationaleLines": 2
+      }
+    ],
+    "reviewStatus": "second_review_signed",
+    "reviewReference": "review-development-v2.md ?6"
+  },
+  "schemaNote": "development-labels-v2.json is exactly {version,cases} and validates against TargetLabelFileSchema. This sibling file holds provenance only and is never read by the scoring loader.",
+  "labelFile": "apps/ai_agent/evaluation/r3/recovery/development-labels-v2.json",
+  "labelFileHash": "5a0f75659aa3e86498be441bb3cf2935cf98ba26eecdb58c5dd7eba6ddb061e6",
+  "labelFileHashBasis": "sha256(JSON.stringify({version,cases}))",
+  "movedAt": "2026-10-20",
+  "moveNote": "The constituents block was moved out of the scoring label file so that development-labels-v2.json remains exactly {version,cases} and loadTargetLabels stays strict. No case or label row was edited."
+}

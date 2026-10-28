@@ -12,7 +12,7 @@ const unknown = contexts.find(context => context.evidence?.failureContext.facts.
 
 test("new prompt prioritizes incident evidence and avoids unsupported cause certainty", () => {
   const prompt = buildDiagnosisPrompt(known.evidence!, known.retrieval!.matches);
-  expect(DIAGNOSIS_PROMPT_VERSION).toBe("phase-11a-v3");
+  expect(DIAGNOSIS_PROMPT_VERSION).toBe("phase-11a-v4");
   expect(prompt.instructions).toMatch(/structured.*provider.*phase.*status.*outcome.*attempt.*validation/i);
   expect(prompt.instructions).toMatch(/instruction-like.*not.*incident.*evidence/i);
   expect(prompt.instructions).toMatch(/credential.*authentication.*permission.*transport/i);
@@ -56,4 +56,41 @@ test("historical V4 and V5 prompts still reconstruct their captured hashes", asy
       expect(fixtureHash(prompt)).toBe(call.prompt_hash);
     }
   }
+});
+
+test("v4 instructions add the four delivery and grounding rules", () => {
+  const v3 = buildDiagnosisPrompt(known.evidence!, known.retrieval!.matches);
+  const v4 = buildDiagnosisPrompt(known.evidence!, known.retrieval!.matches, undefined, "phase-11a-v4");
+  expect(v4.instructions.startsWith(v3.instructions)).toBe(true);
+  expect(JSON.parse(v4.input).prompt_version).toBe("phase-11a-v4");
+  expect(v4.instructions).toContain("conservative cooldown deadline (observed_at plus retry_after_seconds)");
+  expect(v4.instructions).toContain("Without an observed retry_after_seconds, state that no deadline is available; never invent one.");
+  expect(v4.instructions).toContain("outcome_unknown is only for unknown or contradictory delivery evidence.");
+  expect(v4.instructions).toContain("Name a cause only if it appears in observed fact fields");
+  expect(v4.instructions).toContain("A recorded SUCCESS or accepted outcome stays recorded.");
+  expect(v4.instructions).not.toMatch(/\bF\d{2}\b|\bS\d{2}\b/);
+});
+
+test("v4 grounding covers every field, conditional runbooks and no-match fixes", () => {
+  const v4 = buildDiagnosisPrompt(known.evidence!, known.retrieval!.matches, undefined, "phase-11a-v4").instructions;
+  expect(v4).toContain("This applies to the summary, reasons, alternates and proposal alike");
+  expect(v4).toContain("Describe an absent record as absent, not lost or irrecoverable.");
+  expect(v4).toContain("makes a conclusion conditional on a fact that is listed as unavailable");
+  expect(v4).toContain("Without applicable runbook guidance, never state a definitive fix, even as an alternate.");
+  expect(v4).toContain("Keep the observed final_error and status in the summary");
+  expect(v4).toContain("never claim how or why it was recorded");
+});
+
+test("v4 repair guidance for unsafe_replay_candidate names the cooldown", () => {
+  const repair = (version: "phase-11a-v3" | "phase-11a-v4") =>
+    JSON.parse(buildDiagnosisPrompt(known.evidence!, known.retrieval!.matches, { issue: "unsafe_replay_candidate" }, version).input).repair.guidance;
+  expect(repair("phase-11a-v4")).toContain("cooldown deadline");
+  expect(repair("phase-11a-v4")).not.toContain("Request engineering investigation");
+  expect(repair("phase-11a-v3")).toContain("Request engineering investigation");
+});
+
+test("v4 adds unsupported_outcome_unknown guidance", () => {
+  const guidance = JSON.parse(buildDiagnosisPrompt(known.evidence!, known.retrieval!.matches, { issue: "unsupported_outcome_unknown" }, "phase-11a-v4").input).repair.guidance;
+  expect(guidance).toContain("insufficient_evidence");
+  expect(guidance).toContain("state the observed rejection");
 });

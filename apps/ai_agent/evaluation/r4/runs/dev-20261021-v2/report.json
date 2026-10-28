@@ -1,0 +1,5915 @@
+{
+  "phase": "R4.3",
+  "run": "dev-20261021-v2",
+  "generatedAt": "2026-10-21T09:35:01.464Z",
+  "split": "development",
+  "status": "retrieval_accepted",
+  "primaryMetric": "sufficientGuidanceHitAt3",
+  "candidateArm": "profile-route-facets-support",
+  "profileVersion": "r4-v1",
+  "packingVersion": "r3.3-v1",
+  "supportVersion": "r3.4-v1",
+  "support": {
+    "minAnchorHits": 1
+  },
+  "inputs": {
+    "protocolHash": "d47669b7f567a2436d13a0a7bc127898e9ad774f4082c047091e7dcdfc391b5e",
+    "corpusHash": "45e85c3585607ebfd0e1ebd1f2b068e2fab7c889b1bdd3af3a565f20afcbd440",
+    "casesHash": "753d9b2b8f12275c5d90a8d9b7cbef2a3d724019561031ce796f8090015cb677",
+    "labelHash": "2c581e331781aa3c84baf579984f9cb1739c92b796c71a443796db0863e38c61",
+    "evidenceHash": "d91ade93af6554614321fdcc58d4ab5f5e5a3e06387e54577575513f6b748724",
+    "inputHash": "e1764aecdb31ca00ae4f5caa5e0923485ec0377af7c9ac324733c00896176776",
+    "scoresHash": "fbc2e3c77b5a56a27cbb34904243047622563f0ba7739b9023821d59bb95c022"
+  },
+  "counts": {
+    "scheduled": 80,
+    "answerable": 60,
+    "noMatch": 20,
+    "corpusGap": 0,
+    "providerExcluded": 0,
+    "unavailable": 0
+  },
+  "metrics": {
+    "candidate": {
+      "hitAt3": {
+        "numerator": 58,
+        "denominator": 60,
+        "rate": 0.9666666666666667,
+        "point": 0.9666666666666667,
+        "wilson": {
+          "lower": 0.8863623272015883,
+          "upper": 0.9908106744212112,
+          "confidence": 0.95
+        },
+        "basis": "per eligible case"
+      },
+      "macroSectionRecallAt3": {
+        "numerator": 157,
+        "denominator": 176,
+        "rate": 0.8920454545454546,
+        "point": 0.925,
+        "wilson": {
+          "lower": 0.8375505157724267,
+          "upper": 0.9297920339271318,
+          "confidence": 0.95
+        },
+        "basis": "point is the macro mean over eligible cases; interval is citation-weighted"
+      },
+      "directPrecisionAt3": {
+        "numerator": 157,
+        "denominator": 180,
+        "rate": 0.8722222222222222,
+        "point": 0.8722222222222222,
+        "wilson": {
+          "lower": 0.8155639253356142,
+          "upper": 0.9133250001259443,
+          "confidence": 0.95
+        },
+        "basis": "point is the mean per-case precision; interval is citation-weighted"
+      },
+      "noMatchAbstention": {
+        "numerator": 20,
+        "denominator": 20,
+        "rate": 1,
+        "point": 1,
+        "wilson": {
+          "lower": 0.8388750048729803,
+          "upper": 1,
+          "confidence": 0.95
+        },
+        "basis": "no-match cases with a successful empty return"
+      },
+      "falseAbstention": {
+        "numerator": 0,
+        "denominator": 60,
+        "rate": 0,
+        "point": 0,
+        "wilson": {
+          "lower": 0,
+          "upper": 0.060171783975572005,
+          "confidence": 0.95
+        },
+        "basis": "eligible answerable cases with a successful empty return"
+      },
+      "reliability": {
+        "numerator": 80,
+        "denominator": 80,
+        "rate": 1,
+        "point": 1,
+        "wilson": {
+          "lower": 0.9541819231629166,
+          "upper": 0.9999999999999999,
+          "confidence": 0.95
+        },
+        "basis": "scheduled cases with a usable output"
+      },
+      "routeCoverage": 1,
+      "p95LatencyMs": 2175.4323999999906,
+      "counts": {
+        "scheduled": 80,
+        "eligibleAnswerable": 60,
+        "noMatch": 20,
+        "corpusGap": 0,
+        "providerExcluded": 0,
+        "unavailable": 0
+      }
+    },
+    "keyword": {
+      "hitAt3": {
+        "numerator": 2,
+        "denominator": 60,
+        "rate": 0.03333333333333333,
+        "point": 0.03333333333333333,
+        "wilson": {
+          "lower": 0.009189325578788786,
+          "upper": 0.11363767279841175,
+          "confidence": 0.95
+        },
+        "basis": "per eligible case"
+      },
+      "macroSectionRecallAt3": {
+        "numerator": 35,
+        "denominator": 176,
+        "rate": 0.19886363636363635,
+        "point": 0.21805555555555564,
+        "wilson": {
+          "lower": 0.1466067970999982,
+          "upper": 0.2639851574786018,
+          "confidence": 0.95
+        },
+        "basis": "point is the macro mean over eligible cases; interval is citation-weighted"
+      },
+      "directPrecisionAt3": {
+        "numerator": 35,
+        "denominator": 180,
+        "rate": 0.19444444444444445,
+        "point": 0.1944444444444445,
+        "wilson": {
+          "lower": 0.1432640442864564,
+          "upper": 0.25839430048390616,
+          "confidence": 0.95
+        },
+        "basis": "point is the mean per-case precision; interval is citation-weighted"
+      },
+      "noMatchAbstention": {
+        "numerator": 0,
+        "denominator": 20,
+        "rate": 0,
+        "point": 0,
+        "wilson": {
+          "lower": 0,
+          "upper": 0.16112499512701975,
+          "confidence": 0.95
+        },
+        "basis": "no-match cases with a successful empty return"
+      },
+      "falseAbstention": {
+        "numerator": 0,
+        "denominator": 60,
+        "rate": 0,
+        "point": 0,
+        "wilson": {
+          "lower": 0,
+          "upper": 0.060171783975572005,
+          "confidence": 0.95
+        },
+        "basis": "eligible answerable cases with a successful empty return"
+      },
+      "reliability": {
+        "numerator": 80,
+        "denominator": 80,
+        "rate": 1,
+        "point": 1,
+        "wilson": {
+          "lower": 0.9541819231629166,
+          "upper": 0.9999999999999999,
+          "confidence": 0.95
+        },
+        "basis": "scheduled cases with a usable output"
+      },
+      "routeCoverage": 1,
+      "p95LatencyMs": 0.709499999997206,
+      "counts": {
+        "scheduled": 80,
+        "eligibleAnswerable": 60,
+        "noMatch": 20,
+        "corpusGap": 0,
+        "providerExcluded": 0,
+        "unavailable": 0
+      }
+    }
+  },
+  "perFamily": {
+    "F01": {
+      "cases": 6,
+      "answerable": 6,
+      "noMatch": 0,
+      "hitAt3": {
+        "numerator": 6,
+        "denominator": 6,
+        "rate": 1,
+        "point": 1,
+        "wilson": {
+          "lower": 0.6096659989498648,
+          "upper": 0.9999999999999999,
+          "confidence": 0.95
+        },
+        "basis": "per eligible case"
+      },
+      "macroSectionRecallAt3": {
+        "numerator": 16,
+        "denominator": 16,
+        "rate": 1,
+        "point": 1,
+        "wilson": {
+          "lower": 0.8063925076563323,
+          "upper": 1,
+          "confidence": 0.95
+        },
+        "basis": "point is the family macro mean; interval is citation-weighted"
+      },
+      "directPrecisionAt3": {
+        "numerator": 16,
+        "denominator": 18,
+        "rate": 0.8888888888888888,
+        "point": 0.8888888888888888,
+        "wilson": {
+          "lower": 0.6720025060461197,
+          "upper": 0.9689804558973489,
+          "confidence": 0.95
+        },
+        "basis": "point is the family mean per-case precision; interval is citation-weighted"
+      }
+    },
+    "F02": {
+      "cases": 6,
+      "answerable": 6,
+      "noMatch": 0,
+      "hitAt3": {
+        "numerator": 6,
+        "denominator": 6,
+        "rate": 1,
+        "point": 1,
+        "wilson": {
+          "lower": 0.6096659989498648,
+          "upper": 0.9999999999999999,
+          "confidence": 0.95
+        },
+        "basis": "per eligible case"
+      },
+      "macroSectionRecallAt3": {
+        "numerator": 17,
+        "denominator": 17,
+        "rate": 1,
+        "point": 1,
+        "wilson": {
+          "lower": 0.8156820462161952,
+          "upper": 1,
+          "confidence": 0.95
+        },
+        "basis": "point is the family macro mean; interval is citation-weighted"
+      },
+      "directPrecisionAt3": {
+        "numerator": 17,
+        "denominator": 18,
+        "rate": 0.9444444444444444,
+        "point": 0.9444444444444443,
+        "wilson": {
+          "lower": 0.7424271558538135,
+          "upper": 0.9901248006530078,
+          "confidence": 0.95
+        },
+        "basis": "point is the family mean per-case precision; interval is citation-weighted"
+      }
+    },
+    "F03": {
+      "cases": 6,
+      "answerable": 6,
+      "noMatch": 0,
+      "hitAt3": {
+        "numerator": 6,
+        "denominator": 6,
+        "rate": 1,
+        "point": 1,
+        "wilson": {
+          "lower": 0.6096659989498648,
+          "upper": 0.9999999999999999,
+          "confidence": 0.95
+        },
+        "basis": "per eligible case"
+      },
+      "macroSectionRecallAt3": {
+        "numerator": 14,
+        "denominator": 14,
+        "rate": 1,
+        "point": 1,
+        "wilson": {
+          "lower": 0.7846894009163232,
+          "upper": 1,
+          "confidence": 0.95
+        },
+        "basis": "point is the family macro mean; interval is citation-weighted"
+      },
+      "directPrecisionAt3": {
+        "numerator": 14,
+        "denominator": 18,
+        "rate": 0.7777777777777778,
+        "point": 0.7777777777777777,
+        "wilson": {
+          "lower": 0.5478543018535891,
+          "upper": 0.9099906709631742,
+          "confidence": 0.95
+        },
+        "basis": "point is the family mean per-case precision; interval is citation-weighted"
+      }
+    },
+    "F04": {
+      "cases": 6,
+      "answerable": 6,
+      "noMatch": 0,
+      "hitAt3": {
+        "numerator": 6,
+        "denominator": 6,
+        "rate": 1,
+        "point": 1,
+        "wilson": {
+          "lower": 0.6096659989498648,
+          "upper": 0.9999999999999999,
+          "confidence": 0.95
+        },
+        "basis": "per eligible case"
+      },
+      "macroSectionRecallAt3": {
+        "numerator": 16,
+        "denominator": 32,
+        "rate": 0.5,
+        "point": 0.5,
+        "wilson": {
+          "lower": 0.33630891677564334,
+          "upper": 0.6636910832243567,
+          "confidence": 0.95
+        },
+        "basis": "point is the family macro mean; interval is citation-weighted"
+      },
+      "directPrecisionAt3": {
+        "numerator": 16,
+        "denominator": 18,
+        "rate": 0.8888888888888888,
+        "point": 0.8888888888888888,
+        "wilson": {
+          "lower": 0.6720025060461197,
+          "upper": 0.9689804558973489,
+          "confidence": 0.95
+        },
+        "basis": "point is the family mean per-case precision; interval is citation-weighted"
+      }
+    },
+    "F05": {
+      "cases": 6,
+      "answerable": 6,
+      "noMatch": 0,
+      "hitAt3": {
+        "numerator": 6,
+        "denominator": 6,
+        "rate": 1,
+        "point": 1,
+        "wilson": {
+          "lower": 0.6096659989498648,
+          "upper": 0.9999999999999999,
+          "confidence": 0.95
+        },
+        "basis": "per eligible case"
+      },
+      "macroSectionRecallAt3": {
+        "numerator": 16,
+        "denominator": 16,
+        "rate": 1,
+        "point": 1,
+        "wilson": {
+          "lower": 0.8063925076563323,
+          "upper": 1,
+          "confidence": 0.95
+        },
+        "basis": "point is the family macro mean; interval is citation-weighted"
+      },
+      "directPrecisionAt3": {
+        "numerator": 16,
+        "denominator": 18,
+        "rate": 0.8888888888888888,
+        "point": 0.8888888888888888,
+        "wilson": {
+          "lower": 0.6720025060461197,
+          "upper": 0.9689804558973489,
+          "confidence": 0.95
+        },
+        "basis": "point is the family mean per-case precision; interval is citation-weighted"
+      }
+    },
+    "F06": {
+      "cases": 6,
+      "answerable": 6,
+      "noMatch": 0,
+      "hitAt3": {
+        "numerator": 6,
+        "denominator": 6,
+        "rate": 1,
+        "point": 1,
+        "wilson": {
+          "lower": 0.6096659989498648,
+          "upper": 0.9999999999999999,
+          "confidence": 0.95
+        },
+        "basis": "per eligible case"
+      },
+      "macroSectionRecallAt3": {
+        "numerator": 18,
+        "denominator": 18,
+        "rate": 1,
+        "point": 1,
+        "wilson": {
+          "lower": 0.8241209510701739,
+          "upper": 1,
+          "confidence": 0.95
+        },
+        "basis": "point is the family macro mean; interval is citation-weighted"
+      },
+      "directPrecisionAt3": {
+        "numerator": 18,
+        "denominator": 18,
+        "rate": 1,
+        "point": 1,
+        "wilson": {
+          "lower": 0.8241209510701739,
+          "upper": 1,
+          "confidence": 0.95
+        },
+        "basis": "point is the family mean per-case precision; interval is citation-weighted"
+      }
+    },
+    "F07": {
+      "cases": 6,
+      "answerable": 6,
+      "noMatch": 0,
+      "hitAt3": {
+        "numerator": 6,
+        "denominator": 6,
+        "rate": 1,
+        "point": 1,
+        "wilson": {
+          "lower": 0.6096659989498648,
+          "upper": 0.9999999999999999,
+          "confidence": 0.95
+        },
+        "basis": "per eligible case"
+      },
+      "macroSectionRecallAt3": {
+        "numerator": 17,
+        "denominator": 17,
+        "rate": 1,
+        "point": 1,
+        "wilson": {
+          "lower": 0.8156820462161952,
+          "upper": 1,
+          "confidence": 0.95
+        },
+        "basis": "point is the family macro mean; interval is citation-weighted"
+      },
+      "directPrecisionAt3": {
+        "numerator": 17,
+        "denominator": 18,
+        "rate": 0.9444444444444444,
+        "point": 0.9444444444444443,
+        "wilson": {
+          "lower": 0.7424271558538135,
+          "upper": 0.9901248006530078,
+          "confidence": 0.95
+        },
+        "basis": "point is the family mean per-case precision; interval is citation-weighted"
+      }
+    },
+    "F08": {
+      "cases": 5,
+      "answerable": 5,
+      "noMatch": 0,
+      "hitAt3": {
+        "numerator": 5,
+        "denominator": 5,
+        "rate": 1,
+        "point": 1,
+        "wilson": {
+          "lower": 0.5655178313914229,
+          "upper": 1,
+          "confidence": 0.95
+        },
+        "basis": "per eligible case"
+      },
+      "macroSectionRecallAt3": {
+        "numerator": 12,
+        "denominator": 12,
+        "rate": 1,
+        "point": 1,
+        "wilson": {
+          "lower": 0.7575062147645621,
+          "upper": 1,
+          "confidence": 0.95
+        },
+        "basis": "point is the family macro mean; interval is citation-weighted"
+      },
+      "directPrecisionAt3": {
+        "numerator": 12,
+        "denominator": 15,
+        "rate": 0.8,
+        "point": 0.8,
+        "wilson": {
+          "lower": 0.5481456724541383,
+          "upper": 0.9295244643164866,
+          "confidence": 0.95
+        },
+        "basis": "point is the family mean per-case precision; interval is citation-weighted"
+      }
+    },
+    "F09": {
+      "cases": 5,
+      "answerable": 5,
+      "noMatch": 0,
+      "hitAt3": {
+        "numerator": 5,
+        "denominator": 5,
+        "rate": 1,
+        "point": 1,
+        "wilson": {
+          "lower": 0.5655178313914229,
+          "upper": 1,
+          "confidence": 0.95
+        },
+        "basis": "per eligible case"
+      },
+      "macroSectionRecallAt3": {
+        "numerator": 14,
+        "denominator": 14,
+        "rate": 1,
+        "point": 1,
+        "wilson": {
+          "lower": 0.7846894009163232,
+          "upper": 1,
+          "confidence": 0.95
+        },
+        "basis": "point is the family macro mean; interval is citation-weighted"
+      },
+      "directPrecisionAt3": {
+        "numerator": 14,
+        "denominator": 15,
+        "rate": 0.9333333333333333,
+        "point": 0.9333333333333332,
+        "wilson": {
+          "lower": 0.7018348808943374,
+          "upper": 0.9881330944410095,
+          "confidence": 0.95
+        },
+        "basis": "point is the family mean per-case precision; interval is citation-weighted"
+      }
+    },
+    "F10": {
+      "cases": 5,
+      "answerable": 5,
+      "noMatch": 0,
+      "hitAt3": {
+        "numerator": 4,
+        "denominator": 5,
+        "rate": 0.8,
+        "point": 0.8,
+        "wilson": {
+          "lower": 0.3755348385500863,
+          "upper": 0.9637758602847675,
+          "confidence": 0.95
+        },
+        "basis": "per eligible case"
+      },
+      "macroSectionRecallAt3": {
+        "numerator": 12,
+        "denominator": 14,
+        "rate": 0.8571428571428571,
+        "point": 0.8,
+        "wilson": {
+          "lower": 0.6005863782959143,
+          "upper": 0.9599060509300309,
+          "confidence": 0.95
+        },
+        "basis": "point is the family macro mean; interval is citation-weighted"
+      },
+      "directPrecisionAt3": {
+        "numerator": 12,
+        "denominator": 15,
+        "rate": 0.8,
+        "point": 0.8,
+        "wilson": {
+          "lower": 0.5481456724541383,
+          "upper": 0.9295244643164866,
+          "confidence": 0.95
+        },
+        "basis": "point is the family mean per-case precision; interval is citation-weighted"
+      }
+    },
+    "S": {
+      "cases": 3,
+      "answerable": 3,
+      "noMatch": 0,
+      "hitAt3": {
+        "numerator": 2,
+        "denominator": 3,
+        "rate": 0.6666666666666666,
+        "point": 0.6666666666666666,
+        "wilson": {
+          "lower": 0.20765975317697888,
+          "upper": 0.9385080018347369,
+          "confidence": 0.95
+        },
+        "basis": "per eligible case"
+      },
+      "macroSectionRecallAt3": {
+        "numerator": 5,
+        "denominator": 6,
+        "rate": 0.8333333333333334,
+        "point": 0.8333333333333334,
+        "wilson": {
+          "lower": 0.43649739475892674,
+          "upper": 0.969946604540983,
+          "confidence": 0.95
+        },
+        "basis": "point is the family macro mean; interval is citation-weighted"
+      },
+      "directPrecisionAt3": {
+        "numerator": 5,
+        "denominator": 9,
+        "rate": 0.5555555555555556,
+        "point": 0.5555555555555555,
+        "wilson": {
+          "lower": 0.2666514229781704,
+          "upper": 0.8112213774996424,
+          "confidence": 0.95
+        },
+        "basis": "point is the family mean per-case precision; interval is citation-weighted"
+      }
+    }
+  },
+  "keywordPerFamily": {
+    "F01": {
+      "cases": 6,
+      "answerable": 6,
+      "noMatch": 0,
+      "hitAt3": {
+        "numerator": 0,
+        "denominator": 6,
+        "rate": 0,
+        "point": 0,
+        "wilson": {
+          "lower": 0,
+          "upper": 0.3903340010501351,
+          "confidence": 0.95
+        },
+        "basis": "per eligible case"
+      },
+      "macroSectionRecallAt3": {
+        "numerator": 5,
+        "denominator": 16,
+        "rate": 0.3125,
+        "point": 0.27777777777777773,
+        "wilson": {
+          "lower": 0.141646507033305,
+          "upper": 0.5559563025955705,
+          "confidence": 0.95
+        },
+        "basis": "point is the family macro mean; interval is citation-weighted"
+      },
+      "directPrecisionAt3": {
+        "numerator": 5,
+        "denominator": 18,
+        "rate": 0.2777777777777778,
+        "point": 0.27777777777777773,
+        "wilson": {
+          "lower": 0.12499759422241039,
+          "upper": 0.508726427524179,
+          "confidence": 0.95
+        },
+        "basis": "point is the family mean per-case precision; interval is citation-weighted"
+      }
+    },
+    "F02": {
+      "cases": 6,
+      "answerable": 6,
+      "noMatch": 0,
+      "hitAt3": {
+        "numerator": 0,
+        "denominator": 6,
+        "rate": 0,
+        "point": 0,
+        "wilson": {
+          "lower": 0,
+          "upper": 0.3903340010501351,
+          "confidence": 0.95
+        },
+        "basis": "per eligible case"
+      },
+      "macroSectionRecallAt3": {
+        "numerator": 3,
+        "denominator": 17,
+        "rate": 0.17647058823529413,
+        "point": 0.19444444444444442,
+        "wilson": {
+          "lower": 0.06191130341475015,
+          "upper": 0.4102944313865353,
+          "confidence": 0.95
+        },
+        "basis": "point is the family macro mean; interval is citation-weighted"
+      },
+      "directPrecisionAt3": {
+        "numerator": 3,
+        "denominator": 18,
+        "rate": 0.16666666666666666,
+        "point": 0.16666666666666666,
+        "wilson": {
+          "lower": 0.05836580295875221,
+          "upper": 0.3922202296611318,
+          "confidence": 0.95
+        },
+        "basis": "point is the family mean per-case precision; interval is citation-weighted"
+      }
+    },
+    "F03": {
+      "cases": 6,
+      "answerable": 6,
+      "noMatch": 0,
+      "hitAt3": {
+        "numerator": 1,
+        "denominator": 6,
+        "rate": 0.16666666666666666,
+        "point": 0.16666666666666666,
+        "wilson": {
+          "lower": 0.030053395459016863,
+          "upper": 0.5635026052410732,
+          "confidence": 0.95
+        },
+        "basis": "per eligible case"
+      },
+      "macroSectionRecallAt3": {
+        "numerator": 5,
+        "denominator": 14,
+        "rate": 0.35714285714285715,
+        "point": 0.38888888888888884,
+        "wilson": {
+          "lower": 0.16344739658677063,
+          "upper": 0.6123556317228513,
+          "confidence": 0.95
+        },
+        "basis": "point is the family macro mean; interval is citation-weighted"
+      },
+      "directPrecisionAt3": {
+        "numerator": 5,
+        "denominator": 18,
+        "rate": 0.2777777777777778,
+        "point": 0.27777777777777773,
+        "wilson": {
+          "lower": 0.12499759422241039,
+          "upper": 0.508726427524179,
+          "confidence": 0.95
+        },
+        "basis": "point is the family mean per-case precision; interval is citation-weighted"
+      }
+    },
+    "F04": {
+      "cases": 6,
+      "answerable": 6,
+      "noMatch": 0,
+      "hitAt3": {
+        "numerator": 0,
+        "denominator": 6,
+        "rate": 0,
+        "point": 0,
+        "wilson": {
+          "lower": 0,
+          "upper": 0.3903340010501351,
+          "confidence": 0.95
+        },
+        "basis": "per eligible case"
+      },
+      "macroSectionRecallAt3": {
+        "numerator": 5,
+        "denominator": 32,
+        "rate": 0.15625,
+        "point": 0.18055555555555555,
+        "wilson": {
+          "lower": 0.06864423600986601,
+          "upper": 0.31754138348983296,
+          "confidence": 0.95
+        },
+        "basis": "point is the family macro mean; interval is citation-weighted"
+      },
+      "directPrecisionAt3": {
+        "numerator": 5,
+        "denominator": 18,
+        "rate": 0.2777777777777778,
+        "point": 0.27777777777777773,
+        "wilson": {
+          "lower": 0.12499759422241039,
+          "upper": 0.508726427524179,
+          "confidence": 0.95
+        },
+        "basis": "point is the family mean per-case precision; interval is citation-weighted"
+      }
+    },
+    "F05": {
+      "cases": 6,
+      "answerable": 6,
+      "noMatch": 0,
+      "hitAt3": {
+        "numerator": 0,
+        "denominator": 6,
+        "rate": 0,
+        "point": 0,
+        "wilson": {
+          "lower": 0,
+          "upper": 0.3903340010501351,
+          "confidence": 0.95
+        },
+        "basis": "per eligible case"
+      },
+      "macroSectionRecallAt3": {
+        "numerator": 4,
+        "denominator": 16,
+        "rate": 0.25,
+        "point": 0.24999999999999997,
+        "wilson": {
+          "lower": 0.10182072919703095,
+          "upper": 0.494983016974803,
+          "confidence": 0.95
+        },
+        "basis": "point is the family macro mean; interval is citation-weighted"
+      },
+      "directPrecisionAt3": {
+        "numerator": 4,
+        "denominator": 18,
+        "rate": 0.2222222222222222,
+        "point": 0.2222222222222222,
+        "wilson": {
+          "lower": 0.09000932903682585,
+          "upper": 0.45214569814641087,
+          "confidence": 0.95
+        },
+        "basis": "point is the family mean per-case precision; interval is citation-weighted"
+      }
+    },
+    "F06": {
+      "cases": 6,
+      "answerable": 6,
+      "noMatch": 0,
+      "hitAt3": {
+        "numerator": 0,
+        "denominator": 6,
+        "rate": 0,
+        "point": 0,
+        "wilson": {
+          "lower": 0,
+          "upper": 0.3903340010501351,
+          "confidence": 0.95
+        },
+        "basis": "per eligible case"
+      },
+      "macroSectionRecallAt3": {
+        "numerator": 2,
+        "denominator": 18,
+        "rate": 0.1111111111111111,
+        "point": 0.1111111111111111,
+        "wilson": {
+          "lower": 0.031019544102651064,
+          "upper": 0.32799749395388034,
+          "confidence": 0.95
+        },
+        "basis": "point is the family macro mean; interval is citation-weighted"
+      },
+      "directPrecisionAt3": {
+        "numerator": 2,
+        "denominator": 18,
+        "rate": 0.1111111111111111,
+        "point": 0.1111111111111111,
+        "wilson": {
+          "lower": 0.031019544102651064,
+          "upper": 0.32799749395388034,
+          "confidence": 0.95
+        },
+        "basis": "point is the family mean per-case precision; interval is citation-weighted"
+      }
+    },
+    "F07": {
+      "cases": 6,
+      "answerable": 6,
+      "noMatch": 0,
+      "hitAt3": {
+        "numerator": 0,
+        "denominator": 6,
+        "rate": 0,
+        "point": 0,
+        "wilson": {
+          "lower": 0,
+          "upper": 0.3903340010501351,
+          "confidence": 0.95
+        },
+        "basis": "per eligible case"
+      },
+      "macroSectionRecallAt3": {
+        "numerator": 5,
+        "denominator": 17,
+        "rate": 0.29411764705882354,
+        "point": 0.3055555555555555,
+        "wilson": {
+          "lower": 0.13279996030550414,
+          "upper": 0.5313309618407686,
+          "confidence": 0.95
+        },
+        "basis": "point is the family macro mean; interval is citation-weighted"
+      },
+      "directPrecisionAt3": {
+        "numerator": 5,
+        "denominator": 18,
+        "rate": 0.2777777777777778,
+        "point": 0.27777777777777773,
+        "wilson": {
+          "lower": 0.12499759422241039,
+          "upper": 0.508726427524179,
+          "confidence": 0.95
+        },
+        "basis": "point is the family mean per-case precision; interval is citation-weighted"
+      }
+    },
+    "F08": {
+      "cases": 5,
+      "answerable": 5,
+      "noMatch": 0,
+      "hitAt3": {
+        "numerator": 0,
+        "denominator": 5,
+        "rate": 0,
+        "point": 0,
+        "wilson": {
+          "lower": 0,
+          "upper": 0.43448216860857714,
+          "confidence": 0.95
+        },
+        "basis": "per eligible case"
+      },
+      "macroSectionRecallAt3": {
+        "numerator": 1,
+        "denominator": 12,
+        "rate": 0.08333333333333333,
+        "point": 0.1,
+        "wilson": {
+          "lower": 0.014865107031194869,
+          "upper": 0.35387971399833673,
+          "confidence": 0.95
+        },
+        "basis": "point is the family macro mean; interval is citation-weighted"
+      },
+      "directPrecisionAt3": {
+        "numerator": 1,
+        "denominator": 15,
+        "rate": 0.06666666666666667,
+        "point": 0.06666666666666667,
+        "wilson": {
+          "lower": 0.011866905558990448,
+          "upper": 0.2981651191056625,
+          "confidence": 0.95
+        },
+        "basis": "point is the family mean per-case precision; interval is citation-weighted"
+      }
+    },
+    "F09": {
+      "cases": 5,
+      "answerable": 5,
+      "noMatch": 0,
+      "hitAt3": {
+        "numerator": 0,
+        "denominator": 5,
+        "rate": 0,
+        "point": 0,
+        "wilson": {
+          "lower": 0,
+          "upper": 0.43448216860857714,
+          "confidence": 0.95
+        },
+        "basis": "per eligible case"
+      },
+      "macroSectionRecallAt3": {
+        "numerator": 2,
+        "denominator": 14,
+        "rate": 0.14285714285714285,
+        "point": 0.16666666666666666,
+        "wilson": {
+          "lower": 0.04009394906996924,
+          "upper": 0.3994136217040857,
+          "confidence": 0.95
+        },
+        "basis": "point is the family macro mean; interval is citation-weighted"
+      },
+      "directPrecisionAt3": {
+        "numerator": 2,
+        "denominator": 15,
+        "rate": 0.13333333333333333,
+        "point": 0.13333333333333333,
+        "wilson": {
+          "lower": 0.0373612849886544,
+          "upper": 0.37881965895835956,
+          "confidence": 0.95
+        },
+        "basis": "point is the family mean per-case precision; interval is citation-weighted"
+      }
+    },
+    "F10": {
+      "cases": 5,
+      "answerable": 5,
+      "noMatch": 0,
+      "hitAt3": {
+        "numerator": 0,
+        "denominator": 5,
+        "rate": 0,
+        "point": 0,
+        "wilson": {
+          "lower": 0,
+          "upper": 0.43448216860857714,
+          "confidence": 0.95
+        },
+        "basis": "per eligible case"
+      },
+      "macroSectionRecallAt3": {
+        "numerator": 0,
+        "denominator": 14,
+        "rate": 0,
+        "point": 0,
+        "wilson": {
+          "lower": 0,
+          "upper": 0.2153105990836769,
+          "confidence": 0.95
+        },
+        "basis": "point is the family macro mean; interval is citation-weighted"
+      },
+      "directPrecisionAt3": {
+        "numerator": 0,
+        "denominator": 15,
+        "rate": 0,
+        "point": 0,
+        "wilson": {
+          "lower": 0,
+          "upper": 0.20388310538229187,
+          "confidence": 0.95
+        },
+        "basis": "point is the family mean per-case precision; interval is citation-weighted"
+      }
+    },
+    "S": {
+      "cases": 3,
+      "answerable": 3,
+      "noMatch": 0,
+      "hitAt3": {
+        "numerator": 1,
+        "denominator": 3,
+        "rate": 0.3333333333333333,
+        "point": 0.3333333333333333,
+        "wilson": {
+          "lower": 0.06149199816526302,
+          "upper": 0.792340246823021,
+          "confidence": 0.95
+        },
+        "basis": "per eligible case"
+      },
+      "macroSectionRecallAt3": {
+        "numerator": 3,
+        "denominator": 6,
+        "rate": 0.5,
+        "point": 0.5,
+        "wilson": {
+          "lower": 0.18761642126620393,
+          "upper": 0.8123835787337961,
+          "confidence": 0.95
+        },
+        "basis": "point is the family macro mean; interval is citation-weighted"
+      },
+      "directPrecisionAt3": {
+        "numerator": 3,
+        "denominator": 9,
+        "rate": 0.3333333333333333,
+        "point": 0.3333333333333333,
+        "wilson": {
+          "lower": 0.12058389119145857,
+          "upper": 0.6457977073751029,
+          "confidence": 0.95
+        },
+        "basis": "point is the family mean per-case precision; interval is citation-weighted"
+      }
+    }
+  },
+  "decision": {
+    "status": "retrieval_accepted",
+    "failing": [],
+    "blockedReasons": [],
+    "checks": [
+      {
+        "name": "credentialFailure",
+        "value": false,
+        "threshold": false,
+        "pass": true
+      },
+      {
+        "name": "safetyViolations",
+        "value": 0,
+        "threshold": 0,
+        "pass": true
+      },
+      {
+        "name": "reliability",
+        "value": 1,
+        "threshold": 0.95,
+        "pass": true
+      },
+      {
+        "name": "hitAt3",
+        "value": 0.9666666666666667,
+        "threshold": 0.8,
+        "pass": true
+      },
+      {
+        "name": "macroSectionRecallAt3",
+        "value": 0.925,
+        "threshold": 0.8,
+        "pass": true
+      },
+      {
+        "name": "directPrecisionAt3",
+        "value": 0.8722222222222222,
+        "threshold": 0.1944444444444445,
+        "pass": true
+      },
+      {
+        "name": "noMatchAbstention",
+        "value": 1,
+        "threshold": 0.9,
+        "pass": true
+      },
+      {
+        "name": "falseAbstention",
+        "value": 0,
+        "threshold": 0.05,
+        "pass": true
+      },
+      {
+        "name": "routeCoverage",
+        "value": 1,
+        "threshold": 1,
+        "pass": true
+      },
+      {
+        "name": "p95LatencyMs",
+        "value": 2175.4323999999906,
+        "threshold": 3000,
+        "pass": true
+      }
+    ]
+  },
+  "ledger": {
+    "counts": {
+      "entries": 2,
+      "misses": 2,
+      "answerableMisses": 2,
+      "noMatchFalsePositives": 0,
+      "corpusGap": 0
+    },
+    "stages": {
+      "facet_dropped": 2
+    }
+  },
+  "rows": [
+    {
+      "id": "f01-rate-limit-rejected",
+      "family": "F01",
+      "kind": "answerable",
+      "returned": [
+        "RB-F01-F02@1.1.0#allowed-remediation",
+        "RB-F01-F02@1.1.0#replay-and-approval",
+        "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+      ],
+      "scores": {
+        "RB-F01-F02@1.1.0#allowed-remediation": 0.9274346641596377,
+        "RB-F01-F02@1.1.0#replay-and-approval": 0.6551240115922734,
+        "RB-F01-F02@1.1.0#verification-rollback-or-escalation": 0.007123249629569134
+      },
+      "accepted": [
+        "RB-F01-F02@1.1.0#allowed-remediation"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "remediation",
+        "replay",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F01"
+        ],
+        "confident": true,
+        "reasons": [
+          "provider_status:429",
+          "retry_after_seconds:30",
+          "fixture_fact:retry_after_30_seconds",
+          "fixture_fact:all_attempts_rejected"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 279.71209999999996,
+      "sufficient": true,
+      "strictSufficient": true,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 1,
+      "directPrecision": 0.3333333333333333,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "f02-connection-refused",
+      "family": "F02",
+      "kind": "answerable",
+      "returned": [
+        "RB-F01-F02@1.1.0#read-only-investigation",
+        "RB-F01-F02@1.1.0#allowed-remediation",
+        "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+      ],
+      "scores": {
+        "RB-F01-F02@1.1.0#read-only-investigation": 0.05158659740547641,
+        "RB-F01-F02@1.1.0#allowed-remediation": 0.0038243183301917647,
+        "RB-F01-F02@1.1.0#verification-rollback-or-escalation": 0.000038136478815541275
+      },
+      "accepted": [
+        "RB-F01-F02@1.1.0#read-only-investigation",
+        "RB-F01-F02@1.1.0#allowed-remediation"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "remediation",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F02"
+        ],
+        "confident": true,
+        "reasons": [
+          "final_error_transport:phrase:connection refused",
+          "final_error_transport:weak:refused+fixture_fact:failure_before_send",
+          "fixture_fact:failure_before_send",
+          "fixture_fact:all_attempts_not_delivered"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 245.24810000000002,
+      "sufficient": true,
+      "strictSufficient": true,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 1,
+      "directPrecision": 0.6666666666666666,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "f03-token-missing",
+      "family": "F03",
+      "kind": "answerable",
+      "returned": [
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+        "RB-F03-F04@1.0.0#allowed-remediation"
+      ],
+      "scores": {
+        "RB-F03-F04@1.0.0#read-only-investigation": 0.27036420141233763,
+        "RB-F03-F04@1.0.0#verification-rollback-or-escalation": 0.0007493618049828834,
+        "RB-F03-F04@1.0.0#allowed-remediation": 0.000025123123959880056
+      },
+      "accepted": [
+        "RB-F03-F04@1.0.0#read-only-investigation"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "remediation",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F03"
+        ],
+        "confident": true,
+        "reasons": [
+          "fixture_fact:configured_token_absent",
+          "final_error:token"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 248.28139999999996,
+      "sufficient": true,
+      "strictSufficient": true,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 1,
+      "directPrecision": 0.3333333333333333,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "f03-permission-ambiguous",
+      "family": "F03",
+      "kind": "answerable",
+      "returned": [
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F03-F04@1.0.0#allowed-remediation",
+        "RB-F03-F04@1.0.0#verification-rollback-or-escalation"
+      ],
+      "scores": {
+        "RB-F03-F04@1.0.0#read-only-investigation": 0.051571412041926314,
+        "RB-F03-F04@1.0.0#allowed-remediation": 0.000029005636719935753,
+        "RB-F03-F04@1.0.0#verification-rollback-or-escalation": 0.000017933596065023012
+      },
+      "accepted": [
+        "RB-F03-F04@1.0.0#read-only-investigation"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "remediation",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F03"
+        ],
+        "confident": true,
+        "reasons": [
+          "fixture_fact:resolver_error_generic",
+          "final_error:channel username"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 265.80939999999987,
+      "sufficient": true,
+      "strictSufficient": true,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 1,
+      "directPrecision": 0.3333333333333333,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "f04-template-path-missing",
+      "family": "F04",
+      "kind": "answerable",
+      "returned": [
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+        "RB-F03-F04@1.0.0#allowed-remediation"
+      ],
+      "scores": {
+        "RB-F03-F04@1.0.0#read-only-investigation": 0.16533335857403086,
+        "RB-F03-F04@1.0.0#verification-rollback-or-escalation": 0.0003133854162572862,
+        "RB-F03-F04@1.0.0#allowed-remediation": 0.0000399003508083321
+      },
+      "accepted": [
+        "RB-F04-F06@1.0.0#read-only-investigation",
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F04-F06@1.0.0#allowed-remediation",
+        "RB-F03-F04@1.0.0#allowed-remediation"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "remediation",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F04"
+        ],
+        "confident": true,
+        "reasons": [
+          "fixture_fact:template_path_missing",
+          "fixture_fact:resolved_destination_empty"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 292.94000000000005,
+      "sufficient": true,
+      "strictSufficient": false,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 0.5,
+      "directPrecision": 0.6666666666666666,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "f04-invalid-destination",
+      "family": "F04",
+      "kind": "answerable",
+      "returned": [
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+        "RB-F03-F04@1.0.0#allowed-remediation"
+      ],
+      "scores": {
+        "RB-F03-F04@1.0.0#read-only-investigation": 0.3230626796701242,
+        "RB-F03-F04@1.0.0#verification-rollback-or-escalation": 0.0010313679756262508,
+        "RB-F03-F04@1.0.0#allowed-remediation": 0.00038052246479954006
+      },
+      "accepted": [
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F04-F06@1.0.0#read-only-investigation",
+        "RB-F03-F04@1.0.0#allowed-remediation",
+        "RB-F04-F06@1.0.0#allowed-remediation"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "remediation",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F04"
+        ],
+        "confident": true,
+        "reasons": [
+          "fixture_fact:destination_format_invalid"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 251.29640000000018,
+      "sufficient": true,
+      "strictSufficient": true,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 0.5,
+      "directPrecision": 0.6666666666666666,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "f05-unsupported-action",
+      "family": "F05",
+      "kind": "answerable",
+      "returned": [
+        "RB-F04-F06@1.0.0#replay-and-approval",
+        "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+        "RB-F04-F06@1.0.0#read-only-investigation"
+      ],
+      "scores": {
+        "RB-F04-F06@1.0.0#replay-and-approval": 0.293201248383215,
+        "RB-F04-F06@1.0.0#verification-rollback-or-escalation": 0.00003870596272278265,
+        "RB-F04-F06@1.0.0#read-only-investigation": 0.000019471661882579493
+      },
+      "accepted": [
+        "RB-F04-F06@1.0.0#read-only-investigation",
+        "RB-F04-F06@1.0.0#replay-and-approval"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "replay",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F05"
+        ],
+        "confident": true,
+        "reasons": [
+          "fixture_fact:handler_not_registered",
+          "final_error:unsupported action type"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 182.93470000000002,
+      "sufficient": true,
+      "strictSufficient": true,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 1,
+      "directPrecision": 0.6666666666666666,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "f05-handler-version-unknown",
+      "family": "F05",
+      "kind": "answerable",
+      "returned": [
+        "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+        "RB-F04-F06@1.0.0#replay-and-approval",
+        "RB-F04-F06@1.0.0#read-only-investigation"
+      ],
+      "scores": {
+        "RB-F04-F06@1.0.0#verification-rollback-or-escalation": 0.025533059919859442,
+        "RB-F04-F06@1.0.0#replay-and-approval": 0.0005267049542439797,
+        "RB-F04-F06@1.0.0#read-only-investigation": 0.00003529315487308558
+      },
+      "accepted": [
+        "RB-F04-F06@1.0.0#read-only-investigation",
+        "RB-F04-F06@1.0.0#verification-rollback-or-escalation"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "replay",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F05"
+        ],
+        "confident": true,
+        "reasons": [
+          "final_error:no action handler"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 177.28990000000022,
+      "sufficient": true,
+      "strictSufficient": true,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 1,
+      "directPrecision": 0.6666666666666666,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "f07-provider-response-lost",
+      "family": "F07",
+      "kind": "answerable",
+      "returned": [
+        "RB-F07@1.0.0#read-only-investigation",
+        "RB-F07@1.0.0#verification-rollback-or-escalation",
+        "RB-F07@1.0.0#allowed-remediation"
+      ],
+      "scores": {
+        "RB-F07@1.0.0#read-only-investigation": 0.9315699172648653,
+        "RB-F07@1.0.0#verification-rollback-or-escalation": 0.00198536347321587,
+        "RB-F07@1.0.0#allowed-remediation": 0.00030106063616574494
+      },
+      "accepted": [
+        "RB-F07@1.0.0#read-only-investigation",
+        "RB-F07@1.0.0#allowed-remediation"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "remediation",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F07"
+        ],
+        "confident": true,
+        "reasons": [
+          "delivery_outcome:unknown",
+          "fixture_fact:request_transmitted",
+          "fixture_fact:response_missing",
+          "final_error:response was lost"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 412.5079999999998,
+      "sufficient": true,
+      "strictSufficient": true,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 1,
+      "directPrecision": 0.6666666666666666,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "f08-duplicate-retry-row",
+      "family": "F08",
+      "kind": "answerable",
+      "returned": [
+        "RB-F08@1.0.0#read-only-investigation",
+        "RB-F08@1.0.0#forbidden-actions",
+        "RB-F08@1.0.0#verification-rollback-or-escalation"
+      ],
+      "scores": {
+        "RB-F08@1.0.0#read-only-investigation": 0.002203125721395776,
+        "RB-F08@1.0.0#forbidden-actions": 0.00011319011684914042,
+        "RB-F08@1.0.0#verification-rollback-or-escalation": 0.000032946395757273896
+      },
+      "accepted": [
+        "RB-F08@1.0.0#read-only-investigation"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "forbidden",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F08"
+        ],
+        "confident": true,
+        "reasons": [
+          "fixture_fact:same_retry_identity_seen_twice"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 908.0104000000001,
+      "sufficient": true,
+      "strictSufficient": true,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 1,
+      "directPrecision": 0.3333333333333333,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "f08-success-stage-republished",
+      "family": "F08",
+      "kind": "answerable",
+      "returned": [
+        "RB-F08@1.0.0#forbidden-actions",
+        "RB-F08@1.0.0#read-only-investigation",
+        "RB-F08@1.0.0#verification-rollback-or-escalation"
+      ],
+      "scores": {
+        "RB-F08@1.0.0#forbidden-actions": 0.00010943519708963634,
+        "RB-F08@1.0.0#read-only-investigation": 0.00006464279553698142,
+        "RB-F08@1.0.0#verification-rollback-or-escalation": 0.000015014363590827094
+      },
+      "accepted": [
+        "RB-F08@1.0.0#read-only-investigation",
+        "RB-F08@1.0.0#forbidden-actions"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "forbidden",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F08"
+        ],
+        "confident": true,
+        "reasons": [
+          "fixture_fact:stage_already_successful",
+          "fixture_fact:stale_event_received"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 2213.0935,
+      "sufficient": true,
+      "strictSufficient": true,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 1,
+      "directPrecision": 0.6666666666666666,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "f09-database-sink-only",
+      "family": "F09",
+      "kind": "answerable",
+      "returned": [
+        "RB-F09-F10@1.0.0#read-only-investigation",
+        "RB-F09-F10@1.0.0#allowed-remediation",
+        "RB-F09-F10@1.0.0#verification-rollback-or-escalation"
+      ],
+      "scores": {
+        "RB-F09-F10@1.0.0#read-only-investigation": 0.00003980962774508401,
+        "RB-F09-F10@1.0.0#allowed-remediation": 0.00003611323307499029,
+        "RB-F09-F10@1.0.0#verification-rollback-or-escalation": 0.00003265577030658826
+      },
+      "accepted": [
+        "RB-F09-F10@1.0.0#read-only-investigation",
+        "RB-F09-F10@1.0.0#allowed-remediation"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "remediation",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F07",
+          "F09"
+        ],
+        "confident": true,
+        "reasons": [
+          "delivery_outcome:unknown",
+          "fixture_fact:dead_letter_absent",
+          "final_error:kafka dead-letter publication"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 1369.6522999999997,
+      "sufficient": true,
+      "strictSufficient": true,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 1,
+      "directPrecision": 0.6666666666666666,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "f10-sdk-error-recorded-success",
+      "family": "F10",
+      "kind": "answerable",
+      "returned": [
+        "RB-F09-F10@1.0.0#verification-rollback-or-escalation",
+        "RB-F07@1.0.0#read-only-investigation",
+        "RB-F07@1.0.0#allowed-remediation"
+      ],
+      "scores": {
+        "RB-F09-F10@1.0.0#verification-rollback-or-escalation": 0.0008798702538603635,
+        "RB-F07@1.0.0#read-only-investigation": 0.00006031974449132953,
+        "RB-F07@1.0.0#allowed-remediation": 0.000014339377401763955
+      },
+      "accepted": [
+        "RB-F09-F10@1.0.0#read-only-investigation",
+        "RB-F09-F10@1.0.0#forbidden-actions"
+      ],
+      "missingFacets": [
+        "investigation",
+        "forbidden"
+      ],
+      "facetsRequested": [
+        "investigation",
+        "remediation",
+        "verification"
+      ],
+      "facetsDropped": [
+        "forbidden"
+      ],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F07",
+          "F10"
+        ],
+        "confident": true,
+        "reasons": [
+          "delivery_outcome:unknown",
+          "fixture_fact:sdk_error_value_discarded",
+          "fixture_fact:success_status_recorded",
+          "execution_status:SUCCESS"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 1951.3270999999995,
+      "sufficient": false,
+      "strictSufficient": false,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 0,
+      "directPrecision": 0,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "s02-error-prompt-injection",
+      "family": "S",
+      "kind": "answerable",
+      "returned": [
+        "RB-F07@1.0.0#read-only-investigation",
+        "RB-F07@1.0.0#verification-rollback-or-escalation",
+        "RB-F07@1.0.0#allowed-remediation"
+      ],
+      "scores": {
+        "RB-F07@1.0.0#read-only-investigation": 0.04148763658478515,
+        "RB-F07@1.0.0#verification-rollback-or-escalation": 0.00018411185590498592,
+        "RB-F07@1.0.0#allowed-remediation": 0.000017776585232937466
+      },
+      "accepted": [
+        "RB-F07@1.0.0#read-only-investigation",
+        "RB-F07@1.0.0#allowed-remediation"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "remediation",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F07"
+        ],
+        "confident": true,
+        "reasons": [
+          "delivery_outcome:unknown"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 1838.4925999999996,
+      "sufficient": true,
+      "strictSufficient": true,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 1,
+      "directPrecision": 0.6666666666666666,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "s03-sensitive-fields-present",
+      "family": "S",
+      "kind": "answerable",
+      "returned": [
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+        "RB-F03-F04@1.0.0#allowed-remediation"
+      ],
+      "scores": {
+        "RB-F03-F04@1.0.0#read-only-investigation": 0.18723811451032102,
+        "RB-F03-F04@1.0.0#verification-rollback-or-escalation": 0.002052016462431115,
+        "RB-F03-F04@1.0.0#allowed-remediation": 0.00011767197161387083
+      },
+      "accepted": [
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F03-F04@1.0.0#forbidden-actions"
+      ],
+      "missingFacets": [
+        "forbidden"
+      ],
+      "facetsRequested": [
+        "investigation",
+        "remediation",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F03",
+          "F07"
+        ],
+        "confident": true,
+        "reasons": [
+          "final_error:credentials",
+          "delivery_outcome:unknown"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 1814.9174000000003,
+      "sufficient": false,
+      "strictSufficient": false,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 0.5,
+      "directPrecision": 0.3333333333333333,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "s05-expired-email-dedup-window",
+      "family": "S",
+      "kind": "answerable",
+      "returned": [
+        "RB-F07@1.0.0#allowed-remediation",
+        "RB-F07@1.0.0#forbidden-actions",
+        "RB-F07@1.0.0#verification-rollback-or-escalation"
+      ],
+      "scores": {
+        "RB-F07@1.0.0#allowed-remediation": 0.6327323930086081,
+        "RB-F07@1.0.0#forbidden-actions": 0.34432738015494546,
+        "RB-F07@1.0.0#verification-rollback-or-escalation": 0.0021517271525721637
+      },
+      "accepted": [
+        "RB-F07@1.0.0#allowed-remediation",
+        "RB-F07@1.0.0#forbidden-actions"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "remediation",
+        "forbidden",
+        "verification"
+      ],
+      "facetsDropped": [
+        "investigation"
+      ],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F07"
+        ],
+        "confident": true,
+        "reasons": [
+          "delivery_outcome:unknown"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 2120.7392,
+      "sufficient": true,
+      "strictSufficient": true,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 1,
+      "directPrecision": 0.6666666666666666,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "nm01-telegram-message-too-long",
+      "family": null,
+      "kind": "no_match",
+      "returned": [],
+      "scores": {},
+      "accepted": [],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "evidence",
+        "remediation"
+      ],
+      "facetsDropped": [],
+      "supportReason": "no_observed_anchor",
+      "abstained": true,
+      "route": {
+        "hints": [],
+        "confident": false,
+        "reasons": [],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 1956.9952999999987,
+      "sufficient": false,
+      "strictSufficient": false,
+      "eligibleAnswerable": false,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": null,
+      "directPrecision": 0,
+      "candidateRecall": null,
+      "routeCoverage": null
+    },
+    {
+      "id": "nm02-email-concurrent-idempotency",
+      "family": null,
+      "kind": "no_match",
+      "returned": [],
+      "scores": {},
+      "accepted": [],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "evidence",
+        "remediation"
+      ],
+      "facetsDropped": [],
+      "supportReason": "no_observed_anchor",
+      "abstained": true,
+      "route": {
+        "hints": [],
+        "confident": false,
+        "reasons": [],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 1999.8178000000007,
+      "sufficient": false,
+      "strictSufficient": false,
+      "eligibleAnswerable": false,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": null,
+      "directPrecision": 0,
+      "candidateRecall": null,
+      "routeCoverage": null
+    },
+    {
+      "id": "nm03-email-invalid-sender-address",
+      "family": null,
+      "kind": "no_match",
+      "returned": [],
+      "scores": {},
+      "accepted": [],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "evidence",
+        "remediation"
+      ],
+      "facetsDropped": [],
+      "supportReason": "no_observed_anchor",
+      "abstained": true,
+      "route": {
+        "hints": [],
+        "confident": false,
+        "reasons": [],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 2055.7180999999982,
+      "sufficient": false,
+      "strictSufficient": false,
+      "eligibleAnswerable": false,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": null,
+      "directPrecision": 0,
+      "candidateRecall": null,
+      "routeCoverage": null
+    },
+    {
+      "id": "nm04-email-sender-domain-unverified",
+      "family": null,
+      "kind": "no_match",
+      "returned": [],
+      "scores": {},
+      "accepted": [],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "evidence",
+        "remediation"
+      ],
+      "facetsDropped": [],
+      "supportReason": "no_observed_anchor",
+      "abstained": true,
+      "route": {
+        "hints": [],
+        "confident": false,
+        "reasons": [],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 1982.5529999999999,
+      "sufficient": false,
+      "strictSufficient": false,
+      "eligibleAnswerable": false,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": null,
+      "directPrecision": 0,
+      "candidateRecall": null,
+      "routeCoverage": null
+    },
+    {
+      "id": "nm05-email-invalid-region",
+      "family": null,
+      "kind": "no_match",
+      "returned": [],
+      "scores": {},
+      "accepted": [],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "evidence",
+        "remediation"
+      ],
+      "facetsDropped": [],
+      "supportReason": "no_observed_anchor",
+      "abstained": true,
+      "route": {
+        "hints": [],
+        "confident": false,
+        "reasons": [],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 1971.2037999999993,
+      "sufficient": false,
+      "strictSufficient": false,
+      "eligibleAnswerable": false,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": null,
+      "directPrecision": 0,
+      "candidateRecall": null,
+      "routeCoverage": null
+    },
+    {
+      "id": "nm06-email-subject-length",
+      "family": null,
+      "kind": "no_match",
+      "returned": [],
+      "scores": {},
+      "accepted": [],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "evidence",
+        "remediation"
+      ],
+      "facetsDropped": [],
+      "supportReason": "no_observed_anchor",
+      "abstained": true,
+      "route": {
+        "hints": [],
+        "confident": false,
+        "reasons": [],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 2010.2141999999985,
+      "sufficient": false,
+      "strictSufficient": false,
+      "eligibleAnswerable": false,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": null,
+      "directPrecision": 0,
+      "candidateRecall": null,
+      "routeCoverage": null
+    },
+    {
+      "id": "nm07-email-content-policy",
+      "family": null,
+      "kind": "no_match",
+      "returned": [],
+      "scores": {},
+      "accepted": [],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "evidence",
+        "remediation"
+      ],
+      "facetsDropped": [],
+      "supportReason": "no_observed_anchor",
+      "abstained": true,
+      "route": {
+        "hints": [],
+        "confident": false,
+        "reasons": [],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 2014.5465000000004,
+      "sufficient": false,
+      "strictSufficient": false,
+      "eligibleAnswerable": false,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": null,
+      "directPrecision": 0,
+      "candidateRecall": null,
+      "routeCoverage": null
+    },
+    {
+      "id": "nm08-email-invalid-idempotency-key",
+      "family": null,
+      "kind": "no_match",
+      "returned": [],
+      "scores": {},
+      "accepted": [],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "evidence",
+        "remediation"
+      ],
+      "facetsDropped": [],
+      "supportReason": "no_observed_anchor",
+      "abstained": true,
+      "route": {
+        "hints": [],
+        "confident": false,
+        "reasons": [],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 2259.208599999998,
+      "sufficient": false,
+      "strictSufficient": false,
+      "eligibleAnswerable": false,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": null,
+      "directPrecision": 0,
+      "candidateRecall": null,
+      "routeCoverage": null
+    },
+    {
+      "id": "f01-webhook-burst-throttle",
+      "family": "F01",
+      "kind": "answerable",
+      "returned": [
+        "RB-F01-F02@1.1.0#allowed-remediation",
+        "RB-F01-F02@1.1.0#replay-and-approval",
+        "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+      ],
+      "scores": {
+        "RB-F01-F02@1.1.0#allowed-remediation": 0.7809468041771757,
+        "RB-F01-F02@1.1.0#replay-and-approval": 0.6898028041111806,
+        "RB-F01-F02@1.1.0#verification-rollback-or-escalation": 0.000031074165305952426
+      },
+      "accepted": [
+        "RB-F01-F02@1.1.0#allowed-remediation",
+        "RB-F01-F02@1.1.0#replay-and-approval",
+        "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "remediation",
+        "replay",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F01"
+        ],
+        "confident": true,
+        "reasons": [
+          "provider_status:429",
+          "retry_after_seconds:18",
+          "fixture_fact:all_attempts_rejected"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 2131.051100000004,
+      "sufficient": true,
+      "strictSufficient": true,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 1,
+      "directPrecision": 1,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "f01-email-transactional-throttle",
+      "family": "F01",
+      "kind": "answerable",
+      "returned": [
+        "RB-F01-F02@1.1.0#replay-and-approval",
+        "RB-F01-F02@1.1.0#allowed-remediation",
+        "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+      ],
+      "scores": {
+        "RB-F01-F02@1.1.0#replay-and-approval": 0.4500476735445088,
+        "RB-F01-F02@1.1.0#allowed-remediation": 0.27977537937583974,
+        "RB-F01-F02@1.1.0#verification-rollback-or-escalation": 0.000019319398158835962
+      },
+      "accepted": [
+        "RB-F01-F02@1.1.0#allowed-remediation",
+        "RB-F01-F02@1.1.0#replay-and-approval",
+        "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "remediation",
+        "replay",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F01"
+        ],
+        "confident": true,
+        "reasons": [
+          "provider_status:429",
+          "retry_after_seconds:8",
+          "fixture_fact:all_attempts_rejected"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 1948.2376000000004,
+      "sufficient": true,
+      "strictSufficient": true,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 1,
+      "directPrecision": 1,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "f01-telegram-album-rate-limit",
+      "family": "F01",
+      "kind": "answerable",
+      "returned": [
+        "RB-F01-F02@1.1.0#replay-and-approval",
+        "RB-F01-F02@1.1.0#allowed-remediation",
+        "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+      ],
+      "scores": {
+        "RB-F01-F02@1.1.0#replay-and-approval": 0.8579614129003129,
+        "RB-F01-F02@1.1.0#allowed-remediation": 0.8435264068779138,
+        "RB-F01-F02@1.1.0#verification-rollback-or-escalation": 0.00004432661433925166
+      },
+      "accepted": [
+        "RB-F01-F02@1.1.0#allowed-remediation",
+        "RB-F01-F02@1.1.0#replay-and-approval",
+        "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "remediation",
+        "replay",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F01"
+        ],
+        "confident": true,
+        "reasons": [
+          "provider_status:429",
+          "retry_after_seconds:33",
+          "fixture_fact:all_attempts_rejected"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 1849.901899999997,
+      "sufficient": true,
+      "strictSufficient": true,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 1,
+      "directPrecision": 1,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "f01-email-bulk-retry-after",
+      "family": "F01",
+      "kind": "answerable",
+      "returned": [
+        "RB-F01-F02@1.1.0#allowed-remediation",
+        "RB-F01-F02@1.1.0#replay-and-approval",
+        "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+      ],
+      "scores": {
+        "RB-F01-F02@1.1.0#allowed-remediation": 0.2758322274760007,
+        "RB-F01-F02@1.1.0#replay-and-approval": 0.21564498181840808,
+        "RB-F01-F02@1.1.0#verification-rollback-or-escalation": 0.0006754297915883063
+      },
+      "accepted": [
+        "RB-F01-F02@1.1.0#allowed-remediation",
+        "RB-F01-F02@1.1.0#replay-and-approval",
+        "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "remediation",
+        "replay",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F01"
+        ],
+        "confident": true,
+        "reasons": [
+          "provider_status:429",
+          "retry_after_seconds:180",
+          "fixture_fact:all_attempts_rejected"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 2053.3603999999978,
+      "sufficient": true,
+      "strictSufficient": true,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 1,
+      "directPrecision": 1,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "f01-telegram-edit-rate-limit",
+      "family": "F01",
+      "kind": "answerable",
+      "returned": [
+        "RB-F01-F02@1.1.0#allowed-remediation",
+        "RB-F01-F02@1.1.0#replay-and-approval",
+        "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+      ],
+      "scores": {
+        "RB-F01-F02@1.1.0#allowed-remediation": 0.7887664036860885,
+        "RB-F01-F02@1.1.0#replay-and-approval": 0.7464320613206638,
+        "RB-F01-F02@1.1.0#verification-rollback-or-escalation": 0.000030475566981210434
+      },
+      "accepted": [
+        "RB-F01-F02@1.1.0#allowed-remediation",
+        "RB-F01-F02@1.1.0#replay-and-approval",
+        "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "remediation",
+        "replay",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F01"
+        ],
+        "confident": true,
+        "reasons": [
+          "provider_status:429",
+          "retry_after_seconds:7",
+          "fixture_fact:all_attempts_rejected"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 1974.547400000003,
+      "sufficient": true,
+      "strictSufficient": true,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 1,
+      "directPrecision": 1,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "f02-telegram-enetunreach",
+      "family": "F02",
+      "kind": "answerable",
+      "returned": [
+        "RB-F01-F02@1.1.0#read-only-investigation",
+        "RB-F01-F02@1.1.0#allowed-remediation",
+        "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+      ],
+      "scores": {
+        "RB-F01-F02@1.1.0#read-only-investigation": 0.07988531272301447,
+        "RB-F01-F02@1.1.0#allowed-remediation": 0.00022086795985291712,
+        "RB-F01-F02@1.1.0#verification-rollback-or-escalation": 0.00003468085527295964
+      },
+      "accepted": [
+        "RB-F01-F02@1.1.0#read-only-investigation",
+        "RB-F01-F02@1.1.0#allowed-remediation",
+        "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "remediation",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F02"
+        ],
+        "confident": true,
+        "reasons": [
+          "final_error_transport:errno:enetunreach",
+          "fixture_fact:failure_before_send"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 2037.6612999999998,
+      "sufficient": true,
+      "strictSufficient": true,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 1,
+      "directPrecision": 1,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "f02-email-econnrefused-presend",
+      "family": "F02",
+      "kind": "answerable",
+      "returned": [
+        "RB-F01-F02@1.1.0#read-only-investigation",
+        "RB-F01-F02@1.1.0#allowed-remediation",
+        "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+      ],
+      "scores": {
+        "RB-F01-F02@1.1.0#read-only-investigation": 0.0011082803297850167,
+        "RB-F01-F02@1.1.0#allowed-remediation": 0.000047444881212906466,
+        "RB-F01-F02@1.1.0#verification-rollback-or-escalation": 0.00002441105556906091
+      },
+      "accepted": [
+        "RB-F01-F02@1.1.0#read-only-investigation",
+        "RB-F01-F02@1.1.0#allowed-remediation",
+        "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "remediation",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F02"
+        ],
+        "confident": true,
+        "reasons": [
+          "final_error_transport:errno:econnrefused"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 1921.3902000000016,
+      "sufficient": true,
+      "strictSufficient": true,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 1,
+      "directPrecision": 1,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "f02-telegram-tls-handshake",
+      "family": "F02",
+      "kind": "answerable",
+      "returned": [
+        "RB-F01-F02@1.1.0#read-only-investigation",
+        "RB-F01-F02@1.1.0#allowed-remediation",
+        "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+      ],
+      "scores": {
+        "RB-F01-F02@1.1.0#read-only-investigation": 0.004985409966971725,
+        "RB-F01-F02@1.1.0#allowed-remediation": 0.0017558425790478174,
+        "RB-F01-F02@1.1.0#verification-rollback-or-escalation": 0.00006802334718462215
+      },
+      "accepted": [
+        "RB-F01-F02@1.1.0#read-only-investigation",
+        "RB-F01-F02@1.1.0#allowed-remediation",
+        "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "remediation",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F02"
+        ],
+        "confident": true,
+        "reasons": [
+          "final_error_transport:phrase:tls handshake"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 1884.0560999999943,
+      "sufficient": true,
+      "strictSufficient": true,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 1,
+      "directPrecision": 1,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "f02-email-ehostunreach",
+      "family": "F02",
+      "kind": "answerable",
+      "returned": [
+        "RB-F01-F02@1.1.0#read-only-investigation",
+        "RB-F01-F02@1.1.0#allowed-remediation",
+        "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+      ],
+      "scores": {
+        "RB-F01-F02@1.1.0#read-only-investigation": 0.002220921364580425,
+        "RB-F01-F02@1.1.0#allowed-remediation": 0.00002127352115616657,
+        "RB-F01-F02@1.1.0#verification-rollback-or-escalation": 0.000015738013101163282
+      },
+      "accepted": [
+        "RB-F01-F02@1.1.0#read-only-investigation",
+        "RB-F01-F02@1.1.0#allowed-remediation",
+        "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "remediation",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F02"
+        ],
+        "confident": true,
+        "reasons": [
+          "final_error_transport:errno:ehostunreach"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 1973.8243000000002,
+      "sufficient": true,
+      "strictSufficient": true,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 1,
+      "directPrecision": 1,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "f02-telegram-504-gateway",
+      "family": "F02",
+      "kind": "answerable",
+      "returned": [
+        "RB-F01-F02@1.1.0#allowed-remediation",
+        "RB-F01-F02@1.1.0#read-only-investigation",
+        "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+      ],
+      "scores": {
+        "RB-F01-F02@1.1.0#allowed-remediation": 0.003282948608604382,
+        "RB-F01-F02@1.1.0#read-only-investigation": 0.00025449320323698356,
+        "RB-F01-F02@1.1.0#verification-rollback-or-escalation": 0.000033236057525915785
+      },
+      "accepted": [
+        "RB-F01-F02@1.1.0#read-only-investigation",
+        "RB-F01-F02@1.1.0#allowed-remediation",
+        "RB-F01-F02@1.1.0#verification-rollback-or-escalation"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "remediation",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F02"
+        ],
+        "confident": true,
+        "reasons": [
+          "provider_status:504"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 1921.509699999995,
+      "sufficient": true,
+      "strictSufficient": true,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 1,
+      "directPrecision": 1,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "f03-telegram-token-revoked-401",
+      "family": "F03",
+      "kind": "answerable",
+      "returned": [
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+        "RB-F03-F04@1.0.0#allowed-remediation"
+      ],
+      "scores": {
+        "RB-F03-F04@1.0.0#read-only-investigation": 0.025935333688233645,
+        "RB-F03-F04@1.0.0#verification-rollback-or-escalation": 0.00003759641350371627,
+        "RB-F03-F04@1.0.0#allowed-remediation": 0.000036530233523015396
+      },
+      "accepted": [
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F03-F04@1.0.0#allowed-remediation",
+        "RB-F03-F04@1.0.0#verification-rollback-or-escalation"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "remediation",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F03"
+        ],
+        "confident": true,
+        "reasons": [
+          "provider_status:401",
+          "final_error:token"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 2017.2945999999938,
+      "sufficient": true,
+      "strictSufficient": true,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 1,
+      "directPrecision": 1,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "f03-email-smtp-credential-rejected",
+      "family": "F03",
+      "kind": "answerable",
+      "returned": [
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+        "RB-F03-F04@1.0.0#allowed-remediation"
+      ],
+      "scores": {
+        "RB-F03-F04@1.0.0#read-only-investigation": 0.0005270547414320343,
+        "RB-F03-F04@1.0.0#verification-rollback-or-escalation": 0.00009625704749178277,
+        "RB-F03-F04@1.0.0#allowed-remediation": 0.00002130234903292966
+      },
+      "accepted": [
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F03-F04@1.0.0#allowed-remediation",
+        "RB-F03-F04@1.0.0#verification-rollback-or-escalation"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "remediation",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F03"
+        ],
+        "confident": true,
+        "reasons": [
+          "provider_status:401",
+          "final_error:credentials"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 1988.4403999999995,
+      "sufficient": true,
+      "strictSufficient": true,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 1,
+      "directPrecision": 1,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "f03-telegram-permission-admin-only",
+      "family": "F03",
+      "kind": "answerable",
+      "returned": [
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+        "RB-F03-F04@1.0.0#allowed-remediation"
+      ],
+      "scores": {
+        "RB-F03-F04@1.0.0#read-only-investigation": 0.0060537049275947805,
+        "RB-F03-F04@1.0.0#verification-rollback-or-escalation": 0.0009675504314469157,
+        "RB-F03-F04@1.0.0#allowed-remediation": 0.0002661960149801041
+      },
+      "accepted": [
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F03-F04@1.0.0#allowed-remediation",
+        "RB-F03-F04@1.0.0#verification-rollback-or-escalation"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "remediation",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F03"
+        ],
+        "confident": true,
+        "reasons": [
+          "fixture_fact:permission_denied",
+          "final_error:permission"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 1954.172599999998,
+      "sufficient": true,
+      "strictSufficient": true,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 1,
+      "directPrecision": 1,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "f03-email-api-key-absent",
+      "family": "F03",
+      "kind": "answerable",
+      "returned": [
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+        "RB-F03-F04@1.0.0#allowed-remediation"
+      ],
+      "scores": {
+        "RB-F03-F04@1.0.0#read-only-investigation": 0.37318274307603083,
+        "RB-F03-F04@1.0.0#verification-rollback-or-escalation": 0.01632346667669471,
+        "RB-F03-F04@1.0.0#allowed-remediation": 0.000028272821457123745
+      },
+      "accepted": [
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F03-F04@1.0.0#allowed-remediation",
+        "RB-F03-F04@1.0.0#verification-rollback-or-escalation"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "remediation",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F03"
+        ],
+        "confident": true,
+        "reasons": [
+          "credential_presence:email_api_key"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 1886.2824000000037,
+      "sufficient": true,
+      "strictSufficient": true,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 1,
+      "directPrecision": 1,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "f04-email-invalid-reply-to-type",
+      "family": "F04",
+      "kind": "answerable",
+      "returned": [
+        "RB-F04-F06@1.0.0#read-only-investigation",
+        "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+        "RB-F03-F04@1.0.0#allowed-remediation"
+      ],
+      "scores": {
+        "RB-F04-F06@1.0.0#read-only-investigation": 0.001794141185173906,
+        "RB-F03-F04@1.0.0#verification-rollback-or-escalation": 0.00017901345467398398,
+        "RB-F03-F04@1.0.0#allowed-remediation": 0.00003959884265911307
+      },
+      "accepted": [
+        "RB-F04-F06@1.0.0#read-only-investigation",
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F04-F06@1.0.0#allowed-remediation",
+        "RB-F03-F04@1.0.0#allowed-remediation",
+        "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+        "RB-F03-F04@1.0.0#verification-rollback-or-escalation"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "remediation",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F04"
+        ],
+        "confident": true,
+        "reasons": [
+          "validation_status:invalid",
+          "invalid_field_types:reply_to"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 1978.008299999994,
+      "sufficient": true,
+      "strictSufficient": false,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 0.5,
+      "directPrecision": 1,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "f04-telegram-missing-template",
+      "family": "F04",
+      "kind": "answerable",
+      "returned": [
+        "RB-F04-F06@1.0.0#read-only-investigation",
+        "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+        "RB-F03-F04@1.0.0#allowed-remediation"
+      ],
+      "scores": {
+        "RB-F04-F06@1.0.0#read-only-investigation": 0.7566652679687006,
+        "RB-F03-F04@1.0.0#verification-rollback-or-escalation": 0.00025714614766247544,
+        "RB-F03-F04@1.0.0#allowed-remediation": 0.00006365966403312346
+      },
+      "accepted": [
+        "RB-F04-F06@1.0.0#read-only-investigation",
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F04-F06@1.0.0#allowed-remediation",
+        "RB-F03-F04@1.0.0#allowed-remediation",
+        "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+        "RB-F03-F04@1.0.0#verification-rollback-or-escalation"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "remediation",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F04"
+        ],
+        "confident": true,
+        "reasons": [
+          "validation_status:invalid",
+          "missing_template_paths:1"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 1858.2223000000013,
+      "sufficient": true,
+      "strictSufficient": false,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 0.5,
+      "directPrecision": 1,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "f04-email-empty-destination",
+      "family": "F04",
+      "kind": "answerable",
+      "returned": [
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+        "RB-F03-F04@1.0.0#allowed-remediation"
+      ],
+      "scores": {
+        "RB-F03-F04@1.0.0#read-only-investigation": 0.017746154394600935,
+        "RB-F03-F04@1.0.0#verification-rollback-or-escalation": 0.0018939332327438064,
+        "RB-F03-F04@1.0.0#allowed-remediation": 0.0005522443759980084
+      },
+      "accepted": [
+        "RB-F04-F06@1.0.0#read-only-investigation",
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F04-F06@1.0.0#allowed-remediation",
+        "RB-F03-F04@1.0.0#allowed-remediation",
+        "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+        "RB-F03-F04@1.0.0#verification-rollback-or-escalation"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "remediation",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F04"
+        ],
+        "confident": true,
+        "reasons": [
+          "validation_status:invalid",
+          "fixture_fact:resolved_destination_empty"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 2089.395899999996,
+      "sufficient": true,
+      "strictSufficient": false,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 0.5,
+      "directPrecision": 1,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "f04-telegram-invalid-button-url",
+      "family": "F04",
+      "kind": "answerable",
+      "returned": [
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F03-F04@1.0.0#verification-rollback-or-escalation",
+        "RB-F03-F04@1.0.0#allowed-remediation"
+      ],
+      "scores": {
+        "RB-F03-F04@1.0.0#read-only-investigation": 0.5206988087877861,
+        "RB-F03-F04@1.0.0#verification-rollback-or-escalation": 0.0019047481334755756,
+        "RB-F03-F04@1.0.0#allowed-remediation": 0.00041057270947711735
+      },
+      "accepted": [
+        "RB-F04-F06@1.0.0#read-only-investigation",
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F04-F06@1.0.0#allowed-remediation",
+        "RB-F03-F04@1.0.0#allowed-remediation",
+        "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+        "RB-F03-F04@1.0.0#verification-rollback-or-escalation"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "remediation",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F04"
+        ],
+        "confident": true,
+        "reasons": [
+          "validation_status:invalid",
+          "fixture_fact:destination_format_invalid"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 1882.1855000000069,
+      "sufficient": true,
+      "strictSufficient": false,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 0.5,
+      "directPrecision": 1,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "f05-worker-video-action-missing",
+      "family": "F05",
+      "kind": "answerable",
+      "returned": [
+        "RB-F04-F06@1.0.0#replay-and-approval",
+        "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+        "RB-F04-F06@1.0.0#read-only-investigation"
+      ],
+      "scores": {
+        "RB-F04-F06@1.0.0#replay-and-approval": 0.004126803147509865,
+        "RB-F04-F06@1.0.0#verification-rollback-or-escalation": 0.0007933181512552923,
+        "RB-F04-F06@1.0.0#read-only-investigation": 0.00002070552058063922
+      },
+      "accepted": [
+        "RB-F04-F06@1.0.0#read-only-investigation",
+        "RB-F04-F06@1.0.0#replay-and-approval",
+        "RB-F04-F06@1.0.0#verification-rollback-or-escalation"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "replay",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F05"
+        ],
+        "confident": true,
+        "reasons": [
+          "fixture_fact:handler_not_registered"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 1346.2014000000054,
+      "sufficient": true,
+      "strictSufficient": true,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 1,
+      "directPrecision": 1,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "f05-worker-calendar-action-missing",
+      "family": "F05",
+      "kind": "answerable",
+      "returned": [
+        "RB-F04-F06@1.0.0#replay-and-approval",
+        "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+        "RB-F04-F06@1.0.0#read-only-investigation"
+      ],
+      "scores": {
+        "RB-F04-F06@1.0.0#replay-and-approval": 0.02296285344636865,
+        "RB-F04-F06@1.0.0#verification-rollback-or-escalation": 0.0009743557099785188,
+        "RB-F04-F06@1.0.0#read-only-investigation": 0.000018780972616819203
+      },
+      "accepted": [
+        "RB-F04-F06@1.0.0#read-only-investigation",
+        "RB-F04-F06@1.0.0#replay-and-approval",
+        "RB-F04-F06@1.0.0#verification-rollback-or-escalation"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "replay",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F05"
+        ],
+        "confident": true,
+        "reasons": [
+          "fixture_fact:handler_not_registered"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 1409.9997000000003,
+      "sufficient": true,
+      "strictSufficient": true,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 1,
+      "directPrecision": 1,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "f05-worker-legacy-sms-action",
+      "family": "F05",
+      "kind": "answerable",
+      "returned": [
+        "RB-F04-F06@1.0.0#replay-and-approval",
+        "RB-F04-F06@1.0.0#read-only-investigation",
+        "RB-F04-F06@1.0.0#verification-rollback-or-escalation"
+      ],
+      "scores": {
+        "RB-F04-F06@1.0.0#replay-and-approval": 0.05299846287532695,
+        "RB-F04-F06@1.0.0#read-only-investigation": 0.00249218003163966,
+        "RB-F04-F06@1.0.0#verification-rollback-or-escalation": 0.0016137971209813054
+      },
+      "accepted": [
+        "RB-F04-F06@1.0.0#read-only-investigation",
+        "RB-F04-F06@1.0.0#replay-and-approval",
+        "RB-F04-F06@1.0.0#verification-rollback-or-escalation"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "replay",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F05"
+        ],
+        "confident": true,
+        "reasons": [
+          "fixture_fact:unsupported_action_type",
+          "final_error:unsupported action type"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 1366.114499999996,
+      "sufficient": true,
+      "strictSufficient": true,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 1,
+      "directPrecision": 1,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "f05-worker-crm-action-missing",
+      "family": "F05",
+      "kind": "answerable",
+      "returned": [
+        "RB-F04-F06@1.0.0#replay-and-approval",
+        "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+        "RB-F04-F06@1.0.0#read-only-investigation"
+      ],
+      "scores": {
+        "RB-F04-F06@1.0.0#replay-and-approval": 0.0009517659134798292,
+        "RB-F04-F06@1.0.0#verification-rollback-or-escalation": 0.000054971670227913,
+        "RB-F04-F06@1.0.0#read-only-investigation": 0.000013856254967471428
+      },
+      "accepted": [
+        "RB-F04-F06@1.0.0#read-only-investigation",
+        "RB-F04-F06@1.0.0#replay-and-approval",
+        "RB-F04-F06@1.0.0#verification-rollback-or-escalation"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "replay",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F05"
+        ],
+        "confident": true,
+        "reasons": [
+          "final_error:no action handler"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 1212.0789000000077,
+      "sufficient": true,
+      "strictSufficient": true,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 1,
+      "directPrecision": 1,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "f06-stage-order-gap-dev",
+      "family": "F06",
+      "kind": "answerable",
+      "returned": [
+        "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+        "RB-F04-F06@1.0.0#read-only-investigation",
+        "RB-F04-F06@1.0.0#forbidden-actions"
+      ],
+      "scores": {
+        "RB-F04-F06@1.0.0#verification-rollback-or-escalation": 0.0009739069740862227,
+        "RB-F04-F06@1.0.0#read-only-investigation": 0.0006451943610301877,
+        "RB-F04-F06@1.0.0#forbidden-actions": 0.00034041701473794294
+      },
+      "accepted": [
+        "RB-F04-F06@1.0.0#read-only-investigation",
+        "RB-F04-F06@1.0.0#forbidden-actions",
+        "RB-F04-F06@1.0.0#verification-rollback-or-escalation"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "forbidden",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F06"
+        ],
+        "confident": true,
+        "reasons": [
+          "ordering:invalid",
+          "missing_predecessor_stages:1",
+          "fixture_fact:missing_predecessor"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 1360.666900000011,
+      "sufficient": true,
+      "strictSufficient": true,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 1,
+      "directPrecision": 1,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "f06-stage-index-negative-dev",
+      "family": "F06",
+      "kind": "answerable",
+      "returned": [
+        "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+        "RB-F04-F06@1.0.0#read-only-investigation",
+        "RB-F04-F06@1.0.0#forbidden-actions"
+      ],
+      "scores": {
+        "RB-F04-F06@1.0.0#verification-rollback-or-escalation": 0.0058151966925228185,
+        "RB-F04-F06@1.0.0#read-only-investigation": 0.0019436410546486654,
+        "RB-F04-F06@1.0.0#forbidden-actions": 0.00021416609667808978
+      },
+      "accepted": [
+        "RB-F04-F06@1.0.0#read-only-investigation",
+        "RB-F04-F06@1.0.0#forbidden-actions",
+        "RB-F04-F06@1.0.0#verification-rollback-or-escalation"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "forbidden",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F06"
+        ],
+        "confident": true,
+        "reasons": [
+          "ordering:invalid",
+          "fixture_fact:ordering_invalid"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 1314.395800000013,
+      "sufficient": true,
+      "strictSufficient": true,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 1,
+      "directPrecision": 1,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "f06-stage-order-duplicate-dev",
+      "family": "F06",
+      "kind": "answerable",
+      "returned": [
+        "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+        "RB-F04-F06@1.0.0#read-only-investigation",
+        "RB-F04-F06@1.0.0#forbidden-actions"
+      ],
+      "scores": {
+        "RB-F04-F06@1.0.0#verification-rollback-or-escalation": 0.007914787601339932,
+        "RB-F04-F06@1.0.0#read-only-investigation": 0.004274622825381382,
+        "RB-F04-F06@1.0.0#forbidden-actions": 0.00041352063397130797
+      },
+      "accepted": [
+        "RB-F04-F06@1.0.0#read-only-investigation",
+        "RB-F04-F06@1.0.0#forbidden-actions",
+        "RB-F04-F06@1.0.0#verification-rollback-or-escalation"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "forbidden",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F06"
+        ],
+        "confident": true,
+        "reasons": [
+          "ordering:invalid",
+          "fixture_fact:ordering_invalid"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 1359.05750000001,
+      "sufficient": true,
+      "strictSufficient": true,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 1,
+      "directPrecision": 1,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "f06-stage-predecessor-missing-dev",
+      "family": "F06",
+      "kind": "answerable",
+      "returned": [
+        "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+        "RB-F04-F06@1.0.0#forbidden-actions",
+        "RB-F04-F06@1.0.0#read-only-investigation"
+      ],
+      "scores": {
+        "RB-F04-F06@1.0.0#verification-rollback-or-escalation": 0.0003516609677753274,
+        "RB-F04-F06@1.0.0#forbidden-actions": 0.00004508206875566686,
+        "RB-F04-F06@1.0.0#read-only-investigation": 0.000029182457854652083
+      },
+      "accepted": [
+        "RB-F04-F06@1.0.0#read-only-investigation",
+        "RB-F04-F06@1.0.0#forbidden-actions",
+        "RB-F04-F06@1.0.0#verification-rollback-or-escalation"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "forbidden",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F06"
+        ],
+        "confident": true,
+        "reasons": [
+          "ordering:invalid",
+          "missing_predecessor_stages:1",
+          "fixture_fact:missing_predecessor"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 1293.281600000002,
+      "sufficient": true,
+      "strictSufficient": true,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 1,
+      "directPrecision": 1,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "f06-stage-order-cycle-dev",
+      "family": "F06",
+      "kind": "answerable",
+      "returned": [
+        "RB-F04-F06@1.0.0#read-only-investigation",
+        "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+        "RB-F04-F06@1.0.0#forbidden-actions"
+      ],
+      "scores": {
+        "RB-F04-F06@1.0.0#read-only-investigation": 0.011925934572276151,
+        "RB-F04-F06@1.0.0#verification-rollback-or-escalation": 0.010929268181362124,
+        "RB-F04-F06@1.0.0#forbidden-actions": 0.00017511077663302942
+      },
+      "accepted": [
+        "RB-F04-F06@1.0.0#read-only-investigation",
+        "RB-F04-F06@1.0.0#forbidden-actions",
+        "RB-F04-F06@1.0.0#verification-rollback-or-escalation"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "forbidden",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F06"
+        ],
+        "confident": true,
+        "reasons": [
+          "ordering:invalid",
+          "fixture_fact:ordering_invalid"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 1306.3236000000034,
+      "sufficient": true,
+      "strictSufficient": true,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 1,
+      "directPrecision": 1,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "f06-stage-zero-missing-dev",
+      "family": "F06",
+      "kind": "answerable",
+      "returned": [
+        "RB-F04-F06@1.0.0#verification-rollback-or-escalation",
+        "RB-F04-F06@1.0.0#forbidden-actions",
+        "RB-F04-F06@1.0.0#read-only-investigation"
+      ],
+      "scores": {
+        "RB-F04-F06@1.0.0#verification-rollback-or-escalation": 0.0007874550823062539,
+        "RB-F04-F06@1.0.0#forbidden-actions": 0.0001573198158536312,
+        "RB-F04-F06@1.0.0#read-only-investigation": 0.00014683858629599008
+      },
+      "accepted": [
+        "RB-F04-F06@1.0.0#read-only-investigation",
+        "RB-F04-F06@1.0.0#forbidden-actions",
+        "RB-F04-F06@1.0.0#verification-rollback-or-escalation"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "forbidden",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F06"
+        ],
+        "confident": true,
+        "reasons": [
+          "ordering:invalid",
+          "missing_predecessor_stages:1",
+          "fixture_fact:missing_predecessor"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 1422.9946000000054,
+      "sufficient": true,
+      "strictSufficient": true,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 1,
+      "directPrecision": 1,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "f07-response-missing-dev",
+      "family": "F07",
+      "kind": "answerable",
+      "returned": [
+        "RB-F07@1.0.0#read-only-investigation",
+        "RB-F07@1.0.0#verification-rollback-or-escalation",
+        "RB-F07@1.0.0#allowed-remediation"
+      ],
+      "scores": {
+        "RB-F07@1.0.0#read-only-investigation": 0.8625112215375007,
+        "RB-F07@1.0.0#verification-rollback-or-escalation": 0.004576783045581719,
+        "RB-F07@1.0.0#allowed-remediation": 0.000213536654897325
+      },
+      "accepted": [
+        "RB-F07@1.0.0#read-only-investigation",
+        "RB-F07@1.0.0#allowed-remediation",
+        "RB-F07@1.0.0#verification-rollback-or-escalation"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "remediation",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F07"
+        ],
+        "confident": true,
+        "reasons": [
+          "delivery_outcome:unknown",
+          "execution_status:PENDING",
+          "fixture_fact:request_transmitted",
+          "fixture_fact:response_missing"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 1998.8490999999922,
+      "sufficient": true,
+      "strictSufficient": true,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 1,
+      "directPrecision": 1,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "f07-email-pending-lease-dev",
+      "family": "F07",
+      "kind": "answerable",
+      "returned": [
+        "RB-F07@1.0.0#read-only-investigation",
+        "RB-F07@1.0.0#allowed-remediation",
+        "RB-F07@1.0.0#verification-rollback-or-escalation"
+      ],
+      "scores": {
+        "RB-F07@1.0.0#read-only-investigation": 0.01268510732173147,
+        "RB-F07@1.0.0#allowed-remediation": 0.00018844100120526052,
+        "RB-F07@1.0.0#verification-rollback-or-escalation": 0.000034759791221386014
+      },
+      "accepted": [
+        "RB-F07@1.0.0#read-only-investigation",
+        "RB-F07@1.0.0#allowed-remediation",
+        "RB-F07@1.0.0#verification-rollback-or-escalation"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "remediation",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F07"
+        ],
+        "confident": true,
+        "reasons": [
+          "delivery_outcome:unknown",
+          "execution_status:PENDING"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 1776.6491999999998,
+      "sufficient": true,
+      "strictSufficient": true,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 1,
+      "directPrecision": 1,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "f07-telegram-worker-exit-dev",
+      "family": "F07",
+      "kind": "answerable",
+      "returned": [
+        "RB-F07@1.0.0#read-only-investigation",
+        "RB-F07@1.0.0#verification-rollback-or-escalation",
+        "RB-F07@1.0.0#allowed-remediation"
+      ],
+      "scores": {
+        "RB-F07@1.0.0#read-only-investigation": 0.2972861456899853,
+        "RB-F07@1.0.0#verification-rollback-or-escalation": 0.0326968632275524,
+        "RB-F07@1.0.0#allowed-remediation": 0.0002472658767077798
+      },
+      "accepted": [
+        "RB-F07@1.0.0#read-only-investigation",
+        "RB-F07@1.0.0#allowed-remediation",
+        "RB-F07@1.0.0#verification-rollback-or-escalation"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "remediation",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F07"
+        ],
+        "confident": true,
+        "reasons": [
+          "delivery_outcome:unknown",
+          "execution_status:PENDING",
+          "fixture_fact:request_transmitted"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 1923.9711000000098,
+      "sufficient": true,
+      "strictSufficient": true,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 1,
+      "directPrecision": 1,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "f07-email-response-missing-dev",
+      "family": "F07",
+      "kind": "answerable",
+      "returned": [
+        "RB-F07@1.0.0#read-only-investigation",
+        "RB-F07@1.0.0#allowed-remediation",
+        "RB-F07@1.0.0#verification-rollback-or-escalation"
+      ],
+      "scores": {
+        "RB-F07@1.0.0#read-only-investigation": 0.05676087891524934,
+        "RB-F07@1.0.0#allowed-remediation": 0.000784263051149227,
+        "RB-F07@1.0.0#verification-rollback-or-escalation": 0.0007460758994000155
+      },
+      "accepted": [
+        "RB-F07@1.0.0#read-only-investigation",
+        "RB-F07@1.0.0#allowed-remediation",
+        "RB-F07@1.0.0#verification-rollback-or-escalation"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "remediation",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F07"
+        ],
+        "confident": true,
+        "reasons": [
+          "delivery_outcome:unknown",
+          "execution_status:PENDING",
+          "fixture_fact:response_missing"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 1803.6340000000055,
+      "sufficient": true,
+      "strictSufficient": true,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 1,
+      "directPrecision": 1,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "f07-telegram-ack-missing-dev",
+      "family": "F07",
+      "kind": "answerable",
+      "returned": [
+        "RB-F07@1.0.0#read-only-investigation",
+        "RB-F07@1.0.0#verification-rollback-or-escalation",
+        "RB-F07@1.0.0#allowed-remediation"
+      ],
+      "scores": {
+        "RB-F07@1.0.0#read-only-investigation": 0.26128518077923324,
+        "RB-F07@1.0.0#verification-rollback-or-escalation": 0.00034860226026943886,
+        "RB-F07@1.0.0#allowed-remediation": 0.000018210723697879676
+      },
+      "accepted": [
+        "RB-F07@1.0.0#read-only-investigation",
+        "RB-F07@1.0.0#allowed-remediation",
+        "RB-F07@1.0.0#verification-rollback-or-escalation"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "remediation",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F07"
+        ],
+        "confident": true,
+        "reasons": [
+          "delivery_outcome:unknown",
+          "execution_status:PENDING",
+          "fixture_fact:response_missing"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 1855.2708999999886,
+      "sufficient": true,
+      "strictSufficient": true,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 1,
+      "directPrecision": 1,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "f08-duplicate-stage-event-dev",
+      "family": "F08",
+      "kind": "answerable",
+      "returned": [
+        "RB-F08@1.0.0#forbidden-actions",
+        "RB-F08@1.0.0#read-only-investigation",
+        "RB-F08@1.0.0#verification-rollback-or-escalation"
+      ],
+      "scores": {
+        "RB-F08@1.0.0#forbidden-actions": 0.00042331477120352714,
+        "RB-F08@1.0.0#read-only-investigation": 0.00024672212208108347,
+        "RB-F08@1.0.0#verification-rollback-or-escalation": 0.000033483117089065634
+      },
+      "accepted": [
+        "RB-F08@1.0.0#read-only-investigation",
+        "RB-F08@1.0.0#forbidden-actions",
+        "RB-F08@1.0.0#verification-rollback-or-escalation"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "forbidden",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F08"
+        ],
+        "confident": true,
+        "reasons": [
+          "fixture_fact:duplicate_event",
+          "final_error:duplicate"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 1313.1649999999936,
+      "sufficient": true,
+      "strictSufficient": true,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 1,
+      "directPrecision": 1,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "f08-stale-approval-dev",
+      "family": "F08",
+      "kind": "answerable",
+      "returned": [
+        "RB-F08@1.0.0#forbidden-actions",
+        "RB-F08@1.0.0#verification-rollback-or-escalation",
+        "RB-F08@1.0.0#read-only-investigation"
+      ],
+      "scores": {
+        "RB-F08@1.0.0#forbidden-actions": 0.45088387851821776,
+        "RB-F08@1.0.0#verification-rollback-or-escalation": 0.0007995352478658475,
+        "RB-F08@1.0.0#read-only-investigation": 0.00012127399791886147
+      },
+      "accepted": [
+        "RB-F08@1.0.0#read-only-investigation",
+        "RB-F08@1.0.0#forbidden-actions",
+        "RB-F08@1.0.0#verification-rollback-or-escalation"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "forbidden",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F08"
+        ],
+        "confident": true,
+        "reasons": [
+          "fixture_fact:stale_approval",
+          "final_error:stale"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 1246.4078000000009,
+      "sufficient": true,
+      "strictSufficient": true,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 1,
+      "directPrecision": 1,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "f08-already-success-command-dev",
+      "family": "F08",
+      "kind": "answerable",
+      "returned": [
+        "RB-F08@1.0.0#forbidden-actions",
+        "RB-F08@1.0.0#read-only-investigation",
+        "RB-F08@1.0.0#verification-rollback-or-escalation"
+      ],
+      "scores": {
+        "RB-F08@1.0.0#forbidden-actions": 0.0010957484219133516,
+        "RB-F08@1.0.0#read-only-investigation": 0.000044973559589091656,
+        "RB-F08@1.0.0#verification-rollback-or-escalation": 0.000016679345077205384
+      },
+      "accepted": [
+        "RB-F08@1.0.0#read-only-investigation",
+        "RB-F08@1.0.0#forbidden-actions",
+        "RB-F08@1.0.0#verification-rollback-or-escalation"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "forbidden",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F08"
+        ],
+        "confident": true,
+        "reasons": [
+          "safe_code:already_success"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 1366.6621999999916,
+      "sufficient": true,
+      "strictSufficient": true,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 1,
+      "directPrecision": 1,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "f09-dlq-publication-missing-dev",
+      "family": "F09",
+      "kind": "answerable",
+      "returned": [
+        "RB-F09-F10@1.0.0#allowed-remediation",
+        "RB-F09-F10@1.0.0#read-only-investigation",
+        "RB-F09-F10@1.0.0#verification-rollback-or-escalation"
+      ],
+      "scores": {
+        "RB-F09-F10@1.0.0#allowed-remediation": 0.009361270357883438,
+        "RB-F09-F10@1.0.0#read-only-investigation": 0.0012107371875285191,
+        "RB-F09-F10@1.0.0#verification-rollback-or-escalation": 0.00008835413038399794
+      },
+      "accepted": [
+        "RB-F09-F10@1.0.0#read-only-investigation",
+        "RB-F09-F10@1.0.0#allowed-remediation",
+        "RB-F09-F10@1.0.0#verification-rollback-or-escalation"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "remediation",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F09"
+        ],
+        "confident": true,
+        "reasons": [
+          "fixture_fact:dlq_publication_missing",
+          "final_error:dlq"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 1387.0154000000039,
+      "sufficient": true,
+      "strictSufficient": true,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 1,
+      "directPrecision": 1,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "f09-dead-letter-absent-dev",
+      "family": "F09",
+      "kind": "answerable",
+      "returned": [
+        "RB-F09-F10@1.0.0#allowed-remediation",
+        "RB-F09-F10@1.0.0#verification-rollback-or-escalation",
+        "RB-F09-F10@1.0.0#read-only-investigation"
+      ],
+      "scores": {
+        "RB-F09-F10@1.0.0#allowed-remediation": 0.0002147175352354633,
+        "RB-F09-F10@1.0.0#verification-rollback-or-escalation": 0.000014347817297745396,
+        "RB-F09-F10@1.0.0#read-only-investigation": 0.000012401805871632726
+      },
+      "accepted": [
+        "RB-F09-F10@1.0.0#read-only-investigation",
+        "RB-F09-F10@1.0.0#allowed-remediation",
+        "RB-F09-F10@1.0.0#verification-rollback-or-escalation"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "remediation",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F09"
+        ],
+        "confident": true,
+        "reasons": [
+          "fixture_fact:dead_letter_absent",
+          "final_error:dead-letter"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 1368.9793000000063,
+      "sufficient": true,
+      "strictSufficient": true,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 1,
+      "directPrecision": 1,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "f09-successor-publication-gap-dev",
+      "family": "F09",
+      "kind": "answerable",
+      "returned": [
+        "RB-F09-F10@1.0.0#allowed-remediation",
+        "RB-F09-F10@1.0.0#read-only-investigation",
+        "RB-F09-F10@1.0.0#verification-rollback-or-escalation"
+      ],
+      "scores": {
+        "RB-F09-F10@1.0.0#allowed-remediation": 0.00016892893438483024,
+        "RB-F09-F10@1.0.0#read-only-investigation": 0.00010215061346275109,
+        "RB-F09-F10@1.0.0#verification-rollback-or-escalation": 0.00002999408975461821
+      },
+      "accepted": [
+        "RB-F09-F10@1.0.0#read-only-investigation",
+        "RB-F09-F10@1.0.0#allowed-remediation",
+        "RB-F09-F10@1.0.0#verification-rollback-or-escalation"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "remediation",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F09"
+        ],
+        "confident": true,
+        "reasons": [
+          "fixture_fact:dlq_publication_missing",
+          "final_error:kafka publication"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 1577.068100000004,
+      "sufficient": true,
+      "strictSufficient": true,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 1,
+      "directPrecision": 1,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "f09-failure-publication-unacked-dev",
+      "family": "F09",
+      "kind": "answerable",
+      "returned": [
+        "RB-F09-F10@1.0.0#allowed-remediation",
+        "RB-F09-F10@1.0.0#read-only-investigation",
+        "RB-F09-F10@1.0.0#verification-rollback-or-escalation"
+      ],
+      "scores": {
+        "RB-F09-F10@1.0.0#allowed-remediation": 0.0789336680815579,
+        "RB-F09-F10@1.0.0#read-only-investigation": 0.0007287365625020683,
+        "RB-F09-F10@1.0.0#verification-rollback-or-escalation": 0.00022160794466080278
+      },
+      "accepted": [
+        "RB-F09-F10@1.0.0#read-only-investigation",
+        "RB-F09-F10@1.0.0#allowed-remediation",
+        "RB-F09-F10@1.0.0#verification-rollback-or-escalation"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "remediation",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F09"
+        ],
+        "confident": true,
+        "reasons": [
+          "fixture_fact:dlq_publication_missing"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 1399.4802000000054,
+      "sufficient": true,
+      "strictSufficient": true,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 1,
+      "directPrecision": 1,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "f10-sdk-error-discarded-dev",
+      "family": "F10",
+      "kind": "answerable",
+      "returned": [
+        "RB-F09-F10@1.0.0#forbidden-actions",
+        "RB-F09-F10@1.0.0#verification-rollback-or-escalation",
+        "RB-F09-F10@1.0.0#read-only-investigation"
+      ],
+      "scores": {
+        "RB-F09-F10@1.0.0#forbidden-actions": 0.0080406576662796,
+        "RB-F09-F10@1.0.0#verification-rollback-or-escalation": 0.0009123798508705555,
+        "RB-F09-F10@1.0.0#read-only-investigation": 0.00019124248586137692
+      },
+      "accepted": [
+        "RB-F09-F10@1.0.0#read-only-investigation",
+        "RB-F09-F10@1.0.0#forbidden-actions",
+        "RB-F09-F10@1.0.0#verification-rollback-or-escalation"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "forbidden",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F10"
+        ],
+        "confident": true,
+        "reasons": [
+          "fixture_fact:sdk_error_value_discarded",
+          "execution_status:SUCCESS"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 2456.0409999999974,
+      "sufficient": true,
+      "strictSufficient": true,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 1,
+      "directPrecision": 1,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "f10-success-status-recorded-dev",
+      "family": "F10",
+      "kind": "answerable",
+      "returned": [
+        "RB-F09-F10@1.0.0#forbidden-actions",
+        "RB-F09-F10@1.0.0#read-only-investigation",
+        "RB-F09-F10@1.0.0#verification-rollback-or-escalation"
+      ],
+      "scores": {
+        "RB-F09-F10@1.0.0#forbidden-actions": 0.009264576988025196,
+        "RB-F09-F10@1.0.0#read-only-investigation": 0.000051446334661172894,
+        "RB-F09-F10@1.0.0#verification-rollback-or-escalation": 0.000045288556274842843
+      },
+      "accepted": [
+        "RB-F09-F10@1.0.0#read-only-investigation",
+        "RB-F09-F10@1.0.0#forbidden-actions",
+        "RB-F09-F10@1.0.0#verification-rollback-or-escalation"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "forbidden",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F10"
+        ],
+        "confident": true,
+        "reasons": [
+          "fixture_fact:success_status_recorded",
+          "execution_status:SUCCESS"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 2175.4323999999906,
+      "sufficient": true,
+      "strictSufficient": true,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 1,
+      "directPrecision": 1,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "f10-sdk-result-ignored-dev",
+      "family": "F10",
+      "kind": "answerable",
+      "returned": [
+        "RB-F09-F10@1.0.0#verification-rollback-or-escalation",
+        "RB-F09-F10@1.0.0#forbidden-actions",
+        "RB-F09-F10@1.0.0#read-only-investigation"
+      ],
+      "scores": {
+        "RB-F09-F10@1.0.0#verification-rollback-or-escalation": 0.005986750904198362,
+        "RB-F09-F10@1.0.0#forbidden-actions": 0.001960304572210906,
+        "RB-F09-F10@1.0.0#read-only-investigation": 0.00026608335307550435
+      },
+      "accepted": [
+        "RB-F09-F10@1.0.0#read-only-investigation",
+        "RB-F09-F10@1.0.0#forbidden-actions",
+        "RB-F09-F10@1.0.0#verification-rollback-or-escalation"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "forbidden",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F10"
+        ],
+        "confident": true,
+        "reasons": [
+          "fixture_fact:sdk_error_value_discarded",
+          "execution_status:SUCCESS"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 2196.346399999995,
+      "sufficient": true,
+      "strictSufficient": true,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 1,
+      "directPrecision": 1,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "f10-sdk-failure-hidden-dev",
+      "family": "F10",
+      "kind": "answerable",
+      "returned": [
+        "RB-F09-F10@1.0.0#verification-rollback-or-escalation",
+        "RB-F09-F10@1.0.0#forbidden-actions",
+        "RB-F09-F10@1.0.0#read-only-investigation"
+      ],
+      "scores": {
+        "RB-F09-F10@1.0.0#verification-rollback-or-escalation": 0.22643995349590992,
+        "RB-F09-F10@1.0.0#forbidden-actions": 0.005872727745245939,
+        "RB-F09-F10@1.0.0#read-only-investigation": 0.0005243079080393254
+      },
+      "accepted": [
+        "RB-F09-F10@1.0.0#read-only-investigation",
+        "RB-F09-F10@1.0.0#forbidden-actions",
+        "RB-F09-F10@1.0.0#verification-rollback-or-escalation"
+      ],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "forbidden",
+        "verification"
+      ],
+      "facetsDropped": [],
+      "supportReason": "supported",
+      "abstained": false,
+      "route": {
+        "hints": [
+          "F10"
+        ],
+        "confident": true,
+        "reasons": [
+          "fixture_fact:sdk_error_value_discarded",
+          "execution_status:SUCCESS"
+        ],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 1979.5515000000014,
+      "sufficient": true,
+      "strictSufficient": true,
+      "eligibleAnswerable": true,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": 1,
+      "directPrecision": 1,
+      "candidateRecall": 1,
+      "routeCoverage": 1
+    },
+    {
+      "id": "nm-missing-guidance-telegram-entity-mode",
+      "family": null,
+      "kind": "no_match",
+      "returned": [],
+      "scores": {},
+      "accepted": [],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "evidence",
+        "remediation"
+      ],
+      "facetsDropped": [],
+      "supportReason": "no_observed_anchor",
+      "abstained": true,
+      "route": {
+        "hints": [],
+        "confident": false,
+        "reasons": [],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 2028.9581999999937,
+      "sufficient": false,
+      "strictSufficient": false,
+      "eligibleAnswerable": false,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": null,
+      "directPrecision": 0,
+      "candidateRecall": null,
+      "routeCoverage": null
+    },
+    {
+      "id": "nm-missing-guidance-email-header-encoding",
+      "family": null,
+      "kind": "no_match",
+      "returned": [],
+      "scores": {},
+      "accepted": [],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "evidence",
+        "remediation"
+      ],
+      "facetsDropped": [],
+      "supportReason": "no_observed_anchor",
+      "abstained": true,
+      "route": {
+        "hints": [],
+        "confident": false,
+        "reasons": [],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 1851.3280000000086,
+      "sufficient": false,
+      "strictSufficient": false,
+      "eligibleAnswerable": false,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": null,
+      "directPrecision": 0,
+      "candidateRecall": null,
+      "routeCoverage": null
+    },
+    {
+      "id": "nm-missing-guidance-telegram-reaction-target",
+      "family": null,
+      "kind": "no_match",
+      "returned": [],
+      "scores": {},
+      "accepted": [],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "evidence",
+        "remediation"
+      ],
+      "facetsDropped": [],
+      "supportReason": "no_observed_anchor",
+      "abstained": true,
+      "route": {
+        "hints": [],
+        "confident": false,
+        "reasons": [],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 1835.3868000000075,
+      "sufficient": false,
+      "strictSufficient": false,
+      "eligibleAnswerable": false,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": null,
+      "directPrecision": 0,
+      "candidateRecall": null,
+      "routeCoverage": null
+    },
+    {
+      "id": "nm-missing-runtime-fact-worker-volume-capacity",
+      "family": null,
+      "kind": "no_match",
+      "returned": [],
+      "scores": {},
+      "accepted": [],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "evidence",
+        "remediation"
+      ],
+      "facetsDropped": [],
+      "supportReason": "no_observed_anchor",
+      "abstained": true,
+      "route": {
+        "hints": [],
+        "confident": false,
+        "reasons": [],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 1295.5574999999953,
+      "sufficient": false,
+      "strictSufficient": false,
+      "eligibleAnswerable": false,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": null,
+      "directPrecision": 0,
+      "candidateRecall": null,
+      "routeCoverage": null
+    },
+    {
+      "id": "nm-missing-runtime-fact-email-sender-reputation",
+      "family": null,
+      "kind": "no_match",
+      "returned": [],
+      "scores": {},
+      "accepted": [],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "evidence",
+        "remediation"
+      ],
+      "facetsDropped": [],
+      "supportReason": "no_observed_anchor",
+      "abstained": true,
+      "route": {
+        "hints": [],
+        "confident": false,
+        "reasons": [],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 1924.8536000000022,
+      "sufficient": false,
+      "strictSufficient": false,
+      "eligibleAnswerable": false,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": null,
+      "directPrecision": 0,
+      "candidateRecall": null,
+      "routeCoverage": null
+    },
+    {
+      "id": "nm-missing-runtime-fact-telegram-file-size-limit",
+      "family": null,
+      "kind": "no_match",
+      "returned": [],
+      "scores": {},
+      "accepted": [],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "evidence",
+        "remediation"
+      ],
+      "facetsDropped": [],
+      "supportReason": "no_observed_anchor",
+      "abstained": true,
+      "route": {
+        "hints": [],
+        "confident": false,
+        "reasons": [],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 1909.466100000005,
+      "sufficient": false,
+      "strictSufficient": false,
+      "eligibleAnswerable": false,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": null,
+      "directPrecision": 0,
+      "candidateRecall": null,
+      "routeCoverage": null
+    },
+    {
+      "id": "nm-out-of-scope-broker-producer-quota",
+      "family": null,
+      "kind": "no_match",
+      "returned": [],
+      "scores": {},
+      "accepted": [],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "evidence",
+        "remediation"
+      ],
+      "facetsDropped": [],
+      "supportReason": "no_observed_anchor",
+      "abstained": true,
+      "route": {
+        "hints": [],
+        "confident": false,
+        "reasons": [],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 1386.5975000000035,
+      "sufficient": false,
+      "strictSufficient": false,
+      "eligibleAnswerable": false,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": null,
+      "directPrecision": 0,
+      "candidateRecall": null,
+      "routeCoverage": null
+    },
+    {
+      "id": "nm-out-of-scope-database-connection-pool",
+      "family": null,
+      "kind": "no_match",
+      "returned": [],
+      "scores": {},
+      "accepted": [],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "evidence",
+        "remediation"
+      ],
+      "facetsDropped": [],
+      "supportReason": "no_observed_anchor",
+      "abstained": true,
+      "route": {
+        "hints": [],
+        "confident": false,
+        "reasons": [],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 1253.2832999999955,
+      "sufficient": false,
+      "strictSufficient": false,
+      "eligibleAnswerable": false,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": null,
+      "directPrecision": 0,
+      "candidateRecall": null,
+      "routeCoverage": null
+    },
+    {
+      "id": "nm-out-of-scope-scheduler-lease-clock-skew",
+      "family": null,
+      "kind": "no_match",
+      "returned": [],
+      "scores": {},
+      "accepted": [],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "evidence",
+        "remediation"
+      ],
+      "facetsDropped": [],
+      "supportReason": "no_observed_anchor",
+      "abstained": true,
+      "route": {
+        "hints": [],
+        "confident": false,
+        "reasons": [],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 1269.324900000007,
+      "sufficient": false,
+      "strictSufficient": false,
+      "eligibleAnswerable": false,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": null,
+      "directPrecision": 0,
+      "candidateRecall": null,
+      "routeCoverage": null
+    },
+    {
+      "id": "nm-adversarial-injection-skip-runbook",
+      "family": null,
+      "kind": "no_match",
+      "returned": [],
+      "scores": {},
+      "accepted": [],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "evidence",
+        "remediation"
+      ],
+      "facetsDropped": [],
+      "supportReason": "no_observed_anchor",
+      "abstained": true,
+      "route": {
+        "hints": [],
+        "confident": false,
+        "reasons": [],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 2029.9948000000004,
+      "sufficient": false,
+      "strictSufficient": false,
+      "eligibleAnswerable": false,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": null,
+      "directPrecision": 0,
+      "candidateRecall": null,
+      "routeCoverage": null
+    },
+    {
+      "id": "nm-adversarial-contradictory-attempts",
+      "family": null,
+      "kind": "no_match",
+      "returned": [],
+      "scores": {},
+      "accepted": [],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "evidence",
+        "remediation"
+      ],
+      "facetsDropped": [],
+      "supportReason": "no_observed_anchor",
+      "abstained": true,
+      "route": {
+        "hints": [],
+        "confident": false,
+        "reasons": [],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 1866.2017999999953,
+      "sufficient": false,
+      "strictSufficient": false,
+      "eligibleAnswerable": false,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": null,
+      "directPrecision": 0,
+      "candidateRecall": null,
+      "routeCoverage": null
+    },
+    {
+      "id": "nm-adversarial-empty-provider-detail",
+      "family": null,
+      "kind": "no_match",
+      "returned": [],
+      "scores": {},
+      "accepted": [],
+      "missingFacets": [],
+      "facetsRequested": [
+        "investigation",
+        "evidence",
+        "remediation"
+      ],
+      "facetsDropped": [],
+      "supportReason": "no_observed_anchor",
+      "abstained": true,
+      "route": {
+        "hints": [],
+        "confident": false,
+        "reasons": [],
+        "weakTokenRejected": []
+      },
+      "latencyMs": 1869.927800000005,
+      "sufficient": false,
+      "strictSufficient": false,
+      "eligibleAnswerable": false,
+      "providerExcluded": false,
+      "available": true,
+      "sectionRecall": null,
+      "directPrecision": 0,
+      "candidateRecall": null,
+      "routeCoverage": null
+    }
+  ],
+  "keywordRows": [
+    {
+      "id": "f01-rate-limit-rejected",
+      "kind": "answerable",
+      "returned": [
+        "RB-F01-F02@1.1.0#simulated-example",
+        "RB-F01-F02@1.1.0#replay-and-approval",
+        "RB-F03-F04@1.0.0#read-only-investigation"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0,
+      "directPrecision": 0,
+      "available": true
+    },
+    {
+      "id": "f02-connection-refused",
+      "kind": "answerable",
+      "returned": [
+        "RB-F01-F02@1.1.0#replay-and-approval",
+        "RB-F01-F02@1.1.0#read-only-investigation",
+        "RB-F03-F04@1.0.0#read-only-investigation"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0.5,
+      "directPrecision": 0.3333333333333333,
+      "available": true
+    },
+    {
+      "id": "f03-token-missing",
+      "kind": "answerable",
+      "returned": [
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F03-F04@1.0.0#simulated-example",
+        "RB-F01-F02@1.1.0#replay-and-approval"
+      ],
+      "sufficient": true,
+      "sectionRecall": 1,
+      "directPrecision": 0.3333333333333333,
+      "available": true
+    },
+    {
+      "id": "f03-permission-ambiguous",
+      "kind": "answerable",
+      "returned": [
+        "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence",
+        "RB-F01-F02@1.1.0#replay-and-approval",
+        "RB-F04-F06@1.0.0#replay-and-approval"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0,
+      "directPrecision": 0,
+      "available": true
+    },
+    {
+      "id": "f04-template-path-missing",
+      "kind": "answerable",
+      "returned": [
+        "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence",
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F04-F06@1.0.0#read-only-investigation"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0.5,
+      "directPrecision": 0.6666666666666666,
+      "available": true
+    },
+    {
+      "id": "f04-invalid-destination",
+      "kind": "answerable",
+      "returned": [
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence",
+        "RB-F07@1.0.0#read-only-investigation"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0.25,
+      "directPrecision": 0.3333333333333333,
+      "available": true
+    },
+    {
+      "id": "f05-unsupported-action",
+      "kind": "answerable",
+      "returned": [
+        "RB-F04-F06@1.0.0#simulated-example",
+        "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence",
+        "RB-F04-F06@1.0.0#replay-and-approval"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0.5,
+      "directPrecision": 0.3333333333333333,
+      "available": true
+    },
+    {
+      "id": "f05-handler-version-unknown",
+      "kind": "answerable",
+      "returned": [
+        "RB-F04-F06@1.0.0#simulated-example",
+        "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence",
+        "RB-F01-F02@1.1.0#replay-and-approval"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0,
+      "directPrecision": 0,
+      "available": true
+    },
+    {
+      "id": "f07-provider-response-lost",
+      "kind": "answerable",
+      "returned": [
+        "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence",
+        "RB-F07@1.0.0#read-only-investigation",
+        "RB-F07@1.0.0#replay-and-approval"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0.5,
+      "directPrecision": 0.3333333333333333,
+      "available": true
+    },
+    {
+      "id": "f08-duplicate-retry-row",
+      "kind": "answerable",
+      "returned": [
+        "RB-F04-F06@1.0.0#replay-and-approval",
+        "RB-F08@1.0.0#symptoms",
+        "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0,
+      "directPrecision": 0,
+      "available": true
+    },
+    {
+      "id": "f08-success-stage-republished",
+      "kind": "answerable",
+      "returned": [
+        "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence",
+        "RB-F01-F02@1.1.0#replay-and-approval",
+        "RB-F08@1.0.0#forbidden-actions"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0.5,
+      "directPrecision": 0.3333333333333333,
+      "available": true
+    },
+    {
+      "id": "f09-database-sink-only",
+      "kind": "answerable",
+      "returned": [
+        "RB-F09-F10@1.0.0#read-only-investigation",
+        "RB-F09-F10@1.0.0#symptoms",
+        "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0.5,
+      "directPrecision": 0.3333333333333333,
+      "available": true
+    },
+    {
+      "id": "f10-sdk-error-recorded-success",
+      "kind": "answerable",
+      "returned": [
+        "RB-F09-F10@1.0.0#symptoms",
+        "RB-F01-F02@1.1.0#evidence-needed",
+        "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0,
+      "directPrecision": 0,
+      "available": true
+    },
+    {
+      "id": "s02-error-prompt-injection",
+      "kind": "answerable",
+      "returned": [
+        "RB-F01-F02@1.1.0#replay-and-approval",
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F07@1.0.0#replay-and-approval"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0,
+      "directPrecision": 0,
+      "available": true
+    },
+    {
+      "id": "s03-sensitive-fields-present",
+      "kind": "answerable",
+      "returned": [
+        "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence",
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F07@1.0.0#replay-and-approval"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0.5,
+      "directPrecision": 0.3333333333333333,
+      "available": true
+    },
+    {
+      "id": "s05-expired-email-dedup-window",
+      "kind": "answerable",
+      "returned": [
+        "RB-F07@1.0.0#replay-and-approval",
+        "RB-F07@1.0.0#allowed-remediation",
+        "RB-F07@1.0.0#forbidden-actions"
+      ],
+      "sufficient": true,
+      "sectionRecall": 1,
+      "directPrecision": 0.6666666666666666,
+      "available": true
+    },
+    {
+      "id": "nm01-telegram-message-too-long",
+      "kind": "no_match",
+      "returned": [
+        "RB-F01-F02@1.1.0#replay-and-approval",
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F01-F02@1.1.0#simulated-example"
+      ],
+      "sufficient": false,
+      "sectionRecall": null,
+      "directPrecision": 0,
+      "available": true
+    },
+    {
+      "id": "nm02-email-concurrent-idempotency",
+      "kind": "no_match",
+      "returned": [
+        "RB-F07@1.0.0#replay-and-approval",
+        "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence",
+        "RB-F01-F02@1.1.0#read-only-investigation"
+      ],
+      "sufficient": false,
+      "sectionRecall": null,
+      "directPrecision": 0,
+      "available": true
+    },
+    {
+      "id": "nm03-email-invalid-sender-address",
+      "kind": "no_match",
+      "returned": [
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F07@1.0.0#replay-and-approval",
+        "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence"
+      ],
+      "sufficient": false,
+      "sectionRecall": null,
+      "directPrecision": 0,
+      "available": true
+    },
+    {
+      "id": "nm04-email-sender-domain-unverified",
+      "kind": "no_match",
+      "returned": [
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F07@1.0.0#replay-and-approval",
+        "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence"
+      ],
+      "sufficient": false,
+      "sectionRecall": null,
+      "directPrecision": 0,
+      "available": true
+    },
+    {
+      "id": "nm05-email-invalid-region",
+      "kind": "no_match",
+      "returned": [
+        "RB-F07@1.0.0#replay-and-approval",
+        "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence",
+        "RB-F01-F02@1.1.0#read-only-investigation"
+      ],
+      "sufficient": false,
+      "sectionRecall": null,
+      "directPrecision": 0,
+      "available": true
+    },
+    {
+      "id": "nm06-email-subject-length",
+      "kind": "no_match",
+      "returned": [
+        "RB-F07@1.0.0#replay-and-approval",
+        "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence",
+        "RB-F01-F02@1.1.0#read-only-investigation"
+      ],
+      "sufficient": false,
+      "sectionRecall": null,
+      "directPrecision": 0,
+      "available": true
+    },
+    {
+      "id": "nm07-email-content-policy",
+      "kind": "no_match",
+      "returned": [
+        "RB-F07@1.0.0#replay-and-approval",
+        "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence",
+        "RB-F01-F02@1.1.0#read-only-investigation"
+      ],
+      "sufficient": false,
+      "sectionRecall": null,
+      "directPrecision": 0,
+      "available": true
+    },
+    {
+      "id": "nm08-email-invalid-idempotency-key",
+      "kind": "no_match",
+      "returned": [
+        "RB-F07@1.0.0#replay-and-approval",
+        "RB-F07@1.0.0#forbidden-actions",
+        "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence"
+      ],
+      "sufficient": false,
+      "sectionRecall": null,
+      "directPrecision": 0,
+      "available": true
+    },
+    {
+      "id": "f01-webhook-burst-throttle",
+      "kind": "answerable",
+      "returned": [
+        "RB-F01-F02@1.1.0#replay-and-approval",
+        "RB-F01-F02@1.1.0#simulated-example",
+        "RB-F03-F04@1.0.0#read-only-investigation"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0.3333333333333333,
+      "directPrecision": 0.3333333333333333,
+      "available": true
+    },
+    {
+      "id": "f01-email-transactional-throttle",
+      "kind": "answerable",
+      "returned": [
+        "RB-F01-F02@1.1.0#replay-and-approval",
+        "RB-F01-F02@1.1.0#simulated-example",
+        "RB-F01-F02@1.1.0#symptoms"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0.3333333333333333,
+      "directPrecision": 0.3333333333333333,
+      "available": true
+    },
+    {
+      "id": "f01-telegram-album-rate-limit",
+      "kind": "answerable",
+      "returned": [
+        "RB-F01-F02@1.1.0#replay-and-approval",
+        "RB-F01-F02@1.1.0#simulated-example",
+        "RB-F03-F04@1.0.0#read-only-investigation"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0.3333333333333333,
+      "directPrecision": 0.3333333333333333,
+      "available": true
+    },
+    {
+      "id": "f01-email-bulk-retry-after",
+      "kind": "answerable",
+      "returned": [
+        "RB-F01-F02@1.1.0#simulated-example",
+        "RB-F01-F02@1.1.0#replay-and-approval",
+        "RB-F01-F02@1.1.0#symptoms"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0.3333333333333333,
+      "directPrecision": 0.3333333333333333,
+      "available": true
+    },
+    {
+      "id": "f01-telegram-edit-rate-limit",
+      "kind": "answerable",
+      "returned": [
+        "RB-F01-F02@1.1.0#replay-and-approval",
+        "RB-F01-F02@1.1.0#simulated-example",
+        "RB-F03-F04@1.0.0#read-only-investigation"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0.3333333333333333,
+      "directPrecision": 0.3333333333333333,
+      "available": true
+    },
+    {
+      "id": "f02-telegram-enetunreach",
+      "kind": "answerable",
+      "returned": [
+        "RB-F01-F02@1.1.0#replay-and-approval",
+        "RB-F01-F02@1.1.0#read-only-investigation",
+        "RB-F03-F04@1.0.0#read-only-investigation"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0.3333333333333333,
+      "directPrecision": 0.3333333333333333,
+      "available": true
+    },
+    {
+      "id": "f02-email-econnrefused-presend",
+      "kind": "answerable",
+      "returned": [
+        "RB-F07@1.0.0#replay-and-approval",
+        "RB-F01-F02@1.1.0#replay-and-approval",
+        "RB-F07@1.0.0#forbidden-actions"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0,
+      "directPrecision": 0,
+      "available": true
+    },
+    {
+      "id": "f02-telegram-tls-handshake",
+      "kind": "answerable",
+      "returned": [
+        "RB-F07@1.0.0#forbidden-actions",
+        "RB-F07@1.0.0#replay-and-approval",
+        "RB-F01-F02@1.1.0#allowed-remediation"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0.3333333333333333,
+      "directPrecision": 0.3333333333333333,
+      "available": true
+    },
+    {
+      "id": "f02-email-ehostunreach",
+      "kind": "answerable",
+      "returned": [
+        "RB-F07@1.0.0#replay-and-approval",
+        "RB-F01-F02@1.1.0#replay-and-approval",
+        "RB-F07@1.0.0#forbidden-actions"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0,
+      "directPrecision": 0,
+      "available": true
+    },
+    {
+      "id": "f02-telegram-504-gateway",
+      "kind": "answerable",
+      "returned": [
+        "RB-F01-F02@1.1.0#replay-and-approval",
+        "RB-F01-F02@1.1.0#simulated-example",
+        "RB-F03-F04@1.0.0#read-only-investigation"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0,
+      "directPrecision": 0,
+      "available": true
+    },
+    {
+      "id": "f03-telegram-token-revoked-401",
+      "kind": "answerable",
+      "returned": [
+        "RB-F01-F02@1.1.0#simulated-example",
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F01-F02@1.1.0#read-only-investigation"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0.3333333333333333,
+      "directPrecision": 0.3333333333333333,
+      "available": true
+    },
+    {
+      "id": "f03-email-smtp-credential-rejected",
+      "kind": "answerable",
+      "returned": [
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F03-F04@1.0.0#symptoms",
+        "RB-F07@1.0.0#replay-and-approval"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0.3333333333333333,
+      "directPrecision": 0.3333333333333333,
+      "available": true
+    },
+    {
+      "id": "f03-telegram-permission-admin-only",
+      "kind": "answerable",
+      "returned": [
+        "RB-F01-F02@1.1.0#replay-and-approval",
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F01-F02@1.1.0#simulated-example"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0.3333333333333333,
+      "directPrecision": 0.3333333333333333,
+      "available": true
+    },
+    {
+      "id": "f03-email-api-key-absent",
+      "kind": "answerable",
+      "returned": [
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F07@1.0.0#replay-and-approval",
+        "RB-F03-F04@1.0.0#evidence-needed"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0.3333333333333333,
+      "directPrecision": 0.3333333333333333,
+      "available": true
+    },
+    {
+      "id": "f04-email-invalid-reply-to-type",
+      "kind": "answerable",
+      "returned": [
+        "RB-F01-F02@1.1.0#read-only-investigation",
+        "RB-F01-F02@1.1.0#replay-and-approval",
+        "RB-F01-F02@1.1.0#simulated-example"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0,
+      "directPrecision": 0,
+      "available": true
+    },
+    {
+      "id": "f04-telegram-missing-template",
+      "kind": "answerable",
+      "returned": [
+        "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence",
+        "RB-F01-F02@1.1.0#replay-and-approval",
+        "RB-F03-F04@1.0.0#forbidden-actions"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0,
+      "directPrecision": 0,
+      "available": true
+    },
+    {
+      "id": "f04-email-empty-destination",
+      "kind": "answerable",
+      "returned": [
+        "RB-F03-F04@1.0.0#forbidden-actions",
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F01-F02@1.1.0#replay-and-approval"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0.16666666666666666,
+      "directPrecision": 0.3333333333333333,
+      "available": true
+    },
+    {
+      "id": "f04-telegram-invalid-button-url",
+      "kind": "answerable",
+      "returned": [
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F01-F02@1.1.0#replay-and-approval",
+        "RB-F01-F02@1.1.0#simulated-example"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0.16666666666666666,
+      "directPrecision": 0.3333333333333333,
+      "available": true
+    },
+    {
+      "id": "f05-worker-video-action-missing",
+      "kind": "answerable",
+      "returned": [
+        "RB-F01-F02@1.1.0#replay-and-approval",
+        "RB-F04-F06@1.0.0#forbidden-actions",
+        "RB-F04-F06@1.0.0#replay-and-approval"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0.3333333333333333,
+      "directPrecision": 0.3333333333333333,
+      "available": true
+    },
+    {
+      "id": "f05-worker-calendar-action-missing",
+      "kind": "answerable",
+      "returned": [
+        "RB-F04-F06@1.0.0#forbidden-actions",
+        "RB-F04-F06@1.0.0#replay-and-approval",
+        "RB-F01-F02@1.1.0#replay-and-approval"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0.3333333333333333,
+      "directPrecision": 0.3333333333333333,
+      "available": true
+    },
+    {
+      "id": "f05-worker-legacy-sms-action",
+      "kind": "answerable",
+      "returned": [
+        "RB-F04-F06@1.0.0#evidence-needed",
+        "RB-F04-F06@1.0.0#simulated-example",
+        "RB-F04-F06@1.0.0#symptoms"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0,
+      "directPrecision": 0,
+      "available": true
+    },
+    {
+      "id": "f05-worker-crm-action-missing",
+      "kind": "answerable",
+      "returned": [
+        "RB-F01-F02@1.1.0#replay-and-approval",
+        "RB-F04-F06@1.0.0#forbidden-actions",
+        "RB-F04-F06@1.0.0#replay-and-approval"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0.3333333333333333,
+      "directPrecision": 0.3333333333333333,
+      "available": true
+    },
+    {
+      "id": "f06-stage-order-gap-dev",
+      "kind": "answerable",
+      "returned": [
+        "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence",
+        "RB-F04-F06@1.0.0#symptoms",
+        "RB-F01-F02@1.1.0#replay-and-approval"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0,
+      "directPrecision": 0,
+      "available": true
+    },
+    {
+      "id": "f06-stage-index-negative-dev",
+      "kind": "answerable",
+      "returned": [
+        "RB-F01-F02@1.1.0#replay-and-approval",
+        "RB-F04-F06@1.0.0#evidence-needed",
+        "RB-F04-F06@1.0.0#forbidden-actions"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0.3333333333333333,
+      "directPrecision": 0.3333333333333333,
+      "available": true
+    },
+    {
+      "id": "f06-stage-order-duplicate-dev",
+      "kind": "answerable",
+      "returned": [
+        "RB-F01-F02@1.1.0#replay-and-approval",
+        "RB-F04-F06@1.0.0#evidence-needed",
+        "RB-F04-F06@1.0.0#forbidden-actions"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0.3333333333333333,
+      "directPrecision": 0.3333333333333333,
+      "available": true
+    },
+    {
+      "id": "f06-stage-predecessor-missing-dev",
+      "kind": "answerable",
+      "returned": [
+        "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence",
+        "RB-F04-F06@1.0.0#replay-and-approval",
+        "RB-F04-F06@1.0.0#symptoms"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0,
+      "directPrecision": 0,
+      "available": true
+    },
+    {
+      "id": "f06-stage-order-cycle-dev",
+      "kind": "answerable",
+      "returned": [
+        "RB-F01-F02@1.1.0#replay-and-approval",
+        "RB-F08@1.0.0#symptoms",
+        "RB-F04-F06@1.0.0#evidence-needed"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0,
+      "directPrecision": 0,
+      "available": true
+    },
+    {
+      "id": "f06-stage-zero-missing-dev",
+      "kind": "answerable",
+      "returned": [
+        "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence",
+        "RB-F04-F06@1.0.0#symptoms",
+        "RB-F01-F02@1.1.0#replay-and-approval"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0,
+      "directPrecision": 0,
+      "available": true
+    },
+    {
+      "id": "f07-response-missing-dev",
+      "kind": "answerable",
+      "returned": [
+        "RB-F07@1.0.0#read-only-investigation",
+        "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence",
+        "RB-F07@1.0.0#replay-and-approval"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0.3333333333333333,
+      "directPrecision": 0.3333333333333333,
+      "available": true
+    },
+    {
+      "id": "f07-email-pending-lease-dev",
+      "kind": "answerable",
+      "returned": [
+        "RB-F07@1.0.0#replay-and-approval",
+        "RB-F01-F02@1.1.0#read-only-investigation",
+        "RB-F01-F02@1.1.0#replay-and-approval"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0,
+      "directPrecision": 0,
+      "available": true
+    },
+    {
+      "id": "f07-telegram-worker-exit-dev",
+      "kind": "answerable",
+      "returned": [
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F07@1.0.0#read-only-investigation",
+        "RB-F07@1.0.0#replay-and-approval"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0.3333333333333333,
+      "directPrecision": 0.3333333333333333,
+      "available": true
+    },
+    {
+      "id": "f07-email-response-missing-dev",
+      "kind": "answerable",
+      "returned": [
+        "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence",
+        "RB-F07@1.0.0#read-only-investigation",
+        "RB-F07@1.0.0#replay-and-approval"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0.3333333333333333,
+      "directPrecision": 0.3333333333333333,
+      "available": true
+    },
+    {
+      "id": "f07-telegram-ack-missing-dev",
+      "kind": "answerable",
+      "returned": [
+        "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence",
+        "RB-F07@1.0.0#read-only-investigation",
+        "RB-F01-F02@1.1.0#replay-and-approval"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0.3333333333333333,
+      "directPrecision": 0.3333333333333333,
+      "available": true
+    },
+    {
+      "id": "f08-duplicate-stage-event-dev",
+      "kind": "answerable",
+      "returned": [
+        "RB-F01-F02@1.1.0#read-only-investigation",
+        "RB-F01-F02@1.1.0#replay-and-approval",
+        "RB-F01-F02@1.1.0#simulated-example"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0,
+      "directPrecision": 0,
+      "available": true
+    },
+    {
+      "id": "f08-stale-approval-dev",
+      "kind": "answerable",
+      "returned": [
+        "RB-F01-F02@1.1.0#replay-and-approval",
+        "RB-F04-F06@1.0.0#replay-and-approval",
+        "RB-F09-F10@1.0.0#replay-and-approval"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0,
+      "directPrecision": 0,
+      "available": true
+    },
+    {
+      "id": "f08-already-success-command-dev",
+      "kind": "answerable",
+      "returned": [
+        "RB-F01-F02@1.1.0#replay-and-approval",
+        "RB-F01-F02@1.1.0#simulated-example",
+        "RB-F08@1.0.0#simulated-example"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0,
+      "directPrecision": 0,
+      "available": true
+    },
+    {
+      "id": "f09-dlq-publication-missing-dev",
+      "kind": "answerable",
+      "returned": [
+        "RB-F09-F10@1.0.0#symptoms",
+        "RB-F09-F10@1.0.0#allowed-remediation",
+        "RB-F09-F10@1.0.0#sources"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0.3333333333333333,
+      "directPrecision": 0.3333333333333333,
+      "available": true
+    },
+    {
+      "id": "f09-dead-letter-absent-dev",
+      "kind": "answerable",
+      "returned": [
+        "RB-F01-F02@1.1.0#read-only-investigation",
+        "RB-F01-F02@1.1.0#replay-and-approval",
+        "RB-F01-F02@1.1.0#simulated-example"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0,
+      "directPrecision": 0,
+      "available": true
+    },
+    {
+      "id": "f09-successor-publication-gap-dev",
+      "kind": "answerable",
+      "returned": [
+        "RB-F09-F10@1.0.0#symptoms",
+        "RB-F09-F10@1.0.0#evidence-needed",
+        "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0,
+      "directPrecision": 0,
+      "available": true
+    },
+    {
+      "id": "f09-failure-publication-unacked-dev",
+      "kind": "answerable",
+      "returned": [
+        "RB-F01-F02@1.1.0#historical-snapshots-and-missing-evidence",
+        "RB-F01-F02@1.1.0#read-only-investigation",
+        "RB-F01-F02@1.1.0#replay-and-approval"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0,
+      "directPrecision": 0,
+      "available": true
+    },
+    {
+      "id": "f10-sdk-error-discarded-dev",
+      "kind": "answerable",
+      "returned": [
+        "RB-F09-F10@1.0.0#symptoms",
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F07@1.0.0#replay-and-approval"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0,
+      "directPrecision": 0,
+      "available": true
+    },
+    {
+      "id": "f10-success-status-recorded-dev",
+      "kind": "answerable",
+      "returned": [
+        "RB-F07@1.0.0#forbidden-actions",
+        "RB-F07@1.0.0#replay-and-approval",
+        "RB-F01-F02@1.1.0#evidence-needed"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0,
+      "directPrecision": 0,
+      "available": true
+    },
+    {
+      "id": "f10-sdk-result-ignored-dev",
+      "kind": "answerable",
+      "returned": [
+        "RB-F09-F10@1.0.0#symptoms",
+        "RB-F09-F10@1.0.0#simulated-example",
+        "RB-F01-F02@1.1.0#replay-and-approval"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0,
+      "directPrecision": 0,
+      "available": true
+    },
+    {
+      "id": "f10-sdk-failure-hidden-dev",
+      "kind": "answerable",
+      "returned": [
+        "RB-F07@1.0.0#read-only-investigation",
+        "RB-F01-F02@1.1.0#read-only-investigation",
+        "RB-F01-F02@1.1.0#replay-and-approval"
+      ],
+      "sufficient": false,
+      "sectionRecall": 0,
+      "directPrecision": 0,
+      "available": true
+    },
+    {
+      "id": "nm-missing-guidance-telegram-entity-mode",
+      "kind": "no_match",
+      "returned": [
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F01-F02@1.1.0#replay-and-approval",
+        "RB-F01-F02@1.1.0#simulated-example"
+      ],
+      "sufficient": false,
+      "sectionRecall": null,
+      "directPrecision": 0,
+      "available": true
+    },
+    {
+      "id": "nm-missing-guidance-email-header-encoding",
+      "kind": "no_match",
+      "returned": [
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F07@1.0.0#replay-and-approval",
+        "RB-F01-F02@1.1.0#read-only-investigation"
+      ],
+      "sufficient": false,
+      "sectionRecall": null,
+      "directPrecision": 0,
+      "available": true
+    },
+    {
+      "id": "nm-missing-guidance-telegram-reaction-target",
+      "kind": "no_match",
+      "returned": [
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F01-F02@1.1.0#replay-and-approval",
+        "RB-F01-F02@1.1.0#simulated-example"
+      ],
+      "sufficient": false,
+      "sectionRecall": null,
+      "directPrecision": 0,
+      "available": true
+    },
+    {
+      "id": "nm-missing-runtime-fact-worker-volume-capacity",
+      "kind": "no_match",
+      "returned": [
+        "RB-F01-F02@1.1.0#replay-and-approval",
+        "RB-F01-F02@1.1.0#read-only-investigation",
+        "RB-F01-F02@1.1.0#simulated-example"
+      ],
+      "sufficient": false,
+      "sectionRecall": null,
+      "directPrecision": 0,
+      "available": true
+    },
+    {
+      "id": "nm-missing-runtime-fact-email-sender-reputation",
+      "kind": "no_match",
+      "returned": [
+        "RB-F07@1.0.0#replay-and-approval",
+        "RB-F01-F02@1.1.0#read-only-investigation",
+        "RB-F03-F04@1.0.0#read-only-investigation"
+      ],
+      "sufficient": false,
+      "sectionRecall": null,
+      "directPrecision": 0,
+      "available": true
+    },
+    {
+      "id": "nm-missing-runtime-fact-telegram-file-size-limit",
+      "kind": "no_match",
+      "returned": [
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F07@1.0.0#replay-and-approval",
+        "RB-F01-F02@1.1.0#read-only-investigation"
+      ],
+      "sufficient": false,
+      "sectionRecall": null,
+      "directPrecision": 0,
+      "available": true
+    },
+    {
+      "id": "nm-out-of-scope-broker-producer-quota",
+      "kind": "no_match",
+      "returned": [
+        "RB-F09-F10@1.0.0#allowed-remediation",
+        "RB-F09-F10@1.0.0#sources",
+        "RB-F09-F10@1.0.0#symptoms"
+      ],
+      "sufficient": false,
+      "sectionRecall": null,
+      "directPrecision": 0,
+      "available": true
+    },
+    {
+      "id": "nm-out-of-scope-database-connection-pool",
+      "kind": "no_match",
+      "returned": [
+        "RB-F01-F02@1.1.0#read-only-investigation",
+        "RB-F01-F02@1.1.0#simulated-example",
+        "RB-F01-F02@1.1.0#replay-and-approval"
+      ],
+      "sufficient": false,
+      "sectionRecall": null,
+      "directPrecision": 0,
+      "available": true
+    },
+    {
+      "id": "nm-out-of-scope-scheduler-lease-clock-skew",
+      "kind": "no_match",
+      "returned": [
+        "RB-F01-F02@1.1.0#read-only-investigation",
+        "RB-F01-F02@1.1.0#replay-and-approval",
+        "RB-F01-F02@1.1.0#simulated-example"
+      ],
+      "sufficient": false,
+      "sectionRecall": null,
+      "directPrecision": 0,
+      "available": true
+    },
+    {
+      "id": "nm-adversarial-injection-skip-runbook",
+      "kind": "no_match",
+      "returned": [
+        "RB-F01-F02@1.1.0#replay-and-approval",
+        "RB-F01-F02@1.1.0#simulated-example",
+        "RB-F03-F04@1.0.0#read-only-investigation"
+      ],
+      "sufficient": false,
+      "sectionRecall": null,
+      "directPrecision": 0,
+      "available": true
+    },
+    {
+      "id": "nm-adversarial-contradictory-attempts",
+      "kind": "no_match",
+      "returned": [
+        "RB-F07@1.0.0#replay-and-approval",
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F01-F02@1.1.0#evidence-needed"
+      ],
+      "sufficient": false,
+      "sectionRecall": null,
+      "directPrecision": 0,
+      "available": true
+    },
+    {
+      "id": "nm-adversarial-empty-provider-detail",
+      "kind": "no_match",
+      "returned": [
+        "RB-F03-F04@1.0.0#read-only-investigation",
+        "RB-F07@1.0.0#forbidden-actions",
+        "RB-F07@1.0.0#replay-and-approval"
+      ],
+      "sufficient": false,
+      "sectionRecall": null,
+      "directPrecision": 0,
+      "available": true
+    }
+  ],
+  "notes": {
+    "metric": "sufficientGuidanceHit@3 requires every required facet to have an accepted citation in the returned three; scoreTarget owns the definition.",
+    "recallInterval": "macro recall and direct precision points are macro means; their Wilson intervals treat accepted/returned citations as the evidence units.",
+    "unavailable": "an output that is missing or errors is unavailable: it cannot satisfy abstention and counts against reliability.",
+    "equivalenceRecall": "an F04-style facet may accept two independently sufficient sibling sections. Returning either one is a primary hit, but the unreturned sibling stays in the citation-level recall denominator, so per-family macro recall can fall below hit@3 without a guidance failure.",
+    "latency": "p95LatencyMs is the per-case rerank time over the frozen candidate set in the offline scorer, matching the R3 measurement basis; it is not warm HTTP service latency.",
+    "noHoldout": "the driver reads only development artifacts and the frozen R3 corpus. The sealed R4 holdout is not opened in R4.3.",
+    "noTuning": "no route, facet, packing, support, corpus, label, gate, or prompt was changed while producing this report."
+  }
+}
