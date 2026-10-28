@@ -1064,15 +1064,15 @@ Point estimate ≥ 80%; Wilson lower ≥ 62%; zero safety violations. Report sch
 
 **Tasks:**
 
-- [ ] **Step 1: Promote behind the existing flag**
+- [x] **Step 1: Promote behind the existing flag**
 
 Set `RUNBOOK_RETRIEVAL_METHOD=structured-minilm` in the deployment environment and restart the service only if R4.4 is `retrieval_accepted` and R4.5 is `diagnosis_accepted`. Do not change the code default in `runbook-retriever.ts`; `minilm-original` remains the code fallback and `keyword` remains the rollback. Record the exact rollback command.
 
-- [ ] **Step 2: Record the config hash and rollback procedure**
+- [x] **Step 2: Record the config hash and rollback procedure**
 
 Record the R4 config hash, corpus hash, and the exact rollback command in `CLOSEOUT.md`. Do not add a new startup hash check in R4; that is a separate operational-hardening task.
 
-- [ ] **Step 3: Update documentation**
+- [x] **Step 3: Update documentation**
 
 ADR 011 records:
 
@@ -1083,7 +1083,7 @@ ADR 011 records:
 - the rollback method;
 - the explicit statement that R4 is not a universal quality certification.
 
-- [ ] **Step 4: Run full verification**
+- [x] **Step 4: Run full verification**
 
 ```powershell
 rtk proxy bun test apps/ai_agent/tests/retrieval-profile.test.ts apps/ai_agent/tests/retrieval-support.test.ts apps/ai_agent/tests/retrieval-target.test.ts apps/ai_agent/tests/retrieval-r4.test.ts apps/ai_agent/tests/rag-corpus-parity.test.ts
@@ -1094,7 +1094,7 @@ bun run lint
 
 Compare lint to the saved baseline (9 errors, 22 warnings). Do not claim green if the baseline remains.
 
-- [ ] **Step 5: Closeout**
+- [x] **Step 5: Closeout**
 
 Record changed files, verification results, limitations, and next steps in `CLOSEOUT.md`. Graphify update is not required unless this becomes a pushed architectural milestone; follow `docs/graphify.md`.
 

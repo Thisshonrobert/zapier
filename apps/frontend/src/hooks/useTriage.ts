@@ -245,7 +245,7 @@ export function useTriage() {
         : undefined;
       if (idempotencyKey) window.sessionStorage.setItem(`triage:replay-request:${authority.decision.id}`, idempotencyKey);
       const result = await submitReplayAction({ baseUrl: operatorBaseUrl, token, caseId: selectedCase.case_id,
-        action: kind, approvalId: authority.decision.id, proposalVersion: authority.version,
+        action: kind === "request" ? "requests" : "dry-run", approvalId: authority.decision.id, proposalVersion: authority.version,
         idempotencyKey, signal: controller.signal });
       if (controller.signal.aborted) return;
       if (kind === "dry-run") {

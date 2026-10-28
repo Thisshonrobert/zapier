@@ -1,6 +1,6 @@
 # R4 — measurement recovery and pipeline repair
 
-**Status: R4.3 complete and R4.4 complete — the sealed holdout is `retrieval_accepted` (120/120 hit@3, 40/40 abstention). R4.5 diagnosis validation is the next conditional phase.**
+**Status: R4 closed (R4.6, 2026-10-28). `structured-minilm` is `retrieval_accepted` (120/120 hit@3, 40/40 abstention) and promoted behind `RUNBOOK_RETRIEVAL_METHOD`. Diagnosis was accepted through D1 as `diagnosis_accepted_ai_reviewed`. See [`CLOSEOUT.md`](CLOSEOUT.md).**
 R4 repairs four known pipeline/label defects and replaces the underpowered 30-case
 holdout with a 120-answerable / 40-no-match benchmark analysed with confidence
 intervals. It is not a method sweep: no new retriever, model, index, reranker,
@@ -23,8 +23,8 @@ Plan: [`docs/superpowers/plans/2026-10-21-r4-measurement-recovery.md`](../../../
 | R4.2b runtime fixes | **complete** | failing-then-passing tests |
 | R4.3 development screening | **complete** | all dev gates pass (`runs/dev-20261021-v2`) |
 | R4.4 holdout freeze and one run | **complete** | `retrieval_accepted` (`runs/holdout-20261021-v1`) |
-| R4.5 diagnosis validation | conditional (retrieval accepted) | `diagnosis_accepted` |
-| R4.6 integration and closeout | not started | closeout record |
+| R4.5 diagnosis validation | **met via D1** (v1/v2 stay `blocked` pending human review; D1 `diagnosis_accepted_ai_reviewed`, [`../d1/CLOSEOUT.md`](../d1/CLOSEOUT.md)) | `diagnosis_accepted` |
+| R4.6 integration and closeout | **complete** | [`CLOSEOUT.md`](CLOSEOUT.md) + rollback proof |
 
 Do not open the holdout or tune thresholds again. The holdout has been consumed
 by its single run. A new attempt requires a new protocol, a new candidate freeze,
